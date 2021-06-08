@@ -169,13 +169,8 @@ class TRP_Translate_Press{
 
         // the names of your product should match the download names in EDD exactly
         $trp_all_pro_addons = array(
-            "tp-add-on-automatic-language-detection" => "Automatic User Language Detection",
-            "tp-add-on-browse-as-other-roles"        => "Browse as other Role",
-            "tp-add-on-extra-languages"              => "Multiple Languages",
-            "tp-add-on-navigation-based-on-language" => "Navigation Based on Language",
-            "tp-add-on-seo-pack"                     => "SEO Pack",
-            "tp-add-on-translator-accounts"          => "Translator Accounts",
-            "tp-add-on-deepl"                        => "DeepL Automatic Translation",
+            "translatepress-pro"                => "TranslatePress Pro",
+            "translatepress-personal"           => "TranslatePress Personal",
         );
         $active_plugins = get_option('active_plugins');
         foreach ( $trp_all_pro_addons as $trp_pro_addon_folder => $trp_pro_addon_name ){
