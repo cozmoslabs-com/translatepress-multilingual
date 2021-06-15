@@ -169,8 +169,9 @@ class TRP_Translate_Press{
 
         // the names of your product should match the download names in EDD exactly
         $trp_all_pro_addons = array(
-            "translatepress-pro"                => "TranslatePress Pro",
-            "translatepress-personal"           => "TranslatePress Personal",
+            "translatepress-business"      => "TranslatePress Business",
+            "translatepress-developer"     => "TranslatePress Developer",
+            "translatepress-personal"      => "TranslatePress Personal",
         );
         $active_plugins = get_option('active_plugins');
         foreach ( $trp_all_pro_addons as $trp_pro_addon_folder => $trp_pro_addon_name ){
@@ -180,6 +181,9 @@ class TRP_Translate_Press{
                 }
             }
         }
+        //for the dev version simulate PRO version active
+        if( ( defined('TRANSLATE_PRESS') && TRANSLATE_PRESS === 'TranslatePress - Dev' ) )
+            $this->active_pro_addons["translatepress-business"] = "TranslatePress Business";
     }
 
     /**
