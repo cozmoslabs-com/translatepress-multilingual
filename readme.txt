@@ -5,12 +5,12 @@ Tags: translate, translation, multilingual, automatic translation, bilingual, fr
 Requires at least: 3.1.0
 Tested up to: 5.7.2
 Requires PHP: 5.6.20
-Stable tag: 2.0.2
+Stable tag: 2.0.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 Translate your entire site directly from the front-end and go multilingual, with full support for WooCommerce and page builders + Google Translate integration.
- 
+
 == Description ==
 
 **Experience a better way to translate your WordPress site and go multilingual, directly from the front-end using a visual translation interface.**
@@ -41,6 +41,7 @@ https://www.youtube.com/watch?v=pUlYisvBm8g
 * Translation Block feature in which you can translate multiple html elements together
 * Native **Gutenberg** support, so you can easily [translate Gutenberg blocks](https://translatepress.com/translate-gutenberg-blocks-in-wordpress/?utm_source=wp.org&utm_medium=tp-description-page&utm_campaign=TPFree)
 * Out of the box [WooCommerce](https://translatepress.com/translate-woocommerce-products-translatepress/?utm_source=wp.org&utm_medium=tp-description-page&utm_campaign=TPFree) compatibility
+* Use our [FREE Website Translation](https://translatepress.com/free-website-translation-tool-widget/?utm_source=wp.org&utm_medium=tp-description-page&utm_campaign=TPFree) tool/widget to browse any website into your own language.
 
 Note: this plugin uses the Google Translation API to translate the strings on your site. This feature can be enabled or disabled according to your preferences.
 
@@ -139,6 +140,22 @@ For more information please check out our [documentation](https://translatepress
 
 
 == Changelog ==
+= 2.0.4 =
+* Added support for translating aria-label attribute
+* Added possibility to exclude entire gettext domain from translation
+* Improved determining http/https when building links
+* Fixed automatic translation for custom languages
+* Added missing Swahili flag
+* Fixed flag for Tagalog language
+* Fixed some PHP notices and warnings
+
+= 2.0.3 =
+* Added compatibility with PHP 8
+* Added compatibility with Profile Builder Content Restriction redirect URL
+* Added compatibility with Paid Member Subscription Content Restriction redirect URL
+* Added filter to skip admin check on add_language_to_home_url
+* Fixed some cases of PHP errors
+
 = 2.0.2 =
 * Fixed WooCommerce permalink issues
 * Fixed notice about language switcher in Menus
@@ -874,4 +891,3 @@ For more information please check out our [documentation](https://translatepress
 
 = 1.0.0 =
 * Initial release.
-
