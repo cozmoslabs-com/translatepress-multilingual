@@ -59,6 +59,7 @@ class TRP_Error_Manager{
                 $error_message = wp_kses( __('Automatic translation has been disabled.','translatepress-multilingual'), array('strong' => array() ) ) . ' ' . $error_message ;
             }
             if ( !isset( $option['notifications']['disable_automatic_translations'] ) ) {
+
                 $option['notifications']['disable_automatic_translations' ] = array(
                     // we need a unique ID so that after the notice is dismissed and this type of error appears again, it's not already marked as dismissed for that user
                     'notification_id' => 'disable_automatic_translations' . time(),
@@ -106,7 +107,23 @@ class TRP_Error_Manager{
         if ( $mt_settings['machine-translation'] === 'yes' ){
             $this->clear_notification_from_db('disable_automatic_translations', null);
         }
+
         return $mt_settings;
+    }
+
+    /**
+     * Disable the notification after the link is clicked.
+     */
+
+
+    public function disable_error_after_click_link(){
+
+        $link = $_GET['page'];
+
+        if($link = 'trp_error_manager') {
+            $this->clear_notification_from_db('disable_automatic_translations', null);
+        }
+
     }
 
     /**

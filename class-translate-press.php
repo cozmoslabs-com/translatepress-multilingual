@@ -58,7 +58,7 @@ class TRP_Translate_Press{
         define( 'TRP_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
         define( 'TRP_PLUGIN_BASE', plugin_basename( __DIR__ . '/index.php' ) );
         define( 'TRP_PLUGIN_SLUG', 'translatepress-multilingual' );
-        define( 'TRP_PLUGIN_VERSION', '2.0.2' );
+        define( 'TRP_PLUGIN_VERSION', '2.0.5' );
 
 	    wp_cache_add_non_persistent_groups(array('trp'));
 
@@ -223,6 +223,7 @@ class TRP_Translate_Press{
         $this->loader->add_filter( 'trp_machine_translation_sanitize_settings', $this->error_manager, 'clear_disable_machine_translation_notification_from_db', 10, 1 );
         $this->loader->add_filter( 'trp_error_manager_page_output', $this->error_manager, 'show_instructions_on_how_to_fix', 7, 1 );
         $this->loader->add_filter( 'trp_error_manager_page_output', $this->error_manager, 'output_db_errors', 10, 1 );
+        $this->loader->add_action('load-admin_page_trp_error_manager', $this->error_manager, 'disable_error_after_click_link', 10);
 
         $this->loader->add_action( 'wp_ajax_nopriv_trp_get_translations_regular', $this->editor_api_regular_strings, 'get_translations' );
 

@@ -196,7 +196,7 @@ class TRP_Languages{
      * @param string $english_or_native     'english_name' | 'native_name'
      * @return string                       Short language name.
      */
-	public function beautify_language_name( $name, $code, $english_or_native = 'english_name', $language_codes ){
+	public function beautify_language_name( $name, $code, $english_or_native, $language_codes ){
 		if ( $english_or_native == 'english_name' ) {
 			if ( ! $this->duplicated_language( $code, $language_codes ) ){
 				$name = $this->string_trim_after_character( $name, " (" );

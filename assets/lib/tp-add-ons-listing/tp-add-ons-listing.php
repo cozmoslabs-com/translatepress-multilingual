@@ -329,3 +329,14 @@ function trp_add_ons_listing_process_actions(){
         wp_safe_redirect( add_query_arg( 'trp_add_ons_listing_success', 'true', admin_url( 'admin.php?page='. $_REQUEST['page'] ) ) );
     }
 }
+
+/**
+ * Add a notice on the add-ons page if the save was successful
+ */
+if ( isset($_GET['trp_add_ons_listing_success']) ){
+    if( class_exists('TRP_Add_General_Notices') ) {
+        new TRP_Add_General_Notices('trp_add_ons_listing_success',
+            sprintf(__('%1$sAdd-ons settings saved successfully%2$s', 'translatepress-multilingual'), "<p>", "</p>"),
+            'updated notice is-dismissible');
+    }
+}

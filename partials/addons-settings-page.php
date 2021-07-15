@@ -1,22 +1,3 @@
-<?php
-
-/**
- * Function that adds content to the "Add-Ons" submenu page
- *
- * @since v.2.1.0
- *
- * @return string
- */
-function trp_add_ons_content() {
-
-}
-
-?>
-
-
-
-
-
 <div id="trp-addons-page" class="wrap">
 
     <h1> <?php esc_html_e( 'TranslatePress Settings', 'translatepress-multilingual' );?></h1>
@@ -38,7 +19,7 @@ function trp_add_ons_content() {
 
     //Add Advanced section
     $trp_addons_listing->section_header = array( 'title' => __('Advanced Add-ons', 'translatepress-multilingual' ), 'description' => __('These addons extend your translation plugin and are available in the Developer, Business and Personal plans.', 'translatepress-multilingual')  );
-    $trp_addons_listing->section_versions = array( 'TranslatePress - Dev', 'TranslatePress - Personal', 'TranslatePress - Pro' );
+    $trp_addons_listing->section_versions = array( 'TranslatePress - Dev', 'TranslatePress - Personal', 'TranslatePress - Business', 'TranslatePress - Developer' );
     $trp_addons_listing->items = array(
         array(  'slug' => 'tp-add-on-seo-pack/tp-seo-pack.php',
             'type' => 'add-on',
@@ -59,7 +40,7 @@ function trp_add_ons_content() {
 
     //Add Pro Section
     $trp_addons_listing->section_header = array( 'title' => __('Pro Add-ons', 'translatepress-multilingual' ), 'description' => __('These addons extend your translation plugin and are available in the Business and Developer plans.', 'translatepress-multilingual')  );
-    $trp_addons_listing->section_versions = array( 'TranslatePress - Dev', 'TranslatePress - Pro' );
+    $trp_addons_listing->section_versions = array( 'TranslatePress - Dev', 'TranslatePress - Business', 'TranslatePress - Developer' );
     $trp_addons_listing->items = array(
         array(  'slug' => 'tp-add-on-deepl/index.php',
             'type' => 'add-on',
@@ -102,7 +83,7 @@ function trp_add_ons_content() {
 
     //Add Recommended Plugins
     $trp_addons_listing->section_header = array( 'title' => __('Recommended Plugins', 'translatepress-multilingual' ), 'description' => __('A short list of plugins you can use to extend your website.', 'translatepress-multilingual')  );
-    $trp_addons_listing->section_versions = array( 'TranslatePress - Dev', 'TranslatePress - Personal', 'TranslatePress - Pro', 'TranslatePress - Multilingual' );
+    $trp_addons_listing->section_versions = array( 'TranslatePress - Dev', 'TranslatePress - Personal', 'TranslatePress - Business', 'TranslatePress - Developer', 'TranslatePress - Multilingual' );
     $trp_addons_listing->items = array(
         array(  'slug' => 'profile-builder/index.php',
             'short-slug' => 'pb',

@@ -111,17 +111,24 @@ class TRP_Machine_Translation_Tab {
         if( empty( $this->settings['trp_machine_translation_settings']['translation-engine'] ) )
             $value = $default;
         else {
-            $value = 'TRP_' . ucwords( $this->settings['trp_machine_translation_settings']['translation-engine'] ) . '_Machine_Translator'; // class name needs to follow this pattern
+            $deepl_class_name = class_exists('TRP_IN_Deepl_Machine_Translator' ) ? 'TRP_IN_Deepl_Machine_Translator' : 'TRP_Deepl_Machine_Translator';
+            $existing_engines = apply_filters('trp_automatic_translation_engines_classes', array(
+                'google_translate_v2' => 'TRP_Google_Translate_V2_Machine_Translator',
+                'deepl'               => $deepl_class_name
+            ));
 
-            if( !class_exists( $value ) )
-                $value = $default;
+            $value = $existing_engines[$this->settings['trp_machine_translation_settings']['translation-engine']];
+
+            if( !class_exists( $value ) ) {
+                $value = $default; //something is wrong if it reaches this
+            }
         }
 
         return new $value( $this->settings );
     }
 
     public function add_upsell_filter(){
-        if( !class_exists( 'TRP_DeepL' ) )
+        if( !class_exists( 'TRP_DeepL' ) && !class_exists( 'TRP_IN_DeepL' ) )
             add_filter( 'trp_machine_translation_engines', [ $this, 'translation_engines_upsell' ], 20 );
     }
 
@@ -131,14 +138,20 @@ class TRP_Machine_Translation_Tab {
         return $engines;
     }
 
+
+
     public function display_unsupported_languages(){
         $trp = TRP_Translate_Press::get_trp_instance();
         $machine_translator = $trp->get_component( 'machine_translator' );
         $trp_languages = $trp->get_component( 'languages' );
 
+        $correct_key = $machine_translator->is_correct_api_key();
+
+
         if ( 'yes' === $this->settings['trp_machine_translation_settings']['machine-translation'] &&
             !empty( $machine_translator->get_api_key() ) &&
-            !$machine_translator->check_languages_availability($this->settings['translation-languages'])
+            !$machine_translator->check_languages_availability($this->settings['translation-languages']) &&
+            $correct_key != null
         ){
 
             $language_names = $trp_languages->get_language_names( $this->settings['translation-languages'], 'english_name' );

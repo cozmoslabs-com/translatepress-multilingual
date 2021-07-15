@@ -27,13 +27,12 @@ function trpc_add_custom_language( $languages ) {
 			$custom_language_iso    = $option["custom_language"]["cuslangiso"][ $key ];
 			$custom_language_name   = $option["custom_language"]["cuslangname"][ $key ];
 			$custom_language_native = $option["custom_language"]["cuslangnative"][ $key ];
-			$custom_language_slug   = $option["custom_language"]["cuslangslug"][ $key ];
 
 			$languages[ $lang ] = array(
 				'language'     => $lang,
 				'english_name' => $custom_language_name,
 				'native_name'  => $custom_language_native,
-				'iso'          => array( $custom_language_slug )
+                'iso'          => array( $custom_language_iso )
 			);
 
 			global $TRP_LANGUAGE;

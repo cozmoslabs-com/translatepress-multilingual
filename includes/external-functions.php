@@ -14,6 +14,11 @@
  /* NB: We don't always have access to WP get_option, for instance while calling trp_full_trim inside trp-ajax */
  /* So this falls back to the option being transmitted either as a param from another function or obtained directly if get_option is available */
 function trp_full_trim( $string, $args = array()  ) {
+
+    if((is_array($string)) || (is_object($string))){
+        return "";
+    }
+
 	if ( !isset( $args['numerals']) ) {
 		if ( function_exists( 'get_option' ) ) {
 			$opt = get_option( 'trp_advanced_settings', false );
@@ -36,8 +41,12 @@ function trp_full_trim( $string, $args = array()  ) {
 	/* Trim nbsp the same way as the whitespace (chr194 chr160) above */
 	$prefixes = array( "\xc2\xa0", "&nbsp;" );
 	do{
-		$previous_iteration_string = $string;
-		$string = trim($string, " \t\n\r\0\x0B");
+
+	    $previous_iteration_string = $string;
+
+        $string = trim($string, " \t\n\r\0\x0B");
+
+
 		foreach( $prefixes as $prefix ) {
 			$prefix_length = strlen($prefix);
 			if (substr($string, 0, $prefix_length) == $prefix) {

@@ -1114,7 +1114,7 @@ class TRP_Query{
 		}
 
 		$placeholders = "( " . implode ( ", ", $placeholders ) . " )";
-		$query = 'UPDATE `' . implode( $table_names, '`, `' ) . '` SET `' . implode( $table_names, '`.block_type=' . $block_type . ', `' ) . '`.block_type=' . $block_type . ' WHERE `' . implode( $table_names, '`.original IN ' . $placeholders . ' AND `' ) . '`.original IN ' . $placeholders ;
+		$query = 'UPDATE `' . implode( '`, `', $table_names ) . '` SET `' . implode( '`.block_type=' . $block_type . ', `', $table_names ) . '`.block_type=' . $block_type . ' WHERE `' . implode( '`.original IN ' . $placeholders . ' AND `', $table_names ) . '`.original IN ' . $placeholders ;
 
 		return $this->db->query( $this->db->prepare( $query, $values ) );
 	}
@@ -1355,7 +1355,7 @@ class TRP_Query{
             $place_holders[] = "(original COLLATE " . $charset . "_bin = '%s' " . $domain . "AND id != '%d'  )";
         }
 
-        $sql = "DELETE FROM `" . sanitize_text_field( $table_name ). "` WHERE " . implode( $place_holders, " OR " );
+        $sql = "DELETE FROM `" . sanitize_text_field( $table_name ). "` WHERE " . implode( " OR ", $place_holders );
         $query = $this->db->prepare( $sql, $values );
         return $this->db->query( $query );
     }

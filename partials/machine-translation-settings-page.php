@@ -37,7 +37,7 @@
                 </td>
             </tr>
 
-            <?php if( !class_exists( 'TRP_DeepL' ) ) : ?>
+            <?php if( !class_exists( 'TRP_DeepL' ) && !class_exists( 'TRP_IN_DeepL' ) ) : ?>
                 <tr style="display:none;">
                     <th scope="row"></th>
                     <td>

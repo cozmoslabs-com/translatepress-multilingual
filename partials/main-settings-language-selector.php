@@ -62,8 +62,8 @@
         <p class="trp-upsell-multiple-languages" style="display: none;">
             <?php
             if ( trp_is_paid_version() ){
-                $url = 'https://translatepress.com/account/';
-                $lnk = sprintf( wp_kses( __( 'To add <strong>more than two languages</strong> download and install the <strong>Extra Languages Add-on</strong> from <a href="%s" class="trp-translatepress-account-page" target="_blank" title="TranslatePress Account page">your account</a>. Once activated, you\'ll be able to add unlimited languages.', 'translatepress-multilingual' ), array( 'strong' => array(), 'br' => array(), 'a' => array( 'href' => array(), 'title' => array(), 'target' => array(), 'class' => array() ) ) ), esc_url( $url ) );
+                $url = admin_url('admin.php?page=trp_addons_page');
+                $lnk = sprintf( wp_kses( __( 'To add <strong>more than two languages</strong> activate the <strong>Extra Languages Add-on</strong> from <a href="%s" class="trp-translatepress-account-page" target="_blank" title="Add-ons page">the Add-ons Page</a>. Once activated, you\'ll be able to add unlimited languages.', 'translatepress-multilingual' ), array( 'strong' => array(), 'br' => array(), 'a' => array( 'href' => array(), 'title' => array(), 'target' => array(), 'class' => array() ) ) ), esc_url( $url ) );
             }else {
                 $url = trp_add_affiliate_id_to_link('https://translatepress.com/?utm_source=wpbackend&utm_medium=clientsite&utm_content=multiple_languages&utm_campaign=tpfree');
                 $lnk = sprintf(

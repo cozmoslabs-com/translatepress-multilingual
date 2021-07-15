@@ -22,14 +22,14 @@ function trp_register_custom_language($settings_array){
 							'cuslangname' => array ('label' => esc_html__( 'Language name', 'translatepress-multilingual' ), 'type' => 'text', 'values' => '' ),
 							'cuslangnative' => array ('label' => esc_html__( 'Native name', 'translatepress-multilingual' ), 'type' => 'text', 'values' => '' ),
 							'cuslangiso' => array ('label' => esc_html__( 'ISO code', 'translatepress-multilingual' ), 'type' => 'text', 'values' => '' ),
-							'cuslangslug' => array ('label' => esc_html__( 'URL slug', 'translatepress-multilingual' ), 'type' => 'text', 'values' => '' ),
 							'cuslangflag' => array ('label' => esc_html__( 'Flag URL', 'translatepress-multilingual' ), 'type' => 'textarea', 'values' => '' ),
 							'cuslangisrtl' => array ('label' => esc_html__( 'Text RTL', 'translatepress-multilingual' ), 'type' => 'checkbox', 'values' => '' ),
 		),
 		'type'          => 'mixed',
 		'label'         => esc_html__( 'Custom language', 'translatepress-multilingual' ),
-		'description'   => wp_kses(  __( 'Adds custom languages to TranslatePress.<br>Will be available under General settings, All Languages list.<br>For custom flag, first upload the image in media library then paste the URL.<br>Changing or deleting a custom language will impact translations and site URL\'s.', 'translatepress-multilingual' ), array( 'br' => array() )),
-	);
+		'description'   => wp_kses(  __( 'Adds custom languages to TranslatePress.<br>Will be available under General settings, All Languages list, where the URL slug can also be edited.<br>For custom flag, first upload the image in media library then paste the URL.<br>Changing or deleting a custom language will impact translations and site URL\'s.<br> The ISO code will be used for automatic translation if supported.', 'translatepress-multilingual' ), array( 'br' => array() )),
+
+    );
 
     return $settings_array;
 }

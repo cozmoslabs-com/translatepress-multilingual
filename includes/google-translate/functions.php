@@ -47,7 +47,7 @@ function trp_gt_add_settings( $mt_settings ){
                 <?php
             }
             ?>
-            <input type="text" id="trp-g-translate-key" class="<?php echo esc_html( implode( $text_input_classes, ' ' ) ); ?>" name="trp_machine_translation_settings[google-translate-key]" value="<?php if( !empty( $mt_settings['google-translate-key'] ) ) echo esc_attr( $mt_settings['google-translate-key']);?>"/>
+            <input type="text" id="trp-g-translate-key" class="<?php echo esc_html( implode( ' ', $text_input_classes ) ); ?>" name="trp_machine_translation_settings[google-translate-key]" value="<?php if( !empty( $mt_settings['google-translate-key'] ) ) echo esc_attr( $mt_settings['google-translate-key']);?>"/>
             <?php
              // Only show errors if Google Translate is active.
             if ( 'google_translate_v2' === $translation_engine && function_exists( 'trp_output_svg' ) ) {

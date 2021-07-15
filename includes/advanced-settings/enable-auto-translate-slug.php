@@ -6,7 +6,7 @@ function trp_register_enable_auto_translate_slug( $settings_array ){
 		'name'          => 'enable_auto_translate_slug',
 		'type'          => 'checkbox',
 		'label'         => esc_html__( 'Automatically translate slugs', 'translatepress-multilingual' ),
-		'description'   => wp_kses( __( 'Generate automatic translations of slugs for posts, pages and Custom Post Types.<br/>Requires <a href="https://translatepress.com/docs/addons/seo-pack/" title="TranslatePress Add-on SEO Pack documentation" target="_blank"> SEO Pack Add-on</a> to be installed and activated.', 'translatepress-multilingual' ), array( 'br' => array(), 'a' => array( 'href' => array(), 'title' => array(), 'target' => array() ) ) ),
+		'description'   => wp_kses( __( 'Generate automatic translations of slugs for posts, pages and Custom Post Types.<br/>Requires <a href="https://translatepress.com/docs/addons/seo-pack/" title="TranslatePress Add-on SEO Pack documentation" target="_blank"> SEO Pack Add-on</a> to be installed and activated.<br>The slugs will be automatically translated starting with the second refresh of each page.', 'translatepress-multilingual' ), array( 'br' => array(), 'a' => array( 'href' => array(), 'title' => array(), 'target' => array() ) ) ),
 	);
 	return $settings_array;
 }
