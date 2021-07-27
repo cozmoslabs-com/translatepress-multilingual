@@ -1,5 +1,5 @@
 <?php
-add_image_size( 'trp-custom-language-flag', 16, 12 );
+add_image_size( 'trp-custom-language-flag', 18, 12 );
 
 // Register country flag size for use in Add Media modal
 add_filter( 'image_size_names_choose', 'trp_add_flag_sizes' );
@@ -19,7 +19,8 @@ function trpc_add_custom_language( $languages ) {
 
 		foreach ( $option['custom_language']['cuslangname'] as $key => $value ) {
 
-			$lang = $option["custom_language"]["cuslangiso"][ $key ];
+		    $lang = $option["custom_language"]["cuslangiso"][ $key ];
+
 			if ( array_key_exists( $lang, $languages ) ) {
 				return $languages;
 			}
@@ -29,10 +30,10 @@ function trpc_add_custom_language( $languages ) {
 			$custom_language_native = $option["custom_language"]["cuslangnative"][ $key ];
 
 			$languages[ $lang ] = array(
-				'language'     => $lang,
-				'english_name' => $custom_language_name,
-				'native_name'  => $custom_language_native,
-                'iso'          => array( $custom_language_iso )
+				'language'           => $lang,
+				'english_name'       => $custom_language_name,
+				'native_name'        => $custom_language_native,
+                'iso'                => array( $custom_language_iso )
 			);
 
 			global $TRP_LANGUAGE;
@@ -114,4 +115,3 @@ function trpc_flag_name_custom ( $original_flags_path,  $language_code ){
 	}
 	return $original_flags_path;
 }
-

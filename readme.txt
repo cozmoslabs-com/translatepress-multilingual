@@ -3,9 +3,9 @@ Contributors: cozmoslabs, razvan.mo, madalin.ungureanu, sareiodata, cristophor
 Donate link: https://www.translatepress.com/
 Tags: translate, translation, multilingual, automatic translation, bilingual, front-end translation, google translate, language
 Requires at least: 3.1.0
-Tested up to: 5.7.2
+Tested up to: 5.8
 Requires PHP: 5.6.20
-Stable tag: 2.0.5
+Stable tag: 2.0.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -140,6 +140,11 @@ For more information please check out our [documentation](https://translatepress
 
 
 == Changelog ==
+= 2.0.6 =
+* Added support for translating form reset button
+* Fixed custom flags getting resized
+* Fixed bug on Add-ons tab
+
 = 2.0.5 =
 * All Premium Add-ons have been repackaged in new archives downloadable from translatepress.com account. All the old plugin Add-ons will no longer receive updates.
 * Reconfigured add-ons to be activated from TP Settings Add-ons tab

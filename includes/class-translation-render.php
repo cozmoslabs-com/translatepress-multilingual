@@ -1407,7 +1407,7 @@ class TRP_Translation_Render{
 			    'attribute' => true
 		    ),
 		    'submit' => array(
-		    	'selector' => 'input[type=\'submit\'],input[type=\'button\']',
+		    	'selector' => 'input[type=\'submit\'],input[type=\'button\'], input[type=\'reset\']',
 			    'accessor' => 'value',
 			    'attribute' => true
 		    ),

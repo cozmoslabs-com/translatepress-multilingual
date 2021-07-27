@@ -13,15 +13,15 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: index-dev.php:38
+#: index-dev.php:39
 msgid "Please update the TranslatePress - Multilingual plugin to version 2.0.5 at least for %s to work properly"
 msgstr ""
 
-#: index-dev.php:32
+#: index-dev.php:33
 msgid "Please install and activate the TranslatePress - Multilingual plugin"
 msgstr ""
 
-#: index-dev.php:215
+#: index-dev.php:216
 msgid "This TranslatePress add-on has been migrated to the main plugin and is no longer used. You can delete it."
 msgstr ""
 
