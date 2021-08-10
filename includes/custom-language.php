@@ -5,7 +5,7 @@ add_image_size( 'trp-custom-language-flag', 18, 12 );
 add_filter( 'image_size_names_choose', 'trp_add_flag_sizes' );
 function trp_add_flag_sizes( $sizes ) {
 	return array_merge( $sizes, array(
-		'trp-custom-language-flag' => __( 'Custom Language Flag' )
+		'trp-custom-language-flag' => __( 'Custom Language Flag', 'translatepress-multilingual' )
 	) );
 }
 
@@ -33,7 +33,9 @@ function trpc_add_custom_language( $languages ) {
 				'language'           => $lang,
 				'english_name'       => $custom_language_name,
 				'native_name'        => $custom_language_native,
-                'iso'                => array( $custom_language_iso )
+                'iso'                => array( $custom_language_iso ),
+                'is_custom_language' => true
+
 			);
 
 			global $TRP_LANGUAGE;

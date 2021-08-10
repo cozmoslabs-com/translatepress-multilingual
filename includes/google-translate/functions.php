@@ -56,7 +56,7 @@ function trp_gt_add_settings( $mt_settings ){
             ?>
             <p class="description">
                 <?php echo wp_kses( __( 'Visit <a href="https://cloud.google.com/docs/authentication/api-keys" target="_blank">this link</a> to see how you can set up an API key, <strong>control API costs</strong> and set HTTP referrer restrictions.', 'translatepress-multilingual' ), [ 'a' => [ 'href' => [], 'title' => [], 'target' => [] ], 'strong' => [] ] ); ?>
-                <br><?php echo sprintf( esc_html__( 'Your HTTP referrer is: %s', 'translatepress-multilingual' ), $machine_translator->get_referer() ); ?>
+                <br><?php echo esc_html( sprintf( __( 'Your HTTP referrer is: %s', 'translatepress-multilingual' ), $machine_translator->get_referer() ) ); ?>
             </p>
         </td>
 

@@ -88,7 +88,7 @@ class TRP_Elementor {
         $element->start_controls_section(
             $this->section_name_show, array(
                 'tab'   => Controls_Manager::TAB_ADVANCED,
-                'label' => __( 'Restrict by Language', 'translatepress' )
+                'label' => __( 'Restrict by Language', 'translatepress-multilingual' )
             )
         );
 
@@ -106,7 +106,7 @@ class TRP_Elementor {
         $element->start_controls_section(
             $this->section_name_exclude, array(
                 'tab'   => Controls_Manager::TAB_ADVANCED,
-                'label' => __( 'Exclude from Language', 'translatepress' )
+                'label' => __( 'Exclude from Language', 'translatepress-multilingual' )
             )
         );
 
@@ -121,15 +121,15 @@ class TRP_Elementor {
 
 		$element->add_control(
 			'trp_language_restriction', array(
-				'label'       => __( 'Restrict element to language', 'translatepress' ),
+				'label'       => __( 'Restrict element to language', 'translatepress-multilingual' ),
 				'type'        => Controls_Manager::SWITCHER,
-				'description' => __( 'Show this element only in one language.', 'translatepress' ),
+				'description' => __( 'Show this element only in one language.', 'translatepress-multilingual' ),
 			)
 		);
 
 		$element->add_control(
 			'trp_language_restriction_heading', array(
-				'label'     => __( 'Select language', 'translatepress' ),
+				'label'     => __( 'Select language', 'translatepress-multilingual' ),
 				'type'      => Controls_Manager::HEADING,
 				'separator' => 'before',
 			)
@@ -146,7 +146,7 @@ class TRP_Elementor {
                 'type'        => Controls_Manager::SELECT2,
                 'options'     => $published_languages,
 				'label_block' => 'true',
-				'description' => __( 'Choose in which language to show this element.', 'translatepress' ),
+				'description' => __( 'Choose in which language to show this element.', 'translatepress-multilingual' ),
             )
         );
 
@@ -158,15 +158,15 @@ class TRP_Elementor {
 
 		$element->add_control(
 			'trp_exclude_handler', array(
-				'label'       => __( 'Exclude element from language', 'translatepress' ),
+				'label'       => __( 'Exclude element from language', 'translatepress-multilingual' ),
 				'type'        => Controls_Manager::SWITCHER,
-				'description' => __( 'Exclude this element from specific languages.', 'translatepress' ),
+				'description' => __( 'Exclude this element from specific languages.', 'translatepress-multilingual' ),
 			)
 		);
 
 		$element->add_control(
 			'trp_excluded_heading', array(
-				'label'     => __( 'Select languages', 'translatepress' ),
+				'label'     => __( 'Select languages', 'translatepress-multilingual' ),
 				'type'      => Controls_Manager::HEADING,
 				'separator' => 'before',
 			)
@@ -184,12 +184,12 @@ class TRP_Elementor {
                 'options'             => $published_languages,
 				'multiple'            => 'true',
 				'label_block'         => 'true',
-				'description'         => __( 'Choose from which languages to exclude this element.', 'translatepress' ),
+				'description'         => __( 'Choose from which languages to exclude this element.', 'translatepress-multilingual' ),
             )
         );
 
-        $message  = '<p>' . __( 'This element will still be visible when you are translating your website through the Translation Editor.', 'translatepress' ) . '</p>';
-        $message .= '<p>' . __( 'The content of this element should be written in the default language.', 'translatepress' ) . '</p>';
+        $message  = '<p>' . __( 'This element will still be visible when you are translating your website through the Translation Editor.', 'translatepress-multilingual' ) . '</p>';
+        $message .= '<p>' . __( 'The content of this element should be written in the default language.', 'translatepress-multilingual' ) . '</p>';
 
 		$element->add_control(
             'trp_excluded_message', array(

@@ -5,13 +5,13 @@ $current_language_preference = $this->add_shortcode_preferences($shortcode_setti
 <div class="trp-language-switcher trp-language-switcher-container" data-no-translation <?php echo ( isset( $_GET['trp-edit-translation'] ) && $_GET['trp-edit-translation'] == 'preview' ) ? 'data-trp-unpreviewable="trp-unpreviewable"' : '' ?>>
     <div class="trp-ls-shortcode-current-language">
         <a href="#" class="trp-ls-shortcode-disabled-language trp-ls-disabled-language" title="<?php echo esc_attr( $current_language['name'] ); ?>" onclick="event.preventDefault()">
-			<?php echo $current_language_preference; // WPCS: ok. ?>
+			<?php echo $current_language_preference; /* phpcs:ignore */ /* escaped inside the function that generates the output */ ?>
 		</a>
     </div>
     <div class="trp-ls-shortcode-language">
         <?php if ( apply_filters('trp_ls_shortcode_show_disabled_language', true, $current_language, $current_language_preference, $this->settings ) ){ ?>
         <a href="#" class="trp-ls-shortcode-disabled-language trp-ls-disabled-language"  title="<?php echo esc_attr( $current_language['name'] ); ?>" onclick="event.preventDefault()">
-			<?php echo $current_language_preference; // WPCS: ok. ?>
+			<?php echo $current_language_preference; /* phpcs:ignore */ /* escaped inside the function that generates the output */ ?>
 		</a>
         <?php } ?>
     <?php foreach ( $other_languages as $code => $name ){
@@ -19,7 +19,7 @@ $current_language_preference = $this->add_shortcode_preferences($shortcode_setti
         $language_preference = $this->add_shortcode_preferences($shortcode_settings, $code, $name);
         ?>
         <a href="<?php echo esc_url( $this->url_converter->get_url_for_language($code, false) ); ?>" title="<?php echo esc_attr( $name ); ?>">
-            <?php echo $language_preference; // WPCS: ok. ?>
+            <?php echo $language_preference; /* phpcs:ignore */ /* escaped inside the function that generates the output */ ?>
         </a>
 
     <?php } ?>

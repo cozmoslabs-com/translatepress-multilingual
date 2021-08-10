@@ -22,7 +22,7 @@ class TRP_Ajax{
         }
 
         include './external-functions.php';
-        if ( !trp_is_valid_language_code( $_POST['language'] ) || !trp_is_valid_language_code( $_POST['original_language'] ) ) {
+        if ( !trp_is_valid_language_code( $_POST['language'] ) || !trp_is_valid_language_code( $_POST['original_language'] ) ) {//phpcs:ignore
             echo json_encode( 'TranslatePress Error: Invalid language code' );
             exit;
         }
@@ -30,8 +30,8 @@ class TRP_Ajax{
         if ( $this->connect_to_db() ){
 
             $this->output_translations(
-            	$this->sanitize_strings( $_POST['originals'] ),
-            	$this->sanitize_strings( $_POST['skip_machine_translation'] ),
+            	$this->sanitize_strings( $_POST['originals'] ),//phpcs:ignore
+            	$this->sanitize_strings( $_POST['skip_machine_translation'] ),//phpcs:ignore
 	            mysqli_real_escape_string( $this->connection, filter_var( $_POST['language'], FILTER_SANITIZE_STRING ) ),
 	            mysqli_real_escape_string( $this->connection, filter_var( $_POST['original_language'], FILTER_SANITIZE_STRING ) )
             );

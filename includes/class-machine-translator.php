@@ -59,7 +59,7 @@ class TRP_Machine_Translator {
         }
         $force_recheck = ( current_user_can('manage_options') &&
             !empty( $_GET['trp_recheck_supported_languages']) && $_GET['trp_recheck_supported_languages'] === '1' &&
-            wp_verify_nonce( $_GET['trp_recheck_supported_languages_nonce'], 'trp_recheck_supported_languages' ) ) ? true : $force_recheck;
+            wp_verify_nonce( sanitize_text_field( $_GET['trp_recheck_supported_languages_nonce'] ), 'trp_recheck_supported_languages' ) ) ? true : $force_recheck; //phpcs:ignore
         $data = get_option('trp_db_stored_data', array() );
         if ( isset( $_GET['trp_recheck_supported_languages'] )) {
             unset($_GET['trp_recheck_supported_languages'] );
@@ -282,7 +282,7 @@ class TRP_Machine_Translator {
 
         $crawlers = apply_filters( 'trp_machine_translator_crawlers', 'rambler|abacho|acoi|accona|aspseek|altavista|estyle|scrubby|lycos|geona|ia_archiver|alexa|sogou|skype|facebook|twitter|pinterest|linkedin|naver|bing|google|yahoo|duckduckgo|yandex|baidu|teoma|xing|java\/1.7.0_45|bot|crawl|slurp|spider|mediapartners|\sask\s|\saol\s' );
 
-        return preg_match( '/'. $crawlers .'/i', $_SERVER['HTTP_USER_AGENT'] );
+        return preg_match( '/'. $crawlers .'/i', sanitize_text_field ( $_SERVER['HTTP_USER_AGENT'] ) );
     }
 
     private function get_placeholders( $count ){

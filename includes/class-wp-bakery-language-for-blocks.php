@@ -95,19 +95,19 @@ class TRP_WPBakery {
 
         $attributes_checkbox = [
             'type' => 'checkbox',
-            'heading' => __('Restrict element to language', 'translatepress'),
+            'heading' => __('Restrict element to language', 'translatepress-multilingual'),
             'param_name' => $this->param_name_show,
             'group' => $group,
-            'description' => __('Show this element only in one language.', 'translatepress')
+            'description' => __('Show this element only in one language.', 'translatepress-multilingual')
         ];
 
         $attributes_value = [
             'type' => 'dropdown',
-            'heading' => __('Select language', 'translatepress'),
+            'heading' => __('Select language', 'translatepress-multilingual'),
             'param_name' => $this->param_name_show_language,
             'group' => $group,
             'value' => array_flip($this->get_published_languages(true)),
-            'description' => __('Choose in which language to show this element.', 'translatepress'),
+            'description' => __('Choose in which language to show this element.', 'translatepress-multilingual'),
             'dependency' => [
                 'element' => $this->param_name_show,
                 'value' => 'true'
@@ -135,31 +135,31 @@ class TRP_WPBakery {
 
         $attributes_checkbox = [
             'type' => 'checkbox',
-            'heading' => __('Exclude from Language', 'translatepress'),
+            'heading' => __('Exclude from Language', 'translatepress-multilingual'),
             'param_name' => $this->param_name_exclude,
             'group' => $group,
-            'description' => __('Exclude this element from specific languages.', 'translatepress')
+            'description' => __('Exclude this element from specific languages.', 'translatepress-multilingual')
         ];
 
         $message =
             '<p>' .
             __(
                 'This element will still be visible when you are translating your website through the Translation Editor.',
-                'translatepress'
+                'translatepress-multilingual'
             ) .
             '</p>';
         $message .=
             '<p>' .
-            __('The content of this element should be written in the default language.', 'translatepress') .
+            __('The content of this element should be written in the default language.', 'translatepress-multilingual') .
             '</p>';
 
         $attributes_value = [
             'type' => $this->shortcode_param_type_dropdown_multi,
-            'heading' => __('Select languages', 'translatepress'),
+            'heading' => __('Select languages', 'translatepress-multilingual'),
             'param_name' => $this->param_name_exclude_languages,
             'group' => $group,
             'value' => array_flip($this->get_published_languages(true)),
-            'description' => __('Choose from which languages to exclude this element.', 'translatepress') . $message,
+            'description' => __('Choose from which languages to exclude this element.', 'translatepress-multilingual') . $message,
             'dependency' => [
                 'element' => $this->param_name_exclude,
                 'value' => 'true'
@@ -176,7 +176,7 @@ class TRP_WPBakery {
     }
 
     private function get_group() {
-        return __('TranslatePress', 'translatepress');
+        return __('TranslatePress', 'translatepress-multilingual');
     }
 
     private function get_published_languages($placeholder = false) {
@@ -248,9 +248,10 @@ class TRP_WPBakery {
     public function get_skip_sc_array(){
         $skip_sc = array();
         $sc = WPBMap::getAllShortCodes();
+
         if ( isset( $sc) && is_array($sc) ){
             foreach( $sc as $key => $value ){
-                if ( isset($sc[$key] ) && (!isset($sc[$key]['params']) || !is_array($sc[$key]['params'])) ){
+                if ( isset($sc[$key] ) && (!isset($sc[$key]['params']) || !is_array($sc[$key]['params']) || $this->has_invalid_params($sc[$key]['params']))){
                     $skip_sc[] = $key;
                 }
             }
@@ -258,7 +259,28 @@ class TRP_WPBakery {
         return $skip_sc;
     }
 
+    /**
+     * Check if the parameters are valid (have numeric keys).
+     * @param $arr array
+     */
+    public function has_invalid_params($arr){
+        $bool=false;
+
+        foreach (array_keys($arr) as $key){
+            if(!is_numeric($key)){
+                $bool = true;
+                break;
+            }
+        }
+
+        $invalid_params = apply_filters('trp_wp_bakery_invalid_params', $bool, $arr);
+        return $invalid_params;
+    }
+
 }
+
+
 
 // Instantiate Plugin Class
 TRP_WPBakery::instance();
+

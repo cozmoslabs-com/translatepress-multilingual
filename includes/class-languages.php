@@ -197,8 +197,9 @@ class TRP_Languages{
      * @return string                       Short language name.
      */
 	public function beautify_language_name( $name, $code, $english_or_native, $language_codes ){
+	    $wp_lang = $this->get_wp_languages();
 		if ( $english_or_native == 'english_name' ) {
-			if ( ! $this->duplicated_language( $code, $language_codes ) ){
+			if ( ! $this->duplicated_language( $code, $language_codes) && (!isset($wp_lang[$code]['is_custom_language']) || (isset($wp_lang[$code]['is_custom_language']) && $wp_lang[$code]['is_custom_language'] !== true))){
 				$name = $this->string_trim_after_character( $name, " (" );
 			}
 		}

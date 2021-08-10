@@ -65,7 +65,7 @@ class TRP_Addons_List_Table extends WP_List_Table {
         $columns = array(
             'cb'        	=> '<input type="checkbox" />', //Render a checkbox instead of text
             'icon'     	=> '',
-            'add_on'    => __('Add-On', $this->text_domain ),
+            'add_on'    => __('Add-On', $this->text_domain ), //phpcs:ignore
             'actions'     => '',
         );
         return $columns;
@@ -120,7 +120,7 @@ class TRP_Addons_List_Table extends WP_List_Table {
         //for plugins we can do something general
         if( $item['type'] === 'plugin' ) {
             ?>
-            <a class="button-primary right trp-recommended-plugin-buttons trp-install-and-activate" data-trp-plugin-slug="<?php echo $item['short-slug']; ?>" data-trp-action-performed="<?php _e( 'Installing...', 'translatepress-multilingual' );?>" <?php echo $item['disabled']; ?>><?php echo $item['install_button']; ?></a>
+            <a class="button-primary right trp-recommended-plugin-buttons trp-install-and-activate" data-trp-plugin-slug="<?php echo esc_attr( $item['short-slug'] ); ?>" data-trp-action-performed="<?php esc_html_e( 'Installing...', 'translatepress-multilingual' );?>" <?php echo esc_html( $item['disabled'] ); ?>><?php echo wp_kses_post( $item['install_button'] ); ?></a>
             <?php
 
         }
@@ -129,14 +129,14 @@ class TRP_Addons_List_Table extends WP_List_Table {
             in_array( $this->current_version, $this->section_versions ) ? $disabled = '' : $disabled = 'disabled'; //add disabled if the current version isn't eligible
 
             if ( $this->is_add_on_active( $item['slug'] ) ) {
-                $action = '<a class="right button button-secondary" '.$disabled.' href="'. esc_url( wp_nonce_url( add_query_arg( 'trp_add_ons', $item['slug'], admin_url( 'admin.php?page='. $_REQUEST['page']. '&trp_add_ons_action=deactivate' ) ), 'trp_add_ons_action' ) ) .'">' . __('Deactivate', $this->text_domain) . '</a>';
+                $action = '<a class="right button button-secondary" '.$disabled.' href="'. esc_url( wp_nonce_url( add_query_arg( 'trp_add_ons', $item['slug'], admin_url( 'admin.php?page='. sanitize_text_field( $_REQUEST['page'] ) . '&trp_add_ons_action=deactivate' ) ), 'trp_add_ons_action' ) ) .'">' . __('Deactivate', $this->text_domain) . '</a>';//phpcs:ignore
             } else {
-                $action = '<a class="right button button-primary" '.$disabled.' href="'. esc_url( wp_nonce_url( add_query_arg( 'trp_add_ons', $item['slug'], admin_url( 'admin.php?page='. $_REQUEST['page']. '&trp_add_ons_action=activate' ) ), 'trp_add_ons_action' ) ) .'">' . __('Activate', $this->text_domain) . '</a>';
+                $action = '<a class="right button button-primary" '.$disabled.' href="'. esc_url( wp_nonce_url( add_query_arg( 'trp_add_ons', $item['slug'], admin_url( 'admin.php?page='. sanitize_text_field( $_REQUEST['page'] ). '&trp_add_ons_action=activate' ) ), 'trp_add_ons_action' ) ) .'">' . __('Activate', $this->text_domain) . '</a>';//phpcs:ignore
             }
         }
 
 
-        $documentation = '<a target="_blank" class="right" href="'. trp_add_affiliate_id_to_link( $item['doc_url'] ) . '">' . __( 'Documentation', $this->text_domain ) . '</a>';
+        $documentation = '<a target="_blank" class="right" href="'. trp_add_affiliate_id_to_link( $item['doc_url'] ) . '">' . __( 'Documentation', $this->text_domain ) . '</a>';//phpcs:ignore
 
         return $action . $documentation;
     }
@@ -168,7 +168,7 @@ class TRP_Addons_List_Table extends WP_List_Table {
     function show_search_box(){
         ?>
         <p class="trp-add-ons-search-box">
-            <input type="text" id="trp-add-ons-search-input" name="s" value="" placeholder="<?php _e( 'Search for add-ons...', $this->text_domain ); ?>">
+            <input type="text" id="trp-add-ons-search-input" name="s" value="" placeholder="<?php esc_html_e( 'Search for add-ons...', $this->text_domain ); //phpcs:ignore ?>">
         </p>
         <?php
     }
@@ -178,7 +178,7 @@ class TRP_Addons_List_Table extends WP_List_Table {
      */
     function show_sumbit_button(){
         ?>
-        <input type="submit" class="button-primary" value="<?php _e('Save Add-ons', $this->text_domain);?>">
+        <input type="submit" class="button-primary" value="<?php esc_html_e('Save Add-ons', $this->text_domain); //phpcs:ignore?>">
         <?php
     }
 
@@ -191,9 +191,9 @@ class TRP_Addons_List_Table extends WP_List_Table {
         <div class="trp-add-ons-section">
             <?php if( !empty( $this->section_header ) ): ?>
 
-                <h2><?php echo $this->section_header['title'];?></h2>
+                <h2><?php echo esc_html( $this->section_header['title'] );?></h2>
                 <?php if( !empty( $this->section_header ) ): ?>
-                    <p class="description"><?php echo $this->section_header['description']; ?></p>
+                    <p class="description"><?php echo wp_kses_post( $this->section_header['description'] ); ?></p>
                 <?php endif; ?>
             <?php endif; ?>
 
@@ -223,7 +223,7 @@ class TRP_Addons_List_Table extends WP_List_Table {
     function display_addons(){
         ?>
         <div class="wrap" id="trp-add-ons-listing">
-            <h1 class="trp-main-header"><?php echo $this->header['title'];?></h1>
+            <h1 class="trp-main-header"><?php echo esc_html( $this->header['title'] );?></h1>
 
             <form id="trp-addons" method="post">
 
@@ -235,15 +235,15 @@ class TRP_Addons_List_Table extends WP_List_Table {
 
                 if( !empty( $this->sections ) ){
                     foreach ( $this->sections as $section ){
-                        echo $section;
+                        echo $section;/* phpcs:ignore */ /* escaped inside the variable */
                     }
                 }
                 ?>
                 <?php $this->show_sumbit_button(); ?>
 
                 <!-- For plugins, we also need to ensure that the form posts back to our current page -->
-                <input type="hidden" name="trp_all_add_ons" value="<?php echo implode( '|' ,$this->all_addons ); ?>" />
-                <input type="hidden" name="trp_all_plugins" value="<?php echo implode( '|' ,$this->all_plugins ); ?>" />
+                <input type="hidden" name="trp_all_add_ons" value="<?php echo esc_attr( implode( '|' ,$this->all_addons ) ); ?>" />
+                <input type="hidden" name="trp_all_plugins" value="<?php echo esc_attr( implode( '|' ,$this->all_plugins ) ); ?>" />
                 <input type="hidden" name="trp_add_ons_action" value="bulk_action" />
                 <?php wp_nonce_field('trp_add_ons_action'); ?>
             </form>
@@ -263,7 +263,7 @@ class TRP_Addons_List_Table extends WP_List_Table {
  */
 add_action( 'admin_init', 'trp_add_ons_listing_process_actions', 1 );
 function trp_add_ons_listing_process_actions(){
-    if (current_user_can( 'manage_options' ) && isset( $_REQUEST['trp_add_ons_action'] ) && isset($_REQUEST['_wpnonce']) && wp_verify_nonce( $_REQUEST['_wpnonce'], 'trp_add_ons_action' ) ){
+    if (current_user_can( 'manage_options' ) && isset( $_REQUEST['trp_add_ons_action'] ) && isset($_REQUEST['_wpnonce']) && wp_verify_nonce( sanitize_text_field( $_REQUEST['_wpnonce'] ), 'trp_add_ons_action' ) ){
 
         if( $_REQUEST['trp_add_ons_action'] === 'bulk_action' ){
             if( !empty( $_POST['trp_all_plugins'] ) && !empty( $_POST['trp_all_add_ons'] ) ){//make sure we have all the data
@@ -326,7 +326,7 @@ function trp_add_ons_listing_process_actions(){
             }
         }
 
-        wp_safe_redirect( add_query_arg( 'trp_add_ons_listing_success', 'true', admin_url( 'admin.php?page='. $_REQUEST['page'] ) ) );
+        wp_safe_redirect( add_query_arg( 'trp_add_ons_listing_success', 'true', admin_url( 'admin.php?page='. sanitize_text_field( $_REQUEST['page'] ) ) ) );//phpcs:ignore
     }
 }
 

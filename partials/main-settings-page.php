@@ -93,7 +93,7 @@
                             <?php
                             $link_start = '<a href="' . esc_url( admin_url( 'nav-menus.php' ) ) .'">';
                             $link_end = '</a>';
-                            printf( wp_kses( __( 'Go to  %1$s Appearance -> Menus%2$s to add languages to the Language Switcher in any menu.', 'translatepress-multilingual' ), [ 'a' => [ 'href' => [] ] ] ), $link_start, $link_end ); ?>
+                            printf( wp_kses( __( 'Go to  %1$s Appearance -> Menus%2$s to add languages to the Language Switcher in any menu.', 'translatepress-multilingual' ), [ 'a' => [ 'href' => [] ] ] ), $link_start, $link_end ); //phpcs:ignore ?>
                             <a href="https://translatepress.com/docs/settings/#language-switcher"><?php esc_html_e( 'Learn more in our documentation.', 'translatepress-multilingual' ); ?></a>
                         </p>
                     </div>
@@ -120,6 +120,6 @@
             <?php do_action ( 'trp_extra_settings', $this->settings ); ?>
         </table>
 
-        <p class="submit"><input type="submit" class="button-primary" value="<?php esc_attr_e( 'Save Changes' ); ?>" /></p>
+        <p class="submit"><input type="submit" class="button-primary" value="<?php esc_attr_e( 'Save Changes', 'translatepress-multilingual' ); ?>" /></p>
     </form>
 </div>

@@ -79,9 +79,9 @@ class TRP_Url_Converter {
         // we can't use wp_get_referer() It looks like it creates an infinite loop because it calls home_url() and we're filtering that
         $referrer = '';
         if ( ! empty( $_REQUEST['_wp_http_referer'] ) ) {
-            $referrer = wp_unslash( $_REQUEST['_wp_http_referer'] );
+            $referrer = wp_unslash( esc_url_raw( $_REQUEST['_wp_http_referer'] ) );
         } else if ( ! empty( $_SERVER['HTTP_REFERER'] ) ) {
-            $referrer = wp_unslash( $_SERVER['HTTP_REFERER'] );
+            $referrer = wp_unslash( esc_url_raw( $_SERVER['HTTP_REFERER'] ) );
         }
 
         //consider an admin request a call to the rest api that came from the admin area
@@ -120,7 +120,7 @@ class TRP_Url_Converter {
         global $wp_current_filter;
 
         if( empty( $path ) || $path === '/' ){
-            $path = $_SERVER['REQUEST_URI'];
+            $path = isset( $_SERVER['REQUEST_URI'] ) ? esc_url_raw( $_SERVER['REQUEST_URI'] ) : '';
         }
 
         // Verify that this is a sitemap url and that it contains the .xml extension
@@ -358,18 +358,18 @@ class TRP_Url_Converter {
 
         }else if( isset( $trp_current_url_term_slug ) && isset($trp_current_url_taxonomy) &&
             !is_wp_error( get_term_link( $trp_current_url_term_slug, $trp_current_url_taxonomy)) &&
-            strpos( urldecode($url), get_term_link( $trp_current_url_term_slug, $trp_current_url_taxonomy) ) === 0
+            strpos( $url, get_term_link( $trp_current_url_term_slug, $trp_current_url_taxonomy) ) === 0
         ){ // check here if it is a term link
             $current_term_link = get_term_link( $trp_current_url_term_slug, $trp_current_url_taxonomy);
             $TRP_LANGUAGE = $language;
                 $check_term_link = get_term_link($trp_current_url_term_slug, $trp_current_url_taxonomy);
                 if (!is_wp_error($check_term_link))
-                    $new_url =  str_replace( $current_term_link, $check_term_link, urldecode($url) );
+                    $new_url =  str_replace( $current_term_link, $check_term_link, $url );
                 else
                     $new_url = $url;
 
                 $TRP_LANGUAGE = $trp_language_copy;
-        }else if( is_home() && ( strpos($_SERVER['REQUEST_URI'], 'sitemap') === false && strpos($_SERVER['REQUEST_URI'], '.xml') === false ) ) {//for some reason in yoast sitemap is_home() is true ..so we need to check if we are not in the sitemap itself
+        }else if( is_home() && ( isset( $_SERVER['REQUEST_URI'] ) && strpos( esc_url_raw( $_SERVER['REQUEST_URI'] ), 'sitemap') === false && strpos( esc_url_raw( $_SERVER['REQUEST_URI'] ), '.xml') === false ) ) {//for some reason in yoast sitemap is_home() is true ..so we need to check if we are not in the sitemap itself
             $TRP_LANGUAGE = $language;
             if ( empty($url_obj->getQuery()) ) {
 	            $new_url = $this->maybe_add_pagination_to_blog_page( get_post_type_archive_link( 'post' ) );
@@ -551,7 +551,7 @@ class TRP_Url_Converter {
         }
         if ( apply_filters('trp_adjust_absolute_home_https_based_on_server_variable', true) ) {
             // always return absolute_home based on the http or https version of the current page request. This means no more redirects.
-            if ( !empty( $_SERVER['HTTPS'] ) && strtolower($_SERVER['HTTPS']) != 'off' ) {
+            if ( !empty( $_SERVER['HTTPS'] ) && strtolower( sanitize_text_field( $_SERVER['HTTPS'] ) ) != 'off' ) {
                 $this->absolute_home = str_replace( 'http://', 'https://', $this->absolute_home );
             } else {
                 $this->absolute_home = str_replace( 'https://', 'http://', $this->absolute_home );
@@ -635,7 +635,7 @@ class TRP_Url_Converter {
             return $req_uri;
         }
 
-        $req_uri = $_SERVER['REQUEST_URI'];
+        $req_uri = isset( $_SERVER['REQUEST_URI'] ) ? esc_url_raw( $_SERVER['REQUEST_URI'] ) : '';
 
         $home_path = trim( parse_url( $this->get_abs_home(), PHP_URL_PATH ), '/' );
         $home_path_regex = sprintf( '|^%s|i', preg_quote( $home_path, '|' ) );
@@ -718,6 +718,11 @@ class TRP_Url_Converter {
         if( $TRP_LANGUAGE != $this->settings['default-language'] ) {
             if( trim($value['product_base'], '/') === trp_x( 'product', 'slug', 'woocommerce', $this->settings['default-language'] ) ){
                 $value['product_base'] = '';
+                /* in ajax it seems the language is not set correctly and we get the slug for the original language if we leave it blank. detected in sober theme
+                Will only do it for products for now as I am not 100% sure it won't impact other things */
+                if( wp_doing_ajax() ){
+                    $value['product_base'] = trp_x( 'product', 'slug', 'woocommerce', $TRP_LANGUAGE );
+                }
             }else{
             	// if the custom base permalink starts with product, WooCommerce will translate it when on other languages
 	            if ( substr( $value['product_base'], 0, strlen('/product/' ) ) === '/product/' ) {

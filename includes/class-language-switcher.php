@@ -283,7 +283,7 @@ class TRP_Language_Switcher{
         <div id="trp-floater-ls" onclick="" data-no-translation class="trp-language-switcher-container <?php echo esc_attr( $floater_class ); ?>" <?php echo ( isset( $_GET['trp-edit-translation'] ) && $_GET['trp-edit-translation'] == 'preview' ) ? 'data-trp-unpreviewable="trp-unpreviewable"' : '' ?>>
             <div id="trp-floater-ls-current-language" class="<?php echo esc_attr( $floater_flags_class ); ?>">
                 <a href="#" class="trp-floater-ls-disabled-language trp-ls-disabled-language" onclick="event.preventDefault()">
-					<?php echo ( $floater_settings['flags'] ? $this->add_flag( $current_language['code'], $current_language['name'] ) : '' ); // WPCS: ok.
+					<?php echo ( $floater_settings['flags'] ? $this->add_flag( $current_language['code'], $current_language['name'] ) : '' ); // phpcs:ignore
 					echo esc_html( $current_language_label ); ?>
 				</a>
             </div>
@@ -302,9 +302,9 @@ class TRP_Language_Switcher{
 
                 $floater_position = 'bottom';
                 if ( !empty( $this->settings['floater-position'] ) && strpos( $this->settings['floater-position'], 'top' ) !== false  ){
-	                  echo $powered_by;
+	                  echo $powered_by; // phpcs:ignore
 	                  echo '<div class="trp-language-wrap">';
-	                  echo $disabled_language;
+	                  echo $disabled_language; // phpcs:ignore
                     $floater_position = 'top';
                 }
 
@@ -327,7 +327,7 @@ class TRP_Language_Switcher{
                     <a href="<?php echo esc_url( $this->url_converter->get_url_for_language($code, false) ); ?>"
                         <?php echo ( isset( $_GET['trp-edit-translation'] ) && $_GET['trp-edit-translation'] == 'preview' ) ? 'data-trp-unpreviewable="trp-unpreviewable"' : '' ?> title="<?php echo esc_attr( $name ); ?>">
           						  <?php
-                          echo ( $floater_settings['flags'] ? $this->add_flag( $code, $name ) : '' ); // WPCS: ok.
+                          echo ( $floater_settings['flags'] ? $this->add_flag( $code, $name ) : '' ); // phpcs:ignore
 						              echo esc_html( $language_label );
 						            ?>
 					          </a>
@@ -339,9 +339,9 @@ class TRP_Language_Switcher{
                 }
 
                 if ( $floater_position == 'bottom' ){
-	                  echo $disabled_language;
+	                  echo $disabled_language; // phpcs:ignore
 	                  echo '</div>';
-	                  echo $powered_by;
+	                  echo $powered_by; // phpcs:ignore
                 }
                 ?>
             </div>
@@ -349,7 +349,7 @@ class TRP_Language_Switcher{
 
     <?php
         $floating_ls_html = ob_get_clean();
-        echo apply_filters( 'trp_floating_ls_html', $floating_ls_html );
+        echo apply_filters( 'trp_floating_ls_html', $floating_ls_html ); // phpcs:ignore
     }
 
     /**

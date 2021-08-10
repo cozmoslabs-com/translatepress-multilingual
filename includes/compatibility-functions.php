@@ -60,7 +60,7 @@ function trp_remove_html_from_menu_title( $atts, $item, $args ){
  */
 function trp_wp_trim_words( $text, $num_words, $more, $original_text ) {
     if ( null === $more ) {
-        $more = __( '&hellip;' );
+        $more = __( '&hellip;' );//phpcs:ignore
     }
     // what we receive is the short text in the filter
     $text = $original_text;
@@ -73,7 +73,7 @@ function trp_wp_trim_words( $text, $num_words, $more, $original_text ) {
     $default_language= $settings["default-language"];
 
     $char_is_word = false;
-    foreach (array('ch', 'ja', 'tw') as $lang){
+    foreach (array('ja', 'tw', 'zh') as $lang){
         if (strpos($default_language, $lang) !== false){
             $char_is_word = true;
         }
@@ -418,7 +418,7 @@ function trp_nextgen_compatibility( $priority ){
  */
 add_filter( 'run_ngg_resource_manager', 'trp_nextgen_disable_nextgen_in_translation_editor');
 function trp_nextgen_disable_nextgen_in_translation_editor( $bool ){
-    if ( isset( $_REQUEST['trp-edit-translation'] ) && esc_attr( $_REQUEST['trp-edit-translation'] ) === 'true' ) {
+    if ( isset( $_REQUEST['trp-edit-translation'] ) && sanitize_text_field( $_REQUEST['trp-edit-translation'] ) === 'true' ) {
         return false;
     }
     return $bool;
@@ -481,7 +481,7 @@ if( class_exists( 'WooCommerce' ) ) {
 	function trp_woo_fix_product_remove_from_cart_notice($message, $cart_item){
 		$product = wc_get_product( $cart_item['product_id'] );
 		if ($product){
-			$message =  sprintf( _x( '&ldquo; %s &rdquo;', 'Item name in quotes', 'woocommerce' ), $product->get_name() );
+			$message =  sprintf( _x( '&ldquo; %s &rdquo;', 'Item name in quotes', 'woocommerce' ), $product->get_name() ); //phpcs:ignore
 		}
 		return $message;
 	}
@@ -905,8 +905,9 @@ function trp_brizy_disable_dynamic_translation( $enable ){
 
 /**
  * Compatibility with Brizy PRO menu, the language switcher inside the menu does not work fully yet
+ * Compatibility with Brizy assets loading with language slug in url (the 'process' function)
  */
-if( defined( 'BRIZY_PRO_VERSION' ) ){
+if( defined( 'BRIZY_PRO_VERSION' ) || defined( 'BRIZY_VERSION' ) ){
     add_filter( 'trp_home_url', 'trp_brizy_menu_pro_compatibility', 10, 5 );
     function trp_brizy_menu_pro_compatibility( $new_url, $abs_home, $TRP_LANGUAGE, $path, $url ){
         if ( version_compare( PHP_VERSION, '5.4.0', '>=' ) ) {
@@ -916,7 +917,7 @@ if( defined( 'BRIZY_PRO_VERSION' ) ){
             $callstack_functions = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS);
         }
 
-        $list_of_functions = array( 'restoreSiteUrl' );
+        $list_of_functions = array( 'restoreSiteUrl', 'process' );
         if( !empty( $callstack_functions ) ) {
             foreach ( $callstack_functions as $callstack_function ) {
                 if ( in_array( $callstack_function['function'], $list_of_functions ) ) {
@@ -1249,7 +1250,7 @@ function trp_add_current_menu_item_css_class( $items ){
     }
 
     foreach( $items as $item ){
-        if ( !in_array( 'current-menu-item', $item->classes ) && !in_array( 'menu-item-object-language_switcher', $item->classes )){
+        if ( !in_array( 'current-menu-item', $item->classes ) && !in_array( 'menu-item-object-language_switcher', $item->classes ) && ( !empty($item->url) && $item->url !== '#')){
             $url_for_language = $url_converter->get_url_for_language( $TRP_LANGUAGE, $item->url );
             $url_for_language = strpos( $url_for_language, '#' ) ? substr( $url_for_language, 0, strpos( $url_for_language, '#' ) ) : $url_for_language;
             $cur_page_url = set_url_scheme( untrailingslashit( $url_converter->cur_page_url() ) );
@@ -1400,8 +1401,8 @@ if( class_exists('WooCommerce_Product_Search_Service') ) {
             $attributes = isset($_REQUEST[WooCommerce_Product_Search_Service::ATTRIBUTES]) ? intval($_REQUEST[WooCommerce_Product_Search_Service::ATTRIBUTES]) > 0 : WooCommerce_Product_Search_Service::DEFAULT_ATTRIBUTES;
             $variations = isset($_REQUEST[WooCommerce_Product_Search_Service::VARIATIONS]) ? intval($_REQUEST[WooCommerce_Product_Search_Service::VARIATIONS]) > 0 : WooCommerce_Product_Search_Service::DEFAULT_VARIATIONS;
 
-            $min_price = isset($_REQUEST[WooCommerce_Product_Search_Service::MIN_PRICE]) ? WooCommerce_Product_Search_Service::to_float($_REQUEST[WooCommerce_Product_Search_Service::MIN_PRICE]) : null;
-            $max_price = isset($_REQUEST[WooCommerce_Product_Search_Service::MAX_PRICE]) ? WooCommerce_Product_Search_Service::to_float($_REQUEST[WooCommerce_Product_Search_Service::MAX_PRICE]) : null;
+            $min_price = isset($_REQUEST[WooCommerce_Product_Search_Service::MIN_PRICE]) ? WooCommerce_Product_Search_Service::to_float($_REQUEST[WooCommerce_Product_Search_Service::MIN_PRICE]) : null;//phpcs:ignore
+            $max_price = isset($_REQUEST[WooCommerce_Product_Search_Service::MAX_PRICE]) ? WooCommerce_Product_Search_Service::to_float($_REQUEST[WooCommerce_Product_Search_Service::MAX_PRICE]) : null;//phpcs:ignore
             if ($min_price !== null && $min_price <= 0) {
                 $min_price = null;
             }

@@ -204,7 +204,7 @@ if( !class_exists('TRP_EDD_SL_Plugin_Updater') ) {
                 // build a plugin list row, with update notification
                 $wp_list_table = _get_list_table('WP_Plugins_List_Table');
                 # <tr class="plugin-update-tr"><td colspan="' . $wp_list_table->get_column_count() . '" class="plugin-update colspanchange">
-                echo '<tr class="plugin-update-tr" id="' . $this->slug . '-update" data-slug="' . $this->slug . '" data-plugin="' . $this->slug . '/' . $file . '">';
+                echo '<tr class="plugin-update-tr" id="' . esc_attr( $this->slug ) . '-update" data-slug="' . esc_attr( $this->slug ) . '" data-plugin="' . esc_attr( $this->slug ) . '/' . esc_attr( $file ) . '">';
                 echo '<td colspan="3" class="plugin-update colspanchange">';
                 echo '<div class="update-message notice inline notice-warning notice-alt">';
 
@@ -212,7 +212,7 @@ if( !class_exists('TRP_EDD_SL_Plugin_Updater') ) {
 
                 if (empty($version_info->download_link)) {
                     printf(
-                        __('There is a new version of %1$s available. %2$sView version %3$s details%4$s.', 'easy-digital-downloads'),
+                        __('There is a new version of %1$s available. %2$sView version %3$s details%4$s.', 'translatepress-multilingual'), //phpcs:ignore
                         esc_html($version_info->name),
                         '<a target="_blank" class="thickbox" href="' . esc_url($changelog_link) . '">',
                         esc_html($version_info->new_version),
@@ -220,7 +220,7 @@ if( !class_exists('TRP_EDD_SL_Plugin_Updater') ) {
                     );
                 } else {
                     printf(
-                        __('There is a new version of %1$s available. %2$sView version %3$s details%4$s or %5$supdate now%6$s.', 'easy-digital-downloads'),
+                        __('There is a new version of %1$s available. %2$sView version %3$s details%4$s or %5$supdate now%6$s.', 'translatepress-multilingual'), //phpcs:ignore
                         esc_html($version_info->name),
                         '<a target="_blank" class="thickbox" href="' . esc_url($changelog_link) . '">',
                         esc_html($version_info->new_version),
@@ -414,10 +414,10 @@ if( !class_exists('TRP_EDD_SL_Plugin_Updater') ) {
             }
 
             if (!current_user_can('update_plugins')) {
-                wp_die(__('You do not have permission to install plugin updates', 'easy-digital-downloads'), __('Error', 'easy-digital-downloads'), array('response' => 403));
+                wp_die( esc_html__('You do not have permission to install plugin updates', 'translatepress-multilingual'), esc_html__('Error', 'translatepress-multilingual'), array('response' => 403));
             }
 
-            $data = $edd_plugin_data[$_REQUEST['slug']];
+            $data = $edd_plugin_data[sanitize_text_field( $_REQUEST['slug'] )];
             $beta = !empty($data['beta']) ? true : false;
             $cache_key = md5('edd_plugin_' . sanitize_key($_REQUEST['plugin']) . '_' . $beta . '_version_info');
             $version_info = $this->get_cached_version_info($cache_key);
@@ -428,7 +428,7 @@ if( !class_exists('TRP_EDD_SL_Plugin_Updater') ) {
                     'edd_action' => 'get_version',
                     'item_name' => isset($data['item_name']) ? $data['item_name'] : false,
                     'item_id' => isset($data['item_id']) ? $data['item_id'] : false,
-                    'slug' => $_REQUEST['slug'],
+                    'slug' => sanitize_text_field( $_REQUEST['slug'] ),
                     'author' => $data['author'],
                     'url' => home_url(),
                     'beta' => !empty($data['beta'])
@@ -459,7 +459,7 @@ if( !class_exists('TRP_EDD_SL_Plugin_Updater') ) {
             }
 
             if (!empty($version_info) && isset($version_info->sections['changelog'])) {
-                echo '<div style="background:#fff;padding:10px;">' . $version_info->sections['changelog'] . '</div>';
+                echo '<div style="background:#fff;padding:10px;">' . wp_kses_post( $version_info->sections['changelog'] ) . '</div>';
             }
 
             exit;
@@ -540,7 +540,7 @@ if( !class_exists('TRP_LICENSE_PAGE') ) {
             $action = 'options.php';
             ob_start();
             require TRP_PLUGIN_DIR . 'partials/license-settings-page.php';
-            echo ob_get_clean();
+            echo ob_get_clean();//phpcs:ignore
         }
     }
 }
@@ -635,8 +635,6 @@ class TRP_Plugin_Updater{
     public function admin_activation_notices() {
         if ( isset( $_GET['trp_sl_activation'] ) && ! empty( $_GET['message'] ) ) {
 
-            $message = urldecode( $_GET['message'] );
-
             switch( $_GET['trp_sl_activation'] ) {
                 case 'false':
                     $class ="error";
@@ -648,8 +646,8 @@ class TRP_Plugin_Updater{
             }
 
             ?>
-            <div class="<?php echo $class; ?>">
-                <p><?php echo wp_kses_post( $message ); ?></p>
+            <div class="<?php echo esc_attr( $class ); ?>">
+                <p><?php echo wp_kses_post( urldecode( $_GET['message'] ) );//phpcs:ignore ?></p>
             </div>
             <?php
         }
@@ -664,13 +662,13 @@ class TRP_Plugin_Updater{
                 return; // get out if we didn't click the Activate button
 
 
-            if (preg_match('/^[*]+$/', $_POST['trp_license_key']) && strlen( $_POST['trp_license_key'] ) > 5 ) {
+            if ( isset( $_POST['trp_license_key'] ) && preg_match('/^[*]+$/', $_POST['trp_license_key']) && strlen( $_POST['trp_license_key'] ) > 5 ) { //phpcs:ignore
                 // pressed submit without altering the existing license key (containing only * as outputted by default)
                 // useful for Deactivating/Activating valid license back
                 $license = get_option('trp_license_key', '');
             }else{
                 // save the license
-                $license = $this->edd_sanitize_license( trim( $_POST['trp_license_key'] ) );
+                $license = $this->edd_sanitize_license( trim( $_POST['trp_license_key'] ) );//phpcs:ignore
                 $this->update_option( 'trp_license_key', $license );
             }
             $message = array();//we will check the license for each addon and we will sotre the messages in an array

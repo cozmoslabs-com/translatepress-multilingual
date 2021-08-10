@@ -35,7 +35,7 @@ class TRP_Install_Plugins {
                     }else{
                         $message = wp_kses( sprintf( __('Could not install. Try again from <a href="%s" >Plugins Dashboard.</a>', 'translatepress-multilingual'), admin_url('plugins.php') ), array('a' => array( 'href' => array() ) ) );
                     }
-                    wp_die( trp_safe_json_encode( $message ));
+                    wp_die( trp_safe_json_encode( $message ));//phpcs:ignore
                 }
             }
         }

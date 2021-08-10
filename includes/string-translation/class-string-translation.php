@@ -83,13 +83,13 @@ class TRP_String_Translation {
      * @return bool
      */
     public function is_string_translation_editor() {
-        if ( isset( $_REQUEST['trp-string-translation'] ) && esc_attr( $_REQUEST['trp-string-translation'] ) === 'true' ) {
+        if ( isset( $_REQUEST['trp-string-translation'] ) && sanitize_text_field( $_REQUEST['trp-string-translation'] ) === 'true' ) {
             if ( current_user_can( apply_filters( 'trp_translating_capability', 'manage_options' ) ) && !is_admin() ) {
                 return true;
             } else {
                 wp_die(
-                    '<h1>' . esc_html__( 'Cheatin&#8217; uh?' ) . '</h1>' .
-                    '<p>' . esc_html__( 'Sorry, you are not allowed to access this page.' ) . '</p>',
+                    '<h1>' . esc_html__( 'Cheatin&#8217; uh?' ) . '</h1>' . //phpcs:ignore
+                    '<p>' . esc_html__( 'Sorry, you are not allowed to access this page.' ) . '</p>', //phpcs:ignore
                     403
                 );
             }
@@ -227,7 +227,7 @@ class TRP_String_Translation {
             'in'                         => _x( 'in', 'Untranslated in this language', 'translatepress-multilingual' ),
 
             // specific bulk actions
-            'delete_warning'             => __( 'Warning: This action cannot be undone. Deleting a string will remove its current translation. The original string will appear again in this interface after TranslatePress detects it. This action is NOT equivalent to excluding the string from being translated again.' ),
+            'delete_warning'             => __( 'Warning: This action cannot be undone. Deleting a string will remove its current translation. The original string will appear again in this interface after TranslatePress detects it. This action is NOT equivalent to excluding the string from being translated again.' , 'translatepress-multilingual' ),
 
             // tooltips
             'next_page'                  => __( 'Navigate to next page', 'translatepress-multilingual' ),

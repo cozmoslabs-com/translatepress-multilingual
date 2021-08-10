@@ -5,7 +5,7 @@ Tags: translate, translation, multilingual, automatic translation, bilingual, fr
 Requires at least: 3.1.0
 Tested up to: 5.8
 Requires PHP: 5.6.20
-Stable tag: 2.0.6
+Stable tag: 2.0.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -140,6 +140,17 @@ For more information please check out our [documentation](https://translatepress
 
 
 == Changelog ==
+= 2.0.7 =
+* Security improvements
+* Added support for WooCommerce /shop/%product_cat% product permalink structure
+* Fixed URL issues with post category when using encoded characters
+* Fixed an issue with Woocommerce product links not being translated when loaded with ajax
+* Fixed notices when using WP Bakery
+* Fixed excerpt character limit in Chinese language
+* Fixed some cases of trimming custom language name in language switcher
+* Fixed adding current-menu-item class on empty menu links
+* Compatibility with Brizy to load correct assets on other languages
+
 = 2.0.6 =
 * Added support for translating form reset button
 * Fixed custom flags getting resized

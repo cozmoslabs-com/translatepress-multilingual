@@ -1,9 +1,9 @@
 <?php
 /*
-Plugin Name: TranslatePress - Multilingual
+Plugin Name: TranslatePress - Dev
 Plugin URI: https://translatepress.com/
 Description: Experience a better way of translating your WordPress site using a visual front-end translation editor, with full support for WooCommerce and site builders.
-Version: 2.0.6
+Version: 2.0.7
 Author: Cozmoslabs, Razvan Mocanu, Madalin Ungureanu, Cristophor Hurduban
 Author URI: https://cozmoslabs.com/
 Text Domain: translatepress-multilingual

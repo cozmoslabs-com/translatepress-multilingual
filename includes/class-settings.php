@@ -53,7 +53,7 @@ class TRP_Settings{
         }
         $output .= '</select>';
 
-        echo $output;
+        echo $output;/* phpcs:ignore */ /* escaped above */
     }
 
     /**
@@ -77,7 +77,7 @@ class TRP_Settings{
         }
         $output .= '</select>';
 
-        echo $output;
+        echo $output; /* phpcs:ignore */ /* escaped above */
     }
 
 	/**
@@ -98,7 +98,7 @@ class TRP_Settings{
 		}
 		$output .= '</select>';
 
-		echo $output;
+		echo $output; /* phpcs:ignore */ /* escaped above */
 	}
 
     /**
@@ -542,7 +542,7 @@ class TRP_Settings{
 
         $active_tab = 'translate-press';
         if ( isset( $_GET['page'] ) ){
-            $active_tab = esc_attr( wp_unslash( $_GET['page'] ) );
+            $active_tab = sanitize_text_field( wp_unslash( $_GET['page'] ) );
         }
 
         require TRP_PLUGIN_DIR . 'partials/settings-navigation-tabs.php';

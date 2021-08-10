@@ -38,15 +38,15 @@ class TRP_Translation_Manager
      */
     protected function conditions_met($mode = 'true')
     {
-        if (isset($_REQUEST['trp-edit-translation']) && esc_attr($_REQUEST['trp-edit-translation']) == $mode) {
+        if (isset($_REQUEST['trp-edit-translation']) && sanitize_text_field($_REQUEST['trp-edit-translation']) == $mode) {
             if (current_user_can(apply_filters('trp_translating_capability', 'manage_options')) && !is_admin()) {
                 return true;
-            } elseif (esc_attr($_REQUEST['trp-edit-translation']) == "preview") {
+            } elseif (sanitize_text_field($_REQUEST['trp-edit-translation']) == "preview") {
                 return true;
             } else {
                 wp_die(
-                    '<h1>' . esc_html__('Cheatin&#8217; uh?') . '</h1>' .
-                    '<p>' . esc_html__('Sorry, you are not allowed to access this page.') . '</p>',
+                    '<h1>' . esc_html__('Cheatin&#8217; uh?') . '</h1>' . //phpcs:ignore  WordPress.WP.I18n.MissingArgDomain
+                    '<p>' . esc_html__('Sorry, you are not allowed to access this page.') . '</p>', //phpcs:ignore  WordPress.WP.I18n.MissingArgDomain
                     403
                 );
             }
@@ -211,7 +211,7 @@ class TRP_Translation_Manager
         if (defined('DOING_AJAX') && DOING_AJAX && current_user_can(apply_filters('trp_translating_capability', 'manage_options'))) {
             check_ajax_referer('trp_editor_user_meta', 'security');
             if (isset($_POST['action']) && $_POST['action'] === 'trp_save_editor_user_meta' && !empty($_POST['user_meta'])) {
-                $submitted_user_meta = json_decode(stripslashes($_POST['user_meta']), true);
+                $submitted_user_meta = json_decode(stripslashes($_POST['user_meta']), true); /* phpcs:ignore */ /* sanitized bellow */
                 $existing_user_meta = $this->get_editor_user_meta();
                 foreach ($existing_user_meta as $key => $existing) {
                     if (isset($submitted_user_meta[$key])) {
@@ -221,7 +221,7 @@ class TRP_Translation_Manager
                 update_user_meta(get_current_user_id(), 'trp_editor_user_meta', $existing_user_meta);
             }
         }
-        echo trp_safe_json_encode(array());
+        echo trp_safe_json_encode(array());//phpcs:ignore
         die();
     }
 
@@ -670,7 +670,7 @@ class TRP_Translation_Manager
     {
 
         /* for our own actions return false */
-        if (isset($_REQUEST['action']) && strpos($_REQUEST['action'], 'trp_') === 0)
+        if (isset($_REQUEST['action']) && strpos( sanitize_text_field( $_REQUEST['action'] ), 'trp_') === 0)
             return false;
 
         $trp = TRP_Translate_Press::get_trp_instance();
@@ -720,7 +720,7 @@ class TRP_Translation_Manager
     {
 
         /* for our own actions don't do nothing */
-        if (isset($_REQUEST['action']) && strpos($_REQUEST['action'], 'trp_') === 0)
+        if ( isset($_REQUEST['action']) && strpos( sanitize_text_field( $_REQUEST['action'] ), 'trp_') === 0 )
             return;
 
         /* if the request came from preview mode make sure to keep it */
@@ -777,7 +777,7 @@ class TRP_Translation_Manager
             return $translation;
 
         /* for our own actions don't do nothing */
-        if (isset($_REQUEST['action']) && strpos($_REQUEST['action'], 'trp_') === 0)
+        if (isset($_REQUEST['action']) && strpos( sanitize_text_field( $_REQUEST['action'] ), 'trp_') === 0)
             return $translation;
 
         /* get_locale() returns WP Settings Language (WPLANG). It might not be a language in TP so it may not have a TP table. */
@@ -1264,7 +1264,7 @@ class TRP_Translation_Manager
                 }
 
                 if ($current_user_can_change_roles) {
-                    if (!wp_verify_nonce($_REQUEST['trp-view-as-nonce'], 'trp_view_as' . sanitize_text_field($_REQUEST['trp-view-as']) . get_current_user_id())) {
+                    if (!wp_verify_nonce( sanitize_text_field($_REQUEST['trp-view-as-nonce'] ), 'trp_view_as' . sanitize_text_field($_REQUEST['trp-view-as']) . get_current_user_id())) {
                         wp_die(esc_html__('Security check', 'translatepress-multilingual'));
                     } else {
                         global $current_user;

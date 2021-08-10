@@ -33,6 +33,10 @@ msgstr ""
 msgid "Advanced"
 msgstr ""
 
+#: includes/class-advanced-tab.php:178
+msgid "Settings saved."
+msgstr ""
+
 #: includes/class-advanced-tab.php:307, includes/class-error-manager.php:172, partials/machine-translation-settings-page.php:13, partials/machine-translation-settings-page.php:88, partials/machine-translation-settings-page.php:121, partials/main-settings-page.php:41, partials/main-settings-page.php:54, partials/main-settings-page.php:67
 msgid "Yes"
 msgstr ""
@@ -53,40 +57,104 @@ msgstr ""
 msgid "Select..."
 msgstr ""
 
-#: includes/class-edd-sl-plugin-updater.php:708
+#: includes/class-edd-sl-plugin-updater.php:223
+msgid "There is a new version of %1$s available. %2$sView version %3$s details%4$s or %5$supdate now%6$s."
+msgstr ""
+
+#: includes/class-edd-sl-plugin-updater.php:215
+msgid "There is a new version of %1$s available. %2$sView version %3$s details%4$s."
+msgstr ""
+
+#: includes/class-edd-sl-plugin-updater.php:417
+msgid "You do not have permission to install plugin updates"
+msgstr ""
+
+#: includes/class-edd-sl-plugin-updater.php:417
+msgid "Error"
+msgstr ""
+
+#: includes/class-edd-sl-plugin-updater.php:706
 msgid "Your license key expired on %s."
 msgstr ""
 
-#: includes/class-edd-sl-plugin-updater.php:713
+#: includes/class-edd-sl-plugin-updater.php:711
 msgid "Your license key has been disabled."
 msgstr ""
 
-#: includes/class-edd-sl-plugin-updater.php:716
+#: includes/class-edd-sl-plugin-updater.php:714
 msgid "Invalid license."
 msgstr ""
 
-#: includes/class-edd-sl-plugin-updater.php:720
+#: includes/class-edd-sl-plugin-updater.php:718
 msgid "Your license is not active for this URL."
 msgstr ""
 
-#: includes/class-edd-sl-plugin-updater.php:723
+#: includes/class-edd-sl-plugin-updater.php:721
 msgid "This appears to be an invalid license key for %s."
 msgstr ""
 
-#: includes/class-edd-sl-plugin-updater.php:726
+#: includes/class-edd-sl-plugin-updater.php:724
 msgid "Your license key has reached its activation limit."
 msgstr ""
 
-#: includes/class-edd-sl-plugin-updater.php:729, includes/class-edd-sl-plugin-updater.php:697, includes/class-edd-sl-plugin-updater.php:800
+#: includes/class-edd-sl-plugin-updater.php:727, includes/class-edd-sl-plugin-updater.php:695, includes/class-edd-sl-plugin-updater.php:798
 msgid "An error occurred, please try again."
 msgstr ""
 
-#: includes/class-edd-sl-plugin-updater.php:760
+#: includes/class-edd-sl-plugin-updater.php:758
 msgid "You have successfully activated your license"
 msgstr ""
 
 #: includes/class-editor-api-regular-strings.php:48
 msgid "Others"
+msgstr ""
+
+#: includes/class-elementor-language-for-blocks.php:91
+msgid "Restrict by Language"
+msgstr ""
+
+#: includes/class-elementor-language-for-blocks.php:109, includes/class-wp-bakery-language-for-blocks.php:138
+msgid "Exclude from Language"
+msgstr ""
+
+#: includes/class-elementor-language-for-blocks.php:124, includes/class-wp-bakery-language-for-blocks.php:98
+msgid "Restrict element to language"
+msgstr ""
+
+#: includes/class-elementor-language-for-blocks.php:126, includes/class-wp-bakery-language-for-blocks.php:101
+msgid "Show this element only in one language."
+msgstr ""
+
+#: includes/class-elementor-language-for-blocks.php:132, includes/class-wp-bakery-language-for-blocks.php:106
+msgid "Select language"
+msgstr ""
+
+#: includes/class-elementor-language-for-blocks.php:149, includes/class-wp-bakery-language-for-blocks.php:110
+msgid "Choose in which language to show this element."
+msgstr ""
+
+#: includes/class-elementor-language-for-blocks.php:161
+msgid "Exclude element from language"
+msgstr ""
+
+#: includes/class-elementor-language-for-blocks.php:163, includes/class-wp-bakery-language-for-blocks.php:141
+msgid "Exclude this element from specific languages."
+msgstr ""
+
+#: includes/class-elementor-language-for-blocks.php:169, includes/class-wp-bakery-language-for-blocks.php:158
+msgid "Select languages"
+msgstr ""
+
+#: includes/class-elementor-language-for-blocks.php:187, includes/class-wp-bakery-language-for-blocks.php:162
+msgid "Choose from which languages to exclude this element."
+msgstr ""
+
+#: includes/class-elementor-language-for-blocks.php:191, includes/class-wp-bakery-language-for-blocks.php:146
+msgid "This element will still be visible when you are translating your website through the Translation Editor."
+msgstr ""
+
+#: includes/class-elementor-language-for-blocks.php:192, includes/class-wp-bakery-language-for-blocks.php:153
+msgid "The content of this element should be written in the default language."
 msgstr ""
 
 #: includes/class-error-manager.php:50
@@ -777,12 +845,20 @@ msgstr ""
 msgid "All individual TranslatePress add-on plugins have been discontinued and have been replaced with new Personal, Business and Developer versions of TranslatePress. Please log into the account page at <a href=\"https://translatepress.com/account/\" target=\"_blank\">translatepress.com</a> and download the new plugin and install it. Individual Add-ons will not receive updates anymore"
 msgstr ""
 
+#: includes/class-wp-bakery-language-for-blocks.php:179
+msgid "TranslatePress"
+msgstr ""
+
 #: includes/compatibility-functions.php:28
 msgid "<strong>TranslatePress</strong> requires <strong><a href=\"http://php.net/manual/en/book.mbstring.php\">Multibyte String PHP library</a></strong>. Please contact your server administrator to install it on your server."
 msgstr ""
 
-#: includes/compatibility-functions.php:1493
+#: includes/compatibility-functions.php:1494
 msgid "Detected long query limitation on WPEngine hosting. Some large pages may appear untranslated. You can remove limitation by adding the following to your site’s wp-config.php: define( 'WPE_GOVERNOR', false ); "
+msgstr ""
+
+#: includes/custom-language.php:8
+msgid "Custom Language Flag"
 msgstr ""
 
 #: partials/addons-settings-page.php:3, partials/license-settings-page.php:46, partials/license-settings-page.php:8, partials/main-settings-page.php:5, partials/test-api-settings-page.php:11, partials/trp-remove-duplicate-rows.php:3
@@ -893,7 +969,7 @@ msgstr ""
 msgid "TranslatePress Advanced Settings"
 msgstr ""
 
-#: partials/advanced-settings-page.php:16
+#: partials/advanced-settings-page.php:16, partials/machine-translation-settings-page.php:132, partials/main-settings-page.php:123
 msgid "Save Changes"
 msgstr ""
 
@@ -1298,6 +1374,14 @@ msgstr ""
 msgid "Choose what paths can be translated. Supports wildcard at the end of the path.<br>For example, to exclude https://example.com/some/path you can either use the rule /some/path/ or /some/*.<br>Enter each rule on it's own line. To exclude the home page use {{home}}."
 msgstr ""
 
+#: includes/advanced-settings/do-not-translate-certain-paths.php:30
+msgid "Exclude Paths From Translation"
+msgstr ""
+
+#: includes/advanced-settings/do-not-translate-certain-paths.php:35
+msgid "Translate Only Certain Paths"
+msgstr ""
+
 #: includes/advanced-settings/enable-auto-translate-slug.php:8
 msgid "Automatically translate slugs"
 msgstr ""
@@ -1576,6 +1660,10 @@ msgctxt "Untranslated in this language"
 msgid "in"
 msgstr ""
 
+#: includes/string-translation/class-string-translation.php:230
+msgid "Warning: This action cannot be undone. Deleting a string will remove its current translation. The original string will appear again in this interface after TranslatePress detects it. This action is NOT equivalent to excluding the string from being translated again."
+msgstr ""
+
 #: includes/string-translation/class-string-translation.php:233
 msgid "Navigate to next page"
 msgstr ""
@@ -1720,12 +1808,12 @@ msgstr ""
 msgid "Visit <a href=\"%s\" target=\"_blank\">this link</a> to see how you can set up an API key and control API costs."
 msgstr ""
 
-#: add-ons-pro/translator-accounts/includes/class-translator-accounts.php:92
-msgid " TranslatePress Settings"
+#: add-ons-pro/translator-accounts/includes/class-translator-accounts-activator.php:30, add-ons-pro/translator-accounts/includes/class-translator-accounts.php:96, add-ons-pro/translator-accounts/includes/class-translator-accounts.php:97
+msgid "Translator"
 msgstr ""
 
-#: add-ons-pro/translator-accounts/includes/class-translator-accounts.php:96, add-ons-pro/translator-accounts/includes/class-translator-accounts.php:97
-msgid "Translator"
+#: add-ons-pro/translator-accounts/includes/class-translator-accounts.php:92
+msgid " TranslatePress Settings"
 msgstr ""
 
 #: add-ons-pro/translator-accounts/includes/class-translator-accounts.php:101

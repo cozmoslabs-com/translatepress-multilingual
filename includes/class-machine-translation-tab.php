@@ -164,13 +164,13 @@ class TRP_Machine_Translation_Tab {
                         <?php
                         foreach ( $this->settings['translation-languages'] as $language_code ) {
                             if ( !$machine_translator->check_languages_availability( array( $language_code ) ) ) {
-                                echo '<li>' . $language_names[$language_code] . '</li>';
+                                echo '<li>' . esc_html( $language_names[$language_code] ) . '</li>';
                             }
                         }
                         ?>
                    </ul>
-                  <a href="<?php echo esc_url( admin_url( 'admin.php?page=trp_machine_translation&trp_recheck_supported_languages=1&trp_recheck_supported_languages_nonce=' . wp_create_nonce('trp_recheck_supported_languages') ) ); ?>" class="button-secondary"><?php _e( 'Recheck supported languages', 'translatepress-multilingual' ); ?></a>
-                  <p><i><?php echo sprintf( __( '(last checked on %s)', 'translatepress-multilingual' ), esc_html( $machine_translator->get_last_checked_supported_languages() ) ); ?> </i></p>
+                  <a href="<?php echo esc_url( admin_url( 'admin.php?page=trp_machine_translation&trp_recheck_supported_languages=1&trp_recheck_supported_languages_nonce=' . wp_create_nonce('trp_recheck_supported_languages') ) ); ?>" class="button-secondary"><?php esc_html_e( 'Recheck supported languages', 'translatepress-multilingual' ); ?></a>
+                  <p><i><?php echo wp_kses_post( sprintf( __( '(last checked on %s)', 'translatepress-multilingual' ), esc_html( $machine_translator->get_last_checked_supported_languages() ) ) ); ?> </i></p>
                    <p class="description">
                        <?php echo wp_kses( __( 'The selected automatic translation engine does not provide support for these languages.<br>You can still manually translate pages in these languages using the Translation Editor.', 'translatepress-multilingual' ), array( 'br' => array() ) ); ?>
                    </p>

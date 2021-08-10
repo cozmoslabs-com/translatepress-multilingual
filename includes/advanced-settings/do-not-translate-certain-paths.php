@@ -22,23 +22,23 @@ function trp_output_do_not_translate_certain_paths( $setting ){
 
     ?>
     <tr id="trp-adv-translate-certain-paths">
-        <th scope="row"><?php echo $setting['label']; ?></th>
+        <th scope="row"><?php echo esc_html( $setting['label'] ); ?></th>
         <td>
             <div class="trp-adv-holder">
                 <label>
-                    <input type='radio' id='$setting_name' name="trp_advanced_settings[<?php echo $setting['name']; ?>][option]" value="exclude" <?php echo isset( $trp_settings['trp_advanced_settings'][$setting['name']]['option'] ) && $trp_settings['trp_advanced_settings'][$setting['name']]['option'] == 'exclude' ? 'checked' : ''; ?>>
-                    <?php _e( 'Exclude Paths From Translation', 'translatepress' ); ?>
+                    <input type='radio' id='$setting_name' name="trp_advanced_settings[<?php echo esc_attr( $setting['name'] ); ?>][option]" value="exclude" <?php echo isset( $trp_settings['trp_advanced_settings'][$setting['name']]['option'] ) && $trp_settings['trp_advanced_settings'][$setting['name']]['option'] == 'exclude' ? 'checked' : ''; ?>>
+                    <?php esc_html_e( 'Exclude Paths From Translation', 'translatepress-multilingual' ); ?>
                 </label>
 
                 <label>
-                    <input type='radio' id='$setting_name' name="trp_advanced_settings[<?php echo $setting['name']; ?>][option]" value="include" <?php echo isset( $trp_settings['trp_advanced_settings'][$setting['name']]['option'] ) && $trp_settings['trp_advanced_settings'][$setting['name']]['option'] == 'include' ? 'checked' : ''; ?> >
-                    <?php _e( 'Translate Only Certain Paths', 'translatepress' ); ?>
+                    <input type='radio' id='$setting_name' name="trp_advanced_settings[<?php echo esc_attr( $setting['name'] ); ?>][option]" value="include" <?php echo isset( $trp_settings['trp_advanced_settings'][$setting['name']]['option'] ) && $trp_settings['trp_advanced_settings'][$setting['name']]['option'] == 'include' ? 'checked' : ''; ?> >
+                    <?php esc_html_e( 'Translate Only Certain Paths', 'translatepress-multilingual' ); ?>
                 </label>
             </div>
 
-            <textarea class="trp-adv-big-textarea" name="trp_advanced_settings[<?php echo $setting['name']; ?>][paths]"><?php echo isset( $trp_settings['trp_advanced_settings'][$setting['name']]['paths'] ) ? $trp_settings['trp_advanced_settings'][$setting['name']]['paths'] : ''; ?></textarea>
+            <textarea class="trp-adv-big-textarea" name="trp_advanced_settings[<?php echo esc_attr( $setting['name'] ); ?>][paths]"><?php echo isset( $trp_settings['trp_advanced_settings'][$setting['name']]['paths'] ) ? esc_textarea( $trp_settings['trp_advanced_settings'][$setting['name']]['paths'] ) : ''; ?></textarea>
 
-            <p class="description"><?php echo $setting['description']; ?></p>
+            <p class="description"><?php echo wp_kses_post( $setting['description'] ); ?></p>
         </td>
     </tr>
 
@@ -81,7 +81,7 @@ function trp_exclude_include_paths_to_run_on(){
         return true;
 
     $paths        = explode("\n", str_replace("\r", "", $advanced_settings['translateable_content']['paths'] ) );
-    $current_slug = sanitize_text_field( $_SERVER['REQUEST_URI'] );
+    $current_slug = isset( $_SERVER['REQUEST_URI'] ) ? esc_url_raw( $_SERVER['REQUEST_URI'] ) : '';
 
     $replace = '/';
 

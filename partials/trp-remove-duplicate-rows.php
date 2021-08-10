@@ -21,7 +21,7 @@
                             </td>
                         </tr>
                     </table>
-                    <input type="hidden" name="trp_rm_nonce" value="<?php echo wp_create_nonce('tpremoveduplicaterows')?>">
+                    <input type="hidden" name="trp_rm_nonce" value="<?php echo esc_attr( wp_create_nonce('tpremoveduplicaterows') )?>">
                     <input type="hidden" name="page" value="trp_remove_duplicate_rows">
                     <input type="hidden" name="trp_rm_batch" value="1">
                     <input type="hidden" name="trp_rm_duplicates" value="<?php echo esc_attr( $this->settings['translation-languages'][0] ); ?>">

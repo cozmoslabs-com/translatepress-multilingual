@@ -118,7 +118,7 @@ class TRP_Error_Manager{
 
     public function disable_error_after_click_link(){
 
-        $link = $_GET['page'];
+        $link = isset( $_GET['page'] ) ? sanitize_text_field( $_GET['page'] ) : '';
 
         if($link = 'trp_error_manager') {
             $this->clear_notification_from_db('disable_automatic_translations', null);

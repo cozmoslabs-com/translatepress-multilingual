@@ -34,7 +34,7 @@ class TRP_String_Translation_Helper {
             $this->settings = $trp_settings->get_settings();
         }
         $query_args   = array();
-        $posted_query = ( empty( $_POST['query'] ) ) ? array() : json_decode( stripslashes( $_POST['query'] ), true );
+        $posted_query = ( empty( $_POST['query'] ) ) ? array() : json_decode( stripslashes( $_POST['query'] ), true ); /* phpcs:ignore */ /* sanitized below */
 
         // translation status
         $translation_status_filters = $this->string_translation->get_translation_status_filters();

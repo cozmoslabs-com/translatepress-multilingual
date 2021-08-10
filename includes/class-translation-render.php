@@ -408,7 +408,7 @@ class TRP_Translation_Render{
 	     */
 	    if( $json_array && $json_array != $output ) {
 		    /* if it's one of our own ajax calls don't do nothing */
-            if ( ! empty( $_REQUEST['action'] ) && strpos( $_REQUEST['action'], 'trp_' ) === 0 && $_REQUEST['action'] != 'trp_split_translation_block' )
+            if ( ! empty( $_REQUEST['action'] ) && strpos( sanitize_text_field( $_REQUEST['action'] ), 'trp_' ) === 0 && $_REQUEST['action'] != 'trp_split_translation_block' )
 		        return $output;
 
 	        //check if we have a json response
@@ -1096,7 +1096,7 @@ class TRP_Translation_Render{
 			 */
 	        if( $json_array && $json_array != $output ) {
 		        /* if it's one of our own ajax calls don't do nothing */
-		        if ( ! empty( $_REQUEST['action'] ) && strpos( $_REQUEST['action'], 'trp_' ) === 0 && $_REQUEST['action'] != 'trp_split_translation_block' ) {
+		        if ( ! empty( $_REQUEST['action'] ) && strpos( sanitize_text_field( $_REQUEST['action'] ), 'trp_' ) === 0 && $_REQUEST['action'] != 'trp_split_translation_block' ) {
 			        return $output;
 		        }
 
@@ -1596,7 +1596,7 @@ class TRP_Translation_Render{
      */
     public function force_language_on_form_url_redirect( $location, $status ){
         if( isset( $_REQUEST[ 'trp-form-language' ] ) && !empty($_REQUEST[ 'trp-form-language' ]) ){
-            $form_language_slug = esc_attr($_REQUEST[ 'trp-form-language' ]);
+            $form_language_slug = sanitize_text_field($_REQUEST[ 'trp-form-language' ]);
             $form_language = array_search($form_language_slug, $this->settings['url-slugs']);
             if ( ! $this->url_converter ) {
                 $trp = TRP_Translate_Press::get_trp_instance();
@@ -1668,7 +1668,7 @@ class TRP_Translation_Render{
      */
     function callback_add_language_to_url(&$item, $key){
         if ( filter_var($item, FILTER_VALIDATE_URL) !== FALSE ) {
-            $form_language_slug = esc_attr($_REQUEST[ 'trp-form-language' ]);
+            $form_language_slug = isset( $_REQUEST[ 'trp-form-language' ] ) ? sanitize_text_field($_REQUEST[ 'trp-form-language' ]) : '';
             $form_language = array_search($form_language_slug, $this->settings['url-slugs']);
             if ( ! $this->url_converter ) {
                 $trp = TRP_Translate_Press::get_trp_instance();

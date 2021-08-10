@@ -59,8 +59,8 @@ class TRP_Translation_Memory {
             {
                 global $TRP_LANGUAGE;
                 check_ajax_referer('getsimilarstring', 'security');
-                $string = ( isset($_POST['original_string']) ) ? $_POST['original_string'] : '';
-                $language_code = ( isset($_POST['language']) ) ? $_POST['language'] : $TRP_LANGUAGE;
+                $string = ( isset($_POST['original_string']) ) ? $_POST['original_string'] : '';//phpcs:ignore
+                $language_code = ( isset($_POST['language']) ) ? sanitize_text_field( $_POST['language'] ) : $TRP_LANGUAGE;
                 $selector = ( isset($_POST['selector']) ) ? sanitize_text_field( $_POST['selector'] ) : '';
                 $number = ( isset($_POST['number']) ) ? (int) $_POST['number'] : 3;
 
