@@ -148,41 +148,44 @@ class TRP_Url_Converter {
     /**
      * Add Hreflang entries for each language to Header.
      */
-    public function add_hreflang_to_head(){
+    public function add_hreflang_to_head() {
 
-    	// exclude hreflang for URL
-	    $default_language= $this->settings["default-language"];
-	    $original_url = str_replace('#TRPLINKPROCESSED', '', $this->get_url_for_language( $default_language ) ) ;
-	    if ( apply_filters('trp-exclude-hreflang', false, $original_url) ){
-    		return;
-	    }
+        // exclude hreflang for URL
+        $default_language = $this->settings["default-language"];
+        $original_url     = str_replace( '#TRPLINKPROCESSED', '', $this->get_url_for_language( $default_language ) );
+        if ( apply_filters( 'trp-exclude-hreflang', false, $original_url ) ) {
+            return;
+        }
 
         $languages = $this->settings['publish-languages'];
         if ( isset( $_GET['trp-edit-translation'] ) && $_GET['trp-edit-translation'] == 'preview' ) {
             $languages = $this->settings['translation-languages'];
         }
 
-        $region_independent_languages = array();
-        foreach ( $languages as $language ) {
-            // hreflang should have - instead of _ . For example: en-EN, not en_EN like the locale
-            $hreflang = str_replace('_', '-', $language);
-            $hreflang = apply_filters('trp_hreflang', $hreflang, $language);
-            echo '<link rel="alternate" hreflang="' . esc_attr( $hreflang ). '" href="' . esc_url( $this->get_url_for_language( $language ) ) . '"/>' . "\n";
+            $region_independent_languages = array();
+            foreach ( $languages as $language ) {
+                    // hreflang should have - instead of _ . For example: en-EN, not en_EN like the locale
+                    $hreflang = str_replace( '_', '-', $language );
+                    $hreflang = apply_filters( 'trp_hreflang', $hreflang, $language );
+                    echo '<link rel="alternate" hreflang="' . esc_attr( $hreflang ) . '" href="' . esc_url( $this->get_url_for_language( $language ) ) . '"/>' . "\n";
 
-            if ( strpos( $language, '_' ) !== false ){
-                $language_independent_hreflang = strtok($language, '_');
-                if( !empty( $language_independent_hreflang ) && !in_array( $language_independent_hreflang, $region_independent_languages ) ) {
-                    $region_independent_languages[] = $language_independent_hreflang;
-                    echo '<link rel="alternate" hreflang="' . esc_attr( $language_independent_hreflang ) . '" href="' . esc_url( $this->get_url_for_language( $language ) ) . '"/>' . "\n";
+                if ( apply_filters( 'trp_add_region_independent_hreflang_tags', true ) ) {
+                    if ( strpos( $language, '_' ) !== false ) {
+                        $language_independent_hreflang = strtok( $language, '_' );
+                        if ( !empty( $language_independent_hreflang ) && !in_array( $language_independent_hreflang, $region_independent_languages ) ) {
+                            $region_independent_languages[] = $language_independent_hreflang;
+                            echo '<link rel="alternate" hreflang="' . esc_attr( $language_independent_hreflang ) . '" href="' . esc_url( $this->get_url_for_language( $language ) ) . '"/>' . "\n";
+                        }
+                    }
                 }
+            }
+
+            if ( isset( $this->settings['trp_advanced_settings']['enable_hreflang_xdefault'] ) && $this->settings['trp_advanced_settings']['enable_hreflang_xdefault'] != 'disabled' ) {
+                $default_lang = $this->settings['trp_advanced_settings']['enable_hreflang_xdefault'];
+                echo '<link rel="alternate" hreflang="x-default" href="' . esc_url( $this->get_url_for_language( $default_lang ) ) . '"/>' . "\n";
             }
         }
 
-        if( isset($this->settings['trp_advanced_settings']['enable_hreflang_xdefault']) && $this->settings['trp_advanced_settings']['enable_hreflang_xdefault'] != 'disabled' ){
-            $default_lang = $this->settings['trp_advanced_settings']['enable_hreflang_xdefault'];
-            echo '<link rel="alternate" hreflang="x-default" href="' . esc_url( $this->get_url_for_language( $default_lang ) ) . '"/>' . "\n";
-        }
-    }
 
     /**
      * Function that changes the lang attribute in the html tag to the current language.

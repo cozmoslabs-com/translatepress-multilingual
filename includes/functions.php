@@ -166,7 +166,14 @@ function trp_sanitize_string( $filtered ){
 		$filtered = trim( preg_replace('/ +/', ' ', $filtered) );
 	}
 
-	return $filtered;
+    return trp_wp_kses( $filtered );
+}
+
+function trp_wp_kses($string){
+    if ( apply_filters('trp_apply_wp_kses_on_strings', true) ){
+        $string = wp_kses_post($string);
+    }
+    return $string;
 }
 
 /**

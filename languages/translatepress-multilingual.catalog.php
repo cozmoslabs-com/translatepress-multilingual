@@ -27,6 +27,8 @@
 <?php __("Exclude from Language", "translatepress-multilingual"); ?>
 <?php __("Restrict element to language", "translatepress-multilingual"); ?>
 <?php __("Show this element only in one language.", "translatepress-multilingual"); ?>
+<?php __("Enable translation", "translatepress-multilingual"); ?>
+<?php __("Allow translation to the corresponding language only if the content is written in the default language.", "translatepress-multilingual"); ?>
 <?php __("Select language", "translatepress-multilingual"); ?>
 <?php __("Choose in which language to show this element.", "translatepress-multilingual"); ?>
 <?php __("Exclude element from language", "translatepress-multilingual"); ?>
@@ -206,7 +208,7 @@
 <?php __("If the page does not redirect automatically", "translatepress-multilingual"); ?>
 <?php __("click here", "translatepress-multilingual"); ?>
 <?php __("Recreated original strings table.", "translatepress-multilingual"); ?>
-<?php __("All individual TranslatePress add-on plugins have been discontinued and have been replaced with new Personal, Business and Developer versions of TranslatePress. Please log into the account page at <a href=\"https://translatepress.com/account/\" target=\"_blank\">translatepress.com</a> and download the new plugin and install it. Individual Add-ons will not receive updates anymore", "translatepress-multilingual"); ?>
+<?php __("All individual TranslatePress add-on plugins <a href=\"%1$s\" target=\"_blank\">have been discontinued</a> and are now included in the premium Personal, Business and Developer versions of TranslatePress. Please log into your <a href=\"%2$s\" target=\"_blank\">account page</a>, download the new premium version and install it. Your individual addons settings will be ported over.", "translatepress-multilingual"); ?>
 <?php __("TranslatePress", "translatepress-multilingual"); ?>
 <?php __("<strong>TranslatePress</strong> requires <strong><a href=\"http://php.net/manual/en/book.mbstring.php\">Multibyte String PHP library</a></strong>. Please contact your server administrator to install it on your server.", "translatepress-multilingual"); ?>
 <?php __("Detected long query limitation on WPEngine hosting. Some large pages may appear untranslated. You can remove limitation by adding the following to your site’s wp-config.php: define( 'WPE_GOVERNOR', false ); ", "translatepress-multilingual"); ?>
@@ -241,7 +243,7 @@
 <?php __("Save Changes", "translatepress-multilingual"); ?>
 <?php __("TranslatePress Errors", "translatepress-multilingual"); ?>
 <?php __("There are no logged errors.", "translatepress-multilingual"); ?>
-<?php __("If you purchased a premium version, first install and activate any of the <a href=\"%s\">Advanced or Pro Addons</a>. After this you will be prompted with an input to enter your license key.", "translatepress-multilingual"); ?>
+<?php __("If you purchased a <a href=\"%s\">premium version</a>, first install and activate it. After this you will be prompted with an input to enter your license key.", "translatepress-multilingual"); ?>
 <?php __("License Key", "translatepress-multilingual"); ?>
 <?php __("Activate License", "translatepress-multilingual"); ?>
 <?php __("Deactivate License", "translatepress-multilingual"); ?>
@@ -254,9 +256,11 @@
 <?php __("Enable or disable the automatic translation of the site. To minimize translation costs, each untranslated string is automatically translated only once, then stored in the database.", "translatepress-multilingual"); ?>
 <?php __("Translation Engine", "translatepress-multilingual"); ?>
 <?php __("Choose which engine you want to use in order to automatically translate your website.", "translatepress-multilingual"); ?>
+<?php __("To use <strong>DeepL</strong> for automatic translation, activate this Pro add-on from the <a href=\"%1$s\" target=\"_self\" title=\"%2$s\">%2$s</a>.", "translatepress-multilingual"); ?>
 <?php __("<strong>DeepL</strong> automatic translation is available as a <a href=\"%1$s\" target=\"_blank\" title=\"%2$s\">%2$s</a>.", "translatepress-multilingual"); ?>
-<?php __("TranslatePress Pro Add-on", "translatepress-multilingual"); ?>
 <?php __("By upgrading you'll get access to all paid add-ons, premium support and help fund the future development of TranslatePress.", "translatepress-multilingual"); ?>
+<?php __("TranslatePress Pro Add-on", "translatepress-multilingual"); ?>
+<?php __("Addons tab", "translatepress-multilingual"); ?>
 <?php __("Please note that DeepL API usage is paid separately. See <a href=\"https://www.deepl.com/pro.html#developer\">DeepL pricing information</a>.", "translatepress-multilingual"); ?>
 <?php __("TranslatePress Pro Add-ons", "translatepress-multilingual"); ?>
 <?php __("Test API credentials", "translatepress-multilingual"); ?>

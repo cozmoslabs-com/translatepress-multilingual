@@ -5,7 +5,7 @@ Tags: translate, translation, multilingual, automatic translation, bilingual, fr
 Requires at least: 3.1.0
 Tested up to: 5.8
 Requires PHP: 5.6.20
-Stable tag: 2.0.7
+Stable tag: 2.0.9
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -140,6 +140,15 @@ For more information please check out our [documentation](https://translatepress
 
 
 == Changelog ==
+= 2.0.9 =
+* Security improvements
+* Added option to translate content restricted by language in Elementor
+* Added filter to disable independent region hreflang tags
+* Improved notices in TP Settings
+
+= 2.0.8 =
+* Corrected plugin name
+
 = 2.0.7 =
 * Security improvements
 * Added support for WooCommerce /shop/%product_cat% product permalink structure

@@ -37,32 +37,61 @@
                 </td>
             </tr>
 
+
             <?php if( !class_exists( 'TRP_DeepL' ) && !class_exists( 'TRP_IN_DeepL' ) ) : ?>
                 <tr style="display:none;">
                     <th scope="row"></th>
                     <td>
                         <p class="trp-upsell-multiple-languages" id="trp-upsell-deepl">
+
                             <?php
-                                $url = trp_add_affiliate_id_to_link('https://translatepress.com/?utm_source=wpbackend&utm_medium=clientsite&utm_content=deepl_upsell&utm_campaign=tpfree');
+                            //link and message in case the user has the free version of TranslatePress
+                            if(( !class_exists('TRP_Handle_Included_Addons')) || (( defined('TRANSLATE_PRESS') && (TRANSLATE_PRESS !== 'TranslatePress - Developer' && TRANSLATE_PRESS !=='TranslatePress - Business' && TRANSLATE_PRESS !=='TranslatePress - Dev') )) ) :
+                                $url = trp_add_affiliate_id_to_link('https://translatepress.com/pricing/?utm_source=wpbackend&utm_medium=clientsite&utm_content=deepl_upsell&utm_campaign=tpfree');
+                                $message = __( '<strong>DeepL</strong> automatic translation is available as a <a href="%1$s" target="_blank" title="%2$s">%2$s</a>.', 'translatepress-multilingual' );
+                                $message_upgrade = __( 'By upgrading you\'ll get access to all paid add-ons, premium support and help fund the future development of TranslatePress.', 'translatepress-multilingual' );
+                                ?>
+                            <?php
+                            //link and message in case the user has the pro version of TranslatePress
+                                else:
+                                    $url = 'admin.php?page=trp_addons_page' ;
+                                $message = __( 'To use <strong>DeepL</strong> for automatic translation, activate this Pro add-on from the <a href="%1$s" target="_self" title="%2$s">%2$s</a>.', 'translatepress-multilingual' );
+                                $message_upgrade= "";
+                                    ?>
+                        <?php endif; ?>
+                        <?php
+                            if(empty($message_upgrade)) {
                                 $lnk = sprintf(
-                                    // Translators: %1$s is the URL to the DeepL add-on. %2$s is the name of the Pro offerings.
-                                    __( '<strong>DeepL</strong> automatic translation is available as a <a href="%1$s" target="_blank" title="%2$s">%2$s</a>.', 'translatepress-multilingual' ),
-                                    esc_url( $url ),
+                                // Translators: %1$s is the URL to the DeepL add-on. %2$s is the name of the Pro offerings.
+                                    $message, esc_url( $url ),
+                                    _x( 'Addons tab', 'Verbiage for the DeepL Pro Add-on', 'translatepress-multilingual' )
+                                );
+                            }else{
+                                $lnk = sprintf(
+                                // Translators: %1$s is the URL to the DeepL add-on. %2$s is the name of the Pro offerings.
+                                    $message, esc_url( $url ),
                                     _x( 'TranslatePress Pro Add-on', 'Verbiage for the DeepL Pro Add-on', 'translatepress-multilingual' )
                                 );
-                                $lnk .= '<br/><br />' . __( 'By upgrading you\'ll get access to all paid add-ons, premium support and help fund the future development of TranslatePress.', 'translatepress-multilingual' );
+                            }
+
+                                if(!empty($message_upgrade)) {
+                                    $lnk .= '<br/><br />' . $message_upgrade;
+                                }
                                 $lnk .= '<br/><br />' . __( 'Please note that DeepL API usage is paid separately. See <a href="https://www.deepl.com/pro.html#developer">DeepL pricing information</a>.', 'translatepress-multilingual' );
-                                $lnk .= sprintf(
-                                    '<br /><br />' . '<a href="%1$s" class="button button-primary" target="_blank" title="%2$s">%2$s</a>',
-                                    esc_url( $url ),
-                                    __( 'TranslatePress Pro Add-ons', 'translatepress-multilingual' )
-                                );
+                                if(!empty($message_upgrade)) {
+                                    $lnk .= sprintf(
+                                        '<br /><br />' . '<a href="%1$s" class="button button-primary" target="_blank" title="%2$s">%2$s</a>',
+                                        esc_url( $url ),
+                                        __( 'TranslatePress Pro Add-ons', 'translatepress-multilingual' )
+                                    );
+                                }
                                 echo wp_kses_post( $lnk ); // Post kses for more generalized output that is more forgiving and has late escaping.
                             ?>
                         </p>
                     </td>
                 </tr>
             <?php endif; ?>
+
 
             <?php do_action ( 'trp_machine_translation_extra_settings_middle', $this->settings['trp_machine_translation_settings'] ); ?>
 

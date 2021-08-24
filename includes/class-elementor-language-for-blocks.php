@@ -127,6 +127,14 @@ class TRP_Elementor {
 			)
 		);
 
+        $element->add_control(
+            'trp_language_restriction_automatic_translation', array(
+                'label'       => __( 'Enable translation', 'translatepress-multilingual' ),
+                'type'        => Controls_Manager::SWITCHER,
+                'description' => __( 'Allow translation to the corresponding language only if the content is written in the default language.', 'translatepress-multilingual' ),
+            )
+        );
+
 		$element->add_control(
 			'trp_language_restriction_heading', array(
 				'label'     => __( 'Select language', 'translatepress-multilingual' ),
@@ -257,7 +265,7 @@ class TRP_Elementor {
 
         $settings = $element->get_settings();
 
-        if( isset( $settings['trp_language_restriction'] ) && $settings['trp_language_restriction'] == 'yes' && !empty( $settings['trp_restricted_languages'] ) )
+        if( isset( $settings['trp_language_restriction'] ) && $settings['trp_language_restriction'] == 'yes' && !empty( $settings['trp_restricted_languages'] ) && isset( $settings['trp_language_restriction_automatic_translation'] ) && $settings['trp_language_restriction_automatic_translation'] != 'yes')
             $element->add_render_attribute( '_wrapper', 'data-no-translation' );
 
     }

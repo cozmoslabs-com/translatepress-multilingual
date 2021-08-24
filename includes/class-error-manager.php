@@ -120,7 +120,7 @@ class TRP_Error_Manager{
 
         $link = isset( $_GET['page'] ) ? sanitize_text_field( $_GET['page'] ) : '';
 
-        if($link = 'trp_error_manager') {
+        if($link === 'trp_error_manager') {
             $this->clear_notification_from_db('disable_automatic_translations', null);
         }
 

@@ -769,7 +769,9 @@ class TRP_Upgrade {
 
                 $notification_id = 'trp_add_ons_removal';
 
-                $message = '<p style="padding-right:30px;">' . __( 'All individual TranslatePress add-on plugins have been discontinued and have been replaced with new Personal, Business and Developer versions of TranslatePress. Please log into the account page at <a href="https://translatepress.com/account/" target="_blank">translatepress.com</a> and download the new plugin and install it. Individual Add-ons will not receive updates anymore' , 'translatepress-multilingual' ) . '</p>';
+                $url_info = 'https://translatepress.com/docs/installation/upgrade-to-version-2-0-5-or-newer/';
+                $url_account = 'https://translatepress.com/account/';
+                $message = '<p style="padding-right:30px;">' . sprintf(__( 'All individual TranslatePress add-on plugins <a href="%1$s" target="_blank">have been discontinued</a> and are now included in the premium Personal, Business and Developer versions of TranslatePress. Please log into your <a href="%2$s" target="_blank">account page</a>, download the new premium version and install it. Your individual addons settings will be ported over.' , 'translatepress-multilingual' ), esc_url($url_info), esc_url($url_account)) . '</p>';
                 //make sure to use the trp_dismiss_admin_notification arg
                 $message .= '<a href="' . add_query_arg(array('trp_dismiss_admin_notification' => $notification_id)) . '" type="button" class="notice-dismiss" style="text-decoration: none;z-index:100;"><span class="screen-reader-text">' . esc_html__('Dismiss this notice.', 'translatepress-multilingual') . '</span></a>';
 
