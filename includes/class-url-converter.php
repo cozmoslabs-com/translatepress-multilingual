@@ -77,11 +77,14 @@ class TRP_Url_Converter {
         $admin_url = strtolower( admin_url() );
 
         // we can't use wp_get_referer() It looks like it creates an infinite loop because it calls home_url() and we're filtering that
+        // array('http','https') is added because of a compatibility issue with Scriptless Social Sharing that created an infinite loop
+        //because this function is hooked to 'locale' and reaches at a certain point a function hooked to 'kses_allowed_protocols'
+        //Scriptless Social Sharing had a function hooked to the same filter and it created an infinit loop
         $referrer = '';
         if ( ! empty( $_REQUEST['_wp_http_referer'] ) ) {
-            $referrer = wp_unslash( esc_url_raw( $_REQUEST['_wp_http_referer'] ) );
+            $referrer = wp_unslash( esc_url_raw( $_REQUEST['_wp_http_referer'], array( 'http', 'https' ) ) );
         } else if ( ! empty( $_SERVER['HTTP_REFERER'] ) ) {
-            $referrer = wp_unslash( esc_url_raw( $_SERVER['HTTP_REFERER'] ) );
+            $referrer = wp_unslash( esc_url_raw( $_SERVER['HTTP_REFERER'], array( 'http', 'https' ) ) );
         }
 
         //consider an admin request a call to the rest api that came from the admin area

@@ -785,7 +785,7 @@ class TRP_Translation_Render{
                     do_action( 'trp_set_translation_for_attribute', $nodes[$i]['node'], $accessor, $translated_strings[$i] );
                 }else{
 	                $translateable_string = $this->maybe_correct_translatable_string( $translateable_string, $nodes[$i]['node']->$accessor );
-                    $nodes[$i]['node']->$accessor = trp_sanitize_string( str_replace( $translateable_string, $translated_strings[$i], $nodes[$i]['node']->$accessor ) );
+                    $nodes[$i]['node']->$accessor = str_replace( $translateable_string, trp_sanitize_string($translated_strings[$i]), $nodes[$i]['node']->$accessor );
                 }
 
             }
