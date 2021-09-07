@@ -72,6 +72,9 @@ class TRP_Upgrade {
             if ( version_compare($stored_database_version, '1.9.8', '<=')) {
                 $this->set_force_slash_at_end_of_links();
             }
+            if ( version_compare($stored_database_version, '2.1.0', '<=')){
+                $this->add_iso_code_to_language_code();
+            }
         }
 
         // don't update the db version unless they are different. Otherwise the query is run on every page load.
@@ -669,6 +672,20 @@ class TRP_Upgrade {
             update_option('trp_advanced_settings', $advanced_settings );
         }
 
+    }
+
+    public function add_iso_code_to_language_code(){
+        $trp = TRP_Translate_Press::get_trp_instance();
+        $trp_settings = $trp->get_component('settings' );
+        $settings = $trp_settings->get_settings();
+
+        if(isset($settings['trp_advanced_settings']) && isset($settings['trp_advanced_settings']['custom_language']) ){
+            $advanced_settings = $settings['trp_advanced_settings'];
+            if(!isset($advanced_settings['custom_language']['cuslangcode'])){
+                $advanced_settings['custom_language']['cuslangcode'] = $advanced_settings['custom_language']['cuslangiso'];
+            }
+            update_option('trp_advanced_settings', $advanced_settings);
+        }
     }
 
 

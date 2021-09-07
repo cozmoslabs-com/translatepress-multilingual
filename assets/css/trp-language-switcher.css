@@ -16,7 +16,6 @@
  */
 .trp-language-switcher{
     position: relative;
-    width: auto;
     display: inline-block;
     padding: 0;
     border: 0;
@@ -92,13 +91,15 @@
 
 .trp-language-switcher:focus .trp-ls-shortcode-language,
 .trp-language-switcher:hover .trp-ls-shortcode-language{
+    max-height: 250px;
+    height: auto;
+    overflow-y: auto;
     visibility:visible;
-    height:auto;
     position: absolute;
     left: 0;
     top: 0;
     display: inline-block !important;
-    
+    min-height: auto;
 }
 
 /*

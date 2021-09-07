@@ -1,7 +1,9 @@
 /* Free */
 
 table#trp-options td{
-    padding-left: 28px;
+    padding-left: 14px;
+    padding-right: 14px;
+
 }
 
 span.select2-container{
@@ -189,7 +191,9 @@ input.trp-translation-published{
 
 table.trp-adst-list-option{
     width: 1px;
-    margin-left: -30px
+    margin-left: -30px;
+    border-collapse: separate;
+    border-spacing: 0;
 }
 table.trp-adst-list-option td{
     padding: 5px;
@@ -220,6 +224,20 @@ table.trp-adst-list-option th{
 #trp_advanced_tab_content_table{
     margin-top: 25px;
     font-size: 15px;
+}
+
+.trp_display_on_hover{
+    display: none;
+}
+
+.cuslangcode {
+    border-right-style: solid;
+    border-right-color: #0f0f0f;
+}
+
+.trp_lang_code{
+    border-right-style: solid;
+    border-right-color: #0f0f0f;
 }
 
 /* Add-ons page */

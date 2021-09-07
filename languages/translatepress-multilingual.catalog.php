@@ -1,6 +1,9 @@
 <?php __("", "translatepress-multilingual"); ?>
+<?php __("Plugin activated.", "translatepress-multilingual"); ?>
+<?php __("Could not install. Try again from <a href=\"%s\" >Plugins Dashboard.</a>", "translatepress-multilingual"); ?>
 <?php __("Please update the TranslatePress - Multilingual plugin to version 2.0.5 at least for %s to work properly", "translatepress-multilingual"); ?>
 <?php __("Please install and activate the TranslatePress - Multilingual plugin", "translatepress-multilingual"); ?>
+<?php __("Install & Activate", "translatepress-multilingual"); ?>
 <?php __("This TranslatePress add-on has been migrated to the main plugin and is no longer used. You can delete it.", "translatepress-multilingual"); ?>
 <?php __("<strong>TranslatePress</strong> requires at least PHP version 5.6.20+ to run. It is the <a href=\"%s\">minimum requirement of the latest WordPress version</a>. Please contact your server administrator to update your PHP version.", "translatepress-multilingual"); ?>
 <?php __("Advanced", "translatepress-multilingual"); ?>
@@ -58,7 +61,6 @@
 <?php __("Test it to see if everything is working. If something went wrong, you can restore the backup that you've made at the first step. Check if no more errors occur while browsing your website in a translated language. Look at the timestamps of the errors to make sure you are not seeing the old errors. Only the most recent 5 errors are displayed.", "translatepress-multilingual"); ?>
 <?php __("Plan C.", "translatepress-multilingual"); ?>
 <?php __("If your problem still isn't solved, try asking your hosting about your errors. The most common issue is missing permissions for the SQL user, such as the Create Tables permission.", "translatepress-multilingual"); ?>
-<?php __("Could not install. Try again from <a href=\"%s\" >Plugins Dashboard.</a>", "translatepress-multilingual"); ?>
 <?php __("Active", "translatepress-multilingual"); ?>
 <?php __("Automatic Translation", "translatepress-multilingual"); ?>
 <?php __("DeepL", "translatepress-multilingual"); ?>
@@ -94,7 +96,6 @@
 <?php __("Top Left", "translatepress-multilingual"); ?>
 <?php __("Dark", "translatepress-multilingual"); ?>
 <?php __("Light", "translatepress-multilingual"); ?>
-<?php __("Install & Activate", "translatepress-multilingual"); ?>
 <?php __("Error! Duplicate URL slug values.", "translatepress-multilingual"); ?>
 <?php __("Current Language", "translatepress-multilingual"); ?>
 <?php __("General", "translatepress-multilingual"); ?>
@@ -213,6 +214,9 @@
 <?php __("<strong>TranslatePress</strong> requires <strong><a href=\"http://php.net/manual/en/book.mbstring.php\">Multibyte String PHP library</a></strong>. Please contact your server administrator to install it on your server.", "translatepress-multilingual"); ?>
 <?php __("Detected long query limitation on WPEngine hosting. Some large pages may appear untranslated. You can remove limitation by adding the following to your site’s wp-config.php: define( 'WPE_GOVERNOR', false ); ", "translatepress-multilingual"); ?>
 <?php __("Custom Language Flag", "translatepress-multilingual"); ?>
+<?php __("The Language code of the added custom language is invalid.", "translatepress-multilingual"); ?>
+<?php __("The Automatic Translation Code of the added custom language is invalid.", "translatepress-multilingual"); ?>
+<?php __("The Language code of the added custom language cannot be empty.", "translatepress-multilingual"); ?>
 <?php __("TranslatePress Settings", "translatepress-multilingual"); ?>
 <?php __("TranslatePress Add-ons", "translatepress-multilingual"); ?>
 <?php __("You must first purchase this version to have access to the addon %1$shere%2$s", "translatepress-multilingual"); ?>
@@ -278,6 +282,7 @@
 <?php __("Slug", "translatepress-multilingual"); ?>
 <?php __("Are you sure you want to remove this language?", "translatepress-multilingual"); ?>
 <?php __("Choose...", "translatepress-multilingual"); ?>
+<?php __("Custom Languages", "translatepress-multilingual"); ?>
 <?php __("Select the language you wish to make your website available in.", "translatepress-multilingual"); ?>
 <?php __("To add <strong>more than two languages</strong> and support for SEO Title, Description, Slug and more check out <a href=\"%1$s\" target=\"_blank\" title=\"%2$s\">%2$s</a>.", "translatepress-multilingual"); ?>
 <?php __("TranslatePress Advanced Add-ons", "translatepress-multilingual"); ?>
@@ -325,13 +330,14 @@
 <?php __("Limit this menu item to the following languages", "translatepress-multilingual"); ?>
 <?php __("Date format", "translatepress-multilingual"); ?>
 <?php __("Customize the date formatting per each translated language.<br/>Leave empty for default WP setting or see more information <a href=\"https://wordpress.org/support/article/formatting-date-and-time/\" title=\"Formatting Date and Time\" target=\"_blank\">here</a>", "translatepress-multilingual"); ?>
+<?php __("To edit an existing TranslatePress language, input the language code and fill in only the columns you want to overwrite (e.g. Language name, Flag).<br>You can also add new custom languages. They will be available under General settings, All Languages list, where the URL slug can be edited.<br>For custom flag, first upload the image in media library then paste the URL.<br>Changing or deleting a custom language will impact translations and site URL's.<br>The Language code and the Automatic Translation Code should contain only alphabetical values, numerical values, \"-\" and \"_\".<br>The Automatic Translation codes can be found on <a href = \"https://cloud.google.com/translate/docs/languages\" target = \"_blank\">Google ISO Codes</a> and <a href = \"https://www.deepl.com/docs-api/translating-text/\" target = \"_blank\">DeepL Target Codes</a>.", "translatepress-multilingual"); ?>
+<?php __("Language code", "translatepress-multilingual"); ?>
 <?php __("Language name", "translatepress-multilingual"); ?>
 <?php __("Native name", "translatepress-multilingual"); ?>
-<?php __("ISO code", "translatepress-multilingual"); ?>
+<?php __("Automatic translation code", "translatepress-multilingual"); ?>
 <?php __("Flag URL", "translatepress-multilingual"); ?>
 <?php __("Text RTL", "translatepress-multilingual"); ?>
 <?php __("Custom language", "translatepress-multilingual"); ?>
-<?php __("Adds custom languages to TranslatePress.<br>Will be available under General settings, All Languages list, where the URL slug can also be edited.<br>For custom flag, first upload the image in media library then paste the URL.<br>Changing or deleting a custom language will impact translations and site URL's.<br> The ISO code will be used for automatic translation if supported.", "translatepress-multilingual"); ?>
 <?php __("Disable dynamic translation", "translatepress-multilingual"); ?>
 <?php __("It disables detection of strings displayed dynamically using JavaScript. <br/>Strings loaded via a server side AJAX call will still be translated.", "translatepress-multilingual"); ?>
 <?php __("Exclude translated links from sitemap", "translatepress-multilingual"); ?>

@@ -111,8 +111,9 @@ class TRP_Advanced_Tab {
 						*/
                     	{
 						$settings[ $registered_setting['name'] ] = array();
+                        $one_column = '';
 						foreach ( $registered_setting['columns'] as $column => $column_name ) {
-							$one_column = $column;
+                            $one_column = ( empty ( $one_column ) && !(is_array($column_name) && $column_name ['type'] === 'checkbox') ) ? $column : $one_column;
 							$settings[ $registered_setting['name'] ][ $column ] = array();
 							if ( isset($submitted_settings[ $registered_setting['name'] ][ $column ] ) ) {
                                 foreach ($submitted_settings[$registered_setting['name']][$column] as $key => $value) {
@@ -175,9 +176,12 @@ class TRP_Advanced_Tab {
             }
 
 		} //end foreach of parsing all the registered settings array
-		add_settings_error( 'trp_advanced_settings', 'settings_updated', __( 'Settings saved.', 'translatepress-multilingual' ), 'updated' );
 
-		return apply_filters( 'trp_extra_sanitize_advanced_settings', $settings, $submitted_settings );
+        if ( apply_filters( 'trp_saving_advanced_settings_is_successful', true, $settings, $submitted_settings ) ) {
+            add_settings_error( 'trp_advanced_settings', 'settings_updated', esc_html__( 'Settings saved.', 'translatepress-multilingual' ), 'updated' );
+        }
+
+		return apply_filters( 'trp_extra_sanitize_advanced_settings', $settings, $submitted_settings, $prev_settings );
 	}
 
 	/*
@@ -554,7 +558,12 @@ class TRP_Advanced_Tab {
 						<thead>
 							";
 		foreach( $setting['columns'] as $option_name => $option_details ){
-			$html .= '<th><strong>' . esc_html( $option_details['label'] ) . '</strong></th>';
+            if(isset($setting['columns'][$option_name]['required']) && $setting['columns'][$option_name]['required'] === true){
+                $html .= '<th class="trp_lang_code"><strong>' . esc_html( $option_details['label'] ). '<span title="Required"> *</span> </strong></th>';
+            }else{
+                $html .= '<th><strong>' . esc_html( $option_details['label'] ) . '</strong></th>';
+            }
+
 		}
 
 		//"Remove" button
@@ -569,7 +578,7 @@ class TRP_Advanced_Tab {
 			break;
 		}
 
-		if ( isset( $adv_option[ $setting['name'] ] ) && is_array( $adv_option[ $setting['name'] ] ) ) {
+		if ( isset( $adv_option[ $setting['name'] ] ) && is_array( $adv_option[ $setting['name'] ] )) {
 			foreach ( $adv_option[ $setting['name'] ][ $first_column ] as $index => $value ) {
 
 				$html .= "<tr class='trp-list-entry'>";
@@ -577,7 +586,8 @@ class TRP_Advanced_Tab {
 				foreach ( $setting['columns'] as $option_name => $option_details ) {
 					switch ( $option_details['type']) {
 						case 'text':
-							$html .= "<td><input class='trp_narrow_input' type='text' name='trp_advanced_settings[" . esc_attr( $setting['name'] ) . "][" . esc_attr( $option_name ) . "][]' value='" . htmlspecialchars($adv_option[ $setting['name'] ][ $option_name ][ $index ], ENT_QUOTES) . "' ></td>";
+							$html .= "<td class=' ". $option_name ." '><input class='trp_narrow_input' type='text' name='trp_advanced_settings[" . esc_attr( $setting['name'] ) . "][" . esc_attr( $option_name ) . "][]' value='" . htmlspecialchars($adv_option[ $setting['name'] ][ $option_name ][ $index ], ENT_QUOTES) . "'></td>";
+
 							break;
 						case 'textarea':
 							$html .= "<td><textarea class='trp_narrow_input' name='trp_advanced_settings[" . esc_attr( $setting['name'] ) . "][" . esc_attr(  $option_name ) . "][]'>" . htmlspecialchars($adv_option[ $setting['name'] ][ $option_name ][ $index ], ENT_QUOTES) . "</textarea></td>";
@@ -611,7 +621,7 @@ class TRP_Advanced_Tab {
 
 			switch ( $option_details['type']) {
 				case 'text':
-					$html .= "<td><input type='text' class='trp_narrow_input' id='new_entry_" . esc_attr( $setting['name'] ) . "_" . esc_attr( $option_name ) . "' data-name='trp_advanced_settings[" . esc_attr( $setting['name'] ) . "][" . esc_attr( $option_name ) . "][]' data-setting-name='" . esc_attr( $setting['name'] ) . "' data-column-name='" . esc_attr( $option_name ) . "'></input></td>";
+				    $html .= "<td class=' " . $option_name . " '><input type='text' class='trp_narrow_input' id='new_entry_" . esc_attr( $setting['name'] ) . "_" . esc_attr( $option_name ) . "' data-name='trp_advanced_settings[" . esc_attr( $setting['name'] ) . "][" . esc_attr( $option_name ) . "][]' data-setting-name='" . esc_attr( $setting['name'] ) . "' data-column-name='" . esc_attr( $option_name ) . "' placeholder='" . esc_attr( $setting['columns'][ $option_name ]['placeholder'] ) . "' '></input></td>";
 					break;
 				case 'textarea':
 					$html .= "<td class='trp_narrow_input'><textarea id='new_entry_" . esc_attr( $setting['name'] ) . "_" . esc_attr( $option_name ) . "' data-name='trp_advanced_settings[" . esc_attr( $setting['name'] ) . "][" . esc_attr( $option_name ) . "][]' data-setting-name='" . esc_attr( $setting['name'] ) . "' data-column-name='" . esc_attr( $option_name ) . "'></textarea></td>";

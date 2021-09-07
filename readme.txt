@@ -5,7 +5,7 @@ Tags: translate, translation, multilingual, automatic translation, bilingual, fr
 Requires at least: 3.1.0
 Tested up to: 5.8
 Requires PHP: 5.6.20
-Stable tag: 2.1.0
+Stable tag: 2.1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -140,6 +140,11 @@ For more information please check out our [documentation](https://translatepress
 
 
 == Changelog ==
+= 2.1.1 =
+* Improved Custom Languages feature
+* Added possibility to easily edit existing language name or flag through Custom Language
+* Added vertical scroll on floating and shortcode language switchers when having many languages
+
 = 2.1.0 =
 * Fixed some cases of missing spaces between words in different html tags on translated pages
 * Fixed conflict with Scriptless Social Sharing plugin

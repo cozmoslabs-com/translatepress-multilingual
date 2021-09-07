@@ -203,3 +203,8 @@ body.admin-bar #trp-floater-ls.trp-top-left{
 #trp-floater-ls a {
     text-decoration: none;
 }
+
+#trp-floater-ls-language-list{
+    max-height: 300px;
+    overflow-y: auto;
+}

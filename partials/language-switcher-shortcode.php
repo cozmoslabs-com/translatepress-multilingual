@@ -33,7 +33,7 @@ $current_language_preference = $this->add_shortcode_preferences($shortcode_setti
             var trp_shortcode_language_item = trp_el.querySelector('.trp-ls-shortcode-language')
 
             // set width
-            var trp_ls_shortcode_width = trp_shortcode_language_item.offsetWidth + 5;
+            var trp_ls_shortcode_width = trp_shortcode_language_item.offsetWidth + 16;
             trp_shortcode_language_item.style.width = trp_ls_shortcode_width + 'px';
             trp_el.querySelector('.trp-ls-shortcode-current-language').style.width = trp_ls_shortcode_width + 'px';
 

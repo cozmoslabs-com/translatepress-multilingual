@@ -45,11 +45,38 @@
         </table>
         <div id="trp-new-language">
             <select id="trp-select-language" class="trp-select2 trp-translation-language" >
+                <?php
+                $trp = TRP_Translate_Press::get_trp_instance();
+                $trp_languages = $trp->get_component('languages');
+                $wp_languages = $trp_languages->get_wp_languages();
+                ?>
                 <option value=""><?php esc_html_e( 'Choose...', 'translatepress-multilingual' );?></option>
                 <?php foreach( $languages as $language_code => $language_name ){ ?>
+
+            <?php if(isset($wp_languages[$language_code]['is_custom_language']) && $wp_languages[$language_code]['is_custom_language'] === true){ ?>
+                <optgroup label="<?php echo esc_html__('Custom Languages', 'translatepress-multilingual'); ?>">
+                    <?php break;?>
+                    <?php } ?>
+                    <?php } ?>
+                    <?php foreach( $languages as $language_code => $language_name ){ ?>
+
+                        <?php if(isset($wp_languages[$language_code]['is_custom_language']) && $wp_languages[$language_code]['is_custom_language'] === true){ ?>
+                            <option title="<?php echo esc_attr( $language_code ); ?>" value="<?php echo esc_attr( $language_code ); ?>">
+                                <?php echo esc_html( $language_name ); ?>
+                            </option>
+
+                        <?php } ?>
+
+                    <?php }?>
+                </optgroup>
+
+                <?php foreach( $languages as $language_code => $language_name ){ ?>
+                <?php if(!isset($wp_languages[$language_code]['is_custom_language']) || (isset($wp_languages[$language_code]['is_custom_language']) && $wp_languages[$language_code]['is_custom_language'] !== true)){ ?>
+
                     <option title="<?php echo esc_attr( $language_code ); ?>" value="<?php echo esc_attr( $language_code ); ?>">
                         <?php echo esc_html( $language_name ); ?>
                     </option>
+                    <?php } ?>
                 <?php }?>
             </select>
             <button type="button" id="trp-add-language" class="button-secondary"><?php esc_html_e( 'Add', 'translatepress-multilingual' );?></button>
