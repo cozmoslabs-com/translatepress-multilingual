@@ -192,10 +192,9 @@ function trp_verify_custom_language_codes($is_correct_code, $settings){
         'message'      => '',
         'correct_code' => $is_correct_code
     );
-
 }
 
-function trp_add_messages_custom_language_codes($correct_code=true, $settings, $submitted_settings){
+function trp_add_messages_custom_language_codes($correct_code, $settings, $submitted_settings){
 
     $correct_code_custom_language = trp_verify_custom_language_codes(true, $settings);
 

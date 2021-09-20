@@ -1245,18 +1245,27 @@ function trp_add_current_menu_item_css_class( $items ){
     $trp_settings = $trp->get_component( 'settings' );
     $settings = $trp_settings->get_settings();
 
-    if ( $TRP_LANGUAGE === $settings['default-language'] && isset( $settings['add-subdirectory-to-default-language']) && $settings['add-subdirectory-to-default-language'] !== 'yes'  ) {
-        return $items;
-    }
-
     foreach( $items as $item ){
-        if ( !in_array( 'current-menu-item', $item->classes ) && !in_array( 'menu-item-object-language_switcher', $item->classes ) && ( !empty($item->url) && $item->url !== '#')){
+        if ( !( $TRP_LANGUAGE === $settings['default-language'] && isset( $settings['add-subdirectory-to-default-language']) && $settings['add-subdirectory-to-default-language'] !== 'yes'  ) &&
+            !in_array( 'current-menu-item', $item->classes ) && !in_array( 'menu-item-object-language_switcher', $item->classes ) && ( !empty($item->url) && $item->url !== '#')
+        ){
             $url_for_language = $url_converter->get_url_for_language( $TRP_LANGUAGE, $item->url );
             $url_for_language = strpos( $url_for_language, '#' ) ? substr( $url_for_language, 0, strpos( $url_for_language, '#' ) ) : $url_for_language;
             $cur_page_url = set_url_scheme( untrailingslashit( $url_converter->cur_page_url() ) );
 
             if ( untrailingslashit( $url_for_language ) == untrailingslashit( $cur_page_url ) ){
                 $item->classes[] = 'current-menu-item';
+            }
+        }
+        if(!in_array('current-language-menu-item', $item->classes) && in_array('menu-item-object-language_switcher', $item->classes)){
+            $current_language = $url_converter->get_lang_from_url_string($item->url);
+
+            if($current_language == null){
+                $current_language = $settings['default-language'];
+            }
+
+            if($current_language == $TRP_LANGUAGE){
+                $item->classes[] = 'current-language-menu-item';
             }
         }
     }

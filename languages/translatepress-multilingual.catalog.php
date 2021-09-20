@@ -376,6 +376,8 @@
 <?php __("Fixes attributes without spaces between them because they are not valid HTML.<br> May help fix missing or broken content from the HTML on translated pages.", "translatepress-multilingual"); ?>
 <?php __("Force slash at end of home url:", "translatepress-multilingual"); ?>
 <?php __("Ads a slash at the end of the home_url() function", "translatepress-multilingual"); ?>
+<?php __("Show opposite language in the shortcode language switcher", "translatepress-multilingual"); ?>
+<?php __("Transforms the shortcode language switcher into a button showing the other available language, not the current one.<br> Only works when there are exactly two languages, the default one and a translation one.<br>Does not affect floating language switcher or menu language switcher.", "translatepress-multilingual"); ?>
 <?php __("Remove duplicate rows", "translatepress-multilingual"); ?>
 <?php __("Click <a href=\"%s\">here</a> to remove duplicate rows from the database.", "translatepress-multilingual"); ?>
 <?php __("Troubleshooting", "translatepress-multilingual"); ?>

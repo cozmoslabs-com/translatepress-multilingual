@@ -527,5 +527,4 @@ class TRP_Language_Switcher{
         return $items;
     }
 
-
 }

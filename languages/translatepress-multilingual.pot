@@ -49,23 +49,23 @@ msgstr ""
 msgid "Settings saved."
 msgstr ""
 
-#: includes/class-advanced-tab.php:311, includes/class-error-manager.php:172, partials/machine-translation-settings-page.php:13, partials/machine-translation-settings-page.php:117, partials/machine-translation-settings-page.php:150, partials/main-settings-page.php:41, partials/main-settings-page.php:54, partials/main-settings-page.php:67
+#: includes/class-advanced-tab.php:312, includes/class-error-manager.php:172, partials/machine-translation-settings-page.php:13, partials/machine-translation-settings-page.php:117, partials/machine-translation-settings-page.php:150, partials/main-settings-page.php:41, partials/main-settings-page.php:54, partials/main-settings-page.php:67
 msgid "Yes"
 msgstr ""
 
-#: includes/class-advanced-tab.php:508, includes/class-advanced-tab.php:519, includes/class-advanced-tab.php:613, includes/class-advanced-tab.php:644
+#: includes/class-advanced-tab.php:509, includes/class-advanced-tab.php:520, includes/class-advanced-tab.php:614, includes/class-advanced-tab.php:645
 msgid "Are you sure you want to remove this item?"
 msgstr ""
 
-#: includes/class-advanced-tab.php:508, includes/class-advanced-tab.php:519, includes/class-advanced-tab.php:613, includes/class-advanced-tab.php:644, partials/main-settings-language-selector.php:40, add-ons-advanced/extra-languages/partials/language-selector-pro.php:43
+#: includes/class-advanced-tab.php:509, includes/class-advanced-tab.php:520, includes/class-advanced-tab.php:614, includes/class-advanced-tab.php:645, partials/main-settings-language-selector.php:40, add-ons-advanced/extra-languages/partials/language-selector-pro.php:43
 msgid "Remove"
 msgstr ""
 
-#: includes/class-advanced-tab.php:519, includes/class-advanced-tab.php:644, partials/main-settings-language-selector.php:82, add-ons-advanced/extra-languages/partials/language-selector-pro.php:84
+#: includes/class-advanced-tab.php:520, includes/class-advanced-tab.php:645, partials/main-settings-language-selector.php:82, add-ons-advanced/extra-languages/partials/language-selector-pro.php:84
 msgid "Add"
 msgstr ""
 
-#: includes/class-advanced-tab.php:597, includes/class-advanced-tab.php:631
+#: includes/class-advanced-tab.php:598, includes/class-advanced-tab.php:632
 msgid "Select..."
 msgstr ""
 
@@ -865,7 +865,7 @@ msgstr ""
 msgid "<strong>TranslatePress</strong> requires <strong><a href=\"http://php.net/manual/en/book.mbstring.php\">Multibyte String PHP library</a></strong>. Please contact your server administrator to install it on your server."
 msgstr ""
 
-#: includes/compatibility-functions.php:1494
+#: includes/compatibility-functions.php:1503
 msgid "Detected long query limitation on WPEngine hosting. Some large pages may appear untranslated. You can remove limitation by adding the following to your site’s wp-config.php: define( 'WPE_GOVERNOR', false ); "
 msgstr ""
 
@@ -1525,6 +1525,14 @@ msgstr ""
 
 #: includes/advanced-settings/force-slash-at-end-of-links.php:10
 msgid "Ads a slash at the end of the home_url() function"
+msgstr ""
+
+#: includes/advanced-settings/opposite-flag-shortcode.php:8
+msgid "Show opposite language in the shortcode language switcher"
+msgstr ""
+
+#: includes/advanced-settings/opposite-flag-shortcode.php:9
+msgid "Transforms the shortcode language switcher into a button showing the other available language, not the current one.<br> Only works when there are exactly two languages, the default one and a translation one.<br>Does not affect floating language switcher or menu language switcher."
 msgstr ""
 
 #: includes/advanced-settings/remove-duplicates-from-db.php:7
