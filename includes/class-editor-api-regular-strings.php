@@ -89,7 +89,7 @@ class TRP_Editor_Api_Regular_Strings {
 		}
 		foreach( $originals as $original ){
 			if ( isset( $original ) ) {
-				$trimmed_string = trp_full_trim( trp_sanitize_string( $original ) );
+				$trimmed_string = trp_full_trim( trp_sanitize_string( $original, false ) );
 				if ( ( filter_var($trimmed_string, FILTER_VALIDATE_URL) === false) ){
 					// not url
 					$original_array[] = $trimmed_string;
@@ -215,7 +215,7 @@ class TRP_Editor_Api_Regular_Strings {
 						}
 						array_push($update_strings[ $language ], array(
 							'id' => (int)$string->id,
-							'original' => trp_sanitize_string( $string->original ),
+							'original' => trp_sanitize_string( $string->original, false ),
 							'translated' => trp_sanitize_string( $string->translated ),
 							'status' => (int)$string->status,
 							'block_type' => (int)$string->block_type
@@ -287,7 +287,7 @@ class TRP_Editor_Api_Regular_Strings {
 								$ajax_translated_string_list = $strings->$language;
 
 								foreach( $ajax_translated_string_list as $ajax_key => $ajax_string ) {
-									if ( trp_full_trim( trp_sanitize_string( $ajax_string->original ) ) == $dictionary_string->original ) {
+									if ( trp_full_trim( trp_sanitize_string( $ajax_string->original, false ) ) == $dictionary_string->original ) {
 										if ( $ajax_string->translated != '' ) {
 											$dictionaries[ $language ][ $dictionary_string_key ]->translated = trp_sanitize_string( $ajax_string->translated );
 											$dictionaries[ $language ][ $dictionary_string_key ]->status     = (int) $ajax_string->status;
@@ -360,7 +360,7 @@ class TRP_Editor_Api_Regular_Strings {
 				$deprecated_block_type = $this->trp_query->get_constant_block_type_deprecated();
 				$originals = array();
 				foreach( $raw_original_array as $original ){
-					$originals[] = trp_sanitize_string( $original );
+					$originals[] = trp_sanitize_string( $original, false );
 				}
 
 				// even inactive languages ( not in $this->settings['translation-languages'] array ) will be updated

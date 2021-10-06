@@ -364,13 +364,13 @@ class TRP_Url_Converter {
 
         }else if( isset( $trp_current_url_term_slug ) && isset($trp_current_url_taxonomy) &&
             !is_wp_error( get_term_link( $trp_current_url_term_slug, $trp_current_url_taxonomy)) &&
-            strpos( $url, get_term_link( $trp_current_url_term_slug, $trp_current_url_taxonomy) ) === 0
+            strpos( urldecode( $url ), get_term_link( $trp_current_url_term_slug, $trp_current_url_taxonomy) ) === 0
         ){ // check here if it is a term link
             $current_term_link = get_term_link( $trp_current_url_term_slug, $trp_current_url_taxonomy);
             $TRP_LANGUAGE = $language;
                 $check_term_link = get_term_link($trp_current_url_term_slug, $trp_current_url_taxonomy);
                 if (!is_wp_error($check_term_link))
-                    $new_url =  str_replace( $current_term_link, $check_term_link, $url );
+                    $new_url =  str_replace( $current_term_link, $check_term_link, urldecode( $url ) );
                 else
                     $new_url = $url;
 

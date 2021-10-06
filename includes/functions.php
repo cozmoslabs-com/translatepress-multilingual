@@ -148,7 +148,7 @@ function trp_add_affiliate_id_to_link( $link ){
  * Removes any unwanted html code from the string.
  * Do not confuse with trim.
  */
-function trp_sanitize_string( $filtered ){
+function trp_sanitize_string( $filtered, $execute_wp_kses = true ){
 	$filtered = preg_replace( '/<script\b[^>]*>(.*?)<\/script>/is', '', $filtered );
 
 	// don't remove \r \n \t. They are part of the translation, they give structure and context to the text.
@@ -166,7 +166,10 @@ function trp_sanitize_string( $filtered ){
 		$filtered = trim( preg_replace('/ +/', ' ', $filtered) );
 	}
 
-    return trp_wp_kses( $filtered );
+    if ( $execute_wp_kses ){
+        $filtered = trp_wp_kses( $filtered );
+    }
+    return $filtered;
 }
 
 function trp_wp_kses($string){

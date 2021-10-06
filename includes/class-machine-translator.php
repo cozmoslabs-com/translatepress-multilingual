@@ -155,10 +155,16 @@ class TRP_Machine_Translator {
                     $is_error= false;
                     $response = $machine_translator->test_request();
                     $code     = wp_remote_retrieve_response_code( $response );
-                    if ( 200 !== $code && method_exists( 'TRP_DeepL', 'deepl_response_codes' ) ) {
-                        $is_error        = true;
-                        $translate_response = TRP_DeepL::deepl_response_codes( $code );
-                        $return_message     = $translate_response['message'];
+                    if ( 200 !== $code && ( method_exists( 'TRP_DeepL', 'deepl_response_codes' ) || method_exists( 'TRP_IN_DeepL', 'deepl_response_codes' ) ) ) {
+
+						// Test whether the old deepL add-on or the new repackaging model is used
+						if ( method_exists( 'TRP_DeepL', 'deepl_response_codes' ) ) {
+							$translate_response = TRP_DeepL::deepl_response_codes( $code );
+						} else {
+							$translate_response = TRP_IN_DeepL::deepl_response_codes( $code );
+						}
+	                    $is_error       = true;
+                        $return_message = $translate_response['message'];
                     }
                 }
                 break;

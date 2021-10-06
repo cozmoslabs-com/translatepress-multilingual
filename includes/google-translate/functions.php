@@ -15,13 +15,15 @@ function trp_gt_add_settings( $mt_settings ){
     $translation_engine = isset( $mt_settings['translation-engine'] ) ? $mt_settings['translation-engine'] : '';
     $api_key = isset( $mt_settings['google-translate-key'] ) ? $mt_settings['google-translate-key'] : '';
 
-    // Check for API errors.
-    $api_check = $machine_translator->automatic_translate_error_check( $machine_translator, $translation_engine, $api_key );
+    // Check for API errors only if $translation_engine is Google.
+    if ( 'google_translate_v2' === $translation_engine ) {
+	    $api_check = $machine_translator->automatic_translate_error_check( $machine_translator, $translation_engine, $api_key );
+    }
 
     // Check for errors.
     $error_message = '';
     $show_errors   = false;
-    if ( true === $api_check['error'] ) {
+    if ( isset( $api_check ) && true === $api_check['error'] ) {
         $error_message = $api_check['message'];
         $show_errors    = true;
     }

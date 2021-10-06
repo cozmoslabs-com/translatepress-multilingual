@@ -121,7 +121,7 @@ class TRP_Translation_Render{
 	    $string_groups = $this->translation_manager->string_groups();
 
         $node_type_categories = apply_filters( 'trp_node_type_categories', array(
-            $string_groups['metainformation'] => array( 'meta_desc', 'page_title' ),
+            $string_groups['metainformation'] => array( 'meta_desc', 'page_title', 'meta_desc_img' ),
             $string_groups['images']          => array( 'image_src' )
         ));
 
@@ -147,53 +147,83 @@ class TRP_Translation_Render{
                     'type'          => 'meta_desc',
                     'attribute'     => 'name',
                     'value'         => 'description',
-                    'description'   => __( 'Description', 'translatepress-multilingual' )
+                    'description'   => esc_html__( 'Description', 'translatepress-multilingual' )
                 ),
                 array(
                     'type'          => 'meta_desc',
                     'attribute'     => 'property',
                     'value'         => 'og:title',
-                    'description'   => __( 'OG Title', 'translatepress-multilingual' )
+                    'description'   => esc_html__( 'OG Title', 'translatepress-multilingual' )
                 ),
                 array(
                     'type'          => 'meta_desc',
                     'attribute'     => 'property',
                     'value'         => 'og:site_name',
-                    'description'   => __( 'OG Site Name', 'translatepress-multilingual' )
+                    'description'   => esc_html__( 'OG Site Name', 'translatepress-multilingual' )
                 ),
                 array(
                     'type'          => 'meta_desc',
                     'attribute'     => 'property',
                     'value'         => 'og:description',
-                    'description'   => __( 'OG Description', 'translatepress-multilingual' )
+                    'description'   => esc_html__( 'OG Description', 'translatepress-multilingual' )
                 ),
+	            array(
+		            'type'          => 'meta_desc',
+		            'attribute'     => 'property',
+		            'value'         => 'og:image:alt',
+		            'description'   => esc_html__( 'OG Image Alt', 'translatepress-multilingual' )
+	            ),
                 array(
                     'type'          => 'meta_desc',
                     'attribute'     => 'name',
                     'value'         => 'twitter:title',
-                    'description'   => __( 'Twitter Title', 'translatepress-multilingual' )
+                    'description'   => esc_html__( 'Twitter Title', 'translatepress-multilingual' )
                 ),
                 array(
                     'type'          => 'meta_desc',
                     'attribute'     => 'name',
                     'value'         => 'twitter:description',
-                    'description'   => __( 'Twitter Description', 'translatepress-multilingual' )
+                    'description'   => esc_html__( 'Twitter Description', 'translatepress-multilingual' )
                 ),
+	            array(
+		            'type'          => 'meta_desc',
+		            'attribute'     => 'name',
+		            'value'         => 'twitter:image:alt',
+		            'description'   => esc_html__( 'Twitter Image Alt', 'translatepress-multilingual' )
+	            ),
                 array(
                     'type'          => 'page_title',
-                    'description'   => __( 'Page Title', 'translatepress-multilingual' )
+                    'description'   => esc_html__( 'Page Title', 'translatepress-multilingual' )
                 ),
 	            array(
 		            'type'          => 'meta_desc',
 		            'attribute'     => 'name',
 		            'value'         => 'DC.Title',
-		            'description'   => __( 'Dublin Core Title', 'translatepress-multilingual' )
+		            'description'   => esc_html__( 'Dublin Core Title', 'translatepress-multilingual' )
 	            ),
 	            array(
 		            'type'          => 'meta_desc',
 		            'attribute'     => 'name',
 		            'value'         => 'DC.Description',
-		            'description'   => __( 'Dublin Core Description', 'translatepress-multilingual' )
+		            'description'   => esc_html__( 'Dublin Core Description', 'translatepress-multilingual' )
+	            ),
+	            array(
+		            'type'          => 'meta_desc_img',
+		            'attribute'     => 'property',
+		            'value'         => 'og:image',
+		            'description'   => esc_html__( 'OG Image', 'translatepress-multilingual' )
+	            ),
+	            array(
+		            'type'          => 'meta_desc_img',
+		            'attribute'     => 'property',
+		            'value'         => 'og:image:secure_url',
+		            'description'   => esc_html__( 'OG Image Secure URL', 'translatepress-multilingual' )
+	            ),
+	            array(
+		            'type'          => 'meta_desc_img',
+		            'attribute'     => 'name',
+		            'value'         => 'twitter:image',
+		            'description'   => esc_html__( 'Twitter Image', 'translatepress-multilingual' )
 	            ),
 
             ));
@@ -1317,7 +1347,7 @@ class TRP_Translation_Render{
                 array_push( $update_strings, array(
                     'id'          => $id,
                     'original_id' => $original_inserts[ $string ]->id,
-                    'original'    => trp_sanitize_string( $string ),
+                    'original'    => trp_sanitize_string( $string, false ),
                     'translated'  => trp_sanitize_string( $machine_strings[ $string ] ),
                     'status'      => $this->trp_query->get_constant_machine_translated() ) );
             }

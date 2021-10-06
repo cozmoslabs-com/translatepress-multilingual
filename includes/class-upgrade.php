@@ -75,6 +75,9 @@ class TRP_Upgrade {
             if ( version_compare($stored_database_version, '2.1.0', '<=')){
                 $this->add_iso_code_to_language_code();
             }
+            if ( version_compare($stored_database_version, '2.1.2', '<=')){
+                $this->create_opposite_ls_option();
+            }
         }
 
         // don't update the db version unless they are different. Otherwise the query is run on every page load.
@@ -688,6 +691,18 @@ class TRP_Upgrade {
         }
     }
 
+    public function create_opposite_ls_option(){
+
+        add_filter('wp_loaded', array($this, 'call_create_menu_entries'));
+    }
+
+    public function call_create_menu_entries(){
+        $trp = TRP_Translate_Press::get_trp_instance();
+        $trp_settings = $trp->get_component('settings' );
+        $settings = $trp_settings->get_settings();
+
+        $trp_settings->create_menu_entries( $settings['publish-languages'] );
+    }
 
     public function trp_remove_duplicate_original_strings(){
         if ( ! $this->trp_query ) {

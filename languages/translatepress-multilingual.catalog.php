@@ -98,6 +98,7 @@
 <?php __("Light", "translatepress-multilingual"); ?>
 <?php __("Error! Duplicate URL slug values.", "translatepress-multilingual"); ?>
 <?php __("Current Language", "translatepress-multilingual"); ?>
+<?php __("Opposite Language", "translatepress-multilingual"); ?>
 <?php __("General", "translatepress-multilingual"); ?>
 <?php __("Translate Site", "translatepress-multilingual"); ?>
 <?php __("Addons", "translatepress-multilingual"); ?>
@@ -179,11 +180,16 @@
 <?php __("OG Title", "translatepress-multilingual"); ?>
 <?php __("OG Site Name", "translatepress-multilingual"); ?>
 <?php __("OG Description", "translatepress-multilingual"); ?>
+<?php __("OG Image Alt", "translatepress-multilingual"); ?>
 <?php __("Twitter Title", "translatepress-multilingual"); ?>
 <?php __("Twitter Description", "translatepress-multilingual"); ?>
+<?php __("Twitter Image Alt", "translatepress-multilingual"); ?>
 <?php __("Page Title", "translatepress-multilingual"); ?>
 <?php __("Dublin Core Title", "translatepress-multilingual"); ?>
 <?php __("Dublin Core Description", "translatepress-multilingual"); ?>
+<?php __("OG Image", "translatepress-multilingual"); ?>
+<?php __("OG Image Secure URL", "translatepress-multilingual"); ?>
+<?php __("Twitter Image", "translatepress-multilingual"); ?>
 <?php __("Inserting original strings for language %s...", "translatepress-multilingual"); ?>
 <?php __("Cleaning original strings table for language %s...", "translatepress-multilingual"); ?>
 <?php __("Updating original string ids for language %s...", "translatepress-multilingual"); ?>
@@ -376,8 +382,8 @@
 <?php __("Fixes attributes without spaces between them because they are not valid HTML.<br> May help fix missing or broken content from the HTML on translated pages.", "translatepress-multilingual"); ?>
 <?php __("Force slash at end of home url:", "translatepress-multilingual"); ?>
 <?php __("Ads a slash at the end of the home_url() function", "translatepress-multilingual"); ?>
-<?php __("Show opposite language in the shortcode language switcher", "translatepress-multilingual"); ?>
-<?php __("Transforms the shortcode language switcher into a button showing the other available language, not the current one.<br> Only works when there are exactly two languages, the default one and a translation one.<br>Does not affect floating language switcher or menu language switcher.", "translatepress-multilingual"); ?>
+<?php __("Show opposite language in the language switcher", "translatepress-multilingual"); ?>
+<?php __("Transforms the language switcher into a button showing the other available language, not the current one.<br> Only works when there are exactly two languages, the default one and a translation one.<br>This will affect the shortcode language switcher and floating language switcher as well.<br> To achieve this in menu language switcher go to Appearance->Menus->Language Switcher and select Opposite Language.", "translatepress-multilingual"); ?>
 <?php __("Remove duplicate rows", "translatepress-multilingual"); ?>
 <?php __("Click <a href=\"%s\">here</a> to remove duplicate rows from the database.", "translatepress-multilingual"); ?>
 <?php __("Troubleshooting", "translatepress-multilingual"); ?>

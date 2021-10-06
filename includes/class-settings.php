@@ -467,7 +467,7 @@ class TRP_Settings{
      *
      * @param array $languages          Array of language codes to create menu items for.
      */
-    protected function create_menu_entries( $languages ){
+    public function create_menu_entries( $languages ){
         if ( ! $this->trp_languages ){
             $trp = TRP_Translate_Press::get_trp_instance();
             $this->trp_languages = $trp->get_component( 'languages' );
@@ -476,6 +476,11 @@ class TRP_Settings{
         $published_languages['current_language'] = __( 'Current Language', 'translatepress-multilingual' );
         $languages[] = 'current_language';
         $posts = get_posts( array( 'post_type' =>'language_switcher',  'posts_per_page'   => -1  ) );
+
+        if ( count( $published_languages ) == 3 ){
+            $languages[] = 'opposite_language';
+            $published_languages['opposite_language'] = __( 'Opposite Language', 'translatepress-multilingual' );
+        }
 
         foreach ( $published_languages as $language_code => $language_name ) {
             $existing_ls = null;
