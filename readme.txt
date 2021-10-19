@@ -5,7 +5,7 @@ Tags: translate, translation, multilingual, automatic translation, bilingual, fr
 Requires at least: 3.1.0
 Tested up to: 5.8.1
 Requires PHP: 5.6.20
-Stable tag: 2.1.3
+Stable tag: 2.1.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -140,6 +140,10 @@ For more information please check out our [documentation](https://translatepress
 
 
 == Changelog ==
+= 2.1.4 =
+* Optimized automatic translation usage by improved recognition of cdata, js scripts and encoded html
+* Fixed conflict with Ultimate Dashboard
+
 = 2.1.3 =
 * Added Opposite Language menu item when using 2 languages
 * Added support for opposite language in floating language switcher

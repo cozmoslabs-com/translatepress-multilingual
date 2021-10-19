@@ -14,6 +14,7 @@ class TRP_Translation_Render{
     protected $url_converter;
     /* @var TRP_Translation_Manager */
 	protected $translation_manager;
+    protected $common_html_tags;
 
     /**
      * TRP_Translation_Render constructor.
@@ -22,6 +23,8 @@ class TRP_Translation_Render{
      */
     public function __construct( $settings ){
         $this->settings = $settings;
+        // apply_filters only once instead of everytime is_html() is used
+        $this->common_html_tags = implode( '|', apply_filters('trp_common_html_tags', array( 'html', 'body', 'table', 'tbody', 'thead', 'th', 'td', 'tr', 'div', 'p', 'span', 'b', 'a', 'strong', 'center', 'br', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'hr', 'img' ) ) );
     }
 
     /**
@@ -646,6 +649,18 @@ class TRP_Translation_Render{
 	    }
 
         $no_translate_selectors = apply_filters( 'trp_no_translate_selectors', array( '#wpadminbar' ), $TRP_LANGUAGE );
+        $ignore_cdata = apply_filters('trp_ignore_cdata', true );
+        $translate_encoded_html_as_string = apply_filters('trp_translate_encoded_html_as_string', false );
+        $translate_encoded_html_as_html = apply_filters('trp_translate_encoded_html_as_html', true );
+        // used for skipping minified scripts but can be used for anything
+        $skip_strings_containing_key_terms = apply_filters('trp_skip_strings_containing_key_terms',
+            array(
+                array(
+                    'terms'=> array( 'function', 'return', 'if', '==' ),
+                    'operator' => 'and'
+                )
+            )
+        );
 
         /*
          * process the types of strings we can currently have: no-translate, translation-block, text, input, textarea, etc.
@@ -698,8 +713,37 @@ class TRP_Translation_Render{
                 && !$this->trp_is_numeric($trimmed_string)
                 && !preg_match('/^\d+%$/',$trimmed_string)
                 && !$this->has_ancestor_attribute( $row, $no_translate_attribute )
-                && !$this->has_ancestor_class( $row, 'translation-block') )
+                && !$this->has_ancestor_class( $row, 'translation-block')
+                && ( !$ignore_cdata || ( strpos($trimmed_string, '<![CDATA[') !== 0 && strpos($trimmed_string, '&lt;![CDATA[') !== 0  ) )
+                && !$this->contains_substrings($trimmed_string, $skip_strings_containing_key_terms ) )
             {
+                if ( !$translate_encoded_html_as_string ){
+                    $is_html = false;
+                    if ( $translate_encoded_html_as_html ){
+                        if ( $this->is_html($trimmed_string) ){
+                            // prevent potential infinite loops. Only call translate_page once recursively
+                            add_filter( 'trp_translate_encoded_html_as_html', '__return_false' );
+
+                            $row->outertext = str_replace( $trimmed_string, $this->translate_page( $trimmed_string ), $row->outertext );
+                            remove_filter( 'trp_translate_encoded_html_as_html', '__return_false' );
+                            $is_html = true;
+                        }else {
+                            $entity_decoded_trimmed_string = html_entity_decode( $trimmed_string );
+                            if ( $this->is_html( $entity_decoded_trimmed_string ) ) {
+                                // prevent potential infinite loops. Only call translate_page once recursively
+                                add_filter( 'trp_translate_encoded_html_as_html', '__return_false' );
+
+                                $row->outertext = str_replace( $trimmed_string, htmlentities( $this->translate_page( $entity_decoded_trimmed_string ) ), $row->outertext );
+                                remove_filter( 'trp_translate_encoded_html_as_html', '__return_false' );
+                                $is_html = true;
+                            }
+                        }
+                    }
+                    if ( $is_html ) {
+                        continue;
+                    }
+                }
+
                 // $translateable_strings array needs to be in sync in $nodes array
                 $string_count = array_push( $translateable_strings, $trimmed_string );
                 $node_type_to_push = ( in_array( $parent->tag, array( 'button', 'option' ) ) ) ? $parent->tag : 'text';
@@ -737,9 +781,24 @@ class TRP_Translation_Render{
 				        && !$this->has_ancestor_attribute( $row, $no_translate_attribute )
 				        && !$this->has_ancestor_attribute( $row, $no_translate_attribute . '-' . $current_node_accessor_selector )
 				        && !$this->has_ancestor_class( $row, 'translation-block')
-				        && $row->tag != 'link' )
+				        && $row->tag != 'link'
+                        && ( !$ignore_cdata || ( strpos($trimmed_string, '<![CDATA[') !== 0 && strpos($trimmed_string, '&lt;![CDATA[') !== 0  ) )
+                        && !$this->contains_substrings($trimmed_string, $skip_strings_containing_key_terms ) )
 				    {
-					    $entity_decoded_trimmed_string = html_entity_decode( $trimmed_string );
+                        $entity_decoded_trimmed_string = html_entity_decode( $trimmed_string );
+                        if ( !$translate_encoded_html_as_string ){
+                            if ( $translate_encoded_html_as_html ){
+                                if ( $this->is_html($entity_decoded_trimmed_string) ){
+                                    // prevent potential infinite loops. Only call translate_page once recursively
+                                    add_filter( 'trp_translate_encoded_html_as_html', '__return_false' );
+
+                                    $row->setAttribute( $current_node_accessor_selector, str_replace( $trimmed_string, esc_attr( htmlentities($this->translate_page( $entity_decoded_trimmed_string )) ), $row->$current_node_accessor_selector ) );
+                                    remove_filter( 'trp_translate_encoded_html_as_html', '__return_false' );
+                                    continue;
+                                }
+                            }
+                        }
+
 					    array_push( $translateable_strings, $entity_decoded_trimmed_string );
 					    array_push( $nodes, array( 'node'=>$row, 'type' => $node_accessor_key ) );
 					    if ( ! apply_filters( 'trp_allow_machine_translation_for_string', true, $entity_decoded_trimmed_string, $current_node_accessor_selector, $node_accessor, $row ) ){
@@ -1805,6 +1864,51 @@ class TRP_Translation_Render{
     	else {
     		return false;
     	}
+    }
+
+    /**
+     * Whether a text contains html tags.
+     * Match an opening or closing tag among given html tags.
+     * @param $string
+     * @return bool
+     */
+    public function is_html( $string ){
+        $pattern = '/<\/?(' . $this->common_html_tags . ')(\s[^>]*)?(\s?\/)?\>/';
+        return preg_match($pattern, $string, $matches);
+    }
+
+    /**
+     * Matches the conditions set by $key_term_arrays
+     *
+     * See $skip_strings_containing_key_terms for config
+     *
+     * @param $string
+     * @param $key_terms_arrays
+     * @return bool
+     */
+    public function contains_substrings($string, $key_terms_arrays){
+        foreach( $key_terms_arrays as $key_terms ) {
+            if ( !empty( $key_terms['operator'] ) && !empty( $key_terms['terms'] ) && is_array( $key_terms ) ) {
+                if ( $key_terms['operator'] == 'or' ){
+                    foreach ( $key_terms['terms'] as $term ) {
+                        if ( stripos( $string, $term ) !== false ) {
+                            return true;
+                        }
+                    }
+                }
+                if ( $key_terms['operator'] == 'and' ){
+                    foreach ( $key_terms['terms'] as $array_key => $term ) {
+                        if ( stripos( $string, $term ) !== false ) {
+                            unset($key_terms['terms'][$array_key]);
+                            if ( count ($key_terms['terms'] ) == 0 ){
+                                return true;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return false;
     }
 
 }

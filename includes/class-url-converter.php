@@ -9,6 +9,7 @@ class TRP_Url_Converter {
 
     protected $absolute_home;
     protected $settings;
+    protected $admin_url;
 
     /**
      * TRP_Url_Converter constructor.
@@ -17,6 +18,8 @@ class TRP_Url_Converter {
      */
     public function __construct( $settings ){
         $this->settings = $settings;
+        //$admin_url is declared here because it was causing a conflict with Ultimate Dashboard since there was an action hooked on site_url
+        $this->admin_url = strtolower( admin_url() );
     }
 
     /**
@@ -74,7 +77,6 @@ class TRP_Url_Converter {
      */
     public function is_admin_request() {
         $current_url = $this->cur_page_url();
-        $admin_url = strtolower( admin_url() );
 
         // we can't use wp_get_referer() It looks like it creates an infinite loop because it calls home_url() and we're filtering that
         // array('http','https') is added because of a compatibility issue with Scriptless Social Sharing that created an infinite loop
@@ -88,7 +90,7 @@ class TRP_Url_Converter {
         }
 
         //consider an admin request a call to the rest api that came from the admin area
-        if( false !== strpos( $current_url, '/wp-json/' ) && 0 === strpos( $referrer, $admin_url ) ){
+        if( false !== strpos( $current_url, '/wp-json/' ) && 0 === strpos( $referrer, $this->admin_url ) ){
             return true;
         }
 
@@ -96,11 +98,11 @@ class TRP_Url_Converter {
          * Check if this is a admin request. If true, it
          * could also be a AJAX request from the frontend.
          */
-        if ( 0 === strpos( $current_url, $admin_url ) ) {
+        if ( 0 === strpos( $current_url, $this->admin_url ) ) {
             /**
              * Check if the user comes from a admin page.
              */
-            if ( 0 === strpos( $referrer, $admin_url ) ) {
+            if ( 0 === strpos( $referrer, $this->admin_url ) ) {
                 return true;
             } else {
                 if ( function_exists( 'wp_doing_ajax' ) ) {

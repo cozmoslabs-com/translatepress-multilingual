@@ -721,59 +721,59 @@ msgstr ""
 msgid "<strong>Warning:</strong> Some strings have possibly incorrectly encoded characters. This may result in breaking the queries, rendering the page untranslated in live mode. Consider revising the following strings or their method of outputting."
 msgstr ""
 
-#: includes/class-translation-render.php:150
+#: includes/class-translation-render.php:153
 msgid "Description"
 msgstr ""
 
-#: includes/class-translation-render.php:156
+#: includes/class-translation-render.php:159
 msgid "OG Title"
 msgstr ""
 
-#: includes/class-translation-render.php:162
+#: includes/class-translation-render.php:165
 msgid "OG Site Name"
 msgstr ""
 
-#: includes/class-translation-render.php:168
+#: includes/class-translation-render.php:171
 msgid "OG Description"
 msgstr ""
 
-#: includes/class-translation-render.php:174
+#: includes/class-translation-render.php:177
 msgid "OG Image Alt"
 msgstr ""
 
-#: includes/class-translation-render.php:180
+#: includes/class-translation-render.php:183
 msgid "Twitter Title"
 msgstr ""
 
-#: includes/class-translation-render.php:186
+#: includes/class-translation-render.php:189
 msgid "Twitter Description"
 msgstr ""
 
-#: includes/class-translation-render.php:192
+#: includes/class-translation-render.php:195
 msgid "Twitter Image Alt"
 msgstr ""
 
-#: includes/class-translation-render.php:196
+#: includes/class-translation-render.php:199
 msgid "Page Title"
 msgstr ""
 
-#: includes/class-translation-render.php:202
+#: includes/class-translation-render.php:205
 msgid "Dublin Core Title"
 msgstr ""
 
-#: includes/class-translation-render.php:208
+#: includes/class-translation-render.php:211
 msgid "Dublin Core Description"
 msgstr ""
 
-#: includes/class-translation-render.php:214
+#: includes/class-translation-render.php:217
 msgid "OG Image"
 msgstr ""
 
-#: includes/class-translation-render.php:220
+#: includes/class-translation-render.php:223
 msgid "OG Image Secure URL"
 msgstr ""
 
-#: includes/class-translation-render.php:226
+#: includes/class-translation-render.php:229
 msgid "Twitter Image"
 msgstr ""
 
