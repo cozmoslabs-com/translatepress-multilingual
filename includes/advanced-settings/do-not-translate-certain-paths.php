@@ -85,10 +85,12 @@ function trp_exclude_include_paths_to_run_on(){
 
     $replace = '/';
 
-    if( isset( $settings['add-subdirectory-to-default-language'] ) && $settings['add-subdirectory-to-default-language'] == 'yes' )
-        $replace .= $settings['url-slugs'][$current_lang];
+    if( isset( $settings['add-subdirectory-to-default-language'] ) && $settings['add-subdirectory-to-default-language'] == 'yes' ) {
+	    $replace .= $settings['url-slugs'][ $current_lang ];
+	    $current_slug = str_replace( $replace, '', $current_slug );
+    }
 
-    $current_slug = str_replace( $replace, '', untrailingslashit( $current_slug ) );
+    $current_slug = trim($current_slug, "/");
 
     // Explode get params
     $current_slug = explode( '?', $current_slug );
@@ -100,39 +102,70 @@ function trp_exclude_include_paths_to_run_on(){
         $current_slug = $current_slug[0];
     }
 
-    if( empty( $current_slug ) || $current_slug == '/' )
+	if( empty( $current_slug ) || $current_slug == '/' || $current_slug == '' ){
+        $array_slugs[0] = "{{home}}";
         $current_slug = "{{home}}";
-    else
-        $current_slug = '/' . ltrim( $current_slug, '/' );
+    }
+    else {
+	    $array_slugs = explode( "/", $current_slug );
+    }
 
     if( $advanced_settings['translateable_content']['option'] == 'exclude' ){
 
         foreach( $paths as $path ){
 
-            if( !empty( $path ) ){
+            if( !empty( $path ) ) {
+	            $path = trim( $path, "/" );
 
-                if( untrailingslashit( $current_slug ) == untrailingslashit( $path ) || ( strpos( $path, '*' ) !== false && strpos( untrailingslashit( $current_slug ), str_replace( '/*', '', $path ) ) !== false ) )
-                    return false;
+	            if ( ( untrailingslashit( $current_slug ) == untrailingslashit( $path ) || strcmp( $current_slug, $path ) == 0 ) && strpos( $path, '*' ) == false )
+		            return false;
 
+                elseif ( strpos( $path, '*' ) !== false ) {
+		            $path = str_replace('/*', '', $path);
+		            $array_paths = explode( "/", $path );
+
+		            if ( count($array_slugs) > count($array_paths) ) {
+			            $compare_slugs = true;
+			            foreach($array_paths as $key=>$array_path){
+				            if( strcmp($array_slugs[$key], $array_path ) !== 0 )
+                                $compare_slugs = false;
+			            }
+                        if($compare_slugs === true)
+                            return false;
+		            }
+                }
             }
         }
 
     } else if( $advanced_settings['translateable_content']['option'] == 'include' ){
 
         foreach( $paths as $path ){
+	        $path = trim( $path, "/" );
 
-            if( !empty( $path ) ){
-                if( untrailingslashit( $current_slug ) == untrailingslashit( $path ) || ( strpos( $path, '*' ) !== false && strpos( untrailingslashit( $current_slug ), str_replace( '/*', '', $path ) ) !== false ) )
-                    return true;
-            }
+	        if ( ( untrailingslashit( $current_slug ) == untrailingslashit( $path ) || strcmp( $current_slug, $path ) == 0 ) && strpos( $path, '*' ) == false )
+		        return true;
 
+            elseif ( strpos( $path, '*' ) !== false ) {
+		        $path = str_replace('/*', '', $path);
+		        $array_paths = explode( "/", $path );
+
+		        if ( count($array_slugs) > count($array_paths) ) {
+			        $compare_slugs = true;
+			        foreach($array_paths as $key=>$array_path){
+				        if( strcmp($array_slugs[$key], $array_path ) !== 0 )
+					        $compare_slugs = false;
+			        }
+			        if($compare_slugs === true)
+				        return true;
+		        }
+	        }
         }
 
         return false;
 
     }
 
-    return true;
+	return true;
 
 }
 

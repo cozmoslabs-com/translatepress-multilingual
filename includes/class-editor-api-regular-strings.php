@@ -183,10 +183,10 @@ class TRP_Editor_Api_Regular_Strings {
 			check_ajax_referer( 'save_translations', 'security' );
 			if ( isset( $_POST['action'] ) && $_POST['action'] === 'trp_save_translations_regular' && !empty( $_POST['strings'] ) ) {
 				$strings = json_decode(stripslashes($_POST['strings'])); /* phpcs:ignore */ /* sanitized downstream */
-				$this->save_translations_of_strings( $strings );
+				$update_strings = $this->save_translations_of_strings( $strings );
 			}
 		}
-		echo trp_safe_json_encode( array() ); // phpcs:ignore
+		echo trp_safe_json_encode( $update_strings ); // phpcs:ignore
 		die();
 	}
 
@@ -237,7 +237,8 @@ class TRP_Editor_Api_Regular_Strings {
 		}
 
         do_action('trp_save_editor_translations_regular_strings', $update_strings, $this->settings);
-		
+
+		return $update_strings;
 	}
 
 	/**

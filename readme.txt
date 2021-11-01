@@ -5,7 +5,7 @@ Tags: translate, translation, multilingual, automatic translation, bilingual, fr
 Requires at least: 3.1.0
 Tested up to: 5.8.1
 Requires PHP: 5.6.20
-Stable tag: 2.1.4
+Stable tag: 2.1.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -140,6 +140,12 @@ For more information please check out our [documentation](https://translatepress
 
 
 == Changelog ==
+= 2.1.5 =
+* Show sanitized translation after saving changes in Translation Editor
+* Improved query for getting existing translations
+* Fixed issue with using wildcard in Translate only certain paths feature
+* Fixed php warning on settings page about DeepL
+
 = 2.1.4 =
 * Optimized automatic translation usage by improved recognition of cdata, js scripts and encoded html
 * Fixed conflict with Ultimate Dashboard

@@ -70,6 +70,10 @@ class TRP_Machine_Translation_Tab {
         else
             $mt_settings['translation-engine'] = 'google_translate_v2';
 
+        if($mt_settings['translation-engine'] == 'deepl_upsell' && !class_exists( 'TRP_DeepL' ) && !class_exists( 'TRP_IN_DeepL' )){
+            $mt_settings['translation-engine'] = 'google_translate_v2';
+        }
+
         if( !empty( $mt_settings['block-crawlers'] ) )
             $mt_settings['block-crawlers'] = sanitize_text_field( $mt_settings['block-crawlers']  );
         else
