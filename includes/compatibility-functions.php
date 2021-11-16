@@ -876,20 +876,13 @@ if( function_exists( 'ct_is_show_builder' ) || defined( 'FL_BUILDER_VERSION' ) )
     /**
      * Disable automatic language redirect when the Oxygen or Beaver Builders are showing
      */
-    add_action( 'plugins_loaded', 'trp_page_builder_compatibility_disable_automatic_language_redirect' );
-    function trp_page_builder_compatibility_disable_automatic_language_redirect(){
-
+    add_filter( 'trp_ald_enqueue_redirecting_script', 'trp_ald_dont_redirect_inside_page_builders');
+    function trp_ald_dont_redirect_inside_page_builders( $enqueue_redirecting_script ){
         if( ( isset( $_GET['ct_builder'] ) && $_GET['ct_builder'] == 'true' ) || isset( $_GET['fl_builder'] ) ){
-
-            $trp    = TRP_Translate_Press::get_trp_instance();
-            $loader = $trp->get_component( 'loader' );
-
-            $loader->remove_hook( 'wp_enqueue_scripts', 'enqueue_cookie_adding' );
-
+            return false;
         }
-
+        return $enqueue_redirecting_script;
     }
-
 }
 
 /**
@@ -1568,5 +1561,53 @@ function trp_add_filters_wp_typography($final_html){
 
     return $final_html;
 
+}
+
+/*
+ * Compatibility with All In One SEO Pack
+ */
+
+if(function_exists('aioseo')){
+
+    if (version_compare(PHP_VERSION, '5.4.0', '>=')) {
+        $callstack_functions = debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT, 15);//set a limit if it is supported to improve performance
+    } else {
+        $callstack_functions = debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT);
+    }
+
+    if (!empty($callstack_functions)) {
+        foreach ( $callstack_functions as $callstack_function ) {
+            if ( isset($callstack_function["object"]->{"callbacks"}) ) {
+                foreach ($callstack_function["object"]->{"callbacks"}[10] as $key=>$value){
+                    if(strpos($key, 'actionScheduler')){
+                        if(array_key_exists('breadcrumbs_archiveFormat',  $callstack_function["object"]->{"callbacks"}[10][ $key ]["function"][0]->{"options"}->{"localized"}  )) {
+                            add_action( 'trp_before_running_hooks', 'trp_AIOSEO_remove_gettext_hooks', 10, 1 );
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+function trp_AIOSEO_remove_gettext_hooks($trp_loader){
+    $trp                = TRP_Translate_Press::get_trp_instance();
+    $translation_render = $trp->get_component( 'translation_render' );
+    $trp_loader->remove_hook( 'the_title', 'wrap_with_post_id', $translation_render );
+}
+
+
+/**
+ * Compatibility with Elementor/Divi/WPBakery when "Use a subdirectory for the default language" is set to Yes
+ * Making sure the page edited with Elementor/Divi/WPBakery appears in the default language instead of the first language from the Language list
+ */
+add_filter( 'trp_needed_language', 'trp_page_builders_compatibility_with_subdirectory_for_default_language', 10, 4 );
+function trp_page_builders_compatibility_with_subdirectory_for_default_language( $needed_language, $lang_from_url, $settings, $trp) {
+    if ( ( ( isset( $_GET['action'] ) && $_GET['action'] === 'elementor' ) || isset( $_GET['elementor-preview'] ) ) //Elementor
+        || ( ( isset( $_GET['et_fb'] ) && $_GET['et_fb'] === '1' ) && ( isset( $_GET['PageSpeed'] ) && $_GET['PageSpeed'] === "off" ) ) //Divi
+        || ( ( isset( $_GET['vc_action'] ) && $_GET['vc_action'] === 'vc_inline' ) || ( isset( $_GET['vc_editable'] ) && $_GET['vc_editable'] === 'true' ) ) ) { //WPBakery
+        $needed_language = $settings['default-language'];
+    }
+    return $needed_language;
 }
 

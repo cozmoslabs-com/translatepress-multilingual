@@ -3,9 +3,9 @@ Contributors: cozmoslabs, razvan.mo, madalin.ungureanu, sareiodata, cristophor
 Donate link: https://www.translatepress.com/
 Tags: translate, translation, multilingual, automatic translation, bilingual, front-end translation, google translate, language
 Requires at least: 3.1.0
-Tested up to: 5.8.1
+Tested up to: 5.8.2
 Requires PHP: 5.6.20
-Stable tag: 2.1.5
+Stable tag: 2.1.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -140,6 +140,13 @@ For more information please check out our [documentation](https://translatepress
 
 
 == Changelog ==
+= 2.1.6 =
+* Show sanitized translation when editing gettext strings in Translation Editor
+* Fixed showing translation language instead of default language in some cases in Elementor, Divi and WPBakery editors
+* Fixed breadcrumbs issue with All in One SEO plugin on translation language
+* Fixed Beaver Builder Editor loading loop when Automatic User Language Detection is active
+* Fixed issue with excluding path from translation
+
 = 2.1.5 =
 * Show sanitized translation after saving changes in Translation Editor
 * Improved query for getting existing translations

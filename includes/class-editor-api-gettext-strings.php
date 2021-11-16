@@ -162,7 +162,7 @@ class TRP_Editor_Api_Gettext_Strings {
                 do_action('trp_save_editor_translations_gettext_strings', $update_strings, $this->settings);
 			}
 		}
-		echo trp_safe_json_encode( array() );//phpcs:ignore
+		echo trp_safe_json_encode( $update_strings );//phpcs:ignore
 		wp_die();
 	}
 }

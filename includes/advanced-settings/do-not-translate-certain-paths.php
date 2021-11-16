@@ -47,6 +47,63 @@ function trp_output_do_not_translate_certain_paths( $setting ){
     return;
 }
 
+function trp_test_current_slug( &$current_slug, &$array_slugs ) {
+    $current_slug = trim($current_slug, "/");
+
+    // Explode get params
+    $current_slug = explode( '?', $current_slug );
+
+    // If get params then store in $current_slug the part thats important to us
+    if( isset( $current_slug[1] ) ){
+        $current_get  = $current_slug[1];
+        $current_slug = $current_slug[0];
+    } else {
+        $current_slug = $current_slug[0];
+    }
+
+    // Test if current slug should be home. If not then split the slug on "/" and save the individual strings in $array_slugs
+    if( empty( $current_slug ) || $current_slug == '/' || $current_slug == '' ){
+        $array_slugs[0] = "{{home}}";
+        $current_slug = "{{home}}";
+    }
+    else {
+        $array_slugs = explode( "/", $current_slug );
+    }
+}
+
+function trp_return_exclude_include_url($paths, $current_slug, $array_slugs) {
+    // $paths contains all the paths set in the advance tab
+    foreach( $paths as $path ) {
+
+        if ( !empty( $path ) ) {
+            $path = trim( $path, "/" );
+
+            // If $current_path is exactly $path and $path doesn't contain "/*"
+            if ( ( untrailingslashit( $current_slug ) == untrailingslashit( $path ) || strcmp( $current_slug, $path ) == 0 ) && strpos( $path, '*' ) == false )
+                return true;
+            // Elseif $current path contains "/*"
+            elseif ( strpos( $path, '*' ) !== false ) {
+                $path = str_replace( '/*', '', $path );
+                // $array_paths contains each part of $path split on "/"
+                $array_paths = explode( "/", $path );
+                // If $current_slug has more values than $path
+                if ( count( $array_slugs ) > count( $array_paths ) ) {
+                    $compare_slugs = true;
+                    // Comparing each value from $array_paths and $array_slugs in the same order
+                    foreach ( $array_paths as $key => $array_path ) {
+                        // Testing if the values are different
+                        if ( strcmp( $array_slugs[ $key ], $array_path ) !== 0 )
+                            $compare_slugs = false;
+                    }
+                    // If all the values are identical
+                    if ( $compare_slugs === true )
+                        return true;
+                }
+            }
+        }
+    }
+}
+
 // Prevent TranslatePress from loading on excluded pages
 add_action( 'trp_allow_tp_to_run', 'trp_exclude_include_paths_to_run_on', 2 );
 function trp_exclude_include_paths_to_run_on(){
@@ -90,76 +147,20 @@ function trp_exclude_include_paths_to_run_on(){
 	    $current_slug = str_replace( $replace, '', $current_slug );
     }
 
-    $current_slug = trim($current_slug, "/");
 
-    // Explode get params
-    $current_slug = explode( '?', $current_slug );
-
-    if( isset( $current_slug[1] ) ){
-        $current_get  = $current_slug[1];
-        $current_slug = $current_slug[0];
-    } else {
-        $current_slug = $current_slug[0];
-    }
-
-	if( empty( $current_slug ) || $current_slug == '/' || $current_slug == '' ){
-        $array_slugs[0] = "{{home}}";
-        $current_slug = "{{home}}";
-    }
-    else {
-	    $array_slugs = explode( "/", $current_slug );
-    }
+    // $array_slugs contains each part of $curent_slug split on "/"
+    $array_slugs = array();
+    trp_test_current_slug($current_slug, $array_slugs );
 
     if( $advanced_settings['translateable_content']['option'] == 'exclude' ){
 
-        foreach( $paths as $path ){
-
-            if( !empty( $path ) ) {
-	            $path = trim( $path, "/" );
-
-	            if ( ( untrailingslashit( $current_slug ) == untrailingslashit( $path ) || strcmp( $current_slug, $path ) == 0 ) && strpos( $path, '*' ) == false )
-		            return false;
-
-                elseif ( strpos( $path, '*' ) !== false ) {
-		            $path = str_replace('/*', '', $path);
-		            $array_paths = explode( "/", $path );
-
-		            if ( count($array_slugs) > count($array_paths) ) {
-			            $compare_slugs = true;
-			            foreach($array_paths as $key=>$array_path){
-				            if( strcmp($array_slugs[$key], $array_path ) !== 0 )
-                                $compare_slugs = false;
-			            }
-                        if($compare_slugs === true)
-                            return false;
-		            }
-                }
-            }
-        }
+        if ( trp_return_exclude_include_url($paths, $current_slug, $array_slugs) )
+            return false;
 
     } else if( $advanced_settings['translateable_content']['option'] == 'include' ){
 
-        foreach( $paths as $path ){
-	        $path = trim( $path, "/" );
-
-	        if ( ( untrailingslashit( $current_slug ) == untrailingslashit( $path ) || strcmp( $current_slug, $path ) == 0 ) && strpos( $path, '*' ) == false )
-		        return true;
-
-            elseif ( strpos( $path, '*' ) !== false ) {
-		        $path = str_replace('/*', '', $path);
-		        $array_paths = explode( "/", $path );
-
-		        if ( count($array_slugs) > count($array_paths) ) {
-			        $compare_slugs = true;
-			        foreach($array_paths as $key=>$array_path){
-				        if( strcmp($array_slugs[$key], $array_path ) !== 0 )
-					        $compare_slugs = false;
-			        }
-			        if($compare_slugs === true)
-				        return true;
-		        }
-	        }
-        }
+        if ( trp_return_exclude_include_url($paths, $current_slug, $array_slugs) )
+            return true;
 
         return false;
 
@@ -192,43 +193,19 @@ function trp_exclude_include_do_not_redirect_on_excluded_pages( $redirect, $lang
     $current_slug = str_replace( $replace, '', trailingslashit( $url ) );
     $paths        = explode("\n", str_replace("\r", "", $advanced_settings['translateable_content']['paths'] ) );
 
-    // Explode get params
-    $current_slug = explode( '?', $current_slug );
-
-    if( isset( $current_slug[1] ) ){
-        $current_get  = $current_slug[1];
-        $current_slug = $current_slug[0];
-    } else {
-        $current_slug = $current_slug[0];
-    }
-
-    if( empty( $current_slug ) || $current_slug == '/' )
-        $current_slug = "{{home}}";
-    else
-        $current_slug = '/' . ltrim( $current_slug, '/' );
+    // $array_slugs contains each part of $curent_slug split on "/"
+    $array_slugs = array();
+    trp_test_current_slug($current_slug, $array_slugs );
 
     if( $advanced_settings['translateable_content']['option'] == 'exclude' ){
 
-        foreach( $paths as $path ){
-
-            if( !empty( $path ) ){
-
-                if( untrailingslashit( $current_slug ) == untrailingslashit( $path ) || ( strpos( $path, '*' ) !== false && strpos( untrailingslashit( $current_slug ), str_replace( '/*', '', $path ) ) !== false ) )
-                    return false;
-
-            }
-        }
+        if ( trp_return_exclude_include_url($paths, $current_slug, $array_slugs) )
+            return false;
 
     } else if( $advanced_settings['translateable_content']['option'] == 'include' ){
 
-        foreach( $paths as $path ){
-
-            if( !empty( $path ) ){
-                if( untrailingslashit( $current_slug ) == untrailingslashit( $path ) || ( strpos( $path, '*' ) !== false && strpos( untrailingslashit( $current_slug ), str_replace( '/*', '', $path ) ) !== false ) )
-                    return $redirect;
-            }
-
-        }
+        if ( trp_return_exclude_include_url($paths, $current_slug, $array_slugs) )
+            return $redirect;
 
         return false;
 
@@ -282,47 +259,23 @@ function trp_exclude_include_redirect_to_default_language(){
     // Remove language from this URL if present
     $current_original_url = str_replace( '/' . $settings['url-slugs'][$settings['default-language']], '', $current_original_url );
 
-    // Explode get params
-    $current_slug = explode( '?', $current_slug );
-
-    if( isset( $current_slug[1] ) ){
-        $current_get  = $current_slug[1];
-        $current_slug = $current_slug[0];
-    } else {
-        $current_slug = $current_slug[0];
-    }
-
-    if( empty( $current_slug ) || $current_slug == '/' )
-        $current_slug = "{{home}}";
+    // $array_slugs contains each part of $curent_slug split on "/"
+    $array_slugs = array();
+    trp_test_current_slug($current_slug, $array_slugs );
 
     if( $advanced_settings['translateable_content']['option'] == 'exclude' ){
 
-        foreach( $paths as $path ){
-
-            if( !empty( $path ) ){
-
-                if( untrailingslashit( $current_slug ) == untrailingslashit( $path ) || ( strpos( $path, '*' ) !== false && strpos( untrailingslashit( $current_slug ), str_replace( '/*', '', $path ) ) !== false ) ){
-
-                    if( $url_converter->cur_page_url() != $current_original_url ){
-                        wp_redirect( $current_original_url, 301 );
-                        exit;
-                    }
-
-                }
-
+        if ( trp_return_exclude_include_url($paths, $current_slug, $array_slugs) )
+            if( $url_converter->cur_page_url() != $current_original_url ){
+                wp_redirect( $current_original_url, 301 );
+                exit;
             }
-        }
+
 
     } else if( $advanced_settings['translateable_content']['option'] == 'include' ){
 
-        foreach( $paths as $path ){
-
-            if( !empty( $path ) ){
-                if( untrailingslashit( $current_slug ) == untrailingslashit( $path ) || ( strpos( $path, '*' ) !== false && strpos( untrailingslashit( $current_slug ), str_replace( '/*', '', $path ) ) !== false ) )
-                    return;
-            }
-
-        }
+        if ( trp_return_exclude_include_url($paths, $current_slug, $array_slugs) )
+            return;
 
         if( $url_converter->cur_page_url() != $current_original_url ){
             wp_redirect( $current_original_url, 301 );
@@ -366,40 +319,19 @@ function trp_exclude_include_filter_custom_links( $new_url, $url, $TRP_LANGUAGE,
     $current_slug = str_replace( $absolute_home, '', untrailingslashit( $current_original_url ) );
     $paths        = explode("\n", str_replace("\r", "", $advanced_settings['translateable_content']['paths'] ) );
 
-    // Explode get params
-    $current_slug = explode( '?', $current_slug );
-
-    if( isset( $current_slug[1] ) ){
-        $current_get  = $current_slug[1];
-        $current_slug = $current_slug[0];
-    } else {
-        $current_slug = $current_slug[0];
-    }
-
-    if( empty( $current_slug ) || $current_slug == '/' )
-        $current_slug = "{{home}}";
+    // $array_slugs contains each part of $curent_slug split on "/"
+    $array_slugs = array();
+    trp_test_current_slug($current_slug, $array_slugs );
 
     if( $advanced_settings['translateable_content']['option'] == 'exclude' ){
 
-        foreach( $paths as $path ){
-
-            if( !empty( $path ) ){
-                if( untrailingslashit( $current_slug ) == untrailingslashit( $path ) || ( strpos( $path, '*' ) !== false && strpos( untrailingslashit( $current_slug ), str_replace( '/*', '', $path ) ) !== false ) )
-                    return $current_original_url;
-            }
-
-        }
+        if ( trp_return_exclude_include_url($paths, $current_slug, $array_slugs) )
+            return $current_original_url;
 
     } else if( $advanced_settings['translateable_content']['option'] == 'include' ){
 
-        foreach( $paths as $path ){
-
-            if( !empty( $path ) ){
-                if( untrailingslashit( $current_slug ) == untrailingslashit( $path ) || ( strpos( $path, '*' ) !== false && strpos( untrailingslashit( $current_slug ), str_replace( '/*', '', $path ) ) !== false ) )
-                    return $new_url;
-            }
-
-        }
+        if ( trp_return_exclude_include_url($paths, $current_slug, $array_slugs) )
+            return $new_url;
 
         return $current_original_url;
 
@@ -436,40 +368,19 @@ function trp_exclude_include_filter_sitemap_links( $new_output, $output, $settin
     $current_slug = str_replace( $absolute_home, '', untrailingslashit( $current_original_url ) );
     $paths        = explode("\n", str_replace("\r", "", $advanced_settings['translateable_content']['paths'] ) );
 
-    // Explode get params
-    $current_slug = explode( '?', $current_slug );
-
-    if( isset( $current_slug[1] ) ){
-        $current_get  = $current_slug[1];
-        $current_slug = $current_slug[0];
-    } else {
-        $current_slug = $current_slug[0];
-    }
-
-    if( empty( $current_slug ) || $current_slug == '/' )
-        $current_slug = "{{home}}";
+    // $array_slugs contains each part of $curent_slug split on "/"
+    $array_slugs = array();
+    trp_test_current_slug($current_slug, $array_slugs );
 
     if( $advanced_settings['translateable_content']['option'] == 'exclude' ){
 
-        foreach( $paths as $path ){
-
-            if( !empty( $path ) ){
-                if( untrailingslashit( $current_slug ) == untrailingslashit( $path ) || ( strpos( $path, '*' ) !== false && strpos( untrailingslashit( $current_slug ), str_replace( '/*', '', $path ) ) !== false ) )
-                    return $output;
-            }
-
-        }
+        if ( trp_return_exclude_include_url($paths, $current_slug, $array_slugs) )
+            return $output;
 
     } else if( $advanced_settings['translateable_content']['option'] == 'include' ){
 
-        foreach( $paths as $path ){
-
-            if( !empty( $path ) ){
-                if( untrailingslashit( $current_slug ) == untrailingslashit( $path ) || ( strpos( $path, '*' ) !== false && strpos( untrailingslashit( $current_slug ), str_replace( '/*', '', $path ) ) !== false ) )
-                    return $new_output;
-            }
-
-        }
+        if ( trp_return_exclude_include_url($paths, $current_slug, $array_slugs) )
+            return $new_output;
 
         return $output;
 
