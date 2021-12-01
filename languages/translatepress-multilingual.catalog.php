@@ -317,6 +317,13 @@
 <?php __("Add a floating dropdown that follows the user on every page.", "translatepress-multilingual"); ?>
 <?php __("Show \"Powered by TranslatePress\"", "translatepress-multilingual"); ?>
 <?php __("Show the small \"Powered by TranslatePress\" label in the floater language switcher.", "translatepress-multilingual"); ?>
+<?php __("5 Days to Better Multilingual Websites", "translatepress-multilingual"); ?>
+<?php __("%sJoin our FREE & EXCLUSIVE onboarding course%s and learn how to grow your multilingual traffic, reach international markets, and save time & money while getting the most out of TranslatePress!", "translatepress-multilingual"); ?>
+<?php __("Invalid email address", "translatepress-multilingual"); ?>
+<?php __("Your email", "translatepress-multilingual"); ?>
+<?php __("Sign me up!", "translatepress-multilingual"); ?>
+<?php __("Sign up with your email address and receive a 5-part email guide to help you maximize the power of TranslatePress.", "translatepress-multilingual"); ?>
+<?php __("Dismiss email course notification", "translatepress-multilingual"); ?>
 <?php __("API Key from settings page:", "translatepress-multilingual"); ?>
 <?php __("HTTP Referrer:", "translatepress-multilingual"); ?>
 <?php __("Use this HTTP Referrer if the API lets you restrict key usage from its Dashboard.", "translatepress-multilingual"); ?>

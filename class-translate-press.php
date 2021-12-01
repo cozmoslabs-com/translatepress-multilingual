@@ -58,7 +58,7 @@ class TRP_Translate_Press{
         define( 'TRP_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
         define( 'TRP_PLUGIN_BASE', plugin_basename( __DIR__ . '/index.php' ) );
         define( 'TRP_PLUGIN_SLUG', 'translatepress-multilingual' );
-        define( 'TRP_PLUGIN_VERSION', '2.1.6' );
+        define( 'TRP_PLUGIN_VERSION', '2.1.7' );
 
 	    wp_cache_add_non_persistent_groups(array('trp'));
 
@@ -271,6 +271,9 @@ class TRP_Translate_Press{
         $this->loader->add_action( 'admin_init', $this->reviews, 'display_review_notice' );
         $this->loader->add_action( 'trp_dismiss_notification', $this->reviews, 'dismiss_notification', 10, 2 );
 
+        // Email Course
+	    $this->loader->add_action( 'wp_ajax_trp_dismiss_email_course', $this->settings, 'trp_dismiss_email_course' );
+
     }
 
     /**
@@ -329,6 +332,7 @@ class TRP_Translate_Press{
         $this->loader->add_filter( 'home_url', $this->url_converter, 'add_language_to_home_url', 1, 4 );
         $this->loader->add_action( 'wp_head', $this->url_converter, 'add_hreflang_to_head' );
         $this->loader->add_filter( 'language_attributes', $this->url_converter, 'change_lang_attr_in_html_tag', 10, 1 );
+        $this->loader->add_filter('trp_is_file', $this->url_converter, 'does_url_contains_array', 10, 2);
 
 
         $this->loader->add_filter( 'widget_text', null, 'do_shortcode', 11 );

@@ -273,3 +273,136 @@ a.trp-recommended-learn-more{
     width: 450px;
     min-height: 150px;
 }
+
+/* Email course */
+.trp-email-course {
+    display: flex;
+    justify-content: center;
+}
+
+.trp-email-course__content {
+    position: relative;
+    max-width: 350px;
+    padding: 60px 40px;
+    margin-top: 24px;
+    text-align: center;
+    background: #dde1e2;
+    border: 1px solid #E0E0E0;
+}
+
+.trp-email-course h2 {
+    font-size: 2.3em;
+    line-height: 1.1em;
+    margin-top: 0px;
+}
+
+.trp-email-course p {
+    font-size: 120%;
+    color: #2c2e35;
+}
+
+.trp-email-course__footer {
+    color: #515151 !important;
+    margin-bottom: 0px;
+}
+
+.trp-email-course input[type="email"] {
+    width: 100%;
+    height: 32px;
+    margin-bottom: 16px;
+}
+
+.trp-email-course input[type="submit"] {
+	min-height: 40px;
+	line-height: 2.50769231; /* 30px */
+	padding: 0 12px;
+    font-size: 110%;
+}
+
+.trp-email-course__message {
+    display: none;
+    height: 88px;
+    font-size: 130%;
+    font-weight: 600;
+}
+
+.trp-email-course__error {
+    display: none;
+    font-size: 110%;
+    color: #E21E30;
+    margin-bottom: 8px;
+}
+
+.trp-email-course__error.visible {
+    display: block;
+}
+
+.trp-email-course__message.visible {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.trp-email-course__message.success {
+    color: #27ae60;
+}
+
+.trp-email-course__close {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    width: 16px;
+    height: 16px;
+    opacity: 0.6;
+}
+
+.trp-email-course__close:hover {
+    opacity: 1;
+}
+
+.trp-email-course__close:before, .trp-email-course__close:after {
+    position: absolute;
+    left: 50%;
+    transform: translateX( -50% );
+    content: ' ';
+    height: 15px;
+    width: 2px;
+    background-color: #333;
+}
+
+.trp-email-course__close:before {
+    transform: rotate(45deg);
+}
+
+.trp-email-course__close:after {
+    transform: rotate(-45deg);
+}
+
+@media only screen and (min-width: 1024px) {
+    #trp-main-settings__wrap {
+        display: flex;
+    }
+
+    #trp-main-settings__wrap #trp-options {
+        max-width: 1000px;
+    }
+
+    .trp-email-course {
+        display: block;
+    }
+
+    .trp-email-course__content {
+        margin-left: 40px;
+    }
+}
+
+@media only screen and (max-width: 1500px) {
+    .trp-email-course__content {
+        min-width: 300px;
+        padding: 50px 30px;
+    }
+
+    .trp-email-course h2 {
+        font-size: 2.1em;
+    }
+}

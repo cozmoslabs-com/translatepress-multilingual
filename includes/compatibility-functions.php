@@ -1541,9 +1541,20 @@ if( function_exists( 'wppb_plugin_init' ) )
  */
 
 if(class_exists('WP_Typography')) {
+    add_action('plugins_loaded', 'trp_wp_typography');
+}
 
-    add_filter('typo_content_filters', 'trp_remove_filters_wp_typography');
-    add_filter( 'trp_translated_html', 'trp_add_filters_wp_typography', 9999, 1 );
+function trp_wp_typography(){
+    global $TRP_LANGUAGE;
+    $trp = TRP_Translate_Press::get_trp_instance();
+    $trp_settings = $trp->get_component('settings');
+    $settings = $trp_settings->get_settings();
+
+    if ($TRP_LANGUAGE !== $settings['default-language']) {
+        add_filter( 'typo_content_filters', 'trp_remove_filters_wp_typography' );
+        add_filter( 'trp_translated_html', 'trp_add_filters_wp_typography', 100000, 1 );
+        add_filter('run_wptexturize', '__return_null', 11);
+    }
 }
 
 function trp_remove_filters_wp_typography($filters){
@@ -1557,11 +1568,14 @@ function trp_remove_filters_wp_typography($filters){
 function trp_add_filters_wp_typography($final_html){
     $wpt= WP_Typography::get_instance();
 
+    add_filter('run_wptexturize', '__return_false', 11);
+
     $final_html = $wpt->process($final_html, $is_title = false, $force_feed = false, null );
 
     return $final_html;
 
 }
+
 
 /*
  * Compatibility with All In One SEO Pack

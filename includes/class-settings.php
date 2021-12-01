@@ -590,4 +590,16 @@ class TRP_Settings{
         return $links;
     }
 
+    public function trp_dismiss_email_course(){
+
+        $user_id = get_current_user_id();
+
+        if( empty( $user_id ) )
+            die();
+
+        update_user_meta( $user_id, 'trp_email_course_dismissed', 1 );
+        die();
+        
+    }
+
 }

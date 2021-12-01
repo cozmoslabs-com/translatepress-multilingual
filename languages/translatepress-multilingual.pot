@@ -49,7 +49,7 @@ msgstr ""
 msgid "Settings saved."
 msgstr ""
 
-#: includes/class-advanced-tab.php:312, includes/class-error-manager.php:172, partials/machine-translation-settings-page.php:13, partials/machine-translation-settings-page.php:117, partials/machine-translation-settings-page.php:150, partials/main-settings-page.php:41, partials/main-settings-page.php:54, partials/main-settings-page.php:67
+#: includes/class-advanced-tab.php:312, includes/class-error-manager.php:172, partials/machine-translation-settings-page.php:13, partials/machine-translation-settings-page.php:117, partials/machine-translation-settings-page.php:150, partials/main-settings-page.php:42, partials/main-settings-page.php:55, partials/main-settings-page.php:68
 msgid "Yes"
 msgstr ""
 
@@ -1017,7 +1017,7 @@ msgstr ""
 msgid "TranslatePress Advanced Settings"
 msgstr ""
 
-#: partials/advanced-settings-page.php:16, partials/machine-translation-settings-page.php:161, partials/main-settings-page.php:123
+#: partials/advanced-settings-page.php:16, partials/machine-translation-settings-page.php:161, partials/main-settings-page.php:159
 msgid "Save Changes"
 msgstr ""
 
@@ -1065,7 +1065,7 @@ msgstr ""
 msgid "Enable Automatic Translation"
 msgstr ""
 
-#: partials/machine-translation-settings-page.php:12, partials/main-settings-page.php:40, partials/main-settings-page.php:53, partials/main-settings-page.php:66
+#: partials/machine-translation-settings-page.php:12, partials/main-settings-page.php:41, partials/main-settings-page.php:54, partials/main-settings-page.php:67
 msgid "No"
 msgstr ""
 
@@ -1203,92 +1203,120 @@ msgstr ""
 msgid "To add <strong>more than two languages</strong> activate the <strong>Extra Languages Add-on</strong> from <a href=\"%s\" class=\"trp-translatepress-account-page\" target=\"_blank\" title=\"Add-ons page\">the Add-ons Page</a>. Once activated, you'll be able to add unlimited languages."
 msgstr ""
 
-#: partials/main-settings-page.php:10
+#: partials/main-settings-page.php:11
 msgid "Default Language"
 msgstr ""
 
-#: partials/main-settings-page.php:21
+#: partials/main-settings-page.php:22
 msgid "Select the original language of your content."
 msgstr ""
 
-#: partials/main-settings-page.php:25
+#: partials/main-settings-page.php:26
 msgid "WARNING. Changing the default language will invalidate existing translations."
 msgstr ""
 
-#: partials/main-settings-page.php:26
+#: partials/main-settings-page.php:27
 msgid "Even changing from en_US to en_GB, because they are treated as two different languages."
 msgstr ""
 
-#: partials/main-settings-page.php:27
+#: partials/main-settings-page.php:28
 msgid "In most cases changing the default flag is all it is needed: "
 msgstr ""
 
-#: partials/main-settings-page.php:28
+#: partials/main-settings-page.php:29
 msgid "replace the default flag"
 msgstr ""
 
-#: partials/main-settings-page.php:37
+#: partials/main-settings-page.php:38
 msgid "Native language name"
 msgstr ""
 
-#: partials/main-settings-page.php:44
+#: partials/main-settings-page.php:45
 msgid "Select Yes if you want to display languages in their native names. Otherwise, languages will be displayed in English."
 msgstr ""
 
-#: partials/main-settings-page.php:50
+#: partials/main-settings-page.php:51
 msgid "Use a subdirectory for the default language"
 msgstr ""
 
-#: partials/main-settings-page.php:57
+#: partials/main-settings-page.php:58
 msgid "Select Yes if you want to add the subdirectory in the URL for the default language.</br>By selecting Yes, the default language seen by website visitors will become the first one in the \"All Languages\" list."
 msgstr ""
 
-#: partials/main-settings-page.php:63
+#: partials/main-settings-page.php:64
 msgid "Force language in custom links"
 msgstr ""
 
-#: partials/main-settings-page.php:70
+#: partials/main-settings-page.php:71
 msgid "Select Yes if you want to force custom links without language encoding to keep the currently selected language."
 msgstr ""
 
-#: partials/main-settings-page.php:76
+#: partials/main-settings-page.php:77
 msgid "Language Switcher"
 msgstr ""
 
-#: partials/main-settings-page.php:79
+#: partials/main-settings-page.php:80
 msgid "Shortcode "
 msgstr ""
 
-#: partials/main-settings-page.php:84
+#: partials/main-settings-page.php:85
 msgid "Use shortcode on any page or widget."
 msgstr ""
 
-#: partials/main-settings-page.php:88
+#: partials/main-settings-page.php:89
 msgid "Menu item"
 msgstr ""
 
-#: partials/main-settings-page.php:96
+#: partials/main-settings-page.php:97
 msgid "Go to  %1$s Appearance -> Menus%2$s to add languages to the Language Switcher in any menu."
 msgstr ""
 
-#: partials/main-settings-page.php:97
+#: partials/main-settings-page.php:98
 msgid "Learn more in our documentation."
 msgstr ""
 
-#: partials/main-settings-page.php:101
+#: partials/main-settings-page.php:102
 msgid "Floating language selection"
 msgstr ""
 
-#: partials/main-settings-page.php:108
+#: partials/main-settings-page.php:109
 msgid "Add a floating dropdown that follows the user on every page."
 msgstr ""
 
-#: partials/main-settings-page.php:112
+#: partials/main-settings-page.php:113
 msgid "Show \"Powered by TranslatePress\""
 msgstr ""
 
-#: partials/main-settings-page.php:114
+#: partials/main-settings-page.php:115
 msgid "Show the small \"Powered by TranslatePress\" label in the floater language switcher."
+msgstr ""
+
+#: partials/main-settings-page.php:131
+msgid "5 Days to Better Multilingual Websites"
+msgstr ""
+
+#: partials/main-settings-page.php:135
+msgid "%sJoin our FREE & EXCLUSIVE onboarding course%s and learn how to grow your multilingual traffic, reach international markets, and save time & money while getting the most out of TranslatePress!"
+msgstr ""
+
+#: partials/main-settings-page.php:141
+msgid "Invalid email address"
+msgstr ""
+
+#: partials/main-settings-page.php:143
+msgid "Your email"
+msgstr ""
+
+#: partials/main-settings-page.php:145
+msgid "Sign me up!"
+msgstr ""
+
+#: partials/main-settings-page.php:149
+msgid "Sign up with your email address and receive a 5-part email guide to help you maximize the power of TranslatePress."
+msgstr ""
+
+#: partials/main-settings-page.php:152
+msgid "Dismiss email course notification"
 msgstr ""
 
 #: partials/test-api-settings-page.php:17
