@@ -66,7 +66,7 @@ class TRP_Machine_Translator {
         }
 
         // if supported languages are not stored, fetch them and update option
-        if ( empty( $data['trp_mt_supported_languages'][$this->settings['trp_machine_translation_settings']['translation-engine']]['last-checked'] ) || $force_recheck ){
+        if ( empty( $data['trp_mt_supported_languages'][$this->settings['trp_machine_translation_settings']['translation-engine']]['last-checked'] ) || $force_recheck || ( method_exists($this,'check_formality') && !isset($data['trp_mt_supported_languages'][$this->settings['trp_machine_translation_settings']['translation-engine']]['formality-supported-languages']))){
             if ( empty( $data['trp_mt_supported_languages'] ) ) {
                 $data['trp_mt_supported_languages'] = array();
             }
@@ -75,6 +75,9 @@ class TRP_Machine_Translator {
             }
 
             $data['trp_mt_supported_languages'][$this->settings['trp_machine_translation_settings']['translation-engine']]['languages'] = $this->get_supported_languages();
+            if (method_exists($this, 'check_formality')) {
+                $data['trp_mt_supported_languages'][ $this->settings['trp_machine_translation_settings']['translation-engine'] ]['formality-supported-languages'] = $this->check_formality();
+            }
             $data['trp_mt_supported_languages'][$this->settings['trp_machine_translation_settings']['translation-engine']]['last-checked'] = date("Y-m-d H:i:s" );
             update_option('trp_db_stored_data', $data );
         }

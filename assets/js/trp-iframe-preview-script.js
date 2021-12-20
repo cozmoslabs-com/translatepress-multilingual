@@ -16,7 +16,9 @@ function TRP_Iframe_Preview(){
         jQuery('a').each(function () {
             // target parent brakes from the iframe so we're changing to self.
             // We cannot remove it because we need it in Translation blocks
-            jQuery(this).attr('data-trp-original-target', jQuery(this).attr('target') );
+            if ( ! jQuery(this).attr('data-trp-original-target') ){
+                jQuery( this ).attr( 'data-trp-original-target', jQuery( this ).attr( 'target' ) );
+            }
             jQuery(this).attr('target', '_self');
 
             if( typeof this.href != "undefined" && this.href != '' ) {

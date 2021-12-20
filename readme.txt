@@ -5,7 +5,7 @@ Tags: translate, translation, multilingual, automatic translation, bilingual, fr
 Requires at least: 3.1.0
 Tested up to: 5.8.2
 Requires PHP: 5.6.20
-Stable tag: 2.1.7
+Stable tag: 2.1.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -140,6 +140,12 @@ For more information please check out our [documentation](https://translatepress
 
 
 == Changelog ==
+= 2.1.8 =
+* Added language formality setting to be used in Automatic Translation
+* Added Advanced option for enabling clickable shortcode language switcher
+* Improved tool for database optimization from Advanced tab
+* Fixed translation blocks ignoring target blank on links
+
 = 2.1.7 =
 * Added form in settings to sign up for TranslatePress email course
 * Fixed issue when logging in that redirected to "page not found" when languages are reordered

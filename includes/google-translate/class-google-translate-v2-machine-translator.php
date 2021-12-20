@@ -151,4 +151,14 @@ class TRP_Google_Translate_V2_Machine_Translator extends TRP_Machine_Translator 
     public function get_engine_specific_language_codes($languages){
         return $this->trp_languages->get_iso_codes($languages);
     }
+
+    /*
+     * Google does not support formality yet, but we need this for the machine translation tab to show the unsupported languages for formality
+     */
+    public function check_formality(){
+
+        $formality_supported_languages = array();
+
+        return $formality_supported_languages;
+    }
 }

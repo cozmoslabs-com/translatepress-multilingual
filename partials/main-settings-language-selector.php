@@ -5,6 +5,7 @@
             <thead>
                 <tr>
                     <th colspan="2"><?php esc_html_e( 'Language', 'translatepress-multilingual' ); ?></th>
+                    <th><?php esc_html_e( 'Formality', 'translatepress-multilingual' ); ?></th>
                     <th><?php esc_html_e( 'Code', 'translatepress-multilingual' ); ?></th>
                     <th><?php esc_html_e( 'Slug', 'translatepress-multilingual' ); ?></th>
                 </tr>
@@ -12,7 +13,15 @@
             <tbody id="trp-sortable-languages" class="trp-language-selector-limited">
 
             <?php
-            foreach ($this->settings['translation-languages'] as $selected_language_code ){
+            $formality_array = array(
+                'default' => __('Default', 'translatepress-multilingual'),
+                'formal'  => __('Formal', 'translatepress-multilingual'),
+                'informal'=> __('Informal', 'translatepress-multilingual')
+            );
+            ?>
+
+            <?php
+            foreach ($this->settings['translation-languages'] as $key=>$selected_language_code ){
                 $default_language = ( $selected_language_code == $this->settings['default-language'] );?>
                 <tr class="trp-language">
                     <td><span class="trp-sortable-handle"></span></td>
@@ -29,6 +38,17 @@
                         <?php if ( $default_language ) { ?>
                             <input type="hidden" class="trp-hidden-default-language" name="trp_settings[translation-languages][]" value="<?php echo esc_attr( $selected_language_code );?>" />
                         <?php } ?>
+                    </td>
+                    <td>
+                        <select name="trp_settings[translation-languages-formality][]" class="trp-translation-language-formality" >
+                            <?php
+                            foreach ( $formality_array as $value => $label ) {
+                                ?>
+                                <option value="<?php echo esc_attr( $value ); ?>" <?php echo ( isset($this->settings['translation-languages-formality-parameter'][$selected_language_code]) && $value == $this->settings['translation-languages-formality-parameter'][$selected_language_code] ) ? 'selected' : ''; ?>><?php echo esc_html( $label ); ?></option>
+                                <?php
+                            }
+                            ?>
+                        </select>
                     </td>
                     <td>
                         <input class="trp-language-code trp-code-slug" type="text" disabled value="<?php echo esc_attr( $selected_language_code ); ?>">
@@ -82,9 +102,7 @@
             <button type="button" id="trp-add-language" class="button-secondary"><?php esc_html_e( 'Add', 'translatepress-multilingual' );?></button>
         </div>
         <p class="description">
-            <?php
-            esc_html_e( 'Select the language you wish to make your website available in.', 'translatepress-multilingual');
-            ?>
+            <?php echo wp_kses ( sprintf(__( 'Select the languages you wish to make your website available in.<br>The Formality field is used by Automatic Translation to decide whether the translated text should lean towards formal or informal language. For now, it is supported only for a few languages and only by <a href="%s">DeepL</a>.', 'translatepress-multilingual' ), esc_url('https://www.deepl.com/docs-api/translating-text/') ), array('a' => array('href' => array(), 'title' => array()), 'br' => array()) ); ?>
         </p>
         <p class="trp-upsell-multiple-languages" style="display: none;">
             <?php

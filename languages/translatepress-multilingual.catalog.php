@@ -65,9 +65,11 @@
 <?php __("Automatic Translation", "translatepress-multilingual"); ?>
 <?php __("DeepL", "translatepress-multilingual"); ?>
 <?php __("Unsupported languages", "translatepress-multilingual"); ?>
+<?php __("The selected automatic translation engine does not provide support for these languages.<br>You can still manually translate pages in these languages using the Translation Editor.", "translatepress-multilingual"); ?>
+<?php __("Languages without formality", "translatepress-multilingual"); ?>
+<?php __("The selected automatic translation engine provides only <a href=\"%s\" target=\"_blank\">default formality</a> settings for these languages for now.<br>Automatic translation will still work if available for these languages. It will just not use the formality setting from TranslatePress <a href=\"%s\" target=\"_self\"> General Tab</a> for the languages listed above.", "translatepress-multilingual"); ?>
 <?php __("Recheck supported languages", "translatepress-multilingual"); ?>
 <?php __("(last checked on %s)", "translatepress-multilingual"); ?>
-<?php __("The selected automatic translation engine does not provide support for these languages.<br>You can still manually translate pages in these languages using the Translation Editor.", "translatepress-multilingual"); ?>
 <?php __("Please enter your Google Translate key.", "translatepress-multilingual"); ?>
 <?php __("Please enter your DeepL API key.", "translatepress-multilingual"); ?>
 <?php __("You are not using a permalink structure! Please <a href=\"%s\">enable</a> one or install our <a href=\"%s\">\"Language by GET parameter\"</a> addon, so that TranslatePress can function properly.", "translatepress-multilingual"); ?>
@@ -190,6 +192,10 @@
 <?php __("OG Image", "translatepress-multilingual"); ?>
 <?php __("OG Image Secure URL", "translatepress-multilingual"); ?>
 <?php __("Twitter Image", "translatepress-multilingual"); ?>
+<?php __("Removing duplicated gettext strings for language %s...", "translatepress-multilingual"); ?>
+<?php __("Removing untranslated gettext strings where translation is available for language %s...", "translatepress-multilingual"); ?>
+<?php __("Removing duplicated dictionary strings for language %s...", "translatepress-multilingual"); ?>
+<?php __("Removing untranslated dictionary strings where translation is available for language %s...", "translatepress-multilingual"); ?>
 <?php __("Inserting original strings for language %s...", "translatepress-multilingual"); ?>
 <?php __("Cleaning original strings table for language %s...", "translatepress-multilingual"); ?>
 <?php __("Updating original string ids for language %s...", "translatepress-multilingual"); ?>
@@ -208,12 +214,6 @@
 <?php __("Back to TranslatePress Settings", "translatepress-multilingual"); ?>
 <?php __("Successfully updated database!", "translatepress-multilingual"); ?>
 <?php __(" done.", "translatepress-multilingual"); ?>
-<?php __("Done.", "translatepress-multilingual"); ?>
-<?php __("Invalid nonce.", "translatepress-multilingual"); ?>
-<?php __("Querying table <strong>%s</strong>", "translatepress-multilingual"); ?>
-<?php __("%s duplicates removed", "translatepress-multilingual"); ?>
-<?php __("If the page does not redirect automatically", "translatepress-multilingual"); ?>
-<?php __("click here", "translatepress-multilingual"); ?>
 <?php __("Recreated original strings table.", "translatepress-multilingual"); ?>
 <?php __("All individual TranslatePress add-on plugins <a href=\"%1$s\" target=\"_blank\">have been discontinued</a> and are now included in the premium Personal, Business and Developer versions of TranslatePress. Please log into your <a href=\"%2$s\" target=\"_blank\">account page</a>, download the new premium version and install it. Your individual addons settings will be ported over.", "translatepress-multilingual"); ?>
 <?php __("TranslatePress", "translatepress-multilingual"); ?>
@@ -284,12 +284,16 @@
 <?php __("Only enable for testing purposes. Can impact performance.<br>All records are stored in the wp_trp_machine_translation_log database table. Use a plugin like <a href=\"https://wordpress.org/plugins/wp-data-access/\">WP Data Access</a> to browse the logs or directly from your database manager (PHPMyAdmin, etc.)", "translatepress-multilingual"); ?>
 <?php __("All Languages", "translatepress-multilingual"); ?>
 <?php __("Language", "translatepress-multilingual"); ?>
+<?php __("Formality", "translatepress-multilingual"); ?>
 <?php __("Code", "translatepress-multilingual"); ?>
 <?php __("Slug", "translatepress-multilingual"); ?>
+<?php __("Default", "translatepress-multilingual"); ?>
+<?php __("Formal", "translatepress-multilingual"); ?>
+<?php __("Informal", "translatepress-multilingual"); ?>
 <?php __("Are you sure you want to remove this language?", "translatepress-multilingual"); ?>
 <?php __("Choose...", "translatepress-multilingual"); ?>
 <?php __("Custom Languages", "translatepress-multilingual"); ?>
-<?php __("Select the language you wish to make your website available in.", "translatepress-multilingual"); ?>
+<?php __("Select the languages you wish to make your website available in.<br>The Formality field is used by Automatic Translation to decide whether the translated text should lean towards formal or informal language. For now, it is supported only for a few languages and only by <a href=\"%s\">DeepL</a>.", "translatepress-multilingual"); ?>
 <?php __("To add <strong>more than two languages</strong> and support for SEO Title, Description, Slug and more check out <a href=\"%1$s\" target=\"_blank\" title=\"%2$s\">%2$s</a>.", "translatepress-multilingual"); ?>
 <?php __("TranslatePress Advanced Add-ons", "translatepress-multilingual"); ?>
 <?php __("Not only are you getting extra features and premium support, but you also help fund the future development of TranslatePress.", "translatepress-multilingual"); ?>
@@ -330,14 +334,17 @@
 <?php __("Response:", "translatepress-multilingual"); ?>
 <?php __("Response Body:", "translatepress-multilingual"); ?>
 <?php __("Entire Response From wp_remote_get():", "translatepress-multilingual"); ?>
-<?php __("Remove duplicate rows from TranslatePress tables", "translatepress-multilingual"); ?>
-<?php __("<strong>IMPORTANT NOTE: Before performing this action it is strongly recommended to first backup the database.</strong><br><br>This feature can be used to cleanup duplicate entries in TranslatePress trp_dictionary or trp_gettext tables. Such duplicates can appear in exceptional situations of unexpected behavior.", "translatepress-multilingual"); ?>
+<?php __("Optimize TranslatePress database tables", "translatepress-multilingual"); ?>
+<?php __("<strong>IMPORTANT NOTE: Before performing this action it is strongly recommended to first backup the database.</strong><br><br>", "translatepress-multilingual"); ?>
 <?php __("IMPORTANT: It is strongly recommended to first backup the database!! Are you sure you want to continue?", "translatepress-multilingual"); ?>
-<?php __("Batch size", "translatepress-multilingual"); ?>
-<?php __("The number of rows to check at once.<br>Choosing a smaller number helps solve the 504 error \"Page took too long to respond\" on large databases.<br>May take several minutes depending on the database size.", "translatepress-multilingual"); ?>
-<?php __("Remove duplicate dictionary rows", "translatepress-multilingual"); ?>
-<?php __("Remove duplicate gettext rows", "translatepress-multilingual"); ?>
-<?php __("Remove duplicate original strings", "translatepress-multilingual"); ?>
+<?php __("Operations to perform", "translatepress-multilingual"); ?>
+<?php __("Remove duplicate rows for gettext strings", "translatepress-multilingual"); ?>
+<?php __("Cleans up all trp_gettext_* tables of duplicate rows. These tables contain translations for themes and plugin strings.", "translatepress-multilingual"); ?>
+<?php __("Remove duplicate rows for dictionary strings", "translatepress-multilingual"); ?>
+<?php __("Cleans up all trp_dictionary_* tables of duplicate rows. These tables contain translations for user-inputted strings such as post content, post title, menus etc.", "translatepress-multilingual"); ?>
+<?php __("Remove duplicate rows for original dictionary strings", "translatepress-multilingual"); ?>
+<?php __("Cleans up all trp_original_strings table of duplicate rows. This table contains strings in the default language, without any translation.<br>The trp_original_meta table, which contains meta information that refers to the post parent’s id, is also regenerated.<br>Such duplicates can appear in exceptional situations of unexpected behavior.", "translatepress-multilingual"); ?>
+<?php __("Optimize Database", "translatepress-multilingual"); ?>
 <?php __("TranslatePress Database Updater", "translatepress-multilingual"); ?>
 <?php __("Updating TranslatePress tables", "translatepress-multilingual"); ?>
 <?php __("Limit this menu item to the following languages", "translatepress-multilingual"); ?>
@@ -389,9 +396,10 @@
 <?php __("Fixes attributes without spaces between them because they are not valid HTML.<br> May help fix missing or broken content from the HTML on translated pages.", "translatepress-multilingual"); ?>
 <?php __("Force slash at end of home url:", "translatepress-multilingual"); ?>
 <?php __("Ads a slash at the end of the home_url() function", "translatepress-multilingual"); ?>
+<?php __("Open language switcher only on click", "translatepress-multilingual"); ?>
+<?php __("Open the language switcher shortcode by clicking on it instead of hovering.<br> Close it by clicking on it, anywhere else on the screen or by pressing the escape key. This will affect only the shortcode language switcher.", "translatepress-multilingual"); ?>
 <?php __("Show opposite language in the language switcher", "translatepress-multilingual"); ?>
 <?php __("Transforms the language switcher into a button showing the other available language, not the current one.<br> Only works when there are exactly two languages, the default one and a translation one.<br>This will affect the shortcode language switcher and floating language switcher as well.<br> To achieve this in menu language switcher go to Appearance->Menus->Language Switcher and select Opposite Language.", "translatepress-multilingual"); ?>
-<?php __("Remove duplicate rows", "translatepress-multilingual"); ?>
 <?php __("Click <a href=\"%s\">here</a> to remove duplicate rows from the database.", "translatepress-multilingual"); ?>
 <?php __("Troubleshooting", "translatepress-multilingual"); ?>
 <?php __("Exclude strings", "translatepress-multilingual"); ?>
@@ -447,7 +455,8 @@
 <?php __("Click to sort strings by this column", "translatepress-multilingual"); ?>
 <?php __("Language in which the translation status filter applies. Leave unselected for the translation status to apply to ANY language", "translatepress-multilingual"); ?>
 <?php __("String Translation Editor", "translatepress-multilingual"); ?>
-<?php __("Select the languages you wish to make your website available in.", "translatepress-multilingual"); ?>
+<?php __("Active*", "translatepress-multilingual"); ?>
+<?php __("<br>* The inactive languages will still be visible and active for the admin. For other users they won't be visible in the language switchers and won't be accessible either.", "translatepress-multilingual"); ?>
 <?php __("Post Slug", "translatepress-multilingual"); ?>
 <?php __("First by browser language, then IP address (recommended)", "translatepress-multilingual"); ?>
 <?php __("First by IP address, then by browser language", "translatepress-multilingual"); ?>

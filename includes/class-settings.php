@@ -281,6 +281,22 @@ class TRP_Settings{
             }
         }
 
+        foreach ($settings['translation-languages'] as $value=>$language){
+            if(isset($settings['translation-languages-formality'][$value])) {
+                if ( $settings['translation-languages-formality'][ $value ] == 'informal' ) {
+                    $settings['translation-languages-formality-parameter'][ $language ] = 'informal';
+                } else {
+                    if ( $settings['translation-languages-formality'][ $value ] == 'formal' ) {
+                        $settings['translation-languages-formality-parameter'][ $language ] = 'formal';
+                    } else {
+                        $settings['translation-languages-formality-parameter'][ $language ] = 'default';
+                    }
+                }
+            }
+        }
+
+        unset($settings['translation-languages-formality']);
+
         // check for duplicates in url slugs
         $duplicate_exists = false;
         foreach( $settings['url-slugs'] as $urlslug ) {

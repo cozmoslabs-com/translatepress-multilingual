@@ -1129,11 +1129,20 @@ class TRP_Query{
 	 *
 	 * @param $table
 	 */
-	public function remove_duplicate_rows_in_dictionary_table( $language_code, $batch ){
+	public function remove_duplicate_rows_in_dictionary_table( $language_code, $inferior_limit, $batch_size ) {
 		$table_name = $this->get_table_name( $language_code );
-        $query = $this->get_remove_identical_duplicates_query($table_name, $batch, 'regular' );
-		return $this->db->query( $query );
-	}
+        if ($this->table_exists($table_name)) {
+            $last_id = $this->get_last_id( $table_name );
+            $query = $this->get_remove_identical_duplicates_query( $table_name, $inferior_limit, 'regular' );
+            $this->db->query( $query );
+            if ( $inferior_limit > $last_id ) {
+                return true;
+            }
+            return false;
+        }else{
+            return true;
+        }
+    }
 
     /**
      * Removes duplicate rows of gettext strings table
@@ -1143,10 +1152,25 @@ class TRP_Query{
      *
      * @param $table
      */
-	public function remove_duplicate_rows_in_gettext_table( $language_code, $batch ){
+    /**
+     * @param $language_code
+     * @param $inferior_limit 1000, 2000
+     * @param $batch_size
+     * @return bool|int
+     */
+	public function remove_duplicate_rows_in_gettext_table( $language_code, $inferior_limit, $batch_size ){
         $table_name = $this->get_gettext_table_name( $language_code );
-        $query = $this->get_remove_identical_duplicates_query($table_name, $batch, 'gettext' );
-        return $this->db->query( $query );
+        if ($this->table_exists($table_name)) {
+            $last_id = $this->get_last_id( $table_name );
+            $query = $this->get_remove_identical_duplicates_query( $table_name, $inferior_limit, 'gettext' );
+            $this->db->query( $query );
+            if ( $inferior_limit > $last_id ) {
+                return true;
+            }
+            return false;
+        }else{
+            return true;
+        }
     }
 
     /**
@@ -1156,7 +1180,7 @@ class TRP_Query{
      * @param $type string possible values are 'regular' or 'gettext'
      * @return string
      */
-    private function get_remove_identical_duplicates_query( $table_name, $batch, $type ){
+    private function get_remove_identical_duplicates_query( $table_name, $inferior_limit, $type ){
         $charset_collate = $this->db->get_charset_collate();
         $charset = "utf8mb4";
         if( strpos( 'latin1', $charset_collate ) === 0 )
@@ -1168,8 +1192,8 @@ class TRP_Query{
 					    ' . $table_name . ' AS `b`
 					WHERE
 					    -- IMPORTANT: Ensures one version remains
-					    `a`.ID < ' . $batch . '
-					    AND `b`.ID < ' . $batch . '
+					    `a`.ID < ' . $inferior_limit . '
+					    AND `b`.ID < ' . $inferior_limit . '
 					    AND `a`.`ID` < `b`.`ID`
 
 					    -- Check for all duplicates. Binary ensure case sensitive comparison
@@ -1189,10 +1213,14 @@ class TRP_Query{
 	 *
 	 * Only the original with translation remains
 	 */
-	public function remove_untranslated_strings_if_translation_available( $language_code ){
+	public function remove_untranslated_strings_if_translation_available( $language_code, $inferior_limit, $batch_size ){
 		$table_name = $this->get_table_name( $language_code );
-		$query = $this->get_remove_untranslated_duplicates_query( $table_name, 'regular' );
-		return $this->db->query( $query );
+
+        if ($this->table_exists($table_name)) {
+            $query = $this->get_remove_untranslated_duplicates_query( $table_name, 'regular' );
+            $this->db->query( $query );
+        }
+        return true;
 	}
 
     /**
@@ -1200,10 +1228,14 @@ class TRP_Query{
      *
      * Only the original with translation remains
      */
-    public function remove_untranslated_strings_if_gettext_translation_available( $language_code ){
+    public function remove_untranslated_strings_if_gettext_translation_available( $language_code, $inferior_limit, $batch_size ){
         $table_name = $this->get_gettext_table_name( $language_code );
-        $query = $this->get_remove_untranslated_duplicates_query( $table_name, 'gettext' );
-        return $this->db->query( $query );
+
+        if ($this->table_exists($table_name)) {
+            $query = $this->get_remove_untranslated_duplicates_query( $table_name, 'gettext' );
+            $this->db->query( $query );
+        }
+        return true;
     }
 
     /**
