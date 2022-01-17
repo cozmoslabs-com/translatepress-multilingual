@@ -1267,11 +1267,91 @@ class TRP_Query{
         return $query;
     }
 
-	/*
-	 * Get last inserted ID for this table
-	 *
-	 * Useful for optimizing database by removing duplicate rows
-	 */
+
+    /**
+     * Removes CDATA from original and dictionary tables.
+     * @param $language_code
+     * @param $inferior_limit
+     * @param $batch_size
+     * @return bool
+     */
+    public function remove_cdata_in_original_and_dictionary_tables($language_code, $inferior_limit, $batch_size){
+
+        if ($language_code == $this->settings['default-language']){
+            $table_name = $this->get_table_name_for_original_strings();
+            $query = $this->get_remove_cdata_query($table_name, $batch_size);
+
+            $rows_affected = $this->db->query( $query );
+            if ( $rows_affected > 0 ) {
+                return false;
+            }else{
+                return true;
+            }
+        }
+        $table_name = $this->get_table_name( $language_code );
+        if ($this->table_exists($table_name)) {
+            $query = $this->get_remove_cdata_query($table_name, $batch_size);
+            $rows_affected = $this->db->query( $query );
+            if ( $rows_affected > 0 ) {
+                return false;
+            }else{
+                return true;
+            }
+        }else{
+            return true;
+        }
+    }
+
+    /**
+     * @param $table_name
+     * @param $batch_size
+     * @return string
+     */
+    private function get_remove_cdata_query( $table_name, $batch_size ){
+
+        $query = "DELETE FROM " . $table_name . " WHERE original LIKE '<![CDATA[%' LIMIT " . $batch_size;
+
+        return $query;
+    }
+
+    /**
+     * Removes untranslated links from the dictionary table
+     * @param $language_code
+     * @param $inferior_limit
+     * @param $batch_size
+     * @return bool
+     */
+    public function remove_untranslated_links_in_dictionary_table($language_code, $inferior_limit, $batch_size){
+        $table_name = $this->get_table_name( $language_code );
+        if ($this->table_exists($table_name)) {
+            $query = $this->get_remove_untranslated_links_query($table_name, $batch_size);
+            $rows_affected = $this->db->query( $query );
+            if ( $rows_affected > 0 ) {
+                return false;
+            }else{
+                return true;
+            }
+        }else{
+            return true;
+        }
+    }
+
+    /**
+     * @param $table_name
+     * @return $query
+     */
+    private function get_remove_untranslated_links_query($table_name, $batch_size){
+
+        $query = "DELETE FROM " . $table_name . " WHERE original LIKE 'http%' AND (translated = '' OR translated IS NULL) LIMIT " . $batch_size;
+
+        return $query;
+    }
+
+    /*
+     * Get last inserted ID for this table
+     *
+     * Useful for optimizing database by removing duplicate rows
+     */
 	public function get_last_id( $table_name ){
 		$last_id = $this->db->get_var("SELECT MAX(id) FROM " . $table_name );
 		return $last_id;

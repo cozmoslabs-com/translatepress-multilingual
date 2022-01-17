@@ -3,9 +3,9 @@ Contributors: cozmoslabs, razvan.mo, madalin.ungureanu, sareiodata, cristophor
 Donate link: https://www.translatepress.com/
 Tags: translate, translation, multilingual, automatic translation, bilingual, front-end translation, google translate, language
 Requires at least: 3.1.0
-Tested up to: 5.8.2
+Tested up to: 5.8.3
 Requires PHP: 5.6.20
-Stable tag: 2.1.8
+Stable tag: 2.1.9
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -140,6 +140,12 @@ For more information please check out our [documentation](https://translatepress
 
 
 == Changelog ==
+= 2.1.9 =
+* Improved database optimization tool by adding option to remove CDATA and untranslated links from TP custom tables
+* Fixed database optimization tool not starting in some cases
+* Fixed edge case error unknown format specifier on php 8 related to automatic translation of gettext strings
+* Added noindex tag to Translation Editor pages to prevent duplicate indexing
+
 = 2.1.8 =
 * Added language formality setting to be used in Automatic Translation
 * Added Advanced option for enabling clickable shortcode language switcher
