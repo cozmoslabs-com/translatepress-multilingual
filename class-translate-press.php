@@ -33,6 +33,7 @@ class TRP_Translate_Press{
     protected $search;
     protected $install_plugins;
     protected $reviews;
+    protected $rewrite_rules;
 
     public $active_pro_addons = array();
     public static $translate_press = null;
@@ -58,7 +59,7 @@ class TRP_Translate_Press{
         define( 'TRP_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
         define( 'TRP_PLUGIN_BASE', plugin_basename( __DIR__ . '/index.php' ) );
         define( 'TRP_PLUGIN_SLUG', 'translatepress-multilingual' );
-        define( 'TRP_PLUGIN_VERSION', '2.1.9' );
+        define( 'TRP_PLUGIN_VERSION', '2.2.0' );
 
 	    wp_cache_add_non_persistent_groups(array('trp'));
 
@@ -116,6 +117,7 @@ class TRP_Translate_Press{
         require_once TRP_PLUGIN_DIR . 'includes/class-search.php';
         require_once TRP_PLUGIN_DIR . 'includes/class-install-plugins.php';
         require_once TRP_PLUGIN_DIR . 'includes/class-reviews.php';
+        require_once TRP_PLUGIN_DIR . 'includes/class-rewrite-rules.php';
         require_once TRP_PLUGIN_DIR . 'assets/lib/tp-add-ons-listing/tp-add-ons-listing.php';
         if ( did_action( 'elementor/loaded' ) )
             require_once TRP_PLUGIN_DIR . 'includes/class-elementor-language-for-blocks.php';
@@ -156,6 +158,7 @@ class TRP_Translate_Press{
         $this->search                     = new TRP_Search( $this->settings->get_settings() );
         $this->install_plugins            = new TRP_Install_Plugins();
         $this->reviews                    = new TRP_Reviews( $this->settings->get_settings() );
+        $this->rewrite_rules              = new TRP_Rewrite_Rules( $this->settings->get_settings() );
     }
 
     /**
@@ -276,6 +279,8 @@ class TRP_Translate_Press{
         // Email Course
 	    $this->loader->add_action( 'wp_ajax_trp_dismiss_email_course', $this->settings, 'trp_dismiss_email_course' );
 
+        // Filter rewrite rules for .htaccess
+        $this->loader->add_filter( 'mod_rewrite_rules', $this->rewrite_rules, 'trp_remove_language_param', 100 );
     }
 
     /**
