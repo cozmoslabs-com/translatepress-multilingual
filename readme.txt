@@ -3,9 +3,9 @@ Contributors: cozmoslabs, razvan.mo, madalin.ungureanu, sareiodata, cristophor
 Donate link: https://www.translatepress.com/
 Tags: translate, translation, multilingual, automatic translation, bilingual, front-end translation, google translate, language
 Requires at least: 3.1.0
-Tested up to: 5.9
+Tested up to: 5.9.1
 Requires PHP: 5.6.20
-Stable tag: 2.2.1
+Stable tag: 2.2.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -140,6 +140,11 @@ For more information please check out our [documentation](https://translatepress
 
 
 == Changelog ==
+= 2.2.2 =
+* Fixed issue in WP 5.9 causing Invalid Data SQL Error reports
+* Improved page load time for WooCommerce websites on translated languages
+* Improved admin notices regarding database optimization
+
 = 2.2.1 =
 * Added Advanced option to adjust hreflang to hide region independent language tags or country locale tags
 * Added missing flags for Tamil (Sri Lanka), Spanish (Ecuador), Spanish (Dominican Republic), Amharic

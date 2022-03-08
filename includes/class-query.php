@@ -14,6 +14,7 @@ class TRP_Query{
     protected $url_converter;
     protected $translation_render;
     protected $error_manager;
+    protected $check_invalid_text;
     protected $tables_exist = array();
     protected $db_sql_version = null;
 
@@ -80,15 +81,26 @@ class TRP_Query{
 	    $prepared_query = $this->db->prepare( $query, $values );
         $dictionary = $this->db->get_results( $prepared_query, OBJECT_K  );
 
+
+
+        if( !$this->check_invalid_text ){
+            $trp = TRP_Translate_Press::get_trp_instance();
+            $this->check_invalid_text = $trp->get_component( 'check_invalid_text' );
+        }
+        $dictionary = $this->check_invalid_text->get_existing_translations_without_invalid_text($dictionary, $prepared_query, $strings_array, $language_code, $block_type );
+
         $this->maybe_record_automatic_translation_error(array( 'details' => 'Error running get_existing_translations()' ) );
-        if ( is_array( $dictionary ) && count( $dictionary ) === 0 && !$this->table_exists($this->get_table_name( $language_code )) ){
+
+        if ($this->db->last_error !== '' && !$this->check_invalid_text->is_invalid_data_error())
+            $dictionary = false;
+
+        $dictionary = apply_filters( 'trp_get_existing_translations', $dictionary, $prepared_query, $strings_array, $language_code, $block_type );
+        if ( is_array( $dictionary ) && count( $dictionary ) === 0 && !$this->table_exists($this->get_table_name( $language_code )) && !$this->check_invalid_text->is_invalid_data_error()){
             // if table is missing then last_error is empty for the select query
             $this->maybe_record_automatic_translation_error(array( 'details' => 'Missing table ' . $this->get_table_name( $language_code ) . ' . To regenerate tables, try going to Settings->TranslatePress->General tab and Save Settings.'), true );
         }
-        if ($this->db->last_error !== '')
-            $dictionary = false;
 
-        return apply_filters( 'trp_get_existing_translations', $dictionary, $prepared_query, $strings_array );
+        return $dictionary;
     }
 
     /**
@@ -674,7 +686,11 @@ class TRP_Query{
 
 		$prepared_query = $this->db->prepare($query . ' ', $values);
 		$this->db->query( $prepared_query );
-
+        if( !$this->check_invalid_text ){
+            $trp = TRP_Translate_Press::get_trp_instance();
+            $this->check_invalid_text = $trp->get_component( 'check_invalid_text' );
+        }
+        $this->check_invalid_text->update_translations_without_invalid_text( $update_strings, $language_code, $columns_to_update );
         $this->maybe_record_automatic_translation_error(array( 'details' => 'Error running update_strings()' ) );
 	}
 
@@ -711,9 +727,12 @@ class TRP_Query{
         // you cannot insert multiple rows at once using insert() method.
         // but by using prepare you cannot insert NULL values.
         $this->db->query( $this->db->prepare($query . ' ', $values) );
-
+        if( !$this->check_invalid_text ){
+            $trp = TRP_Translate_Press::get_trp_instance();
+            $this->check_invalid_text = $trp->get_component( 'check_invalid_text' );
+        }
+        $this->check_invalid_text->insert_translations_without_invalid_text($new_strings, $language_code, $block_type);
         $this->maybe_record_automatic_translation_error(array( 'details' => 'Error running insert_strings()' ) );
-
     }
 
     public function insert_gettext_strings( $new_strings, $language_code ){
@@ -955,11 +974,11 @@ class TRP_Query{
 
     public function get_all_gettext_strings(  $language_code ){
         $dictionary = $this->db->get_results( "SELECT id, original, translated, domain FROM `" . sanitize_text_field( $this->get_gettext_table_name( $language_code ) ) . "`", ARRAY_A );
+        $this->maybe_record_automatic_translation_error(array( 'details' => 'Error running get_all_gettext_strings()' ) );
         if ( is_array( $dictionary ) && count( $dictionary ) === 0 && !$this->table_exists($this->get_gettext_table_name( $language_code )) ){
             // if table is missing then last_error is empty
             $this->maybe_record_automatic_translation_error(array( 'details' => 'Missing table ' . $this->get_gettext_table_name( $language_code ). ' . To regenerate tables, try going to Settings->TranslatePress->General tab and Save Settings.'), true );
         }
-        $this->maybe_record_automatic_translation_error(array( 'details' => 'Error running get_all_gettext_strings()' ) );
         return $dictionary;
     }
 
@@ -1396,7 +1415,12 @@ class TRP_Query{
 	}
 
 	public function maybe_record_automatic_translation_error($error_details = array(), $ignore_last_error = false ){
-        if ( !empty( $this->db->last_error) || $ignore_last_error ){
+        if( !$this->check_invalid_text ){
+            $trp = TRP_Translate_Press::get_trp_instance();
+            $this->check_invalid_text = $trp->get_component( 'check_invalid_text' );
+        }
+
+        if ( ( !empty( $this->db->last_error) && !$this->check_invalid_text->is_invalid_data_error() ) || $ignore_last_error ){
             $trp = TRP_Translate_Press::get_trp_instance();
             if( !$this->error_manager ){
                 $this->error_manager = $trp->get_component( 'error_manager' );

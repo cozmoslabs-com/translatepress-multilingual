@@ -226,9 +226,10 @@ class TRP_Upgrade {
 			return;
 		}
 		$updates_needed = $this->get_updates_details();
+        $option_db_error_message = get_option($updates_needed['show_error_db_message']['option_name']);
 		foreach( $updates_needed as $update ){
 			$option = get_option( $update['option_name'], 'is not set' );
-			if ( $option === 'no' ){
+			if ( $option === 'no' && $option_db_error_message !== 'no'){
 				add_action( 'admin_notices', array( $this, 'admin_notice_update_database' ) );
 				break;
 			}
@@ -264,13 +265,11 @@ class TRP_Upgrade {
             return;
         }
         $updates_needed = $this->get_updates_details();
-        foreach ( $updates_needed as $update ) {
-            $option = get_option( $update['option_name'] );
-            if ( $option === 'no' ) {
-                add_action( 'admin_notices', array( $this, 'trp_admin_notice_error_database' ) );
-                break;
-            }
+        $option_db_error_message = get_option($updates_needed['show_error_db_message']['option_name']);
+        if ( $option_db_error_message === 'no' ) {
+            add_action( 'admin_notices', array( $this, 'trp_admin_notice_error_database' ) );
         }
+
     }
 
     public function trp_admin_notice_error_database(){
@@ -305,6 +304,9 @@ class TRP_Upgrade {
 		$request = array();
 		$request['progress_message'] = '';
 		$updates_needed = $this->get_updates_details();
+        if (isset($_REQUEST['initiate_update']) && $_REQUEST['initiate_update']=== "true" ){
+            update_option('trp_show_error_db_message', 'no');
+        }
 		if ( empty ( $_REQUEST['trp_updb_action'] ) ){
 			foreach( $updates_needed as $update_action_key => $update ) {
 				$option = get_option( $update['option_name'], 'is not set' );
@@ -586,7 +588,6 @@ class TRP_Upgrade {
         }
 
         if ( $redirect ) {
-            update_option('trp_show_error_db_message', 'no');
             $url = add_query_arg( array( 'page' => 'trp_update_database' ), site_url( 'wp-admin/admin.php' ) );
             wp_safe_redirect( $url );
             exit;
