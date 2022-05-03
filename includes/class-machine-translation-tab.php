@@ -64,6 +64,8 @@ class TRP_Machine_Translation_Tab {
 
         $free_version = ( ( !class_exists( 'TRP_Handle_Included_Addons' ) ) || ( ( defined( 'TRANSLATE_PRESS' ) && ( TRANSLATE_PRESS !== 'TranslatePress - Developer' && TRANSLATE_PRESS !== 'TranslatePress - Business' && TRANSLATE_PRESS !== 'TranslatePress - Dev' && TRANSLATE_PRESS !== 'TranslatePress - Personal' ) ) ) );
         $seo_pack_active = class_exists( 'TRP_IN_Seo_Pack');
+        $trp = TRP_Translate_Press::get_trp_instance();
+        $machine_translator = $trp->get_component( 'machine_translator' );
         $settings = array();
         $machine_translation_keys = array( 'machine-translation', 'translation-engine', 'google-translate-key', 'deepl-api-type', 'deepl-api-key', 'block-crawlers', 'automatically-translate-slug', 'machine_translation_limit', 'machine_translation_log' );
         foreach( $machine_translation_keys as $key ){
@@ -71,9 +73,12 @@ class TRP_Machine_Translation_Tab {
                 $settings[$key] = $mt_settings[$key];
             }
         }
-        if( !empty( $settings['machine-translation'] ) )
-            $settings['machine-translation'] = sanitize_text_field( $settings['machine-translation']  );
-        else
+        if( !empty( $settings['machine-translation'] ) ) {
+            $settings['machine-translation'] = sanitize_text_field( $settings['machine-translation'] );
+            if ( $settings['machine-translation'] === 'yes') {
+                $machine_translator->check_languages_availability( $this->settings['translation-languages'], true );
+            }
+        }else
             $settings['machine-translation'] = 'no';
 
         if( !empty( $settings['translation-engine'] ) )

@@ -5,7 +5,7 @@ Tags: translate, translation, multilingual, automatic translation, bilingual, fr
 Requires at least: 3.1.0
 Tested up to: 5.9.3
 Requires PHP: 5.6.20
-Stable tag: 2.2.5
+Stable tag: 2.2.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -140,6 +140,11 @@ For more information please check out our [documentation](https://translatepress
 
 
 == Changelog ==
+= 2.2.6 =
+* Improved automatic translation usage by skipping detection of icalendar strings
+* Unsupported languages are now checked automatically when saving Automatic Translation tab settings
+* Added new filters that allow changing the custom tables names from external scripts
+
 = 2.2.5 =
 * Fixed span tag appearing in WooCommerce Orders in WP Dashboard
 * Fixed warnings from The Event Calendar about SQL commands

@@ -269,31 +269,31 @@ msgstr ""
 msgid "Automatic Translation"
 msgstr ""
 
-#: includes/class-machine-translation-tab.php:164, add-ons-pro/deepl/includes/class-deepl.php:27
+#: includes/class-machine-translation-tab.php:169, add-ons-pro/deepl/includes/class-deepl.php:27
 msgid "DeepL"
 msgstr ""
 
-#: includes/class-machine-translation-tab.php:196
+#: includes/class-machine-translation-tab.php:201
 msgid "Unsupported languages"
 msgstr ""
 
-#: includes/class-machine-translation-tab.php:208
+#: includes/class-machine-translation-tab.php:213
 msgid "The selected automatic translation engine does not provide support for these languages.<br>You can still manually translate pages in these languages using the Translation Editor."
 msgstr ""
 
-#: includes/class-machine-translation-tab.php:235
+#: includes/class-machine-translation-tab.php:240
 msgid "Languages without formality"
 msgstr ""
 
-#: includes/class-machine-translation-tab.php:247
+#: includes/class-machine-translation-tab.php:252
 msgid "The selected automatic translation engine provides only <a href=\"%s\" target=\"_blank\">default formality</a> settings for these languages for now.<br>Automatic translation will still work if available for these languages. It will just not use the formality setting from TranslatePress <a href=\"%s\" target=\"_self\"> General Tab</a> for the languages listed above."
 msgstr ""
 
-#: includes/class-machine-translation-tab.php:260
+#: includes/class-machine-translation-tab.php:265
 msgid "Recheck supported languages"
 msgstr ""
 
-#: includes/class-machine-translation-tab.php:261
+#: includes/class-machine-translation-tab.php:266
 msgid "(last checked on %s)"
 msgstr ""
 

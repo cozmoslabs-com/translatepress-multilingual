@@ -718,6 +718,7 @@ class TRP_Translation_Render{
                 && !$this->has_ancestor_attribute( $row, $no_translate_attribute )
                 && !$this->has_ancestor_class( $row, 'translation-block')
                 && ( !$ignore_cdata || ( strpos($trimmed_string, '<![CDATA[') !== 0 && strpos($trimmed_string, '&lt;![CDATA[') !== 0  ) )
+                && (strpos($trimmed_string, 'BEGIN:VCALENDAR') !== 0)
                 && !$this->contains_substrings($trimmed_string, $skip_strings_containing_key_terms ) )
             {
                 if ( !$translate_encoded_html_as_string ){
@@ -786,6 +787,7 @@ class TRP_Translation_Render{
 				        && !$this->has_ancestor_class( $row, 'translation-block')
 				        && $row->tag != 'link'
                         && ( !$ignore_cdata || ( strpos($trimmed_string, '<![CDATA[') !== 0 && strpos($trimmed_string, '&lt;![CDATA[') !== 0  ) )
+                        && (strpos($trimmed_string, 'BEGIN:VCALENDAR') !== 0 )
                         && !$this->contains_substrings($trimmed_string, $skip_strings_containing_key_terms ) )
 				    {
                         $entity_decoded_trimmed_string = html_entity_decode( $trimmed_string );

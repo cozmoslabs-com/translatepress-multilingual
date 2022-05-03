@@ -935,7 +935,7 @@ class TRP_Query{
         if ( $default_language == null ) {
             $default_language = $this->settings['default-language'];
         }
-        return $this->db->prefix . 'trp_dictionary_' . strtolower( $default_language ) . '_'. strtolower( $language_code );
+        return apply_filters( 'trp_table_name_dictionary', $this->db->prefix . 'trp_dictionary_' . strtolower( $default_language ) . '_'. strtolower( $language_code ), $this->db->prefix, $language_code, $default_language );
     }
 
     public function get_language_code_from_table_name( $table_name, $default_language = null ){
@@ -952,7 +952,7 @@ class TRP_Query{
      * @return string                       Table name.
      */
     public function get_table_name_for_original_strings(){
-        return sanitize_text_field( $this->db->prefix . 'trp_original_strings' );
+        return apply_filters( 'trp_table_name_original_strings', sanitize_text_field( $this->db->prefix . 'trp_original_strings' ), $this->db->prefix );
     }
 
     /**
@@ -961,7 +961,7 @@ class TRP_Query{
      * @return string                       Table name.
      */
     public function get_table_name_for_original_meta(){
-        return sanitize_text_field( $this->db->prefix . 'trp_original_meta' );
+        return apply_filters( 'trp_table_name_original_meta', sanitize_text_field( $this->db->prefix . 'trp_original_meta' ), $this->db->prefix );
     }
     /**
      * Return meta_key for post parent id from meta table
@@ -989,8 +989,7 @@ class TRP_Query{
     }
 
     public function get_gettext_table_name( $language_code ){
-		global $wpdb;
-        return $wpdb->get_blog_prefix() . 'trp_gettext_' . strtolower( $language_code );
+        return apply_filters( 'trp_table_name_gettext', $this->db->prefix . 'trp_gettext_' . strtolower( $language_code ), $this->db->prefix, $language_code );
     }
 
     /**
