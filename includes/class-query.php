@@ -1451,7 +1451,7 @@ class TRP_Query{
         }
 
 	    $table_name = sanitize_text_field($table_name);
-        $table_found = $this->db->get_var( "SHOW TABLES LIKE '$table_name'" ) == $table_name;
+        $table_found = strtolower( $this->db->get_var( "SHOW TABLES LIKE '$table_name'" ) ) == strtolower( $table_name );
         if ( $table_found ) {
             $this->tables_exist[] = $table_name;
         }

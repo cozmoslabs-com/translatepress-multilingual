@@ -203,6 +203,21 @@ function trp_woo_ultimate_pdf_invoices_data_compatibility($data_array){
     return $data_array;
 }
 
+/**
+ * Compatibility with WooCommerce PDF Catalog (woocommerce-pdf-catalog)
+ * https://www.welaunch.io/en/product/woocommerce-pdf-catalog/
+ *
+ * @since 2.2.7
+ *
+ */
+add_filter( 'trp_stop_translating_page', 'trp_woocommerce_pdf_catalog_compatibility_dont_translate_pdf', 10, 2 );
+function trp_woocommerce_pdf_catalog_compatibility_dont_translate_pdf( $bool, $output ){
+	if ( isset( $_REQUEST['pdf-catalog'] ) ) {
+		return true;
+	}
+	return $bool;
+}
+
 
 /**
  * Compatibility with WooCommerce order notes

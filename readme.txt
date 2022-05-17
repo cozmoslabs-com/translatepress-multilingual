@@ -5,7 +5,7 @@ Tags: translate, translation, multilingual, automatic translation, bilingual, fr
 Requires at least: 3.1.0
 Tested up to: 5.9.3
 Requires PHP: 5.6.20
-Stable tag: 2.2.6
+Stable tag: 2.2.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -140,6 +140,12 @@ For more information please check out our [documentation](https://translatepress
 
 
 == Changelog ==
+= 2.2.7 =
+* Added compatibility for WooCommerce PDF Catalog plugin
+* Fixed edge case causing SQL errors due to case sensitivity on table names
+* Fixed hreflang code for Belarusian
+* Fixed Gujarati flag
+
 = 2.2.6 =
 * Improved automatic translation usage by skipping detection of icalendar strings
 * Unsupported languages are now checked automatically when saving Automatic Translation tab settings
