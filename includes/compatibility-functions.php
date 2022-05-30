@@ -772,12 +772,12 @@ function trp_superfly_change_menu_loading_hook(){
  */
 add_filter( 'wpseo_canonical', 'trp_wpseo_canonical_compat', 99999, 2);
 function trp_wpseo_canonical_compat( $canonical, $presentation_class = null ){
-	global $TRP_LANGUAGE;
-	$trp = TRP_Translate_Press::get_trp_instance();
-	$url_converter = $trp->get_component( 'url_converter' );
-	$canonical = $url_converter->get_url_for_language($TRP_LANGUAGE, $canonical, '');
+    global $TRP_LANGUAGE;
+    $trp           = TRP_Translate_Press::get_trp_instance();
+    $url_converter = $trp->get_component( 'url_converter' );
+    $canonical     = $url_converter->get_url_for_language( $TRP_LANGUAGE, $canonical, '' );
 
-	return $canonical;
+    return $canonical;
 };
 
 add_filter( 'wpseo_opengraph_url', 'trp_opengraph_url', 99999 );

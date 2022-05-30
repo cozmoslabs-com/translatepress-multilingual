@@ -49,23 +49,23 @@ msgstr ""
 msgid "Settings saved."
 msgstr ""
 
-#: includes/class-advanced-tab.php:319, includes/class-error-manager.php:172, partials/machine-translation-settings-page.php:17, partials/machine-translation-settings-page.php:121, partials/machine-translation-settings-page.php:141, partials/machine-translation-settings-page.php:192, partials/main-settings-page.php:42, partials/main-settings-page.php:55, partials/main-settings-page.php:68
+#: includes/class-advanced-tab.php:318, includes/class-error-manager.php:172, partials/machine-translation-settings-page.php:17, partials/machine-translation-settings-page.php:121, partials/machine-translation-settings-page.php:141, partials/machine-translation-settings-page.php:192, partials/main-settings-page.php:42, partials/main-settings-page.php:55, partials/main-settings-page.php:68
 msgid "Yes"
 msgstr ""
 
-#: includes/class-advanced-tab.php:529, includes/class-advanced-tab.php:540, includes/class-advanced-tab.php:634, includes/class-advanced-tab.php:665
+#: includes/class-advanced-tab.php:528, includes/class-advanced-tab.php:539, includes/class-advanced-tab.php:633, includes/class-advanced-tab.php:664
 msgid "Are you sure you want to remove this item?"
 msgstr ""
 
-#: includes/class-advanced-tab.php:529, includes/class-advanced-tab.php:540, includes/class-advanced-tab.php:634, includes/class-advanced-tab.php:665, partials/main-settings-language-selector.php:60, add-ons-advanced/extra-languages/partials/language-selector-pro.php:62
+#: includes/class-advanced-tab.php:528, includes/class-advanced-tab.php:539, includes/class-advanced-tab.php:633, includes/class-advanced-tab.php:664, partials/main-settings-language-selector.php:60, add-ons-advanced/extra-languages/partials/language-selector-pro.php:62
 msgid "Remove"
 msgstr ""
 
-#: includes/class-advanced-tab.php:540, includes/class-advanced-tab.php:665, partials/main-settings-language-selector.php:102, add-ons-advanced/extra-languages/partials/language-selector-pro.php:103
+#: includes/class-advanced-tab.php:539, includes/class-advanced-tab.php:664, partials/main-settings-language-selector.php:102, add-ons-advanced/extra-languages/partials/language-selector-pro.php:103
 msgid "Add"
 msgstr ""
 
-#: includes/class-advanced-tab.php:618, includes/class-advanced-tab.php:652
+#: includes/class-advanced-tab.php:617, includes/class-advanced-tab.php:651
 msgid "Select..."
 msgstr ""
 
@@ -85,35 +85,35 @@ msgstr ""
 msgid "Error"
 msgstr ""
 
-#: includes/class-edd-sl-plugin-updater.php:706
+#: includes/class-edd-sl-plugin-updater.php:715
 msgid "Your license key expired on %s."
 msgstr ""
 
-#: includes/class-edd-sl-plugin-updater.php:711
+#: includes/class-edd-sl-plugin-updater.php:720
 msgid "Your license key has been disabled."
 msgstr ""
 
-#: includes/class-edd-sl-plugin-updater.php:714
+#: includes/class-edd-sl-plugin-updater.php:723
 msgid "Invalid license."
 msgstr ""
 
-#: includes/class-edd-sl-plugin-updater.php:718
+#: includes/class-edd-sl-plugin-updater.php:727
 msgid "Your license is not active for this URL."
 msgstr ""
 
-#: includes/class-edd-sl-plugin-updater.php:721
+#: includes/class-edd-sl-plugin-updater.php:730
 msgid "This appears to be an invalid license key for %s."
 msgstr ""
 
-#: includes/class-edd-sl-plugin-updater.php:724
+#: includes/class-edd-sl-plugin-updater.php:733
 msgid "Your license key has reached its activation limit."
 msgstr ""
 
-#: includes/class-edd-sl-plugin-updater.php:727, includes/class-edd-sl-plugin-updater.php:695, includes/class-edd-sl-plugin-updater.php:798
+#: includes/class-edd-sl-plugin-updater.php:736, includes/class-edd-sl-plugin-updater.php:704, includes/class-edd-sl-plugin-updater.php:805
 msgid "An error occurred, please try again."
 msgstr ""
 
-#: includes/class-edd-sl-plugin-updater.php:758
+#: includes/class-edd-sl-plugin-updater.php:767
 msgid "You have successfully activated your license"
 msgstr ""
 
@@ -1628,15 +1628,7 @@ msgid "Fix broken HTML"
 msgstr ""
 
 #: includes/advanced-settings/fix-broken-html.php:9
-msgid "General attempt to fix broken or missing HTML on translated pages.<br/><strong>Only try this if the \"Fix spaces between html attribute\" did not solve the issue.</strong>"
-msgstr ""
-
-#: includes/advanced-settings/fix-invalid-space-between-html-attr.php:8
-msgid "Fix spaces between HTML attributes"
-msgstr ""
-
-#: includes/advanced-settings/fix-invalid-space-between-html-attr.php:9
-msgid "Fixes attributes without spaces between them because they are not valid HTML.<br> May help fix missing or broken content from the HTML on translated pages."
+msgid "General attempt to fix broken or missing HTML on translated pages.<br/>"
 msgstr ""
 
 #: includes/advanced-settings/force-slash-at-end-of-links.php:9

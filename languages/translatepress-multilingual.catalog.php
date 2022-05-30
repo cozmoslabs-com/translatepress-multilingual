@@ -401,9 +401,7 @@
 <?php __("Exclude strings from automatic translation", "translatepress-multilingual"); ?>
 <?php __("Do not automatically translate these strings (ex. names, technical words...)<br>Paragraphs containing these strings will still be translated except for the specified part.", "translatepress-multilingual"); ?>
 <?php __("Fix broken HTML", "translatepress-multilingual"); ?>
-<?php __("General attempt to fix broken or missing HTML on translated pages.<br/><strong>Only try this if the \"Fix spaces between html attribute\" did not solve the issue.</strong>", "translatepress-multilingual"); ?>
-<?php __("Fix spaces between HTML attributes", "translatepress-multilingual"); ?>
-<?php __("Fixes attributes without spaces between them because they are not valid HTML.<br> May help fix missing or broken content from the HTML on translated pages.", "translatepress-multilingual"); ?>
+<?php __("General attempt to fix broken or missing HTML on translated pages.<br/>", "translatepress-multilingual"); ?>
 <?php __("Force slash at end of home url:", "translatepress-multilingual"); ?>
 <?php __("Ads a slash at the end of the home_url() function", "translatepress-multilingual"); ?>
 <?php __("Show Both (recommended)", "translatepress-multilingual"); ?>

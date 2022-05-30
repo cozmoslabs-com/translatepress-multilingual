@@ -3,9 +3,9 @@ Contributors: cozmoslabs, razvan.mo, madalin.ungureanu, sareiodata, cristophor
 Donate link: https://www.translatepress.com/
 Tags: translate, translation, multilingual, automatic translation, bilingual, front-end translation, google translate, language
 Requires at least: 3.1.0
-Tested up to: 5.9.3
+Tested up to: 6.0
 Requires PHP: 5.6.20
-Stable tag: 2.2.7
+Stable tag: 2.2.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -140,6 +140,13 @@ For more information please check out our [documentation](https://translatepress
 
 
 == Changelog ==
+= 2.2.8 =
+* Fixed truncated archive urls on front page on translated pages
+* Fixed bug with language switcher not working properly for posts with translated slugs when using Advanced option to Exclude Paths From Translation
+* Fixed canonical of archive links sometimes not having translated slugs in url
+* Fixed FAQ schema not being fully translated
+* Fixed trp_hreflang hook parameters
+
 = 2.2.7 =
 * Added compatibility for WooCommerce PDF Catalog plugin
 * Fixed edge case causing SQL errors due to case sensitivity on table names
