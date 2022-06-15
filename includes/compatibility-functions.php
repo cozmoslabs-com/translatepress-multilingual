@@ -1025,6 +1025,22 @@ function trp_thrive_arhitect_compatibility($bool)    {
 
     return $bool;
 }
+// do not redirect the URL's that are used inside Thrive Architect Editor
+add_filter( 'trp_allow_language_redirect', 'trp_thrive_no_redirect_in_editor', 10, 3 );
+function trp_thrive_no_redirect_in_editor( $allow_redirect, $needed_language, $current_page_url ){
+	if ( strpos($current_page_url, 'tve=true&tcbf')!== false ){
+		return false;
+	}
+	return $allow_redirect;
+};
+// skip the URL's that are used inside Thrive Architect Editor as they are stripped of parameters in certain cases and the editor isn't working.
+add_filter('trp_skip_url_for_language', 'trp_thrive_skip_language_in_editor', 10, 2);
+function trp_thrive_skip_language_in_editor($skip, $url){
+	if ( strpos($url, 'tve=true&tcbf') !== false ){
+		return true;
+	}
+	return $skip;
+}
 
 /**
  * Compatibility with the RECON gateway for woocommerce. We must not send the "trp-form-language" hidden field in the post request to the gateway

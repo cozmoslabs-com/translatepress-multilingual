@@ -948,7 +948,18 @@ class TRP_Translation_Manager
             if (did_action('init') && isset($trp_output_buffer_started) && $trp_output_buffer_started) {//check here for our global $trp_output_buffer_started, don't wrap the gettexts if they are not processed by our cleanup callbacks for the buffers
                 if ((!empty($TRP_LANGUAGE) && $this->settings["default-language"] != $TRP_LANGUAGE) || (isset($_REQUEST['trp-edit-translation']) && $_REQUEST['trp-edit-translation'] == 'preview')) {
                     //add special start and end tags so that it does not influence html in any way. we will replace them with < and > at the start of the translate function
-                    $translation = apply_filters('trp_process_gettext_tags', '#!trpst#trp-gettext data-trpgettextoriginal=' . $db_id . '#!trpen#' . $translation . '#!trpst#/trp-gettext#!trpen#', $translation, $skip_gettext_querying, $text, $domain);
+                    /**
+                     * Compatibility with Woocomerce Payments
+                     *
+                     * In the file woocommerce-payments/includes/class-wc-payments-customer-service.php there is this line of code
+                     * $description = sprintf( __( 'Name: %1$s, Username: %2$s', 'woocommerce-payments' ), $name, $wc_customer->get_username() ); that should return admin or guest
+                     * but for some reason it returns our gettext string without the stripped gettext.
+                     */
+
+                    if ( $text != 'Name: %1$s, Username: %2$s' && $text != 'Name: %1$s, Guest' ) {
+                        $translation = apply_filters( 'trp_process_gettext_tags', '#!trpst#trp-gettext data-trpgettextoriginal=' . $db_id . '#!trpen#' . $translation . '#!trpst#/trp-gettext#!trpen#', $translation, $skip_gettext_querying, $text, $domain );
+
+                    }
                 }
             }
         }

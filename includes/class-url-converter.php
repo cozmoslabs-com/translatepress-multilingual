@@ -411,15 +411,18 @@ class TRP_Url_Converter {
         if( isset( $trp_current_url_term_slug ) && isset($trp_current_url_taxonomy) && $new_url_has_been_determined === false){
             // check here if it is a term link
             $current_term_link = get_term_link( $trp_current_url_term_slug, $trp_current_url_taxonomy);
-            $language_to_replace = $TRP_LANGUAGE;
-            $TRP_LANGUAGE = $language;
-            $current_term_link= apply_filters( 'trp_get_url_for_language', $current_term_link, $url, $language_to_replace, $this->get_abs_home(), $this->get_lang_from_url_string($url), $this->get_url_slug( $language ) );
+            if (!is_wp_error($current_term_link)){
+                $language_to_replace = $TRP_LANGUAGE;
+                $TRP_LANGUAGE = $language;
+                $current_term_link= apply_filters( 'trp_get_url_for_language', $current_term_link, $url, $language_to_replace, $this->get_abs_home(), $this->get_lang_from_url_string($url), $this->get_url_slug( $language ) );
                 $check_term_link = get_term_link($trp_current_url_term_slug, $trp_current_url_taxonomy);
                 if (!is_wp_error($check_term_link) && strpos(urldecode( $url ), $current_term_link) === 0) {
                     $new_url = str_replace( $current_term_link, $check_term_link, urldecode( $url ) );
+                    $new_url = apply_filters( 'trp_get_url_for_language', $new_url, $url, $language, $this->get_abs_home(), $this->get_lang_from_url_string($url), $this->get_url_slug( $language ) );
                     $new_url_has_been_determined = true;
                 }
                 $TRP_LANGUAGE = $trp_language_copy;
+            }
         }
 
         /**
@@ -689,7 +692,7 @@ class TRP_Url_Converter {
             if ($abs_home_url_obj->getPath() == "/"){
                 $abs_home_url_obj->setPath('');
             }
-            $possible_path = str_replace($abs_home_url_obj->getPath(), '', $url_obj->getPath());
+            $possible_path = str_replace( $abs_home_url_obj->getPath(), '', $url_obj->getPath() );
             $lang = ltrim( $possible_path,'/' );
             $lang = explode('/', $lang);
             if( $lang == false ){

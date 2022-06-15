@@ -5,7 +5,7 @@ Tags: translate, translation, multilingual, automatic translation, bilingual, fr
 Requires at least: 3.1.0
 Tested up to: 6.0
 Requires PHP: 5.6.20
-Stable tag: 2.2.8
+Stable tag: 2.2.9
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -140,6 +140,11 @@ For more information please check out our [documentation](https://translatepress
 
 
 == Changelog ==
+= 2.2.9 =
+* Fix: compatibility issue between translation interface and Thrive Architect
+* Fix: make sure processed links are stripped of extra tags
+* Fix: a potential error in the url converter
+
 = 2.2.8 =
 * Fixed truncated archive urls on front page on translated pages
 * Fixed bug with language switcher not working properly for posts with translated slugs when using Advanced option to Exclude Paths From Translation
