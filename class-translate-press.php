@@ -60,7 +60,7 @@ class TRP_Translate_Press{
         define( 'TRP_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
         define( 'TRP_PLUGIN_BASE', plugin_basename( __DIR__ . '/index.php' ) );
         define( 'TRP_PLUGIN_SLUG', 'translatepress-multilingual' );
-        define( 'TRP_PLUGIN_VERSION', '2.2.9' );
+        define( 'TRP_PLUGIN_VERSION', '2.3.0' );
 
 	    wp_cache_add_non_persistent_groups(array('trp'));
 
@@ -344,6 +344,7 @@ class TRP_Translate_Press{
         $this->loader->add_filter( 'language_attributes', $this->url_converter, 'change_lang_attr_in_html_tag', 10, 1 );
         $this->loader->add_filter('trp_is_file', $this->url_converter, 'does_url_contains_array', 10, 2);
         $this->loader->add_filter('trp_hreflang', $this->url_converter, 'replace_iso_2_with_iso_3_for_hreflang', 10, 2);
+        $this->loader->add_filter('wp_footer', $this->url_converter, 'add_tp_language_lang_attribute', 1);
 
 
         $this->loader->add_filter( 'widget_text', null, 'do_shortcode', 11 );

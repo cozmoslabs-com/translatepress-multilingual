@@ -236,10 +236,29 @@ class TRP_Url_Converter {
         global $TRP_LANGUAGE;
         $lang = get_bloginfo('language');
         if ( $lang && !empty($TRP_LANGUAGE) ) {
-            $output = str_replace( 'lang="'. $lang .'"', 'lang="'. str_replace('_', '-', $TRP_LANGUAGE ) .'"', $output );
+            if ( apply_filters( 'trp_add_default_lang_tags', true ) ) {
+                $output = str_replace( 'lang="' . $lang . '"', 'lang="' . str_replace( '_', '-', $TRP_LANGUAGE ) . '"', $output );
+            }
+            if ( apply_filters( 'trp_add_regional_lang_tags', true ) ) {
+                $language = strtok($TRP_LANGUAGE, '_');
+                $output = str_replace( 'lang="' . $lang . '"', 'lang="' . $language . '"', $output );
+
+            }
         }
 
         return $output;
+    }
+
+    /**
+     * @param $output
+     * @return $output
+     *
+     * adds a new attribute in footer, tp_language_lang, for Automatic User Language Detection to rely on for finding the current language
+     */
+    public function add_tp_language_lang_attribute(){
+        global $TRP_LANGUAGE;
+        $html ='<template id="tp-language" lang="'. esc_attr($TRP_LANGUAGE) . '"></template>';
+        echo $html; /* phpcs:ignore *///ignored because the html is constructed by us
     }
 
     /**
@@ -692,7 +711,18 @@ class TRP_Url_Converter {
             if ($abs_home_url_obj->getPath() == "/"){
                 $abs_home_url_obj->setPath('');
             }
-            $possible_path = str_replace( $abs_home_url_obj->getPath(), '', $url_obj->getPath() );
+
+            $abs_home = $abs_home_url_obj->getPath();
+
+            //in some cases $abs_home_url_obj->getPath() can be null and this causes a PHP 8 notice
+            if ($abs_home !== null) {
+                $abs_home = $abs_home_url_obj->getPath();
+            }else{
+                $abs_home = '';
+            }
+            //we make sure that the path is the actual path and not a folder
+            $possible_path = str_replace( $abs_home, '', $url_obj->getPath() );
+
             $lang = ltrim( $possible_path,'/' );
             $lang = explode('/', $lang);
             if( $lang == false ){
@@ -732,13 +762,21 @@ class TRP_Url_Converter {
 
         $req_uri = isset( $_SERVER['REQUEST_URI'] ) ? esc_url_raw( $_SERVER['REQUEST_URI'] ) : '';
 
-        $home_path = trim( parse_url( $this->get_abs_home(), PHP_URL_PATH ), '/' );
+        //in some cases $this->get_abs_home() can be null and this causes a PHP 8 notice
+        $abs_home = $this->get_abs_home();
+        if ( $this->get_abs_home() !== null) {
+            $abs_home = $this->get_abs_home();
+        }else{
+            $abs_home = '';
+        }
+
+        $home_path = trim( parse_url( $abs_home, PHP_URL_PATH ), '/' );
         $home_path_regex = sprintf( '|^%s|i', preg_quote( $home_path, '|' ) );
 
         // Trim path info from the end and the leading home path from the front.
         $req_uri = ltrim($req_uri, '/');
         $req_uri = preg_replace( $home_path_regex, '', $req_uri );
-        $req_uri = trim($this->get_abs_home(), '/') . '/' . ltrim( $req_uri, '/' );
+        $req_uri = trim($abs_home, '/') . '/' . ltrim( $req_uri, '/' );
 
 
         if ( function_exists('apply_filters') ) $req_uri = apply_filters('trp_curpageurl', $req_uri);

@@ -102,7 +102,7 @@
             <button type="button" id="trp-add-language" class="button-secondary"><?php esc_html_e( 'Add', 'translatepress-multilingual' );?></button>
         </div>
         <p class="description">
-            <?php echo wp_kses ( sprintf(__( 'Select the languages you wish to make your website available in.<br>The Formality field is used by Automatic Translation to decide whether the translated text should lean towards formal or informal language. For now, it is supported only for a few languages and only by <a href="%s">DeepL</a>.', 'translatepress-multilingual' ), esc_url('https://www.deepl.com/docs-api/translating-text/') ), array('a' => array('href' => array(), 'title' => array()), 'br' => array()) ); ?>
+            <?php echo wp_kses ( sprintf(__( 'Select the languages you wish to make your website available in.<br>The Formality field is used by Automatic Translation to decide whether the translated text should lean towards formal or informal language. For now, it is supported only for a few languages and only by <a href="%s" target="_blank">DeepL</a>.', 'translatepress-multilingual' ), esc_url('https://www.deepl.com/docs-api/translating-text/') ), array('a' => array('href' => array(), 'target' =>array(),'title' => array()), 'br' => array()) ); ?>
         </p>
         <p class="trp-upsell-multiple-languages" style="display: none;">
             <?php

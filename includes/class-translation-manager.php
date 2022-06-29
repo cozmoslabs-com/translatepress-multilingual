@@ -666,6 +666,22 @@ class TRP_Translation_Manager
         remove_action( 'trp_call_gettext_filters', array( $this, 'verify_locale_of_loaded_textdomain' ) );
     }
 
+	/**
+	 * Function that determines if a request is a rest api request based on the URL.
+	 * @return bool
+	 */
+	static function is_rest_api_request() {
+		if ( empty( $_SERVER['REQUEST_URI'] ) ) {
+			// Probably a CLI request
+			return false;
+		}
+
+		$rest_prefix         = trailingslashit( rest_get_url_prefix() );
+		$is_rest_api_request = strpos( $_SERVER['REQUEST_URI'], $rest_prefix ) !== false; /* phpcs:ignore */
+
+        return apply_filters( 'trp_is_rest_api_request', $is_rest_api_request );
+	}
+
     /**
      * Function that determines if an ajax request came from the frontend
      * @return bool

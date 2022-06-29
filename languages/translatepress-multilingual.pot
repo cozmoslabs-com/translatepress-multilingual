@@ -49,23 +49,23 @@ msgstr ""
 msgid "Settings saved."
 msgstr ""
 
-#: includes/class-advanced-tab.php:318, includes/class-error-manager.php:172, partials/machine-translation-settings-page.php:17, partials/machine-translation-settings-page.php:121, partials/machine-translation-settings-page.php:141, partials/machine-translation-settings-page.php:192, partials/main-settings-page.php:42, partials/main-settings-page.php:55, partials/main-settings-page.php:68
+#: includes/class-advanced-tab.php:319, includes/class-error-manager.php:172, partials/machine-translation-settings-page.php:17, partials/machine-translation-settings-page.php:121, partials/machine-translation-settings-page.php:141, partials/machine-translation-settings-page.php:192, partials/main-settings-page.php:42, partials/main-settings-page.php:55, partials/main-settings-page.php:68
 msgid "Yes"
 msgstr ""
 
-#: includes/class-advanced-tab.php:528, includes/class-advanced-tab.php:539, includes/class-advanced-tab.php:633, includes/class-advanced-tab.php:664
+#: includes/class-advanced-tab.php:529, includes/class-advanced-tab.php:540, includes/class-advanced-tab.php:634, includes/class-advanced-tab.php:665
 msgid "Are you sure you want to remove this item?"
 msgstr ""
 
-#: includes/class-advanced-tab.php:528, includes/class-advanced-tab.php:539, includes/class-advanced-tab.php:633, includes/class-advanced-tab.php:664, partials/main-settings-language-selector.php:60, add-ons-advanced/extra-languages/partials/language-selector-pro.php:62
+#: includes/class-advanced-tab.php:529, includes/class-advanced-tab.php:540, includes/class-advanced-tab.php:634, includes/class-advanced-tab.php:665, partials/main-settings-language-selector.php:60, add-ons-advanced/extra-languages/partials/language-selector-pro.php:62
 msgid "Remove"
 msgstr ""
 
-#: includes/class-advanced-tab.php:539, includes/class-advanced-tab.php:664, partials/main-settings-language-selector.php:102, add-ons-advanced/extra-languages/partials/language-selector-pro.php:103
+#: includes/class-advanced-tab.php:540, includes/class-advanced-tab.php:665, partials/main-settings-language-selector.php:102, add-ons-advanced/extra-languages/partials/language-selector-pro.php:103
 msgid "Add"
 msgstr ""
 
-#: includes/class-advanced-tab.php:617, includes/class-advanced-tab.php:651
+#: includes/class-advanced-tab.php:618, includes/class-advanced-tab.php:652
 msgid "Select..."
 msgstr ""
 
@@ -121,59 +121,59 @@ msgstr ""
 msgid "Others"
 msgstr ""
 
-#: includes/class-elementor-language-for-blocks.php:91
+#: includes/class-elementor-language-for-blocks.php:98
 msgid "Restrict by Language"
 msgstr ""
 
-#: includes/class-elementor-language-for-blocks.php:109, includes/class-wp-bakery-language-for-blocks.php:138
+#: includes/class-elementor-language-for-blocks.php:116, includes/class-wp-bakery-language-for-blocks.php:138
 msgid "Exclude from Language"
 msgstr ""
 
-#: includes/class-elementor-language-for-blocks.php:124, includes/class-wp-bakery-language-for-blocks.php:98
+#: includes/class-elementor-language-for-blocks.php:131, includes/class-wp-bakery-language-for-blocks.php:98
 msgid "Restrict element to language"
 msgstr ""
 
-#: includes/class-elementor-language-for-blocks.php:126, includes/class-wp-bakery-language-for-blocks.php:101
+#: includes/class-elementor-language-for-blocks.php:133, includes/class-wp-bakery-language-for-blocks.php:101
 msgid "Show this element only in one language."
 msgstr ""
 
-#: includes/class-elementor-language-for-blocks.php:132
+#: includes/class-elementor-language-for-blocks.php:139
 msgid "Enable translation"
 msgstr ""
 
-#: includes/class-elementor-language-for-blocks.php:134
+#: includes/class-elementor-language-for-blocks.php:141
 msgid "Allow translation to the corresponding language only if the content is written in the default language."
 msgstr ""
 
-#: includes/class-elementor-language-for-blocks.php:140, includes/class-wp-bakery-language-for-blocks.php:106
+#: includes/class-elementor-language-for-blocks.php:147, includes/class-wp-bakery-language-for-blocks.php:106
 msgid "Select language"
 msgstr ""
 
-#: includes/class-elementor-language-for-blocks.php:157, includes/class-wp-bakery-language-for-blocks.php:110
+#: includes/class-elementor-language-for-blocks.php:164, includes/class-wp-bakery-language-for-blocks.php:110
 msgid "Choose in which language to show this element."
 msgstr ""
 
-#: includes/class-elementor-language-for-blocks.php:169
+#: includes/class-elementor-language-for-blocks.php:176
 msgid "Exclude element from language"
 msgstr ""
 
-#: includes/class-elementor-language-for-blocks.php:171, includes/class-wp-bakery-language-for-blocks.php:141
+#: includes/class-elementor-language-for-blocks.php:178, includes/class-wp-bakery-language-for-blocks.php:141
 msgid "Exclude this element from specific languages."
 msgstr ""
 
-#: includes/class-elementor-language-for-blocks.php:177, includes/class-wp-bakery-language-for-blocks.php:158
+#: includes/class-elementor-language-for-blocks.php:184, includes/class-wp-bakery-language-for-blocks.php:158
 msgid "Select languages"
 msgstr ""
 
-#: includes/class-elementor-language-for-blocks.php:195, includes/class-wp-bakery-language-for-blocks.php:162
+#: includes/class-elementor-language-for-blocks.php:202, includes/class-wp-bakery-language-for-blocks.php:162
 msgid "Choose from which languages to exclude this element."
 msgstr ""
 
-#: includes/class-elementor-language-for-blocks.php:199, includes/class-wp-bakery-language-for-blocks.php:146
+#: includes/class-elementor-language-for-blocks.php:206, includes/class-wp-bakery-language-for-blocks.php:146
 msgid "This element will still be visible when you are translating your website through the Translation Editor."
 msgstr ""
 
-#: includes/class-elementor-language-for-blocks.php:200, includes/class-wp-bakery-language-for-blocks.php:153
+#: includes/class-elementor-language-for-blocks.php:207, includes/class-wp-bakery-language-for-blocks.php:153
 msgid "The content of this element should be written in the default language."
 msgstr ""
 
@@ -297,11 +297,11 @@ msgstr ""
 msgid "(last checked on %s)"
 msgstr ""
 
-#: includes/class-machine-translator.php:136, includes/google-translate/class-google-translate-v2-machine-translator.php:181
+#: includes/class-machine-translator.php:137, includes/google-translate/class-google-translate-v2-machine-translator.php:181
 msgid "Please enter your Google Translate key."
 msgstr ""
 
-#: includes/class-machine-translator.php:151, add-ons-pro/deepl/includes/class-deepl-machine-translator.php:286
+#: includes/class-machine-translator.php:152, add-ons-pro/deepl/includes/class-deepl-machine-translator.php:286
 msgid "Please enter your DeepL API key."
 msgstr ""
 
@@ -725,11 +725,11 @@ msgstr ""
 msgid "Translate Page"
 msgstr ""
 
-#: includes/class-translation-manager.php:1283
+#: includes/class-translation-manager.php:1299
 msgid "Security check"
 msgstr ""
 
-#: includes/class-translation-manager.php:1357
+#: includes/class-translation-manager.php:1373
 msgid "<strong>Warning:</strong> Some strings have possibly incorrectly encoded characters. This may result in breaking the queries, rendering the page untranslated in live mode. Consider revising the following strings or their method of outputting."
 msgstr ""
 
@@ -1177,7 +1177,7 @@ msgid "Log machine translation queries."
 msgstr ""
 
 #: partials/machine-translation-settings-page.php:195
-msgid "Only enable for testing purposes. Can impact performance.<br>All records are stored in the wp_trp_machine_translation_log database table. Use a plugin like <a href=\"https://wordpress.org/plugins/wp-data-access/\">WP Data Access</a> to browse the logs or directly from your database manager (PHPMyAdmin, etc.)"
+msgid "Only enable for testing purposes. Can impact performance.<br>All records are stored in the wp_trp_machine_translation_log database table. Use a plugin like <a href=\"https://wordpress.org/plugins/wp-data-access/\" target=\"_blank\">WP Data Access</a> to browse the logs or directly from your database manager (PHPMyAdmin, etc.)"
 msgstr ""
 
 #: partials/main-settings-language-selector.php:2, add-ons-pro/navigation-based-on-language/class-navigation-based-on-language.php:81, add-ons-advanced/extra-languages/partials/language-selector-pro.php:2
@@ -1225,7 +1225,7 @@ msgid "Custom Languages"
 msgstr ""
 
 #: partials/main-settings-language-selector.php:105, add-ons-advanced/extra-languages/partials/language-selector-pro.php:106
-msgid "Select the languages you wish to make your website available in.<br>The Formality field is used by Automatic Translation to decide whether the translated text should lean towards formal or informal language. For now, it is supported only for a few languages and only by <a href=\"%s\">DeepL</a>."
+msgid "Select the languages you wish to make your website available in.<br>The Formality field is used by Automatic Translation to decide whether the translated text should lean towards formal or informal language. For now, it is supported only for a few languages and only by <a href=\"%s\" target=\"_blank\">DeepL</a>."
 msgstr ""
 
 #. translators: %1$s is the URL to the add-ons. %2$2 is for the TranslatePress add-on verbiage.
@@ -1657,6 +1657,22 @@ msgstr ""
 
 #: includes/advanced-settings/hreflang-remove-locale.php:12
 msgid "Choose which hreflang tags will appear on your website.<br/>We recommend showing both types of hreflang tags as indicated by <a href=\"https://developers.google.com/search/docs/advanced/crawling/localized-versions\" title=\"Google Crawling\" target=\"_blank\">Google documentation</a>.<br/>Removing Country Locale when having multiple Country Locales of the same language (ex. English UK and English US) will result in showing one hreflang tag with link to just one of the region locales for that language."
+msgstr ""
+
+#: includes/advanced-settings/html-lang-remove-locale.php:10
+msgid "Default (example: en-US, fr-CA, etc.)"
+msgstr ""
+
+#: includes/advanced-settings/html-lang-remove-locale.php:10
+msgid "Regional (example: en, fr, es, etc.)"
+msgstr ""
+
+#: includes/advanced-settings/html-lang-remove-locale.php:11
+msgid "HTML Lang Attribute Format"
+msgstr ""
+
+#: includes/advanced-settings/html-lang-remove-locale.php:12
+msgid "Change lang attribute of the html tag to a format that includes country regional or not. <br>In HTML, the lang attribute (<html lang=\"en-US\">)  should be used to  specify the language of text content so that the  browser can correctly display or process  your content (eg. for  hyphenation, styling, spell checking, etc)."
 msgstr ""
 
 #: includes/advanced-settings/open-language-switcher-shortcode-on-click.php:8

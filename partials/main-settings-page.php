@@ -95,7 +95,7 @@
                                 $link_start = '<a href="' . esc_url( admin_url( 'nav-menus.php' ) ) .'">';
                                 $link_end = '</a>';
                                 printf( wp_kses( __( 'Go to  %1$s Appearance -> Menus%2$s to add languages to the Language Switcher in any menu.', 'translatepress-multilingual' ), [ 'a' => [ 'href' => [] ] ] ), $link_start, $link_end ); //phpcs:ignore ?>
-                                <a href="https://translatepress.com/docs/settings/#language-switcher"><?php esc_html_e( 'Learn more in our documentation.', 'translatepress-multilingual' ); ?></a>
+                                <a href="https://translatepress.com/docs/settings/#language-switcher" target="_blank"><?php esc_html_e( 'Learn more in our documentation.', 'translatepress-multilingual' ); ?></a>
                             </p>
                         </div>
                         <div class="trp-ls-type">
