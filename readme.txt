@@ -5,7 +5,7 @@ Tags: translate, translation, multilingual, automatic translation, bilingual, fr
 Requires at least: 3.1.0
 Tested up to: 6.0
 Requires PHP: 5.6.20
-Stable tag: 2.3.0
+Stable tag: 2.3.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -140,6 +140,10 @@ For more information please check out our [documentation](https://translatepress
 
 
 == Changelog ==
+= 2.3.1 =
+* Added function trp_translate to facilitate custom integrations by other devs
+* Renamed possibly conflicting lang attribute of the template tag used to detect language
+
 = 2.3.0 =
 * Added compatibility with Elementor Containers for exclude/include in certain language
 * Added Advanced option to change html lang attribute to a region independent form

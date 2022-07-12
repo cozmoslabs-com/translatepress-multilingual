@@ -257,7 +257,7 @@ class TRP_Url_Converter {
      */
     public function add_tp_language_lang_attribute(){
         global $TRP_LANGUAGE;
-        $html ='<template id="tp-language" lang="'. esc_attr($TRP_LANGUAGE) . '"></template>';
+        $html ='<template id="tp-language" data-tp-language="'. esc_attr($TRP_LANGUAGE) . '"></template>';
         echo $html; /* phpcs:ignore *///ignored because the html is constructed by us
     }
 
