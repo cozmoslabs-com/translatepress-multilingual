@@ -60,7 +60,7 @@ class TRP_Translate_Press{
         define( 'TRP_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
         define( 'TRP_PLUGIN_BASE', plugin_basename( __DIR__ . '/index.php' ) );
         define( 'TRP_PLUGIN_SLUG', 'translatepress-multilingual' );
-        define( 'TRP_PLUGIN_VERSION', '2.3.1' );
+        define( 'TRP_PLUGIN_VERSION', '2.3.2' );
 
 	    wp_cache_add_non_persistent_groups(array('trp'));
 
@@ -331,6 +331,7 @@ class TRP_Translate_Press{
         $this->loader->add_action( 'admin_bar_menu', $this->translation_manager, 'add_shortcut_to_translation_editor', 90, 1 );
         $this->loader->add_action( 'admin_head', $this->translation_manager, 'add_styling_to_admin_bar_button', 10 );
         $this->loader->add_filter( 'show_admin_bar', $this->translation_manager, 'hide_admin_bar_when_in_editor', 90 );
+        $this->loader->add_action( 'enqueue_block_editor_assets', $this->translation_manager, 'trp_add_shortcut_to_trp_editor_gutenberg', 90);
 
         $this->loader->add_filter( 'template_include', $this->string_translation, 'string_translation_editor', 99999 );
         $this->loader->add_filter( 'trp_string_types', $this->string_translation, 'register_string_types', 10, 1 );

@@ -590,45 +590,41 @@ class TRP_Plugin_Updater{
         if ( false === ( $trp_check_license = get_transient( 'trp_checked_licence' ) ) ) {
 
             $license = trim( $this->get_option( 'trp_license_key' ) );
-            if( $license ) {
-                $license_status = trim($this->get_option('trp_license_status'));
 
-                if ($license_status) { // do this only if the user activated the license on this site
-                    $license_information_for_all_addons = array();
+            $license_information_for_all_addons = array();
 
-                    $trp = TRP_Translate_Press::get_trp_instance();
-                    if (!empty($trp->active_pro_addons)) {
-                        foreach ($trp->active_pro_addons as $active_pro_addon_name) {
-                            // data to send in our API request
-                            $api_params = array(
-                                'edd_action' => 'activate_license',                  //as the license is already activated this does not do anything. We could use check_license action but it gives different results  so we can't use it consistently with the result we get from the moment we activate it
-                                'license'    => $license,
-                                'item_name'  => urlencode($active_pro_addon_name),   // the name of our product in EDD
-                                'url'        => home_url()
-                            );
+            $trp = TRP_Translate_Press::get_trp_instance();
 
-                            // Call the custom API.
-                            $response = wp_remote_post($this->store_url, array('timeout' => 15, 'sslverify' => false, 'body' => $api_params));
+            if (!empty($trp->active_pro_addons)) {
+                foreach ($trp->active_pro_addons as $active_pro_addon_name) {
+                    // data to send in our API request
+                    $api_params = array(
+                        'edd_action' => 'activate_license',                  //as the license is already activated this does not do anything. We could use check_license action but it gives different results  so we can't use it consistently with the result we get from the moment we activate it
+                        'license'    => $license,
+                        'item_name'  => urlencode($active_pro_addon_name),   // the name of our product in EDD
+                        'url'        => home_url()
+                    );
 
-                            // make sure the response came back okay
-                            if (!is_wp_error($response)) {
-                                $license_data = json_decode(wp_remote_retrieve_body($response));
-                                if (false === $license_data->success) {
-                                    $license_information_for_all_addons['invalid'][] = $license_data;
-                                    break;//we only need one failure
-                                } else {
-                                    $license_information_for_all_addons['valid'][] = $license_data;
-                                }
-                            }
+                    // Call the custom API.
+                    $response = wp_remote_post($this->store_url, array('timeout' => 15, 'sslverify' => false, 'body' => $api_params));
+
+                    // make sure the response came back okay
+                    if (!is_wp_error($response)) {
+                        $license_data = json_decode(wp_remote_retrieve_body($response));
+                        if (false === $license_data->success) {
+                            $license_information_for_all_addons['invalid'][] = $license_data;
+                            break;//we only need one failure
+                        } else {
+                            $license_information_for_all_addons['valid'][] = $license_data;
                         }
                     }
-
-                    //store the license reponse for each addon in the database
-                    $this->update_option('trp_license_details', $license_information_for_all_addons);
-
                 }
+            }
 
-            } else {
+            //store the license reponse for each addon in the database
+            $this->update_option('trp_license_details', $license_information_for_all_addons);
+
+            if( !$license ){
                 //we need to throw a notice if we have a pro addon active and no license entered
                 $license_information_for_all_addons['invalid'][] = (object) array( 'error' => 'missing' );
                 $this->update_option('trp_license_details', $license_information_for_all_addons);

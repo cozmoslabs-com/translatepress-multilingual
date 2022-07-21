@@ -177,6 +177,7 @@
 <?php __("Visual Editor", "translatepress-multilingual"); ?>
 <?php __("String Translation", "translatepress-multilingual"); ?>
 <?php __("Translate Page", "translatepress-multilingual"); ?>
+<?php __("Opens post in the translation editor. Post must be saved as draft or published beforehand.", "translatepress-multilingual"); ?>
 <?php __("Security check", "translatepress-multilingual"); ?>
 <?php __("<strong>Warning:</strong> Some strings have possibly incorrectly encoded characters. This may result in breaking the queries, rendering the page untranslated in live mode. Consider revising the following strings or their method of outputting.", "translatepress-multilingual"); ?>
 <?php __("Description", "translatepress-multilingual"); ?>
