@@ -49,7 +49,7 @@ msgstr ""
 msgid "Settings saved."
 msgstr ""
 
-#: includes/class-advanced-tab.php:319, includes/class-error-manager.php:172, partials/machine-translation-settings-page.php:17, partials/machine-translation-settings-page.php:121, partials/machine-translation-settings-page.php:141, partials/machine-translation-settings-page.php:192, partials/main-settings-page.php:42, partials/main-settings-page.php:55, partials/main-settings-page.php:68
+#: includes/class-advanced-tab.php:319, includes/class-error-manager.php:180, partials/machine-translation-settings-page.php:17, partials/machine-translation-settings-page.php:121, partials/machine-translation-settings-page.php:141, partials/machine-translation-settings-page.php:192, partials/main-settings-page.php:42, partials/main-settings-page.php:55, partials/main-settings-page.php:68
 msgid "Yes"
 msgstr ""
 
@@ -177,87 +177,87 @@ msgstr ""
 msgid "The content of this element should be written in the default language."
 msgstr ""
 
-#: includes/class-error-manager.php:50
+#: includes/class-error-manager.php:43
 msgid "<strong>TranslatePress</strong> encountered SQL errors. <a href=\"%s\" title=\"View TranslatePress SQL Errors\">Check out the errors</a>."
 msgstr ""
 
-#: includes/class-error-manager.php:59
+#: includes/class-error-manager.php:61
 msgid "Automatic translation has been disabled."
 msgstr ""
 
-#: includes/class-error-manager.php:146, includes/class-plugin-notices.php:341, includes/class-plugin-notices.php:392, includes/class-plugin-notices.php:373, includes/class-plugin-notices.php:406, includes/class-plugin-notices.php:431, includes/class-plugin-notices.php:455, includes/class-reviews.php:119, includes/class-reviews.php:122, includes/class-upgrade.php:839
+#: includes/class-error-manager.php:154, includes/class-plugin-notices.php:341, includes/class-plugin-notices.php:392, includes/class-plugin-notices.php:373, includes/class-plugin-notices.php:406, includes/class-plugin-notices.php:431, includes/class-plugin-notices.php:455, includes/class-reviews.php:119, includes/class-reviews.php:122, includes/class-upgrade.php:839
 msgid "Dismiss this notice."
 msgstr ""
 
-#: includes/class-error-manager.php:164
+#: includes/class-error-manager.php:172
 msgid "Logged errors"
 msgstr ""
 
-#: includes/class-error-manager.php:165
+#: includes/class-error-manager.php:173
 msgid "These are the most recent 5 errors logged by TranslatePress:"
 msgstr ""
 
-#: includes/class-error-manager.php:189
+#: includes/class-error-manager.php:197
 msgid "Why are these errors occuring"
 msgstr ""
 
-#: includes/class-error-manager.php:190
+#: includes/class-error-manager.php:198
 msgid "If TranslatePress detects something wrong when executing queries on your database, it may disable the Automatic Translation feature in order to avoid any extra charging by Google/DeepL. Automatic Translation needs to be manually turned on, after you solve the issues."
 msgstr ""
 
-#: includes/class-error-manager.php:191
+#: includes/class-error-manager.php:199
 msgid "The SQL errors detected can occur for various reasons including missing tables, missing permissions for the SQL user to create tables or perform other operations, problems after site migration or changes to SQL server configuration."
 msgstr ""
 
-#: includes/class-error-manager.php:193
+#: includes/class-error-manager.php:201
 msgid "What you can do in this situation"
 msgstr ""
 
-#: includes/class-error-manager.php:195
+#: includes/class-error-manager.php:203
 msgid "Plan A."
 msgstr ""
 
-#: includes/class-error-manager.php:196
+#: includes/class-error-manager.php:204
 msgid "Go to Settings -> TranslatePress -> General tab and Save Settings. This will regenerate the tables using your current SQL settings. Check if no more errors occur while browsing your website in a translated language. Look at the timestamps of the errors to make sure you are not seeing the old errors. Only the most recent 5 errors are displayed."
 msgstr ""
 
-#: includes/class-error-manager.php:198
+#: includes/class-error-manager.php:206
 msgid "Plan B."
 msgstr ""
 
-#: includes/class-error-manager.php:199
+#: includes/class-error-manager.php:207
 msgid "If your problem isn't solved, try the following steps:"
 msgstr ""
 
-#: includes/class-error-manager.php:201
+#: includes/class-error-manager.php:209
 msgid "Create a backup of your database"
 msgstr ""
 
-#: includes/class-error-manager.php:202
+#: includes/class-error-manager.php:210
 msgid "Create a copy of each translation table where you encounter errors. You can copy the table within the same database (trp_dictionary_en_us_es_es_COPY for example) -- perform this step only if you want to keep the current translations"
 msgstr ""
 
-#: includes/class-error-manager.php:203
+#: includes/class-error-manager.php:211
 msgid "Remove the trouble tables by executing the DROP function on them"
 msgstr ""
 
-#: includes/class-error-manager.php:204
+#: includes/class-error-manager.php:212
 msgid "Go to Settings -> TranslatePress -> General tab and Save Settings. This will regenerate the tables using your current SQL server."
 msgstr ""
 
-#: includes/class-error-manager.php:205
+#: includes/class-error-manager.php:213
 msgid "Copy the relevant content from the duplicated tables (trp_dictionary_en_us_es_es_COPY for example) in the newly generated table (trp_dictionary_en_us_es_es) -- perform this step only if you want to keep the current translations"
 msgstr ""
 
-#: includes/class-error-manager.php:206
+#: includes/class-error-manager.php:214
 msgid "Test it to see if everything is working. If something went wrong, you can restore the backup that you've made at the first step. Check if no more errors occur while browsing your website in a translated language. Look at the timestamps of the errors to make sure you are not seeing the old errors. Only the most recent 5 errors are displayed."
 msgstr ""
 
-#: includes/class-error-manager.php:209
+#: includes/class-error-manager.php:217
 msgid "Plan C."
 msgstr ""
 
-#: includes/class-error-manager.php:210
+#: includes/class-error-manager.php:218
 msgid "If your problem still isn't solved, try asking your hosting about your errors. The most common issue is missing permissions for the SQL user, such as the Create Tables permission."
 msgstr ""
 
@@ -409,43 +409,51 @@ msgstr ""
 msgid "Light"
 msgstr ""
 
-#: includes/class-settings.php:452, add-ons-advanced/extra-languages/class-extra-languages.php:44
+#: includes/class-settings.php:229
+msgid "Invalid language code. Please try again."
+msgstr ""
+
+#: includes/class-settings.php:430
+msgid "Language codes can contain only A-Z a-z 0-9 - _ characters. Check your language codes in TranslatePress General Settings."
+msgstr ""
+
+#: includes/class-settings.php:478, add-ons-advanced/extra-languages/class-extra-languages.php:44
 msgid "Error! Duplicate URL slug values."
 msgstr ""
 
-#: includes/class-settings.php:493
+#: includes/class-settings.php:519
 msgid "Current Language"
 msgstr ""
 
-#: includes/class-settings.php:499
+#: includes/class-settings.php:525
 msgid "Opposite Language"
 msgstr ""
 
-#: includes/class-settings.php:539
+#: includes/class-settings.php:565
 msgid "General"
 msgstr ""
 
-#: includes/class-settings.php:544, includes/class-translation-manager.php:438
+#: includes/class-settings.php:570, includes/class-translation-manager.php:438
 msgid "Translate Site"
 msgstr ""
 
-#: includes/class-settings.php:549
+#: includes/class-settings.php:575
 msgid "Addons"
 msgstr ""
 
-#: includes/class-settings.php:557
+#: includes/class-settings.php:583
 msgid "License"
 msgstr ""
 
-#: includes/class-settings.php:601, includes/class-translation-manager.php:470
+#: includes/class-settings.php:627, includes/class-translation-manager.php:470
 msgid "Settings"
 msgstr ""
 
-#: includes/class-settings.php:614, partials/license-settings-page.php:32
+#: includes/class-settings.php:640, partials/license-settings-page.php:32
 msgid "Activate License"
 msgstr ""
 
-#: includes/class-settings.php:606
+#: includes/class-settings.php:632
 msgid "Pro Features"
 msgstr ""
 
