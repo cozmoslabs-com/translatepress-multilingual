@@ -69,7 +69,7 @@ class TRP_Error_Manager{
                 );
             }
         }
-        if ( $error_details['notification_id'] ){
+        if ( isset( $error_details['notification_id'] ) && isset( $error_details['message'] ) ) {
             $option['notifications'][$error_details['notification_id']] = array(
                 'notification_id' => $error_details['notification_id'],
                 'message' => $error_details['message'] .' ' . $error_message

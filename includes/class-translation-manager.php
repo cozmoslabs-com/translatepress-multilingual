@@ -1010,7 +1010,7 @@ class TRP_Translation_Manager
                      * but for some reason it returns our gettext string without the stripped gettext.
                      */
 
-                    if ( $text != 'Name: %1$s, Username: %2$s' && $text != 'Name: %1$s, Guest' ) {
+                    if ( ($text != 'Name: %1$s, Username: %2$s' && $text != 'Name: %1$s, Guest' && $domain == 'woocommerce-payments') || $domain != 'woocommerce-payments') {
                         $translation = apply_filters( 'trp_process_gettext_tags', '#!trpst#trp-gettext data-trpgettextoriginal=' . $db_id . '#!trpen#' . $translation . '#!trpst#/trp-gettext#!trpen#', $translation, $skip_gettext_querying, $text, $domain );
 
                     }
