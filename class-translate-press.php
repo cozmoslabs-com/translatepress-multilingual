@@ -35,6 +35,7 @@ class TRP_Translate_Press{
     protected $reviews;
     protected $rewrite_rules;
     protected $check_invalid_text;
+    protected $woocommerce_emails;
 
     public $active_pro_addons = array();
     public static $translate_press = null;
@@ -60,7 +61,7 @@ class TRP_Translate_Press{
         define( 'TRP_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
         define( 'TRP_PLUGIN_BASE', plugin_basename( __DIR__ . '/index.php' ) );
         define( 'TRP_PLUGIN_SLUG', 'translatepress-multilingual' );
-        define( 'TRP_PLUGIN_VERSION', '2.3.4' );
+        define( 'TRP_PLUGIN_VERSION', '2.3.5' );
 
 	    wp_cache_add_non_persistent_groups(array('trp'));
 
@@ -120,6 +121,7 @@ class TRP_Translate_Press{
         require_once TRP_PLUGIN_DIR . 'includes/class-reviews.php';
         require_once TRP_PLUGIN_DIR . 'includes/class-rewrite-rules.php';
         require_once TRP_PLUGIN_DIR . 'includes/class-check-invalid-text.php';
+        require_once TRP_PLUGIN_DIR . 'includes/class-woocommerce-emails.php';
         require_once TRP_PLUGIN_DIR . 'assets/lib/tp-add-ons-listing/tp-add-ons-listing.php';
         if ( did_action( 'elementor/loaded' ) )
             require_once TRP_PLUGIN_DIR . 'includes/class-elementor-language-for-blocks.php';
@@ -162,6 +164,7 @@ class TRP_Translate_Press{
         $this->reviews                    = new TRP_Reviews( $this->settings->get_settings() );
         $this->rewrite_rules              = new TRP_Rewrite_Rules( $this->settings->get_settings() );
         $this->check_invalid_text         = new TRP_Check_Invalid_Text( );
+        $this->woocommerce_emails         = new TRP_Woocommerce_Emails();
     }
 
     /**
@@ -284,6 +287,9 @@ class TRP_Translate_Press{
 
         // Filter rewrite rules for .htaccess
         $this->loader->add_filter( 'mod_rewrite_rules', $this->rewrite_rules, 'trp_remove_language_param', 100 );
+
+        // Add hooks for translating WooCommerce emails
+        $this->loader->add_action( 'init', $this->woocommerce_emails, 'initialize_hooks' );
     }
 
     /**

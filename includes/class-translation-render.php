@@ -928,11 +928,12 @@ class TRP_Translation_Render{
 	    }
 	    $final_html = $html->save();
 
-        /* perform preg replace on the remaining trp-gettext tags */
+       /* perform preg replace on the remaining trp-gettext tags */
         $final_html = $this->remove_trp_html_tags( $final_html );
 
 	    return apply_filters( 'trp_translated_html', $final_html, $TRP_LANGUAGE, $language_code, $preview_mode );
     }
+
 
     public function handle_custom_links_and_forms( $html ){
         global $TRP_LANGUAGE;

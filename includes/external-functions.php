@@ -132,3 +132,13 @@ function trp_is_valid_language_code( $language_code ){
         return true;
     }
 }
+
+/**
+ * Determine user language
+ *
+ * @param $user_id
+ * @return mixed
+ */
+function trp_get_user_language( $user_id ){
+    return get_user_meta( $user_id, 'trp_language', true );
+}
