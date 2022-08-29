@@ -5,7 +5,7 @@ Tags: translate, translation, multilingual, automatic translation, bilingual, fr
 Requires at least: 3.1.0
 Tested up to: 6.0.1
 Requires PHP: 5.6.20
-Stable tag: 2.3.5
+Stable tag: 2.3.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -140,6 +140,9 @@ For more information please check out our [documentation](https://translatepress
 
 
 == Changelog ==
+= 2.3.6 =
+* Fixed error when resetting password on WooCommerce form
+
 = 2.3.5 =
 * Added feature to remember user language for WooCommerce emails. Both admins and customers now receive all Woo emails in their preferred language, not just on checkout
 * Improved handling of empty or invalid schema json arrays in script tags on translated languages

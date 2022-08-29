@@ -123,21 +123,22 @@ class TRP_Woocommerce_Emails{
      * @return false
      */
     public function trp_woo_setup_locale( $bool, $wc_email ) {
-
+        global $TRP_LANGUAGE, $TRP_LANGUAGE_COPY;
         $is_customer_email  = $wc_email->is_customer_email();
         $recipients         = explode( ',', $wc_email->get_recipient() );
-        $language           = '';
+        $language           = $TRP_LANGUAGE;
         $user_id            = 0;
 
         if( $is_customer_email ){
             global $TRP_EMAIL_ORDER;
             $order = wc_get_order( $TRP_EMAIL_ORDER );
-            $user_id = $order->get_user_id();
-            if( $user_id > 0 ){
-                $language = get_user_meta( $user_id, 'trp_language', true );
-            }
-            else{
-                $language = get_post_meta( $TRP_EMAIL_ORDER, 'trp_language', true );
+            if ( $order ) {
+                $user_id = $order->get_user_id();
+                if ( $user_id > 0 ) {
+                    $language = get_user_meta( $user_id, 'trp_language', true );
+                } else {
+                    $language = get_post_meta( $TRP_EMAIL_ORDER, 'trp_language', true );
+                }
             }
         }
         else{
@@ -152,7 +153,6 @@ class TRP_Woocommerce_Emails{
         $language = apply_filters( 'trp_woo_email_language', $language, $is_customer_email, $recipients, $user_id );
         $language = $this->validate_language( $language );
 
-        global $TRP_LANGUAGE, $TRP_LANGUAGE_COPY;
         $TRP_LANGUAGE = $language;
         $TRP_LANGUAGE_COPY = $language;
 
