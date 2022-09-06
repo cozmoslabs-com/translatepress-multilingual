@@ -3,9 +3,9 @@ Contributors: cozmoslabs, razvan.mo, madalin.ungureanu, sareiodata, cristophor
 Donate link: https://www.translatepress.com/
 Tags: translate, translation, multilingual, automatic translation, bilingual, front-end translation, google translate, language
 Requires at least: 3.1.0
-Tested up to: 6.0.1
+Tested up to: 6.0.2
 Requires PHP: 5.6.20
-Stable tag: 2.3.6
+Stable tag: 2.3.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -140,6 +140,10 @@ For more information please check out our [documentation](https://translatepress
 
 
 == Changelog ==
+= 2.3.7 =
+* Fixed missing GET parameters when accessing a custom url without subdirectory
+* Added filter trp_redirect_status to allow changing redirect status from all wp_redirect calls
+
 = 2.3.6 =
 * Fixed error when resetting password on WooCommerce form
 

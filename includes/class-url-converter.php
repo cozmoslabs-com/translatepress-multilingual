@@ -415,8 +415,17 @@ class TRP_Url_Converter {
             $arguments = str_replace(untrailingslashit($processed_permalink), '', $url_to_replace );
 
             // if nothing was replaced, something was wrong, just use the normal permalink without any arguments.
-            if( $arguments == $url_to_replace )
+            if( $arguments == $url_to_replace ) {
                 $arguments = '';
+                //try again, this time trying to correct url_to_replace to include subdirectory
+                if (isset ($this->settings['add-subdirectory-to-default-language']) && $this->settings['add-subdirectory-to-default-language'] === 'yes' && $this->get_lang_from_url_string( $url_to_replace ) == null ) {
+                    $possible_url_to_replace = $this->add_language_to_home_url( $url, ( empty( $url_obj->getQuery() ) ) ? $url_obj->getPath() : rtrim( $url_obj->getPath(), '/' ) . '/?' . $url_obj->getQuery(), $url_obj->getScheme(), get_current_blog_id() );
+                    $arguments = str_replace( untrailingslashit( $processed_permalink ), '', $possible_url_to_replace );
+                    if ( $arguments == $possible_url_to_replace ) {
+                        $arguments = '';
+                    }
+                }
+            }
 
             $TRP_LANGUAGE = $language;
             $new_url = trailingslashit( get_permalink($post_id) ) . ltrim($arguments, '/');
