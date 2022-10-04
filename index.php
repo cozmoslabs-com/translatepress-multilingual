@@ -3,14 +3,14 @@
 Plugin Name: TranslatePress - Multilingual
 Plugin URI: https://translatepress.com/
 Description: Experience a better way of translating your WordPress site using a visual front-end translation editor, with full support for WooCommerce and site builders.
-Version: 2.3.7
+Version: 2.3.8
 Author: Cozmoslabs, Razvan Mocanu, Madalin Ungureanu, Cristophor Hurduban
 Author URI: https://cozmoslabs.com/
 Text Domain: translatepress-multilingual
 Domain Path: /languages
 License: GPL2
 WC requires at least: 2.5.0
-WC tested up to: 6.8.2
+WC tested up to: 6.9.4
 
 == Copyright ==
 Copyright 2017 Cozmoslabs (www.cozmoslabs.com)
@@ -62,6 +62,37 @@ function trp_translatepress_disabled_notice(){
 	echo '<div class="notice notice-error"><p>' . wp_kses( sprintf( __( '<strong>TranslatePress</strong> requires at least PHP version 5.6.20+ to run. It is the <a href="%s">minimum requirement of the latest WordPress version</a>. Please contact your server administrator to update your PHP version.','translatepress-multilingual' ), 'https://wordpress.org/about/requirements/' ), array( 'a' => array( 'href' => array() ), 'strong' => array() ) ) . '</p></div>';
 }
 
+/**
+ * Redirect users to the settings page on plugin activation
+ */
+add_action( 'activated_plugin', 'trp_plugin_activation_redirect' );
+function trp_plugin_activation_redirect( $plugin ){
+
+	if( !wp_doing_ajax() && $plugin == plugin_basename( __FILE__ ) ) {
+		wp_safe_redirect( admin_url( 'options-general.php?page=translate-press' ) );
+		exit();
+	}
+
+}
+
+// Plugin option hooks for plugin activation or deactivation
+function trp_plugin_activate() {
+
+	$trp = TRP_Translate_Press::get_trp_instance();
+
+	$trp->plugin_optin->process_plugin_activation();
+
+}
+register_activation_hook( __FILE__, 'trp_plugin_activate' );
+
+function trp_plugin_deactivate() {
+
+	$trp = TRP_Translate_Press::get_trp_instance();
+
+	$trp->plugin_optin->process_plugin_deactivation();
+
+}
+register_deactivation_hook( __FILE__, 'trp_plugin_deactivate' );
 
 //This is for the DEV version
 if( file_exists(plugin_dir_path( __FILE__ ) . '/index-dev.php') )

@@ -141,6 +141,7 @@
                             <div class="trp-email-course__error"><?php esc_html_e( 'Invalid email address', 'translatepress-multilingual' ) ?></div>
                             
                             <input type="email" name="trp_email_course_email" placeholder="<?php esc_html_e( 'Your email', 'translatepress-multilingual' ) ?>" value=""/>
+                            <input type="hidden" name="trp_installed_plugin_version" value="<?php echo esc_attr( TRP_Plugin_Optin::get_current_active_version() ); ?>" />
 
                             <input type="submit" class="button-primary" value="<?php esc_attr_e( 'Sign me up!', 'translatepress-multilingual' ); ?>"/>
                         </div>

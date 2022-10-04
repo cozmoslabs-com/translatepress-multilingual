@@ -399,19 +399,30 @@ class TRP_Trigger_Plugin_Notifications{
         }
 
 	    /* this must be unique */
-	    $notification_id = 'trp_new_feature_image_translation';
+//	    $notification_id = 'trp_new_feature_image_translation';
+//
+//	    $message = '<p style="padding-right:30px;">' . __('NEW: Display different images based on language. Find out <a href="https://translatepress.com/docs/image-translation/" >how to translate images, sliders and more</a> from the TranslatePress editor.' , 'translatepress-multilingual' ) . '</p>';
+//	    //make sure to use the trp_dismiss_admin_notification arg
+//	    $message .= '<a href="' . add_query_arg(array('trp_dismiss_admin_notification' => $notification_id)) . '" type="button" class="notice-dismiss"><span class="screen-reader-text">' . __('Dismiss this notice.', 'translatepress-multilingual') . '</span></a>';
+//
+//	    $notifications->add_notification($notification_id, $message, 'trp-notice trp-narrow notice notice-info', true, array('translate-press'));
 
-	    $message = '<p style="padding-right:30px;">' . __('NEW: Display different images based on language. Find out <a href="https://translatepress.com/docs/image-translation/" >how to translate images, sliders and more</a> from the TranslatePress editor.' , 'translatepress-multilingual' ) . '</p>';
+
+	    /* String translation */
+	    $notification_id = 'trp_new_feature_string_translation';
+
+	    $message = '<p style="padding-right:30px;">' . __('NEW: Translate Emails and other plugin texts using String Translation. Find out <a href="https://translatepress.com/docs/translation-editor/string-translation/?utm_source=wpbackend&utm_medium=clientsite&utm_content=tpsettings" >how to search for a specific text to translate</a>.' , 'translatepress-multilingual' ) . '</p>';
 	    //make sure to use the trp_dismiss_admin_notification arg
 	    $message .= '<a href="' . add_query_arg(array('trp_dismiss_admin_notification' => $notification_id)) . '" type="button" class="notice-dismiss"><span class="screen-reader-text">' . __('Dismiss this notice.', 'translatepress-multilingual') . '</span></a>';
 
 	    $notifications->add_notification($notification_id, $message, 'trp-notice trp-narrow notice notice-info', true, array('translate-press'));
 
-        /*
-         *
-         *  Machine translation enabled and  quota is met.
-         *
-         */
+
+	    /*
+		 *
+		 *  Machine translation enabled and  quota is met.
+		 *
+		 */
         $trp = TRP_Translate_Press::get_trp_instance();
         if ( ! $this->settings_obj )
             $this->settings_obj = $trp->get_component( 'settings' );

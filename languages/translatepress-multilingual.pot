@@ -49,23 +49,23 @@ msgstr ""
 msgid "Settings saved."
 msgstr ""
 
-#: includes/class-advanced-tab.php:319, includes/class-error-manager.php:180, partials/machine-translation-settings-page.php:17, partials/machine-translation-settings-page.php:121, partials/machine-translation-settings-page.php:141, partials/machine-translation-settings-page.php:192, partials/main-settings-page.php:42, partials/main-settings-page.php:55, partials/main-settings-page.php:68
+#: includes/class-advanced-tab.php:320, includes/class-error-manager.php:180, partials/machine-translation-settings-page.php:17, partials/machine-translation-settings-page.php:121, partials/machine-translation-settings-page.php:141, partials/machine-translation-settings-page.php:192, partials/main-settings-page.php:42, partials/main-settings-page.php:55, partials/main-settings-page.php:68
 msgid "Yes"
 msgstr ""
 
-#: includes/class-advanced-tab.php:529, includes/class-advanced-tab.php:540, includes/class-advanced-tab.php:634, includes/class-advanced-tab.php:665
+#: includes/class-advanced-tab.php:530, includes/class-advanced-tab.php:541, includes/class-advanced-tab.php:635, includes/class-advanced-tab.php:666
 msgid "Are you sure you want to remove this item?"
 msgstr ""
 
-#: includes/class-advanced-tab.php:529, includes/class-advanced-tab.php:540, includes/class-advanced-tab.php:634, includes/class-advanced-tab.php:665, partials/main-settings-language-selector.php:60, add-ons-advanced/extra-languages/partials/language-selector-pro.php:62
+#: includes/class-advanced-tab.php:530, includes/class-advanced-tab.php:541, includes/class-advanced-tab.php:635, includes/class-advanced-tab.php:666, partials/main-settings-language-selector.php:60, add-ons-advanced/extra-languages/partials/language-selector-pro.php:62
 msgid "Remove"
 msgstr ""
 
-#: includes/class-advanced-tab.php:540, includes/class-advanced-tab.php:665, partials/main-settings-language-selector.php:102, add-ons-advanced/extra-languages/partials/language-selector-pro.php:103
+#: includes/class-advanced-tab.php:541, includes/class-advanced-tab.php:666, partials/main-settings-language-selector.php:102, add-ons-advanced/extra-languages/partials/language-selector-pro.php:103
 msgid "Add"
 msgstr ""
 
-#: includes/class-advanced-tab.php:618, includes/class-advanced-tab.php:652
+#: includes/class-advanced-tab.php:619, includes/class-advanced-tab.php:653
 msgid "Select..."
 msgstr ""
 
@@ -185,7 +185,7 @@ msgstr ""
 msgid "Automatic translation has been disabled."
 msgstr ""
 
-#: includes/class-error-manager.php:154, includes/class-plugin-notices.php:341, includes/class-plugin-notices.php:392, includes/class-plugin-notices.php:373, includes/class-plugin-notices.php:406, includes/class-plugin-notices.php:431, includes/class-plugin-notices.php:455, includes/class-reviews.php:119, includes/class-reviews.php:122, includes/class-upgrade.php:839
+#: includes/class-error-manager.php:154, includes/class-plugin-notices.php:341, includes/class-plugin-notices.php:392, includes/class-plugin-notices.php:373, includes/class-plugin-notices.php:416, includes/class-plugin-notices.php:442, includes/class-plugin-notices.php:466, includes/class-reviews.php:119, includes/class-reviews.php:122, includes/class-upgrade.php:950
 msgid "Dismiss this notice."
 msgstr ""
 
@@ -325,16 +325,24 @@ msgstr ""
 msgid "Your <strong>TranslatePress</strong> serial number is invalid or missing. <br/>Please %1$sregister your copy%2$s to receive access to automatic updates and support. Need a license key? %3$sPurchase one now%4$s"
 msgstr ""
 
-#: includes/class-plugin-notices.php:404
-msgid "NEW: Display different images based on language. Find out <a href=\"https://translatepress.com/docs/image-translation/\" >how to translate images, sliders and more</a> from the TranslatePress editor."
+#: includes/class-plugin-notices.php:414
+msgid "NEW: Translate Emails and other plugin texts using String Translation. Find out <a href=\"https://translatepress.com/docs/translation-editor/string-translation/?utm_source=wpbackend&utm_medium=clientsite&utm_content=tpsettings\" >how to search for a specific text to translate</a>."
 msgstr ""
 
-#: includes/class-plugin-notices.php:428
+#: includes/class-plugin-notices.php:439
 msgid "The daily quota for machine translation characters exceeded. Please check the <strong>TranslatePress -> <a href=\"%s\">Automatic Translation</a></strong> page for more information."
 msgstr ""
 
-#: includes/class-plugin-notices.php:452
+#: includes/class-plugin-notices.php:463
 msgid "One or more languages are unsupported by the automatic translation provider. Please check the <strong>TranslatePress -> <a href=\"%s\">Automatic Translation</a></strong> page for more information."
+msgstr ""
+
+#: includes/class-plugin-optin.php:248
+msgid "Marketing optin"
+msgstr ""
+
+#: includes/class-plugin-optin.php:249
+msgid "Opt in to our security and feature updates notifications, and non-sensitive diagnostic tracking."
 msgstr ""
 
 #: includes/class-reviews.php:105
@@ -413,336 +421,420 @@ msgstr ""
 msgid "Invalid language code. Please try again."
 msgstr ""
 
-#: includes/class-settings.php:430
+#: includes/class-settings.php:433
 msgid "Language codes can contain only A-Z a-z 0-9 - _ characters. Check your language codes in TranslatePress General Settings."
 msgstr ""
 
-#: includes/class-settings.php:478, add-ons-advanced/extra-languages/class-extra-languages.php:44
+#: includes/class-settings.php:481, add-ons-advanced/extra-languages/class-extra-languages.php:44
 msgid "Error! Duplicate URL slug values."
 msgstr ""
 
-#: includes/class-settings.php:519
+#: includes/class-settings.php:522
 msgid "Current Language"
 msgstr ""
 
-#: includes/class-settings.php:525
+#: includes/class-settings.php:528
 msgid "Opposite Language"
 msgstr ""
 
-#: includes/class-settings.php:565
+#: includes/class-settings.php:568
 msgid "General"
 msgstr ""
 
-#: includes/class-settings.php:570, includes/class-translation-manager.php:438
+#: includes/class-settings.php:573, includes/class-translation-manager.php:447
 msgid "Translate Site"
 msgstr ""
 
-#: includes/class-settings.php:575
+#: includes/class-settings.php:578
 msgid "Addons"
 msgstr ""
 
-#: includes/class-settings.php:583
+#: includes/class-settings.php:586
 msgid "License"
 msgstr ""
 
-#: includes/class-settings.php:627, includes/class-translation-manager.php:470
+#: includes/class-settings.php:630, includes/class-translation-manager.php:479
 msgid "Settings"
 msgstr ""
 
-#: includes/class-settings.php:640, partials/license-settings-page.php:32
+#: includes/class-settings.php:643, partials/license-settings-page.php:32
 msgid "Activate License"
 msgstr ""
 
-#: includes/class-settings.php:632
+#: includes/class-settings.php:635
 msgid "Pro Features"
 msgstr ""
 
-#: includes/class-translation-manager.php:93
+#: includes/class-translation-manager.php:98
 msgid "Image source"
 msgstr ""
 
-#: includes/class-translation-manager.php:94
+#: includes/class-translation-manager.php:99
 msgid "Alt attribute"
 msgstr ""
 
-#: includes/class-translation-manager.php:95
+#: includes/class-translation-manager.php:100
 msgid "Title attribute"
 msgstr ""
 
-#: includes/class-translation-manager.php:96
+#: includes/class-translation-manager.php:101
 msgid "Anchor link"
 msgstr ""
 
-#: includes/class-translation-manager.php:97
+#: includes/class-translation-manager.php:102
 msgid "Placeholder attribute"
 msgstr ""
 
-#: includes/class-translation-manager.php:98
+#: includes/class-translation-manager.php:103
 msgid "Submit attribute"
 msgstr ""
 
-#: includes/class-translation-manager.php:99
+#: includes/class-translation-manager.php:104
 msgid "Text"
 msgstr ""
 
-#: includes/class-translation-manager.php:101
-msgid "Saved"
-msgstr ""
-
-#: includes/class-translation-manager.php:102
-msgid "Save translation"
-msgstr ""
-
-#: includes/class-translation-manager.php:103
-msgid "Saving translation..."
-msgstr ""
-
-#: includes/class-translation-manager.php:104
-msgid "You have unsaved changes!"
-msgstr ""
-
-#: includes/class-translation-manager.php:105
-msgid "Discard changes"
-msgstr ""
-
-#: includes/class-translation-manager.php:106
-msgid "Discard All"
-msgstr ""
-
 #: includes/class-translation-manager.php:107
-msgid "Loading Strings..."
+msgid "plural form"
 msgstr ""
 
 #: includes/class-translation-manager.php:108
-msgid "Select string to translate..."
+msgid "one"
 msgstr ""
 
 #: includes/class-translation-manager.php:109
-msgid "Close Editor"
+msgid "few"
 msgstr ""
 
 #: includes/class-translation-manager.php:110
-msgid "From"
+msgid "many"
 msgstr ""
 
 #: includes/class-translation-manager.php:111
-msgid "To"
-msgstr ""
-
-#: includes/class-translation-manager.php:112
-msgid "Next"
+msgid "other"
 msgstr ""
 
 #: includes/class-translation-manager.php:113
-msgid "Previous"
+msgid "Saved"
 msgstr ""
 
 #: includes/class-translation-manager.php:114
-msgid "Add Media"
+msgid "Save translation"
 msgstr ""
 
 #: includes/class-translation-manager.php:115
-msgid "Other languages"
+msgid "Saving translation..."
 msgstr ""
 
 #: includes/class-translation-manager.php:116
-msgid "View As"
+msgid "You have unsaved changes!"
 msgstr ""
 
 #: includes/class-translation-manager.php:117
-msgid "Available in our Pro Versions"
+msgid "Discard changes"
+msgstr ""
+
+#: includes/class-translation-manager.php:118
+msgid "Discard All"
+msgstr ""
+
+#: includes/class-translation-manager.php:119
+msgid "Loading Strings..."
 msgstr ""
 
 #: includes/class-translation-manager.php:120
-msgid "Select or Upload Media"
+msgid "Select string to translate..."
 msgstr ""
 
 #: includes/class-translation-manager.php:121
-msgid "Use this media"
+msgid "Close Editor"
+msgstr ""
+
+#: includes/class-translation-manager.php:122
+msgid "From"
+msgstr ""
+
+#: includes/class-translation-manager.php:123
+msgid "To"
 msgstr ""
 
 #: includes/class-translation-manager.php:124
-msgid "Translate"
+msgid "Next"
 msgstr ""
 
 #: includes/class-translation-manager.php:125
-msgid "Translate entire block element"
+msgid "Previous"
 msgstr ""
 
 #: includes/class-translation-manager.php:126
-msgid "Split block to translate strings individually"
+msgid "Add Media"
 msgstr ""
 
 #: includes/class-translation-manager.php:127
-msgid "Save changes to translation. Shortcut: CTRL(⌘) + S"
+msgid "Other languages"
 msgstr ""
 
 #: includes/class-translation-manager.php:128
-msgid "Navigate to next string in dropdown list. Shortcut: CTRL(⌘) + ALT + Right Arrow"
+msgid "Context"
 msgstr ""
 
 #: includes/class-translation-manager.php:129
-msgid "Navigate to previous string in dropdown list. Shortcut: CTRL(⌘) + ALT + Left Arrow"
+msgid "View As"
 msgstr ""
 
 #: includes/class-translation-manager.php:130
-msgid "Discard all changes. Shortcut: CTRL(⌘) + ALT + Z"
+msgid "Available in our Pro Versions"
 msgstr ""
 
-#: includes/class-translation-manager.php:131
-msgid "Discard changes to this text box. To discard changes to all text boxes use shortcut: CTRL(⌘) + ALT + Z"
+#: includes/class-translation-manager.php:133
+msgid "Select or Upload Media"
 msgstr ""
 
-#: includes/class-translation-manager.php:132
-msgid "Dismiss tooltip"
+#: includes/class-translation-manager.php:134
+msgid "Use this media"
 msgstr ""
 
-#: includes/class-translation-manager.php:133, includes/class-translation-manager.php:168, includes/class-translation-manager.php:174, includes/class-translation-manager.php:179, includes/class-translation-manager.php:184
-msgid "Quick Intro"
-msgstr ""
-
-#: includes/class-translation-manager.php:135
-msgid "Are you sure you want to split this phrase into smaller parts?"
-msgstr ""
-
-#: includes/class-translation-manager.php:136
-msgid "This string is not ready for translation yet. <br>Try again in a moment..."
+#: includes/class-translation-manager.php:137
+msgid "Translate"
 msgstr ""
 
 #: includes/class-translation-manager.php:138
-msgid "For this option to work, please update the Browse as other role add-on to the latest version."
+msgid "Translate entire block element"
 msgstr ""
 
 #: includes/class-translation-manager.php:139
-msgid "To translate slugs, please update the SEO Pack add-on to the latest version."
+msgid "Split block to translate strings individually"
+msgstr ""
+
+#: includes/class-translation-manager.php:140
+msgid "Save changes to translation. Shortcut: CTRL(⌘) + S"
+msgstr ""
+
+#: includes/class-translation-manager.php:141
+msgid "Navigate to next string in dropdown list. Shortcut: CTRL(⌘) + ALT + Right Arrow"
 msgstr ""
 
 #: includes/class-translation-manager.php:142
-msgid "You can add a new language from <a href=\"%s\">Settings->TranslatePress</a>"
+msgid "Navigate to previous string in dropdown list. Shortcut: CTRL(⌘) + ALT + Left Arrow"
 msgstr ""
 
 #: includes/class-translation-manager.php:143
-msgid "However, you can still use TranslatePress to <strong style=\"background: #f5fb9d;\">modify gettext strings</strong> available in your page."
+msgid "Discard all changes. Shortcut: CTRL(⌘) + ALT + Z"
 msgstr ""
 
 #: includes/class-translation-manager.php:144
-msgid "Strings that are user-created cannot be modified, only those from themes and plugins."
+msgid "Discard changes to this text box. To discard changes to all text boxes use shortcut: CTRL(⌘) + ALT + Z"
 msgstr ""
 
-#: includes/class-translation-manager.php:146
-msgid "Extra Translation Features"
+#: includes/class-translation-manager.php:145
+msgid "Dismiss tooltip"
 msgstr ""
 
-#: includes/class-translation-manager.php:147
-msgid "Support for 221 Extra Languages"
+#: includes/class-translation-manager.php:146, includes/class-translation-manager.php:180, includes/class-translation-manager.php:186, includes/class-translation-manager.php:191, includes/class-translation-manager.php:196
+msgid "Quick Intro"
 msgstr ""
 
 #: includes/class-translation-manager.php:148
-msgid "Yoast SEO support"
+msgid "Are you sure you want to split this phrase into smaller parts?"
 msgstr ""
 
 #: includes/class-translation-manager.php:149
-msgid "Translate SEO Title, Description, Slug"
-msgstr ""
-
-#: includes/class-translation-manager.php:150
-msgid "Publish only when translation is complete"
+msgid "This string is not ready for translation yet. <br>Try again in a moment..."
 msgstr ""
 
 #: includes/class-translation-manager.php:151
-msgid "Translate by Browsing as User Role"
+msgid "For this option to work, please update the Browse as other role add-on to the latest version."
 msgstr ""
 
 #: includes/class-translation-manager.php:152
-msgid "Different Menu Items for each Language"
-msgstr ""
-
-#: includes/class-translation-manager.php:153, partials/addons-settings-page.php:54, add-ons-pro/automatic-language-detection/class-automatic-language-detection.php:53, add-ons-pro/automatic-language-detection/partials/general-settings.php:1, add-ons-pro/automatic-language-detection/partials/settings-option.php:1
-msgid "Automatic User Language Detection"
-msgstr ""
-
-#: includes/class-translation-manager.php:154
-msgid "Supported By Real People"
+msgid "To translate slugs, please update the SEO Pack add-on to the latest version."
 msgstr ""
 
 #: includes/class-translation-manager.php:155
-msgid "Find Out More"
+msgid "You can add a new language from <a href=\"%s\">Settings->TranslatePress</a>"
+msgstr ""
+
+#: includes/class-translation-manager.php:156
+msgid "However, you can still use TranslatePress to <strong style=\"background: #f5fb9d;\">modify gettext strings</strong> available in your page."
 msgstr ""
 
 #: includes/class-translation-manager.php:157
-msgid "No available suggestions"
-msgstr ""
-
-#: includes/class-translation-manager.php:158
-msgid "Suggestions from translation memory"
+msgid "Strings that are user-created cannot be modified, only those from themes and plugins."
 msgstr ""
 
 #: includes/class-translation-manager.php:159
+msgid "Extra Translation Features"
+msgstr ""
+
+#: includes/class-translation-manager.php:160
+msgid "Support for 221 Extra Languages"
+msgstr ""
+
+#: includes/class-translation-manager.php:161
+msgid "Yoast SEO support"
+msgstr ""
+
+#: includes/class-translation-manager.php:162
+msgid "Translate SEO Title, Description, Slug"
+msgstr ""
+
+#: includes/class-translation-manager.php:163
+msgid "Publish only when translation is complete"
+msgstr ""
+
+#: includes/class-translation-manager.php:164
+msgid "Translate by Browsing as User Role"
+msgstr ""
+
+#: includes/class-translation-manager.php:165
+msgid "Different Menu Items for each Language"
+msgstr ""
+
+#: includes/class-translation-manager.php:166, partials/addons-settings-page.php:54, add-ons-pro/automatic-language-detection/class-automatic-language-detection.php:53, add-ons-pro/automatic-language-detection/partials/general-settings.php:1, add-ons-pro/automatic-language-detection/partials/settings-option.php:1
+msgid "Automatic User Language Detection"
+msgstr ""
+
+#: includes/class-translation-manager.php:167
+msgid "Supported By Real People"
+msgstr ""
+
+#: includes/class-translation-manager.php:168
+msgid "Find Out More"
+msgstr ""
+
+#: includes/class-translation-manager.php:170
+msgid "No available suggestions"
+msgstr ""
+
+#: includes/class-translation-manager.php:171
+msgid "Suggestions from translation memory"
+msgstr ""
+
+#: includes/class-translation-manager.php:172
 msgid "Click to Copy"
 msgstr ""
 
-#: includes/class-translation-manager.php:169
+#: includes/class-translation-manager.php:181
 msgid "Hover any text on the page, click <img src=\"%s\" class=\"trp-edit-icon-inline\">, then modify the translation in the sidebar."
 msgstr ""
 
-#: includes/class-translation-manager.php:175
+#: includes/class-translation-manager.php:187
 msgid "Don't forget to Save Translation. Use keyboard shortcut CTRL(⌘) + S"
 msgstr ""
 
-#: includes/class-translation-manager.php:180
+#: includes/class-translation-manager.php:192
 msgid "Switch language to see the translation changes directly on the page."
 msgstr ""
 
-#: includes/class-translation-manager.php:185
+#: includes/class-translation-manager.php:197
 msgid "Search for any text in this page in the dropdown."
 msgstr ""
 
-#: includes/class-translation-manager.php:231, add-ons-advanced/seo-pack/includes/string-translation/class-string-translation-seo.php:12
+#: includes/class-translation-manager.php:239, includes/string-translation/class-string-translation.php:368, add-ons-advanced/seo-pack/includes/string-translation/class-string-translation-seo.php:12
 msgid "Slugs"
 msgstr ""
 
-#: includes/class-translation-manager.php:232
+#: includes/class-translation-manager.php:240
 msgid "Meta Information"
 msgstr ""
 
-#: includes/class-translation-manager.php:233
+#: includes/class-translation-manager.php:241
 msgid "String List"
 msgstr ""
 
-#: includes/class-translation-manager.php:234
+#: includes/class-translation-manager.php:242
 msgid "Gettext Strings"
 msgstr ""
 
-#: includes/class-translation-manager.php:235
+#: includes/class-translation-manager.php:243
 msgid "Images"
 msgstr ""
 
-#: includes/class-translation-manager.php:236
+#: includes/class-translation-manager.php:244
 msgid "Dynamically Added Strings"
 msgstr ""
 
-#: includes/class-translation-manager.php:272
+#: includes/class-translation-manager.php:281
 msgid "Visual Editor"
 msgstr ""
 
-#: includes/class-translation-manager.php:278
+#: includes/class-translation-manager.php:283
+msgid "Edit translations by visually selecting them on each site page"
+msgstr ""
+
+#: includes/class-translation-manager.php:287
 msgid "String Translation"
 msgstr ""
 
-#: includes/class-translation-manager.php:451, includes/class-translation-manager.php:512
+#: includes/class-translation-manager.php:289
+msgid "Edit url slug translations, plugins and theme translation (emails, forms etc.)"
+msgstr ""
+
+#: includes/class-translation-manager.php:460, includes/class-translation-manager.php:521
 msgid "Translate Page"
 msgstr ""
 
-#: includes/class-translation-manager.php:510
+#: includes/class-translation-manager.php:519
 msgid "Opens post in the translation editor. Post must be saved as draft or published beforehand."
 msgstr ""
 
-#: includes/class-translation-manager.php:1337
+#: includes/class-translation-manager.php:633
 msgid "Security check"
 msgstr ""
 
-#: includes/class-translation-manager.php:1411
+#: includes/class-translation-manager.php:705
 msgid "<strong>Warning:</strong> Some strings have possibly incorrectly encoded characters. This may result in breaking the queries, rendering the page untranslated in live mode. Consider revising the following strings or their method of outputting."
+msgstr ""
+
+#: includes/class-translation-manager.php:730, includes/class-upgrade.php:311
+msgid "TranslatePress data update"
+msgstr ""
+
+#: includes/class-translation-manager.php:730, includes/class-upgrade.php:311
+msgid "We need to update your translations database to the latest version."
+msgstr ""
+
+#: includes/class-translation-manager.php:731
+msgid "Updating will allow editing translations of localized text from plugins and theme. Existing translation will still work as expected."
+msgstr ""
+
+#: includes/class-translation-manager.php:733, includes/class-upgrade.php:312
+msgid "IMPORTANT: It is strongly recommended to first backup the database!\nAre you sure you want to continue?"
+msgstr ""
+
+#: includes/class-translation-manager.php:733, includes/class-upgrade.php:312
+msgid "Run the updater"
+msgstr ""
+
+#: includes/class-translation-manager.php:783
+msgid "The SEO Pack add-on allows translation of all the URL slugs:"
+msgstr ""
+
+#: includes/class-translation-manager.php:786
+msgid "Taxonomy slugs"
+msgstr ""
+
+#: includes/class-translation-manager.php:789
+msgid "Term slugs"
+msgstr ""
+
+#: includes/class-translation-manager.php:792
+msgid "Post slugs (this includes pages and custom post types)"
+msgstr ""
+
+#: includes/class-translation-manager.php:795
+msgid "Post type base slugs"
+msgstr ""
+
+#: includes/class-translation-manager.php:798
+msgid "WooCommerce slugs"
+msgstr ""
+
+#: includes/class-translation-manager.php:803
+msgid "The SEO Pack add-on is available with ALL premium versions of the plugin."
+msgstr ""
+
+#: includes/class-translation-manager.php:806
+msgid "Learn More"
 msgstr ""
 
 #: includes/class-translation-render.php:153
@@ -801,111 +893,107 @@ msgstr ""
 msgid "Twitter Image"
 msgstr ""
 
-#: includes/class-upgrade.php:136
+#: includes/class-upgrade.php:148
 msgid "Removing cdata dictionary strings for language %s..."
 msgstr ""
 
-#: includes/class-upgrade.php:144
+#: includes/class-upgrade.php:156
 msgid "Removing untranslated dictionary links for language %s..."
 msgstr ""
 
-#: includes/class-upgrade.php:164
+#: includes/class-upgrade.php:176
 msgid "Removing duplicated gettext strings for language %s..."
 msgstr ""
 
-#: includes/class-upgrade.php:172
+#: includes/class-upgrade.php:184
 msgid "Removing untranslated gettext strings where translation is available for language %s..."
 msgstr ""
 
-#: includes/class-upgrade.php:180
+#: includes/class-upgrade.php:192
 msgid "Removing duplicated dictionary strings for language %s..."
 msgstr ""
 
-#: includes/class-upgrade.php:188
+#: includes/class-upgrade.php:200
 msgid "Removing untranslated dictionary strings where translation is available for language %s..."
 msgstr ""
 
-#: includes/class-upgrade.php:195
+#: includes/class-upgrade.php:207
 msgid "Inserting original strings for language %s..."
 msgstr ""
 
-#: includes/class-upgrade.php:204
+#: includes/class-upgrade.php:216
 msgid "Cleaning original strings table for language %s..."
 msgstr ""
 
-#: includes/class-upgrade.php:212
+#: includes/class-upgrade.php:224
 msgid "Updating original string ids for language %s..."
 msgstr ""
 
-#: includes/class-upgrade.php:220
+#: includes/class-upgrade.php:232
 msgid "Regenerating original meta table for language %s..."
 msgstr ""
 
-#: includes/class-upgrade.php:228
+#: includes/class-upgrade.php:240
 msgid "Cleaning original meta table for language %s..."
 msgstr ""
 
-#: includes/class-upgrade.php:236
+#: includes/class-upgrade.php:247
+msgid "Inserting gettext original strings for language %s..."
+msgstr ""
+
+#: includes/class-upgrade.php:256
+msgid "Cleaning gettext original strings table for language %s..."
+msgstr ""
+
+#: includes/class-upgrade.php:264
+msgid "Updating gettext original string ids for language %s..."
+msgstr ""
+
+#: includes/class-upgrade.php:272
 msgid "Finishing up..."
 msgstr ""
 
-#: includes/class-upgrade.php:272
-msgid "TranslatePress data update"
-msgstr ""
-
-#: includes/class-upgrade.php:272
-msgid "We need to update your translations database to the latest version."
-msgstr ""
-
-#: includes/class-upgrade.php:273
-msgid "IMPORTANT: It is strongly recommended to first backup the database!\nAre you sure you want to continue?"
-msgstr ""
-
-#: includes/class-upgrade.php:273
-msgid "Run the updater"
-msgstr ""
-
-#: includes/class-upgrade.php:300
+#: includes/class-upgrade.php:339
 msgid "Database optimization did not complete successfully. We recommend restoring the original database or <a href=\"%s\" >trying again.</a>"
 msgstr ""
 
-#: includes/class-upgrade.php:318
+#: includes/class-upgrade.php:357
 msgid "Update aborted! Your user account doesn't have the capability to perform database updates."
 msgstr ""
 
-#: includes/class-upgrade.php:323
+#: includes/class-upgrade.php:362
 msgid "Update aborted! Invalid nonce."
 msgstr ""
 
-#: includes/class-upgrade.php:367
+#: includes/class-upgrade.php:406
 msgid "Update aborted! Incorrect action."
 msgstr ""
 
-#: includes/class-upgrade.php:370
+#: includes/class-upgrade.php:409
 msgid "Update aborted! Incorrect language code."
 msgstr ""
 
-#: includes/class-upgrade.php:354
+#: includes/class-upgrade.php:393
 msgid "Updating database to version %s+"
 msgstr ""
 
-#: includes/class-upgrade.php:358, includes/class-upgrade.php:421
+#: includes/class-upgrade.php:397, includes/class-upgrade.php:460
 msgid "Processing table for language %s..."
 msgstr ""
 
-#: includes/class-upgrade.php:341, includes/class-upgrade.php:451
+#: includes/class-upgrade.php:380, includes/class-upgrade.php:490
 msgid "Back to TranslatePress Settings"
 msgstr ""
 
-#: includes/class-upgrade.php:345
+#: includes/class-upgrade.php:384
 msgid "Successfully updated database!"
 msgstr ""
 
-#: includes/class-upgrade.php:426, includes/class-upgrade.php:418
+#: includes/class-upgrade.php:465, includes/class-upgrade.php:457
 msgid " done."
 msgstr ""
 
-#: includes/class-upgrade.php:837
+#: includes/class-upgrade.php:948
 msgid "All individual TranslatePress add-on plugins <a href=\"%1$s\" target=\"_blank\">have been discontinued</a> and are now included in the premium Personal, Business and Developer versions of TranslatePress. Please log into your <a href=\"%2$s\" target=\"_blank\">account page</a>, download the new premium version and install it. Your individual addons settings will be ported over."
 msgstr ""
 
@@ -1045,7 +1133,7 @@ msgstr ""
 msgid "TranslatePress Advanced Settings"
 msgstr ""
 
-#: partials/advanced-settings-page.php:16, partials/machine-translation-settings-page.php:203, partials/main-settings-page.php:159
+#: partials/advanced-settings-page.php:16, partials/machine-translation-settings-page.php:203, partials/main-settings-page.php:160
 msgid "Save Changes"
 msgstr ""
 
@@ -1367,16 +1455,64 @@ msgstr ""
 msgid "Your email"
 msgstr ""
 
-#: partials/main-settings-page.php:145
+#: partials/main-settings-page.php:146
 msgid "Sign me up!"
 msgstr ""
 
-#: partials/main-settings-page.php:149
+#: partials/main-settings-page.php:150
 msgid "Sign up with your email address and receive a 5-part email guide to help you maximize the power of TranslatePress."
 msgstr ""
 
-#: partials/main-settings-page.php:152
+#: partials/main-settings-page.php:153
 msgid "Dismiss email course notification"
+msgstr ""
+
+#: partials/plugin-optin-page.php:15
+msgid "Hey %s,<br>Never miss an important update - opt in to our security and feature updates notifications, and non-sensitive diagnostic tracking."
+msgstr ""
+
+#: partials/plugin-optin-page.php:19
+msgid "Allow & Continue"
+msgstr ""
+
+#: partials/plugin-optin-page.php:21
+msgid "Skip"
+msgstr ""
+
+#: partials/plugin-optin-page.php:29
+msgid "What permissions are being granted?"
+msgstr ""
+
+#: partials/plugin-optin-page.php:36
+msgid "Your profile overview"
+msgstr ""
+
+#: partials/plugin-optin-page.php:37
+msgid "Name and email address"
+msgstr ""
+
+#: partials/plugin-optin-page.php:52
+msgid "Admin Notices"
+msgstr ""
+
+#: partials/plugin-optin-page.php:53
+msgid "Updates, announcements, marketing, no spam"
+msgstr ""
+
+#: partials/plugin-optin-page.php:60
+msgid "Current plugin status"
+msgstr ""
+
+#: partials/plugin-optin-page.php:61
+msgid "Active, Deactivated or uninstalled"
+msgstr ""
+
+#: partials/plugin-optin-page.php:75
+msgid "Privacy Policy"
+msgstr ""
+
+#: partials/plugin-optin-page.php:77
+msgid "Terms of Service"
 msgstr ""
 
 #: partials/test-api-settings-page.php:17
@@ -1595,7 +1731,7 @@ msgstr ""
 msgid "Gettext String"
 msgstr ""
 
-#: includes/advanced-settings/exclude-gettext-strings.php:10
+#: includes/advanced-settings/exclude-gettext-strings.php:10, includes/string-translation/class-string-translation.php:289, includes/string-translation/class-string-translation.php:319
 msgid "Domain"
 msgstr ""
 
@@ -1703,6 +1839,14 @@ msgstr ""
 msgid "Transforms the language switcher into a button showing the other available language, not the current one.<br> Only works when there are exactly two languages, the default one and a translation one.<br>This will affect the shortcode language switcher and floating language switcher as well.<br> To achieve this in menu language switcher go to Appearance->Menus->Language Switcher and select Opposite Language."
 msgstr ""
 
+#: includes/advanced-settings/regular-tab-string-translation.php:8
+msgid "Show regular strings tab in String Translation"
+msgstr ""
+
+#: includes/advanced-settings/regular-tab-string-translation.php:9
+msgid "Adds an additional tab on the String Translation interface that allows editing translations of user-inputted strings."
+msgstr ""
+
 #: includes/advanced-settings/remove-duplicates-from-db.php:8
 msgid "Click <a href=\"%s\">here</a> to remove duplicate rows from the database."
 msgstr ""
@@ -1771,154 +1915,254 @@ msgstr ""
 msgid "There was an error with your Google Translate key."
 msgstr ""
 
-#: includes/string-translation/class-string-translation.php:155
-msgid "Human reviewed"
+#: includes/string-translation/class-gettext-scan.php:83
+msgid "Scanning item %1$d of %2$d..."
 msgstr ""
 
-#: includes/string-translation/class-string-translation.php:156
+#: includes/string-translation/class-string-translation.php:170
+msgid "Manually translated"
+msgstr ""
+
+#: includes/string-translation/class-string-translation.php:171
 msgid "Automatically translated"
 msgstr ""
 
-#: includes/string-translation/class-string-translation.php:157
+#: includes/string-translation/class-string-translation.php:172
 msgid "Not translated"
 msgstr ""
 
-#: includes/string-translation/class-string-translation.php:167
+#: includes/string-translation/class-string-translation.php:182
 msgid "Bulk Actions"
 msgstr ""
 
-#: includes/string-translation/class-string-translation.php:169
+#: includes/string-translation/class-string-translation.php:184
 msgid "Delete entries"
 msgstr ""
 
-#: includes/string-translation/class-string-translation.php:174
+#: includes/string-translation/class-string-translation.php:189
 msgid "Edit"
 msgstr ""
 
-#: includes/string-translation/class-string-translation.php:207
+#: includes/string-translation/class-string-translation.php:221
 msgid "Translation Status"
 msgstr ""
 
-#: includes/string-translation/class-string-translation.php:208
+#: includes/string-translation/class-string-translation.php:222
 msgid "Filter"
 msgstr ""
 
-#: includes/string-translation/class-string-translation.php:209
+#: includes/string-translation/class-string-translation.php:223
+msgid "Clear filters"
+msgstr ""
+
+#: includes/string-translation/class-string-translation.php:224
 msgid "Filter by language"
 msgstr ""
 
-#: includes/string-translation/class-string-translation.php:210
+#: includes/string-translation/class-string-translation.php:225
 msgid "Add New"
 msgstr ""
 
-#: includes/string-translation/class-string-translation.php:211
+#: includes/string-translation/class-string-translation.php:226
+msgid "Rescan plugins and theme for strings"
+msgstr ""
+
+#: includes/string-translation/class-string-translation.php:227
+msgid "Scanning plugins and theme for strings..."
+msgstr ""
+
+#: includes/string-translation/class-string-translation.php:228
+msgid "Plugins and theme scan is complete"
+msgstr ""
+
+#: includes/string-translation/class-string-translation.php:229
+msgid "Plugins and theme scan did not finish due to an error"
+msgstr ""
+
+#: includes/string-translation/class-string-translation.php:230
 msgid "Import / Export"
 msgstr ""
 
-#: includes/string-translation/class-string-translation.php:212
+#: includes/string-translation/class-string-translation.php:231
 msgid "items"
 msgstr ""
 
-#: includes/string-translation/class-string-translation.php:213
+#: includes/string-translation/class-string-translation.php:232
 msgctxt "page 1 of 3"
 msgid "of"
 msgstr ""
 
-#: includes/string-translation/class-string-translation.php:214
+#: includes/string-translation/class-string-translation.php:233
 msgid "See More"
 msgstr ""
 
-#: includes/string-translation/class-string-translation.php:215
+#: includes/string-translation/class-string-translation.php:234
 msgid "See Less"
 msgstr ""
 
-#: includes/string-translation/class-string-translation.php:216
+#: includes/string-translation/class-string-translation.php:235
 msgid "Apply"
 msgstr ""
 
-#: includes/string-translation/class-string-translation.php:217
+#: includes/string-translation/class-string-translation.php:236
 msgid "No strings match your query."
 msgstr ""
 
-#: includes/string-translation/class-string-translation.php:218
+#: includes/string-translation/class-string-translation.php:237
+msgid "Try to rescan plugins and theme for strings."
+msgstr ""
+
+#: includes/string-translation/class-string-translation.php:238
 msgid "An error occurred while loading results. Most likely you were logged out. Reload page?"
 msgstr ""
 
-#: includes/string-translation/class-string-translation.php:220
+#: includes/string-translation/class-string-translation.php:240
 msgid "Select All"
 msgstr ""
 
-#: includes/string-translation/class-string-translation.php:221
+#: includes/string-translation/class-string-translation.php:241
 msgid "Select Visible"
 msgstr ""
 
-#: includes/string-translation/class-string-translation.php:222
+#: includes/string-translation/class-string-translation.php:242
 msgid "You are about to perform this action on all the strings matching your filter, not just the visibly checked. To perform the action only to the visible strings click \"Select Visible\" from the table header dropdown."
 msgstr ""
 
-#: includes/string-translation/class-string-translation.php:223
+#: includes/string-translation/class-string-translation.php:243
 msgid "You are about to perform this action only on the visible strings. To perform the action on all the strings matching the filter click \"Select All\" from the table header dropdown."
 msgstr ""
 
-#: includes/string-translation/class-string-translation.php:224
+#: includes/string-translation/class-string-translation.php:244
 msgid "To continue please type the word:"
 msgstr ""
 
-#: includes/string-translation/class-string-translation.php:225
+#: includes/string-translation/class-string-translation.php:245
 msgid "The word typed was incorrect. Action was cancelled."
 msgstr ""
 
-#: includes/string-translation/class-string-translation.php:227
+#: includes/string-translation/class-string-translation.php:247
 msgctxt "Untranslated in this language"
 msgid "in"
 msgstr ""
 
-#: includes/string-translation/class-string-translation.php:230
+#: includes/string-translation/class-string-translation.php:250
 msgid "Warning: This action cannot be undone. Deleting a string will remove its current translation. The original string will appear again in this interface after TranslatePress detects it. This action is NOT equivalent to excluding the string from being translated again."
 msgstr ""
 
-#: includes/string-translation/class-string-translation.php:233
+#: includes/string-translation/class-string-translation.php:253
 msgid "Navigate to next page"
 msgstr ""
 
-#: includes/string-translation/class-string-translation.php:234
+#: includes/string-translation/class-string-translation.php:254
 msgid "Navigate to previous page"
 msgstr ""
 
-#: includes/string-translation/class-string-translation.php:235
+#: includes/string-translation/class-string-translation.php:255
 msgid "Navigate to first page"
 msgstr ""
 
-#: includes/string-translation/class-string-translation.php:236
+#: includes/string-translation/class-string-translation.php:256
 msgid "Navigate to last page"
 msgstr ""
 
-#: includes/string-translation/class-string-translation.php:237
+#: includes/string-translation/class-string-translation.php:257
 msgid "Type a page number to navigate to"
 msgstr ""
 
-#: includes/string-translation/class-string-translation.php:238
+#: includes/string-translation/class-string-translation.php:258
 msgid "Incorrect page number. Type a page number between 1 and total number of pages"
 msgstr ""
 
-#: includes/string-translation/class-string-translation.php:239
+#: includes/string-translation/class-string-translation.php:259
 msgid "Search original strings containing typed keywords while also matching selected filters"
 msgstr ""
 
-#: includes/string-translation/class-string-translation.php:240
+#: includes/string-translation/class-string-translation.php:260
 msgid "Filter strings according to selected translation status, filters and keywords and selected filters"
 msgstr ""
 
-#: includes/string-translation/class-string-translation.php:241
+#: includes/string-translation/class-string-translation.php:261
+msgid "Removes selected filters"
+msgstr ""
+
+#: includes/string-translation/class-string-translation.php:262
 msgid "See options for selecting all strings"
 msgstr ""
 
-#: includes/string-translation/class-string-translation.php:242
+#: includes/string-translation/class-string-translation.php:263
 msgid "Click to sort strings by this column"
 msgstr ""
 
-#: includes/string-translation/class-string-translation.php:243
+#: includes/string-translation/class-string-translation.php:264
 msgid "Language in which the translation status filter applies. Leave unselected for the translation status to apply to ANY language"
+msgstr ""
+
+#: includes/string-translation/class-string-translation.php:277
+msgid "Plugins and Theme String Translation"
+msgstr ""
+
+#: includes/string-translation/class-string-translation.php:278
+msgid "Gettext"
+msgstr ""
+
+#: includes/string-translation/class-string-translation.php:279
+msgid "Search Gettext Strings"
+msgstr ""
+
+#: includes/string-translation/class-string-translation.php:286, includes/string-translation/class-string-translation.php:316, includes/string-translation/class-string-translation.php:341
+msgid "ID"
+msgstr ""
+
+#: includes/string-translation/class-string-translation.php:287, includes/string-translation/class-string-translation.php:317, includes/string-translation/class-string-translation.php:342
+msgid "Original String"
+msgstr ""
+
+#: includes/string-translation/class-string-translation.php:288, includes/string-translation/class-string-translation.php:318, includes/string-translation/class-string-translation.php:343, add-ons-advanced/seo-pack/includes/string-translation/class-string-translation-seo.php:24, add-ons-advanced/seo-pack/includes/string-translation/class-string-translation-seo.php:37, add-ons-advanced/seo-pack/includes/string-translation/class-string-translation-seo.php:57, add-ons-advanced/seo-pack/includes/string-translation/class-string-translation-seo.php:77, add-ons-advanced/seo-pack/includes/string-translation/class-string-translation-seo.php:95
+msgid "Translation"
+msgstr ""
+
+#: includes/string-translation/class-string-translation.php:295, includes/string-translation/class-string-translation.php:325
+msgid "Filter by domain"
+msgstr ""
+
+#: includes/string-translation/class-string-translation.php:299
+msgid "Filter by type"
+msgstr ""
+
+#: includes/string-translation/class-string-translation.php:300
+msgid "Email text"
+msgstr ""
+
+#: includes/string-translation/class-string-translation.php:307
+msgid "Emails String Translation"
+msgstr ""
+
+#: includes/string-translation/class-string-translation.php:308
+msgid "Emails"
+msgstr ""
+
+#: includes/string-translation/class-string-translation.php:309
+msgid "Search Email Strings"
+msgstr ""
+
+#: includes/string-translation/class-string-translation.php:333
+msgid "User Inputted String Translation"
+msgstr ""
+
+#: includes/string-translation/class-string-translation.php:334
+msgid "Regular"
+msgstr ""
+
+#: includes/string-translation/class-string-translation.php:335
+msgid "Search Regular Strings"
+msgstr ""
+
+#: includes/string-translation/class-string-translation.php:349
+msgid "Filter by Translation Block"
+msgstr ""
+
+#: includes/string-translation/class-string-translation.php:367, add-ons-advanced/seo-pack/includes/string-translation/class-string-translation-seo.php:11
+msgid "URL Slugs Translation"
 msgstr ""
 
 #: includes/string-translation/string-translation-editor.php:7
@@ -2085,10 +2329,6 @@ msgstr ""
 msgid "Allow this user to translate the website."
 msgstr ""
 
-#: add-ons-advanced/seo-pack/includes/string-translation/class-string-translation-seo.php:11
-msgid "URL Slugs Translation"
-msgstr ""
-
 #: add-ons-advanced/seo-pack/includes/string-translation/class-string-translation-seo.php:16
 msgid "Taxonomy Slugs"
 msgstr ""
@@ -2099,10 +2339,6 @@ msgstr ""
 
 #: add-ons-advanced/seo-pack/includes/string-translation/class-string-translation-seo.php:23
 msgid "Taxonomy Slug"
-msgstr ""
-
-#: add-ons-advanced/seo-pack/includes/string-translation/class-string-translation-seo.php:24, add-ons-advanced/seo-pack/includes/string-translation/class-string-translation-seo.php:37, add-ons-advanced/seo-pack/includes/string-translation/class-string-translation-seo.php:57, add-ons-advanced/seo-pack/includes/string-translation/class-string-translation-seo.php:77, add-ons-advanced/seo-pack/includes/string-translation/class-string-translation-seo.php:95
-msgid "Translation"
 msgstr ""
 
 #: add-ons-advanced/seo-pack/includes/string-translation/class-string-translation-seo.php:30

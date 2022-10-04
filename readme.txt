@@ -5,7 +5,7 @@ Tags: translate, translation, multilingual, automatic translation, bilingual, fr
 Requires at least: 3.1.0
 Tested up to: 6.0.2
 Requires PHP: 5.6.20
-Stable tag: 2.3.7
+Stable tag: 2.3.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -140,6 +140,14 @@ For more information please check out our [documentation](https://translatepress
 
 
 == Changelog ==
+= 2.3.8 =
+* Added String Translation interface for gettext (plugins and theme localized strings) with search & filter capabilities
+* Added Emails tab to String Translation that enables manual translation of email strings, including WooCommerce emails
+* Extended support for plural and context for gettext strings
+* Added file scanning for localized strings in active plugins and theme
+* Added Advanced option to search and filter user inputted strings
+* Added possibility to opt in to our security and feature updates notifications
+
 = 2.3.7 =
 * Fixed missing GET parameters when accessing a custom url without subdirectory
 * Added filter trp_redirect_status to allow changing redirect status from all wp_redirect calls

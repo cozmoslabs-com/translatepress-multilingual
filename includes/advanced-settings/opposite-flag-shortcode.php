@@ -47,7 +47,7 @@ function trp_opposite_ls_hide_disabled_language($return, $current_language, $cur
 function trp_enqueue_language_switcher_shortcode_scripts(){
     $trp                 = TRP_Translate_Press::get_trp_instance();
     $trp_languages       = $trp->get_component( 'languages' );
-    $trp_settings        = $trp->get_component( 'settings' );
+    $trp_settings        = $trp->get_component( 'settings' );   
     $published_languages = $trp_languages->get_language_names( $trp_settings->get_settings()['publish-languages'] );
     if(count ( $published_languages ) == 2 ) {
         wp_add_inline_style( 'trp-language-switcher-style', '.trp-language-switcher > div {

@@ -65,7 +65,7 @@ class TRP_Addons_List_Table extends WP_List_Table {
         $columns = array(
             'cb'        	=> '<input type="checkbox" />', //Render a checkbox instead of text
             'icon'     	=> '',
-            'add_on'    => __('Add-On', $this->text_domain ), //phpcs:ignore
+            'add_on'    => __('Add-On', 'translatepress-multilingual' ), //phpcs:ignore
             'actions'     => '',
         );
         return $columns;
@@ -129,14 +129,14 @@ class TRP_Addons_List_Table extends WP_List_Table {
             in_array( $this->current_version, $this->section_versions ) ? $disabled = '' : $disabled = 'disabled'; //add disabled if the current version isn't eligible
 
             if ( $this->is_add_on_active( $item['slug'] ) ) {
-                $action = '<a class="right button button-secondary" '.$disabled.' href="'. esc_url( wp_nonce_url( add_query_arg( 'trp_add_ons', $item['slug'], admin_url( 'admin.php?page='. sanitize_text_field( $_REQUEST['page'] ) . '&trp_add_ons_action=deactivate' ) ), 'trp_add_ons_action' ) ) .'">' . __('Deactivate', $this->text_domain) . '</a>';//phpcs:ignore
+                $action = '<a class="right button button-secondary" '.$disabled.' href="'. esc_url( wp_nonce_url( add_query_arg( 'trp_add_ons', $item['slug'], admin_url( 'admin.php?page='. sanitize_text_field( $_REQUEST['page'] ) . '&trp_add_ons_action=deactivate' ) ), 'trp_add_ons_action' ) ) .'">' . __('Deactivate', 'translatepress-multilingual') . '</a>';//phpcs:ignore
             } else {
-                $action = '<a class="right button button-primary" '.$disabled.' href="'. esc_url( wp_nonce_url( add_query_arg( 'trp_add_ons', $item['slug'], admin_url( 'admin.php?page='. sanitize_text_field( $_REQUEST['page'] ). '&trp_add_ons_action=activate' ) ), 'trp_add_ons_action' ) ) .'">' . __('Activate', $this->text_domain) . '</a>';//phpcs:ignore
+                $action = '<a class="right button button-primary" '.$disabled.' href="'. esc_url( wp_nonce_url( add_query_arg( 'trp_add_ons', $item['slug'], admin_url( 'admin.php?page='. sanitize_text_field( $_REQUEST['page'] ). '&trp_add_ons_action=activate' ) ), 'trp_add_ons_action' ) ) .'">' . __('Activate', 'translatepress-multilingual') . '</a>';//phpcs:ignore
             }
         }
 
 
-        $documentation = '<a target="_blank" class="right" href="'. trp_add_affiliate_id_to_link( $item['doc_url'] ) . '">' . __( 'Documentation', $this->text_domain ) . '</a>';//phpcs:ignore
+        $documentation = '<a target="_blank" class="right" href="'. trp_add_affiliate_id_to_link( $item['doc_url'] ) . '">' . __( 'Documentation', 'translatepress-multilingual' ) . '</a>';//phpcs:ignore
 
         return $action . $documentation;
     }
@@ -168,7 +168,7 @@ class TRP_Addons_List_Table extends WP_List_Table {
     function show_search_box(){
         ?>
         <p class="trp-add-ons-search-box">
-            <input type="text" id="trp-add-ons-search-input" name="s" value="" placeholder="<?php esc_html_e( 'Search for add-ons...', $this->text_domain ); //phpcs:ignore ?>">
+            <input type="text" id="trp-add-ons-search-input" name="s" value="" placeholder="<?php esc_html_e( 'Search for add-ons...', 'translatepress-multilingual' ); //phpcs:ignore ?>">
         </p>
         <?php
     }
@@ -178,7 +178,7 @@ class TRP_Addons_List_Table extends WP_List_Table {
      */
     function show_sumbit_button(){
         ?>
-        <input type="submit" class="button-primary" value="<?php esc_html_e('Save Add-ons', $this->text_domain); //phpcs:ignore?>">
+        <input type="submit" class="button-primary" value="<?php esc_html_e('Save Add-ons', 'translatepress-multilingual'); //phpcs:ignore?>">
         <?php
     }
 

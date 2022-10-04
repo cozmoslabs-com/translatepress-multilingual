@@ -322,18 +322,21 @@ class TRP_Settings{
 
         $this->create_menu_entries( $settings['publish-languages'] );
 
+        $gettext_table_creation = $this->trp_query->get_query_component('gettext_table_creation');
         require_once( ABSPATH . 'wp-includes/load.php' );
         foreach ( $settings['translation-languages'] as $language_code ){
             if ( $settings['default-language'] != $language_code ) {
                 $this->trp_query->check_table( $settings['default-language'], $language_code );
             }
             wp_download_language_pack( $language_code );
-            $this->trp_query->check_gettext_table( $language_code );
+            $gettext_table_creation->check_gettext_table( $language_code );
         }
 
         //in version 1.6.6 we normalized the original strings and created new tables
         $this->trp_query->check_original_table();
         $this->trp_query->check_original_meta_table();
+        $gettext_table_creation->check_gettext_original_table();
+        $gettext_table_creation->check_gettext_original_meta_table();
 
         // regenerate permalinks in case something changed
         flush_rewrite_rules();
@@ -455,7 +458,7 @@ class TRP_Settings{
      * @param string $hook          Admin page.
      */
     public function enqueue_scripts_and_styles( $hook ) {
-        if( in_array( $hook, [ 'settings_page_translate-press', 'admin_page_trp_license_key', 'admin_page_trp_addons_page', 'admin_page_trp_advanced_page', 'admin_page_trp_machine_translation', 'admin_page_trp_test_machine_api' ] ) ){
+        if( in_array( $hook, [ 'settings_page_translate-press', 'admin_page_trp_license_key', 'admin_page_trp_addons_page', 'admin_page_trp_advanced_page', 'admin_page_trp_machine_translation', 'admin_page_trp_test_machine_api', 'admin_page_trp_optin_page' ] ) ){
             wp_enqueue_style(
                 'trp-settings-style',
                 TRP_PLUGIN_URL . 'assets/css/trp-back-end-style.css',

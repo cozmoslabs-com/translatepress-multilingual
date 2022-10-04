@@ -320,7 +320,7 @@ jQuery(document).ready(function (e) {
 
         var email = jQuery( '.trp-email-course input[name="trp_email_course_email"]').val()
         
-        if (!trp_validateEmail( email ) ){
+        if ( !trp_validateEmail( email ) ){
             jQuery( '.trp-email-course .trp-email-course__error' ).addClass( 'visible' )
             jQuery( '.trp-email-course input[name="trp_email_course_email"]' ).focus()
 
@@ -333,6 +333,10 @@ jQuery(document).ready(function (e) {
 
             var data = new FormData()
                 data.append( 'email', email )
+            
+            var version = jQuery('.trp-email-course input[name="trp_installed_plugin_version"]').val()
+            if ( version != '' )
+                data.append( 'version', version )
 
             jQuery.ajax({
                 url: 'https://translatepress.com/wp-json/trp-api/emailCourseSubscribe',
