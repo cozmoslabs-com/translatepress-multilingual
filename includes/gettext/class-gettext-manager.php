@@ -146,7 +146,7 @@ class TRP_Gettext_Manager {
 		$length   = strlen( $localemo );
 
 		global $l10n;
-		if ( isset( $l10n[ $domain ] ) && is_object( $l10n[ $domain ] ) ) {
+		if ( isset( $l10n[ $domain ] ) && is_object( $l10n[ $domain ] ) && method_exists( $l10n[ $domain ], 'get_filename' ) ) {
 			$mo_filename = $l10n[ $domain ]->get_filename();
 
 			if ( is_string($mo_filename) ) {

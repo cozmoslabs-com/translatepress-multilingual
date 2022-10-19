@@ -326,7 +326,7 @@ msgid "Your <strong>TranslatePress</strong> serial number is invalid or missing.
 msgstr ""
 
 #: includes/class-plugin-notices.php:414
-msgid "NEW: Translate Emails and other plugin texts using String Translation. Find out <a href=\"https://translatepress.com/docs/translation-editor/string-translation/?utm_source=wpbackend&utm_medium=clientsite&utm_content=tpsettings\" >how to search for a specific text to translate</a>."
+msgid "NEW: Translate Emails and other plugin texts using String Translation. Find out <a href=\"https://translatepress.com/docs/translation-editor/string-translation/?utm_source=wpbackend&utm_medium=clientsite&utm_content=tpsettings&utm_campaign=TRP\" >how to search for a specific text to translate</a>."
 msgstr ""
 
 #: includes/class-plugin-notices.php:439
@@ -769,71 +769,71 @@ msgstr ""
 msgid "Edit url slug translations, plugins and theme translation (emails, forms etc.)"
 msgstr ""
 
-#: includes/class-translation-manager.php:460, includes/class-translation-manager.php:521
+#: includes/class-translation-manager.php:460, includes/class-translation-manager.php:522
 msgid "Translate Page"
 msgstr ""
 
-#: includes/class-translation-manager.php:519
+#: includes/class-translation-manager.php:520
 msgid "Opens post in the translation editor. Post must be saved as draft or published beforehand."
 msgstr ""
 
-#: includes/class-translation-manager.php:633
+#: includes/class-translation-manager.php:634
 msgid "Security check"
 msgstr ""
 
-#: includes/class-translation-manager.php:705
+#: includes/class-translation-manager.php:706
 msgid "<strong>Warning:</strong> Some strings have possibly incorrectly encoded characters. This may result in breaking the queries, rendering the page untranslated in live mode. Consider revising the following strings or their method of outputting."
 msgstr ""
 
-#: includes/class-translation-manager.php:730, includes/class-upgrade.php:311
+#: includes/class-translation-manager.php:731, includes/class-upgrade.php:311
 msgid "TranslatePress data update"
 msgstr ""
 
-#: includes/class-translation-manager.php:730, includes/class-upgrade.php:311
+#: includes/class-translation-manager.php:731, includes/class-upgrade.php:311
 msgid "We need to update your translations database to the latest version."
 msgstr ""
 
-#: includes/class-translation-manager.php:731
+#: includes/class-translation-manager.php:732
 msgid "Updating will allow editing translations of localized text from plugins and theme. Existing translation will still work as expected."
 msgstr ""
 
-#: includes/class-translation-manager.php:733, includes/class-upgrade.php:312
+#: includes/class-translation-manager.php:734, includes/class-upgrade.php:312
 msgid "IMPORTANT: It is strongly recommended to first backup the database!\nAre you sure you want to continue?"
 msgstr ""
 
-#: includes/class-translation-manager.php:733, includes/class-upgrade.php:312
+#: includes/class-translation-manager.php:734, includes/class-upgrade.php:312
 msgid "Run the updater"
 msgstr ""
 
-#: includes/class-translation-manager.php:783
+#: includes/class-translation-manager.php:784
 msgid "The SEO Pack add-on allows translation of all the URL slugs:"
 msgstr ""
 
-#: includes/class-translation-manager.php:786
+#: includes/class-translation-manager.php:787
 msgid "Taxonomy slugs"
 msgstr ""
 
-#: includes/class-translation-manager.php:789
+#: includes/class-translation-manager.php:790
 msgid "Term slugs"
 msgstr ""
 
-#: includes/class-translation-manager.php:792
+#: includes/class-translation-manager.php:793
 msgid "Post slugs (this includes pages and custom post types)"
 msgstr ""
 
-#: includes/class-translation-manager.php:795
+#: includes/class-translation-manager.php:796
 msgid "Post type base slugs"
 msgstr ""
 
-#: includes/class-translation-manager.php:798
+#: includes/class-translation-manager.php:799
 msgid "WooCommerce slugs"
 msgstr ""
 
-#: includes/class-translation-manager.php:803
+#: includes/class-translation-manager.php:804
 msgid "The SEO Pack add-on is available with ALL premium versions of the plugin."
 msgstr ""
 
-#: includes/class-translation-manager.php:806
+#: includes/class-translation-manager.php:807
 msgid "Learn More"
 msgstr ""
 

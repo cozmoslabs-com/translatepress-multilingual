@@ -1682,3 +1682,18 @@ function trp_page_builders_compatibility_with_subdirectory_for_default_language(
     }
     return $needed_language;
 }
+
+
+/**
+ * Compatibility with Give WP plugin.
+ *
+ * When automatic translation is active and we are on secondary language, clicking the Donate button will not redirect you to the confirmation page.
+ * This happens because "Give WP" expects an admin ajax request to return "success" but TP translates it in another language.
+ */
+add_filter( 'trp_stop_translating_page', 'trp_give_wp_compatibility', 10, 2 );
+function trp_give_wp_compatibility( $bool, $output ){
+    if ( isset( $_REQUEST['give_ajax'] ) && $_REQUEST['give_ajax'] == 'true' ) {
+        return true;
+    }
+    return $bool;
+}

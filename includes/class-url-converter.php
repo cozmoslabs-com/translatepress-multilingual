@@ -377,6 +377,7 @@ class TRP_Url_Converter {
                 /* In order to accurately find the posst ID the passed URL to url_to_postid() needs to be accurate
 	            * if the option add subdir to default language is on we need to add that to the URL
                 */
+
                 $possible_url = $url;
 				if (isset ($this->settings['add-subdirectory-to-default-language']) && $this->settings['add-subdirectory-to-default-language'] === 'yes' && $this->get_lang_from_url_string( $url ) == null ){
 					$possible_url = $this->add_language_to_home_url($url, $url_obj->getPath(), $url_obj->getScheme(), get_current_blog_id() );
@@ -428,7 +429,8 @@ class TRP_Url_Converter {
             }
 
             $TRP_LANGUAGE = $language;
-            $new_url = trailingslashit( get_permalink($post_id) ) . ltrim($arguments, '/');
+            $fragment = ( $frag = parse_url( $url, PHP_URL_FRAGMENT ) ) ? '#' . $frag : '';
+            $new_url = trailingslashit( get_permalink($post_id) ) . ltrim($arguments, '/') . $fragment;
             trp_bulk_debug($debug, array('url' => $url, 'new url' => $new_url, 'found post id' => $post_id, 'url type' => 'based on permalink', 'for language' => $TRP_LANGUAGE));
             $TRP_LANGUAGE = $trp_language_copy;
 

@@ -3,9 +3,9 @@ Contributors: cozmoslabs, razvan.mo, madalin.ungureanu, sareiodata, cristophor
 Donate link: https://www.translatepress.com/
 Tags: translate, translation, multilingual, automatic translation, bilingual, front-end translation, google translate, language
 Requires at least: 3.1.0
-Tested up to: 6.0.2
+Tested up to: 6.0.3
 Requires PHP: 5.6.20
-Stable tag: 2.3.8
+Stable tag: 2.3.9
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -140,6 +140,12 @@ For more information please check out our [documentation](https://translatepress
 
 
 == Changelog ==
+= 2.3.9 =
+* Fixed anchor missing from custom links on translated pages
+* Fixed compatibility issue with GiveWP not redirecting to confirmation page after donation
+* Fixed edge case error with the way some plugins loaded textdomain
+* Fixed notice when editing posts
+
 = 2.3.8 =
 * Added String Translation interface for gettext (plugins and theme localized strings) with search & filter capabilities
 * Added Emails tab to String Translation that enables manual translation of email strings, including WooCommerce emails

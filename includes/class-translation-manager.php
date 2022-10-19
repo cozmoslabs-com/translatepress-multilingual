@@ -506,12 +506,13 @@ class TRP_Translation_Manager {
 
         add_filter('trp_add_language_to_home_url_check_for_admin', '__return_false');
 
-        $trp_permalink_post = $url_converter->get_url_for_language($TRP_LANGUAGE, get_permalink($post->ID));
-
-        if($post->post_status !== "publish"){
-
-            $trp_permalink_post = $url_converter->get_url_for_language($TRP_LANGUAGE, get_preview_post_link($post->ID));
-
+        if ($post) {
+            $trp_permalink_post = $url_converter->get_url_for_language( $TRP_LANGUAGE, get_permalink( $post->ID ) );
+            if ( $post->post_status !== "publish" ) {
+                $trp_permalink_post = $url_converter->get_url_for_language( $TRP_LANGUAGE, get_preview_post_link( $post->ID ) );
+            }
+        }else{
+            $trp_permalink_post = $url_converter->get_url_for_language( $TRP_LANGUAGE, home_url() );
         }
 
         $url_translation_editor = apply_filters('trp_edit_translation_url', add_query_arg('trp-edit-translation', 'true', $trp_permalink_post));
@@ -775,7 +776,7 @@ class TRP_Translation_Manager {
     }
 
 	public function upsale_slugs_text(){
-		$upsale_url = 'https://translatepress.com/pricing/?utm_source=wpbackend&utm_medium=clientsite&utm_content=tpstringeditor';
+		$upsale_url = 'https://translatepress.com/pricing/?utm_source=wpbackend&utm_medium=clientsite&utm_content=tpstringeditor&utm_campaign=tpfree';
 
 		$html = '<div class="trp-text-and-image-upsale-slugs">';
 		$html .= '<div class="trp-text-upsale-slugs">';
