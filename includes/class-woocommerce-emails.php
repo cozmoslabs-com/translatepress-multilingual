@@ -6,13 +6,14 @@ class TRP_Woocommerce_Emails{
 
     public function initialize_hooks(){
 
+        // Save current language for user every time wp_footer is loaded
+        add_action( 'wp_footer', array( $this, 'save_current_language' ) );
+
         // In order for the email translation to work properly, WC_VERSION needs to be >= 6.8.0
         if( defined( 'WC_VERSION' ) && version_compare( WC_VERSION, '6.8.0' ) >= 0 ) {
 
             // Save user language on checkout
             add_action( 'woocommerce_checkout_update_order_meta', array( $this, 'save_language_on_checkout' ), 10, 2 );
-            // Save current language for user every time wp_footer is loaded
-            add_action( 'wp_footer', array( $this, 'save_current_language' ) );
 
             // WooCommerce email notifications
             add_action( 'woocommerce_order_status_processing_to_cancelled_notification', array( $this, 'store_email_order_id' ), 5, 1 );
@@ -75,9 +76,11 @@ class TRP_Woocommerce_Emails{
     public function save_current_language(){
         global $TRP_LANGUAGE;
         $user_id = get_current_user_id();
-        $language_meta = get_user_meta( $user_id, 'trp_language', true);
-        if( $user_id > 0 && $language_meta != $TRP_LANGUAGE ){
-            update_user_meta( $user_id, 'trp_language', $TRP_LANGUAGE );
+        if( $user_id > 0 ){
+            $language_meta = get_user_meta( $user_id, 'trp_language', true);
+            if( $language_meta != $TRP_LANGUAGE ) {
+                update_user_meta( $user_id, 'trp_language', $TRP_LANGUAGE );
+            }
         }
     }
 
@@ -123,7 +126,7 @@ class TRP_Woocommerce_Emails{
      * @return false
      */
     public function trp_woo_setup_locale( $bool, $wc_email ) {
-        global $TRP_LANGUAGE, $TRP_LANGUAGE_COPY;
+        global $TRP_LANGUAGE;
         $is_customer_email  = $wc_email->is_customer_email();
         $recipients         = explode( ',', $wc_email->get_recipient() );
         $language           = $TRP_LANGUAGE;
@@ -151,17 +154,8 @@ class TRP_Woocommerce_Emails{
         }
 
         $language = apply_filters( 'trp_woo_email_language', $language, $is_customer_email, $recipients, $user_id );
-        $language = $this->validate_language( $language );
+        trp_switch_language($language);
 
-        $TRP_LANGUAGE = $language;
-        $TRP_LANGUAGE_COPY = $language;
-
-        // Because of 'trp_before_translate_content' filter function is_ajax_frontend() is called and it changes the global $TRP_LANGUAGE according to the url from which it was called.
-        // Function trp_reset_language() is added on the hook in order to set global $TRP_LANGUAGE according to our need for the email language instead.
-        add_filter( 'trp_before_translate_content', array( $this, 'trp_reset_language' ), 99999999 );
-
-        switch_to_locale($language);
-        add_filter( 'plugin_locale', array( $this, 'trp_get_locale' ), 99999999);
         WC()->load_plugin_textdomain();
 
         // calls necessary because the default additional_content field of an email is localized before this point and stored in a variable in the previous locale
@@ -172,45 +166,6 @@ class TRP_Woocommerce_Emails{
 
     }
 
-    /**
-     * Return a valid TRP language in which the email will be sent
-     *
-     * @param $language
-     * @return mixed
-     */
-    public function validate_language( $language ){
-        $trp = TRP_Translate_Press::get_trp_instance();
-        $trp_settings = $trp->get_component( 'settings' );
-        $settings = $trp_settings->get_settings();
-        if( empty( $language ) || !in_array( $language, $settings['translation-languages'] ) ){
-            $language = $settings['default-language'];
-        }
-        return $language;
-    }
-
-    /**
-     * Return $TRP_LANGUAGE as plugin locale
-     *
-     * @return mixed
-     */
-    public function trp_get_locale() {
-        global $TRP_LANGUAGE;
-        return $TRP_LANGUAGE;
-    }
-
-
-    /**
-     * The value of $TRP_LANGUAGE is set according to the url, which can be problematic in some cases when sending emails
-     * Restore the $TRP_LANGUAGE value in which email will be sent
-     *
-     * @param $output
-     * @return mixed
-     */
-    public function trp_reset_language( $output ){
-        global $TRP_LANGUAGE, $TRP_LANGUAGE_COPY;
-        $TRP_LANGUAGE = $TRP_LANGUAGE_COPY;
-        return $output;
-    }
 
     /**
      * Restore locale after email is sent
@@ -221,10 +176,7 @@ class TRP_Woocommerce_Emails{
      */
     public function trp_woo_restore_locale( $bool, $wc_email ) {
 
-        remove_filter( 'trp_before_translate_content', array( $this, 'trp_reset_language' ) );
-
-        restore_previous_locale();
-        remove_filter( 'plugin_locale', array( $this, 'trp_get_locale' ) );
+        trp_restore_language();
         WC()->load_plugin_textdomain();
 
         return false;

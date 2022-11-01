@@ -178,6 +178,15 @@
 <?php __("Don't forget to Save Translation. Use keyboard shortcut CTRL(⌘) + S", "translatepress-multilingual"); ?>
 <?php __("Switch language to see the translation changes directly on the page.", "translatepress-multilingual"); ?>
 <?php __("Search for any text in this page in the dropdown.", "translatepress-multilingual"); ?>
+<?php __("Your %s license has <span class=\"trp-license-status-emphasized\">expired</span>.", "translatepress-multilingual"); ?>
+<?php __("Please renew your license to continue receiving access to product downloads, automatic updates and support.", "translatepress-multilingual"); ?>
+<?php __("Renew Now", "translatepress-multilingual"); ?>
+<?php __("Your %s license was <span class=\"trp-license-status-emphasized\">refunded</span>.", "translatepress-multilingual"); ?>
+<?php __("Please purchase a new license to continue receiving access to product downloads, automatic updates and support.", "translatepress-multilingual"); ?>
+<?php __("Purchase a new license", "translatepress-multilingual"); ?>
+<?php __("Your %s license is <span class=\"trp-license-status-emphasized\">empty or incorrect</span>.", "translatepress-multilingual"); ?>
+<?php __("Please enter a valid license to continue receiving access to product downloads, automatic updates and support.", "translatepress-multilingual"); ?>
+<?php __("Enter a valid license", "translatepress-multilingual"); ?>
 <?php __("Slugs", "translatepress-multilingual"); ?>
 <?php __("Meta Information", "translatepress-multilingual"); ?>
 <?php __("String List", "translatepress-multilingual"); ?>

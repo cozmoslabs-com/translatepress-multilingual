@@ -63,7 +63,7 @@ class TRP_Translate_Press{
         define( 'TRP_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
         define( 'TRP_PLUGIN_BASE', plugin_basename( __DIR__ . '/index.php' ) );
         define( 'TRP_PLUGIN_SLUG', 'translatepress-multilingual' );
-        define( 'TRP_PLUGIN_VERSION', '2.3.9' );
+        define( 'TRP_PLUGIN_VERSION', '2.4.0' );
 
 	    wp_cache_add_non_persistent_groups(array('trp'));
 
@@ -429,6 +429,7 @@ class TRP_Translate_Press{
         $this->loader->add_filter( "option_woocommerce_permalinks", $this->url_converter, 'woocommerce_filter_permalink_option' );
         $this->loader->add_filter( "pre_update_option_woocommerce_permalinks", $this->url_converter, 'prevent_permalink_update_on_other_languages', 10, 2 );
         $this->loader->add_filter( "pre_update_option_rewrite_rules", $this->url_converter, 'prevent_permalink_update_on_other_languages', 10, 2 );
+        $this->loader->add_filter( "pre_update_option_rewrite_rules", $this->url_converter, 'delete_woocommerce_transient_permalink' );
 
         /* add to the body class the current language */
         $this->loader->add_filter( "body_class", $this->translation_manager, 'add_language_to_body_class' );

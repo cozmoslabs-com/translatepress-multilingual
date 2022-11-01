@@ -283,18 +283,21 @@ class TRP_Upgrade {
 	 * Show admin notice about updating database
 	 */
 	public function show_admin_notice(){
-		if ( ( isset( $_GET[ 'page'] ) && $_GET['page'] == 'trp_update_database' ) ){
-			return;
-		}
-		$updates_needed = $this->get_updates_details();
-        $option_db_error_message = get_option($updates_needed['show_error_db_message']['option_name']);
-		foreach( $updates_needed as $update ){
-			$option = get_option( $update['option_name'], 'is not set' );
-			if ( $option === 'no' && $option_db_error_message !== 'no'){
-				add_action( 'admin_notices', array( $this, 'admin_notice_update_database' ) );
-				break;
-			}
-		}
+        $notifications = TRP_Plugin_Notifications::get_instance();
+        if ( $notifications->is_plugin_page() || ( isset( $GLOBALS['PHP_SELF']) && ( $GLOBALS['PHP_SELF'] === '/wp-admin/index.php' || $GLOBALS['PHP_SELF'] === '/wp-admin/plugins.php' ) ) ) {
+            if ( ( isset( $_GET['page'] ) && $_GET['page'] == 'trp_update_database' ) ) {
+                return;
+            }
+            $updates_needed          = $this->get_updates_details();
+            $option_db_error_message = get_option( $updates_needed['show_error_db_message']['option_name'] );
+            foreach ( $updates_needed as $update ) {
+                $option = get_option( $update['option_name'], 'is not set' );
+                if ( $option === 'no' && $option_db_error_message !== 'no' ) {
+                    add_action( 'admin_notices', array( $this, 'admin_notice_update_database' ) );
+                    break;
+                }
+            }
+        }
 	}
 
 	/**

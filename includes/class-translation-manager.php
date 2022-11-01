@@ -200,6 +200,55 @@ class TRP_Translation_Manager {
         ) );
     }
 
+    public function get_license_notice_content(){
+        $license_notice_content = false; // false will hide the license notice panel
+
+        // paid version plugin (business/developer/personal) is active
+        $free_version = ( defined( 'TRANSLATE_PRESS' ) && ( TRANSLATE_PRESS !== 'TranslatePress - Developer' && TRANSLATE_PRESS !== 'TranslatePress - Business' && TRANSLATE_PRESS !== 'TranslatePress - Dev' && TRANSLATE_PRESS !== 'TranslatePress - Personal' ) );
+
+        if ( !$free_version ){
+            $license_status = trp_get_license_status();
+            if ( $license_status != 'valid' && $license_status != 'free-version' ) {
+                $translatepress_product = ( defined( 'TRANSLATE_PRESS' ) ) ? TRANSLATE_PRESS : "TranslatePress";
+                switch ( $license_status ) {
+                    case 'expired':
+                        {
+                            $status_text  = wp_kses( sprintf( __( 'Your %s license has <span class="trp-license-status-emphasized">expired</span>.', 'translatepress-multilingual' ), '<strong>' . $translatepress_product . '</strong>' ), array( 'strong' => array(),'span' => array( 'class' => array() ) ) );
+                            $instructions = esc_html__( 'Please renew your license to continue receiving access to product downloads, automatic updates and support.', 'translatepress-multilingual' );
+                            $button       = esc_html__( 'Renew Now', 'translatepress-multilingual' );
+                            $link = 'https://translatepress.com/account/?utm_source=wpbackend&utm_medium=clientsite&utm_content=tpeditor&utm_campaign=TP-Renewal';
+                            break;
+                        }
+                    case 'revoked':
+                        {
+                            $status_text  = wp_kses( sprintf( __( 'Your %s license was <span class="trp-license-status-emphasized">refunded</span>.', 'translatepress-multilingual' ), '<strong>' . $translatepress_product . '</strong>' ), array( 'strong' => array(),'span' => array( 'class' => array() ) ) );
+                            $instructions = esc_html__( 'Please purchase a new license to continue receiving access to product downloads, automatic updates and support.', 'translatepress-multilingual' );
+                            $button       = esc_html__( 'Purchase a new license', 'translatepress-multilingual' );
+                            $link = 'https://translatepress.com/pricing/?utm_source=wpbackend&utm_medium=clientsite&utm_content=tpeditor&utm_campaign=TP-Refund';
+                            break;
+                        }
+                    //  case 'missing' :
+                    //  case 'invalid' :
+                    //  case 'site_inactive' :
+                    //  case 'item_name_mismatch' :
+                    //  case 'no_activations_left':
+                    default:
+                        {
+                            $status_text  = wp_kses( sprintf( __( 'Your %s license is <span class="trp-license-status-emphasized">empty or incorrect</span>.', 'translatepress-multilingual' ), '<strong>' . $translatepress_product . '</strong>' ), array( 'strong' => array(),'span' => array( 'class' => array() ) ) );
+                            $instructions = esc_html__( 'Please enter a valid license to continue receiving access to product downloads, automatic updates and support.', 'translatepress-multilingual' );
+                            $button       = esc_html__( 'Enter a valid license', 'translatepress-multilingual' );
+                            $link         = admin_url( 'admin.php?page=trp_license_key' );
+                            break;
+                        }
+                }
+
+                $license_notice_content = '<p>' . $status_text . '</p><p>' . $instructions . '</p><p><a href="' . esc_url($link) . '" class="button-primary trp-license-notice-button" target="_blank">' . $button . '</a></p>';
+            }
+        }
+
+        return $license_notice_content;
+    }
+
     public function get_default_editor_user_meta() {
         return apply_filters( 'trp_default_editor_user_meta', array(
             'helpPanelOpened'          => false,
@@ -413,7 +462,8 @@ class TRP_Translation_Manager {
             'upgraded_gettext'            => ! ( ( get_option( 'trp_updated_database_gettext_original_id_update', 'yes' ) == 'no' ) ),
             'notice_upgrade_gettext'      => $this->display_notice_to_upgrade_gettext_in_editor(''),
             'upsale_slugs'                => $this->is_seo_pack_inactive(),
-            'upsale_slugs_text'           => $this->upsale_slugs_text()
+            'upsale_slugs_text'           => $this->upsale_slugs_text(),
+            'license_notice_content'      => $this->get_license_notice_content()
         );
 
         return apply_filters( 'trp_editor_data', $trp_editor_data );

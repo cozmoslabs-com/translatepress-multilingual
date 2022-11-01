@@ -803,6 +803,7 @@ class TRP_Url_Converter {
     public function woocommerce_filter_permalinks_on_other_languages( $rewrite_rules ){
         if( class_exists( 'WooCommerce' ) ){
             global $TRP_LANGUAGE;
+
             if( $TRP_LANGUAGE != $this->settings['default-language'] ){
                 global $default_language_wc_permalink_structure; //we use a global because apparently you can't do switch to locale and restore multiple times. I should keep an eye on this
                 /* get rewrite rules from original language */
@@ -896,8 +897,31 @@ class TRP_Url_Converter {
      */
     function prevent_permalink_update_on_other_languages( $value, $old_value ){
         global $TRP_LANGUAGE;
+
         if( isset($TRP_LANGUAGE) && $TRP_LANGUAGE != $this->settings['default-language'] && apply_filters( 'trp_prevent_permalink_update_on_other_languages', true ) ) {
             $value = $old_value;
+        }
+
+        return $value;
+    }
+
+
+    /**
+     * Function that deletes old woocommerce transients so the new one are generated correctly
+     * @param $value
+     * @return void
+     */
+    public function delete_woocommerce_transient_permalink($value){
+
+        if( class_exists( 'WooCommerce' ) ) {
+            $english_woocommerce_slugs = array( 'product-category', 'product-tag', 'product', 'default_language_wc_permalink_structure', 'current_language_wc_permalink_structure' );
+
+            foreach ( $english_woocommerce_slugs as $english_woocommerce_slug ) {
+                delete_transient( 'tp_' . $english_woocommerce_slug . '_' . $this->settings['default-language'] );
+                foreach ( $this->settings['translation-languages'] as $language ) {
+                    delete_transient( 'tp_' . $english_woocommerce_slug . '_' . $language );
+                }
+            }
         }
 
         return $value;

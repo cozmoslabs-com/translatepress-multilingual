@@ -5,7 +5,7 @@ Tags: translate, translation, multilingual, automatic translation, bilingual, fr
 Requires at least: 3.1.0
 Tested up to: 6.0.3
 Requires PHP: 5.6.20
-Stable tag: 2.3.9
+Stable tag: 2.4.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -140,6 +140,11 @@ For more information please check out our [documentation](https://translatepress
 
 
 == Changelog ==
+= 2.4.0 =
+* Fixed 404 issues on WooCommerce caused by permalink changes not resetting TP transients
+* Improved communicating license status and other notices
+* Added developer friendly functions trp_switch_language and trp_restore_language to briefly switch language
+
 = 2.3.9 =
 * Fixed anchor missing from custom links on translated pages
 * Fixed compatibility issue with GiveWP not redirecting to confirmation page after donation
