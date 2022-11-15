@@ -3,9 +3,9 @@ Contributors: cozmoslabs, razvan.mo, madalin.ungureanu, sareiodata, cristophor
 Donate link: https://www.translatepress.com/
 Tags: translate, translation, multilingual, automatic translation, bilingual, front-end translation, google translate, language
 Requires at least: 3.1.0
-Tested up to: 6.0.3
+Tested up to: 6.1
 Requires PHP: 5.6.20
-Stable tag: 2.4.0
+Stable tag: 2.4.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -140,6 +140,15 @@ For more information please check out our [documentation](https://translatepress
 
 
 == Changelog ==
+= 2.4.1 =
+* Added preferred language field in WP edit user profile form, to be used in emails
+* Improved updating and optimizing database tool by communicating possible errors if they occur
+* Improved speed by caching locale language
+* Improved loading time when using Divi
+* Fixed mixed collation errors in some cases
+* Fixed license notice appearing incorrectly in some cases
+* Fixed function that gets user's preferred language
+
 = 2.4.0 =
 * Fixed 404 issues on WooCommerce caused by permalink changes not resetting TP transients
 * Improved communicating license status and other notices

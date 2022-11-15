@@ -38,6 +38,7 @@ class TRP_Translate_Press{
     protected $rewrite_rules;
     protected $check_invalid_text;
     protected $woocommerce_emails;
+    protected $preferred_user_language;
 
     public $active_pro_addons = array();
     public static $translate_press = null;
@@ -63,7 +64,7 @@ class TRP_Translate_Press{
         define( 'TRP_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
         define( 'TRP_PLUGIN_BASE', plugin_basename( __DIR__ . '/index.php' ) );
         define( 'TRP_PLUGIN_SLUG', 'translatepress-multilingual' );
-        define( 'TRP_PLUGIN_VERSION', '2.4.0' );
+        define( 'TRP_PLUGIN_VERSION', '2.4.1' );
 
 	    wp_cache_add_non_persistent_groups(array('trp'));
 
@@ -135,6 +136,7 @@ class TRP_Translate_Press{
 	    require_once TRP_PLUGIN_DIR . 'includes/string-translation/class-string-translation-api-regular.php';
         require_once TRP_PLUGIN_DIR . 'assets/lib/tp-add-ons-listing/tp-add-ons-listing.php';
         require_once TRP_PLUGIN_DIR . 'includes/class-plugin-optin.php';
+        require_once TRP_PLUGIN_DIR . 'includes/class-preferred-user-language.php';
         
         if ( did_action( 'elementor/loaded' ) )
             require_once TRP_PLUGIN_DIR . 'includes/class-elementor-language-for-blocks.php';
@@ -181,6 +183,7 @@ class TRP_Translate_Press{
         $this->rewrite_rules              = new TRP_Rewrite_Rules( $this->settings->get_settings() );
         $this->check_invalid_text         = new TRP_Check_Invalid_Text( );
         $this->woocommerce_emails         = new TRP_Woocommerce_Emails();
+        $this->preferred_user_language    = new TRP_Preferred_User_Language();
     }
 
     /**
@@ -317,6 +320,11 @@ class TRP_Translate_Press{
         $this->loader->add_action( 'deactivated_plugin', $this->plugin_optin, 'process_paid_plugin_deactivation', 10, 1 );
         $this->loader->add_action( 'trp_register_advanced_settings', $this->plugin_optin, 'setup_plugin_optin_advanced_setting', 1360, 1 );
         $this->loader->add_action( 'trp_extra_sanitize_advanced_settings', $this->plugin_optin, 'process_plugin_optin_advanced_setting', 20, 1 );
+
+        $this->loader->add_action( 'show_user_profile', $this->preferred_user_language, 'always_use_this_language', 99, 1 );
+        $this->loader->add_action( 'edit_user_profile', $this->preferred_user_language, 'always_use_this_language', 99, 1 );
+        $this->loader->add_action( 'personal_options_update', $this->preferred_user_language, 'update_profile_fields', 99, 1 );
+        $this->loader->add_action( 'edit_user_profile_update', $this->preferred_user_language, 'update_profile_fields', 99, 1 );
 
     }
 

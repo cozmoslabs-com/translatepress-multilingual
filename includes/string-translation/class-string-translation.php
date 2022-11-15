@@ -205,7 +205,12 @@ class TRP_String_Translation {
                 $query .= 'SELECT domain FROM ' . $trp_query->get_gettext_table_name( $language ) . ' UNION ';
             }
             $query = rtrim( $query, ' UNION ' ) . ' ';
-            $query .= ' ORDER BY domain ASC ';
+
+            $charset_collate = $wpdb->get_charset_collate();
+            $charset = "utf8mb4";
+            if( strpos( 'latin1', $charset_collate ) === 0 )
+                $charset = "latin1";
+            $query .= ' ORDER BY domain COLLATE '.$charset.'_general_ci ASC';
 
             $this->gettext_domains = $wpdb->get_results( $query, OBJECT_K );
             foreach ( $this->gettext_domains as $domain => $value ) {
@@ -358,7 +363,6 @@ class TRP_String_Translation {
 	    if ( !apply_filters('trp_show_regular_strings_string_translation', false ) ){
 	    	unset($string_types_config['regular']);
 	    }
-	    $free_version = ( ( !class_exists( 'TRP_Handle_Included_Addons' ) ) || ( ( defined( 'TRANSLATE_PRESS' ) && ( TRANSLATE_PRESS !== 'TranslatePress - Developer' && TRANSLATE_PRESS !== 'TranslatePress - Business' && TRANSLATE_PRESS !== 'TranslatePress - Dev' && TRANSLATE_PRESS !== 'TranslatePress - Personal' ) ) ) );
 	    $seo_pack_active = class_exists( 'TRP_IN_Seo_Pack');
 		if( !$seo_pack_active ){
 			$upsale_slugs_string_type = array(

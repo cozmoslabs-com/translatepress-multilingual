@@ -62,7 +62,7 @@ class TRP_Machine_Translation_Tab {
     */
     public function sanitize_settings($mt_settings ){
 
-        $free_version = ( ( !class_exists( 'TRP_Handle_Included_Addons' ) ) || ( ( defined( 'TRANSLATE_PRESS' ) && ( TRANSLATE_PRESS !== 'TranslatePress - Developer' && TRANSLATE_PRESS !== 'TranslatePress - Business' && TRANSLATE_PRESS !== 'TranslatePress - Dev' && TRANSLATE_PRESS !== 'TranslatePress - Personal' ) ) ) );
+        $free_version = !class_exists( 'TRP_Handle_Included_Addons' );
         $seo_pack_active = class_exists( 'TRP_IN_Seo_Pack');
         $trp = TRP_Translate_Press::get_trp_instance();
         $machine_translator = $trp->get_component( 'machine_translator' );

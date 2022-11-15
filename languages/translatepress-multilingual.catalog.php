@@ -82,6 +82,11 @@
 <?php __("One or more languages are unsupported by the automatic translation provider. Please check the <strong>TranslatePress -> <a href=\"%s\">Automatic Translation</a></strong> page for more information.", "translatepress-multilingual"); ?>
 <?php __("Marketing optin", "translatepress-multilingual"); ?>
 <?php __("Opt in to our security and feature updates notifications, and non-sensitive diagnostic tracking.", "translatepress-multilingual"); ?>
+<?php __("TranslatePress Preferred User Language", "translatepress-multilingual"); ?>
+<?php __("Preferred language to navigate the site", "translatepress-multilingual"); ?>
+<?php __("The language is automatically set based by the last visited language by the user.", "translatepress-multilingual"); ?>
+<?php __("Always use this language", "translatepress-multilingual"); ?>
+<?php __("By checking this setting the preferred language will remain the one selected above, without the possibility of being changed in the frontend.<br>This language will be used in different operations such as sending email to the user.", "translatepress-multilingual"); ?>
 <?php __("Hello! Seems like you've been using <strong>TranslatePress</strong> for a while now to translate your website. That's awesome! ", "translatepress-multilingual"); ?>
 <?php __("If you can spare a few moments to rate it on WordPress.org it would help us a lot (and boost my motivation).", "translatepress-multilingual"); ?>
 <?php __("~ Razvan, developer of TranslatePress", "translatepress-multilingual"); ?>

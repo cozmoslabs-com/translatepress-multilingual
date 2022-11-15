@@ -56,10 +56,21 @@ class TRP_Woocommerce_Emails{
         global $TRP_LANGUAGE, $TRP_EMAIL_ORDER;
         $order = wc_get_order($order_id);
         $user_id = $order->get_user_id();
+
         $TRP_EMAIL_ORDER = $order_id;
         if( $user_id != 0 ){
-            update_user_meta( $user_id, 'trp_language', $TRP_LANGUAGE );
-            update_post_meta( $order_id, 'trp_language', $TRP_LANGUAGE );
+
+            $user_preferred_language = get_user_meta($user_id, 'trp_language', true);
+            $always_use_this_language = get_user_meta( $user_id, 'trp_always_use_this_language', true );
+
+            if (!empty($always_use_this_language) && $always_use_this_language == 'yes' && !empty($user_preferred_language) ){
+                update_user_meta( $user_id, 'trp_language', $user_preferred_language );
+                update_post_meta( $order_id, 'trp_language', $user_preferred_language );
+
+            }else {
+                update_user_meta( $user_id, 'trp_language', $TRP_LANGUAGE );
+                update_post_meta( $order_id, 'trp_language', $TRP_LANGUAGE );
+            }
         }
         else{
             update_post_meta( $order_id, 'trp_language', $TRP_LANGUAGE );
@@ -76,9 +87,12 @@ class TRP_Woocommerce_Emails{
     public function save_current_language(){
         global $TRP_LANGUAGE;
         $user_id = get_current_user_id();
+
         if( $user_id > 0 ){
             $language_meta = get_user_meta( $user_id, 'trp_language', true);
-            if( $language_meta != $TRP_LANGUAGE ) {
+            $always_use_this_language = get_user_meta( $user_id, 'trp_always_use_this_language', true );
+
+            if( $language_meta != $TRP_LANGUAGE && $always_use_this_language !== 'yes') {
                 update_user_meta( $user_id, 'trp_language', $TRP_LANGUAGE );
             }
         }

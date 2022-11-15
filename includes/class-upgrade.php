@@ -476,6 +476,9 @@ class TRP_Upgrade {
             $request['progress_message'] = '.';
 		}
 
+        if ( $this->db->last_error != '' ){
+            $request['progress_message'] = '<p><strong>SQL Error:</strong> ' . esc_html($this->db->last_error) . '</p>' . $request['progress_message'];
+        }
 		$query_arguments = array(
 			'action'                    => 'trp_update_database',
 			'trp_updb_action'           => $request['trp_updb_action'],

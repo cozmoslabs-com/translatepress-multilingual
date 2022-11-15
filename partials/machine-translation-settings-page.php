@@ -4,7 +4,7 @@
         <h1> <?php esc_html_e( 'TranslatePress Automatic Translation', 'translatepress-multilingual' );?></h1>
         <?php
         do_action ( 'trp_settings_navigation_tabs' );
-        $free_version = ( ( !class_exists( 'TRP_Handle_Included_Addons' ) ) || ( ( defined( 'TRANSLATE_PRESS' ) && ( TRANSLATE_PRESS !== 'TranslatePress - Developer' && TRANSLATE_PRESS !== 'TranslatePress - Business' && TRANSLATE_PRESS !== 'TranslatePress - Dev' && TRANSLATE_PRESS !== 'TranslatePress - Personal' ) ) ) );
+        $free_version = !class_exists( 'TRP_Handle_Included_Addons' );
         $seo_pack_active = class_exists( 'TRP_IN_Seo_Pack');
         ?>
 
@@ -50,7 +50,7 @@
 
                             <?php
                             //link and message in case the user has the free version of TranslatePress
-                            if( ( !class_exists( 'TRP_Handle_Included_Addons' ) ) || ( ( defined( 'TRANSLATE_PRESS' ) && ( TRANSLATE_PRESS !== 'TranslatePress - Developer' && TRANSLATE_PRESS !== 'TranslatePress - Business' && TRANSLATE_PRESS !== 'TranslatePress - Dev' ) ) ) ) :
+                            if( !class_exists( 'TRP_Handle_Included_Addons' ) ):
                                 $url = trp_add_affiliate_id_to_link('https://translatepress.com/pricing/?utm_source=wpbackend&utm_medium=clientsite&utm_content=deepl_upsell&utm_campaign=tpfree');
                                 $message = __( '<strong>DeepL</strong> automatic translation is available as a <a href="%1$s" target="_blank" title="%2$s">%2$s</a>.', 'translatepress-multilingual' );
                                 $message_upgrade = __( 'By upgrading you\'ll get access to all paid add-ons, premium support and help fund the future development of TranslatePress.', 'translatepress-multilingual' );

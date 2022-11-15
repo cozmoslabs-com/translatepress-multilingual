@@ -795,3 +795,13 @@ function trp_restore_language(){
     remove_filter( 'plugin_locale', 'trp_get_locale' );
     $TRP_LANGUAGE = $TRP_LANGUAGE_ORIGINAL;
 }
+
+/**
+ * Determine user language
+ *
+ * @param $user_id
+ * @return mixed
+ */
+function trp_get_user_language( $user_id ){
+    return trp_validate_language( get_user_meta( $user_id, 'trp_language', true ) );
+}

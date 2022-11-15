@@ -31,23 +31,30 @@ class TRP_Languages{
         return apply_filters( 'trp_languages', $this->languages[$english_or_native_name], $english_or_native_name );
     }
 
-	/** Set proper locale when changing languages with translatepress
-	 *
-	 * @param $locale
-	 * @return mixed
-	 */
-	public function change_locale( $locale ){
-		if ( $this->is_string_translation_request_for_different_language() ){
-			$trp_ajax_language = (isset($_POST['trp_ajax_language']) ) ? sanitize_text_field( $_POST['trp_ajax_language'] ) : '';
-			if ( !$this->settings ){
-				$trp = TRP_Translate_Press::get_trp_instance();
-				$trp_settings = $trp->get_component( 'settings' );
-				$this->settings = $trp_settings->get_settings();
-			}
-			if ( $trp_ajax_language && in_array( $trp_ajax_language, $this->settings['translation-languages'] ) ){
-				return $trp_ajax_language;
-			}
-		}
+    /** Set proper locale when changing languages with translatepress
+     *
+     * @param $locale
+     * @return mixed
+     */
+    public function change_locale( $locale ){
+        $cache_key = 'trp_locale';
+        $locale_cache = wp_cache_get( $cache_key );
+        if (false !== $locale_cache){
+            return $locale_cache;
+        }
+
+        if ( $this->is_string_translation_request_for_different_language() ){
+            $trp_ajax_language = (isset($_POST['trp_ajax_language']) ) ? sanitize_text_field( $_POST['trp_ajax_language'] ) : '';
+            if ( !$this->settings ){
+                $trp = TRP_Translate_Press::get_trp_instance();
+                $trp_settings = $trp->get_component( 'settings' );
+                $this->settings = $trp_settings->get_settings();
+            }
+            if ( $trp_ajax_language && in_array( $trp_ajax_language, $this->settings['translation-languages'] ) ){
+                wp_cache_set( $cache_key, $trp_ajax_language );
+                return $trp_ajax_language;
+            }
+        }
 
         if ( !$this->is_admin_request ){
             $trp = TRP_Translate_Press::get_trp_instance();
@@ -55,16 +62,18 @@ class TRP_Languages{
             $this->is_admin_request= $trp_is_admin_request->is_admin_request();
         }
 
-		if ( $this->is_admin_request )
-		    return $locale;
+        if ( $this->is_admin_request ){
+            wp_cache_set( $cache_key, $locale );
+            return $locale;
+        }
 
-
-	    global $TRP_LANGUAGE;
-		if( !empty($TRP_LANGUAGE) ){
-			$locale = $TRP_LANGUAGE;
-		}
-		return $locale;
-	}
+        global $TRP_LANGUAGE;
+        if( !empty($TRP_LANGUAGE) ){
+            $locale = $TRP_LANGUAGE;
+        }
+        wp_cache_set( $cache_key, $locale );
+        return $locale;
+    }
 
 	public function is_string_translation_request_for_different_language(){
 		if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {

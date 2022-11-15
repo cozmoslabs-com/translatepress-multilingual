@@ -347,7 +347,7 @@ class TRP_Trigger_Plugin_Notifications{
         /* License Notifications */
         $license_details = get_option( 'trp_license_details' );
         $is_demosite = ( strpos(site_url(), 'https://demo.translatepress.com' ) !== false );
-        $free_version = ( defined( 'TRANSLATE_PRESS' ) && ( TRANSLATE_PRESS !== 'TranslatePress - Developer' && TRANSLATE_PRESS !== 'TranslatePress - Business' && TRANSLATE_PRESS !== 'TranslatePress - Dev' && TRANSLATE_PRESS !== 'TranslatePress - Personal' ) );
+        $free_version = !class_exists( 'TRP_Handle_Included_Addons' );
         if( !empty($license_details) && !$is_demosite && !$free_version){
             /* if we have any invalid response for any of the addon show just the error notification and ignore any valid responses */
             if( !empty( $license_details['invalid'] ) ){

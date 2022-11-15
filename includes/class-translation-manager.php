@@ -204,7 +204,7 @@ class TRP_Translation_Manager {
         $license_notice_content = false; // false will hide the license notice panel
 
         // paid version plugin (business/developer/personal) is active
-        $free_version = ( defined( 'TRANSLATE_PRESS' ) && ( TRANSLATE_PRESS !== 'TranslatePress - Developer' && TRANSLATE_PRESS !== 'TranslatePress - Business' && TRANSLATE_PRESS !== 'TranslatePress - Dev' && TRANSLATE_PRESS !== 'TranslatePress - Personal' ) );
+        $free_version = !class_exists( 'TRP_Handle_Included_Addons' );
 
         if ( !$free_version ){
             $license_status = trp_get_license_status();
