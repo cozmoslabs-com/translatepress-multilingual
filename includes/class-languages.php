@@ -31,6 +31,20 @@ class TRP_Languages{
         return apply_filters( 'trp_languages', $this->languages[$english_or_native_name], $english_or_native_name );
     }
 
+    /**Function that clear cache from the key trp_locale because it was retained over page reloads.
+     * @param $locale
+     * @return void
+     */
+    public function clear_cache_locale( $locale ){
+
+        wp_cache_delete( 'trp_locale' );
+
+        remove_filter('locale', array($this, 'clear_cache_locale'), 99998);
+        remove_filter('plugin_locale', array($this, 'clear_cache_locale'), 99998);
+
+        return $locale;
+    }
+
     /** Set proper locale when changing languages with translatepress
      *
      * @param $locale
@@ -38,6 +52,7 @@ class TRP_Languages{
      */
     public function change_locale( $locale ){
         $cache_key = 'trp_locale';
+
         $locale_cache = wp_cache_get( $cache_key );
         if (false !== $locale_cache){
             return $locale_cache;

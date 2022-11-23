@@ -683,7 +683,9 @@ class TRP_Url_Converter {
             }
         }
 
-	    wp_cache_set( 'get_abs_home', $this->absolute_home, 'trp' );
+        $this->absolute_home = apply_filters('trp_filter_absolute_home_result', $this->absolute_home);
+
+        wp_cache_set( 'get_abs_home', $this->absolute_home, 'trp' );
 
         return $this->absolute_home;
     }
