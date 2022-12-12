@@ -51,12 +51,6 @@ class TRP_Languages{
      * @return mixed
      */
     public function change_locale( $locale ){
-        $cache_key = 'trp_locale';
-
-        $locale_cache = wp_cache_get( $cache_key );
-        if (false !== $locale_cache){
-            return $locale_cache;
-        }
 
         if ( $this->is_string_translation_request_for_different_language() ){
             $trp_ajax_language = (isset($_POST['trp_ajax_language']) ) ? sanitize_text_field( $_POST['trp_ajax_language'] ) : '';
@@ -66,19 +60,17 @@ class TRP_Languages{
                 $this->settings = $trp_settings->get_settings();
             }
             if ( $trp_ajax_language && in_array( $trp_ajax_language, $this->settings['translation-languages'] ) ){
-                wp_cache_set( $cache_key, $trp_ajax_language );
                 return $trp_ajax_language;
             }
         }
 
-        if ( !$this->is_admin_request ){
+        if ( $this->is_admin_request === null ){
             $trp = TRP_Translate_Press::get_trp_instance();
             $trp_is_admin_request = $trp->get_component( 'url_converter' );
             $this->is_admin_request= $trp_is_admin_request->is_admin_request();
         }
 
         if ( $this->is_admin_request ){
-            wp_cache_set( $cache_key, $locale );
             return $locale;
         }
 
@@ -86,7 +78,6 @@ class TRP_Languages{
         if( !empty($TRP_LANGUAGE) ){
             $locale = $TRP_LANGUAGE;
         }
-        wp_cache_set( $cache_key, $locale );
         return $locale;
     }
 

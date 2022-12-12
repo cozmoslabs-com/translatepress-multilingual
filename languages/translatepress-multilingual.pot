@@ -297,11 +297,11 @@ msgstr ""
 msgid "(last checked on %s)"
 msgstr ""
 
-#: includes/class-machine-translator.php:137, includes/google-translate/class-google-translate-v2-machine-translator.php:181
+#: includes/class-machine-translator.php:138, includes/google-translate/class-google-translate-v2-machine-translator.php:181
 msgid "Please enter your Google Translate key."
 msgstr ""
 
-#: includes/class-machine-translator.php:152, add-ons-pro/deepl/includes/class-deepl-machine-translator.php:286
+#: includes/class-machine-translator.php:153, add-ons-pro/deepl/includes/class-deepl-machine-translator.php:286
 msgid "Please enter your DeepL API key."
 msgstr ""
 
