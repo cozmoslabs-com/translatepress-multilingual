@@ -200,17 +200,7 @@ class TRP_String_Translation {
             $settings     = $trp_settings->get_settings();
 
             global $wpdb;
-            $query = '';
-            foreach ( $settings['translation-languages'] as $language ) {
-                $query .= 'SELECT domain FROM ' . $trp_query->get_gettext_table_name( $language ) . ' UNION ';
-            }
-            $query = rtrim( $query, ' UNION ' ) . ' ';
-
-            $charset_collate = $wpdb->get_charset_collate();
-            $charset = "utf8mb4";
-            if( strpos( 'latin1', $charset_collate ) === 0 )
-                $charset = "latin1";
-            $query .= ' ORDER BY domain COLLATE '.$charset.'_general_ci ASC';
+            $query = 'SELECT DISTINCT domain FROM `' . $trp_query->get_table_name_for_gettext_original_strings() . '` ORDER BY domain ASC';
 
             $this->gettext_domains = $wpdb->get_results( $query, OBJECT_K );
             foreach ( $this->gettext_domains as $domain => $value ) {
