@@ -783,13 +783,15 @@ class TRP_Url_Converter {
             $abs_home = '';
         }
 
-        $home_path = trim( parse_url( $abs_home, PHP_URL_PATH ), '/' );
+        $abs_home_path_url = parse_url($abs_home, PHP_URL_PATH);
+        $home_path = ($abs_home_path_url !== null )? trim($abs_home_path_url, '/') : '';
+
         $home_path_regex = sprintf( '|^%s|i', preg_quote( $home_path, '|' ) );
 
         // Trim path info from the end and the leading home path from the front.
-        $req_uri = ltrim($req_uri, '/');
+        $req_uri = ltrim( $req_uri, '/' );
         $req_uri = preg_replace( $home_path_regex, '', $req_uri );
-        $req_uri = trim($abs_home, '/') . '/' . ltrim( $req_uri, '/' );
+        $req_uri = trim( $abs_home, '/' ) . '/' . ltrim( $req_uri, '/' );
 
 
         if ( function_exists('apply_filters') ) $req_uri = apply_filters('trp_curpageurl', $req_uri);

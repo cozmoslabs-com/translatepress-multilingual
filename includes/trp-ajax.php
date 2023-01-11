@@ -32,8 +32,8 @@ class TRP_Ajax{
             $this->output_translations(
             	$this->sanitize_strings( $_POST['originals'] ),//phpcs:ignore
             	$this->sanitize_strings( $_POST['skip_machine_translation'] ),//phpcs:ignore
-	            mysqli_real_escape_string( $this->connection, filter_var( $_POST['language'], FILTER_SANITIZE_STRING ) ),
-	            mysqli_real_escape_string( $this->connection, filter_var( $_POST['original_language'], FILTER_SANITIZE_STRING ) )
+	            mysqli_real_escape_string( $this->connection, $_POST['language'] ), /* phpcs:ignore */ /* validated with trp_is_valid_language_code on line 25 */
+	            mysqli_real_escape_string( $this->connection, $_POST['original_language'] ) /* phpcs:ignore */ /* validated with trp_is_valid_language_code on line 25 */
             );
             //Successful connection to DB
             mysqli_close($this->connection);
@@ -52,7 +52,7 @@ class TRP_Ajax{
      * @return array                    Sanitized array of strings.
      */
     protected function sanitize_strings( $posted_strings){
-    	$numerals_option = isset( $_POST['translate_numerals_opt'] ) ? filter_var( $_POST['translate_numerals_opt'], FILTER_SANITIZE_STRING ) : 'no';
+    	$numerals_option = ( isset( $_POST['translate_numerals_opt'] ) && $_POST['translate_numerals_opt'] === 'yes' ) ? 'yes' : 'no';
         $strings = json_decode( $posted_strings );
         if ( is_array( $strings ) ) {
             foreach ($strings as $key => $string) {

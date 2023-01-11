@@ -1,4 +1,4 @@
-# Copyright (C) 2022 TranslatePress Multilingual
+# Copyright (C) 2023 TranslatePress Multilingual
 # This file is distributed under the same license as the TranslatePress Multilingual package.
 msgid ""
 msgstr ""
@@ -297,11 +297,11 @@ msgstr ""
 msgid "(last checked on %s)"
 msgstr ""
 
-#: includes/class-machine-translator.php:138, includes/google-translate/class-google-translate-v2-machine-translator.php:181
+#: includes/class-machine-translator.php:140, includes/google-translate/class-google-translate-v2-machine-translator.php:181
 msgid "Please enter your Google Translate key."
 msgstr ""
 
-#: includes/class-machine-translator.php:153, add-ons-pro/deepl/includes/class-deepl-machine-translator.php:286
+#: includes/class-machine-translator.php:155, add-ons-pro/deepl/includes/class-deepl-machine-translator.php:286
 msgid "Please enter your DeepL API key."
 msgstr ""
 

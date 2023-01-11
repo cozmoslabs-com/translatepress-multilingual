@@ -5,7 +5,7 @@ Tags: translate, translation, multilingual, automatic translation, bilingual, fr
 Requires at least: 3.1.0
 Tested up to: 6.1.1
 Requires PHP: 5.6.20
-Stable tag: 2.4.4
+Stable tag: 2.4.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -140,6 +140,10 @@ For more information please check out our [documentation](https://translatepress
 
 
 == Changelog ==
+= 2.4.5 =
+ * Fixed multiple compatibility issues with PHP 8.1
+ * Fixed issue on Automatic Translation tab when setting it up for the first time
+
 = 2.4.4 =
 * Improved speed by refactoring query regarding selecting domains
 * Added Advanced option to disable translation of gettext strings through TranslatePress

@@ -76,7 +76,9 @@ class TRP_Machine_Translator {
                 $data['trp_mt_supported_languages'][ $this->settings['trp_machine_translation_settings']['translation-engine'] ] = array( 'languages' => array() );
             }
 
-            $data['trp_mt_supported_languages'][$this->settings['trp_machine_translation_settings']['translation-engine']]['languages'] = $this->get_supported_languages();
+            if ( isset($this->settings['trp_machine_translation_settings']['google-translate-key'])) {
+                $data['trp_mt_supported_languages'][ $this->settings['trp_machine_translation_settings']['translation-engine'] ]['languages'] = $this->get_supported_languages();
+            }
             if (method_exists($this, 'check_formality')) {
                 $data['trp_mt_supported_languages'][ $this->settings['trp_machine_translation_settings']['translation-engine'] ]['formality-supported-languages'] = $this->check_formality();
             }
