@@ -49,23 +49,23 @@ msgstr ""
 msgid "Settings saved."
 msgstr ""
 
-#: includes/class-advanced-tab.php:321, includes/class-error-manager.php:180, partials/machine-translation-settings-page.php:17, partials/machine-translation-settings-page.php:121, partials/machine-translation-settings-page.php:141, partials/machine-translation-settings-page.php:192, partials/main-settings-page.php:42, partials/main-settings-page.php:55, partials/main-settings-page.php:68
+#: includes/class-advanced-tab.php:323, includes/class-error-manager.php:180, partials/machine-translation-settings-page.php:17, partials/machine-translation-settings-page.php:121, partials/machine-translation-settings-page.php:141, partials/machine-translation-settings-page.php:192, partials/main-settings-page.php:42, partials/main-settings-page.php:55, partials/main-settings-page.php:68
 msgid "Yes"
 msgstr ""
 
-#: includes/class-advanced-tab.php:531, includes/class-advanced-tab.php:542, includes/class-advanced-tab.php:636, includes/class-advanced-tab.php:667
+#: includes/class-advanced-tab.php:533, includes/class-advanced-tab.php:544, includes/class-advanced-tab.php:638, includes/class-advanced-tab.php:669
 msgid "Are you sure you want to remove this item?"
 msgstr ""
 
-#: includes/class-advanced-tab.php:531, includes/class-advanced-tab.php:542, includes/class-advanced-tab.php:636, includes/class-advanced-tab.php:667, partials/main-settings-language-selector.php:60, add-ons-advanced/extra-languages/partials/language-selector-pro.php:62
+#: includes/class-advanced-tab.php:533, includes/class-advanced-tab.php:544, includes/class-advanced-tab.php:638, includes/class-advanced-tab.php:669, partials/main-settings-language-selector.php:60, add-ons-advanced/extra-languages/partials/language-selector-pro.php:62
 msgid "Remove"
 msgstr ""
 
-#: includes/class-advanced-tab.php:542, includes/class-advanced-tab.php:667, partials/main-settings-language-selector.php:102, add-ons-advanced/extra-languages/partials/language-selector-pro.php:103
+#: includes/class-advanced-tab.php:544, includes/class-advanced-tab.php:669, partials/main-settings-language-selector.php:102, add-ons-advanced/extra-languages/partials/language-selector-pro.php:103
 msgid "Add"
 msgstr ""
 
-#: includes/class-advanced-tab.php:620, includes/class-advanced-tab.php:654
+#: includes/class-advanced-tab.php:622, includes/class-advanced-tab.php:656
 msgid "Select..."
 msgstr ""
 
@@ -1061,7 +1061,7 @@ msgstr ""
 msgid "<strong>TranslatePress</strong> requires <strong><a href=\"http://php.net/manual/en/book.mbstring.php\">Multibyte String PHP library</a></strong>. Please contact your server administrator to install it on your server."
 msgstr ""
 
-#: includes/compatibility-functions.php:1554
+#: includes/compatibility-functions.php:1651
 msgid "Detected long query limitation on WPEngine hosting. Some large pages may appear untranslated. You can remove limitation by adding the following to your site’s wp-config.php: define( 'WPE_GOVERNOR', false ); "
 msgstr ""
 
@@ -1945,6 +1945,14 @@ msgstr ""
 
 #: includes/advanced-settings/separators.php:39
 msgid "Miscellaneous options"
+msgstr ""
+
+#: includes/advanced-settings/serve-similar-translation.php:9
+msgid "Automatic Translation Memory"
+msgstr ""
+
+#: includes/advanced-settings/serve-similar-translation.php:10
+msgid "Serve same translation for similar text. Helps prevent losing existing translation when correcting typos or making minor adjustments to the original text. <br>If a translation already exists for a very similar original string, it will be automatically used for the current original string. Does not work when making changes to a text that is part of a translation block unless the new text is manually merged again in a translation block."
 msgstr ""
 
 #: includes/advanced-settings/show-dynamic-content-before-translation.php:8

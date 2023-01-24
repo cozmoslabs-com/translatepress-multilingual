@@ -27,7 +27,7 @@ class TRP_Query{
     const NOT_TRANSLATED = 0;
     const MACHINE_TRANSLATED = 1;
     const HUMAN_REVIEWED = 2;
-
+    const SIMILAR_TRANSLATED = 3;
     const BLOCK_TYPE_REGULAR_STRING = 0;
     const BLOCK_TYPE_ACTIVE = 1;
     const BLOCK_TYPE_DEPRECATED = 2;
@@ -142,6 +142,15 @@ class TRP_Query{
      */
     public function get_constant_human_reviewed(){
         return self::HUMAN_REVIEWED;
+    }
+
+    /**
+     * Return constant used for entries automatically filled by the original being a string similar to another string that has a translation.
+     *
+     * @return int
+     */
+    public function get_constant_similar_translated(){
+        return self::SIMILAR_TRANSLATED;
     }
 
 	/**

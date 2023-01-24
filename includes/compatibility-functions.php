@@ -152,6 +152,83 @@ function trp_do_shortcode($content){
     return do_shortcode(stripcslashes($content));
 }
 
+/**
+ * Compatibility with Woocommerce Print Products
+ *
+ * @param $bool
+ * @param $output
+ * @return bool|mixed
+ */
+
+add_filter( 'trp_skip_gettext_processing', 'trp_woo_strip_gettext_from_print_products' );
+
+function trp_woo_strip_gettext_from_print_products( $bool ){
+    if ( isset( $_REQUEST['print-products'] ) && $_REQUEST['print-products'] == 'pdf' && class_exists('\WooCommerce_Print_Products') ) {
+        return true;
+    }
+    return $bool;
+}
+
+
+add_filter('trp_stop_translating_page', 'trp_woo_pdf_print_products', 10, 2);
+
+function trp_woo_pdf_print_products( $bool, $output ){
+    if ( isset( $_REQUEST['print-products'] ) && $_REQUEST['print-products'] == 'pdf' && class_exists('\WooCommerce_Print_Products') ) {
+        return true;
+    }
+    return $bool;
+}
+
+/**
+ * DK PDF compatibility
+ *
+ * The DK PDF plugin seems to not work at all. Even when TranslatePress is deactivated, there are critical errors and notices in debug.log
+ */
+
+add_filter( 'trp_skip_gettext_processing', 'trp_dk_pdf_strip_gettext_from_pdf' );
+
+function trp_dk_pdf_strip_gettext_from_pdf( $bool ){
+
+    if ( isset( $_GET['pdf'] ) && class_exists( 'DKPDF' ) ){
+        return true;
+    }
+
+    return $bool;
+}
+
+
+add_filter('trp_stop_translating_page', 'trp_do_not_translate_dk_pdf', 10, 2);
+function trp_do_not_translate_dk_pdf($translate, $output){
+
+    if ( isset( $_GET['pdf'] ) && class_exists( 'DKPDF' ) ){
+        return true;
+    }
+
+    return $translate;
+}
+
+
+/**
+ * Compatibility with Invoices for WooCommerce
+ * Do not translate url's like this as it brakes them because they are PDF's: https://ro.wordpress.org/plugins/woocommerce-pdf-invoices/
+ */
+
+add_filter( 'trp_skip_gettext_processing', 'trp_invoices_for_woocommerce_strip_gettext_from_pdf', 10, 4 );
+function trp_invoices_for_woocommerce_strip_gettext_from_pdf( $bool, $translation, $text, $domain ){
+
+    if ( isset( $_GET['wc-ajax'] ) && $_GET['wc-ajax'] == "checkout" && class_exists( '\BEWPI_Invoice' ) && ((trim( $domain ) === 'woocommerce-pdf-invoice') || ( $text == 'Cash on delivery' && trim($domain) == 'woocommerce') ) ) {
+        return true;
+    }
+    return $bool;
+}
+
+add_filter('trp_stop_translating_page', 'trp_do_not_translate_pdf_param', 10, 2);
+function trp_do_not_translate_pdf_param($translate, $output){
+    if ( isset( $_GET['bewpi_action'] ) && class_exists( '\BEWPI_Invoice' ) ){
+        return true;
+    }
+    return $translate;
+}
 
 /**
  * Compatibility with WooCommerce PDF Invoices & Packing Slips
@@ -218,6 +295,26 @@ function trp_woocommerce_pdf_catalog_compatibility_dont_translate_pdf( $bool, $o
 	return $bool;
 }
 
+/**
+ *  Compatibility with YITH WooCommerce
+ */
+
+add_filter( 'trp_skip_gettext_processing', 'trp_woo_strip_gettext_from_yith_pdf', 10, 4 );
+function trp_woo_strip_gettext_from_yith_pdf( $bool, $translation, $text, $domain ){
+    if ( isset( $_GET['wc-ajax'] ) && $_GET['wc-ajax'] == 'checkout' && class_exists( 'YITH_Checkout_Addon' ) && ((trim( $domain ) === 'yith-woocommerce-pdf-invoice') || ( $text == 'N/A' && trim($domain) == 'woocommerce') ) ){
+        return true;
+    }
+    return $bool;
+}
+
+add_filter( 'trp_stop_translating_page', 'trp_woo_pdf_invoices_compatibility_dont_translate_pdf', 10, 2 );
+function trp_woo_pdf_invoices_compatibility_dont_translate_pdf( $bool, $output ){
+    if ( isset( $_REQUEST['type'] ) && $_REQUEST['type'] == 'proforma' && class_exists( 'YITH_Checkout_Addon' ) ) {
+        return true;
+    }
+    return $bool;
+
+}
 
 /**
  * Compatibility with WooCommerce order notes

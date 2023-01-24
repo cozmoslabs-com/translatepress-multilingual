@@ -481,6 +481,8 @@
 <?php __("Exclude strings", "translatepress-multilingual"); ?>
 <?php __("Debug", "translatepress-multilingual"); ?>
 <?php __("Miscellaneous options", "translatepress-multilingual"); ?>
+<?php __("Automatic Translation Memory", "translatepress-multilingual"); ?>
+<?php __("Serve same translation for similar text. Helps prevent losing existing translation when correcting typos or making minor adjustments to the original text. <br>If a translation already exists for a very similar original string, it will be automatically used for the current original string. Does not work when making changes to a text that is part of a translation block unless the new text is manually merged again in a translation block.", "translatepress-multilingual"); ?>
 <?php __("Fix missing dynamic content", "translatepress-multilingual"); ?>
 <?php __("May help fix missing content inserted using JavaScript. <br> It shows dynamically inserted content in original language for a moment before the translation request is finished.", "translatepress-multilingual"); ?>
 <?php __("Filter Gettext wrapping from post content and title", "translatepress-multilingual"); ?>

@@ -64,7 +64,7 @@ class TRP_Translate_Press{
         define( 'TRP_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
         define( 'TRP_PLUGIN_BASE', plugin_basename( __DIR__ . '/index.php' ) );
         define( 'TRP_PLUGIN_SLUG', 'translatepress-multilingual' );
-        define( 'TRP_PLUGIN_VERSION', '2.4.5' );
+        define( 'TRP_PLUGIN_VERSION', '2.4.6' );
 
 	    wp_cache_add_non_persistent_groups(array('trp'));
 
@@ -395,9 +395,7 @@ class TRP_Translate_Press{
 
         /* handle dynamic texts with gettext */
         $this->loader->add_filter( 'locale', $this->languages, 'change_locale', 99999 );
-        $this->loader->add_filter( 'locale', $this->languages, 'clear_cache_locale', 99998 );
         $this->loader->add_filter( 'plugin_locale', $this->languages, 'change_locale', 99999 );
-        $this->loader->add_filter( 'plugin_locale', $this->languages, 'clear_cache_locale', 99998 );
 
         $this->loader->add_action( 'init', $this->gettext_manager, 'create_gettext_translated_global' );
         $this->loader->add_action( 'init', $this->gettext_manager, 'initialize_gettext_processing' );

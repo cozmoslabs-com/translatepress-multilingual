@@ -1360,57 +1360,107 @@ class TRP_Translation_Render{
      * @param $language_code
      * @return array
      */
-    public function process_strings( $translateable_strings, $language_code, $block_type = null, $skip_machine_translating_strings = array() ){
-	    if ( ! $this->machine_translator ) {
-		    $trp = TRP_Translate_Press::get_trp_instance();
-		    $this->machine_translator = $trp->get_component('machine_translator');
-	    }
+    public function process_strings( $translateable_strings, $language_code, $block_type = null, $skip_machine_translating_strings = array() ) {
+        if ( !$this->machine_translator ) {
+            $trp                      = TRP_Translate_Press::get_trp_instance();
+            $this->machine_translator = $trp->get_component( 'machine_translator' );
+        }
 
-        $translated_strings = array();
-	    $machine_translation_available = $this->machine_translator ? $this->machine_translator->is_available( array( $this->settings['default-language'], $language_code )) : false;
+        $translated_strings            = array();
+        $machine_translation_available = $this->machine_translator ? $this->machine_translator->is_available( array( $this->settings['default-language'], $language_code ) ) : false;
 
-        if ( ! $this->trp_query ) {
-            $trp = TRP_Translate_Press::get_trp_instance();
+        $originals_without_translation_in_db_that_are_similar_with_already_translated_strings = array();
+
+        if ( !$this->trp_query ) {
+            $trp             = TRP_Translate_Press::get_trp_instance();
             $this->trp_query = $trp->get_component( 'query' );
         }
 
         // get existing translations
-        $dictionary = $this->trp_query->get_existing_translations( array_values($translateable_strings), $language_code );
-        if ( $dictionary === false ){
-        	return array();
+        $dictionary = $this->trp_query->get_existing_translations( array_values( $translateable_strings ), $language_code );
+        if ( $dictionary === false ) {
+            return array();
         }
-        $new_strings = array();
-	    $machine_translatable_strings = array();
-        foreach( $translateable_strings as $i => $string ){
-        	// prevent accidentally machine translated strings from db such as for src to be displayed
-	        $skip_string = in_array( $string, $skip_machine_translating_strings );
-	        if ( isset( $dictionary[$string]->translated ) && $dictionary[$string]->status == $this->trp_query->get_constant_machine_translated() && $skip_string ){
-	        	continue;
-	        }
-	        //strings existing in database,
-            if ( isset( $dictionary[$string]->translated ) ){
-                $translated_strings[$i] = $dictionary[$string]->translated;
-            }else{
-                $new_strings[$i] = $translateable_strings[$i];
-                // if the string is not a url then allow machine translation for it
-                if ( $machine_translation_available && !$skip_string && filter_var($new_strings[$i], FILTER_VALIDATE_URL) === false ){
-	                $machine_translatable_strings[$i] = $new_strings[$i];
+
+        $new_strings                     = array();
+        $machine_translatable_strings    = array();
+
+        /**
+         * The filter 'trp_add_similar_and_original_strings_to_db' becomes true only when TranslatePress Settings->Advanced Settings->Serve similar translations for strings that are almost identical
+         * is set to 'Yes'
+         * This filter appears in multiple places in this class since we use the function process_strings to make sure all the strings are inserted in the DataBase with their corresponding translation
+         * The similar strings we reference are strings that are almost identical with strings that are in the DB and have translations.
+         * We use those translated strings to translate the similar strings so the user or the translation engine does not have to do it anymore and we can
+         * display them in frontend (for more information about how this process is done please look at the file tranlatepress\includes\advanced-settings\serve-similar-translation.php)
+         *
+         * In the code below we are populating the array '$originals_without_translation_in_db_that_are_similar_with_already_translated_strings' with original strings
+         * from the page that do not have a translation, but are almost identical with strings that are already in DB with translation.
+         * A similar string is determined by looking at its value in $dictionary (an array that contains all the strings on the page). The $dictionary has as keys
+         * the strings mentioned before, which are objects containing more arguments, one of them being original. However, in the case of a similar original string
+         * without translation, the argument 'original' is the almost identical string that has a translation stored in the DB.
+         *
+         * We collect these similar strings in an array so we can merge them later in new_strings in order to be introduced into the DB.
+         */
+
+        if ( apply_filters( 'trp_add_similar_and_original_strings_to_db', false ) ) {
+            foreach ( array_keys( $dictionary ) as $value ) {
+                if ( $value != $dictionary[ $value ]->original ) {
+                    $originals_without_translation_in_db_that_are_similar_with_already_translated_strings[] = $value;
                 }
             }
         }
 
-        $untranslated_list = $this->trp_query->get_untranslated_strings( $new_strings, $language_code );
-        $update_strings = array();
+        foreach ( $translateable_strings as $i => $string ) {
+            // prevent accidentally machine translated strings from db such as for src to be displayed
+            $skip_string = in_array( $string, $skip_machine_translating_strings );
+            if ( isset( $dictionary[ $string ]->translated ) && $dictionary[ $string ]->status == $this->trp_query->get_constant_machine_translated() && $skip_string ) {
+                continue;
+            }
+            //strings existing in database,
+            if ( isset( $dictionary[ $string ]->translated ) ) {
+                $translated_strings[ $i ] = $dictionary[ $string ]->translated;
+            } else {
+                $new_strings[ $i ] = $translateable_strings[ $i ];
+                // if the string is not a url then allow machine translation for it
+                if ( $machine_translation_available && !$skip_string && filter_var( $new_strings[ $i ], FILTER_VALIDATE_URL ) === false ) {
+                    $machine_translatable_strings[ $i ] = $new_strings[ $i ];
+                }
+            }
+
+            /**
+             * Here we look through the $translateable_strings found and if they are also in the array $originals_without_translation_in_db_that_are_similar_with_already_translated_strings
+             * then we assign them to new_strings to prepare them for being inserted into DB.
+             */
+            if ( apply_filters( 'trp_add_similar_and_original_strings_to_db', false ) ) {
+                if ( in_array( $translateable_strings[ $i ], $originals_without_translation_in_db_that_are_similar_with_already_translated_strings ) ) {
+                    $new_strings[ $i ] = $translateable_strings[ $i ];
+                }
+            }
+
+        }
+
+        $untranslated_list                                                    = $this->trp_query->get_untranslated_strings( $new_strings, $language_code );
+        $update_strings                                                       = array();
+        $unique_original_strings_with_machine_translations                    = array();
 
         // machine translate new strings
         if ( $machine_translation_available ) {
-            $machine_strings = $this->machine_translator->translate( $machine_translatable_strings, $language_code, $this->settings['default-language'] );
-            $unique_original_strings_with_machine_translations = array_keys($machine_strings);
-            $original_inserts = $this->trp_query->original_strings_sync( $language_code, $unique_original_strings_with_machine_translations );
+            $machine_strings                                                      = $this->machine_translator->translate( $machine_translatable_strings, $language_code, $this->settings['default-language'] );
+            $unique_original_strings_with_machine_translations                    = array_keys( $machine_strings );
+        }
 
+        /**
+         * If the option is activated,we use the below code so the variable $original_to_be_synced contains the array of strings that are to be sent to a machine translation
+         * engine together with the similar one, so they have entries into the table the trp_original_strings
+         */
+        $originals_to_be_synced= array_merge( $unique_original_strings_with_machine_translations, $originals_without_translation_in_db_that_are_similar_with_already_translated_strings );
+
+        $original_inserts = $this->trp_query->original_strings_sync( $language_code, $originals_to_be_synced );
+
+        if ( $machine_translation_available ) {
             // insert unique machine translations into db. Only for strings newly discovered
             foreach ( $unique_original_strings_with_machine_translations as $string ) {
-                $id = ( isset( $untranslated_list[$string] ) ) ? $untranslated_list[$string]->id : NULL;
+                $id = ( isset( $untranslated_list[ $string ] ) ) ? $untranslated_list[ $string ]->id : NULL;
                 array_push( $update_strings, array(
                     'id'          => $id,
                     'original_id' => $original_inserts[ $string ]->id,
@@ -1429,10 +1479,36 @@ class TRP_Translation_Render{
                 $translated_strings[$i] = $machine_strings[$string];
             }
 
-            if ( isset( $untranslated_list[$string] ) || isset( $machine_strings[$string] ) ){
-                unset( $new_strings[$i] );
+            /**
+             * In this code we add the original similar strings, that have now more arguments, including the translation taken from the similar string in
+             * DB, to the $update_strings array, following now to update the field in the DB with all the information gathered.
+             *
+             * We check if the new_string is not already in the DB and if it is we unset it in order to avoid multiple entries in DB for thr same string.
+             * The similar strings have status 3 in DB.
+             */
+
+            if ( apply_filters('trp_add_similar_and_original_strings_to_db', false) ) {
+
+                if (isset($new_strings[$i]) && in_array($new_strings[$i],$originals_without_translation_in_db_that_are_similar_with_already_translated_strings ) ) {
+
+                    $id = ( isset( $untranslated_list[$string] ) ) ? $untranslated_list[$string]->id : NULL;
+                    array_push( $update_strings, array(
+                        'id'          => $id,
+                        'original'    => $new_strings[$i],
+                        'translated'  => trp_sanitize_string( $dictionary[$string]->translated ),
+                        'status'      => $this->trp_query->get_constant_similar_translated(),
+                        'original_id' => $original_inserts[ $string ]->id) );
+
+                    unset($new_strings[$i]);
+                }
+
+            }
+
+            if ( isset( $untranslated_list[ $string ] ) || isset( $machine_strings[ $string ] ) ) {
+                unset( $new_strings[ $i ] );
             }
         }
+
 
         $this->trp_query->insert_strings( $new_strings, $language_code, $block_type );
         $this->trp_query->update_strings( $update_strings, $language_code, array( 'id','original', 'translated', 'status', 'original_id' ) );

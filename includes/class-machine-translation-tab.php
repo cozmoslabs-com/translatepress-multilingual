@@ -108,7 +108,7 @@ class TRP_Machine_Translation_Tab {
                 $settings['automatically-translate-slug'] = 'no';
         }
 
-        return apply_filters( 'trp_machine_translation_sanitize_settings', $settings );
+        return apply_filters( 'trp_machine_translation_sanitize_settings', $settings, $mt_settings );
     }
 
     /*
