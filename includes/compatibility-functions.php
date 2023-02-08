@@ -1805,18 +1805,43 @@ function trp_remove_divi_locale_filter($lang){
     remove_filter( 'locale', 'et_divi_maybe_change_frontend_locale' );
     return $lang;
 }
+
+/**
+ * This function, checks if the Divi plugin is not installed first.
+ * If it's not installed, it returns the original locale.
+ * If it is installed, it will then access the theme options and check if the 'divi_disable_translations' is found in the cache.
+ * If the value is not found in the cache, it retrieves it from the database using get_option('et_divi').
+ * If the value retrieved from the database is also false, it sets it to 'not_set' in the cache.
+ * Then, it checks if the value of theme_options is 'not_set'. If it is, it returns the input locale without making any changes.
+ * If it is, it returns 'en_US', otherwise it returns the original locale.
+**/
 function trp_et_divi_maybe_change_frontend_locale( $locale ) {
+    if ( !defined( 'ET_CORE_PATH' ) ) {
+        return $locale;
+    }
     $cache_key = 'et_divi_option';
     $theme_options = wp_cache_get( $cache_key );
-    $option_name   = 'divi_disable_translations';
-    if (false === $theme_options){
+    $option_name = 'divi_disable_translations';
+    if (false === $theme_options) {
         $theme_options = get_option( 'et_divi' );
+        if ( false === $theme_options ) {
+            $theme_options = 'not_set';
+        }
         wp_cache_set( $cache_key, $theme_options );
     }
-    $disable_translations = isset ( $theme_options[ $option_name ] ) ? $theme_options[ $option_name ] : false;
-    if ( 'on' === $disable_translations ) {
+
+    if ( 'not_set' === $theme_options ) {
+        return $locale;
+    }
+
+    if ( !isset( $theme_options[ $option_name ] ) ) {
+        return $locale;
+    }
+
+    if ( 'on' === $theme_options[ $option_name ] ) {
         return 'en_US';
     }
+
     return $locale;
 }
 add_filter( 'locale', 'trp_et_divi_maybe_change_frontend_locale' );

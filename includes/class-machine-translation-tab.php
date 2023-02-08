@@ -150,7 +150,7 @@ class TRP_Machine_Translation_Tab {
                 'deepl'               => $deepl_class_name
             ));
 
-            $value = $existing_engines[$this->settings['trp_machine_translation_settings']['translation-engine']];
+            $value = ( isset( $existing_engines[$this->settings['trp_machine_translation_settings']['translation-engine']] ) ) ? $existing_engines[$this->settings['trp_machine_translation_settings']['translation-engine']] : '';
 
             if( !class_exists( $value ) ) {
                 $value = $default; //something is wrong if it reaches this

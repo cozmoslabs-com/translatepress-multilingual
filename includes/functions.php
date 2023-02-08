@@ -178,9 +178,21 @@ function trp_sanitize_string( $filtered, $execute_wp_kses = true ){
 
 function trp_wp_kses($string){
     if ( apply_filters('trp_apply_wp_kses_on_strings', true) ){
+        add_filter( 'wp_kses_allowed_html', 'trp_prevent_kses_from_stripping_trp_wbr_tag', 10, 2 );
         $string = wp_kses_post($string);
+        remove_filter('wp_kses_allowed_html', 'trp_prevent_kses_from_stripping_trp_wbr_tag', 10);
     }
+
     return $string;
+}
+
+function trp_prevent_kses_from_stripping_trp_wbr_tag( $allowedposttags, $context ){
+
+    if ( $context === 'post' ){
+        $allowedposttags['wbr'] = true;
+    }
+
+    return $allowedposttags;
 }
 
 /**

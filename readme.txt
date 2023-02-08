@@ -5,7 +5,7 @@ Tags: translate, translation, multilingual, automatic translation, bilingual, fr
 Requires at least: 3.1.0
 Tested up to: 6.1.1
 Requires PHP: 5.6.20
-Stable tag: 2.4.6
+Stable tag: 2.4.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -140,6 +140,11 @@ For more information please check out our [documentation](https://translatepress
 
 
 == Changelog ==
+= 2.4.7 =
+* Speed improvements achieved through better handling of wp_cache functions
+* Included wbr as an accepted html tag in translations
+* Fixed Filipino language being marked incorrectly as unsupported by Google Automatic Translation
+
 = 2.4.6 =
 * Added Advanced option Automatic Translation Memory that prevents losing translations when correcting typos in original text
 * Added compatibility with multiple pdf generating plugins: Yith WooCommerce PDF Invoice, WooCommerce Print Products, Invoices for WooCommerce

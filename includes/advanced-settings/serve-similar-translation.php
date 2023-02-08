@@ -7,7 +7,7 @@ function serve_similar_translation($settings_array)
         'name' => 'serve_similar_translation',
         'type' => 'checkbox',
         'label' => esc_html__('Automatic Translation Memory', 'translatepress-multilingual'),
-        'description' => wp_kses(__('Serve same translation for similar text. Helps prevent losing existing translation when correcting typos or making minor adjustments to the original text. <br>If a translation already exists for a very similar original string, it will be automatically used for the current original string. Does not work when making changes to a text that is part of a translation block unless the new text is manually merged again in a translation block.', 'translatepress-multilingual'), array('br' => array())),
+        'description' => wp_kses(__('Serve same translation for similar text. The strings need to have a percentage of 95% similarity.<br>Helps prevent losing existing translation when correcting typos or making minor adjustments to the original text. <br>If a translation already exists for a very similar original string, it will automatically be used for the current original string.<br>Does not work when making changes to a text that is part of a translation block unless the new text is manually merged again in a translation block.<br>Each string needs to have a minimum of 50 characters. ', 'translatepress-multilingual'), array('br' => array())),
     );
     return $settings_array;
 }
