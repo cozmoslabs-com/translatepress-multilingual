@@ -45,27 +45,27 @@ msgstr ""
 msgid "Advanced"
 msgstr ""
 
-#: includes/class-advanced-tab.php:185
+#: includes/class-advanced-tab.php:199
 msgid "Settings saved."
 msgstr ""
 
-#: includes/class-advanced-tab.php:323, includes/class-error-manager.php:180, partials/machine-translation-settings-page.php:17, partials/machine-translation-settings-page.php:121, partials/machine-translation-settings-page.php:141, partials/machine-translation-settings-page.php:192, partials/main-settings-page.php:42, partials/main-settings-page.php:55, partials/main-settings-page.php:68
+#: includes/class-advanced-tab.php:337, includes/class-error-manager.php:180, partials/machine-translation-settings-page.php:17, partials/machine-translation-settings-page.php:121, partials/machine-translation-settings-page.php:141, partials/machine-translation-settings-page.php:192, partials/main-settings-page.php:42, partials/main-settings-page.php:55, partials/main-settings-page.php:68
 msgid "Yes"
 msgstr ""
 
-#: includes/class-advanced-tab.php:533, includes/class-advanced-tab.php:544, includes/class-advanced-tab.php:638, includes/class-advanced-tab.php:669
+#: includes/class-advanced-tab.php:547, includes/class-advanced-tab.php:558, includes/class-advanced-tab.php:652, includes/class-advanced-tab.php:683
 msgid "Are you sure you want to remove this item?"
 msgstr ""
 
-#: includes/class-advanced-tab.php:533, includes/class-advanced-tab.php:544, includes/class-advanced-tab.php:638, includes/class-advanced-tab.php:669, partials/main-settings-language-selector.php:60, add-ons-advanced/extra-languages/partials/language-selector-pro.php:62
+#: includes/class-advanced-tab.php:547, includes/class-advanced-tab.php:558, includes/class-advanced-tab.php:652, includes/class-advanced-tab.php:683, partials/main-settings-language-selector.php:60, add-ons-advanced/extra-languages/partials/language-selector-pro.php:62
 msgid "Remove"
 msgstr ""
 
-#: includes/class-advanced-tab.php:544, includes/class-advanced-tab.php:669, partials/main-settings-language-selector.php:102, add-ons-advanced/extra-languages/partials/language-selector-pro.php:103
+#: includes/class-advanced-tab.php:558, includes/class-advanced-tab.php:683, partials/main-settings-language-selector.php:102, add-ons-advanced/extra-languages/partials/language-selector-pro.php:103
 msgid "Add"
 msgstr ""
 
-#: includes/class-advanced-tab.php:622, includes/class-advanced-tab.php:656
+#: includes/class-advanced-tab.php:636, includes/class-advanced-tab.php:670
 msgid "Select..."
 msgstr ""
 
@@ -1069,16 +1069,16 @@ msgstr ""
 msgid "Custom Language Flag"
 msgstr ""
 
+#: includes/custom-language.php:165
+msgid "The Language code of the added custom language cannot be empty."
+msgstr ""
+
 #: includes/custom-language.php:158
 msgid "The Language code of the added custom language is invalid."
 msgstr ""
 
-#: includes/custom-language.php:173
+#: includes/custom-language.php:179
 msgid "The Automatic Translation Code of the added custom language is invalid."
-msgstr ""
-
-#: includes/custom-language.php:185
-msgid "The Language code of the added custom language cannot be empty."
 msgstr ""
 
 #: partials/addons-settings-page.php:3, partials/license-settings-page.php:46, partials/license-settings-page.php:8, partials/main-settings-page.php:5, partials/test-api-settings-page.php:11, partials/trp-remove-duplicate-rows.php:3

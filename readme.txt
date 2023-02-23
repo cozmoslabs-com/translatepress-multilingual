@@ -5,7 +5,7 @@ Tags: translate, translation, multilingual, automatic translation, bilingual, fr
 Requires at least: 3.1.0
 Tested up to: 6.1.1
 Requires PHP: 5.6.20
-Stable tag: 2.4.7
+Stable tag: 2.4.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -140,6 +140,10 @@ For more information please check out our [documentation](https://translatepress
 
 
 == Changelog ==
+= 2.4.8 =
+* Fixed x-default hreflang tag displayed incorrectly in some cases
+* Improved sanitizing Advanced settings
+
 = 2.4.7 =
 * Speed improvements achieved through better handling of wp_cache functions
 * Included wbr as an accepted html tag in translations

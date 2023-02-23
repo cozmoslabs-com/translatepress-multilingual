@@ -61,7 +61,10 @@ class TRP_Advanced_Tab {
         $settings = array();
 		foreach ( $registered_settings as $registered_setting ){
 
-		    // checkboxes are not set so we're setting them up as false
+		    /* All advanced options are set to false and then maybe set to a default value below if a particular
+		     * advanced option is not set in array $submitted_settings
+             * Form submitted checkboxes are never set, so this is especially useful
+		     */
             if( !isset( $submitted_settings[$registered_setting['name']] ) ){
                 $submitted_settings[$registered_setting['name']] = false;
             }
@@ -72,13 +75,24 @@ class TRP_Advanced_Tab {
 						$settings[ $registered_setting['name'] ] = ( $submitted_settings[ $registered_setting['name'] ] === 'yes' ) ? 'yes' : 'no';
 						break;
 					}
-                    case 'select':
+                    case 'select': {
+                        if ( isset( $registered_setting['options'] ) && isset( $registered_setting['options'][ $submitted_settings[ $registered_setting['name'] ] ] ) ) {
+                            $settings[ $registered_setting['name'] ] = $submitted_settings[ $registered_setting['name'] ];
+                        } else {
+                            $settings[ $registered_setting['name'] ] = ( empty( $registered_setting['default'] ) ) ? false : $registered_setting['default'];
+                        }
+                        break;
+                    }
                     case 'input': {
                         $settings[ $registered_setting['name'] ] = sanitize_text_field($submitted_settings[ $registered_setting['name'] ]);
                         break;
                     }
-                    case 'radio' : {
-                        $settings[ $registered_setting['name'] ] = sanitize_text_field( $submitted_settings[ $registered_setting['name'] ] );
+                    case 'radio': {
+                        if ( isset( $registered_setting['options'] ) && in_array( $submitted_settings[ $registered_setting['name'] ], $registered_setting['options'] ) ){
+                            $settings[ $registered_setting['name'] ] = $submitted_settings[ $registered_setting['name'] ];
+                        }else{
+                            $settings[ $registered_setting['name'] ] = ( empty($registered_setting['default'] ) )? false : $registered_setting['default'];
+                        }
                         break;
                     }
                     case 'custom': {
