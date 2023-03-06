@@ -365,10 +365,13 @@ class TRP_Process_Gettext {
 	  * Caller for woocommerce domain with no context and no plural
 	  * Can't call process_gettext_strings directly due to incorrect parameter number
 	  */
-	public function woocommerce_process_gettext_strings_no_context( $translation, $text, $domain ){
-		$translation = $this->process_gettext_strings( $translation, $text, $domain );
-		return $translation;
-	}
+    public function woocommerce_process_gettext_strings_no_context( $translation, $text, $domain )
+    {
+        if ($domain === 'woocommerce') {
+            $translation = $this->process_gettext_strings($translation, $text, $domain);
+        }
+        return $translation;
+    }
 
 	/**
 	 * If we have a translation without context and without plural form then return that translation

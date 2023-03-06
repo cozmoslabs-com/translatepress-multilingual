@@ -433,6 +433,8 @@ class TRP_Translation_Render{
 	        $translate_normal_strings = true;
         }
 
+        $translate_normal_strings = apply_filters( 'trp_translate_regular_strings', $translate_normal_strings );
+
 	    $preview_mode = isset( $_REQUEST['trp-edit-translation'] ) && $_REQUEST['trp-edit-translation'] == 'preview';
 
         $json_array = json_decode( $output, true );

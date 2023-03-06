@@ -59,8 +59,12 @@ class TRP_Query{
 	 * @return array|null|object
 	 */
     public function get_all_translation_blocks( $language_code ){
-    	$query = "SELECT original, id, block_type, status FROM `" . sanitize_text_field( $this->get_table_name( $language_code ) ) . "` WHERE block_type = " . self::BLOCK_TYPE_ACTIVE . " OR block_type = " . self::BLOCK_TYPE_DEPRECATED;
-	    $dictionary = $this->db->get_results( $query, OBJECT_K );
+        if ( apply_filters( 'trp_enable_translation_blocks_querying', true ) ) {
+            $query      = "SELECT original, id, block_type, status FROM `" . sanitize_text_field( $this->get_table_name( $language_code ) ) . "` WHERE block_type = " . self::BLOCK_TYPE_ACTIVE . " OR block_type = " . self::BLOCK_TYPE_DEPRECATED;
+            $dictionary = $this->db->get_results( $query, OBJECT_K );
+        }else{
+            $dictionary = array();
+        }
 	    return $dictionary;
     }
 

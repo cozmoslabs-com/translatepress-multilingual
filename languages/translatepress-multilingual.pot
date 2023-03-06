@@ -33,7 +33,7 @@ msgstr ""
 msgid "Install & Activate"
 msgstr ""
 
-#: index-dev.php:230
+#: index-dev.php:238
 msgid "This TranslatePress add-on has been migrated to the main plugin and is no longer used. You can delete it."
 msgstr ""
 

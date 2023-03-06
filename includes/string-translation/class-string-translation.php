@@ -25,7 +25,7 @@ class TRP_String_Translation {
 
     public function register_ajax_hooks() {
         // Build a flat structure of string types
-        $string_types_config = $this->string_types_config();
+        $string_types_config = $this->string_types_config(false);
         foreach ( $string_types_config as $string_type_key => $string_type_value ) {
             if ( $string_type_value['category_based'] ) {
                 foreach ( $string_type_value['categories'] as $substring_type_key => $substring_type_value ) {
@@ -155,7 +155,7 @@ class TRP_String_Translation {
 
     public function get_string_translation_data() {
         $string_translation_data = array(
-            'string_types_config'        => $this->string_types_config(),
+            'string_types_config'        => $this->string_types_config(true),
             'st_editor_strings'          => $this->get_st_editor_strings(),
             'translation_status_filters' => $this->get_translation_status_filters(),
             'default_actions'            => $this->get_default_actions(),
@@ -264,110 +264,110 @@ class TRP_String_Translation {
     /**
      * @return mixed
      */
-    public function string_types_config() {
-	    $string_types_config = array(
-		    'gettext' =>
-			    array(
-					'type'                   => 'gettext',
-				    'name'                   => esc_html__( 'Plugins and Theme String Translation', 'translatepress-multilingual' ),
-				    'tab_name'               => esc_html__( 'Gettext', 'translatepress-multilingual' ),
-				    'search_name'            => esc_html__( 'Search Gettext Strings', 'translatepress-multilingual' ),
-				    'class_name_suffix'      => 'Gettext',
+    public function string_types_config($needs_gettext = false) {
+        $string_types_config = array(
+            'gettext' =>
+                array(
+                    'type'                   => 'gettext',
+                    'name'                   => esc_html__( 'Plugins and Theme String Translation', 'translatepress-multilingual' ),
+                    'tab_name'               => esc_html__( 'Gettext', 'translatepress-multilingual' ),
+                    'search_name'            => esc_html__( 'Search Gettext Strings', 'translatepress-multilingual' ),
+                    'class_name_suffix'      => 'Gettext',
 //				    'add_new'                => true,
                     'scan_gettext'           => true,
-				    'plugin_path'            => TRP_PLUGIN_DIR,
-				    'nonces'                 => $this->get_nonces_for_type( 'gettext' ),
-				    'table_columns'          => array(
-					    'id'         => esc_html__( 'ID', 'translatepress-multilingual' ),
-					    'original'   => esc_html__( 'Original String', 'translatepress-multilingual' ),
-					    'translated' => esc_html__( 'Translation', 'translatepress-multilingual' ),
-					    'domain'     => esc_html__( 'Domain', 'translatepress-multilingual' ),
-				    ),
-				    'show_original_language' => true,
-				    'category_based'         => false,
-				    'filters'                => array(
-					    'domain' => array_merge(
-						    array( 'trp_default' => esc_html__( 'Filter by domain', 'translatepress-multilingual' ) ),
-						    $this->get_gettext_domains()
-					    ),
-					    'type' => array(
-							    'trp_default' => esc_html__( 'Filter by type', 'translatepress-multilingual' ),
-							    'email'       => esc_html__( 'Email text', 'translatepress-multilingual' )
-					    ),
-				    )
-			    ),
-		    'emails' =>
-			    array(
-				    'type'                   => 'gettext',
-				    'name'                   => esc_html__( 'Emails String Translation', 'translatepress-multilingual' ),
-				    'tab_name'               => esc_html__( 'Emails', 'translatepress-multilingual' ),
-				    'search_name'            => esc_html__( 'Search Email Strings', 'translatepress-multilingual' ),
-				    'class_name_suffix'      => 'Gettext',
-				    //				    'add_new'                => true,
-				    'scan_gettext'           => true,
-				    'plugin_path'            => TRP_PLUGIN_DIR,
-				    'nonces'                 => $this->get_nonces_for_type( 'gettext' ),
-				    'table_columns'          => array(
-					    'id'         => esc_html__( 'ID', 'translatepress-multilingual' ),
-					    'original'   => esc_html__( 'Original String', 'translatepress-multilingual' ),
-					    'translated' => esc_html__( 'Translation', 'translatepress-multilingual' ),
-					    'domain'     => esc_html__( 'Domain', 'translatepress-multilingual' ),
-				    ),
-				    'show_original_language' => true,
-				    'category_based'         => false,
-				    'filters'                => array(
-					    'domain' => array_merge(
-						    array( 'trp_default' => esc_html__( 'Filter by domain', 'translatepress-multilingual' ) ),
-						    $this->get_gettext_domains()
-					    ),
-				    )
-			    ),
-		    'regular' =>
-			    array(
-				    'type'                   => 'regular',
-				    'name'                   => esc_html__( 'User Inputted String Translation', 'translatepress-multilingual' ),
-				    'tab_name'               => esc_html__( 'Regular', 'translatepress-multilingual' ),
-				    'search_name'            => esc_html__( 'Search Regular Strings', 'translatepress-multilingual' ),
-				    'class_name_suffix'      => 'Regular',
-				    //				    'add_new'                => true,
-				    'plugin_path'            => TRP_PLUGIN_DIR,
-				    'nonces'                 => $this->get_nonces_for_type( 'regular' ),
-				    'table_columns'          => array(
-					    'id'         => esc_html__( 'ID', 'translatepress-multilingual' ),
-					    'original'   => esc_html__( 'Original String', 'translatepress-multilingual' ),
-					    'translated' => esc_html__( 'Translation', 'translatepress-multilingual' )
-				    ),
-				    'show_original_language' => false,
-				    'category_based'         => false,
-				    'filters'                => array(
-					    'translation-block-type' => array(
-						    'trp_default'       => esc_html__( 'Filter by Translation Block', 'translatepress-multilingual' ),
-						    'individual_string' => 'Individual string',
-						    'translation_block' => 'Translation Block'
-					    )
-				    )
-			    )
-	    );
+                    'plugin_path'            => TRP_PLUGIN_DIR,
+                    'nonces'                 => $this->get_nonces_for_type( 'gettext' ),
+                    'table_columns'          => array(
+                        'id'         => esc_html__( 'ID', 'translatepress-multilingual' ),
+                        'original'   => esc_html__( 'Original String', 'translatepress-multilingual' ),
+                        'translated' => esc_html__( 'Translation', 'translatepress-multilingual' ),
+                        'domain'     => esc_html__( 'Domain', 'translatepress-multilingual' ),
+                    ),
+                    'show_original_language' => true,
+                    'category_based'         => false,
+                    'filters'                => array(
+                        'domain' => array_merge(
+                            array( 'trp_default' => esc_html__( 'Filter by domain', 'translatepress-multilingual' ) ),
+                            $needs_gettext ? $this->get_gettext_domains() : array()
+                        ),
+                        'type' => array(
+                            'trp_default' => esc_html__( 'Filter by type', 'translatepress-multilingual' ),
+                            'email'       => esc_html__( 'Email text', 'translatepress-multilingual' )
+                        ),
+                    )
+                ),
+            'emails' =>
+                array(
+                    'type'                   => 'gettext',
+                    'name'                   => esc_html__( 'Emails String Translation', 'translatepress-multilingual' ),
+                    'tab_name'               => esc_html__( 'Emails', 'translatepress-multilingual' ),
+                    'search_name'            => esc_html__( 'Search Email Strings', 'translatepress-multilingual' ),
+                    'class_name_suffix'      => 'Gettext',
+                    //				    'add_new'                => true,
+                    'scan_gettext'           => true,
+                    'plugin_path'            => TRP_PLUGIN_DIR,
+                    'nonces'                 => $this->get_nonces_for_type( 'gettext' ),
+                    'table_columns'          => array(
+                        'id'         => esc_html__( 'ID', 'translatepress-multilingual' ),
+                        'original'   => esc_html__( 'Original String', 'translatepress-multilingual' ),
+                        'translated' => esc_html__( 'Translation', 'translatepress-multilingual' ),
+                        'domain'     => esc_html__( 'Domain', 'translatepress-multilingual' ),
+                    ),
+                    'show_original_language' => true,
+                    'category_based'         => false,
+                    'filters'                => array(
+                        'domain' => array_merge(
+                            array( 'trp_default' => esc_html__( 'Filter by domain', 'translatepress-multilingual' ) ),
+                            $needs_gettext ? $this->get_gettext_domains() : array()
+                        ),
+                    )
+                ),
+            'regular' =>
+                array(
+                    'type'                   => 'regular',
+                    'name'                   => esc_html__( 'User Inputted String Translation', 'translatepress-multilingual' ),
+                    'tab_name'               => esc_html__( 'Regular', 'translatepress-multilingual' ),
+                    'search_name'            => esc_html__( 'Search Regular Strings', 'translatepress-multilingual' ),
+                    'class_name_suffix'      => 'Regular',
+                    //				    'add_new'                => true,
+                    'plugin_path'            => TRP_PLUGIN_DIR,
+                    'nonces'                 => $this->get_nonces_for_type( 'regular' ),
+                    'table_columns'          => array(
+                        'id'         => esc_html__( 'ID', 'translatepress-multilingual' ),
+                        'original'   => esc_html__( 'Original String', 'translatepress-multilingual' ),
+                        'translated' => esc_html__( 'Translation', 'translatepress-multilingual' )
+                    ),
+                    'show_original_language' => false,
+                    'category_based'         => false,
+                    'filters'                => array(
+                        'translation-block-type' => array(
+                            'trp_default'       => esc_html__( 'Filter by Translation Block', 'translatepress-multilingual' ),
+                            'individual_string' => 'Individual string',
+                            'translation_block' => 'Translation Block'
+                        )
+                    )
+                )
+        );
 
 
-	    if ( !apply_filters('trp_show_regular_strings_string_translation', false ) ){
-	    	unset($string_types_config['regular']);
-	    }
-	    $seo_pack_active = class_exists( 'TRP_IN_Seo_Pack');
-		if( !$seo_pack_active ){
-			$upsale_slugs_string_type = array(
-				'slugs' => array(
-					'type'              => 'upsale-slugs',
-					'name'              => __( 'URL Slugs Translation', 'translatepress-multilingual' ),
-					'tab_name'          => __( 'Slugs', 'translatepress-multilingual' ),
-					'class_name_suffix' => 'Regular',
-					'plugin_path'       => TRP_PLUGIN_DIR,
-					'category_based'    => false,
-					'nonces'                 => $this->get_nonces_for_type( 'regular' ),
-				)
-			);
-			$string_types_config = $upsale_slugs_string_type + $string_types_config;
-		}
+        if ( !apply_filters('trp_show_regular_strings_string_translation', false ) ){
+            unset($string_types_config['regular']);
+        }
+        $seo_pack_active = class_exists( 'TRP_IN_Seo_Pack');
+        if( !$seo_pack_active ){
+            $upsale_slugs_string_type = array(
+                'slugs' => array(
+                    'type'              => 'upsale-slugs',
+                    'name'              => __( 'URL Slugs Translation', 'translatepress-multilingual' ),
+                    'tab_name'          => __( 'Slugs', 'translatepress-multilingual' ),
+                    'class_name_suffix' => 'Regular',
+                    'plugin_path'       => TRP_PLUGIN_DIR,
+                    'category_based'    => false,
+                    'nonces'                 => $this->get_nonces_for_type( 'regular' ),
+                )
+            );
+            $string_types_config = $upsale_slugs_string_type + $string_types_config;
+        }
 
         return apply_filters( 'trp_st_string_types_config', $string_types_config, $this );
     }

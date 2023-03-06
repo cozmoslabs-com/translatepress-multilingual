@@ -5,7 +5,7 @@ Tags: translate, translation, multilingual, automatic translation, bilingual, fr
 Requires at least: 3.1.0
 Tested up to: 6.1.1
 Requires PHP: 5.6.20
-Stable tag: 2.4.8
+Stable tag: 2.4.9
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -140,6 +140,11 @@ For more information please check out our [documentation](https://translatepress
 
 
 == Changelog ==
+= 2.4.9 =
+* Improved speed by eliminating the need of a query on gettext domains on most pages
+* Improved speed when WooCommerce is active by better handling gettext processing
+* Added hooks for disabling translation blocks
+
 = 2.4.8 =
 * Fixed x-default hreflang tag displayed incorrectly in some cases
 * Improved sanitizing Advanced settings
