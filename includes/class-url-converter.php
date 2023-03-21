@@ -282,6 +282,8 @@ class TRP_Url_Converter {
 		    $url = $this->cur_page_url();
 	    }
 
+        $url = urldecode($url);
+
 	    if(apply_filters('trp_skip_url_for_language', false, $url)){
 		    return (string)$url;
 	    }
@@ -927,7 +929,6 @@ class TRP_Url_Converter {
                 }
             }
         }
-
         return $value;
     }
 

@@ -91,6 +91,7 @@ class TRP_Upgrade {
             if( version_compare( $stored_database_version, '2.2.2', '<=' ) ){
                 $this->migrate_auto_translate_slug_to_automatic_translation();
             }
+
             /**
              * Write an upgrading function above this comment to be executed only once: while updating plugin to a higher version.
              * Use example condition: version_compare( $stored_database_version, '2.9.9', '<=')
@@ -347,8 +348,6 @@ class TRP_Upgrade {
 	public function trp_update_database_page(){
 		require_once TRP_PLUGIN_DIR . 'partials/trp-update-database.php';
 	}
-
-
 
 	/**
 	 * Call all functions to update database
