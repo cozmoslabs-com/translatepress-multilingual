@@ -130,6 +130,7 @@ class TRP_Language_Switcher{
 
 		$shortcode_attributes = shortcode_atts( array(
 			'display' => 0,
+			'is_editor' => 0,
 		), $atts );
 
 		if ( ! $this->trp_languages ){
@@ -167,6 +168,8 @@ class TRP_Language_Switcher{
         }else {
 			$shortcode_settings = $ls_options[ $this->settings['shortcode-options'] ];
 		}
+
+        $is_editor = isset( $shortcode_attributes['is_editor'] ) && $shortcode_attributes['is_editor'] === 'true';
 
 		require TRP_PLUGIN_DIR . 'partials/language-switcher-shortcode.php';
 

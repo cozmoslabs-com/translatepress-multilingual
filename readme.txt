@@ -3,9 +3,9 @@ Contributors: cozmoslabs, razvan.mo, madalin.ungureanu, sareiodata, cristophor
 Donate link: https://www.translatepress.com/
 Tags: translate, translation, multilingual, automatic translation, bilingual, front-end translation, google translate, language
 Requires at least: 3.1.0
-Tested up to: 6.1.1
+Tested up to: 6.2
 Requires PHP: 5.6.20
-Stable tag: 2.5.0
+Stable tag: 2.5.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -140,6 +140,10 @@ For more information please check out our [documentation](https://translatepress
 
 
 == Changelog ==
+= 2.5.1 =
+* Added Language Switcher block in Gutenberg Editor
+* Fixed edge case error regarding __return_true function
+
 = 2.5.0 =
 * Improved converting urls in different languages
 * Fixed language switcher directing to page not found in some edge cases

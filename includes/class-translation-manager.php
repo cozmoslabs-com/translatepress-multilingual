@@ -543,7 +543,7 @@ class TRP_Translation_Manager {
 
     function trp_add_shortcut_to_trp_editor_gutenberg(){
         wp_enqueue_script( 'custom-link-in-toolbar', TRP_PLUGIN_URL. '/assets/js/trp-gutenberg-editor-shortcut.js', array("jquery"), TRP_PLUGIN_VERSION, true );
-
+        wp_localize_script( 'custom-link-in-toolbar', 'trp_localized', array( 'dont_adjust_width' => apply_filters( 'trp_dont_adjust_width_of_ls_in_gutenberg', false ) ) );
         $trp           = TRP_Translate_Press::get_trp_instance();
         $url_converter = $trp->get_component('url_converter');
 

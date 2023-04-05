@@ -56,7 +56,7 @@ class TRP_Error_Manager{
                 update_option('trp_machine_translation_settings', $mt_settings_option );
 
                 // filter is needed to block automatic translation in this execution. The settings don't update throughout the plugin for this request. Only the next request will have machine translation turned off.
-                add_filter( 'trp_disable_automatic_translations_due_to_error', __return_true() );
+                add_filter( 'trp_disable_automatic_translations_due_to_error', '__return_true' );
 
                 $error_message = wp_kses( __('Automatic translation has been disabled.','translatepress-multilingual'), array('strong' => array() ) ) . ' ' . $error_message ;
             }

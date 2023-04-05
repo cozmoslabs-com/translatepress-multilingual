@@ -39,6 +39,7 @@ class TRP_Translate_Press{
     protected $check_invalid_text;
     protected $woocommerce_emails;
     protected $preferred_user_language;
+    protected $gutenberg_blocks;
 
     public $active_pro_addons = array();
     public static $translate_press = null;
@@ -64,7 +65,7 @@ class TRP_Translate_Press{
         define( 'TRP_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
         define( 'TRP_PLUGIN_BASE', plugin_basename( __DIR__ . '/index.php' ) );
         define( 'TRP_PLUGIN_SLUG', 'translatepress-multilingual' );
-        define( 'TRP_PLUGIN_VERSION', '2.5.0' );
+        define( 'TRP_PLUGIN_VERSION', '2.5.1' );
 
 	    wp_cache_add_non_persistent_groups(array('trp'));
 
@@ -137,7 +138,8 @@ class TRP_Translate_Press{
         require_once TRP_PLUGIN_DIR . 'assets/lib/tp-add-ons-listing/tp-add-ons-listing.php';
         require_once TRP_PLUGIN_DIR . 'includes/class-plugin-optin.php';
         require_once TRP_PLUGIN_DIR . 'includes/class-preferred-user-language.php';
-        
+        require_once TRP_PLUGIN_DIR . 'includes/gutenberg-blocks/class-gutenberg-blocks.php';
+
         if ( did_action( 'elementor/loaded' ) )
             require_once TRP_PLUGIN_DIR . 'includes/class-elementor-language-for-blocks.php';
         if ( defined( 'WPB_VC_VERSION' ) ) {
@@ -184,6 +186,12 @@ class TRP_Translate_Press{
         $this->check_invalid_text         = new TRP_Check_Invalid_Text( );
         $this->woocommerce_emails         = new TRP_Woocommerce_Emails();
         $this->preferred_user_language    = new TRP_Preferred_User_Language();
+
+        //Gutenberg Blocks
+        global $wp_version;
+        if ( version_compare( $wp_version, "5.0.0", ">=" ) && apply_filters( 'trp_initialize_gutenberg_blocks', true ) ) {
+            $this->gutenberg_blocks = new TRP_Gutenberg_Blocks( $this->settings->get_settings() );
+        }
     }
 
     /**

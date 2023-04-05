@@ -19,7 +19,7 @@ $current_language_preference = $this->add_shortcode_preferences($shortcode_setti
 
         $language_preference = $this->add_shortcode_preferences($shortcode_settings, $code, $name);
         ?>
-        <a href="<?php echo esc_url( $this->url_converter->get_url_for_language($code, false) ); ?>" title="<?php echo esc_attr( $name ); ?>">
+        <a href="<?php echo (isset($is_editor) && $is_editor) ? '#' : esc_url( $this->url_converter->get_url_for_language($code, false) ); /* phpcs:ignore */ /* $is_editor is not outputted */ ?>" title="<?php echo esc_attr( $name ); ?>">
             <?php echo $language_preference; /* phpcs:ignore */ /* escaped inside the function that generates the output */ ?>
         </a>
 
