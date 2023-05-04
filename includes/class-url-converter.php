@@ -172,8 +172,9 @@ class TRP_Url_Converter {
         $hreflang_duplicates_region_independent = array();
         foreach ( $languages as $language ) {
             if ( apply_filters( 'trp_add_country_hreflang_tags', true ) ) {
+                $hreflang              = $this->strip_formality_from_language_code( $language ); // returns the language without formality
                 // hreflang should have - instead of _ . For example: en-EN, not en_EN like the locale
-                $hreflang              = str_replace( '_', '-', $language );
+                $hreflang              = str_replace( '_', '-', $hreflang );
                 $hreflang              = apply_filters( 'trp_hreflang', $hreflang, $language );
                 $hreflang_duplicates[] = $hreflang;
                 echo '<link rel="alternate" hreflang="' . esc_attr( $hreflang ) . '" href="' . esc_url( $this->get_url_for_language( $language ) ) . '"/>' . "\n";
@@ -206,11 +207,21 @@ class TRP_Url_Converter {
         }
     }
 
+    /**
+     * Strips formality from the language code - e.g. de_DE_formal => de_DE
+     *
+     * Otherwise, it would lead to unidentified hreflang values
+     *
+     * @param string $language language code
+     * @return string
+     */
+    public function strip_formality_from_language_code( $language ){
+        return str_replace( ['_formal', '_informal'], '', $language );
+    }
 
     /**
      * Function that replace iso 639-2 and iso 639-3 with iso 639-1 because this is the official one used for hreflang.
      */
-
     public function replace_iso_2_with_iso_3_for_hreflang($hreflang, $language = null){
 
         $hreflang_iso_1 = apply_filters('trp_add_hreflang_correct_iso_code', array(

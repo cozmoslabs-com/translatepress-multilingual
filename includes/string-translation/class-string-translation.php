@@ -143,7 +143,7 @@ class TRP_String_Translation {
         // Necessary for translate-dom-changes to have a nonce as the same user as the Editor.
         // The Preview iframe (which loads translate-dom-changes script) can load as logged out which sets an different nonce
 
-        $scripts_to_print = apply_filters( 'trp-scripts-for-editor', array( 'jquery', 'jquery-ui-core', 'jquery-effects-core', 'jquery-ui-resizable', 'trp-string-translation-editor' ) );
+        $scripts_to_print = apply_filters( 'trp-scripts-for-editor', array( 'jquery', 'jquery-ui-core', 'jquery-effects-core', 'jquery-ui-resizable', 'trp-string-translation-editor') );
         $styles_to_print  = apply_filters( 'trp-styles-for-editor', array( 'dashicons', 'trp-editor-style', 'media-views', 'imgareaselect', 'common', 'forms', 'list-tables', 'buttons' /*'wp-admin', 'common', 'site-icon', 'buttons'*/ ) );
         wp_print_scripts( $scripts_to_print );
         wp_print_styles( $styles_to_print );
@@ -213,10 +213,9 @@ class TRP_String_Translation {
 
     public function get_st_editor_strings() {
         $st_editor_strings = array(
-	        'translation_status'     => esc_html__( 'Translation Status', 'translatepress-multilingual' ),
 	        'filter'                 => esc_html__( 'Filter', 'translatepress-multilingual' ),
 	        'clear_filter'           => esc_html__( 'Clear filters', 'translatepress-multilingual' ),
-	        'filter_by_language'     => esc_html__( 'Filter by language', 'translatepress-multilingual' ),
+	        'filter_by_language'     => esc_html__( 'Language', 'translatepress-multilingual' ),
 	        'add_new'                => esc_html__( 'Add New', 'translatepress-multilingual' ),
 	        'rescan_gettext'         => esc_html__( 'Rescan plugins and theme for strings', 'translatepress-multilingual' ),
 	        'scanning_gettext'       => esc_html__( 'Scanning plugins and theme for strings...', 'translatepress-multilingual' ),
@@ -257,6 +256,7 @@ class TRP_String_Translation {
 	        'select_all_tooltip'         => esc_html__( 'See options for selecting all strings', 'translatepress-multilingual' ),
 	        'sort_by_column'             => esc_html__( 'Click to sort strings by this column', 'translatepress-multilingual' ),
 	        'filter_by_language_tooltip' => esc_html__( 'Language in which the translation status filter applies. Leave unselected for the translation status to apply to ANY language', 'translatepress-multilingual' ),
+            'search_placeholder'         => esc_html__('Search', 'translatepress-multilingual'),
         );
         return apply_filters( 'trp_st_editor_strings', $st_editor_strings );
     }
@@ -385,7 +385,7 @@ class TRP_String_Translation {
     public function get_configuration_options() {
         $config = array(
             'items_per_page'      => 20,
-            'see_more_max_length' => 150
+            'see_more_max_length' => 5000
         );
         return apply_filters( 'trp_string_translation_config', $config );
     }

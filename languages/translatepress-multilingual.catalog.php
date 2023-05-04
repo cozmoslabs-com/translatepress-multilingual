@@ -130,7 +130,7 @@
 <?php __("many", "translatepress-multilingual"); ?>
 <?php __("other", "translatepress-multilingual"); ?>
 <?php __("Saved", "translatepress-multilingual"); ?>
-<?php __("Save translation", "translatepress-multilingual"); ?>
+<?php __("Save", "translatepress-multilingual"); ?>
 <?php __("Saving translation...", "translatepress-multilingual"); ?>
 <?php __("You have unsaved changes!", "translatepress-multilingual"); ?>
 <?php __("Discard changes", "translatepress-multilingual"); ?>
@@ -140,12 +140,10 @@
 <?php __("Close Editor", "translatepress-multilingual"); ?>
 <?php __("From", "translatepress-multilingual"); ?>
 <?php __("To", "translatepress-multilingual"); ?>
-<?php __("Next", "translatepress-multilingual"); ?>
-<?php __("Previous", "translatepress-multilingual"); ?>
 <?php __("Add Media", "translatepress-multilingual"); ?>
 <?php __("Other languages", "translatepress-multilingual"); ?>
 <?php __("Context", "translatepress-multilingual"); ?>
-<?php __("View As", "translatepress-multilingual"); ?>
+<?php __("View Website As", "translatepress-multilingual"); ?>
 <?php __("Available in our Pro Versions", "translatepress-multilingual"); ?>
 <?php __("Select or Upload Media", "translatepress-multilingual"); ?>
 <?php __("Use this media", "translatepress-multilingual"); ?>
@@ -174,12 +172,13 @@
 <?php __("Translate by Browsing as User Role", "translatepress-multilingual"); ?>
 <?php __("Different Menu Items for each Language", "translatepress-multilingual"); ?>
 <?php __("Automatic User Language Detection", "translatepress-multilingual"); ?>
-<?php __("Supported By Real People", "translatepress-multilingual"); ?>
-<?php __("Find Out More", "translatepress-multilingual"); ?>
+<?php __("Upgrade to PRO", "translatepress-multilingual"); ?>
 <?php __("No available suggestions", "translatepress-multilingual"); ?>
 <?php __("Suggestions from translation memory", "translatepress-multilingual"); ?>
 <?php __("Click to Copy", "translatepress-multilingual"); ?>
-<?php __("Hover any text on the page, click <img src=\"%s\" class=\"trp-edit-icon-inline\">, then modify the translation in the sidebar.", "translatepress-multilingual"); ?>
+<?php __("Human Translation", "translatepress-multilingual"); ?>
+<?php __("Machine Translation", "translatepress-multilingual"); ?>
+<?php __("Hover any text on the page, click %s,<br> then modify the translation in the sidebar.", "translatepress-multilingual"); ?>
 <?php __("Don't forget to Save Translation. Use keyboard shortcut CTRL(⌘) + S", "translatepress-multilingual"); ?>
 <?php __("Switch language to see the translation changes directly on the page.", "translatepress-multilingual"); ?>
 <?php __("Search for any text in this page in the dropdown.", "translatepress-multilingual"); ?>
@@ -198,7 +197,7 @@
 <?php __("Gettext Strings", "translatepress-multilingual"); ?>
 <?php __("Images", "translatepress-multilingual"); ?>
 <?php __("Dynamically Added Strings", "translatepress-multilingual"); ?>
-<?php __("Visual Editor", "translatepress-multilingual"); ?>
+<?php __("Translation Editor", "translatepress-multilingual"); ?>
 <?php __("Edit translations by visually selecting them on each site page", "translatepress-multilingual"); ?>
 <?php __("String Translation", "translatepress-multilingual"); ?>
 <?php __("Edit url slug translations, plugins and theme translation (emails, forms etc.)", "translatepress-multilingual"); ?>
@@ -218,7 +217,7 @@
 <?php __("Post type base slugs", "translatepress-multilingual"); ?>
 <?php __("WooCommerce slugs", "translatepress-multilingual"); ?>
 <?php __("The SEO Pack add-on is available with ALL premium versions of the plugin.", "translatepress-multilingual"); ?>
-<?php __("Learn More", "translatepress-multilingual"); ?>
+<?php __("Update to Pro", "translatepress-multilingual"); ?>
 <?php __("Description", "translatepress-multilingual"); ?>
 <?php __("OG Title", "translatepress-multilingual"); ?>
 <?php __("OG Site Name", "translatepress-multilingual"); ?>
@@ -502,10 +501,8 @@
 <?php __("Bulk Actions", "translatepress-multilingual"); ?>
 <?php __("Delete entries", "translatepress-multilingual"); ?>
 <?php __("Edit", "translatepress-multilingual"); ?>
-<?php __("Translation Status", "translatepress-multilingual"); ?>
 <?php __("Filter", "translatepress-multilingual"); ?>
 <?php __("Clear filters", "translatepress-multilingual"); ?>
-<?php __("Filter by language", "translatepress-multilingual"); ?>
 <?php __("Add New", "translatepress-multilingual"); ?>
 <?php __("Rescan plugins and theme for strings", "translatepress-multilingual"); ?>
 <?php __("Scanning plugins and theme for strings...", "translatepress-multilingual"); ?>
@@ -540,6 +537,7 @@
 <?php __("See options for selecting all strings", "translatepress-multilingual"); ?>
 <?php __("Click to sort strings by this column", "translatepress-multilingual"); ?>
 <?php __("Language in which the translation status filter applies. Leave unselected for the translation status to apply to ANY language", "translatepress-multilingual"); ?>
+<?php __("Search", "translatepress-multilingual"); ?>
 <?php __("Plugins and Theme String Translation", "translatepress-multilingual"); ?>
 <?php __("Gettext", "translatepress-multilingual"); ?>
 <?php __("Search Gettext Strings", "translatepress-multilingual"); ?>

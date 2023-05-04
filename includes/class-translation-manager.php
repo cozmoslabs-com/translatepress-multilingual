@@ -111,7 +111,7 @@ class TRP_Translation_Manager {
                 'plural_form_other'          => esc_html__( 'other', 'translatepress-multilingual' ),
 
                 'saved'                                      => esc_html__( 'Saved', 'translatepress-multilingual' ),
-                'save_translation'                           => esc_html__( 'Save translation', 'translatepress-multilingual' ),
+                'save_translation'                           => esc_html__( 'Save', 'translatepress-multilingual' ),
                 'saving_translation'                         => esc_html__( 'Saving translation...', 'translatepress-multilingual' ),
                 'unsaved_changes'                            => esc_html__( 'You have unsaved changes!', 'translatepress-multilingual' ),
                 'discard'                                    => esc_html__( 'Discard changes', 'translatepress-multilingual' ),
@@ -121,12 +121,10 @@ class TRP_Translation_Manager {
                 'close'                                      => esc_attr__( 'Close Editor', 'translatepress-multilingual' ),
                 'from'                                       => esc_html__( 'From', 'translatepress-multilingual' ),
                 'to'                                         => esc_html__( 'To', 'translatepress-multilingual' ),
-                'next'                                       => esc_html__( 'Next', 'translatepress-multilingual' ),
-                'previous'                                   => esc_html__( 'Previous', 'translatepress-multilingual' ),
                 'add_media'                                  => esc_html__( 'Add Media', 'translatepress-multilingual' ),
                 'other_lang'                                 => esc_html__( 'Other languages', 'translatepress-multilingual' ),
                 'context'                                    => esc_html__( 'Context', 'translatepress-multilingual' ),
-                'view_as'                                    => esc_html__( 'View As', 'translatepress-multilingual' ),
+                'view_as'                                    => esc_html__( 'View Website As', 'translatepress-multilingual' ),
                 'view_as_pro'                                => esc_html__( 'Available in our Pro Versions', 'translatepress-multilingual' ),
 
                 //wp media upload
@@ -164,22 +162,24 @@ class TRP_Translation_Manager {
                 'extra_upsell_row5'                 => esc_html__( 'Translate by Browsing as User Role', 'translatepress-multilingual' ),
                 'extra_upsell_row6'                 => esc_html__( 'Different Menu Items for each Language', 'translatepress-multilingual' ),
                 'extra_upsell_row7'                 => esc_html__( 'Automatic User Language Detection', 'translatepress-multilingual' ),
-                'extra_upsell_row8'                 => esc_html__( 'Supported By Real People', 'translatepress-multilingual' ),
-                'extra_upsell_button'               => wp_kses( sprintf( '<a class="button-primary" target="_blank" href="%s">%s</a>', esc_url( trp_add_affiliate_id_to_link( 'https://translatepress.com/pricing/?utm_source=wpbackend&utm_medium=clientsite&utm_content=tpeditor&utm_campaign=tpfree' ) ), __( 'Find Out More', 'translatepress-multilingual' ) ), array( 'a' => [ 'class' => [], 'target' => [], 'href' => [] ] ) ),
+                'extra_upsell_button'               => wp_kses( sprintf( '<a class="button-primary" target="_blank" href="%s">%s</a>', esc_url( trp_add_affiliate_id_to_link( 'https://translatepress.com/pricing/?utm_source=wpbackend&utm_medium=clientsite&utm_content=tpeditor&utm_campaign=tpfree' ) ), __( 'Upgrade to PRO', 'translatepress-multilingual' ) ), array( 'a' => [ 'class' => [], 'target' => [], 'href' => [] ] ) ),
                 // Translation Memory
                 'translation_memory_no_suggestions' => esc_html__( 'No available suggestions', 'translatepress-multilingual' ),
                 'translation_memory_suggestions'    => esc_html__( 'Suggestions from translation memory', 'translatepress-multilingual' ),
-                'translation_memory_click_to_copy'  => esc_html__( 'Click to Copy', 'translatepress-multilingual' )
+                'translation_memory_click_to_copy'  => esc_html__( 'Click to Copy', 'translatepress-multilingual' ),
+                //human or machine translation tooltips
+                'human_translation'                 => esc_html__('Human Translation', 'translatepress-multilingual'),
+                'machine_translation'               => esc_html__('Machine Translation', 'translatepress-multilingual')
             );
     }
 
     public function get_help_panel_content() {
-        $edit_icon = TRP_PLUGIN_URL . 'assets/images/edit-icon.png';
+        $edit_icon = '<svg class="trp-edit-icon-inline" xmlns="http://www.w3.org/2000/svg" visibility="hidden" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false"><path d="M20.1 5.1L16.9 2 6.2 12.7l-1.3 4.4 4.5-1.3L20.1 5.1zM4 20.8h8v-1.5H4v1.5z"></path></svg>';
         return apply_filters( 'trp_help_panel_content', array(
             array(
                 'title'   => esc_html__( 'Quick Intro', 'translatepress-multilingual' ),
-                'content' => wp_kses( sprintf( __( 'Hover any text on the page, click <img src="%s" class="trp-edit-icon-inline">, then modify the translation in the sidebar.', 'translatepress-multilingual' ), $edit_icon ),
-                    array( 'img' => array( 'src' => array(), 'class' => array() ) ) ),
+                'content' => wp_kses(sprintf( __( 'Hover any text on the page, click %s,<br> then modify the translation in the sidebar.', 'translatepress-multilingual' ), $edit_icon),
+                    array( 'svg' => array( 'class' => array(),'xmlns' => array(),'visibility'=>array(), 'viewbox' => array(), 'aria-hidden' => array(), 'focusable' => array() ), 'path' => array('d'=>array() ), "br" => array() ) ),
                 'event'   => 'trp_hover_text_help_panel'
             ),
             array(
@@ -256,6 +256,8 @@ class TRP_Translation_Manager {
             'dismissTooltipNext'       => false,
             'dismissTooltipPrevious'   => false,
             'dismissTooltipDismissAll' => false,
+            'dismissTooltipHumanorMachineTranslation' => false,
+            'dismissPreviousTabTooltip' => false,
         ) );
     }
 
@@ -327,7 +329,7 @@ class TRP_Translation_Manager {
             'tabs' => array(
                 array(
                     'handle'  => 'visualeditor',
-                    'label'   => __( 'Visual Editor', 'translatepress-multilingual' ),
+                    'label'   => __( 'Translation Editor', 'translatepress-multilingual' ),
                     'path'    => add_query_arg( 'trp-edit-translation', 'true', home_url() ),
                     'tooltip' => esc_html__('Edit translations by visually selecting them on each site page', 'translatepress-multilingual')
                 ),
@@ -854,11 +856,11 @@ class TRP_Translation_Manager {
 		$html .= esc_html__('The SEO Pack add-on is available with ALL premium versions of the plugin.', 'translatepress-multilingual' );
 		$html .= '</p>';
 		$html .= '<a target="_blank" href="' . esc_url($upsale_url) . '" class="trp-learn-more-upsale button-primary">';
-		$html .= esc_html__('Learn More', 'translatepress-multilingual' );
+		$html .= esc_html__('Update to Pro', 'translatepress-multilingual' );
 		$html .= '</a>';
 		$html .= '</div>';
 		$html .= '<div class="trp-image-upsale-slugs">';
-		$html .= '<img src="' . TRP_PLUGIN_URL.'assets/images/url-slugs-upsale.png' . '">';
+		$html .= '<img src="' . TRP_PLUGIN_URL.'assets/images/slug-upsale-new-editor-750x430.png' . '">';
 		$html .= '</div>';
 		$html .= '</div>';
 
