@@ -377,13 +377,13 @@
 <?php __("Hey %s,<br>Never miss an important update - opt in to our security and feature updates notifications, and non-sensitive diagnostic tracking.", "translatepress-multilingual"); ?>
 <?php __("Allow & Continue", "translatepress-multilingual"); ?>
 <?php __("Skip", "translatepress-multilingual"); ?>
-<?php __("What permissions are being granted?", "translatepress-multilingual"); ?>
+<?php __("This will allow TranslatePress to:", "translatepress-multilingual"); ?>
 <?php __("Your profile overview", "translatepress-multilingual"); ?>
 <?php __("Name and email address", "translatepress-multilingual"); ?>
 <?php __("Admin Notices", "translatepress-multilingual"); ?>
 <?php __("Updates, announcements, marketing, no spam", "translatepress-multilingual"); ?>
-<?php __("Current plugin status", "translatepress-multilingual"); ?>
-<?php __("Active, Deactivated or uninstalled", "translatepress-multilingual"); ?>
+<?php __("Plugin status & settings", "translatepress-multilingual"); ?>
+<?php __("Active, Deactivated, installed version and settings", "translatepress-multilingual"); ?>
 <?php __("Privacy Policy", "translatepress-multilingual"); ?>
 <?php __("Terms of Service", "translatepress-multilingual"); ?>
 <?php __("API Key from settings page:", "translatepress-multilingual"); ?>

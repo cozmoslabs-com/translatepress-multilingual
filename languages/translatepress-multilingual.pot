@@ -337,11 +337,11 @@ msgstr ""
 msgid "One or more languages are unsupported by the automatic translation provider. Please check the <strong>TranslatePress -> <a href=\"%s\">Automatic Translation</a></strong> page for more information."
 msgstr ""
 
-#: includes/class-plugin-optin.php:248
+#: includes/class-plugin-optin.php:257
 msgid "Marketing optin"
 msgstr ""
 
-#: includes/class-plugin-optin.php:249
+#: includes/class-plugin-optin.php:258
 msgid "Opt in to our security and feature updates notifications, and non-sensitive diagnostic tracking."
 msgstr ""
 
@@ -1532,7 +1532,7 @@ msgid "Skip"
 msgstr ""
 
 #: partials/plugin-optin-page.php:29
-msgid "What permissions are being granted?"
+msgid "This will allow TranslatePress to:"
 msgstr ""
 
 #: partials/plugin-optin-page.php:36
@@ -1552,11 +1552,11 @@ msgid "Updates, announcements, marketing, no spam"
 msgstr ""
 
 #: partials/plugin-optin-page.php:60
-msgid "Current plugin status"
+msgid "Plugin status & settings"
 msgstr ""
 
 #: partials/plugin-optin-page.php:61
-msgid "Active, Deactivated or uninstalled"
+msgid "Active, Deactivated, installed version and settings"
 msgstr ""
 
 #: partials/plugin-optin-page.php:75

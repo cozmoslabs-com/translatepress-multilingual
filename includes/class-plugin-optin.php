@@ -2,8 +2,17 @@
 
 class TRP_Plugin_Optin {
 
-    public $user_name = '';
-    public $base_url = 'https://translatepress.com/wp-json/trp-api/';
+    public static $user_name = '';
+    public static $base_url = 'https://translatepress.com/wp-json/trp-api/';
+
+    public function __construct(){
+
+        if ( !wp_next_scheduled( 'trp_plugin_optin_sync' ) )
+            wp_schedule_event( time(), 'weekly', 'trp_plugin_optin_sync' );
+
+        add_action( 'trp_plugin_optin_sync', array( 'TRP_Plugin_Optin', 'sync_data' ) );
+
+    }
 
     public function redirect_to_plugin_optin_page(){
 
@@ -62,8 +71,8 @@ class TRP_Plugin_Optin {
                 'method' => 'POST',
                 'body'   => array(
                     'email'   => get_option( 'admin_email' ),
-                    'name'    => $this->get_user_name(),
-                    'version' => $this->get_current_active_version(),
+                    'name'    => self::get_user_name(),
+                    'version' => self::get_current_active_version(),
                 ),
             );
 
@@ -85,7 +94,7 @@ class TRP_Plugin_Optin {
                     $args['body']['existingSettings'] = true;
             }
 
-            $request = wp_remote_post( $this->base_url . 'pluginOptinSubscribe/', $args );
+            $request = wp_remote_post( self::$base_url . 'pluginOptinSubscribe/', $args );
 
             update_option( 'trp_plugin_optin', 'yes' );
             update_option( 'trp_plugin_optin_email', get_option( 'admin_email' ) );
@@ -145,7 +154,7 @@ class TRP_Plugin_Optin {
             ],
         );
 
-        $request = wp_remote_post( $this->base_url . 'pluginOptinUpdateInterests/', $args );
+        $request = wp_remote_post( self::$base_url . 'pluginOptinUpdateInterests/', $args );
 
     }
 
@@ -170,7 +179,7 @@ class TRP_Plugin_Optin {
             ],
         );
 
-        $request = wp_remote_post( $this->base_url . 'pluginOptinUpdateInterests/', $args );
+        $request = wp_remote_post( self::$base_url . 'pluginOptinUpdateInterests/', $args );
 
     }
 
@@ -204,7 +213,7 @@ class TRP_Plugin_Optin {
             ],
         );
 
-        $request = wp_remote_post( $this->base_url . 'pluginOptinUpdateVersion/', $args );
+        $request = wp_remote_post( self::$base_url . 'pluginOptinUpdateVersion/', $args );
 
     }
 
@@ -235,7 +244,7 @@ class TRP_Plugin_Optin {
             ],
         );
 
-        $request = wp_remote_post( $this->base_url . 'pluginOptinUpdateVersion/', $args );
+        $request = wp_remote_post( self::$base_url . 'pluginOptinUpdateVersion/', $args );
 
     }
 
@@ -271,7 +280,7 @@ class TRP_Plugin_Optin {
                 ],
             );
 
-            $request = wp_remote_post( $this->base_url . 'pluginOptinArchiveSubscriber/', $args );
+            $request = wp_remote_post( self::$base_url . 'pluginOptinArchiveSubscriber/', $args );
             
         } else {
             
@@ -287,12 +296,12 @@ class TRP_Plugin_Optin {
                 'method' => 'POST',
                 'body'   => [
                     'email'   => $optin_email,
-                    'name'    => $this->get_user_name(),
-                    'version' => $this->get_current_active_version(),
+                    'name'    => self::get_user_name(),
+                    'version' => self::get_current_active_version(),
                 ],
             );
 
-            $request = wp_remote_post( $this->base_url . 'pluginOptinSubscribe/', $args );
+            $request = wp_remote_post( self::$base_url . 'pluginOptinSubscribe/', $args );
 
         }
 
@@ -301,10 +310,10 @@ class TRP_Plugin_Optin {
     }
 
     // Determine current user name
-    public function get_user_name(){
+    public static function get_user_name(){
 
-        if( !empty( $this->user_name ) )
-            return $this->user_name;
+        if( !empty( self::$user_name ) )
+            return self::$user_name;
 
         $user = wp_get_current_user();
 
@@ -316,9 +325,9 @@ class TRP_Plugin_Optin {
         if( !empty( $first_name ) && !empty( $last_name ) )
             $name = $first_name . ' ' . $last_name;
 
-        $this->user_name = $name;
+        self::$user_name = $name;
 
-        return $this->user_name;
+        return self::$user_name;
 
     }
 
@@ -339,4 +348,29 @@ class TRP_Plugin_Optin {
 
     }
 
+    public static function sync_data(){
+
+        $plugin_optin = get_option( 'trp_plugin_optin' );
+
+        if( $plugin_optin != 'yes' )
+            return;
+
+        $trp_settings = get_option( 'trp_settings', 'not_set' );
+
+        $args = array(
+            'method' => 'POST',
+            'body'   => array(
+                'home_url'              => home_url(),
+                'email'                 => get_option( 'admin_email' ),
+                'name'                  => self::get_user_name(),
+                'version'               => self::get_current_active_version(),
+                'license'               => get_option('trp_license_key'),
+                'default_language'      => !empty( $trp_settings['default-language'] ) ? $trp_settings['default-language'] : '',
+                'translation_languages' => !empty( $trp_settings['translation-languages'] ) ? implode( ',', $trp_settings['translation-languages'] ) : '',
+            ),
+        );
+
+        $request = wp_remote_post( self::$base_url . 'pluginOptinSync/', $args );
+
+    }
 }

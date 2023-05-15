@@ -26,7 +26,7 @@
         <div class="trp-optin-page__footer">
             
             <div class="trp-optin-page__more-wrap">
-                <a class="trp-optin-page__more" href="#" onclick="event.preventDefault(); document.getElementsByClassName('trp-optin-page__extra')[0].classList.toggle('hidden');"><?php esc_html_e( 'What permissions are being granted?', 'translatepress-multilingual' ); ?></a>
+                <a class="trp-optin-page__more" href="#" onclick="event.preventDefault(); document.getElementsByClassName('trp-optin-page__extra')[0].classList.toggle('hidden');"><?php esc_html_e( 'This will allow TranslatePress to:', 'translatepress-multilingual' ); ?></a>
             </div>
 
             <div class="trp-optin-page__extra hidden">
@@ -57,8 +57,8 @@
                 <div class="trp-optin-page__extra-line">
                     <span class="trp-optin-page__extra-icon dashicons dashicons-admin-plugins"></span>
                     <div class="trp-optin-page__extra-content">
-                        <h4><?php esc_html_e( 'Current plugin status', 'translatepress-multilingual' ); ?></h4>
-                        <p><?php esc_html_e( 'Active, Deactivated or uninstalled', 'translatepress-multilingual' ); ?></p>
+                        <h4><?php esc_html_e( 'Plugin status & settings', 'translatepress-multilingual' ); ?></h4>
+                        <p><?php esc_html_e( 'Active, Deactivated, installed version and settings', 'translatepress-multilingual' ); ?></p>
                     </div>
                 </div>
 

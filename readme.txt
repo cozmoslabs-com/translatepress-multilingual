@@ -5,7 +5,7 @@ Tags: translate, translation, multilingual, automatic translation, bilingual, fr
 Requires at least: 3.1.0
 Tested up to: 6.2
 Requires PHP: 5.6.20
-Stable tag: 2.5.2
+Stable tag: 2.5.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -140,6 +140,12 @@ For more information please check out our [documentation](https://translatepress
 
 
 == Changelog ==
+= 2.5.3 =
+* Improved security by escaping form actions
+* Fixed filtering by gettext domain in String Translation
+* Fixed title positioning in String Translation UI
+* Added more information in our opt-in non-sensitive diagnostic tracking
+
 = 2.5.2 =
 * Redesigned Translation Editor UI to match the latest WordPress style
 * Fixed hreflang language code attribute for languages with formal/informal in their default code

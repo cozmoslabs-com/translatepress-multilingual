@@ -1004,7 +1004,7 @@ class TRP_Translation_Render{
                     && strpos( $form_action, '#TRPLINKPROCESSED' ) === false ) {
                     $row->action = $this->url_converter->get_url_for_language( $TRP_LANGUAGE, $form_action );
                 }
-                $row->action = str_replace( '#TRPLINKPROCESSED', '', $row->action );
+                $row->action = str_replace( '#TRPLINKPROCESSED', '', esc_url($row->action) );
             }
         }
 

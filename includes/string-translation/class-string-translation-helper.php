@@ -72,10 +72,15 @@ class TRP_String_Translation_Helper {
 		$string_types                = $this->string_translation->get_string_types();
 		$specific_string_type_config = $string_types[ $string_type ];
 		foreach ( $specific_string_type_config['filters'] as $specific_filter_key => $specific_filter_values ) {
+            //check if filter domain is selected and assign the domain value
+            if ( $specific_filter_key=='domain' && !empty($posted_query['domain'])){
+                $specific_filter_values = $this->string_translation->get_gettext_domains();
+            }
 			$query_args[ $specific_filter_key ] =
 				( ! empty( $posted_query[ $specific_filter_key ] ) && isset( $specific_filter_values[ $posted_query[ $specific_filter_key ] ] ) ) ?
 					$posted_query[ $specific_filter_key ] : '';
 		}
+
 
 		return apply_filters( 'trp_sanitized_query_args', $query_args, $string_type, $string_types );
 	}
