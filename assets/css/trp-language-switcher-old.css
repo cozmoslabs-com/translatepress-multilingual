@@ -15,55 +15,48 @@
  *  Shortcode Language Switcher
  */
 .trp-language-switcher{
-    height: 42px;
     position: relative;
+    display: inline-block;
+    padding: 0;
+    border: 0;
+    margin: 2px;
     box-sizing: border-box;
-    width: 200px;
-    text-overflow: ellipsis;
-    white-space: nowrap;
 }
 
 
 .trp-language-switcher > div {
     box-sizing: border-box;
-    padding:4px 20px 3px 13px;
-    border: 1.5px solid #949494;
-    border-radius: 2px;
-    background-image: url(../../assets/images/arrow-down-3101.svg);
-    background-repeat: no-repeat;
+
+    padding:3px 20px 3px 5px;
+    border: 1px solid #c1c1c1;
+    border-radius: 3px;
+
+    background-image:
+            linear-gradient(45deg, transparent 50%, gray 50%),
+            linear-gradient(135deg, gray 50%, transparent 50%);
 
     background-position:
-            calc(100% - 20px) calc(1em + 2px),
+            calc(100% - 8px) calc(1em + 0px),
             calc(100% - 3px) calc(1em + 0px);
 
     background-size:
-            8px 8px,
-            8px 8px;
+            5px 5px,
+            5px 5px;
 
     background-repeat: no-repeat;
 
     background-color: #fff;
 }
 
-.trp-language-switcher > div:hover {
-    background-image: none;
-}
-
-
 .trp-language-switcher > div > a {
     display: block;
-    padding: 7px 12px;
+    padding: 2px;
     border-radius: 3px;
-    text-decoration: none;
-    color: #1E1E1E;
-    font-style: normal;
-    font-weight: 400;
-    font-size: 16px;
+    color: rgb(7, 105, 173);
 }
 
 .trp-language-switcher > div > a:hover {
-    background: #F0F0F0;
-    border-radius: 2px;
+    background: #f1f1f1;
 }
 .trp-language-switcher > div > a.trp-ls-shortcode-disabled-language {
     cursor: default;
@@ -106,7 +99,6 @@
 .trp-language-switcher:hover .trp-ls-shortcode-language{
     visibility: visible;
     max-height: 250px;
-    padding: 4px 13px;
     height: auto;
     overflow-y: auto;
     position: absolute;

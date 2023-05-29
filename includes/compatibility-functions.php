@@ -1845,3 +1845,17 @@ function trp_et_divi_maybe_change_frontend_locale( $locale ) {
     return $locale;
 }
 add_filter( 'locale', 'trp_et_divi_maybe_change_frontend_locale' );
+
+/**
+ * Prevent trp-sortable-languages.js script from running
+ *
+ * We have merged the code from trp-sortable-languages.js in trp-back-end-script.js in TP ver. 2.5.3 but we still need trp-sortable-languages for backwards compatibility
+ * If the version of TranslatePress is at least 2.5.3, prevent the trp-sortable-languages.js script from running
+ *
+ */
+add_action( 'trp_before_running_hooks', 'trpc_prevent_sortable_script_from_loading' );
+function trpc_prevent_sortable_script_from_loading( $trp_loader ){
+    if ( version_compare(TRP_PLUGIN_VERSION, '2.5.4', '>=' ) ) {
+        $trp_loader->remove_hook( 'admin_enqueue_scripts', 'enqueue_sortable_language_script' );
+    }
+}

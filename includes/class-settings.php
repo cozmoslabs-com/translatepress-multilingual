@@ -86,10 +86,11 @@ class TRP_Settings{
 	 * @param string $ls_color    The selected language switcher color.
 	 */
 	public function output_language_switcher_floater_color( $ls_color ){
-		$ls_options = array(
-			'dark'  => array( 'label' => __( 'Dark', 'translatepress-multilingual' ) ),
-			'light'   => array( 'label' => __( 'Light', 'translatepress-multilingual' ) ),
-		);
+        $ls_options = array(
+            'dark'  => array( 'label' => __( 'Dark', 'translatepress-multilingual' ) ),
+            'light' => array( 'label' => __( 'Light', 'translatepress-multilingual' ) )
+        );
+
 
 		$output = '<select id="floater-color" name="trp_settings[floater-color]" class="trp-select trp-ls-select-option">';
 		foreach( $ls_options as $key => $ls_option ){
@@ -478,7 +479,12 @@ class TRP_Settings{
             $all_language_codes = $this->trp_languages->get_all_language_codes();
             $iso_codes          = $this->trp_languages->get_iso_codes( $all_language_codes, false );
 
-            wp_localize_script( 'trp-settings-script', 'trp_url_slugs_info', array( 'iso_codes' => $iso_codes, 'error_message_duplicate_slugs' => __( 'Error! Duplicate URL slug values.', 'translatepress-multilingual' ) ) );
+            wp_localize_script( 'trp-settings-script', 'trp_url_slugs_info', array( 'iso_codes'                         => $iso_codes,
+                                                                                                      'error_message_duplicate_slugs'     => __( 'Error! Duplicate URL slug values.', 'translatepress-multilingual' ),
+                                                                                                      'error_message_formality'           => wp_kses( __( 'You cannot select two languages that have the same <a href="https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes" target="_blank">iso code</a> but different formalities because doing so will lead to duplicate <a href="https://developers.google.com/search/docs/specialty/international/localized-versions" target="_blank">hreflang tags</a>.', 'translatepress-multilingual'), [ 'a' => [ 'href' => [], 'class' => [], 'rel' => [], 'target' => [] ] ] ),
+                                                                                                      'error_message_duplicate_languages' => wp_kses( __( 'Duplicate language detected.<br>Each language can only be added once to ensure accurate translation management.<br> Please change the duplicate language entry and try again. ', 'translatepress-multilingual'), [ 'br' => [] ] )
+                                                                                               )
+            );
 
             wp_enqueue_script( 'trp-select2-lib-js', TRP_PLUGIN_URL . 'assets/lib/select2-lib/dist/js/select2.min.js', array( 'jquery' ), TRP_PLUGIN_VERSION );
             wp_enqueue_style( 'trp-select2-lib-css', TRP_PLUGIN_URL . 'assets/lib/select2-lib/dist/css/select2.min.css', array(), TRP_PLUGIN_VERSION );

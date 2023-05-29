@@ -11,6 +11,7 @@ jQuery( function() {
         var _this = this;
         var duplicate_url_error_message;
         var iso_codes;
+        var error_handler;
 
         /**
          * Initialize select to become select2
@@ -32,21 +33,40 @@ jQuery( function() {
             return return_slug.toLowerCase();
         };
 
+        this.error_check = function( new_language ){
+            error_handler.show_hide_warning( new_language, true );
+
+            if ( error_handler.has_error === true ){
+                return true;
+            }
+
+            error_handler.languages.push( new_language );
+
+            return false;
+        };
+
         this.add_language = function(){
             var selected_language = jQuery( '#trp-select-language' );
             var new_language = selected_language.val();
+
             if ( new_language == "" ){
                 return;
             }
 
-            if (jQuery( "#trp-languages-table .trp-language" ).length >= 2 ){
+            if ( jQuery( "#trp-languages-table .trp-language" ).length >= 2 && jQuery( '.trp-language-selector-limited' ).length ){
                 jQuery(".trp-upsell-multiple-languages").show('fast');
+                return;
+            }
+
+            if ( _this.error_check( new_language ) === true ){
                 return;
             }
 
             selected_language.val( '' ).trigger( 'change' );
 
             var new_option = jQuery( '.trp-language' ).first().clone();
+            error_handler.add_language_change_listener( new_option );
+
             new_option = jQuery( new_option );
 
             new_option.find( '.trp-hidden-default-language' ).remove();
@@ -80,9 +100,19 @@ jQuery( function() {
         this.remove_language = function( element ){
             var message = jQuery( element.target ).attr( 'data-confirm-message' );
             var confirmed = confirm( message );
+
             if ( confirmed ) {
-                jQuery ( element.target ).parent().parent().remove();
+                let language_to_remove = jQuery( element.target ).parent().parent();
+                let language_to_remove_code = language_to_remove.find('.trp-language-code').val();
+
+                // remove language from array
+                error_handler.languages.splice( error_handler.languages.indexOf(language_to_remove_code), 1 ) ;
+
+                language_to_remove.remove();
+
+                error_handler.show_hide_warning( language_to_remove_code );
             }
+
         };
 
         this.update_default_language = function(){
@@ -132,10 +162,7 @@ jQuery( function() {
         this.initialize = function () {
             this.initialize_select2();
 
-            if ( !jQuery( '.trp-language-selector-limited' ).length ){
-                return;
-            }
-
+            error_handler = new TRP_Error_handler();
             duplicate_url_error_message = trp_url_slugs_info['error_message_duplicate_slugs'];
             iso_codes = trp_url_slugs_info['iso_codes'];
 
@@ -310,6 +337,137 @@ function TRP_Field_Toggler (){
     }
 }
 
+function TRP_Error_handler(){
+
+    this.has_error = false;
+    this.languages = [];
+    let _this = this;
+    let $error_container;
+    let error_type;
+
+    this.init = function(){
+        $error_container = jQuery( '.trp-add-language-error-container' );
+        this.set_language_list();
+        this.init_event_listeners();
+    }
+
+    this.set_language_list = function(){
+        let language_nodes = document.querySelectorAll( '.trp-language .trp-language-code' );
+
+        for ( let i = 0; i < language_nodes.length; i++ ){
+            this.languages[i] = language_nodes[i].value;
+        }
+
+    }
+
+    // If the language is formal / informal, returns it but stripped of the _informal or _formal parts
+    // Returns false otherwise
+    this.strip_formal_language = function( new_language_code ){
+        let formality_map = {
+          _informal: '',
+            _formal: ''
+        };
+
+        if( new_language_code.includes( 'formal' ) || new_language_code.includes( 'informal' ) ){
+            new_language_code = new_language_code.replace(/_formal|_informal/, function(matched){
+                return formality_map[matched];
+            });
+
+            return new_language_code;
+        }
+
+        return false;
+    }
+
+    this.has_formal_variant = function( new_language_code, languages_array ){
+
+        for ( let language of languages_array ){
+            let stripped_formal_language = this.strip_formal_language( language ); // false if is not a formal language
+
+            if( stripped_formal_language && stripped_formal_language === new_language_code ){
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    this.set_error_type = function( new_language_code, is_new_language_added ){
+        let languages_array = is_new_language_added ? [].concat( this.languages, new_language_code ) : this.languages;
+
+        if( languages_array.length !== new Set(languages_array).size ){
+            error_type = "duplicates";
+            return true;
+        }
+
+        for ( let language_code of languages_array ){
+            let stripped_formal_language = this.strip_formal_language( language_code );
+
+            if( stripped_formal_language !== false && languages_array.includes( stripped_formal_language ) || this.has_formal_variant( language_code, languages_array ) ){
+                error_type = "formality";
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    this.change_warning_text = function(){
+        let error_container_text;
+
+        switch ( error_type ){
+            case 'formality':
+               error_container_text = trp_url_slugs_info['error_message_formality'];
+            break;
+
+            case 'duplicates':
+               error_container_text = trp_url_slugs_info['error_message_duplicate_languages'];
+            break;
+        }
+
+        $error_container.html( error_container_text );
+    }
+
+    // Displays the warning message with the relevant text in case there is an error
+    // Or hides the warning message in case it was resolved
+    this.show_hide_warning = function( new_language_code, is_new_language_added = false ) {
+        this.has_error = this.set_error_type( new_language_code, is_new_language_added );
+
+        if ( this.has_error !== false ){
+            this.change_warning_text();
+            $error_container.show('fast');
+        }
+
+        if ( this.has_error === false && $error_container.is( ':visible' ) ){
+            $error_container.hide('fast');
+        }
+
+    }
+
+    this.init_event_listeners = function(){
+        let language_nodes = document.querySelectorAll('.trp-language .trp-select2');
+        this.add_language_change_listener( language_nodes );
+    }
+
+    this.add_language_change_listener = function( nodes ){
+        let $nodes = jQuery( nodes );
+
+        $nodes.on( 'change', language_change );
+
+        function language_change( event ){
+            // .trp-language-code is changed after the language changes so there is a small window in which we can get the old value
+            let old_language_code = jQuery(event.target).closest('.trp-language').find('.trp-language-code').val();
+            let new_language_code = jQuery(event.target).next().find('.select2-selection__rendered').attr('title');
+
+            _this.languages[_this.languages.indexOf(old_language_code)] = new_language_code;
+
+            _this.show_hide_warning( new_language_code );
+        }
+    }
+
+    this.init();
+}
+
 // TRP Email Course
 jQuery(document).ready(function (e) {
     jQuery('.trp-email-course input[type="submit"]').on('click', function (e) {
@@ -319,7 +477,7 @@ jQuery(document).ready(function (e) {
         jQuery( '.trp-email-course .trp-email-course__error' ).removeClass( 'visible' )
 
         var email = jQuery( '.trp-email-course input[name="trp_email_course_email"]').val()
-        
+
         if ( !trp_validateEmail( email ) ){
             jQuery( '.trp-email-course .trp-email-course__error' ).addClass( 'visible' )
             jQuery( '.trp-email-course input[name="trp_email_course_email"]' ).focus()
@@ -333,7 +491,7 @@ jQuery(document).ready(function (e) {
 
             var data = new FormData()
                 data.append( 'email', email )
-            
+
             var version = jQuery('.trp-email-course input[name="trp_installed_plugin_version"]').val()
             if ( version != '' )
                 data.append( 'version', version )

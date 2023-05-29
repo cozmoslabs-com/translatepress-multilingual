@@ -108,6 +108,8 @@
 <?php __("Invalid language code. Please try again.", "translatepress-multilingual"); ?>
 <?php __("Language codes can contain only A-Z a-z 0-9 - _ characters. Check your language codes in TranslatePress General Settings.", "translatepress-multilingual"); ?>
 <?php __("Error! Duplicate URL slug values.", "translatepress-multilingual"); ?>
+<?php __("You cannot select two languages that have the same <a href=\"https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes\" target=\"_blank\">iso code</a> but different formalities because doing so will lead to duplicate <a href=\"https://developers.google.com/search/docs/specialty/international/localized-versions\" target=\"_blank\">hreflang tags</a>.", "translatepress-multilingual"); ?>
+<?php __("Duplicate language detected.<br>Each language can only be added once to ensure accurate translation management.<br> Please change the duplicate language entry and try again. ", "translatepress-multilingual"); ?>
 <?php __("Current Language", "translatepress-multilingual"); ?>
 <?php __("Opposite Language", "translatepress-multilingual"); ?>
 <?php __("General", "translatepress-multilingual"); ?>
@@ -360,6 +362,7 @@
 <?php __("Language Switcher", "translatepress-multilingual"); ?>
 <?php __("Shortcode ", "translatepress-multilingual"); ?>
 <?php __("Use shortcode on any page or widget.", "translatepress-multilingual"); ?>
+<?php __("You can also add the <a href=\"%s\" title=\"Language Switcher Block Documentation\">Language Switcher Block</a> in the WP Gutenberg Editor.", "translatepress-multilingual"); ?>
 <?php __("Menu item", "translatepress-multilingual"); ?>
 <?php __("Go to  %1$s Appearance -> Menus%2$s to add languages to the Language Switcher in any menu.", "translatepress-multilingual"); ?>
 <?php __("Learn more in our documentation.", "translatepress-multilingual"); ?>

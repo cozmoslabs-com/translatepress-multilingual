@@ -29,7 +29,7 @@ msgstr ""
 msgid "Please install and activate the TranslatePress - Multilingual plugin"
 msgstr ""
 
-#: index-dev.php:46, includes/class-settings.php:163
+#: index-dev.php:46, includes/class-settings.php:164
 msgid "Install & Activate"
 msgstr ""
 
@@ -261,7 +261,7 @@ msgstr ""
 msgid "If your problem still isn't solved, try asking your hosting about your errors. The most common issue is missing permissions for the SQL user, such as the Create Tables permission."
 msgstr ""
 
-#: includes/class-install-plugins.php:34, includes/class-settings.php:162
+#: includes/class-install-plugins.php:34, includes/class-settings.php:163
 msgid "Active"
 msgstr ""
 
@@ -437,51 +437,59 @@ msgstr ""
 msgid "Light"
 msgstr ""
 
-#: includes/class-settings.php:229
+#: includes/class-settings.php:230
 msgid "Invalid language code. Please try again."
 msgstr ""
 
-#: includes/class-settings.php:433
+#: includes/class-settings.php:434
 msgid "Language codes can contain only A-Z a-z 0-9 - _ characters. Check your language codes in TranslatePress General Settings."
 msgstr ""
 
-#: includes/class-settings.php:481, add-ons-advanced/extra-languages/class-extra-languages.php:44
+#: includes/class-settings.php:483
 msgid "Error! Duplicate URL slug values."
 msgstr ""
 
-#: includes/class-settings.php:522
-msgid "Current Language"
+#: includes/class-settings.php:484
+msgid "You cannot select two languages that have the same <a href=\"https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes\" target=\"_blank\">iso code</a> but different formalities because doing so will lead to duplicate <a href=\"https://developers.google.com/search/docs/specialty/international/localized-versions\" target=\"_blank\">hreflang tags</a>."
+msgstr ""
+
+#: includes/class-settings.php:485
+msgid "Duplicate language detected.<br>Each language can only be added once to ensure accurate translation management.<br> Please change the duplicate language entry and try again. "
 msgstr ""
 
 #: includes/class-settings.php:528
+msgid "Current Language"
+msgstr ""
+
+#: includes/class-settings.php:534
 msgid "Opposite Language"
 msgstr ""
 
-#: includes/class-settings.php:568
+#: includes/class-settings.php:574
 msgid "General"
 msgstr ""
 
-#: includes/class-settings.php:573, includes/class-translation-manager.php:499
+#: includes/class-settings.php:579, includes/class-translation-manager.php:499
 msgid "Translate Site"
 msgstr ""
 
-#: includes/class-settings.php:578
+#: includes/class-settings.php:584
 msgid "Addons"
 msgstr ""
 
-#: includes/class-settings.php:586
+#: includes/class-settings.php:592
 msgid "License"
 msgstr ""
 
-#: includes/class-settings.php:630, includes/class-translation-manager.php:531
+#: includes/class-settings.php:636, includes/class-translation-manager.php:531
 msgid "Settings"
 msgstr ""
 
-#: includes/class-settings.php:643, partials/license-settings-page.php:32
+#: includes/class-settings.php:649, partials/license-settings-page.php:32
 msgid "Activate License"
 msgstr ""
 
-#: includes/class-settings.php:635
+#: includes/class-settings.php:641
 msgid "Pro Features"
 msgstr ""
 
@@ -1185,7 +1193,7 @@ msgstr ""
 msgid "TranslatePress Advanced Settings"
 msgstr ""
 
-#: partials/advanced-settings-page.php:16, partials/machine-translation-settings-page.php:203, partials/main-settings-page.php:160
+#: partials/advanced-settings-page.php:16, partials/machine-translation-settings-page.php:203, partials/main-settings-page.php:161
 msgid "Save Changes"
 msgstr ""
 
@@ -1376,30 +1384,30 @@ msgstr ""
 msgid "Custom Languages"
 msgstr ""
 
-#: partials/main-settings-language-selector.php:105, add-ons-advanced/extra-languages/partials/language-selector-pro.php:106
+#: partials/main-settings-language-selector.php:106, add-ons-advanced/extra-languages/partials/language-selector-pro.php:107
 msgid "Select the languages you wish to make your website available in.<br>The Formality field is used by Automatic Translation to decide whether the translated text should lean towards formal or informal language. For now, it is supported only for a few languages and only by <a href=\"%s\" target=\"_blank\">DeepL</a>."
 msgstr ""
 
 #. translators: %1$s is the URL to the add-ons. %2$2 is for the TranslatePress add-on verbiage.
-#: partials/main-settings-language-selector.php:116
+#: partials/main-settings-language-selector.php:117
 msgid "To add <strong>more than two languages</strong> and support for SEO Title, Description, Slug and more check out <a href=\"%1$s\" target=\"_blank\" title=\"%2$s\">%2$s</a>."
 msgstr ""
 
-#: partials/main-settings-language-selector.php:118
+#: partials/main-settings-language-selector.php:119
 msgctxt "Verbiage for the TranslatePress Advanced add-ons"
 msgid "TranslatePress Advanced Add-ons"
 msgstr ""
 
-#: partials/main-settings-language-selector.php:120
+#: partials/main-settings-language-selector.php:121
 msgid "Not only are you getting extra features and premium support, but you also help fund the future development of TranslatePress."
 msgstr ""
 
-#: partials/main-settings-language-selector.php:124
+#: partials/main-settings-language-selector.php:125
 msgctxt "Link to the TranslatePress add-ons"
 msgid "TranslatePress Advanced Add-ons"
 msgstr ""
 
-#: partials/main-settings-language-selector.php:111
+#: partials/main-settings-language-selector.php:112
 msgid "To add <strong>more than two languages</strong> activate the <strong>Extra Languages Add-on</strong> from <a href=\"%s\" class=\"trp-translatepress-account-page\" target=\"_blank\" title=\"Add-ons page\">the Add-ons Page</a>. Once activated, you'll be able to add unlimited languages."
 msgstr ""
 
@@ -1463,59 +1471,63 @@ msgstr ""
 msgid "Use shortcode on any page or widget."
 msgstr ""
 
-#: partials/main-settings-page.php:89
+#: partials/main-settings-page.php:86
+msgid "You can also add the <a href=\"%s\" title=\"Language Switcher Block Documentation\">Language Switcher Block</a> in the WP Gutenberg Editor."
+msgstr ""
+
+#: partials/main-settings-page.php:90
 msgid "Menu item"
 msgstr ""
 
-#: partials/main-settings-page.php:97
+#: partials/main-settings-page.php:98
 msgid "Go to  %1$s Appearance -> Menus%2$s to add languages to the Language Switcher in any menu."
 msgstr ""
 
-#: partials/main-settings-page.php:98
+#: partials/main-settings-page.php:99
 msgid "Learn more in our documentation."
 msgstr ""
 
-#: partials/main-settings-page.php:102
+#: partials/main-settings-page.php:103
 msgid "Floating language selection"
 msgstr ""
 
-#: partials/main-settings-page.php:109
+#: partials/main-settings-page.php:110
 msgid "Add a floating dropdown that follows the user on every page."
 msgstr ""
 
-#: partials/main-settings-page.php:113
+#: partials/main-settings-page.php:114
 msgid "Show \"Powered by TranslatePress\""
 msgstr ""
 
-#: partials/main-settings-page.php:115
+#: partials/main-settings-page.php:116
 msgid "Show the small \"Powered by TranslatePress\" label in the floater language switcher."
 msgstr ""
 
-#: partials/main-settings-page.php:131
+#: partials/main-settings-page.php:132
 msgid "5 Days to Better Multilingual Websites"
 msgstr ""
 
-#: partials/main-settings-page.php:135
+#: partials/main-settings-page.php:136
 msgid "%sJoin our FREE & EXCLUSIVE onboarding course%s and learn how to grow your multilingual traffic, reach international markets, and save time & money while getting the most out of TranslatePress!"
 msgstr ""
 
-#: partials/main-settings-page.php:141
+#: partials/main-settings-page.php:142
 msgid "Invalid email address"
 msgstr ""
 
-#: partials/main-settings-page.php:143
+#: partials/main-settings-page.php:144
 msgid "Your email"
 msgstr ""
 
-#: partials/main-settings-page.php:146
+#: partials/main-settings-page.php:147
 msgid "Sign me up!"
 msgstr ""
 
-#: partials/main-settings-page.php:150
+#: partials/main-settings-page.php:151
 msgid "Sign up with your email address and receive a 5-part email guide to help you maximize the power of TranslatePress."
 msgstr ""
 
-#: partials/main-settings-page.php:153
+#: partials/main-settings-page.php:154
 msgid "Dismiss email course notification"
 msgstr ""
 
@@ -2253,7 +2265,7 @@ msgstr ""
 msgid "Active*"
 msgstr ""
 
-#: add-ons-advanced/extra-languages/partials/language-selector-pro.php:107
+#: add-ons-advanced/extra-languages/partials/language-selector-pro.php:108
 msgid "<br>* The inactive languages will still be visible and active for the admin. For other users they won't be visible in the language switchers and won't be accessible either."
 msgstr ""
 

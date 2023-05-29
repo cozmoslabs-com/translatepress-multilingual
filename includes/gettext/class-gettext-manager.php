@@ -375,7 +375,9 @@ class TRP_Gettext_Manager {
 			$timezone_string = get_option( 'timezone_string' );
 			if ( $timezone_string ) {
 				$timezone_object = timezone_open( $timezone_string );
-				$date_object     = date_create( null, $timezone_object );
+                //date_create( null, $timezone_object );
+                //date_create() passing null to parameter #1 ($datetime) of type string is deprecated, from what I found online the null should be replaced with ''
+				$date_object     = date_create( '', $timezone_object );
 				foreach ( $timezone_formats as $timezone_format ) {
 					if ( false !== strpos( $dateformatstring, $timezone_format ) ) {
 						$formatted        = date_format( $date_object, $timezone_format );

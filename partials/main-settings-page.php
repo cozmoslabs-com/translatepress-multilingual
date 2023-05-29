@@ -83,6 +83,7 @@
                             </div>
                             <p class="description">
                                 <?php esc_html_e( 'Use shortcode on any page or widget.', 'translatepress-multilingual' ); ?>
+                                <?php echo wp_kses_post( sprintf( __('You can also add the <a href="%s" title="Language Switcher Block Documentation">Language Switcher Block</a> in the WP Gutenberg Editor.', 'translatepress-multilingual'), esc_url('https://translatepress.com/docs/settings/#language-switcher-block' ) ) ); ?>
                             </p>
                         </div>
                         <div class="trp-ls-type">
