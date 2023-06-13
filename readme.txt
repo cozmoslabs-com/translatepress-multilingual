@@ -5,7 +5,7 @@ Tags: translate, translation, multilingual, automatic translation, bilingual, fr
 Requires at least: 3.1.0
 Tested up to: 6.2.2
 Requires PHP: 5.6.20
-Stable tag: 2.5.4
+Stable tag: 2.5.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -140,6 +140,11 @@ For more information please check out our [documentation](https://translatepress
 
 
 == Changelog ==
+= 2.5.5 =
+* Redesigned TranslatePress Settings Advanced tab UI using subtabs
+* Improved the translation status icons for the case when multiple strings are shown at once in Translation Editor
+* Fixed deprecated notice on php 8
+
 = 2.5.4 =
 * Updated look of language switchers for shortcode generated and floating options
 * Added notice in TranslatePress settings to avoid adding duplicate languages with different formalities

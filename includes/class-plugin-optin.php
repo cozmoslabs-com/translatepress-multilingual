@@ -256,7 +256,8 @@ class TRP_Plugin_Optin {
             'type'          => 'checkbox',
             'label'         => esc_html__( 'Marketing optin', 'translatepress-multilingual' ),
             'description'   => esc_html__( 'Opt in to our security and feature updates notifications, and non-sensitive diagnostic tracking.', 'translatepress-multilingual' ),
-        );
+            'id'            => 'miscellaneous_options',
+            );
 
         return $settings_array;
 

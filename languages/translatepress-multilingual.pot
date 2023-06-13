@@ -45,27 +45,27 @@ msgstr ""
 msgid "Advanced"
 msgstr ""
 
-#: includes/class-advanced-tab.php:199
+#: includes/class-advanced-tab.php:204
 msgid "Settings saved."
 msgstr ""
 
-#: includes/class-advanced-tab.php:337, includes/class-error-manager.php:180, partials/machine-translation-settings-page.php:17, partials/machine-translation-settings-page.php:121, partials/machine-translation-settings-page.php:141, partials/machine-translation-settings-page.php:192, partials/main-settings-page.php:42, partials/main-settings-page.php:55, partials/main-settings-page.php:68
+#: includes/class-advanced-tab.php:351, includes/class-error-manager.php:180, partials/machine-translation-settings-page.php:17, partials/machine-translation-settings-page.php:121, partials/machine-translation-settings-page.php:141, partials/machine-translation-settings-page.php:192, partials/main-settings-page.php:42, partials/main-settings-page.php:55, partials/main-settings-page.php:68
 msgid "Yes"
 msgstr ""
 
-#: includes/class-advanced-tab.php:547, includes/class-advanced-tab.php:558, includes/class-advanced-tab.php:652, includes/class-advanced-tab.php:683
+#: includes/class-advanced-tab.php:558, includes/class-advanced-tab.php:569, includes/class-advanced-tab.php:617, includes/class-advanced-tab.php:628, includes/class-advanced-tab.php:723, includes/class-advanced-tab.php:754
 msgid "Are you sure you want to remove this item?"
 msgstr ""
 
-#: includes/class-advanced-tab.php:547, includes/class-advanced-tab.php:558, includes/class-advanced-tab.php:652, includes/class-advanced-tab.php:683, partials/main-settings-language-selector.php:60, add-ons-advanced/extra-languages/partials/language-selector-pro.php:62
+#: includes/class-advanced-tab.php:558, includes/class-advanced-tab.php:569, includes/class-advanced-tab.php:617, includes/class-advanced-tab.php:628, includes/class-advanced-tab.php:723, includes/class-advanced-tab.php:754, partials/main-settings-language-selector.php:60, add-ons-advanced/extra-languages/partials/language-selector-pro.php:62
 msgid "Remove"
 msgstr ""
 
-#: includes/class-advanced-tab.php:558, includes/class-advanced-tab.php:683, partials/main-settings-language-selector.php:102, add-ons-advanced/extra-languages/partials/language-selector-pro.php:103
+#: includes/class-advanced-tab.php:569, includes/class-advanced-tab.php:628, includes/class-advanced-tab.php:754, partials/main-settings-language-selector.php:102, add-ons-advanced/extra-languages/partials/language-selector-pro.php:103
 msgid "Add"
 msgstr ""
 
-#: includes/class-advanced-tab.php:636, includes/class-advanced-tab.php:670
+#: includes/class-advanced-tab.php:707, includes/class-advanced-tab.php:741
 msgid "Select..."
 msgstr ""
 
@@ -709,7 +709,7 @@ msgstr ""
 msgid "Different Menu Items for each Language"
 msgstr ""
 
-#: includes/class-translation-manager.php:164, partials/addons-settings-page.php:54, add-ons-pro/automatic-language-detection/class-automatic-language-detection.php:53, add-ons-pro/automatic-language-detection/partials/general-settings.php:1, add-ons-pro/automatic-language-detection/partials/settings-option.php:1
+#: includes/class-translation-manager.php:164, partials/addons-settings-page.php:54, add-ons-pro/automatic-language-detection/class-automatic-language-detection.php:53, add-ons-pro/automatic-language-detection/partials/general-settings.php:1, add-ons-pro/automatic-language-detection/partials/settings-option.php:2
 msgid "Automatic User Language Detection"
 msgstr ""
 
@@ -1193,7 +1193,7 @@ msgstr ""
 msgid "TranslatePress Advanced Settings"
 msgstr ""
 
-#: partials/advanced-settings-page.php:16, partials/machine-translation-settings-page.php:203, partials/main-settings-page.php:161
+#: partials/advanced-settings-page.php:19, partials/machine-translation-settings-page.php:203, partials/main-settings-page.php:161
 msgid "Save Changes"
 msgstr ""
 
@@ -1711,7 +1711,7 @@ msgstr ""
 msgid "Text RTL"
 msgstr ""
 
-#: includes/advanced-settings/custom-language.php:32, includes/advanced-settings/separators.php:49
+#: includes/advanced-settings/custom-language.php:32, includes/advanced-settings/separators.php:53
 msgid "Custom language"
 msgstr ""
 
@@ -1731,19 +1731,19 @@ msgstr ""
 msgid "Gettext Strings are strings outputted by themes and plugins. <br> Translating these types of strings through TranslatePress can be unnecessary if they are already translated using the .po/.mo translation file system.<br>Enabling this option can improve the page load performance of your site in certain cases. The disadvantage is that you can no longer edit gettext translations using TranslatePress, nor benefit from automatic translation on these strings."
 msgstr ""
 
-#: includes/advanced-settings/disable-gettext-strings.php:47
+#: includes/advanced-settings/disable-gettext-strings.php:48
 msgid "Gettext Strings translation is disabled"
 msgstr ""
 
-#: includes/advanced-settings/disable-gettext-strings.php:49
+#: includes/advanced-settings/disable-gettext-strings.php:50
 msgid "To enable it go to "
 msgstr ""
 
-#: includes/advanced-settings/disable-gettext-strings.php:49
+#: includes/advanced-settings/disable-gettext-strings.php:50
 msgid "TranslatePress->Advanced Settings->Debug->Disable translation for gettext strings"
 msgstr ""
 
-#: includes/advanced-settings/disable-gettext-strings.php:49
+#: includes/advanced-settings/disable-gettext-strings.php:50
 msgid " and uncheck the Checkbox."
 msgstr ""
 
@@ -1763,11 +1763,11 @@ msgstr ""
 msgid "It disables search indexing the post title in translated languages.<br/>Useful when the title of the post doesn't allow HTML thus breaking the page."
 msgstr ""
 
-#: includes/advanced-settings/disable-post-container-tags.php:32
+#: includes/advanced-settings/disable-post-container-tags.php:33
 msgid "Disable post container tags for post content"
 msgstr ""
 
-#: includes/advanced-settings/disable-post-container-tags.php:33
+#: includes/advanced-settings/disable-post-container-tags.php:34
 msgid "It disables search indexing the post content in translated languages.<br/>Useful when the content of the post doesn't allow HTML thus breaking the page."
 msgstr ""
 
@@ -1779,11 +1779,11 @@ msgstr ""
 msgid "Choose what paths can be translated. Supports wildcard at the end of the path.<br>For example, to exclude https://example.com/some/path you can either use the rule /some/path/ or /some/*.<br>Enter each rule on it's own line. To exclude the home page use {{home}}."
 msgstr ""
 
-#: includes/advanced-settings/do-not-translate-certain-paths.php:30
+#: includes/advanced-settings/do-not-translate-certain-paths.php:32
 msgid "Exclude Paths From Translation"
 msgstr ""
 
-#: includes/advanced-settings/do-not-translate-certain-paths.php:35
+#: includes/advanced-settings/do-not-translate-certain-paths.php:37
 msgid "Translate Only Certain Paths"
 msgstr ""
 
@@ -1859,11 +1859,11 @@ msgstr ""
 msgid "Do not automatically translate these strings (ex. names, technical words...)<br>Paragraphs containing these strings will still be translated except for the specified part."
 msgstr ""
 
-#: includes/advanced-settings/fix-broken-html.php:8
+#: includes/advanced-settings/fix-broken-html.php:6
 msgid "Fix broken HTML"
 msgstr ""
 
-#: includes/advanced-settings/fix-broken-html.php:9
+#: includes/advanced-settings/fix-broken-html.php:7
 msgid "General attempt to fix broken or missing HTML on translated pages.<br/>"
 msgstr ""
 
@@ -1943,15 +1943,15 @@ msgstr ""
 msgid "Troubleshooting"
 msgstr ""
 
-#: includes/advanced-settings/separators.php:19
+#: includes/advanced-settings/separators.php:20
 msgid "Exclude strings"
 msgstr ""
 
-#: includes/advanced-settings/separators.php:29
+#: includes/advanced-settings/separators.php:31
 msgid "Debug"
 msgstr ""
 
-#: includes/advanced-settings/separators.php:39
+#: includes/advanced-settings/separators.php:42
 msgid "Miscellaneous options"
 msgstr ""
 
@@ -2321,31 +2321,31 @@ msgstr ""
 msgid "Select how the language should be detected for first time visitors.<br>The visitor's last displayed language will be remembered through cookies."
 msgstr ""
 
-#: add-ons-pro/automatic-language-detection/partials/settings-option.php:24
+#: add-ons-pro/automatic-language-detection/partials/settings-option.php:22
 msgid "Pop-up to notify the user of the detected language"
 msgstr ""
 
-#: add-ons-pro/automatic-language-detection/partials/settings-option.php:31
+#: add-ons-pro/automatic-language-detection/partials/settings-option.php:29
 msgid "Select the type of pop-up you wish to appear."
 msgstr ""
 
-#: add-ons-pro/automatic-language-detection/partials/settings-option.php:43
+#: add-ons-pro/automatic-language-detection/partials/settings-option.php:41
 msgid "Write the text you wish to appear in the pop-up."
 msgstr ""
 
-#: add-ons-pro/automatic-language-detection/partials/settings-option.php:47
+#: add-ons-pro/automatic-language-detection/partials/settings-option.php:44
 msgid "The same text is displayed in all languages. <br>A selecting language switcher will be appended to the pop-up. The detected language is pre-selected."
 msgstr ""
 
-#: add-ons-pro/automatic-language-detection/partials/settings-option.php:51
+#: add-ons-pro/automatic-language-detection/partials/settings-option.php:47
 msgid "Write the text you wish to appear on the button."
 msgstr ""
 
-#: add-ons-pro/automatic-language-detection/partials/settings-option.php:56
+#: add-ons-pro/automatic-language-detection/partials/settings-option.php:50
 msgid "Write the text you wish to appear on the close button. Leave empty for just the close button."
 msgstr ""
 
-#: add-ons-pro/automatic-language-detection/partials/settings-option.php:68
+#: add-ons-pro/automatic-language-detection/partials/settings-option.php:60
 msgid "Choose if you want the user to be redirected directly.<br>* Not recommended because it may cause indexing issues for search engines."
 msgstr ""
 

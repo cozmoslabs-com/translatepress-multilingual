@@ -159,6 +159,9 @@ jQuery( function() {
             row.find( '.trp-translation-published' ).val( new_language );
         };
 
+        var initialize = new TRP_Advanced_Settings_Tabs();
+        initialize.init();
+
         this.initialize = function () {
             this.initialize_select2();
 
@@ -337,7 +340,102 @@ function TRP_Field_Toggler (){
     }
 }
 
-function TRP_Error_handler(){
+
+//Advanced Settings Tabs
+function TRP_Advanced_Settings_Tabs() {
+    function init() {
+
+        jQuery('.advanced_settings_class').hide();
+        jQuery('#trp-cuslang-table').hide();
+        jQuery('.description_table').hide();
+
+        var trp_current_url = window.location.href;
+
+        if (!window.location.href.includes('tab')) {
+            jQuery('#trp_advanced_tab_content_table li:first-child').addClass('active');
+            let first_settings = jQuery('#trp_advanced_tab_content_table li:first-child').find('a').attr('class');
+            jQuery("." + first_settings).show();
+        } else if (!window.location.href.includes('#')) {
+            var trp_tab = trp_current_url.split('tab');
+            var trp_tab_value = trp_tab[1].split('=');
+
+            jQuery('.trp_advanced_tab_content_table_item .' + trp_tab_value[1]).css({
+                'border-bottom': '4px solid #2271b1',
+                'padding-bottom': '19px',
+                'font-weight': 'bold',
+                'color': '#000000'
+            });
+            jQuery("." + trp_tab_value[1]).show();
+
+
+            if (trp_tab_value[1] === 'custom_language') {
+                jQuery('#trp-cuslang-table').show();
+                jQuery('.description_table').show();
+            } else {
+                jQuery('#trp-cuslang-table').hide();
+                jQuery('.description_table').hide();
+            }
+        } else {
+            var trp_tab = trp_current_url.split('tab');
+            var trp_tab_value = trp_tab[1].split('#');
+
+            jQuery('.trp_advanced_tab_content_table_item .' + trp_tab_value[1]).css({
+                'border-bottom': '4px solid #2271b1',
+                'padding-bottom': '19px',
+                'font-weight': 'bold',
+                'color': '#000000'
+            });
+
+            jQuery("." + trp_tab_value[1]).show();
+
+            if (trp_tab_value[1] === 'custom_language') {
+                jQuery('#trp-cuslang-table').show();
+                jQuery('.description_table').show();
+            } else {
+                jQuery('#trp-cuslang-table').hide();
+                jQuery('.description_table').hide();
+            }
+        }
+        jQuery('#trp_advanced_tab_content_table li').click(function (event) {
+            event.preventDefault();
+            jQuery('#trp_advanced_tab_content_table li').removeClass('active');
+            jQuery(this).addClass('active');
+            jQuery('.advanced_settings_class').hide();
+            jQuery('.trp_advanced_tab_content_table_item a').css({
+                'border-bottom': 'none',
+                'padding-bottom': 'none',
+                'font-weight': 'normal',
+                'color': '#2271b1'
+            });
+
+            var activeTab = jQuery(this).find('a').attr('class');
+
+            jQuery('.trp_advanced_tab_content_table_item .' + activeTab).css({
+                'border-bottom': '4px solid #2271b1',
+                'padding-bottom': '19px',
+                'font-weight': 'bold',
+                'color': '#000000'
+            });
+
+            jQuery('#trp_advanced_settings_referer').attr('value', activeTab);
+            jQuery("." + activeTab).show();
+            if (activeTab === 'custom_language') {
+                jQuery('#trp-cuslang-table').show();
+                jQuery('.description_table').show();
+            } else {
+                jQuery('#trp-cuslang-table').hide();
+                jQuery('.description_table').hide();
+            }
+
+        });
+    }
+
+    return {
+        init: init
+    }
+}
+
+function TRP_Error_handler() {
 
     this.has_error = false;
     this.languages = [];
@@ -345,16 +443,16 @@ function TRP_Error_handler(){
     let $error_container;
     let error_type;
 
-    this.init = function(){
-        $error_container = jQuery( '.trp-add-language-error-container' );
+    this.init = function () {
+        $error_container = jQuery('.trp-add-language-error-container');
         this.set_language_list();
         this.init_event_listeners();
     }
 
-    this.set_language_list = function(){
-        let language_nodes = document.querySelectorAll( '.trp-language .trp-language-code' );
+    this.set_language_list = function () {
+        let language_nodes = document.querySelectorAll('.trp-language .trp-language-code');
 
-        for ( let i = 0; i < language_nodes.length; i++ ){
+        for (let i = 0; i < language_nodes.length; i++) {
             this.languages[i] = language_nodes[i].value;
         }
 
@@ -362,14 +460,14 @@ function TRP_Error_handler(){
 
     // If the language is formal / informal, returns it but stripped of the _informal or _formal parts
     // Returns false otherwise
-    this.strip_formal_language = function( new_language_code ){
+    this.strip_formal_language = function (new_language_code) {
         let formality_map = {
-          _informal: '',
+            _informal: '',
             _formal: ''
         };
 
-        if( new_language_code.includes( 'formal' ) || new_language_code.includes( 'informal' ) ){
-            new_language_code = new_language_code.replace(/_formal|_informal/, function(matched){
+        if (new_language_code.includes('formal') || new_language_code.includes('informal')) {
+            new_language_code = new_language_code.replace(/_formal|_informal/, function (matched) {
                 return formality_map[matched];
             });
 
@@ -379,12 +477,12 @@ function TRP_Error_handler(){
         return false;
     }
 
-    this.has_formal_variant = function( new_language_code, languages_array ){
+    this.has_formal_variant = function (new_language_code, languages_array) {
 
-        for ( let language of languages_array ){
-            let stripped_formal_language = this.strip_formal_language( language ); // false if is not a formal language
+        for (let language of languages_array) {
+            let stripped_formal_language = this.strip_formal_language(language); // false if is not a formal language
 
-            if( stripped_formal_language && stripped_formal_language === new_language_code ){
+            if (stripped_formal_language && stripped_formal_language === new_language_code) {
                 return true;
             }
         }
@@ -392,18 +490,18 @@ function TRP_Error_handler(){
         return false;
     }
 
-    this.set_error_type = function( new_language_code, is_new_language_added ){
-        let languages_array = is_new_language_added ? [].concat( this.languages, new_language_code ) : this.languages;
+    this.set_error_type = function (new_language_code, is_new_language_added) {
+        let languages_array = is_new_language_added ? [].concat(this.languages, new_language_code) : this.languages;
 
-        if( languages_array.length !== new Set(languages_array).size ){
+        if (languages_array.length !== new Set(languages_array).size) {
             error_type = "duplicates";
             return true;
         }
 
-        for ( let language_code of languages_array ){
-            let stripped_formal_language = this.strip_formal_language( language_code );
+        for (let language_code of languages_array) {
+            let stripped_formal_language = this.strip_formal_language(language_code);
 
-            if( stripped_formal_language !== false && languages_array.includes( stripped_formal_language ) || this.has_formal_variant( language_code, languages_array ) ){
+            if (stripped_formal_language !== false && languages_array.includes(stripped_formal_language) || this.has_formal_variant(language_code, languages_array)) {
                 error_type = "formality";
                 return true;
             }
@@ -412,56 +510,56 @@ function TRP_Error_handler(){
         return false;
     }
 
-    this.change_warning_text = function(){
+    this.change_warning_text = function () {
         let error_container_text;
 
-        switch ( error_type ){
+        switch (error_type) {
             case 'formality':
-               error_container_text = trp_url_slugs_info['error_message_formality'];
-            break;
+                error_container_text = trp_url_slugs_info['error_message_formality'];
+                break;
 
             case 'duplicates':
-               error_container_text = trp_url_slugs_info['error_message_duplicate_languages'];
-            break;
+                error_container_text = trp_url_slugs_info['error_message_duplicate_languages'];
+                break;
         }
 
-        $error_container.html( error_container_text );
+        $error_container.html(error_container_text);
     }
 
     // Displays the warning message with the relevant text in case there is an error
     // Or hides the warning message in case it was resolved
-    this.show_hide_warning = function( new_language_code, is_new_language_added = false ) {
-        this.has_error = this.set_error_type( new_language_code, is_new_language_added );
+    this.show_hide_warning = function (new_language_code, is_new_language_added = false) {
+        this.has_error = this.set_error_type(new_language_code, is_new_language_added);
 
-        if ( this.has_error !== false ){
+        if (this.has_error !== false) {
             this.change_warning_text();
             $error_container.show('fast');
         }
 
-        if ( this.has_error === false && $error_container.is( ':visible' ) ){
+        if (this.has_error === false && $error_container.is(':visible')) {
             $error_container.hide('fast');
         }
 
     }
 
-    this.init_event_listeners = function(){
+    this.init_event_listeners = function () {
         let language_nodes = document.querySelectorAll('.trp-language .trp-select2');
-        this.add_language_change_listener( language_nodes );
+        this.add_language_change_listener(language_nodes);
     }
 
-    this.add_language_change_listener = function( nodes ){
-        let $nodes = jQuery( nodes );
+    this.add_language_change_listener = function (nodes) {
+        let $nodes = jQuery(nodes);
 
-        $nodes.on( 'change', language_change );
+        $nodes.on('change', language_change);
 
-        function language_change( event ){
+        function language_change(event) {
             // .trp-language-code is changed after the language changes so there is a small window in which we can get the old value
             let old_language_code = jQuery(event.target).closest('.trp-language').find('.trp-language-code').val();
             let new_language_code = jQuery(event.target).next().find('.select2-selection__rendered').attr('title');
 
             _this.languages[_this.languages.indexOf(old_language_code)] = new_language_code;
 
-            _this.show_hide_warning( new_language_code );
+            _this.show_hide_warning(new_language_code);
         }
     }
 
@@ -562,3 +660,4 @@ function trp_dimiss_email_course(){
     })
 
 }
+
