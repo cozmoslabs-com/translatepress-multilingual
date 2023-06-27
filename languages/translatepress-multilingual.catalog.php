@@ -560,6 +560,8 @@
 <?php __("URL Slugs Translation", "translatepress-multilingual"); ?>
 <?php __("String Translation Editor", "translatepress-multilingual"); ?>
 <?php __("Active*", "translatepress-multilingual"); ?>
+<?php __("Select the languages you wish to make your website available in.", "translatepress-multilingual"); ?>
+<?php __("<br>The Formality field is used by Automatic Translation to decide whether the translated text should lean towards formal or informal language. For now, it is supported only for a few languages and only by <a href=\"%s\" target=\"_blank\">DeepL</a>.", "translatepress-multilingual"); ?>
 <?php __("<br>* The inactive languages will still be visible and active for the admin. For other users they won't be visible in the language switchers and won't be accessible either.", "translatepress-multilingual"); ?>
 <?php __("Post Slug", "translatepress-multilingual"); ?>
 <?php __("First by browser language, then IP address (recommended)", "translatepress-multilingual"); ?>

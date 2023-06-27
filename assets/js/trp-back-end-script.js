@@ -65,9 +65,14 @@ jQuery( function() {
             selected_language.val( '' ).trigger( 'change' );
 
             var new_option = jQuery( '.trp-language' ).first().clone();
-            error_handler.add_language_change_listener( new_option );
+
+            _this.supports_formality( new_language, new_option );
+
+            error_handler.add_language_change_listener( new_option.find('.trp-translation-language') );
 
             new_option = jQuery( new_option );
+
+            new_option.find('.trp-translation-language').on( 'change', _this.change_language );
 
             new_option.find( '.trp-hidden-default-language' ).remove();
             new_option.find( '.select2-container' ).remove();
@@ -96,6 +101,13 @@ jQuery( function() {
             new_option = jQuery( '#trp-sortable-languages' ).append( new_option );
             new_option.find( '.trp-remove-language' ).last().click( _this.remove_language );
         };
+
+        this.change_language = function( event ){
+            var new_language_element          = jQuery(event.target).closest( '.trp-language' );
+            var new_language_code             = jQuery(event.target).next().find('.select2-selection__rendered').attr('title');
+
+            _this.supports_formality( new_language_code, new_language_element );
+        }
 
         this.remove_language = function( element ){
             var message = jQuery( element.target ).attr( 'data-confirm-message' );
@@ -159,6 +171,44 @@ jQuery( function() {
             row.find( '.trp-translation-published' ).val( new_language );
         };
 
+        this.supports_formality = function( new_language_code, new_language_element ){
+            var languages_that_support_formality = trp_url_slugs_info['languages_that_support_formality'];
+            var formality_match                  = new_language_code.match( /formal|informal/ ) !== null ? new_language_code.match( /formal|informal/ )[0] : false; // check if the language is innately formal/informal e.g. de_DE_formal
+            var formality_select_field           = new_language_element.find( '.trp-translation-language-formality' );
+            var stripped_formal_language         = error_handler.strip_formal_language( new_language_code );
+
+            if ( formality_select_field.length === 0 ){
+                return;
+            }
+
+            formality_select_field.removeClass( 'trp-formality-disabled' ); // when a language is added,  the fields are cloned - which means that the select field could have the .trp-formality-disabled class even if the language supports formality
+
+            if ( stripped_formal_language && languages_that_support_formality[ stripped_formal_language ] === 'true' ){
+                select_change( formality_match );
+                return;
+            }
+
+            if ( !languages_that_support_formality[new_language_code] || languages_that_support_formality[new_language_code] === 'false' ){
+                formality_select_field.addClass( 'trp-formality-disabled' );
+            }
+
+            select_change( 'default' );
+
+            function select_change( option_value ) {
+                formality_select_field.find( 'option' ).each( function () {
+
+                    if ( jQuery( this ).attr( 'value' ) === option_value ){
+                        jQuery( this ).attr( 'selected', 'selected' );
+                        return;
+                    }
+
+                    jQuery( this ).removeAttr( 'selected' );
+
+                } );
+            }
+
+        }
+
         var initialize = new TRP_Advanced_Settings_Tabs();
         initialize.init();
 
@@ -175,6 +225,10 @@ jQuery( function() {
             jQuery( '#trp-default-language' ).on( 'change', _this.update_default_language );
             jQuery( "form[action='options.php']").on ( 'submit', _this.check_unique_url_slugs );
             jQuery( '#trp-languages-table' ).on( 'change', '.trp-translation-language', _this.update_url_slug_and_status );
+            jQuery('.trp-language .trp-select2').not( '#trp-default-language' ).on( 'change', _this.change_language );
+            jQuery( '.trp-select2' ).on( 'select2:open', function(){
+                document.querySelector( '.select2-search__field' ).focus();
+            });
         };
 
         this.initialize();
@@ -367,7 +421,6 @@ function TRP_Advanced_Settings_Tabs() {
             });
             jQuery("." + trp_tab_value[1]).show();
 
-
             if (trp_tab_value[1] === 'custom_language') {
                 jQuery('#trp-cuslang-table').show();
                 jQuery('.description_table').show();
@@ -385,7 +438,6 @@ function TRP_Advanced_Settings_Tabs() {
                 'font-weight': 'bold',
                 'color': '#000000'
             });
-
             jQuery("." + trp_tab_value[1]).show();
 
             if (trp_tab_value[1] === 'custom_language') {
@@ -585,7 +637,7 @@ jQuery(document).ready(function (e) {
 
         if( email != '' ){
 
-            jQuery( '.trp-email-course input[type="submit"' ).val( 'Working...' )
+            jQuery( '.trp-email-course input[type="submit"]' ).val( 'Working...' )
 
             var data = new FormData()
                 data.append( 'email', email )
@@ -615,7 +667,7 @@ jQuery(document).ready(function (e) {
                 },
                 error: function (response) {
 
-                    jQuery('.trp-email-course input[type="submit"').val('Sign me up!')
+                    jQuery('.trp-email-course input[type="submit"]').val('Sign me up!')
 
                 }
             })
@@ -660,4 +712,3 @@ function trp_dimiss_email_course(){
     })
 
 }
-

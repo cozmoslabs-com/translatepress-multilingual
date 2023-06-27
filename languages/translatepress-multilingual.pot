@@ -57,11 +57,11 @@ msgstr ""
 msgid "Are you sure you want to remove this item?"
 msgstr ""
 
-#: includes/class-advanced-tab.php:558, includes/class-advanced-tab.php:569, includes/class-advanced-tab.php:617, includes/class-advanced-tab.php:628, includes/class-advanced-tab.php:723, includes/class-advanced-tab.php:754, partials/main-settings-language-selector.php:60, add-ons-advanced/extra-languages/partials/language-selector-pro.php:62
+#: includes/class-advanced-tab.php:558, includes/class-advanced-tab.php:569, includes/class-advanced-tab.php:617, includes/class-advanced-tab.php:628, includes/class-advanced-tab.php:723, includes/class-advanced-tab.php:754, partials/main-settings-language-selector.php:60, add-ons-advanced/extra-languages/partials/language-selector-pro.php:75
 msgid "Remove"
 msgstr ""
 
-#: includes/class-advanced-tab.php:569, includes/class-advanced-tab.php:628, includes/class-advanced-tab.php:754, partials/main-settings-language-selector.php:102, add-ons-advanced/extra-languages/partials/language-selector-pro.php:103
+#: includes/class-advanced-tab.php:569, includes/class-advanced-tab.php:628, includes/class-advanced-tab.php:754, partials/main-settings-language-selector.php:102, add-ons-advanced/extra-languages/partials/language-selector-pro.php:116
 msgid "Add"
 msgstr ""
 
@@ -301,7 +301,7 @@ msgstr ""
 msgid "Please enter your Google Translate key."
 msgstr ""
 
-#: includes/class-machine-translator.php:157, add-ons-pro/deepl/includes/class-deepl-machine-translator.php:286
+#: includes/class-machine-translator.php:157, add-ons-pro/deepl/includes/class-deepl-machine-translator.php:314
 msgid "Please enter your DeepL API key."
 msgstr ""
 
@@ -337,11 +337,11 @@ msgstr ""
 msgid "One or more languages are unsupported by the automatic translation provider. Please check the <strong>TranslatePress -> <a href=\"%s\">Automatic Translation</a></strong> page for more information."
 msgstr ""
 
-#: includes/class-plugin-optin.php:257
+#: includes/class-plugin-optin.php:207
 msgid "Marketing optin"
 msgstr ""
 
-#: includes/class-plugin-optin.php:258
+#: includes/class-plugin-optin.php:208
 msgid "Opt in to our security and feature updates notifications, and non-sensitive diagnostic tracking."
 msgstr ""
 
@@ -445,51 +445,51 @@ msgstr ""
 msgid "Language codes can contain only A-Z a-z 0-9 - _ characters. Check your language codes in TranslatePress General Settings."
 msgstr ""
 
-#: includes/class-settings.php:483
+#: includes/class-settings.php:487
 msgid "Error! Duplicate URL slug values."
 msgstr ""
 
-#: includes/class-settings.php:484
+#: includes/class-settings.php:488
 msgid "You cannot select two languages that have the same <a href=\"https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes\" target=\"_blank\">iso code</a> but different formalities because doing so will lead to duplicate <a href=\"https://developers.google.com/search/docs/specialty/international/localized-versions\" target=\"_blank\">hreflang tags</a>."
 msgstr ""
 
-#: includes/class-settings.php:485
+#: includes/class-settings.php:489
 msgid "Duplicate language detected.<br>Each language can only be added once to ensure accurate translation management.<br> Please change the duplicate language entry and try again. "
 msgstr ""
 
-#: includes/class-settings.php:528
+#: includes/class-settings.php:532
 msgid "Current Language"
 msgstr ""
 
-#: includes/class-settings.php:534
+#: includes/class-settings.php:538
 msgid "Opposite Language"
 msgstr ""
 
-#: includes/class-settings.php:574
+#: includes/class-settings.php:578
 msgid "General"
 msgstr ""
 
-#: includes/class-settings.php:579, includes/class-translation-manager.php:499
+#: includes/class-settings.php:583, includes/class-translation-manager.php:499
 msgid "Translate Site"
 msgstr ""
 
-#: includes/class-settings.php:584
+#: includes/class-settings.php:588
 msgid "Addons"
 msgstr ""
 
-#: includes/class-settings.php:592
+#: includes/class-settings.php:596
 msgid "License"
 msgstr ""
 
-#: includes/class-settings.php:636, includes/class-translation-manager.php:531
+#: includes/class-settings.php:640, includes/class-translation-manager.php:531
 msgid "Settings"
 msgstr ""
 
-#: includes/class-settings.php:649, partials/license-settings-page.php:32
+#: includes/class-settings.php:653, partials/license-settings-page.php:32
 msgid "Activate License"
 msgstr ""
 
-#: includes/class-settings.php:641
+#: includes/class-settings.php:645
 msgid "Pro Features"
 msgstr ""
 
@@ -1344,47 +1344,47 @@ msgstr ""
 msgid "All Languages"
 msgstr ""
 
-#: partials/main-settings-language-selector.php:7, includes/string-translation/class-string-translation.php:218, add-ons-advanced/extra-languages/partials/language-selector-pro.php:7
+#: partials/main-settings-language-selector.php:7, includes/string-translation/class-string-translation.php:218, add-ons-advanced/extra-languages/partials/language-selector-pro.php:11
 msgid "Language"
 msgstr ""
 
-#: partials/main-settings-language-selector.php:8, add-ons-advanced/extra-languages/partials/language-selector-pro.php:8
+#: partials/main-settings-language-selector.php:8, add-ons-advanced/extra-languages/partials/language-selector-pro.php:13
 msgid "Formality"
 msgstr ""
 
-#: partials/main-settings-language-selector.php:9, add-ons-advanced/extra-languages/partials/language-selector-pro.php:9
+#: partials/main-settings-language-selector.php:9, add-ons-advanced/extra-languages/partials/language-selector-pro.php:15
 msgid "Code"
 msgstr ""
 
-#: partials/main-settings-language-selector.php:10, add-ons-advanced/extra-languages/partials/language-selector-pro.php:10
+#: partials/main-settings-language-selector.php:10, add-ons-advanced/extra-languages/partials/language-selector-pro.php:16
 msgid "Slug"
 msgstr ""
 
-#: partials/main-settings-language-selector.php:17, add-ons-advanced/extra-languages/partials/language-selector-pro.php:18
+#: partials/main-settings-language-selector.php:17, add-ons-advanced/extra-languages/partials/language-selector-pro.php:24
 msgid "Default"
 msgstr ""
 
-#: partials/main-settings-language-selector.php:18, add-ons-advanced/extra-languages/partials/language-selector-pro.php:19
+#: partials/main-settings-language-selector.php:18, add-ons-advanced/extra-languages/partials/language-selector-pro.php:25
 msgid "Formal"
 msgstr ""
 
-#: partials/main-settings-language-selector.php:19, add-ons-advanced/extra-languages/partials/language-selector-pro.php:20
+#: partials/main-settings-language-selector.php:19, add-ons-advanced/extra-languages/partials/language-selector-pro.php:26
 msgid "Informal"
 msgstr ""
 
-#: partials/main-settings-language-selector.php:60, add-ons-advanced/extra-languages/partials/language-selector-pro.php:62
+#: partials/main-settings-language-selector.php:60, add-ons-advanced/extra-languages/partials/language-selector-pro.php:75
 msgid "Are you sure you want to remove this language?"
 msgstr ""
 
-#: partials/main-settings-language-selector.php:73, add-ons-advanced/extra-languages/partials/language-selector-pro.php:75
+#: partials/main-settings-language-selector.php:73, add-ons-advanced/extra-languages/partials/language-selector-pro.php:88
 msgid "Choose..."
 msgstr ""
 
-#: partials/main-settings-language-selector.php:77, add-ons-advanced/extra-languages/partials/language-selector-pro.php:79
+#: partials/main-settings-language-selector.php:77, add-ons-advanced/extra-languages/partials/language-selector-pro.php:92
 msgid "Custom Languages"
 msgstr ""
 
-#: partials/main-settings-language-selector.php:106, add-ons-advanced/extra-languages/partials/language-selector-pro.php:107
+#: partials/main-settings-language-selector.php:106
 msgid "Select the languages you wish to make your website available in.<br>The Formality field is used by Automatic Translation to decide whether the translated text should lean towards formal or informal language. For now, it is supported only for a few languages and only by <a href=\"%s\" target=\"_blank\">DeepL</a>."
 msgstr ""
 
@@ -2261,11 +2261,19 @@ msgstr ""
 msgid "String Translation Editor"
 msgstr ""
 
-#: add-ons-advanced/extra-languages/partials/language-selector-pro.php:11
+#: add-ons-advanced/extra-languages/partials/language-selector-pro.php:17
 msgid "Active*"
 msgstr ""
 
-#: add-ons-advanced/extra-languages/partials/language-selector-pro.php:108
+#: add-ons-advanced/extra-languages/partials/language-selector-pro.php:120
+msgid "Select the languages you wish to make your website available in."
+msgstr ""
+
+#: add-ons-advanced/extra-languages/partials/language-selector-pro.php:121
+msgid "<br>The Formality field is used by Automatic Translation to decide whether the translated text should lean towards formal or informal language. For now, it is supported only for a few languages and only by <a href=\"%s\" target=\"_blank\">DeepL</a>."
+msgstr ""
+
+#: add-ons-advanced/extra-languages/partials/language-selector-pro.php:122
 msgid "<br>* The inactive languages will still be visible and active for the admin. For other users they won't be visible in the language switchers and won't be accessible either."
 msgstr ""
 
