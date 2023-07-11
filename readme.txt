@@ -5,7 +5,7 @@ Tags: translate, translation, multilingual, automatic translation, bilingual, fr
 Requires at least: 3.1.0
 Tested up to: 6.2.2
 Requires PHP: 5.6.20
-Stable tag: 2.5.6
+Stable tag: 2.5.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -140,6 +140,12 @@ For more information please check out our [documentation](https://translatepress
 
 
 == Changelog ==
+= 2.5.7 =
+* Added a new item in Database optimization tool to fix some cases of gettext not being selectable in Translation Editor
+* Fixed Edit pencil icon being difficult to click when hovering over certain text in Translation Editor
+* Added compatibility with WooCommerce High-Performance Order Storage (HPOS)
+* Improved compatibility with WP Rocket
+
 = 2.5.6 =
 * Improved settings UI by showing formality option only for languages and translation engines that support it
 * Fixed focus on search input when opening the languages dropdown in settings

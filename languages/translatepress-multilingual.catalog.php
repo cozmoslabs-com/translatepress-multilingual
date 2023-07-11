@@ -245,6 +245,7 @@
 <?php __("Updating original string ids for language %s...", "translatepress-multilingual"); ?>
 <?php __("Regenerating original meta table for language %s...", "translatepress-multilingual"); ?>
 <?php __("Cleaning original meta table for language %s...", "translatepress-multilingual"); ?>
+<?php __("Replacing original id NULL with value for language %s...", "translatepress-multilingual"); ?>
 <?php __("Inserting gettext original strings for language %s...", "translatepress-multilingual"); ?>
 <?php __("Cleaning gettext original strings table for language %s...", "translatepress-multilingual"); ?>
 <?php __("Updating gettext original string ids for language %s...", "translatepress-multilingual"); ?>
@@ -409,6 +410,8 @@
 <?php __("Cleans up all trp_dictionary_* tables of duplicate rows. These tables contain translations for user-inputted strings such as post content, post title, menus etc.", "translatepress-multilingual"); ?>
 <?php __("Remove duplicate rows for original dictionary strings", "translatepress-multilingual"); ?>
 <?php __("Cleans up all trp_original_strings table of duplicate rows. This table contains strings in the default language, without any translation.<br>The trp_original_meta table, which contains meta information that refers to the post parent’s id, is also regenerated.<br>Such duplicates can appear in exceptional situations of unexpected behavior.", "translatepress-multilingual"); ?>
+<?php __("Replace gettext strings that have original id NULL with the correct original ids", "translatepress-multilingual"); ?>
+<?php __("Some gettext strings might have the original is set to NULL which causes the translation editor to freeze.<br>Replace the original ids of these strings with the correct value.", "translatepress-multilingual"); ?>
 <?php __("Optimize Database", "translatepress-multilingual"); ?>
 <?php __("TranslatePress Database Updater", "translatepress-multilingual"); ?>
 <?php __("Updating TranslatePress tables", "translatepress-multilingual"); ?>

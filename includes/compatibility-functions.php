@@ -1894,3 +1894,9 @@ function trp_compatibility_for_adl_127_version( $settings ){
     }
     return $settings;
 }
+
+add_action( 'before_woocommerce_init', function() {
+    if ( class_exists( \Automattic\WooCommerce\Utilities\FeaturesUtil::class ) ) {
+        \Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'custom_order_tables', TRP_PLUGIN_DIR . 'index.php', true );
+    }
+} );
