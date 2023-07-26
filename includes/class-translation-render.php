@@ -25,6 +25,7 @@ class TRP_Translation_Render{
         $this->settings = $settings;
         // apply_filters only once instead of everytime is_html() is used
         $this->common_html_tags = implode( '|', apply_filters('trp_common_html_tags', array( 'html', 'body', 'table', 'tbody', 'thead', 'th', 'td', 'tr', 'div', 'p', 'span', 'b', 'a', 'strong', 'center', 'br', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'hr', 'img' ) ) );
+
     }
 
     /**
@@ -1008,8 +1009,10 @@ class TRP_Translation_Render{
             }
         }
 
-        foreach ( $html->find('link') as $link ){
-            $link->href = str_replace('#TRPLINKPROCESSED', '', $link->href);
+        foreach ( $html->find('link') as $link ) {
+            if ( isset($link->href) ) {
+                $link->href = str_replace('#TRPLINKPROCESSED', '', $link->href);
+            }
         }
         return $html;
     }

@@ -3,6 +3,8 @@
 
 class TRP_Gettext_Scan {
 
+    protected $settings;
+
 	public function __construct( $settings ) {
 		$this->settings = $settings;
 	}

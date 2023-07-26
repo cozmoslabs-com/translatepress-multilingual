@@ -9,6 +9,7 @@ class TRP_Plural_Forms {
 
     protected $_gettext_select_plural_form;
     protected $settings;
+    protected $_nplurals;
     protected $gettext_plural_forms_headers;
     protected $cached_language = null;
 

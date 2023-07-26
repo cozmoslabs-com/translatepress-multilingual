@@ -10,6 +10,8 @@ class TRP_Editor_Api_Gettext_Strings {
 	protected $translation_render;
 	/* @var TRP_Translation_Manager */
 	protected $translation_manager;
+    /* @var TRP_Settings */
+    protected $settings;
 
 	/**
 	 * TRP_Translation_Manager constructor.

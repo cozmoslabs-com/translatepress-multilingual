@@ -3,6 +3,9 @@
 
 class TRP_String_Translation {
     protected $settings;
+
+    protected $loader;
+
     /* @var TRP_Translation_Manager */
     protected $translation_manager;
 

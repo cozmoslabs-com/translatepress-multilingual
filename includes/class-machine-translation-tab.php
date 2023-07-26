@@ -173,7 +173,11 @@ class TRP_Machine_Translation_Tab {
 
 
     public function add_enable_auto_translate_slug_filter( $allow ){
-        if( isset( $this->settings['trp_machine_translation_settings']['automatically-translate-slug'] ) && $this->settings['trp_machine_translation_settings']['automatically-translate-slug'] == 'yes' ){
+        if( !empty( $this->settings['trp_machine_translation_settings']['machine-translation'] ) &&
+            $this->settings['trp_machine_translation_settings']['machine-translation'] == 'yes' &&
+            isset( $this->settings['trp_machine_translation_settings']['automatically-translate-slug'] ) &&
+            $this->settings['trp_machine_translation_settings']['automatically-translate-slug'] == 'yes'
+        ){
             $allow = true;
         }
         return $allow;

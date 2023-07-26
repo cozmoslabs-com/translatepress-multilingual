@@ -10,6 +10,8 @@ class TRP_Editor_Api_Regular_Strings {
 	protected $translation_manager;
 	/* @var TRP_Url_Converter */
 	protected $url_converter;
+    /* @var TRP_Settings */
+    protected $settings;
 
 	/**
 	 * TRP_Translation_Manager constructor.
