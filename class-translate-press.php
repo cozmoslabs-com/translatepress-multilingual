@@ -66,7 +66,7 @@ class TRP_Translate_Press{
         define( 'TRP_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
         define( 'TRP_PLUGIN_BASE', plugin_basename( __DIR__ . '/index.php' ) );
         define( 'TRP_PLUGIN_SLUG', 'translatepress-multilingual' );
-        define( 'TRP_PLUGIN_VERSION', '2.5.8' );
+        define( 'TRP_PLUGIN_VERSION', '2.5.9' );
 
 	    wp_cache_add_non_persistent_groups(array('trp'));
 
@@ -473,7 +473,7 @@ class TRP_Translate_Press{
     	/*
     	 * Hook that prevents running the hooks. Caution: some TP code like constructors of classes still run!
     	 */
-    	$run_tp = apply_filters( 'trp_allow_tp_to_run', true );
+    	$run_tp = apply_filters( 'trp_allow_tp_to_run', true, $this->loader );
     	if ( $run_tp ) {
 		    $this->loader->run();
 	    }

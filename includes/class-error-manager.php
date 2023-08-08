@@ -33,6 +33,11 @@ class TRP_Error_Manager{
             'notifications' => array(),
             'errors' => array()
         ));
+
+        if ( !isset( $option ) || !is_array( $option['errors'] ) ){
+            $option['errors'] = [];
+        }
+
         if ( count( $option['errors'] ) >= 5 ){
             // only record the last few errors to avoid huge db options
             array_shift($option['errors'] );

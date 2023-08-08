@@ -323,7 +323,9 @@ class TRP_Language_Switcher{
                 if ( !empty( $this->settings['floater-position'] ) && strpos( $this->settings['floater-position'], 'top' ) !== false  ){
 	                  echo $powered_by; // phpcs:ignore
 	                  echo '<div class="trp-language-wrap" style="padding: 10px;">';
-	                  echo $disabled_language; // phpcs:ignore
+	                  if ( !empty( $disabled_language ) ){
+                          echo $disabled_language;  // phpcs:ignore
+                      }
                     $floater_position = 'top';
                 }
 

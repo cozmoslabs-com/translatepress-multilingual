@@ -5,7 +5,7 @@ Tags: translate, translation, multilingual, automatic translation, bilingual, fr
 Requires at least: 3.1.0
 Tested up to: 6.2.2
 Requires PHP: 5.6.20
-Stable tag: 2.5.8
+Stable tag: 2.5.9
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -140,6 +140,12 @@ For more information please check out our [documentation](https://translatepress
 
 
 == Changelog ==
+= 2.5.9 =
+* Added loader component as extra parameter in trp_allow_tp_to_run hook to ease integration with 3rd parties
+* Fixed edge case error with undefined variable $disabled_language
+* Fixed notice about deprecated property in php 8.2
+* Fixed edge case error in class-error-manager.php file
+
 = 2.5.8 =
 * Fixed some cases of disappearing CPT slugs translations leading to 404 pages
 * Fixed incorrectly adding empty href attributes to link tags on translated pages

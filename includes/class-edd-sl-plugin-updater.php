@@ -20,6 +20,7 @@ if( !class_exists('TRP_EDD_SL_Plugin_Updater') ) {
         private $version = '';
         private $wp_override = false;
         private $cache_key = '';
+        private $beta = '';
 
         /**
          * Class constructor.
