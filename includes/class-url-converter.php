@@ -386,6 +386,7 @@ class TRP_Url_Converter {
 	            *  becasue url_to_postid() uses the global language setting to accurately retrieve a post ID
                 */
                 $TRP_LANGUAGE = $this->settings['default-language'];
+                add_filter('trp_keep_permalinks_unchanged', '__return_true' );
 
                 /* In order to accurately find the posst ID the passed URL to url_to_postid() needs to be accurate
 	            * if the option add subdir to default language is on we need to add that to the URL
@@ -398,6 +399,8 @@ class TRP_Url_Converter {
                 $post_id = url_to_postid( $possible_url );
                 wp_cache_set( 'possible_post_id_' . hash('md4', $possible_url ), $post_id, 'trp' );
                 if($post_id){ trp_bulk_debug($debug, array('url' => $url, 'found post id' => $post_id, 'for default language' => $TRP_LANGUAGE)); }
+
+                remove_filter('trp_keep_permalinks_unchanged', '__return_true' );
                 $TRP_LANGUAGE = $trp_language_copy;
             }
         }
@@ -915,7 +918,9 @@ class TRP_Url_Converter {
     function prevent_permalink_update_on_other_languages( $value, $old_value ){
         global $TRP_LANGUAGE;
 
-        if( isset($TRP_LANGUAGE) && $TRP_LANGUAGE != $this->settings['default-language'] && apply_filters( 'trp_prevent_permalink_update_on_other_languages', true ) ) {
+        if( apply_filters( 'trp_keep_permalinks_unchanged', false ) ||
+            ( isset($TRP_LANGUAGE) && $TRP_LANGUAGE != $this->settings['default-language'] && apply_filters( 'trp_prevent_permalink_update_on_other_languages', true ) ) )
+        {
             $value = $old_value;
         }
 

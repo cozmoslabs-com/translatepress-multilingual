@@ -3,9 +3,9 @@ Contributors: cozmoslabs, razvan.mo, madalin.ungureanu, sareiodata, cristophor
 Donate link: https://www.translatepress.com/
 Tags: translate, translation, multilingual, automatic translation, bilingual, front-end translation, google translate, language
 Requires at least: 3.1.0
-Tested up to: 6.2.2
+Tested up to: 6.3
 Requires PHP: 5.6.20
-Stable tag: 2.5.9
+Stable tag: 2.6.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -140,6 +140,10 @@ For more information please check out our [documentation](https://translatepress
 
 
 == Changelog ==
+= 2.6.0 =
+* Fixed some cases of 404 on translated pages for WooCommerce permalinks
+* Improved compatibility with RankMath
+
 = 2.5.9 =
 * Added loader component as extra parameter in trp_allow_tp_to_run hook to ease integration with 3rd parties
 * Fixed edge case error with undefined variable $disabled_language

@@ -1900,3 +1900,66 @@ add_action( 'before_woocommerce_init', function() {
         \Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'custom_order_tables', TRP_PLUGIN_DIR . 'index.php', true );
     }
 } );
+
+
+/**
+ * Compatibility with RankMath
+ */
+add_filter( 'rank_math/analytics/get_translated_objects', 'trp_rank_math_get_translated_items', 10, 1 );
+function trp_rank_math_get_translated_items( $post_id ) {
+    if ( ! class_exists( 'TRP_Translate_Press' ) || !function_exists('trp_translate')) {
+        return $post_id;
+    }
+
+    $trp                = TRP_Translate_Press::get_trp_instance();
+    $url_converter      = $trp->get_component( 'url_converter' );
+    $settings_component = $trp->get_component( 'settings' );
+    $trp_settings       = $settings_component->get_settings();
+
+    // Needed because adding language slug in urls is not performed by default in admin area.
+    add_filter( 'trp_add_language_to_home_url_check_for_admin', '__return_false' );
+
+    $permalink = get_permalink( $post_id );
+
+    $translated_items = [];
+
+    $languages = $trp_settings['publish-languages'];
+    foreach ( $languages as $language ) {
+
+        $url = esc_url( $url_converter->get_url_for_language( $language, $permalink, '' ) );
+
+        /**
+         * Google API and get_permalink sends URL Encoded strings so we need
+         * to urldecode in order to get them to match with whats saved in DB.
+         */
+        $parse_url = wp_parse_url( urldecode( $url ) );
+        if ( ! $parse_url ) {
+            continue;
+        }
+
+        if ( empty( $parse_url['path'] ) ) {
+            continue;
+        }
+
+        $title = get_the_title( $post_id );
+
+        // Get translated title, if possible.
+        if( $language != $trp_settings['default-language'] ){
+            $title = trp_translate( $title, $language, false );
+        }
+
+        // Push translated URL into array.
+        array_push(
+            $translated_items,
+            [
+                'url'   => $parse_url['path'],
+                'title' => $title,
+            ]
+        );
+    }
+
+    // Revert to default functionality.
+    remove_filter( 'trp_add_language_to_home_url_check_for_admin', '__return_false' );
+
+    return $translated_items;
+}
