@@ -977,7 +977,7 @@ class TRP_Translation_Render{
                 strpos($url, '#TRPLINKPROCESSED') === false &&
 	            ( !$this->has_ancestor_attribute( $a_href, $no_translate_attribute ) || $this->has_ancestor_attribute($a_href, 'data-trp-gettext') ) // add language param to link if it's inside a gettext
             ){
-                $a_href->href = apply_filters( 'trp_force_custom_links', $this->url_converter->get_url_for_language( $TRP_LANGUAGE, $url ), $url, $TRP_LANGUAGE, $a_href );
+                $a_href->href = apply_filters( 'trp_force_custom_links', $this->url_converter->get_url_for_language( $TRP_LANGUAGE, $url, '' ), $url, $TRP_LANGUAGE, $a_href );
                 $url = $a_href->href;
             }
 
@@ -1696,10 +1696,35 @@ class TRP_Translation_Render{
         global $TRP_LANGUAGE;
 
         if ( $TRP_LANGUAGE != $this->settings['default-language'] || ( isset( $_REQUEST['trp-edit-translation'] ) && $_REQUEST['trp-edit-translation'] == 'preview' ) ) {
-
-            wp_enqueue_script('trp-dynamic-translator', TRP_PLUGIN_URL . 'assets/js/trp-translate-dom-changes.js', array('jquery'), TRP_PLUGIN_VERSION, true );
-            wp_localize_script('trp-dynamic-translator', 'trp_data', $this->get_trp_data() );
+            $this->output_dynamic_translation_script();
         }
+    }
+
+    /**
+     * If is_late_dom_html_plugin_active() returns true, echo script on shutdown hook priority 10
+     *
+     * Otherwise, enqueue script
+     *
+     * @see is_late_dom_html_plugin_active()
+     *
+     */
+    public function output_dynamic_translation_script(){
+        $script_src     = TRP_PLUGIN_URL . 'assets/js/trp-translate-dom-changes.js';
+        $trp_data       = $this->get_trp_data();
+        $trp_plugin_ver = TRP_PLUGIN_VERSION;
+
+        $echo_scripts = function() use ( $script_src, $trp_data, $trp_plugin_ver ){
+            echo '<script type="text/javascript" id="trp-dynamic-translator-js-extra"> var trp_data = ' . json_encode( $trp_data ) . ';</script>';
+            echo '<script src="' . esc_url( $script_src  ) . '?ver=' . esc_attr($trp_plugin_ver) .'" id="trp-dynamic-translator-js"></script>';
+        };
+
+        if ( is_late_dom_html_plugin_active() ){
+            add_action( 'shutdown', $echo_scripts );
+            return;
+        }
+
+        wp_enqueue_script('trp-dynamic-translator', $script_src, array('jquery'), TRP_PLUGIN_VERSION, true );
+        wp_localize_script('trp-dynamic-translator', 'trp_data', $trp_data );
     }
 
 	/**

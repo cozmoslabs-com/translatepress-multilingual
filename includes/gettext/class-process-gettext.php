@@ -13,6 +13,8 @@ class TRP_Process_Gettext {
     protected $trp_languages;
     protected $gettext_manager;
     protected $plural_forms;
+    protected $machine_translation_codes;
+    protected $skip_gettext_querying;
 
     /**
      * TRP_Gettext_Manager constructor.
@@ -41,7 +43,7 @@ class TRP_Process_Gettext {
 
         //try here to exclude some strings that do not require translation
         $excluded_gettext_strings = array( '', ' ', '&hellip;', '&nbsp;', '&raquo;' );
-        if ( in_array( trp_full_trim( $text ), $excluded_gettext_strings ) )
+        if ( in_array( trim( $text ), $excluded_gettext_strings ) )
             return $translation;
 
         global $TRP_LANGUAGE;
@@ -53,11 +55,15 @@ class TRP_Process_Gettext {
         if (isset($_REQUEST['action']) && strpos( sanitize_text_field( $_REQUEST['action'] ), 'trp_') === 0)
             return $translation;
 
-        $skip_gettext_querying = apply_filters( 'trp_skip_gettext_querying', false, $translation, $text, $domain );
+        if( $this->skip_gettext_querying === null ) {
+            // apply filters takes time. Only do this once. Parameters $translation, $text, $domain are irrelevant but can't be removed due to backwards compatibility
+            // Use trp_skip_gettext_processing hook for not adding wrappings.
+            $this->skip_gettext_querying = apply_filters( 'trp_skip_gettext_querying', false, $translation, $text, $domain );
+        }
         /* get_locale() returns WP Settings Language (WPLANG). It might not be a language in TP so it may not have a TP table. */
         $current_locale = get_locale();
         global $trp_translated_gettext_texts_language;
-        if ( !$skip_gettext_querying && ( !in_array( $current_locale, $this->settings['translation-languages'] ) || empty( $trp_translated_gettext_texts_language ) || $trp_translated_gettext_texts_language !== $current_locale ) ) {
+        if ( !$this->skip_gettext_querying && ( !in_array( $current_locale, $this->settings['translation-languages'] ) || empty( $trp_translated_gettext_texts_language ) || $trp_translated_gettext_texts_language !== $current_locale ) ) {
             return $translation;
         }
 
@@ -86,7 +92,7 @@ class TRP_Process_Gettext {
             }
 
             $db_id                 = '';
-            if ( !$skip_gettext_querying ) {
+            if ( !$this->skip_gettext_querying ) {
                 global $trp_translated_gettext_texts, $trp_all_gettext_texts;
 
                 $found_in_db = false;
@@ -173,9 +179,11 @@ class TRP_Process_Gettext {
                 if ( !$this->trp_languages ) {
                     $this->trp_languages = $trp->get_component( 'languages' );
                 }
-                $machine_translation_codes = $this->trp_languages->get_iso_codes( $this->settings['translation-languages'] );
+                if ( !$this->machine_translation_codes ) {
+                    $this->machine_translation_codes = $this->trp_languages->get_iso_codes( $this->settings['translation-languages'] );
+                }
                 /* We assume Gettext strings are in English so don't automatically translate into English */
-                if ( $machine_translation_codes[ $TRP_LANGUAGE ] != 'en' && $this->machine_translator->is_available( array( $TRP_LANGUAGE ) ) ) {
+                if ( $this->machine_translation_codes[ $TRP_LANGUAGE ] != 'en' && $this->machine_translator->is_available( array( $TRP_LANGUAGE ) ) ) {
                     global $trp_gettext_strings_for_machine_translation;
                     if ( $text == $translation || $original_plural == $translation ) {
                         foreach ( $trp_translated_gettext_texts as $trp_translated_gettext_text ) {
@@ -252,7 +260,7 @@ class TRP_Process_Gettext {
 	                 */
 
 	                if ( ($text != 'Name: %1$s, Username: %2$s' && $text != 'Name: %1$s, Guest' && $domain == 'woocommerce-payments') || $domain != 'woocommerce-payments') {
-		                $translation = apply_filters( 'trp_process_gettext_tags', '#!trpst#trp-gettext data-trpgettextoriginal=' . $db_id . '#!trpen#' . $translation . '#!trpst#/trp-gettext#!trpen#', $translation, $skip_gettext_querying, $text, $domain );
+		                $translation = apply_filters( 'trp_process_gettext_tags', '#!trpst#trp-gettext data-trpgettextoriginal=' . $db_id . '#!trpen#' . $translation . '#!trpst#/trp-gettext#!trpen#', $translation, $this->skip_gettext_querying, $text, $domain );
 	                }
                 }
             }

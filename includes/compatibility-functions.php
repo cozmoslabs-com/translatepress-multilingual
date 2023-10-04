@@ -1990,3 +1990,15 @@ function trp_stop_automatic_translation_for_certain_post_type_base_slugs( $bool,
     
     return $bool;
 }
+
+/**
+ * Exclude Query Monitor gettext strings from being processed
+ */
+if ( class_exists( 'QueryMonitor' ) ) {
+    add_filter( 'trp_skip_gettext_processing', 'trp_exclude_query_monitor_strings', 10, 4 );
+}
+function trp_exclude_query_monitor_strings( $bool, $translation, $text, $domain ){
+    if ( trim( $domain ) === 'query-monitor' ) return true;
+
+    return $bool;
+}

@@ -862,3 +862,20 @@ function trp_woo_hpos_get_post_meta( $order_id, $meta_key, $single = false ){
 
     return get_post_meta( $order_id, $meta_key, $single );
 }
+
+/**
+ * Helper function that determines if we should output the dynamic translation script later than usual
+ *
+ * Some plugins add HTML to the DOM very late in the page load cycle, so the site becomes slow due our mutation observer capturing it
+ *
+ * @return bool
+ */
+function is_late_dom_html_plugin_active(){
+    $classes_array = ['QueryMonitor']; // for the moment, only Query Monitor matches the criteria
+
+    foreach ( $classes_array as $class ){
+        if ( class_exists( $class ) ) return true;
+    }
+
+    return apply_filters( 'trp_delay_dom_changes_script', false );
+}

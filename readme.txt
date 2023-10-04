@@ -5,7 +5,7 @@ Tags: translate, translation, multilingual, automatic translation, bilingual, fr
 Requires at least: 3.1.0
 Tested up to: 6.3.1
 Requires PHP: 5.6.20
-Stable tag: 2.6.2
+Stable tag: 2.6.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -140,6 +140,13 @@ For more information please check out our [documentation](https://translatepress
 
 
 == Changelog ==
+= 2.6.3 =
+* Improved page loading speed by optimizing code handling gettext
+* Improved page loading speed when Query Monitor plugin is active
+* Fixed internal links not being translated when using Do not translate certain paths feature
+* Fixed trp-gettext wrappings on Query Monitor strings
+* Fixed flag for Hindi and Punjabi (India) languages
+
 = 2.6.2 =
 * Fixed absolute paths not working in the Exclude Paths From Translation option
 * Fixed Pencil icon displayed in wrong positions on WP Forms in the Translation Editor

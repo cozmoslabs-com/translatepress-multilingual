@@ -414,7 +414,9 @@ function trp_dntcp_get_paths() {
     $advanced_settings = get_option( 'trp_advanced_settings', false );
     $paths             = explode( "\n", str_replace( "\r", "", $advanced_settings['translateable_content']['paths'] ) );
 
+    add_filter('trp_home_url', 'trp_dntcp_get_abs_home_url', 10,2 );
     $home_url_no_subdir = home_url();
+    remove_filter('trp_home_url', 'trp_dntcp_get_abs_home_url', 10 );
     $home_urls          = array();
 
     if ( isset( $settings['add-subdirectory-to-default-language'] ) && $settings['add-subdirectory-to-default-language'] == 'yes' )
@@ -430,4 +432,8 @@ function trp_dntcp_get_paths() {
     }
 
     return $paths;
+}
+
+function trp_dntcp_get_abs_home_url($new_url, $abs_home){
+    return $abs_home;
 }
