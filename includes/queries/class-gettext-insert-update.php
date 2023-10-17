@@ -62,6 +62,8 @@ class TRP_Gettext_Insert_Update extends TRP_Query {
 			$place_holders[] = "( '%s', '%s', '%s', '%d', '%d', '%d')";
 		}
 
+        if ( empty( $values ) )
+            return null;
 
 		$query .= implode( ', ', $place_holders );
 		$this->db->query( $this->db->prepare( $query . ' ', $values ) );

@@ -121,7 +121,7 @@
                         <?php esc_html_e( 'Yes' , 'translatepress-multilingual' ); ?>
                     </label>
                     <p class="description">
-                        <?php esc_html_e( 'Block crawlers from triggering automatic translations on your website.', 'translatepress-multilingual' ); ?>
+                        <?php echo wp_kses( __( 'Block crawlers from triggering automatic translations on your website.<br>This will not prevent crawlers from accessing this site\'s pages.', 'translatepress-multilingual' ), array( 'br' => array() ) ); ?>
                     </p>
                 </td>
             </tr>

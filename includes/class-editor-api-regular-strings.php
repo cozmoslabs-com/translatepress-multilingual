@@ -105,8 +105,7 @@ class TRP_Editor_Api_Regular_Strings {
 			}
 		}
 
-		$current_language = isset( $_POST['language'] ) ? sanitize_text_field( $_POST['language'] ) : '';
-
+		$current_language = isset( $_POST['language'] ) && in_array( $_POST['language'], $this->settings['translation-languages'] ) ? $_POST['language'] : ''; /* phpcs:ignore */ /* sanitized by checking against existing languages */
 
 		// necessary in order to obtain all the original strings
 		if ( $this->settings['default-language'] != $current_language ) {

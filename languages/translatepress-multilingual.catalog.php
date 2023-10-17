@@ -320,7 +320,7 @@
 <?php __("Test API credentials", "translatepress-multilingual"); ?>
 <?php __("Click here to check if the selected translation engine is configured correctly.", "translatepress-multilingual"); ?>
 <?php __("Block Crawlers", "translatepress-multilingual"); ?>
-<?php __("Block crawlers from triggering automatic translations on your website.", "translatepress-multilingual"); ?>
+<?php __("Block crawlers from triggering automatic translations on your website.<br>This will not prevent crawlers from accessing this site's pages.", "translatepress-multilingual"); ?>
 <?php __("Automatically Translate Slugs", "translatepress-multilingual"); ?>
 <?php __("Generate automatic translations of slugs for posts, pages and Custom Post Types.<br/>The slugs will be automatically translated starting with the second refresh of each page.", "translatepress-multilingual"); ?>
 <?php __("This feature is available only in the paid version. <a href=\"%1$s\" target=\"_blank\" title=\"%2$s\">%2$s</a> and unlock more premium features.", "translatepress-multilingual"); ?>

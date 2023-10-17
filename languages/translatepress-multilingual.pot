@@ -1301,7 +1301,7 @@ msgid "Block Crawlers"
 msgstr ""
 
 #: partials/machine-translation-settings-page.php:124
-msgid "Block crawlers from triggering automatic translations on your website."
+msgid "Block crawlers from triggering automatic translations on your website.<br>This will not prevent crawlers from accessing this site's pages."
 msgstr ""
 
 #: partials/machine-translation-settings-page.php:130

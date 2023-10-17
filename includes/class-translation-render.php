@@ -1366,6 +1366,10 @@ class TRP_Translation_Render{
      * @return array
      */
     public function process_strings( $translateable_strings, $language_code, $block_type = null, $skip_machine_translating_strings = array() ) {
+        if ( !in_array( $language_code, $this->settings['translation-languages'] ) || $language_code === $this->settings['default-language'] ) {
+            return array();
+        }
+
         if ( !$this->machine_translator ) {
             $trp                      = TRP_Translate_Press::get_trp_instance();
             $this->machine_translator = $trp->get_component( 'machine_translator' );

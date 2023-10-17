@@ -43,7 +43,9 @@ class TRP_Process_Gettext {
 
         //try here to exclude some strings that do not require translation
         $excluded_gettext_strings = array( '', ' ', '&hellip;', '&nbsp;', '&raquo;' );
-        if ( in_array( trim( $text ), $excluded_gettext_strings ) )
+        $trim_filter              = " \t\n\r\0\x0B\xA0�.,/`~!@#\$€£%^&*():;-_=+[]{}\\|?/<>1234567890'\"";
+
+        if ( in_array( trim( $text, $trim_filter ), $excluded_gettext_strings ) || empty( $text ) )
             return $translation;
 
         global $TRP_LANGUAGE;

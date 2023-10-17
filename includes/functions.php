@@ -62,29 +62,46 @@ function trp_utf8ize($mixed) {
  * function that gets the translation for a string with context directly from a .mo file
  * @TODO this was developped firstly for woocommerce so it maybe needs further development.
 */
-function trp_x( $text, $context, $domain, $language ){
+function trp_x( $text, $context, $domain, $language ) {
     $original_text = $text;
+
+    $cache_key = 'trp_x_' . md5( $text . $context . $domain . $language );
+    $new_text  = wp_cache_get( $cache_key );
+    if ( $new_text !== false ) {
+        return $new_text;
+    }
     /* try to find the correct path for the textdomain */
-    $path = trp_find_translation_location_for_domain( $domain, $language );
-
-    if( !empty( $path ) ) {
-
-        $mo_file = trp_cache_get( 'trp_x_' . $domain .'_'. $language );
-
-        if( false === $mo_file ){
-            $mo_file = new MO();
-            $mo_file->import_from_file( $path );
-            wp_cache_set( 'trp_x_' . $domain .'_'. $language, $mo_file );
-        }
-
-        if ( !$mo_file ) return apply_filters('trp_x', $text, $original_text, $context, $domain, $language );
-
-
-        if (!empty($mo_file->entries[$context . '' . $text]))
-            $text = $mo_file->entries[$context . '' . $text]->translations[0];
+    $path_cache_key = 'trp_x_path_' . md5( $domain . $language );
+    $path           = wp_cache_get( $path_cache_key );
+    if ( $path === false ) {
+        $path = trp_find_translation_location_for_domain( $domain, $language );
+        wp_cache_set( $path_cache_key, $path );
     }
 
-    return apply_filters('trp_x', $text, $original_text,  $context, $domain, $language );
+    if ( !empty( $path ) ) {
+
+        $mo_file = trp_cache_get( 'trp_x_' . $domain . '_' . $language );
+
+        if ( false === $mo_file ) {
+            $mo_file = new MO();
+            $mo_file->import_from_file( $path );
+            wp_cache_set( 'trp_x_' . $domain . '_' . $language, $mo_file );
+        }
+
+        if ( !$mo_file ) {
+            $return = apply_filters( 'trp_x', $text, $original_text, $context, $domain, $language );
+            wp_cache_set( $cache_key, $return );
+            return $return;
+        }
+
+        if ( !empty( $mo_file->entries[ $context . '' . $text ] ) ) {
+            $text = $mo_file->entries[ $context . '' . $text ]->translations[0];
+        }
+    }
+
+    $return = apply_filters( 'trp_x', $text, $original_text, $context, $domain, $language );
+    wp_cache_set( $cache_key, $return );
+    return $return;
 }
 
 /**

@@ -78,7 +78,7 @@ class TRP_Query{
      * @return object                   Associative Array of objects with translations where key is original string.
      */
     public function get_existing_translations( $strings_array, $language_code, $block_type = null ){
-        if ( !is_array( $strings_array ) || count ( $strings_array ) == 0 ){
+        if ( !is_array( $strings_array ) || count ( $strings_array ) == 0 || !in_array( $language_code, $this->settings['translation-languages'] ) || $language_code === $this->settings['default-language'] ){
             return array();
         }
         if ( $block_type == null ){
