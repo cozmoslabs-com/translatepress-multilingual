@@ -5,7 +5,7 @@ Tags: translate, translation, multilingual, automatic translation, bilingual, fr
 Requires at least: 3.1.0
 Tested up to: 6.3.2
 Requires PHP: 5.6.20
-Stable tag: 2.6.4
+Stable tag: 2.6.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -140,6 +140,10 @@ For more information please check out our [documentation](https://translatepress
 
 
 == Changelog ==
+= 2.6.5 =
+* Fixed some cases of unnecessarily detecting text inside script tags
+* Fixed compatibility code with Oxygen
+
 = 2.6.4 =
 * Improved page loading speed when WooCommerce is active
 * Fixed some cases of errors on function insert_gettext_string

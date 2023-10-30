@@ -942,12 +942,13 @@ if( function_exists('ct_is_show_builder') ) {
     /**
      * Disable TRP when the Oxygen Builder is being loaded
      */
-    add_filter( 'trp_stop_translating_page', 'trp_oxygen_disable_trp_in_builder');
-    function trp_oxygen_disable_trp_in_builder(){
+    add_filter( 'trp_stop_translating_page', 'trp_oxygen_disable_trp_in_builder', 10, 2);
+    function trp_oxygen_disable_trp_in_builder($bool, $output){
 
         if( defined( 'SHOW_CT_BUILDER' ) )
             return true;
 
+        return $bool;
     }
 
     /**

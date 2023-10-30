@@ -696,6 +696,7 @@ class TRP_Translation_Render{
                 && strpos($row->outertext,'[vc_') === false
                 && !$this->trp_is_numeric($trimmed_string)
                 && !preg_match('/^\d+%$/',$trimmed_string)
+                && $row->find_ancestor_tag( 'script' ) === null // sometimes the script has an html tree that gets detected, so script is not a direct parent
                 && !$this->has_ancestor_attribute( $row, $no_translate_attribute ) )
             {
                 $string_count = array_push( $translateable_strings, $trimmed_string );
@@ -720,6 +721,7 @@ class TRP_Translation_Render{
                 && !preg_match('/^\d+%$/',$trimmed_string)
                 && !$this->has_ancestor_attribute( $row, $no_translate_attribute )
                 && !$this->has_ancestor_class( $row, 'translation-block')
+                && $row->find_ancestor_tag( 'script' ) === null // sometimes the script has an html tree that gets detected, so script is not a direct parent
                 && ( !$ignore_cdata || ( strpos($trimmed_string, '<![CDATA[') !== 0 && strpos($trimmed_string, '&lt;![CDATA[') !== 0  ) )
                 && (strpos($trimmed_string, 'BEGIN:VCALENDAR') !== 0)
                 && !$this->contains_substrings($trimmed_string, $skip_strings_containing_key_terms ) )
