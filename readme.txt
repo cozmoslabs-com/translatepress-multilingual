@@ -3,9 +3,9 @@ Contributors: cozmoslabs, razvan.mo, madalin.ungureanu, sareiodata, cristophor
 Donate link: https://www.translatepress.com/
 Tags: translate, translation, multilingual, automatic translation, bilingual, front-end translation, google translate, language
 Requires at least: 3.1.0
-Tested up to: 6.3.2
+Tested up to: 6.4.1
 Requires PHP: 5.6.20
-Stable tag: 2.6.5
+Stable tag: 2.6.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -140,6 +140,11 @@ For more information please check out our [documentation](https://translatepress
 
 
 == Changelog ==
+= 2.6.6 =
+* Allow translation of comments and categories in REST API
+* Improved compatibility with Complianz plugin
+* Improved rules for creating translation blocks
+
 = 2.6.5 =
 * Fixed some cases of unnecessarily detecting text inside script tags
 * Fixed compatibility code with Oxygen

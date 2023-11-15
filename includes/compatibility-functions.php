@@ -2003,3 +2003,16 @@ function trp_exclude_query_monitor_strings( $bool, $translation, $text, $domain 
 
     return $bool;
 }
+
+/**
+ * Compatibility with Complianz plugin blocking trp_data script
+ */
+// Whitelisting inline script for Complianz
+add_filter ( 'cmplz_service_category', 'trp_cmplz_whitelist_script', 10 , 3 );
+function trp_cmplz_whitelist_script( $category, $total_match, $found ){
+    if ( $found && false !== strpos( $total_match, 'trp-dynamic-translator-js-extra' ) ) {
+        $category = 'functional'; // add cmplz-script for Marketing and cmplz-stats for Statistics
+    }
+
+    return $category;
+}

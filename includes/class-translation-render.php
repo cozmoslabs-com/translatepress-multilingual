@@ -346,6 +346,9 @@ class TRP_Translation_Render{
      */
     public function handle_rest_api_translations($response){
     	if ( isset( $response->data ) ) {
+            if ( isset( $response->data['name'] ) ){
+                $response->data['name'] = $this->translate_page( $response->data['name'] );
+            }
 		    if ( isset( $response->data['title'] ) && isset( $response->data['title']['rendered'] ) ) {
 			    $response->data['title']['rendered'] = $this->translate_page( $response->data['title']['rendered'] );
 		    }
@@ -363,7 +366,7 @@ class TRP_Translation_Render{
 	 * Apply translation filters for REST API response
 	 */
 	public function add_callbacks_for_translating_rest_api(){
-		$post_types = get_post_types();
+        $post_types = array_merge(["comment", "category"],get_post_types());
 		foreach ( $post_types as $post_type ) {
 			add_filter( 'rest_prepare_'. $post_type, array( $this, 'handle_rest_api_translations' ) );
 		}

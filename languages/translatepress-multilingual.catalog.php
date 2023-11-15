@@ -167,7 +167,7 @@
 <?php __("However, you can still use TranslatePress to <strong style=\"background: #f5fb9d;\">modify gettext strings</strong> available in your page.", "translatepress-multilingual"); ?>
 <?php __("Strings that are user-created cannot be modified, only those from themes and plugins.", "translatepress-multilingual"); ?>
 <?php __("Extra Translation Features", "translatepress-multilingual"); ?>
-<?php __("Support for 221 Extra Languages", "translatepress-multilingual"); ?>
+<?php __("Support for 130+ Extra Languages", "translatepress-multilingual"); ?>
 <?php __("Yoast SEO support", "translatepress-multilingual"); ?>
 <?php __("Translate SEO Title, Description, Slug", "translatepress-multilingual"); ?>
 <?php __("Publish only when translation is complete", "translatepress-multilingual"); ?>

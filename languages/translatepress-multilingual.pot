@@ -686,7 +686,7 @@ msgid "Extra Translation Features"
 msgstr ""
 
 #: includes/class-translation-manager.php:158
-msgid "Support for 221 Extra Languages"
+msgid "Support for 130+ Extra Languages"
 msgstr ""
 
 #: includes/class-translation-manager.php:159

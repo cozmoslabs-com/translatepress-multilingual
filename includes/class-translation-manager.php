@@ -82,7 +82,7 @@ class TRP_Translation_Manager {
         $localized_text = $this->string_groups();
 
         $merge_rules = array(
-            'top_parents'           => array( 'p', 'div', 'li', 'ol', 'ul', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'h7', 'body', 'footer', 'article', 'main', 'iframe', 'section', 'figure', 'figcaption', 'blockquote', 'cite', 'tr', 'td', 'th', 'table', 'tbody', 'thead', 'tfoot', 'form' ),
+            'top_parents'           => array( 'p', 'div', 'li', 'ol', 'ul', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'h7', 'body', 'footer', 'article', 'main', 'iframe', 'section', 'figure', 'figcaption', 'blockquote', 'cite', 'tr', 'td', 'th', 'table', 'tbody', 'thead', 'tfoot', 'form', 'label' ),
             'self_object_type'      => array( 'translate-press' ),
             'incompatible_siblings' => array( '[data-trpgettextoriginal]', '[data-trp-node-group="' . $localized_text['dynamicstrings'] . '"]' )
         );
@@ -155,7 +155,7 @@ class TRP_Translation_Manager {
                 'extra_lang_row3'                   => esc_html__( 'Strings that are user-created cannot be modified, only those from themes and plugins.', 'translatepress-multilingual' ),
                 //Pro version upselling
                 'extra_upsell_title'                => esc_html__( 'Extra Translation Features', 'translatepress-multilingual' ),
-                'extra_upsell_row1'                 => esc_html__( 'Support for 221 Extra Languages', 'translatepress-multilingual' ),
+                'extra_upsell_row1'                 => esc_html__( 'Support for 130+ Extra Languages', 'translatepress-multilingual' ),
                 'extra_upsell_row2'                 => esc_html__( 'Yoast SEO support', 'translatepress-multilingual' ),
                 'extra_upsell_row3'                 => esc_html__( 'Translate SEO Title, Description, Slug', 'translatepress-multilingual' ),
                 'extra_upsell_row4'                 => esc_html__( 'Publish only when translation is complete', 'translatepress-multilingual' ),
