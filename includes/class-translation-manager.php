@@ -169,7 +169,12 @@ class TRP_Translation_Manager {
                 'translation_memory_click_to_copy'  => esc_html__( 'Click to Copy', 'translatepress-multilingual' ),
                 //human or machine translation tooltips
                 'human_translation'                 => esc_html__('Human Translation', 'translatepress-multilingual'),
-                'machine_translation'               => esc_html__('Machine Translation', 'translatepress-multilingual')
+                'machine_translation'               => esc_html__('Machine Translation', 'translatepress-multilingual'),
+                'percentage_bar'                    => array(
+                    'tooltip_text_default' => esc_html__( 'Text on this page is %s% translated into all languages.', 'translatepress-multilingual'),
+                    'tooltip_text_general' => esc_html__( '%1$s% of text on this page is translated into %2$s.', 'translatepress-multilingual'),
+                    'minibar_text'         => esc_html__('This page is %1$s% translated into %2$s.', 'translatepress-multilingual')
+                )
             );
     }
 

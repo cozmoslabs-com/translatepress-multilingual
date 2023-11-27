@@ -180,6 +180,9 @@
 <?php __("Click to Copy", "translatepress-multilingual"); ?>
 <?php __("Human Translation", "translatepress-multilingual"); ?>
 <?php __("Machine Translation", "translatepress-multilingual"); ?>
+<?php __("Text on this page is %s% translated into all languages.", "translatepress-multilingual"); ?>
+<?php __("%1$s% of text on this page is translated into %2$s.", "translatepress-multilingual"); ?>
+<?php __("This page is %1$s% translated into %2$s.", "translatepress-multilingual"); ?>
 <?php __("Hover any text on the page, click %s,<br> then modify the translation in the sidebar.", "translatepress-multilingual"); ?>
 <?php __("Don't forget to Save Translation. Use keyboard shortcut CTRL(⌘) + S", "translatepress-multilingual"); ?>
 <?php __("Switch language to see the translation changes directly on the page.", "translatepress-multilingual"); ?>
@@ -294,6 +297,8 @@
 <?php __("Capture more user information on the registration form with the help of Profile Builder's custom user profile fields and/or add an Email Confirmation process to verify your customers accounts.", "translatepress-multilingual"); ?>
 <?php __("Paid Member Subscriptions", "translatepress-multilingual"); ?>
 <?php __("Accept user payments, create subscription plans and restrict content on your membership site.", "translatepress-multilingual"); ?>
+<?php __("WP Webhooks Automator", "translatepress-multilingual"); ?>
+<?php __("Create no-code automations and workflows on your WordPress site. Easily connect your plugins, sites and apps together.", "translatepress-multilingual"); ?>
 <?php __("TranslatePress Advanced Settings", "translatepress-multilingual"); ?>
 <?php __("Save Changes", "translatepress-multilingual"); ?>
 <?php __("TranslatePress Errors", "translatepress-multilingual"); ?>
@@ -483,6 +488,7 @@
 <?php __("Adds an additional tab on the String Translation interface that allows editing translations of user-inputted strings.", "translatepress-multilingual"); ?>
 <?php __("<a href=\"%s\">Click here</a> to access the database optimization tool.", "translatepress-multilingual"); ?>
 <?php __("It helps remove possible duplicate translations, clear unnecessary data and repair possible metadata issues.", "translatepress-multilingual"); ?>
+<?php __("<a href=\"%s\" target=\"_blank\">Here</a> you can observe the last 5 SQL errors relevant to TranslatePress if they exist.", "translatepress-multilingual"); ?>
 <?php __("Troubleshooting", "translatepress-multilingual"); ?>
 <?php __("Exclude strings", "translatepress-multilingual"); ?>
 <?php __("Debug", "translatepress-multilingual"); ?>

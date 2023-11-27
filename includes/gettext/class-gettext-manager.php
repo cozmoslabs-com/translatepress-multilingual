@@ -219,8 +219,11 @@ class TRP_Gettext_Manager {
 				$referer_uri = wp_unslash( esc_url_raw( $_REQUEST['_wp_http_referer'] ) );
 				$req_uri     = $referer_uri;
 
-				$home_path       = trim( parse_url( $url_converter->get_abs_home(), PHP_URL_PATH ), '/' );
-				$home_path_regex = sprintf( '|^%s|i', preg_quote( $home_path, '|' ) );
+                // req_uri is a relative path which might wrongfully contain the subdirectory (in case WordPress is installed in a subdirectory)
+                // We remove that part from req_uri, in case it's found
+                $parsed_home_path = parse_url( $url_converter->get_abs_home(), PHP_URL_PATH );
+				$home_path        = trim( $parsed_home_path ?: '', '/' );
+				$home_path_regex  = sprintf( '|^%s|i', preg_quote( $home_path, '|' ) );
 
 				// Trim path info from the end and the leading home path from the front.
 				$req_uri = ltrim( $req_uri, '/' );

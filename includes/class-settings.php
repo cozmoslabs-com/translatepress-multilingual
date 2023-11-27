@@ -163,7 +163,7 @@ class TRP_Settings{
         $active_plugin = __('Active', 'translatepress-multilingual');
         $inactive_plugin = __('Install & Activate', 'translatepress-multilingual');
 
-        $plugins = array( 'pb', 'pms' );
+        $plugins = array( 'pb', 'pms', 'wha' );
         $plugin_settings = array();
         foreach($plugins as $plugin ){
             $plugin_settings[$plugin] = array();

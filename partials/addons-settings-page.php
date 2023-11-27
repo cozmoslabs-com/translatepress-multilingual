@@ -104,6 +104,16 @@
             'doc_url' => 'https://www.cozmoslabs.com/wordpress-paid-member-subscriptions/?utm_source=tpbackend&utm_medium=clientsite&utm_content=tp-addons-page&utm_campaign=TPPMS',
             'disabled' => $plugin_settings['pms']['disabled'],
             'install_button' =>  $plugin_settings['pms']['install_button']
+        ),
+        array( 'slug' => 'wp-webhooks/wp-webhooks.php',
+            'short-slug' => 'wha',
+            'type' => 'plugin',
+            'name' => __( 'WP Webhooks Automator', 'translatepress-multilingual' ),
+            'description' => __( 'Create no-code automations and workflows on your WordPress site. Easily connect your plugins, sites and apps together.', 'translatepress-multilingual' ),
+            'icon' => 'wha_logo.png',
+            'doc_url' => 'https://wp-webhooks.com/integrations/?utm_source=tpbackend&utm_medium=clientsite&utm_content=tp-addons-page&utm_campaign=TPWPW',
+            'disabled' => $plugin_settings['wha']['disabled'],
+            'install_button' =>  $plugin_settings['wha']['install_button']
         )
     );
     $trp_addons_listing->add_section();

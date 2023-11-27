@@ -5,7 +5,7 @@ Tags: translate, translation, multilingual, automatic translation, bilingual, fr
 Requires at least: 3.1.0
 Tested up to: 6.4.1
 Requires PHP: 5.6.20
-Stable tag: 2.6.6
+Stable tag: 2.6.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -140,6 +140,15 @@ For more information please check out our [documentation](https://translatepress
 
 
 == Changelog ==
+= 2.6.7 =
+* Added new feature that displays translation percentage for current page in Translation Editor
+* Added RSS Feed support for translating title, content and excerpt
+* Added support for Duplicate Page plugin resolving post slug translation conflict
+* Added compatibility with Fluent Forms
+* Added compatibility with WooCommerce Bookings plugin
+* Added WP Webhooks Automator under recommended plugins
+* Fixed deprecated warning in PHP 8.1
+
 = 2.6.6 =
 * Allow translation of comments and categories in REST API
 * Improved compatibility with Complianz plugin

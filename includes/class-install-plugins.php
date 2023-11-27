@@ -17,6 +17,13 @@ class TRP_Install_Plugins {
                 ),
                 'install_slug'   => 'paid-member-subscriptions/index.php',
                 'plugin_zip' => 'https://downloads.wordpress.org/plugin/paid-member-subscriptions.zip'
+            ),
+            'wha' => array(
+                'all_slugs'    => array(
+                    'wp-webhooks/wp-webhooks.php'
+                ),
+                'install_slug' => 'wp-webhooks/wp-webhooks.php',
+                'plugin_zip'   => 'https://downloads.wordpress.org/plugin/wp-webhooks.3.3.1.zip'
             )
         );
 

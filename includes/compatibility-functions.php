@@ -1993,6 +1993,35 @@ function trp_stop_automatic_translation_for_certain_post_type_base_slugs( $bool,
 }
 
 /**
+ * Compatibility with Duplicate Page plugin
+ */
+
+if (class_exists("duplicate_page")) {
+
+    add_action('save_post', 'trp_add_hook_for_delete', 10, 1);
+}
+
+function trp_add_hook_for_delete( $post_id )
+{
+    global $trp_post_id_for_deleting_duplicate_posts_slugs_from_db;
+
+    if (did_action('admin_action_dt_duplicate_post_as_draft')) {
+        $trp_post_id_for_deleting_duplicate_posts_slugs_from_db = $post_id;
+        add_action('shutdown', 'trp_delete_slug_translation_from_duplicated_pages' );
+    }
+}
+function trp_delete_slug_translation_from_duplicated_pages() {
+    global $trp_post_id_for_deleting_duplicate_posts_slugs_from_db;
+    global $wpdb;
+
+    $sql = $wpdb->prepare("DELETE FROM $wpdb->postmeta WHERE post_id = %d AND (meta_key LIKE %s OR meta_key LIKE %s);", $trp_post_id_for_deleting_duplicate_posts_slugs_from_db, '%'. $wpdb->esc_like('trp_automatically_translated_slug') .'%', '%'. $wpdb->esc_like('trp_translated_slug') .'%');
+
+    $wpdb->query( $sql );
+    
+    unset( $GLOBALS['trp_post_id_for_deleting_duplicate_posts_slugs_from_db'] );
+
+}
+/**
  * Exclude Query Monitor gettext strings from being processed
  */
 if ( class_exists( 'QueryMonitor' ) ) {
@@ -2016,3 +2045,60 @@ function trp_cmplz_whitelist_script( $category, $total_match, $found ){
 
     return $category;
 }
+
+/**
+ * Compatibility with Fluent Forms
+ * Do not Translate Fluent Forms ajax submit calls for uploaded media
+ */
+add_filter('trp_stop_translating_page', 'trp_do_not_translate_fluent_form_submit', 1000000, 2);
+function trp_do_not_translate_fluent_form_submit($translate, $output){
+    if ( isset( $_POST['action'] )  && $_POST['action'] == 'fluentform_file_upload'){
+        return true;
+    }
+
+    return $translate;
+}
+
+/**
+ * Do not Translate WooCommerce Bookings
+ */
+add_filter('trp_stop_translating_page', 'trp_do_not_translate_woo_bookings_cost_calculator', 10, 2);
+function trp_do_not_translate_woo_bookings_cost_calculator($translate, $output){
+    if ( isset( $_POST['action'] )  && $_POST['action'] == 'wc_bookings_calculate_costs'){
+        return true;
+    }
+    return $translate;
+}
+
+add_action('init', 'trp_woo_bookings_gettext_filter');
+function trp_woo_bookings_gettext_filter(){
+    if ( isset( $_POST['action'] )  && $_POST['action'] == 'wc_bookings_calculate_costs'){
+        add_filter('gettext', 'trp_woo_bookings_exclude_gettext_strings', 1000, 3 );
+    }
+}
+
+function trp_woo_bookings_exclude_gettext_strings($translation, $text, $domain){
+    if ( isset( $_POST['action'] )  && $_POST['action'] == 'wc_bookings_calculate_costs' ){
+        return TRP_Translation_Manager::strip_gettext_tags( $translation );
+    }
+    return $translation;
+}
+
+/**
+ * Add support for the content feed and excerpt feed so they get translated.
+ * They can be manually translated from String Translation -> Regular.
+ * For most contents, they will work with content the client already sees in the front-end.
+ */
+add_filter( 'the_excerpt_rss', 'trp_translate_the_excerpt_rss', 10, 1);
+function trp_translate_the_excerpt_rss( $output ){
+    $trp = TRP_Translate_Press::get_trp_instance();
+    $translation_render = $trp->get_component( 'translation_render' );
+    return $translation_render->translate_page($output);
+};
+
+add_filter( 'the_content_feed', 'trp_translate_the_content_feed', 10, 2);
+function trp_translate_the_content_feed( $content, $feed_type ){
+    $trp = TRP_Translate_Press::get_trp_instance();
+    $translation_render = $trp->get_component( 'translation_render' );
+    return $translation_render->translate_page($content);
+};
