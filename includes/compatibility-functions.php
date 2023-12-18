@@ -717,7 +717,9 @@ function trp_woo_fondy_payment_gateway_exclude_gettext_strings($translation, $te
 }
 
 /**
- * Compatibility with Woocommerce Product Filters plugin
+ * Compatibility with Woocommerce Product Filters plugin, unknown author
+ * This is NOT about the plugin made by WBM https://woobewoo.com/, nor by barn2.com
+ *
  * They stop the buffering at priority -150 and that leaves #trpst style tags before we get to remove them
  *
  * The caveat to removing or adding a foreign filter is that it can be done via
@@ -725,6 +727,7 @@ function trp_woo_fondy_payment_gateway_exclude_gettext_strings($translation, $te
  *
  * In this case we obtained access to global objects set by the WCPF plugin
  * and their public methods.
+ *
  */
 
 add_action( 'init', 'trp_woo_product_filters', 10 );
@@ -739,6 +742,22 @@ function trp_woo_product_filters(){
 		$hook_manager->add_action( 'shutdown', 'end_of_buffering', 100 );
 	}
 }
+
+/**
+ * Compatibility with WooCommerce Product Filters by barn2
+ * https://barn2.com/wordpress-plugins/woocommerce-product-filters/
+ *
+ * Set chunk size to 0 because the result of the wcf_fetch_data is HTML instead of JSON, causing errors in browser console
+ */
+if ( class_exists( 'Barn2\Plugin\WC_Filters\Plugin_Factory' ) ) {
+    add_filter( "trp_output_buffer_chunk_size", "trp_set_chunk_size_to_zero", 10, 1 );
+}
+function trp_set_chunk_size_to_zero( $chunk_size ) {
+    $chunk_size = 0;
+
+    return $chunk_size;
+}
+
 
 /**
  * Compatibility with Elementor Popups Links

@@ -909,59 +909,59 @@ msgstr ""
 msgid "Update to Pro"
 msgstr ""
 
-#: includes/class-translation-render.php:154
+#: includes/class-translation-render.php:155
 msgid "Description"
 msgstr ""
 
-#: includes/class-translation-render.php:160
+#: includes/class-translation-render.php:161
 msgid "OG Title"
 msgstr ""
 
-#: includes/class-translation-render.php:166
+#: includes/class-translation-render.php:167
 msgid "OG Site Name"
 msgstr ""
 
-#: includes/class-translation-render.php:172
+#: includes/class-translation-render.php:173
 msgid "OG Description"
 msgstr ""
 
-#: includes/class-translation-render.php:178
+#: includes/class-translation-render.php:179
 msgid "OG Image Alt"
 msgstr ""
 
-#: includes/class-translation-render.php:184
+#: includes/class-translation-render.php:185
 msgid "Twitter Title"
 msgstr ""
 
-#: includes/class-translation-render.php:190
+#: includes/class-translation-render.php:191
 msgid "Twitter Description"
 msgstr ""
 
-#: includes/class-translation-render.php:196
+#: includes/class-translation-render.php:197
 msgid "Twitter Image Alt"
 msgstr ""
 
-#: includes/class-translation-render.php:200
+#: includes/class-translation-render.php:201
 msgid "Page Title"
 msgstr ""
 
-#: includes/class-translation-render.php:206
+#: includes/class-translation-render.php:207
 msgid "Dublin Core Title"
 msgstr ""
 
-#: includes/class-translation-render.php:212
+#: includes/class-translation-render.php:213
 msgid "Dublin Core Description"
 msgstr ""
 
-#: includes/class-translation-render.php:218
+#: includes/class-translation-render.php:219
 msgid "OG Image"
 msgstr ""
 
-#: includes/class-translation-render.php:224
+#: includes/class-translation-render.php:225
 msgid "OG Image Secure URL"
 msgstr ""
 
-#: includes/class-translation-render.php:230
+#: includes/class-translation-render.php:231
 msgid "Twitter Image"
 msgstr ""
 
@@ -1081,7 +1081,7 @@ msgstr ""
 msgid "<strong>TranslatePress</strong> requires <strong><a href=\"http://php.net/manual/en/book.mbstring.php\">Multibyte String PHP library</a></strong>. Please contact your server administrator to install it on your server."
 msgstr ""
 
-#: includes/compatibility-functions.php:1656
+#: includes/compatibility-functions.php:1675
 msgid "Detected long query limitation on WPEngine hosting. Some large pages may appear untranslated. You can remove limitation by adding the following to your site’s wp-config.php: define( 'WPE_GOVERNOR', false ); "
 msgstr ""
 

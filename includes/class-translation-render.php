@@ -45,7 +45,8 @@ class TRP_Translation_Render{
             mb_http_output("UTF-8");
             if ( $TRP_LANGUAGE == $this->settings['default-language'] && !trp_is_translation_editor() ) {
                 // on default language when we are not in editor we just need to clear any trp tags that could still be present and handle links for special situation
-                $chunk_size = ($this->handle_custom_links_for_default_language() ) ? null : 4096;
+                $chunk_size = ($this->handle_custom_links_for_default_language() ) ? 0 : 4096;
+                $chunk_size = apply_filters("trp_output_buffer_chunk_size", $chunk_size);
                 ob_start(array( $this, 'render_default_language' ), $chunk_size);
                 $trp_output_buffer_started = true;
             } else {

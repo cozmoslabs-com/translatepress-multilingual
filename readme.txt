@@ -5,7 +5,7 @@ Tags: translate, translation, multilingual, automatic translation, bilingual, fr
 Requires at least: 3.1.0
 Tested up to: 6.4.2
 Requires PHP: 5.6.20
-Stable tag: 2.6.8
+Stable tag: 2.6.9
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -140,6 +140,9 @@ For more information please check out our [documentation](https://translatepress
 
 
 == Changelog ==
+= 2.6.9 =
+* Added compatibility with WooCommerce Product Filters by barn2
+
 = 2.6.8 =
 * Fixed relative urls with anchor links on translated pages
 * Fixed searching in translated languages on sites with specific plugins combination
