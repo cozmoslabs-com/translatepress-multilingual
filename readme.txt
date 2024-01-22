@@ -5,7 +5,7 @@ Tags: translate, translation, multilingual, automatic translation, bilingual, fr
 Requires at least: 3.1.0
 Tested up to: 6.4.2
 Requires PHP: 5.6.20
-Stable tag: 2.6.9
+Stable tag: 2.7.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -140,6 +140,11 @@ For more information please check out our [documentation](https://translatepress
 
 
 == Changelog ==
+= 2.7.0 =
+* Fixed issue with Exclude only certain paths advanced option on subfolder path installs
+* Improved Error Manager by outputting the entire failed query
+* Improved SQL error handling in trp-ajax calls 
+
 = 2.6.9 =
 * Added compatibility with WooCommerce Product Filters by barn2
 
