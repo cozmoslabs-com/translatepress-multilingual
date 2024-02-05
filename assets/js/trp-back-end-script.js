@@ -626,6 +626,8 @@ jQuery(document).ready(function (e) {
 
         jQuery( '.trp-email-course .trp-email-course__error' ).removeClass( 'visible' )
 
+        jQuery('.trp-email-course input[type="submit"]').addClass( 'disabled' )
+
         var email = jQuery( '.trp-email-course input[name="trp_email_course_email"]').val()
 
         if ( !trp_validateEmail( email ) ){

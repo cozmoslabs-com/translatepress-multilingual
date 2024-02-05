@@ -779,6 +779,10 @@ Advanced Setting Page
     justify-content: space-between;
 }
 
+.trp-optin-page__bottom a.disabled, .trp-email-course__form .button-primary.disabled {
+    pointer-events: none;
+}
+
 .trp-optin-page__footer {
     background-color: #f2f2f2;
     border-bottom-right-radius: 8px;

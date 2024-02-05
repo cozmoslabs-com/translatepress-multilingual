@@ -100,7 +100,7 @@ class TRP_Language_Switcher{
         if ( $this->url_converter->is_sitemap_path() )
             return;
 
-        $link_to_redirect = apply_filters( 'trp_link_to_redirect_to', $this->url_converter->get_url_for_language( $TRP_NEEDED_LANGUAGE, null, '' ), $TRP_NEEDED_LANGUAGE );
+        $link_to_redirect = sanitize_url(apply_filters( 'trp_link_to_redirect_to', $this->url_converter->get_url_for_language( $TRP_NEEDED_LANGUAGE, null, '' ), $TRP_NEEDED_LANGUAGE ));
 
         if( isset( $this->settings['add-subdirectory-to-default-language'] ) && $this->settings['add-subdirectory-to-default-language'] === 'yes' && isset( $this->settings['default-language'] ) && $this->settings['default-language'] === $TRP_NEEDED_LANGUAGE ) {
             $status = apply_filters( 'trp_redirect_status', 301, 'redirect_to_add_subdirectory_to_default_language' );
@@ -322,7 +322,7 @@ class TRP_Language_Switcher{
                 $floater_position = 'bottom';
                 if ( !empty( $this->settings['floater-position'] ) && strpos( $this->settings['floater-position'], 'top' ) !== false  ){
 	                  echo $powered_by; // phpcs:ignore
-	                  echo '<div class="trp-language-wrap" style="padding: 10px;">';
+	                  echo '<div class="trp-language-wrap trp-language-wrap-top">';
 	                  if ( !empty( $disabled_language ) ){
                           echo $disabled_language;  // phpcs:ignore
                       }
@@ -330,7 +330,7 @@ class TRP_Language_Switcher{
                 }
 
                 if ( $floater_position == 'bottom' ){
-                    echo '<div class="trp-language-wrap"  style="padding: 11px;">';
+                    echo '<div class="trp-language-wrap trp-language-wrap-bottom">';
 	              }
 
                 foreach( $other_languages as $code => $name ) {
@@ -526,7 +526,7 @@ class TRP_Language_Switcher{
 
                 $language_names = $this->trp_languages->get_language_names( array( $language_code ) );
                 $language_name = $language_names[$language_code];
-	            $items[$key]->url = $this->url_converter->get_url_for_language( $language_code );
+	            $items[$key]->url = esc_url( $this->url_converter->get_url_for_language( $language_code ) );
 
 	            // Output of simple text only menu, for compatibility with certain themes/plugins
                 if ($menu_settings["no_html"] ){

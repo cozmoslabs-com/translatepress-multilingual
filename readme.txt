@@ -3,9 +3,9 @@ Contributors: cozmoslabs, razvan.mo, madalin.ungureanu, sareiodata, cristophor
 Donate link: https://www.translatepress.com/
 Tags: translate, translation, multilingual, automatic translation, bilingual, front-end translation, google translate, language
 Requires at least: 3.1.0
-Tested up to: 6.4.2
+Tested up to: 6.4.3
 Requires PHP: 5.6.20
-Stable tag: 2.7.0
+Stable tag: 2.7.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -140,6 +140,11 @@ For more information please check out our [documentation](https://translatepress
 
 
 == Changelog ==
+= 2.7.1 =
+* Fixed potential security issue in the language switcher
+* Fixed floating language switcher appearance when displaying only flags on sites with many languages
+* Minor UI tweaks in TranslatePress settings
+
 = 2.7.0 =
 * Fixed issue with Exclude only certain paths advanced option on subfolder path installs
 * Improved Error Manager by outputting the entire failed query
