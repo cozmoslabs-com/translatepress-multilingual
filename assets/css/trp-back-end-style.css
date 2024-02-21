@@ -645,6 +645,28 @@ Advanced Setting Page
     border-color: inherit;
 }
 
+@media only screen and (max-width: 1920px) {
+
+    .trp_advanced_settings_align{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .trp_advanced_option_name{
+        min-width: 15%;
+    }
+
+    .trp_advanced_flex_box {
+        display: flex;
+        flex-direction: initial;
+    }
+
+    .trp-adst-radio label{
+        margin-bottom: 6px;
+    }
+
+}
+
 @media only screen and (max-width: 783px) {
     body{
         min-width: 783px;
