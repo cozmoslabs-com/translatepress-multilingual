@@ -109,7 +109,7 @@ TranslatePress - Multilingual plugin works out of the box with WooCommerce, cust
 
 = How is it different from other multilingual & translation plugins like WPML or Polylang? =
 
-TranslatePress is easier to use and more intuitive altogether. No more switching between the editor, string translation interfaces or badly translated plugins. You can now translate the full page content directly from the front-end. This makes TranslatePress a great alternative to plugins like Polylang and WPML.
+TranslatePress is easier to use and more intuitive altogether. No more switching between the editor, string translation interfaces or badly translated plugins. You can now translate the full page content directly from the front-end. This makes TranslatePress a great alternative to plugins like Polylang and WPML. For more details check out this [WordPress Translation Plugin Comparison: TranslatePress vs WPML vs Polylang vs Gtranslate](https://translatepress.com/wordpress-translation-plugin-comparison-translatepress-vs-free-and-paid-alternatives/translate-woocommerce-products-translatepress/?utm_source=wp.org&utm_medium=tp-description-page&utm_campaign=TPFree).
 
 = How do I start to translate my WordPress site? =
 
