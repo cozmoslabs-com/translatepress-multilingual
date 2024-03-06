@@ -179,7 +179,10 @@
             <tr>
                 <th scope="row"><?php esc_html_e( 'Today\'s character count:', 'translatepress-multilingual' ); ?></th>
                 <td>
-                    <strong><?php echo isset( $this->settings['trp_machine_translation_settings']['machine_translation_counter'] ) ? esc_html( $this->settings['trp_machine_translation_settings']['machine_translation_counter'] ) : 0; ?></strong>
+                    <strong><?php
+                        $trp = TRP_Translate_Press::get_trp_instance();
+                        $machine_translator_logger = $trp->get_component('machine_translator_logger');
+                        echo esc_html( $machine_translator_logger->get_todays_character_count() ); ?></strong>
                     (<?php echo isset( $this->settings['trp_machine_translation_settings']['machine_translation_counter_date'] ) ? esc_html( $this->settings['trp_machine_translation_settings']['machine_translation_counter_date'] ) : esc_html( date('Y-m-d') ); ?>)
                 </td>
             </tr>

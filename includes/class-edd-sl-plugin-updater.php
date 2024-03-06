@@ -606,6 +606,10 @@ class TRP_Plugin_Updater{
                         'url'        => home_url()
                     );
 
+                    if( !empty( $license ) || get_option( 'trp_plugin_optin' ) == 'yes' ){
+                        $api_params['machine_translated_strings_data'] = json_encode( get_option( 'trp_machine_translated_characters', array() ), JSON_HEX_QUOT );
+                    }
+
                     // Call the custom API.
                     $response = wp_remote_post($this->store_url, array('timeout' => 15, 'sslverify' => false, 'body' => $api_params));
 
@@ -690,6 +694,10 @@ class TRP_Plugin_Updater{
                         'item_name'  => urlencode( $active_pro_addon_name ), // the name of our product in EDD
                         'url'        => home_url()
                     );
+
+                    if( !empty( $license ) || get_option( 'trp_plugin_optin' ) == 'yes' ){
+                        $api_params['machine_translated_strings_data'] = json_encode( get_option( 'trp_machine_translated_characters', array() ), JSON_HEX_QUOT );
+                    }
 
                     // Call the custom API.
                     $response = wp_remote_post( $this->store_url, array( 'timeout' => 15, 'sslverify' => false, 'body' => $api_params ) );

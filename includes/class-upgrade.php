@@ -91,6 +91,9 @@ class TRP_Upgrade {
             if( version_compare( $stored_database_version, '2.2.2', '<=' ) ){
                 $this->migrate_auto_translate_slug_to_automatic_translation();
             }
+            if( version_compare( $stored_database_version, '2.7.2', '<=' ) ){
+                $this->migrate_machine_translation_counter();
+            }
 
             /**
              * Write an upgrading function above this comment to be executed only once: while updating plugin to a higher version.
@@ -1039,6 +1042,19 @@ class TRP_Upgrade {
         }
 
         return true;
+    }
+
+    /**
+     * Migrate machine_translation_counter to a standalone row in the wp_options.
+     * It's necessary for running atomic queries on it
+     *
+     * @return void
+     */
+    public function migrate_machine_translation_counter() {
+        $mt_settings_option = get_option( 'trp_machine_translation_settings', null );
+        if ( $mt_settings_option && isset( $mt_settings_option['machine_translation_counter'] ) ) {
+            update_option( 'trp_machine_translation_counter', $mt_settings_option['machine_translation_counter'] );
+        }
     }
 
 }

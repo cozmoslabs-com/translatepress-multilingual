@@ -224,6 +224,8 @@
 <?php __("The SEO Pack add-on is available with ALL premium versions of the plugin.", "translatepress-multilingual"); ?>
 <?php __("Update to Pro", "translatepress-multilingual"); ?>
 <?php __("Description", "translatepress-multilingual"); ?>
+<?php __("Article Section", "translatepress-multilingual"); ?>
+<?php __("Article Tag", "translatepress-multilingual"); ?>
 <?php __("OG Title", "translatepress-multilingual"); ?>
 <?php __("OG Site Name", "translatepress-multilingual"); ?>
 <?php __("OG Description", "translatepress-multilingual"); ?>

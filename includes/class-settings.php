@@ -443,7 +443,6 @@ class TRP_Settings{
             'block-crawlers'                    => 'yes',
             'automatically-translate-slug'      => 'yes',
             'machine_translation_counter_date'  => date ("Y-m-d" ),
-            'machine_translation_counter'       => 0,
             'machine_translation_limit'         => 1000000
             /*
              * These settings are merged into the saved DB option.

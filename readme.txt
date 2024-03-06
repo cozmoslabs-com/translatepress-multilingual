@@ -5,11 +5,11 @@ Tags: translate, translation, multilingual, automatic translation, bilingual, fr
 Requires at least: 3.1.0
 Tested up to: 6.4.3
 Requires PHP: 5.6.20
-Stable tag: 2.7.2
+Stable tag: 2.7.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Translate your entire site directly from the front-end and go multilingual, with full support for WooCommerce and page builders + Google Translate integration.
+Translate your entire site directly from the front-end and go multilingual. Full support for WooCommerce, page builders + Google Translate integration
 
 == Description ==
 
@@ -140,6 +140,11 @@ For more information please check out our [documentation](https://translatepress
 
 
 == Changelog ==
+= 2.7.3 =
+* Improved automatic translation character count to better enforce enforce daily limit
+* When Marketing opt-in feature is enabled, automatic translation usage is included in the non-sensitive diagnostic tracking data
+* Added support for translating more meta tags
+
 = 2.7.2 =
  * Fixed translation saved confirmation message in the Translation Editor
  * Fixed CSS issue in Advanced settings
