@@ -1009,9 +1009,11 @@ class TRP_Translation_Render{
         // pass the current language in forms where the action does not contain the language
         // based on this we're filtering wp_redirect to include the proper URL when returning to the current page.
         foreach ( $html->find('form') as $k => $row ){
-            $form_action    = $row->action;
+            $form_action      = $row->action;
             $is_admin_link    = $this->is_admin_link( $form_action, $admin_url, $wp_login_url );
-            if(!$is_admin_link) {
+            $skip_this_action = apply_filters( 'trp_skip_form_action', false, $form_action );
+
+            if( !$is_admin_link && !$skip_this_action ) {
                 $row->setAttribute( 'data-trp-original-action', $row->action );
                 $row->innertext .= apply_filters( 'trp_form_inputs', '<input type="hidden" name="trp-form-language" value="' . $this->settings['url-slugs'][ $TRP_LANGUAGE ] . '"/>', $TRP_LANGUAGE, $this->settings['url-slugs'][ $TRP_LANGUAGE ], $row );
 
