@@ -3,9 +3,9 @@ Contributors: cozmoslabs, razvan.mo, madalin.ungureanu, sareiodata, cristophor
 Donate link: https://www.translatepress.com/
 Tags: translate, translation, multilingual, automatic translation, bilingual, front-end translation, google translate, language
 Requires at least: 3.1.0
-Tested up to: 6.4.3
+Tested up to: 6.5.2
 Requires PHP: 5.6.20
-Stable tag: 2.7.4
+Stable tag: 2.7.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -140,6 +140,11 @@ For more information please check out our [documentation](https://translatepress
 
 
 == Changelog ==
+= 2.7.5 =
+* Improved page load speed by caching translation blocks query
+* Improved page load speed by adding index by block type
+* Fixed frequency of diagnostics usage requests when Marketing Opt-in is active
+
 = 2.7.4 =
 * Fixed compatibility issue with WP Job Board Pro PDFs
 * Fixed compatibility issue with Brikk theme forms
