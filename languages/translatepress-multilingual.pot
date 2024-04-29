@@ -185,7 +185,7 @@ msgstr ""
 msgid "Automatic translation has been disabled."
 msgstr ""
 
-#: includes/class-error-manager.php:163, includes/class-plugin-notices.php:341, includes/class-plugin-notices.php:388, includes/class-plugin-notices.php:412, includes/class-plugin-notices.php:438, includes/class-plugin-notices.php:462, includes/class-reviews.php:119, includes/class-reviews.php:122, includes/class-upgrade.php:974
+#: includes/class-error-manager.php:163, includes/class-plugin-notices.php:341, includes/class-plugin-notices.php:388, includes/class-plugin-notices.php:412, includes/class-plugin-notices.php:438, includes/class-plugin-notices.php:462, includes/class-reviews.php:119, includes/class-reviews.php:122, includes/class-upgrade.php:978
 msgid "Dismiss this notice."
 msgstr ""
 
@@ -441,55 +441,55 @@ msgstr ""
 msgid "Invalid language code. Please try again."
 msgstr ""
 
-#: includes/class-settings.php:434
+#: includes/class-settings.php:443
 msgid "Language codes can contain only A-Z a-z 0-9 - _ characters. Check your language codes in TranslatePress General Settings."
 msgstr ""
 
-#: includes/class-settings.php:486
+#: includes/class-settings.php:495
 msgid "Error! Duplicate URL slug values."
 msgstr ""
 
-#: includes/class-settings.php:487
+#: includes/class-settings.php:496
 msgid "You cannot select two languages that have the same <a href=\"https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes\" target=\"_blank\">iso code</a> but different formalities because doing so will lead to duplicate <a href=\"https://developers.google.com/search/docs/specialty/international/localized-versions\" target=\"_blank\">hreflang tags</a>."
 msgstr ""
 
-#: includes/class-settings.php:488
+#: includes/class-settings.php:497
 msgid "Duplicate language detected.<br>Each language can only be added once to ensure accurate translation management.<br> Please change the duplicate language entry and try again. "
 msgstr ""
 
-#: includes/class-settings.php:531
+#: includes/class-settings.php:540
 msgid "Current Language"
 msgstr ""
 
-#: includes/class-settings.php:537
+#: includes/class-settings.php:546
 msgid "Opposite Language"
 msgstr ""
 
-#: includes/class-settings.php:577
+#: includes/class-settings.php:586
 msgid "General"
 msgstr ""
 
-#: includes/class-settings.php:582, includes/class-translation-manager.php:504, add-ons-pro/translator-accounts/includes/class-translator-accounts.php:152
+#: includes/class-settings.php:591, includes/class-translation-manager.php:504, add-ons-pro/translator-accounts/includes/class-translator-accounts.php:152
 msgid "Translate Site"
 msgstr ""
 
-#: includes/class-settings.php:587
+#: includes/class-settings.php:596
 msgid "Addons"
 msgstr ""
 
-#: includes/class-settings.php:595
+#: includes/class-settings.php:604
 msgid "License"
 msgstr ""
 
-#: includes/class-settings.php:639, includes/class-translation-manager.php:536
+#: includes/class-settings.php:648, includes/class-translation-manager.php:536
 msgid "Settings"
 msgstr ""
 
-#: includes/class-settings.php:652, partials/license-settings-page.php:32
+#: includes/class-settings.php:661, partials/license-settings-page.php:32
 msgid "Activate License"
 msgstr ""
 
-#: includes/class-settings.php:644
+#: includes/class-settings.php:653
 msgid "Pro Features"
 msgstr ""
 
@@ -1077,7 +1077,7 @@ msgstr ""
 msgid " done."
 msgstr ""
 
-#: includes/class-upgrade.php:972
+#: includes/class-upgrade.php:976
 msgid "All individual TranslatePress add-on plugins <a href=\"%1$s\" target=\"_blank\">have been discontinued</a> and are now included in the premium Personal, Business and Developer versions of TranslatePress. Please log into your <a href=\"%2$s\" target=\"_blank\">account page</a>, download the new premium version and install it. Your individual addons settings will be ported over."
 msgstr ""
 

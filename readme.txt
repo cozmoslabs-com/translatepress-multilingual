@@ -5,7 +5,7 @@ Tags: translate, translation, multilingual, automatic translation, bilingual, fr
 Requires at least: 3.1.0
 Tested up to: 6.5.2
 Requires PHP: 5.6.20
-Stable tag: 2.7.5
+Stable tag: 2.7.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -140,6 +140,10 @@ For more information please check out our [documentation](https://translatepress
 
 
 == Changelog ==
+= 2.7.6 =
+* Fixed nonce issue on the Database Optimization form
+* Fixed edge case issue with the Automatic Translation settings default values
+
 = 2.7.5 =
 * Improved page load speed by caching translation blocks query
 * Improved page load speed by adding index by block type

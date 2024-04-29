@@ -411,8 +411,17 @@ class TRP_Settings{
 
         // Add any missing default option for trp_machine_translation_settings
         $default_trp_machine_translation_settings = $this->get_default_trp_machine_translation_settings();
-        $settings_option['trp_machine_translation_settings'] = array_merge( $default_trp_machine_translation_settings, get_option( 'trp_machine_translation_settings', $default_trp_machine_translation_settings ) );
 
+        // a client reported a notice where, in wp_options table, the trp_machine_translation_settings is false
+        // we don't know how ths happened since the setting should be an array, or it shouldn't exist
+        // this couldn't be replicated on a clean instance
+        $trp_check_if_machine_settings_is_array = get_option( 'trp_machine_translation_settings', $default_trp_machine_translation_settings );
+
+        if ( is_array( $trp_check_if_machine_settings_is_array )) {
+            $settings_option['trp_machine_translation_settings'] = array_merge( $default_trp_machine_translation_settings, $trp_check_if_machine_settings_is_array );
+        }else{
+            $settings_option[ 'trp_machine_translation_settings' ] = $default_trp_machine_translation_settings;
+        }
 
         /* @deprecated Setting only used for compatibility with Deepl Add-on 1.0.0 */
         if ( $settings_option['trp_machine_translation_settings']['translation-engine'] === 'deepl' && defined( 'TRP_DL_PLUGIN_VERSION' ) && TRP_DL_PLUGIN_VERSION === '1.0.0' ) {

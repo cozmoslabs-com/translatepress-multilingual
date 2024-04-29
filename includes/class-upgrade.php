@@ -634,8 +634,12 @@ class TRP_Upgrade {
 
 
     public function trp_prepare_options_for_database_optimization(){
-        if ( !current_user_can('manage_options') ){
+        if ( !current_user_can( 'manage_options' ) || !isset( $_GET['trp_rm_nonce'] ) ) {
             return;
+        }
+
+        if ( !wp_verify_nonce( sanitize_text_field( $_GET['trp_rm_nonce'] ), 'tpremoveduplicaterows' ) ){
+            exit;
         }
 
         $redirect = false;
