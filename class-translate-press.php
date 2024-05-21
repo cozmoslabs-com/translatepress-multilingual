@@ -66,7 +66,7 @@ class TRP_Translate_Press{
         define( 'TRP_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
         define( 'TRP_PLUGIN_BASE', plugin_basename( __DIR__ . '/index.php' ) );
         define( 'TRP_PLUGIN_SLUG', 'translatepress-multilingual' );
-        define( 'TRP_PLUGIN_VERSION', '2.7.6' );
+        define( 'TRP_PLUGIN_VERSION', '2.7.7' );
 
 	    wp_cache_add_non_persistent_groups(array('trp'));
 
@@ -311,9 +311,6 @@ class TRP_Translate_Press{
 
         $this->loader->add_action( 'admin_init', $this->reviews, 'display_review_notice' );
         $this->loader->add_action( 'trp_dismiss_notification', $this->reviews, 'dismiss_notification', 10, 2 );
-
-        // Email Course
-	    $this->loader->add_action( 'wp_ajax_trp_dismiss_email_course', $this->settings, 'trp_dismiss_email_course' );
 
         // Filter rewrite rules for .htaccess
         $this->loader->add_filter( 'mod_rewrite_rules', $this->rewrite_rules, 'trp_remove_language_param', 100 );

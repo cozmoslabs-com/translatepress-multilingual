@@ -747,6 +747,7 @@ class TRP_Plugin_Updater{
                         }
                         else{
                             $license_information_for_all_addons['valid'][] =  $license_data;
+                            trp_mtapi_sync_license_call( $license );
                         }
 
                     }
@@ -769,6 +770,7 @@ class TRP_Plugin_Updater{
             // $license_data->license will be either "valid" or "invalid"
 
             $this->update_option( 'trp_license_status', $license_data->license );
+
             wp_redirect( add_query_arg( array( 'trp_sl_activation' => 'true', 'message' => urlencode( __( 'You have successfully activated your license', 'translatepress-multilingual' ) ) ), $this->license_page_url() ) );
             exit();
         }

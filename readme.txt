@@ -3,9 +3,9 @@ Contributors: cozmoslabs, razvan.mo, madalin.ungureanu, sareiodata, cristophor
 Donate link: https://www.translatepress.com/
 Tags: translate, translation, multilingual, automatic translation, bilingual, front-end translation, google translate, language
 Requires at least: 3.1.0
-Tested up to: 6.5.2
+Tested up to: 6.5.3
 Requires PHP: 5.6.20
-Stable tag: 2.7.6
+Stable tag: 2.7.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -140,6 +140,11 @@ For more information please check out our [documentation](https://translatepress
 
 
 == Changelog ==
+= 2.7.7 =
+* New Feature: TranslatePress AI translation engine
+* Fixed Translate Page button missing in Gutenberg Editor
+* Fixed edge case issue where specific style tags were detected for translation
+
 = 2.7.6 =
 * Fixed nonce issue on the Database Optimization form
 * Fixed edge case issue with the Automatic Translation settings default values

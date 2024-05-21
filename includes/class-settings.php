@@ -448,7 +448,7 @@ class TRP_Settings{
         return apply_filters( 'trp_get_default_trp_machine_translation_settings', array(
             // default settings for trp_machine_translation_settings
             'machine-translation'               => 'no',
-            'translation-engine'                => 'google_translate_v2',
+            'translation-engine'                => 'mtapi',
             'block-crawlers'                    => 'yes',
             'automatically-translate-slug'      => 'yes',
             'machine_translation_counter_date'  => date ("Y-m-d" ),
@@ -488,14 +488,17 @@ class TRP_Settings{
             $iso_codes          = $this->trp_languages->get_iso_codes( $all_language_codes, false );
 
             $tp_data = get_option('trp_db_stored_data', array() );
-            $languages_that_support_formality = ( isset( $tp_data['trp_mt_supported_languages']['deepl'] ) && isset( $tp_data['trp_mt_supported_languages']['deepl']['formality-supported-languages'] ) ) ? $tp_data['trp_mt_supported_languages']['deepl']['formality-supported-languages'] : '' ;
+            $languages_that_support_formality = isset( $tp_data['trp_mt_supported_languages'][$this->settings['trp_machine_translation_settings']['translation-engine']] ) ? $tp_data['trp_mt_supported_languages'][$this->settings['trp_machine_translation_settings']['translation-engine']]['formality-supported-languages'] : '' ;
 
-            wp_localize_script( 'trp-settings-script', 'trp_url_slugs_info', array( 'iso_codes'                         => $iso_codes,
-                                                                                                      'languages_that_support_formality'  => $languages_that_support_formality,
-                                                                                                      'error_message_duplicate_slugs'     => __( 'Error! Duplicate URL slug values.', 'translatepress-multilingual' ),
-                                                                                                      'error_message_formality'           => wp_kses( __( 'You cannot select two languages that have the same <a href="https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes" target="_blank">iso code</a> but different formalities because doing so will lead to duplicate <a href="https://developers.google.com/search/docs/specialty/international/localized-versions" target="_blank">hreflang tags</a>.', 'translatepress-multilingual'), [ 'a' => [ 'href' => [], 'class' => [], 'rel' => [], 'target' => [] ] ] ),
-                                                                                                      'error_message_duplicate_languages' => wp_kses( __( 'Duplicate language detected.<br>Each language can only be added once to ensure accurate translation management.<br> Please change the duplicate language entry and try again. ', 'translatepress-multilingual'), [ 'br' => [] ] )
-                                                                                               )
+            wp_localize_script( 'trp-settings-script', 'trp_url_slugs_info',
+                array( 'iso_codes'                         => $iso_codes,
+                       'languages_that_support_formality'  => $languages_that_support_formality,
+                       'error_message_duplicate_slugs'     => __( 'Error! Duplicate URL slug values.', 'translatepress-multilingual' ),
+                       'error_message_formality'           => wp_kses( __( 'You cannot select two languages that have the same <a href="https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes" target="_blank">iso code</a> but different formalities because doing so will lead to duplicate <a href="https://developers.google.com/search/docs/specialty/international/localized-versions" target="_blank">hreflang tags</a>.', 'translatepress-multilingual' ), [ 'a' => [ 'href' => [], 'class' => [], 'rel' => [], 'target' => [] ] ] ),
+                       'error_message_duplicate_languages' => wp_kses( __( 'Duplicate language detected.<br>Each language can only be added once to ensure accurate translation management.<br> Please change the duplicate language entry and try again. ', 'translatepress-multilingual' ), [ 'br' => [] ] ),
+                       'admin-ajax'                        => admin_url( 'admin-ajax.php' ),
+                       'trp-tpai-recheck-nonce'            => wp_create_nonce( 'trp-tpai-recheck' )
+                )
             );
 
             wp_enqueue_script( 'trp-select2-lib-js', TRP_PLUGIN_URL . 'assets/lib/select2-lib/dist/js/select2.min.js', array( 'jquery' ), TRP_PLUGIN_VERSION );
@@ -665,17 +668,4 @@ class TRP_Settings{
         }
         return $links;
     }
-
-    public function trp_dismiss_email_course(){
-
-        $user_id = get_current_user_id();
-
-        if( empty( $user_id ) )
-            die();
-
-        update_user_meta( $user_id, 'trp_email_course_dismissed', 1 );
-        die();
-        
-    }
-
 }

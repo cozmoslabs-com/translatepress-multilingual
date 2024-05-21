@@ -196,6 +196,27 @@ input.trp-translation-published{
     color:#ca4a1f;
 }
 
+#trp-license-settings, #trp-license-settings p{
+    font-size: 14px;
+}
+
+#trp-license-settings ul{
+
+}
+
+#trp-license-settings ul li{
+    list-style: disc;
+    margin-left: 20px;
+}
+
+.trp-upsell-button{
+    padding: 24px 0;
+}
+.trp-upsell-button a.button{
+    padding-left: 80px;
+    padding-right: 80px;
+}
+
 /* Advanced Settings Page */
 
 p.submit{
@@ -577,6 +598,64 @@ Setting Menu Responsive
     }
 
 }
+
+
+
+/***********************
+Automatic Translation Page
+************************/
+.trp-machine-translation-options{
+    border-collapse: separate;
+}
+.trp-machine-translation-options summary{
+    margin-bottom: 1rem;
+    cursor: pointer;
+}
+
+.tp-ai-upsell{
+    background: #fff;
+    border-radius: 5px;
+    padding: 20px;
+    margin: 1rem 0;
+    max-width: 670px;
+}
+
+.trp-machine-translation-options .tp-ai-upsell{
+    margin-top: 0;
+}
+
+#mtapi td{
+    background-color: #fff;
+    margin-bottom: 1rem;
+}
+#mtapi th {
+    background: white;
+    border:1px solid white;
+    padding: 16px;
+    border-right: none;
+    margin-right: 10px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+#mtapi td {
+    border:1px solid white;
+    padding: 20px;
+    border-left: none;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+#trp-refresh-tpai, #trp-refresh-tpai-text-recheck{
+    cursor: pointer;
+    color: #2271b1;
+}
+#trp-refresh-tpai:active, #trp-refresh-tpai:hover {
+    color: #135e96;
+}
+
+#trp-refresh-tpai-text-recheck{
+    text-decoration:underline;
+}
+
 
 /***********************
 Advanced Setting Page

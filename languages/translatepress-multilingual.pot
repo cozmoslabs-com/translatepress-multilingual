@@ -49,7 +49,7 @@ msgstr ""
 msgid "Settings saved."
 msgstr ""
 
-#: includes/class-advanced-tab.php:351, includes/class-error-manager.php:189, partials/machine-translation-settings-page.php:17, partials/machine-translation-settings-page.php:121, partials/machine-translation-settings-page.php:141, partials/machine-translation-settings-page.php:195, partials/main-settings-page.php:42, partials/main-settings-page.php:55, partials/main-settings-page.php:68
+#: includes/class-advanced-tab.php:351, includes/class-error-manager.php:189, partials/machine-translation-settings-page.php:17, partials/machine-translation-settings-page.php:141, partials/machine-translation-settings-page.php:161, partials/machine-translation-settings-page.php:215, partials/main-settings-page.php:42, partials/main-settings-page.php:55, partials/main-settings-page.php:68
 msgid "Yes"
 msgstr ""
 
@@ -109,11 +109,11 @@ msgstr ""
 msgid "Your license key has reached its activation limit."
 msgstr ""
 
-#: includes/class-edd-sl-plugin-updater.php:741, includes/class-edd-sl-plugin-updater.php:709, includes/class-edd-sl-plugin-updater.php:810
+#: includes/class-edd-sl-plugin-updater.php:741, includes/class-edd-sl-plugin-updater.php:709, includes/class-edd-sl-plugin-updater.php:812
 msgid "An error occurred, please try again."
 msgstr ""
 
-#: includes/class-edd-sl-plugin-updater.php:772
+#: includes/class-edd-sl-plugin-updater.php:774
 msgid "You have successfully activated your license"
 msgstr ""
 
@@ -269,39 +269,39 @@ msgstr ""
 msgid "Automatic Translation"
 msgstr ""
 
-#: includes/class-machine-translation-tab.php:169, add-ons-pro/deepl/includes/class-deepl.php:28
+#: includes/class-machine-translation-tab.php:173, add-ons-pro/deepl/includes/class-deepl.php:28
 msgid "DeepL"
 msgstr ""
 
-#: includes/class-machine-translation-tab.php:205
+#: includes/class-machine-translation-tab.php:209
 msgid "Unsupported languages"
 msgstr ""
 
-#: includes/class-machine-translation-tab.php:217
+#: includes/class-machine-translation-tab.php:221
 msgid "The selected automatic translation engine does not provide support for these languages.<br>You can still manually translate pages in these languages using the Translation Editor."
 msgstr ""
 
-#: includes/class-machine-translation-tab.php:244
+#: includes/class-machine-translation-tab.php:248
 msgid "Languages without formality"
 msgstr ""
 
-#: includes/class-machine-translation-tab.php:256
+#: includes/class-machine-translation-tab.php:260
 msgid "The selected automatic translation engine provides only <a href=\"%s\" target=\"_blank\">default formality</a> settings for these languages for now.<br>Automatic translation will still work if available for these languages. It will just not use the formality setting from TranslatePress <a href=\"%s\" target=\"_self\"> General Tab</a> for the languages listed above."
 msgstr ""
 
-#: includes/class-machine-translation-tab.php:269
+#: includes/class-machine-translation-tab.php:273
 msgid "Recheck supported languages"
 msgstr ""
 
-#: includes/class-machine-translation-tab.php:270
+#: includes/class-machine-translation-tab.php:274
 msgid "(last checked on %s)"
 msgstr ""
 
-#: includes/class-machine-translator.php:142, includes/google-translate/class-google-translate-v2-machine-translator.php:189
+#: includes/class-machine-translator.php:140, includes/google-translate/class-google-translate-v2-machine-translator.php:191
 msgid "Please enter your Google Translate key."
 msgstr ""
 
-#: includes/class-machine-translator.php:157, add-ons-pro/deepl/includes/class-deepl-machine-translator.php:314
+#: includes/class-machine-translator.php:155, add-ons-pro/deepl/includes/class-deepl-machine-translator.php:316
 msgid "Please enter your DeepL API key."
 msgstr ""
 
@@ -445,51 +445,51 @@ msgstr ""
 msgid "Language codes can contain only A-Z a-z 0-9 - _ characters. Check your language codes in TranslatePress General Settings."
 msgstr ""
 
-#: includes/class-settings.php:495
+#: includes/class-settings.php:496
 msgid "Error! Duplicate URL slug values."
 msgstr ""
 
-#: includes/class-settings.php:496
+#: includes/class-settings.php:497
 msgid "You cannot select two languages that have the same <a href=\"https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes\" target=\"_blank\">iso code</a> but different formalities because doing so will lead to duplicate <a href=\"https://developers.google.com/search/docs/specialty/international/localized-versions\" target=\"_blank\">hreflang tags</a>."
 msgstr ""
 
-#: includes/class-settings.php:497
+#: includes/class-settings.php:498
 msgid "Duplicate language detected.<br>Each language can only be added once to ensure accurate translation management.<br> Please change the duplicate language entry and try again. "
 msgstr ""
 
-#: includes/class-settings.php:540
+#: includes/class-settings.php:543
 msgid "Current Language"
 msgstr ""
 
-#: includes/class-settings.php:546
+#: includes/class-settings.php:549
 msgid "Opposite Language"
 msgstr ""
 
-#: includes/class-settings.php:586
+#: includes/class-settings.php:589
 msgid "General"
 msgstr ""
 
-#: includes/class-settings.php:591, includes/class-translation-manager.php:504, add-ons-pro/translator-accounts/includes/class-translator-accounts.php:152
+#: includes/class-settings.php:594, includes/class-translation-manager.php:504, add-ons-pro/translator-accounts/includes/class-translator-accounts.php:152
 msgid "Translate Site"
 msgstr ""
 
-#: includes/class-settings.php:596
+#: includes/class-settings.php:599
 msgid "Addons"
 msgstr ""
 
-#: includes/class-settings.php:604
+#: includes/class-settings.php:607, includes/mtapi/functions.php:30
 msgid "License"
 msgstr ""
 
-#: includes/class-settings.php:648, includes/class-translation-manager.php:536
+#: includes/class-settings.php:651, includes/class-translation-manager.php:536
 msgid "Settings"
 msgstr ""
 
-#: includes/class-settings.php:661, partials/license-settings-page.php:32
+#: includes/class-settings.php:664, partials/license-settings-page.php:32
 msgid "Activate License"
 msgstr ""
 
-#: includes/class-settings.php:653
+#: includes/class-settings.php:656
 msgid "Pro Features"
 msgstr ""
 
@@ -1109,7 +1109,7 @@ msgstr ""
 msgid "The Automatic Translation Code of the added custom language is invalid."
 msgstr ""
 
-#: partials/addons-settings-page.php:3, partials/license-settings-page.php:46, partials/license-settings-page.php:8, partials/main-settings-page.php:5, partials/test-api-settings-page.php:11, partials/trp-remove-duplicate-rows.php:3
+#: partials/addons-settings-page.php:3, partials/license-settings-page.php:47, partials/license-settings-page.php:8, partials/main-settings-page.php:5, partials/test-api-settings-page.php:12, partials/trp-remove-duplicate-rows.php:3
 msgid "TranslatePress Settings"
 msgstr ""
 
@@ -1225,7 +1225,7 @@ msgstr ""
 msgid "TranslatePress Advanced Settings"
 msgstr ""
 
-#: partials/advanced-settings-page.php:19, partials/machine-translation-settings-page.php:206, partials/main-settings-page.php:161
+#: partials/advanced-settings-page.php:19, partials/machine-translation-settings-page.php:226, partials/main-settings-page.php:160
 msgid "Save Changes"
 msgstr ""
 
@@ -1237,8 +1237,52 @@ msgstr ""
 msgid "There are no logged errors."
 msgstr ""
 
-#: partials/license-settings-page.php:48
-msgid "If you purchased a <a href=\"%s\">premium version</a>, first install and activate it. After this you will be prompted with an input to enter your license key."
+#: partials/license-settings-page.php:50
+msgid "Seamless, automated & correct translations with TranslatePress AI"
+msgstr ""
+
+#: partials/license-settings-page.php:51
+msgid "Are you tired of the slow, manual effort of translating your website?"
+msgstr ""
+
+#: partials/license-settings-page.php:52
+msgid "With TranslatePress AI, experience the future of website translation."
+msgstr ""
+
+#: partials/license-settings-page.php:54
+msgid "Automatically translate your entire website"
+msgstr ""
+
+#: partials/license-settings-page.php:55
+msgid "Accurate and fast translations"
+msgstr ""
+
+#: partials/license-settings-page.php:56
+msgid "Your message in a language your users understand."
+msgstr ""
+
+#: partials/license-settings-page.php:57
+msgid "Extra features from our paid versions: extra languages, SEO support and more..."
+msgstr ""
+
+#: partials/license-settings-page.php:60
+msgid "Get a License Today"
+msgstr ""
+
+#: partials/license-settings-page.php:64
+msgid "Already purchased a pro version?"
+msgstr ""
+
+#: partials/license-settings-page.php:66
+msgid "Leave the Free version installed."
+msgstr ""
+
+#: partials/license-settings-page.php:67
+msgid "Install and activate the Pro version "
+msgstr ""
+
+#: partials/license-settings-page.php:68
+msgid "A prompt will appear on this page asking you to enter your license key."
 msgstr ""
 
 #: partials/license-settings-page.php:14
@@ -1277,98 +1321,114 @@ msgstr ""
 msgid "Enable or disable the automatic translation of the site. To minimize translation costs, each untranslated string is automatically translated only once, then stored in the database."
 msgstr ""
 
-#: partials/machine-translation-settings-page.php:27
-msgid "Translation Engine"
-msgstr ""
-
-#: partials/machine-translation-settings-page.php:39
-msgid "Choose which engine you want to use in order to automatically translate your website."
-msgstr ""
-
-#: partials/machine-translation-settings-page.php:62
+#: partials/machine-translation-settings-page.php:43
 msgid "To use <strong>DeepL</strong> for automatic translation, activate this Pro add-on from the <a href=\"%1$s\" target=\"_self\" title=\"%2$s\">%2$s</a>."
 msgstr ""
 
-#: partials/machine-translation-settings-page.php:55
+#: partials/machine-translation-settings-page.php:36
 msgid "<strong>DeepL</strong> automatic translation is available as a <a href=\"%1$s\" target=\"_blank\" title=\"%2$s\">%2$s</a>."
 msgstr ""
 
-#: partials/machine-translation-settings-page.php:56
+#: partials/machine-translation-settings-page.php:37
 msgid "By upgrading you'll get access to all paid add-ons, premium support and help fund the future development of TranslatePress."
 msgstr ""
 
 #. translators: %1$s is the URL to the DeepL add-on. %2$s is the name of the Pro offerings.
-#: partials/machine-translation-settings-page.php:77
+#: partials/machine-translation-settings-page.php:58
 msgctxt "Verbiage for the DeepL Pro Add-on"
 msgid "TranslatePress Pro Add-on"
 msgstr ""
 
-#: partials/machine-translation-settings-page.php:71
+#: partials/machine-translation-settings-page.php:52
 msgctxt "Verbiage for the DeepL Pro Add-on"
 msgid "Addons tab"
 msgstr ""
 
-#: partials/machine-translation-settings-page.php:84
+#: partials/machine-translation-settings-page.php:65
 msgid "Please note that DeepL API usage is paid separately. See <a href=\"https://www.deepl.com/pro.html#developer\">DeepL pricing information</a>."
 msgstr ""
 
-#: partials/machine-translation-settings-page.php:89
+#: partials/machine-translation-settings-page.php:70
 msgid "TranslatePress Pro Add-ons"
 msgstr ""
 
-#: partials/machine-translation-settings-page.php:106
+#: partials/machine-translation-settings-page.php:87
 msgid "Test API credentials"
 msgstr ""
 
-#: partials/machine-translation-settings-page.php:108
+#: partials/machine-translation-settings-page.php:89
 msgid "Click here to check if the selected translation engine is configured correctly."
 msgstr ""
 
-#: partials/machine-translation-settings-page.php:117
+#: partials/machine-translation-settings-page.php:99
+msgid "Alternative Engines"
+msgstr ""
+
+#: partials/machine-translation-settings-page.php:112
+msgid "Switch to TranslatePress AI"
+msgstr ""
+
+#: partials/machine-translation-settings-page.php:113
+msgid "Learn More!"
+msgstr ""
+
+#: partials/machine-translation-settings-page.php:116, includes/mtapi/functions.php:24
+msgid "Integrate machine translation directly with your WordPress website."
+msgstr ""
+
+#: partials/machine-translation-settings-page.php:107
+msgid "More info"
+msgstr ""
+
+#: partials/machine-translation-settings-page.php:128
+msgid "Choose which engine you want to use in order to automatically translate your website."
+msgstr ""
+
+#: partials/machine-translation-settings-page.php:137
 msgid "Block Crawlers"
 msgstr ""
 
-#: partials/machine-translation-settings-page.php:124
+#: partials/machine-translation-settings-page.php:144
 msgid "Block crawlers from triggering automatic translations on your website.<br>This will not prevent crawlers from accessing this site's pages."
 msgstr ""
 
-#: partials/machine-translation-settings-page.php:130
+#: partials/machine-translation-settings-page.php:150
 msgid "Automatically Translate Slugs"
 msgstr ""
 
-#: partials/machine-translation-settings-page.php:145
+#: partials/machine-translation-settings-page.php:165
 msgid "Generate automatic translations of slugs for posts, pages and Custom Post Types.<br/>The slugs will be automatically translated starting with the second refresh of each page."
 msgstr ""
 
-#: partials/machine-translation-settings-page.php:148
+#: partials/machine-translation-settings-page.php:168
 msgid "This feature is available only in the paid version. <a href=\"%1$s\" target=\"_blank\" title=\"%2$s\">%2$s</a> and unlock more premium features."
 msgstr ""
 
-#: partials/machine-translation-settings-page.php:151
+#: partials/machine-translation-settings-page.php:171
 msgid "Upgrade TranslatePress"
 msgstr ""
 
-#: partials/machine-translation-settings-page.php:160
+#: partials/machine-translation-settings-page.php:180
 msgid "<br/>Requires <a href=\"https://translatepress.com/docs/addons/seo-pack/\" title=\"TranslatePress Add-on SEO Pack documentation\" target=\"_blank\"> SEO Pack Add-on</a> to be installed and activated."
 msgstr ""
 
-#: partials/machine-translation-settings-page.php:168
+#: partials/machine-translation-settings-page.php:188
 msgid "Limit machine translation / characters per day"
 msgstr ""
 
-#: partials/machine-translation-settings-page.php:174
+#: partials/machine-translation-settings-page.php:194
 msgid "Add a limit to the number of automatically translated characters so you can better budget your project."
 msgstr ""
 
-#: partials/machine-translation-settings-page.php:180
+#: partials/machine-translation-settings-page.php:200
 msgid "Today's character count:"
 msgstr ""
 
-#: partials/machine-translation-settings-page.php:191
+#: partials/machine-translation-settings-page.php:211
 msgid "Log machine translation queries."
 msgstr ""
 
-#: partials/machine-translation-settings-page.php:198
+#: partials/machine-translation-settings-page.php:218
 msgid "Only enable for testing purposes. Can impact performance.<br>All records are stored in the wp_trp_machine_translation_log database table. Use a plugin like <a href=\"https://wordpress.org/plugins/wp-data-access/\" target=\"_blank\">WP Data Access</a> to browse the logs or directly from your database manager (PHPMyAdmin, etc.)"
 msgstr ""
 
@@ -1611,27 +1671,27 @@ msgstr ""
 msgid "Terms of Service"
 msgstr ""
 
-#: partials/test-api-settings-page.php:17
+#: partials/test-api-settings-page.php:18
 msgid "API Key from settings page:"
 msgstr ""
 
-#: partials/test-api-settings-page.php:20
+#: partials/test-api-settings-page.php:21
 msgid "HTTP Referrer:"
 msgstr ""
 
-#: partials/test-api-settings-page.php:21
+#: partials/test-api-settings-page.php:22
 msgid "Use this HTTP Referrer if the API lets you restrict key usage from its Dashboard."
 msgstr ""
 
-#: partials/test-api-settings-page.php:23
+#: partials/test-api-settings-page.php:24
 msgid "Response:"
 msgstr ""
 
-#: partials/test-api-settings-page.php:32
+#: partials/test-api-settings-page.php:33
 msgid "Response Body:"
 msgstr ""
 
-#: partials/test-api-settings-page.php:42
+#: partials/test-api-settings-page.php:43
 msgid "Entire Response From wp_remote_get():"
 msgstr ""
 
@@ -2063,6 +2123,54 @@ msgstr ""
 msgid "There was an error with your Google Translate key."
 msgstr ""
 
+#: includes/mtapi/class-mtapi-machine-translator.php:201
+msgid "Please check your TranslatePress license key."
+msgstr ""
+
+#: includes/mtapi/functions.php:4
+msgid "TranslatePress AI"
+msgstr ""
+
+#: includes/mtapi/functions.php:25
+msgid "No Active License Detected for this website."
+msgstr ""
+
+#: includes/mtapi/functions.php:29
+msgid "Add a license by visiting the %1$s tab:"
+msgstr ""
+
+#: includes/mtapi/functions.php:32
+msgid "Register License"
+msgstr ""
+
+#: includes/mtapi/functions.php:55
+msgid "You have a valid %s license."
+msgstr ""
+
+#: includes/mtapi/functions.php:61
+msgid "Quota: <span id=\"trp-ai-quota-number\">%s</span> available words remaining."
+msgstr ""
+
+#: includes/mtapi/functions.php:71
+msgid "Recheck"
+msgstr ""
+
+#: includes/mtapi/functions.php:79
+msgid "Rechecking..."
+msgstr ""
+
+#: includes/mtapi/functions.php:86
+msgid "Done."
+msgstr ""
+
+#: includes/mtapi/functions.php:95
+msgid "Manage your license & quota on the %s"
+msgstr ""
+
+#: includes/mtapi/functions.php:96
+msgid "TranslatePress.com Account Page"
+msgstr ""
+
 #: includes/string-translation/class-gettext-scan.php:85
 msgid "Scanning item %1$d of %2$d..."
 msgstr ""
@@ -2461,11 +2569,11 @@ msgstr ""
 msgid "Select the type of DeepL API you want to use."
 msgstr ""
 
-#: add-ons-pro/deepl/includes/class-deepl.php:144
+#: add-ons-pro/deepl/includes/class-deepl.php:140
 msgid "DeepL API Key"
 msgstr ""
 
-#: add-ons-pro/deepl/includes/class-deepl.php:164
+#: add-ons-pro/deepl/includes/class-deepl.php:159
 msgid "Visit <a href=\"%s\" target=\"_blank\">this link</a> to see how you can set up an API key and control API costs."
 msgstr ""
 

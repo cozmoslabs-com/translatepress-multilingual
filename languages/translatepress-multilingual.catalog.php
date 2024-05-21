@@ -305,7 +305,18 @@
 <?php __("Save Changes", "translatepress-multilingual"); ?>
 <?php __("TranslatePress Errors", "translatepress-multilingual"); ?>
 <?php __("There are no logged errors.", "translatepress-multilingual"); ?>
-<?php __("If you purchased a <a href=\"%s\">premium version</a>, first install and activate it. After this you will be prompted with an input to enter your license key.", "translatepress-multilingual"); ?>
+<?php __("Seamless, automated & correct translations with TranslatePress AI", "translatepress-multilingual"); ?>
+<?php __("Are you tired of the slow, manual effort of translating your website?", "translatepress-multilingual"); ?>
+<?php __("With TranslatePress AI, experience the future of website translation.", "translatepress-multilingual"); ?>
+<?php __("Automatically translate your entire website", "translatepress-multilingual"); ?>
+<?php __("Accurate and fast translations", "translatepress-multilingual"); ?>
+<?php __("Your message in a language your users understand.", "translatepress-multilingual"); ?>
+<?php __("Extra features from our paid versions: extra languages, SEO support and more...", "translatepress-multilingual"); ?>
+<?php __("Get a License Today", "translatepress-multilingual"); ?>
+<?php __("Already purchased a pro version?", "translatepress-multilingual"); ?>
+<?php __("Leave the Free version installed.", "translatepress-multilingual"); ?>
+<?php __("Install and activate the Pro version ", "translatepress-multilingual"); ?>
+<?php __("A prompt will appear on this page asking you to enter your license key.", "translatepress-multilingual"); ?>
 <?php __("License Key", "translatepress-multilingual"); ?>
 <?php __("Deactivate License", "translatepress-multilingual"); ?>
 <?php __("Your license is invalid", "translatepress-multilingual"); ?>
@@ -315,8 +326,6 @@
 <?php __("Enable Automatic Translation", "translatepress-multilingual"); ?>
 <?php __("No", "translatepress-multilingual"); ?>
 <?php __("Enable or disable the automatic translation of the site. To minimize translation costs, each untranslated string is automatically translated only once, then stored in the database.", "translatepress-multilingual"); ?>
-<?php __("Translation Engine", "translatepress-multilingual"); ?>
-<?php __("Choose which engine you want to use in order to automatically translate your website.", "translatepress-multilingual"); ?>
 <?php __("To use <strong>DeepL</strong> for automatic translation, activate this Pro add-on from the <a href=\"%1$s\" target=\"_self\" title=\"%2$s\">%2$s</a>.", "translatepress-multilingual"); ?>
 <?php __("<strong>DeepL</strong> automatic translation is available as a <a href=\"%1$s\" target=\"_blank\" title=\"%2$s\">%2$s</a>.", "translatepress-multilingual"); ?>
 <?php __("By upgrading you'll get access to all paid add-ons, premium support and help fund the future development of TranslatePress.", "translatepress-multilingual"); ?>
@@ -326,6 +335,12 @@
 <?php __("TranslatePress Pro Add-ons", "translatepress-multilingual"); ?>
 <?php __("Test API credentials", "translatepress-multilingual"); ?>
 <?php __("Click here to check if the selected translation engine is configured correctly.", "translatepress-multilingual"); ?>
+<?php __("Alternative Engines", "translatepress-multilingual"); ?>
+<?php __("Switch to TranslatePress AI", "translatepress-multilingual"); ?>
+<?php __("Learn More!", "translatepress-multilingual"); ?>
+<?php __("Integrate machine translation directly with your WordPress website.", "translatepress-multilingual"); ?>
+<?php __("More info", "translatepress-multilingual"); ?>
+<?php __("Choose which engine you want to use in order to automatically translate your website.", "translatepress-multilingual"); ?>
 <?php __("Block Crawlers", "translatepress-multilingual"); ?>
 <?php __("Block crawlers from triggering automatic translations on your website.<br>This will not prevent crawlers from accessing this site's pages.", "translatepress-multilingual"); ?>
 <?php __("Automatically Translate Slugs", "translatepress-multilingual"); ?>
@@ -510,6 +525,18 @@
 <?php __("Your HTTP referrer is: %s", "translatepress-multilingual"); ?>
 <?php __("There was an error on the server processing your Google Translate key.", "translatepress-multilingual"); ?>
 <?php __("There was an error with your Google Translate key.", "translatepress-multilingual"); ?>
+<?php __("Please check your TranslatePress license key.", "translatepress-multilingual"); ?>
+<?php __("TranslatePress AI", "translatepress-multilingual"); ?>
+<?php __("No Active License Detected for this website.", "translatepress-multilingual"); ?>
+<?php __("Add a license by visiting the %1$s tab:", "translatepress-multilingual"); ?>
+<?php __("Register License", "translatepress-multilingual"); ?>
+<?php __("You have a valid %s license.", "translatepress-multilingual"); ?>
+<?php __("Quota: <span id=\"trp-ai-quota-number\">%s</span> available words remaining.", "translatepress-multilingual"); ?>
+<?php __("Recheck", "translatepress-multilingual"); ?>
+<?php __("Rechecking...", "translatepress-multilingual"); ?>
+<?php __("Done.", "translatepress-multilingual"); ?>
+<?php __("Manage your license & quota on the %s", "translatepress-multilingual"); ?>
+<?php __("TranslatePress.com Account Page", "translatepress-multilingual"); ?>
 <?php __("Scanning item %1$d of %2$d...", "translatepress-multilingual"); ?>
 <?php __("Manually translated", "translatepress-multilingual"); ?>
 <?php __("Automatically translated", "translatepress-multilingual"); ?>
