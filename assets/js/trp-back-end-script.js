@@ -364,29 +364,35 @@ jQuery( function() {
                 nonce: trp_url_slugs_info['trp-tpai-recheck-nonce']
             },
             success: function (response) {
-
-                if( response.quota ){
+                if( response.hasOwnProperty('quota') ){
                     jQuery( '#trp-ai-quota-number').text( Number(response.quota).toLocaleString('en-US') )
-
-                    jQuery( '#trp-refresh-tpai-text-done').finish().fadeIn("fast").delay(1000).fadeOut("slow")
-                    jQuery( '#trp-refresh-tpai').hide()
-                    jQuery( '#trp-refresh-tpai-text-rechecking').hide()
-                    if ( response.quota == '0' ){
+                    if ( !response.quota ){
                         jQuery( '#trp-refresh-tpai-text-recheck').finish().delay(1700).fadeIn("fast")
+                    }else{
+                        jQuery( '#trp-refresh-tpai').finish().delay(1100).fadeOut("slow")
                     }
                 }
+                jQuery( '#trp-refresh-tpai-text-done').finish().fadeIn("fast").delay(1000).fadeOut("slow")
+                jQuery( '#trp-refresh-tpai-text-recheck').hide()
+                jQuery( '#trp-refresh-tpai-text-rechecking').hide()
 
+                trp_ai_recheck_in_progress = false
             },
             error: function (response) {
                 jQuery( '#trp-refresh-tpai-text-done').finish().fadeIn("fast").delay(1000).fadeOut("slow");
                 jQuery( '#trp-refresh-tpai-text-rechecking').hide()
                 jQuery( '#trp-refresh-tpai-text-recheck').finish().delay(1700).fadeIn("fast")
+                trp_ai_recheck_in_progress = false
             }
         })
     }
 
+    trp_ai_recheck_in_progress = false
     jQuery("#trp-refresh-tpai").on('click', function(){
-        TRP_TP_AI_Recheck()
+        if ( !trp_ai_recheck_in_progress ){
+            trp_ai_recheck_in_progress = true
+            TRP_TP_AI_Recheck()
+        }
     })
 
     /*

@@ -2151,23 +2151,23 @@ msgstr ""
 msgid "Quota: <span id=\"trp-ai-quota-number\">%s</span> available words remaining."
 msgstr ""
 
-#: includes/mtapi/functions.php:71
+#: includes/mtapi/functions.php:69
 msgid "Recheck"
 msgstr ""
 
-#: includes/mtapi/functions.php:79
+#: includes/mtapi/functions.php:73
 msgid "Rechecking..."
 msgstr ""
 
-#: includes/mtapi/functions.php:86
+#: includes/mtapi/functions.php:76
 msgid "Done."
 msgstr ""
 
-#: includes/mtapi/functions.php:95
+#: includes/mtapi/functions.php:83
 msgid "Manage your license & quota on the %s"
 msgstr ""
 
-#: includes/mtapi/functions.php:96
+#: includes/mtapi/functions.php:84
 msgid "TranslatePress.com Account Page"
 msgstr ""
 

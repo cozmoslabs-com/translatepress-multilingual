@@ -66,26 +66,14 @@ function trp_mtapi_add_settings( $mt_settings ){
                     <span id="trp-refresh-tpai">
                         <span id="trp-refresh-tpai-dashicon" class="dashicons dashicons-controls-repeat"></span>
                         <span id="trp-refresh-tpai-text-recheck">
-                            <?php
-                            printf(
-                                esc_html__('Recheck', 'translatepress-multilingual'),
-                            );
-                            ?>
+                            <?php esc_html_e( 'Recheck', 'translatepress-multilingual' ); ?>
                         </span>
                     </span>
                     <span id="trp-refresh-tpai-text-rechecking" style="display:none">
-                        <?php
-                        printf(
-                            esc_html__('Rechecking...', 'translatepress-multilingual'),
-                        );
-                        ?>
+                        <?php esc_html_e( 'Rechecking...', 'translatepress-multilingual' ); ?>
                     </span>
                     <span id="trp-refresh-tpai-text-done" style="display:none">
-                        <?php
-                        printf(
-                            esc_html__('Done.', 'translatepress-multilingual'),
-                        );
-                        ?>
+                        <?php esc_html_e( 'Done.', 'translatepress-multilingual' ); ?>
                     </span>
                 <?php } ?>
             </p>
@@ -113,9 +101,9 @@ function trp_mtapi_add_settings( $mt_settings ){
  * @return string
  */
 function trp_mtapi_get_store_url() {
-    $store_url = $store_url ?? ( defined( 'MTAPI_STORE_URL' ) ) ? MTAPI_STORE_URL : null;
-    $store_url = $store_url ?? ( ( defined( 'MTAPI_URL' ) && MTAPI_URL == 'http://mtapi.local' ) ? 'http://tpcom.local' : null );
-    return $store_url ?? "https://translatepress.com";
+    $store_url = ( !isset( $store_url ) ) ? ( ( defined( 'MTAPI_STORE_URL' ) ) ? MTAPI_STORE_URL : null ) : $store_url;
+    $store_url = ( !isset( $store_url ) ) ? ( ( defined( 'MTAPI_URL' ) && MTAPI_URL == 'http://mtapi.local' ) ? 'http://tpcom.local' : null ) : $store_url;
+    return ( !isset( $store_url ) ) ? "https://translatepress.com" : $store_url;
 }
 
 /**

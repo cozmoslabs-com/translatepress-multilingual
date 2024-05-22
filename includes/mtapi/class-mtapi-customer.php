@@ -8,24 +8,24 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 class TRP_MTAPI_Customer {
 
 
-	private string $url;
+	private $url;
 
-	public function __construct( string $url ) {
+	public function __construct( $url ) {
 
 		$this->url       = trailingslashit( $url );
 	}
 
-	public function lookup_site( string $key, $url ): array {
+	public function lookup_site( $key, $url ) {
 
 		return $this->request( 'POST', 'sites/lookup', [ 'key' => $key, 'url' => trailingslashit($url) ] );
 	}
 
-	public function lookup_license( string $key ): array {
+	public function lookup_license( $key ) {
 
 		return $this->request( 'POST', 'licenses/lookup', [ 'key' => $key ] );
 	}
 
-	private function request( string $method, string $path, ?array $data = null ): array {
+	private function request( $method, $path, $data = null ) {
 
 		$request_args = [
 			'method'  => $method,
