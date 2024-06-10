@@ -14,7 +14,9 @@ function trp_mtapi_add_settings( $mt_settings ){
 	$status = get_option('trp_license_status');
 	$details = get_option('trp_license_details');
 
-	//dd($status);
+    if (!isset($details['valid'][0])) $status = false;
+
+    //dd($status);
 	//dd(array($license, $status, $details));
     if ($status === false) :
     ?>

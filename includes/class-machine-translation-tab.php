@@ -75,9 +75,6 @@ class TRP_Machine_Translation_Tab {
         }
         if( !empty( $settings['machine-translation'] ) ) {
             $settings['machine-translation'] = sanitize_text_field( $settings['machine-translation'] );
-            if ( $settings['machine-translation'] === 'yes') {
-                $machine_translator->check_languages_availability( $this->settings['translation-languages'], true );
-            }
         }else
             $settings['machine-translation'] = 'no';
 
@@ -107,6 +104,10 @@ class TRP_Machine_Translation_Tab {
             else
                 $settings['automatically-translate-slug'] = 'no';
         }
+
+        $db_stored_data = get_option('trp_db_stored_data', array() );
+        unset( $db_stored_data['trp_mt_supported_languages'][ $settings['translation-engine'] ]['last-checked'] );
+        update_option( 'trp_db_stored_data', $db_stored_data );
 
         return apply_filters( 'trp_machine_translation_sanitize_settings', $settings, $mt_settings );
     }

@@ -269,31 +269,31 @@ msgstr ""
 msgid "Automatic Translation"
 msgstr ""
 
-#: includes/class-machine-translation-tab.php:173, add-ons-pro/deepl/includes/class-deepl.php:28
+#: includes/class-machine-translation-tab.php:174, add-ons-pro/deepl/includes/class-deepl.php:28
 msgid "DeepL"
 msgstr ""
 
-#: includes/class-machine-translation-tab.php:209
+#: includes/class-machine-translation-tab.php:210
 msgid "Unsupported languages"
 msgstr ""
 
-#: includes/class-machine-translation-tab.php:221
+#: includes/class-machine-translation-tab.php:222
 msgid "The selected automatic translation engine does not provide support for these languages.<br>You can still manually translate pages in these languages using the Translation Editor."
 msgstr ""
 
-#: includes/class-machine-translation-tab.php:248
+#: includes/class-machine-translation-tab.php:249
 msgid "Languages without formality"
 msgstr ""
 
-#: includes/class-machine-translation-tab.php:260
+#: includes/class-machine-translation-tab.php:261
 msgid "The selected automatic translation engine provides only <a href=\"%s\" target=\"_blank\">default formality</a> settings for these languages for now.<br>Automatic translation will still work if available for these languages. It will just not use the formality setting from TranslatePress <a href=\"%s\" target=\"_self\"> General Tab</a> for the languages listed above."
 msgstr ""
 
-#: includes/class-machine-translation-tab.php:273
+#: includes/class-machine-translation-tab.php:274
 msgid "Recheck supported languages"
 msgstr ""
 
-#: includes/class-machine-translation-tab.php:274
+#: includes/class-machine-translation-tab.php:275
 msgid "(last checked on %s)"
 msgstr ""
 
@@ -477,7 +477,7 @@ msgstr ""
 msgid "Addons"
 msgstr ""
 
-#: includes/class-settings.php:607, includes/mtapi/functions.php:30
+#: includes/class-settings.php:607, includes/mtapi/functions.php:32
 msgid "License"
 msgstr ""
 
@@ -1372,7 +1372,7 @@ msgstr ""
 msgid "Learn More!"
 msgstr ""
 
-#: partials/machine-translation-settings-page.php:116, includes/mtapi/functions.php:24
+#: partials/machine-translation-settings-page.php:116, includes/mtapi/functions.php:26
 msgid "Integrate machine translation directly with your WordPress website."
 msgstr ""
 
@@ -2131,43 +2131,43 @@ msgstr ""
 msgid "TranslatePress AI"
 msgstr ""
 
-#: includes/mtapi/functions.php:25
+#: includes/mtapi/functions.php:27
 msgid "No Active License Detected for this website."
 msgstr ""
 
-#: includes/mtapi/functions.php:29
+#: includes/mtapi/functions.php:31
 msgid "Add a license by visiting the %1$s tab:"
 msgstr ""
 
-#: includes/mtapi/functions.php:32
+#: includes/mtapi/functions.php:34
 msgid "Register License"
 msgstr ""
 
-#: includes/mtapi/functions.php:55
+#: includes/mtapi/functions.php:57
 msgid "You have a valid %s license."
 msgstr ""
 
-#: includes/mtapi/functions.php:61
+#: includes/mtapi/functions.php:63
 msgid "Quota: <span id=\"trp-ai-quota-number\">%s</span> available words remaining."
 msgstr ""
 
-#: includes/mtapi/functions.php:69
+#: includes/mtapi/functions.php:71
 msgid "Recheck"
 msgstr ""
 
-#: includes/mtapi/functions.php:73
+#: includes/mtapi/functions.php:75
 msgid "Rechecking..."
 msgstr ""
 
-#: includes/mtapi/functions.php:76
+#: includes/mtapi/functions.php:78
 msgid "Done."
 msgstr ""
 
-#: includes/mtapi/functions.php:83
+#: includes/mtapi/functions.php:85
 msgid "Manage your license & quota on the %s"
 msgstr ""
 
-#: includes/mtapi/functions.php:84
+#: includes/mtapi/functions.php:86
 msgid "TranslatePress.com Account Page"
 msgstr ""
 

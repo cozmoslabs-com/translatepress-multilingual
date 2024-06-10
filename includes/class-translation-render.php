@@ -1879,7 +1879,7 @@ class TRP_Translation_Render{
     public function force_form_language_on_url_in_ajax( $output ){
         if ( TRP_Gettext_Manager::is_ajax_on_frontend() && isset( $_REQUEST[ 'trp-form-language' ] ) && !empty( $_REQUEST[ 'trp-form-language' ] ) ) {
             $result = json_decode($output, TRUE);
-            if ( json_last_error() === JSON_ERROR_NONE) {
+            if ( is_array( $result ) && json_last_error() === JSON_ERROR_NONE) {
                 array_walk_recursive($result, array($this, 'callback_add_language_to_url'));
                 $output = trp_safe_json_encode($result);
             } //endif
