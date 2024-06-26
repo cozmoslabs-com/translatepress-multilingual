@@ -3,9 +3,9 @@ Contributors: cozmoslabs, razvan.mo, madalin.ungureanu, sareiodata, cristophor
 Donate link: https://www.translatepress.com/
 Tags: translate, translation, multilingual, automatic translation, bilingual, front-end translation, google translate, language
 Requires at least: 3.1.0
-Tested up to: 6.5.4
+Tested up to: 6.5.5
 Requires PHP: 5.6.20
-Stable tag: 2.7.9
+Stable tag: 2.8.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -141,6 +141,13 @@ For more information please check out our [documentation](https://translatepress
 
 
 == Changelog ==
+= 2.8.0 =
+* Added compatibility with PWA plugin
+* Added missing flag for Kyrgyz language
+* Fixed menu language switcher labels not being taken into account
+* Fixed issue with custom css being broken on translated language
+* Fixed notice related to language switcher inside Elementor content
+
 = 2.7.9 =
 * Fixed issue on checkout page when using BABE Payment Pack
 * Fixed issue showing Unsupported languages when changing API key

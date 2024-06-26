@@ -2160,31 +2160,20 @@ function trp_exclude_brikk_theme_form_action( $skip_this_action, $form_action ) 
     return $skip_this_action;
 }
 
-// Check if Elementor is loaded
-function trp_is_elementor_loaded() {
-    return defined( 'ELEMENTOR_VERSION' );
-}
+/**
+ * Compatibility with PWA plugin https://wordpress.org/plugins/pwa/
+ */
+add_filter('trp_stop_translating_page', 'trp_do_not_translate_service_worker_pages', 10, 2);
+function trp_do_not_translate_service_worker_pages($translate, $output){
 
-// Check if the [language-switcher] shortcode is present on the page
-function trp_is_language_switcher_present() {
-    global $post;
-    if ( has_shortcode( $post->post_content, 'language-switcher' ) ) {
+    if( isset( $_SERVER['REQUEST_URI'] ) )
+        $request_uri = esc_url_raw( $_SERVER['REQUEST_URI'] );
+    else
+        $request_uri = '';
+
+    if( strpos( $request_uri, 'wp.serviceworker' ) !== false ){
         return true;
     }
-    return false;
-}
 
-// Add custom CSS if conditions are met
-function trp_custom_css_for_elementor_popup() {
-    if ( trp_is_elementor_loaded() && trp_is_language_switcher_present() ) {
-        ?>
-        <style>
-            .elementor-shortcode .trp-ls-shortcode-current-language,
-            .elementor-shortcode .trp-ls-shortcode-language {
-                width: 300px !important;
-            }
-        </style>
-        <?php
-    }
+    return $translate;
 }
-add_action( 'wp_head', 'trp_custom_css_for_elementor_popup' );

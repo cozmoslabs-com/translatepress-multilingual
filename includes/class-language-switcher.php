@@ -525,7 +525,7 @@ class TRP_Language_Switcher{
                 }
 
                 $language_names = $this->trp_languages->get_language_names( array( $language_code ) );
-                $language_name = $language_names[$language_code];
+                $language_name = $item->title;
 	            $items[$key]->url = esc_url( $this->url_converter->get_url_for_language( $language_code ) );
 
 	            // Output of simple text only menu, for compatibility with certain themes/plugins
