@@ -185,7 +185,7 @@ msgstr ""
 msgid "Automatic translation has been disabled."
 msgstr ""
 
-#: includes/class-error-manager.php:163, includes/class-plugin-notices.php:341, includes/class-plugin-notices.php:388, includes/class-plugin-notices.php:412, includes/class-plugin-notices.php:438, includes/class-plugin-notices.php:462, includes/class-reviews.php:119, includes/class-reviews.php:122, includes/class-upgrade.php:978
+#: includes/class-error-manager.php:163, includes/class-plugin-notices.php:341, includes/class-plugin-notices.php:388, includes/class-plugin-notices.php:425, includes/class-plugin-notices.php:450, includes/class-plugin-notices.php:474, includes/class-reviews.php:119, includes/class-reviews.php:122, includes/class-upgrade.php:978
 msgid "Dismiss this notice."
 msgstr ""
 
@@ -325,15 +325,15 @@ msgstr ""
 msgid "Your <strong>TranslatePress</strong> serial number is invalid or missing. <br/>Please %1$sregister your copy%2$s to receive access to automatic updates and support. Need a license key? %3$sPurchase one now%4$s"
 msgstr ""
 
-#: includes/class-plugin-notices.php:410
-msgid "NEW: Translate Emails and other plugin texts using String Translation. Find out <a href=\"https://translatepress.com/docs/translation-editor/string-translation/?utm_source=wpbackend&utm_medium=clientsite&utm_content=tpsettings&utm_campaign=TRP\" >how to search for a specific text to translate</a>."
+#: includes/class-plugin-notices.php:421
+msgid "NEW: Try TranslatePress AI for Instant Accurate Website Translations. <a href=\"%s\" title=\"Learn more!\" target=\"_blank\" >Learn more!</a>"
 msgstr ""
 
-#: includes/class-plugin-notices.php:435
+#: includes/class-plugin-notices.php:447
 msgid "The daily quota for machine translation characters exceeded. Please check the <strong>TranslatePress -> <a href=\"%s\">Automatic Translation</a></strong> page for more information."
 msgstr ""
 
-#: includes/class-plugin-notices.php:459
+#: includes/class-plugin-notices.php:471
 msgid "One or more languages are unsupported by the automatic translation provider. Please check the <strong>TranslatePress -> <a href=\"%s\">Automatic Translation</a></strong> page for more information."
 msgstr ""
 

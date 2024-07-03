@@ -5,7 +5,7 @@ Tags: translate, translation, multilingual, automatic translation, bilingual, fr
 Requires at least: 3.1.0
 Tested up to: 6.5.5
 Requires PHP: 5.6.20
-Stable tag: 2.8.0
+Stable tag: 2.8.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -141,6 +141,9 @@ For more information please check out our [documentation](https://translatepress
 
 
 == Changelog ==
+= 2.8.1 =
+* Fixed menu language switcher showing Current Language instead of actual language name
+
 = 2.8.0 =
 * Added compatibility with PWA plugin
 * Added missing flag for Kyrgyz language
