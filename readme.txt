@@ -3,9 +3,9 @@ Contributors: cozmoslabs, razvan.mo, madalin.ungureanu, sareiodata, cristophor
 Donate link: https://www.translatepress.com/
 Tags: translate, translation, multilingual, automatic translation, bilingual, front-end translation, google translate, language
 Requires at least: 3.1.0
-Tested up to: 6.5.5
+Tested up to: 6.6.1
 Requires PHP: 5.6.20
-Stable tag: 2.8.1
+Stable tag: 2.8.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -141,6 +141,12 @@ For more information please check out our [documentation](https://translatepress
 
 
 == Changelog ==
+= 2.8.2 =
+* Added support for Chinese Traditional automatic translations when using TP AI
+* Fixed menu language switcher not showing native language names when option was selected
+* Improved positioning of Edit button in the visual Translation Editor
+* Fixed edge case where TP AI automatic translation was always the same as the original
+
 = 2.8.1 =
 * Fixed menu language switcher showing Current Language instead of actual language name
 

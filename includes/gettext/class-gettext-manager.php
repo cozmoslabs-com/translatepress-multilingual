@@ -502,6 +502,14 @@ class TRP_Gettext_Manager {
 				$translated = '';
 				if ( $current_string['original_plural'] ) {
 
+                    /* For some domains in some languages, $translations object is not of type Translations
+                     * (but of type WP_Translations) on WP version 6.5+. So it doesn't have this method.
+                     * Todo: find an alternative to access plural forms for these cases
+                     */
+                    if ( !method_exists( $translations, 'translate_entry' ) ) {
+                        continue;
+                    }
+
 					// Insert translation for all other plural forms than the current one
 					for ( $plural_form_i = 0; $plural_form_i < $number_of_plural_forms; $plural_form_i ++ ) {
 						if ( $plural_form_i == $current_string['plural_form'] ) {
