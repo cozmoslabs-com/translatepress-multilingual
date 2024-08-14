@@ -45,7 +45,9 @@ class TRP_Gettext_Manager {
 
 			if ( in_array( $language, $this->settings['translation-languages'] ) ) {
 				$trp_translated_gettext_texts_language = $language;
-				$trp                                   = TRP_Translate_Press::get_trp_instance();
+                global $wpdb, $trp_wpdb_prefix;
+                $trp_wpdb_prefix = $wpdb->get_blog_prefix();
+                $trp             = TRP_Translate_Press::get_trp_instance();
 				if ( ! $this->trp_query ) {
 					$this->trp_query = $trp->get_component( 'query' );
 				}
