@@ -5,7 +5,7 @@ Tags: translate, translation, multilingual, automatic translation, bilingual, fr
 Requires at least: 3.1.0
 Tested up to: 6.6.1
 Requires PHP: 5.6.20
-Stable tag: 2.8.3
+Stable tag: 2.8.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -141,6 +141,10 @@ For more information please check out our [documentation](https://translatepress
 
 
 == Changelog ==
+= 2.8.4 =
+* Major refactoring of url slugs handling. It's recommended to back-up your database before updating
+* Numerous fixes including support for WooCommerce custom permalinks, custom post permalinks, permalinks without base category
+
 = 2.8.3 =
 * Fixed errors in Multisite leading to targeting incorrect subsite tables for some strings
 * Fixed TranslatePress Editor pencil icon's incorrect placement in some cases

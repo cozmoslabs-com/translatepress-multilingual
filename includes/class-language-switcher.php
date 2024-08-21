@@ -46,7 +46,7 @@ class TRP_Language_Switcher{
 
 		$needed_language = $this->determine_needed_language( $language_from_url, $trp );
 
-		$allow_redirect = apply_filters( 'trp_allow_language_redirect', true, $needed_language, $this->url_converter->cur_page_url() );
+		$allow_redirect = apply_filters( 'trp_allow_language_redirect', true, $needed_language, $this->url_converter->cur_page_url( 'unset' ) );
 		if ( $allow_redirect ) {
 			if ( ( $language_from_url == null && isset( $this->settings['add-subdirectory-to-default-language'] ) && $this->settings['add-subdirectory-to-default-language'] == 'yes' ) ||
 			     ( $language_from_url == null && $needed_language != $this->settings['default-language'] ) ||

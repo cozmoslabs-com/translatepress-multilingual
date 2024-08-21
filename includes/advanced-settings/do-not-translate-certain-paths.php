@@ -443,3 +443,34 @@ function trp_dntcp_get_paths() {
 function trp_dntcp_get_abs_home_url($new_url, $abs_home){
     return $abs_home;
 }
+
+add_filter( "trp_allow_machine_translation_for_url", 'trp_dntcp_exclude_links_from_automatic_translation', 10, 2);
+function trp_dntcp_exclude_links_from_automatic_translation( $excluded, $url_verification ){
+
+    $advanced_settings = get_option( 'trp_advanced_settings', false );
+
+    $trp           = TRP_Translate_Press::get_trp_instance();
+    $url_converter = $trp->get_component('url_converter');
+
+    $absolute_home = $url_converter->get_abs_home();
+
+    // Take into account the subdirectory for default language option
+    if ( isset( $settings['add-subdirectory-to-default-language'] ) && $settings['add-subdirectory-to-default-language'] == 'yes' )
+        $absolute_home = trailingslashit( $absolute_home ) . $settings['url-slugs'][$settings['default-language']];
+
+    $current_slug = str_replace( $absolute_home, '', $url_verification );
+
+    $paths = trp_dntcp_get_paths();
+
+    $array_slugs = array();
+    trp_test_current_slug($current_slug, $array_slugs );
+
+    if( isset( $advanced_settings['translateable_content']['option']) && $advanced_settings['translateable_content']['option'] == 'exclude' ) {
+
+        if ( trp_return_exclude_include_url( $paths, $current_slug, $array_slugs ) ) {
+            return false;
+        }
+    }
+
+    return $excluded;
+}

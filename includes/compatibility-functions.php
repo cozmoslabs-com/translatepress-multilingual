@@ -2177,3 +2177,243 @@ function trp_do_not_translate_service_worker_pages($translate, $output){
 
     return $translate;
 }
+
+if ( class_exists( 'WooCommerce' ) ){
+    add_action('plugins_loaded', 'trp_check_if_woo_language_po_file_exists');
+}
+
+function trp_check_if_woo_language_po_file_exists() {
+
+    $trp                 = TRP_Translate_Press::get_trp_instance();
+    $trp_settings        = $trp->get_component( 'settings' );
+    $settings            = $trp_settings->get_settings();
+
+    if ( $settings['default-language'] != 'en_US' && !file_exists(WP_LANG_DIR . "/plugins/woocommerce-{$settings['default-language']}.po")){
+        trp_download_woo_po_file_for_default_language( $settings['default-language'] );
+    }
+    if ( class_exists( 'TRP_IN_Seo_Pack' ) ) {
+
+        foreach ( $settings['publish-languages'] as $secondary_language ){
+            if ( $secondary_language != $settings['default-language'] ){
+                if ( !file_exists(WP_LANG_DIR . "/plugins/woocommerce-{$secondary_language}.po")){
+                    trp_download_woo_po_file_for_default_language( $secondary_language );
+                }
+            }
+        }
+
+    }
+}
+
+function trp_download_woo_po_file_for_default_language( $default_language ){
+
+    $path_for_po_file_in_the_requested_language = trp_get_translation_woo_po_files_url( $default_language );
+
+    if ( $path_for_po_file_in_the_requested_language ) {
+        $language_pack_url = $path_for_po_file_in_the_requested_language;
+
+        $save_to = WP_LANG_DIR . "/plugins";
+        file_put_contents( "woocommerce-{$default_language}.zip", file_get_contents( $path_for_po_file_in_the_requested_language) );
+
+        $zip = new ZipArchive;
+        $res = $zip->open( "woocommerce-{$default_language}.zip");
+
+        if ( $res === TRUE ) {
+            $zip->extractTo( $save_to, array( "woocommerce-{$default_language}.po" ) );
+            $zip->close();
+
+            return true;
+        }
+    }
+    return false;
+
+}
+
+function trp_get_translation_woo_po_files_url( $default_language ) {
+    $translations_api_url = "https://api.wordpress.org/translations/plugins/1.0/?slug=woocommerce";
+    $response = wp_remote_get($translations_api_url, array('timeout' => 300));
+
+    if (is_wp_error($response)) {
+        return false;
+    }
+
+    $body = wp_remote_retrieve_body($response);
+    $data = json_decode($body, true);
+
+    if (empty($data['translations'])) {
+        return false;
+    }
+
+    foreach ($data['translations'] as $translation) {
+        if ($translation['language'] === $default_language) {
+            return $translation['package'];
+        }
+    }
+
+    return false;
+}
+
+function trp_check_condition_and_flush_rewrite_rules() {
+
+    $trp = TRP_Translate_Press::get_trp_instance();
+    $trp_settings = $trp->get_component( 'settings' );
+    $settings = $trp_settings->get_settings();
+
+    if ( $settings['default-language'] != 'en_US' && class_exists('WooCommerce') ) {
+
+        $woo_slug_to_be_replaced = array();
+        $woo_english_slugs = array( 'product-category', 'product-tag', 'product', 'uncategorized' );
+
+        $is_option_set_product_cat = get_option( "trp_woo_english_slug_map_product_category_{$settings['default-language']}" );
+
+        if ( $is_option_set_product_cat ) {
+            $woo_slug_to_be_replaced['product-category'] = $is_option_set_product_cat;
+        }else{
+            $woo_slug_to_be_replaced['product-category'] = str_replace(' ','-', trp_x_updated( 'product-category', 'slug', 'woocommerce', $settings['default-language']));
+            add_option( "trp_woo_english_slug_map_product_category_{$settings['default-language']}", $woo_slug_to_be_replaced['product-category'] );
+        }
+
+        $is_option_set_product = get_option( "trp_woo_english_slug_map_product_{$settings['default-language']}" );
+
+        if ( $is_option_set_product ) {
+            $woo_slug_to_be_replaced['product'] = $is_option_set_product;
+        }else {
+            $woo_slug_to_be_replaced['product'] = str_replace(' ','-', trp_x_updated( 'product', 'slug', 'woocommerce', $settings['default-language'] ));
+            add_option( "trp_woo_english_slug_map_product_{$settings['default-language']}", $woo_slug_to_be_replaced['product'] );
+
+        }
+        $is_option_set_product_tag = get_option( "trp_woo_english_slug_map_product_tag_{$settings['default-language']}" );
+
+        if ( $is_option_set_product_tag ) {
+            $woo_slug_to_be_replaced['product-tag'] = $is_option_set_product_tag;
+        }else {
+            $woo_slug_to_be_replaced['product-tag'] = str_replace(' ','-', trp_x_updated( 'product-tag', 'slug', 'woocommerce', $settings['default-language'] ));
+            add_option( "trp_woo_english_slug_map_product_tag_{$settings['default-language']}", $woo_slug_to_be_replaced['product-tag'] );
+        }
+
+        $is_option_set_uncategorized = get_option( "trp_woo_english_slug_map_uncategorized_{$settings['default-language']}" );
+
+        if ( $is_option_set_uncategorized ) {
+            $woo_slug_to_be_replaced['uncategorized'] = $is_option_set_uncategorized;
+        }else {
+            $woo_slug_to_be_replaced['uncategorized'] = str_replace(' ','-', trp_x_updated( 'uncategorized', 'slug', 'woocommerce', $settings['default-language'] ));
+            add_option( "trp_woo_english_slug_map_uncategorized_{$settings['default-language']}", $woo_slug_to_be_replaced['uncategorized'] );
+        }
+
+        if ( class_exists( 'TRP_IN_Seo_Pack' ) && function_exists( 'trp_in_sp_create_db_tables' ) ) {
+
+            $slug_query     = new TRP_Slug_Query();
+
+            $insert_woo_english_slugs = array();
+            foreach ( $settings['publish-languages'] as $secondary_language ) {
+                if ( $secondary_language != $settings['default-language'] ){
+                    foreach ( $woo_english_slugs as $woo_slug ){
+                        $insert_woo_english_slugs[ $woo_slug_to_be_replaced[$woo_slug ]]['original'] = $woo_slug_to_be_replaced[$woo_slug];
+                        $insert_woo_english_slugs[ $woo_slug_to_be_replaced[$woo_slug ]]['translated'] = str_replace(' ','-', trp_x_updated( $woo_slug, 'slug', 'woocommerce', $secondary_language ));
+                        $insert_woo_english_slugs[ $woo_slug_to_be_replaced[$woo_slug ]]['status'] = '2';
+
+                        if ( $woo_slug == 'product-category' || $woo_slug == 'product-tag'){
+                            $insert_woo_english_slugs[ $woo_slug_to_be_replaced[$woo_slug ]]['type'] = 'taxonomy';
+                        }elseif ( $woo_slug == 'product' ){
+                            $insert_woo_english_slugs[ $woo_slug_to_be_replaced[$woo_slug ]]['type'] = 'post-type-base';
+                        }elseif ( $woo_slug == 'uncategorized' ){
+                            $insert_woo_english_slugs[ $woo_slug_to_be_replaced[$woo_slug ]]['type'] = 'term';
+                        }
+                    }
+
+                    $slug_query->insert_slugs( $insert_woo_english_slugs, $secondary_language );
+
+                }
+            }
+        }
+
+        add_filter('term_link', 'trp_custom_term_link', 10, 3);
+        add_filter('post_type_link', 'trp_custom_post_type_link', 10, 2);
+
+        trp_custom_rewrite_rules( $woo_slug_to_be_replaced );
+
+        flush_rewrite_rules();
+
+    }else {
+        flush_rewrite_rules();
+    }
+}
+
+add_action('wp_loaded', 'trp_check_condition_and_flush_rewrite_rules');
+
+// Function to add custom rewrite rules for woo english slugs
+function trp_custom_rewrite_rules( $woo_slug_to_be_replaced ) {
+
+    add_rewrite_rule(
+        '^' . $woo_slug_to_be_replaced['product-category'] . '/' . $woo_slug_to_be_replaced['uncategorized'] . '/?$',
+        'index.php?product_cat=uncategorized',
+        'top'
+    );
+
+    add_rewrite_rule(
+        '^' . $woo_slug_to_be_replaced['product'] . '/' . $woo_slug_to_be_replaced['uncategorized'] . '/([^/]*)/?',
+        'index.php?product=$matches[1]&product_cat=uncategorized',
+        'top'
+    );
+
+    add_rewrite_rule(
+        '^' . $woo_slug_to_be_replaced['product-category'] . '/(.+)/?$',
+        'index.php?product_cat=$matches[1]',
+        'top'
+    );
+
+    add_rewrite_rule(
+        '^' . $woo_slug_to_be_replaced['product'] . '/([^/]+)/?', // Custom URL structure (e.g., my-product/product-name)
+        'index.php?product=$matches[1]', // Corresponding query variables
+        'top' // Priority of the rule
+    );
+
+    add_rewrite_rule(
+        '^' . $woo_slug_to_be_replaced['product-tag'] . '/([^/]+)/?', // Custom URL structure (e.g., product-tag/tag-name)
+        'index.php?product_tag=$matches[1]', // Corresponding query variables
+        'top' // Priority of the rule
+    );
+
+    add_rewrite_tag('%product_cat%', '([^&]+)');
+    add_rewrite_tag('%product%', '([^&]+)');
+    add_rewrite_tag('%product_tag%', '([^&]+)');
+    add_rewrite_tag('%uncategorized%', '([^&]+)');
+
+}
+
+function trp_custom_term_link($url, $term, $taxonomy) {
+
+    $trp = TRP_Translate_Press::get_trp_instance();
+    $trp_settings = $trp->get_component( 'settings' );
+    $settings = $trp_settings->get_settings();
+
+    $woo_slug_to_be_replaced = array();
+    $woo_slug_to_be_replaced['product-category'] = get_option( "trp_woo_english_slug_map_product_category_{$settings['default-language']}" );
+    $woo_slug_to_be_replaced['product-tag'] = get_option( "trp_woo_english_slug_map_product_tag_{$settings['default-language']}" );
+    $woo_slug_to_be_replaced['uncategorized'] = get_option( "trp_woo_english_slug_map_uncategorized_{$settings['default-language']}" );
+    ;
+
+    if ($taxonomy === 'product_cat') {
+        $url = str_replace('/uncategorized/', '/' . $woo_slug_to_be_replaced['uncategorized'] . '/', $url);
+
+        $url = str_replace('/product-category/', '/' . $woo_slug_to_be_replaced['product-category'] . '/', $url);
+    } elseif ($taxonomy === 'product_tag') {
+        return str_replace('/product-tag/', '/' . $woo_slug_to_be_replaced['product-tag'] . '/', $url);
+    }
+    return $url;
+}
+
+function trp_custom_post_type_link($url, $post) {
+    $trp = TRP_Translate_Press::get_trp_instance();
+    $trp_settings = $trp->get_component( 'settings' );
+    $settings = $trp_settings->get_settings();
+
+    $woo_slug_to_be_replaced['uncategorized'] = get_option( "trp_woo_english_slug_map_uncategorized_{$settings['default-language']}" );
+    $woo_slug_to_be_replaced['product'] = get_option( "trp_woo_english_slug_map_product_{$settings['default-language']}" );
+
+    $url = str_replace('/uncategorized/', '/' . $woo_slug_to_be_replaced['uncategorized'] . '/', $url);
+
+    if ($post->post_type === 'product') {
+        $url = str_replace('/product/', '/' . $woo_slug_to_be_replaced['product'] . '/', $url);
+    }
+    return $url;
+}
