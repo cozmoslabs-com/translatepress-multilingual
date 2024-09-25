@@ -2191,17 +2191,6 @@ function trp_check_if_woo_language_po_file_exists() {
     if ( $settings['default-language'] != 'en_US' && !file_exists(WP_LANG_DIR . "/plugins/woocommerce-{$settings['default-language']}.po")){
         trp_download_woo_po_file_for_default_language( $settings['default-language'] );
     }
-    if ( class_exists( 'TRP_IN_Seo_Pack' ) ) {
-
-        foreach ( $settings['publish-languages'] as $secondary_language ){
-            if ( $secondary_language != $settings['default-language'] ){
-                if ( !file_exists(WP_LANG_DIR . "/plugins/woocommerce-{$secondary_language}.po")){
-                    trp_download_woo_po_file_for_default_language( $secondary_language );
-                }
-            }
-        }
-
-    }
 }
 
 function trp_download_woo_po_file_for_default_language( $default_language ){
@@ -2252,168 +2241,204 @@ function trp_get_translation_woo_po_files_url( $default_language ) {
     return false;
 }
 
-function trp_check_condition_and_flush_rewrite_rules() {
-
+/**
+ * Hooked to trp_get_url_for_language, used in case the pro version of TP was not updated or legacy SEO Pack is in use
+ *
+ * @param $new_url
+ * @param $url
+ * @param $language
+ * @return mixed|string|null
+ */
+function trp_get_url_for_language_backwards_compatibility( $new_url, $url, $language ){
     $trp = TRP_Translate_Press::get_trp_instance();
     $trp_settings = $trp->get_component( 'settings' );
     $settings = $trp_settings->get_settings();
 
-    if ( $settings['default-language'] != 'en_US' && class_exists('WooCommerce') ) {
+    $upgrade = new TRP_Upgrade( $settings );
 
-        $woo_slug_to_be_replaced = array();
-        $woo_english_slugs = array( 'product-category', 'product-tag', 'product', 'uncategorized' );
+    if ( $upgrade->is_pro_minimum_version_met() && ( !isset( $settings['trp_advanced_settings']['load_legacy_seo_pack'] ) || $settings['trp_advanced_settings']['load_legacy_seo_pack'] === 'no' ) ) return $new_url; // Abort -- New system can be used, process URL via get_slug_translated_url_for_language
 
-        $is_option_set_product_cat = get_option( "trp_woo_english_slug_map_product_category_{$settings['default-language']}" );
+    $url_converter = $trp->get_component( 'url_converter' );
 
-        if ( $is_option_set_product_cat ) {
-            $woo_slug_to_be_replaced['product-category'] = $is_option_set_product_cat;
-        }else{
-            $woo_slug_to_be_replaced['product-category'] = str_replace(' ','-', trp_x_updated( 'product-category', 'slug', 'woocommerce', $settings['default-language']));
-            add_option( "trp_woo_english_slug_map_product_category_{$settings['default-language']}", $woo_slug_to_be_replaced['product-category'] );
+    $debug = false;
+
+    global $TRP_LANGUAGE;
+
+    $trp_language_copy = $TRP_LANGUAGE;
+
+    $url_obj          = trp_cache_get('url_obj_' . hash('md4', $url), 'trp');
+    $abs_home_url_obj = trp_cache_get('url_obj_' . hash('md4',  $url_converter->get_abs_home() ), 'trp');
+
+    $possible_post_id = trp_cache_get( 'possible_post_id_'. hash('md4', $url ), 'trp' );
+
+    if ( $possible_post_id ){
+        $post_id = $possible_post_id;
+        trp_bulk_debug($debug, array('url' => $url, 'found post id' => $post_id, 'for language' => $TRP_LANGUAGE));
+    }
+
+    else {
+        $post_id = url_to_postid( $url );
+        wp_cache_set( 'possible_post_id_' . hash('md4', $url ), $post_id, 'trp' );
+        if ( $post_id ) { trp_bulk_debug($debug, array('url' => $url, 'found post id' => $post_id, 'for default language' => $TRP_LANGUAGE)); }
+
+        if ( $post_id == 0 ) {
+            /* try again but this time switch to default language home_url
+            *  becasue url_to_postid() uses the global language setting to accurately retrieve a post ID
+            */
+            $TRP_LANGUAGE = $settings['default-language'];
+            add_filter('trp_keep_permalinks_unchanged', '__return_true' );
+
+            /* In order to accurately find the post ID the passed URL to url_to_postid() needs to be accurate
+            * if the option add subdir to default language is on we need to add that to the URL
+            */
+
+            $possible_url = $url;
+            if (isset ($settings['add-subdirectory-to-default-language']) && $settings['add-subdirectory-to-default-language'] === 'yes' && $url_converter->get_lang_from_url_string( $url ) == null ){
+                $possible_url = $url_converter->add_language_to_home_url($url, $url_obj->getPath(), $url_obj->getScheme(), get_current_blog_id() );
+            }
+            $post_id = url_to_postid( $possible_url );
+            wp_cache_set( 'possible_post_id_' . hash('md4', $possible_url ), $post_id, 'trp' );
+            if($post_id){ trp_bulk_debug($debug, array('url' => $url, 'found post id' => $post_id, 'for default language' => $TRP_LANGUAGE)); }
+
+            remove_filter('trp_keep_permalinks_unchanged', '__return_true' );
+            $TRP_LANGUAGE = $trp_language_copy;
         }
+    }
 
-        $is_option_set_product = get_option( "trp_woo_english_slug_map_product_{$settings['default-language']}" );
+    $TRP_LANGUAGE = $url_converter->get_lang_from_url_string( $url );
 
-        if ( $is_option_set_product ) {
-            $woo_slug_to_be_replaced['product'] = $is_option_set_product;
-        }else {
-            $woo_slug_to_be_replaced['product'] = str_replace(' ','-', trp_x_updated( 'product', 'slug', 'woocommerce', $settings['default-language'] ));
-            add_option( "trp_woo_english_slug_map_product_{$settings['default-language']}", $woo_slug_to_be_replaced['product'] );
+    if ($TRP_LANGUAGE == null){
+        $TRP_LANGUAGE = $settings['default-language'];
+    }
 
-        }
-        $is_option_set_product_tag = get_option( "trp_woo_english_slug_map_product_tag_{$settings['default-language']}" );
+    $new_url_has_been_determined = false;
 
-        if ( $is_option_set_product_tag ) {
-            $woo_slug_to_be_replaced['product-tag'] = $is_option_set_product_tag;
-        }else {
-            $woo_slug_to_be_replaced['product-tag'] = str_replace(' ','-', trp_x_updated( 'product-tag', 'slug', 'woocommerce', $settings['default-language'] ));
-            add_option( "trp_woo_english_slug_map_product_tag_{$settings['default-language']}", $woo_slug_to_be_replaced['product-tag'] );
-        }
+    if( $post_id ){
 
-        $is_option_set_uncategorized = get_option( "trp_woo_english_slug_map_uncategorized_{$settings['default-language']}" );
+        /*
+         * We need to find if the current URL (either passed as parameter or found via cur_page_url)
+         * has extra arguments compared to its permalink.
+         * We need the permalink based on the language IN THE URL, not the one passed to this function,
+         * as that represents the language to be translated into.
+         *
+         * WE ARE NOT USING \TranslatePress\Uri
+         * due to URL's having extra path elements after the permalink slug. Using the class would strip those end points.
+         *
+         */
 
-        if ( $is_option_set_uncategorized ) {
-            $woo_slug_to_be_replaced['uncategorized'] = $is_option_set_uncategorized;
-        }else {
-            $woo_slug_to_be_replaced['uncategorized'] = str_replace(' ','-', trp_x_updated( 'uncategorized', 'slug', 'woocommerce', $settings['default-language'] ));
-            add_option( "trp_woo_english_slug_map_uncategorized_{$settings['default-language']}", $woo_slug_to_be_replaced['uncategorized'] );
-        }
+        $processed_permalink = get_permalink($post_id);
 
-        if ( class_exists( 'TRP_IN_Seo_Pack' ) && function_exists( 'trp_in_sp_create_db_tables' ) ) {
+        $url_to_replace = ( $url_obj->isSchemeless() ) ?
+            ( $url_obj->hasAnchor() || $url_obj->hasQueryParam() ) ?
+                trailingslashit( home_url() ) . ltrim($url, '/')
+                :trailingslashit(trailingslashit( home_url() ) . ltrim($url, '/') )
+            :$url;
 
-            $slug_query     = new TRP_Slug_Query();
+        $arguments = str_replace(untrailingslashit($processed_permalink), '', $url_to_replace );
 
-            $insert_woo_english_slugs = array();
-            foreach ( $settings['publish-languages'] as $secondary_language ) {
-                if ( $secondary_language != $settings['default-language'] ){
-                    foreach ( $woo_english_slugs as $woo_slug ){
-                        $insert_woo_english_slugs[ $woo_slug_to_be_replaced[$woo_slug ]]['original'] = $woo_slug_to_be_replaced[$woo_slug];
-                        $insert_woo_english_slugs[ $woo_slug_to_be_replaced[$woo_slug ]]['translated'] = str_replace(' ','-', trp_x_updated( $woo_slug, 'slug', 'woocommerce', $secondary_language ));
-                        $insert_woo_english_slugs[ $woo_slug_to_be_replaced[$woo_slug ]]['status'] = '2';
-
-                        if ( $woo_slug == 'product-category' || $woo_slug == 'product-tag'){
-                            $insert_woo_english_slugs[ $woo_slug_to_be_replaced[$woo_slug ]]['type'] = 'taxonomy';
-                        }elseif ( $woo_slug == 'product' ){
-                            $insert_woo_english_slugs[ $woo_slug_to_be_replaced[$woo_slug ]]['type'] = 'post-type-base';
-                        }elseif ( $woo_slug == 'uncategorized' ){
-                            $insert_woo_english_slugs[ $woo_slug_to_be_replaced[$woo_slug ]]['type'] = 'term';
-                        }
-                    }
-
-                    $slug_query->insert_slugs( $insert_woo_english_slugs, $secondary_language );
-
+        // if nothing was replaced, something was wrong, just use the normal permalink without any arguments.
+        if( $arguments == $url_to_replace ) {
+            $arguments = '';
+            //try again, this time trying to correct url_to_replace to include subdirectory
+            if (isset ($settings['add-subdirectory-to-default-language']) && $settings['add-subdirectory-to-default-language'] === 'yes' && $url_converter->get_lang_from_url_string( $url_to_replace ) == null ) {
+                $possible_url_to_replace = $url_converter->add_language_to_home_url( $url, ( empty( $url_obj->getQuery() ) ) ? (( empty( $url_obj->getFragment() ) ) ? $url_obj->getPath() : $url_obj->getPath() . '#' . $url_obj->getFragment()) : (( empty( $url_obj->getFragment() ) ) ? rtrim( $url_obj->getPath(), '/' ) . '/?' . $url_obj->getQuery() : rtrim( $url_obj->getPath(), '/' ) . '/?' . $url_obj->getQuery() . '#' . $url_obj->getFragment() ), $url_obj->getScheme(), get_current_blog_id() );
+                $arguments = str_replace( untrailingslashit( $processed_permalink ), '', $possible_url_to_replace );
+                if ( $arguments == $possible_url_to_replace ) {
+                    $arguments = '';
                 }
             }
         }
 
-        add_filter('term_link', 'trp_custom_term_link', 10, 3);
-        add_filter('post_type_link', 'trp_custom_post_type_link', 10, 2);
+        $TRP_LANGUAGE = $language;
 
-        trp_custom_rewrite_rules( $woo_slug_to_be_replaced );
+        $new_url = trailingslashit( get_permalink($post_id) ) . ltrim($arguments, '/');
+        trp_bulk_debug($debug, array('url' => $url, 'new url' => $new_url, 'found post id' => $post_id, 'url type' => 'based on permalink', 'for language' => $TRP_LANGUAGE));
+        $TRP_LANGUAGE = $trp_language_copy;
 
-        flush_rewrite_rules();
+        $new_url_has_been_determined = true;
 
-    }else {
-        flush_rewrite_rules();
     }
-}
 
-add_action('wp_loaded', 'trp_check_condition_and_flush_rewrite_rules');
+    if( isset( $trp_current_url_term_slug ) && isset($trp_current_url_taxonomy) && $new_url_has_been_determined === false ){
+        // check here if it is a term link
+        $current_term_link = get_term_link( $trp_current_url_term_slug, $trp_current_url_taxonomy);
 
-// Function to add custom rewrite rules for woo english slugs
-function trp_custom_rewrite_rules( $woo_slug_to_be_replaced ) {
+        if (!is_wp_error($current_term_link)){
+            $TRP_LANGUAGE = $language;
+            $check_term_link = get_term_link($trp_current_url_term_slug, $trp_current_url_taxonomy);
 
-    add_rewrite_rule(
-        '^' . $woo_slug_to_be_replaced['product-category'] . '/' . $woo_slug_to_be_replaced['uncategorized'] . '/?$',
-        'index.php?product_cat=uncategorized',
-        'top'
-    );
+            if ( !is_wp_error($check_term_link) && strpos(urldecode( $url ), $current_term_link) === 0 ) {
+                $new_url = str_replace( $current_term_link, $check_term_link, urldecode( $url ) );
+                $new_url_has_been_determined = true;
+            }
 
-    add_rewrite_rule(
-        '^' . $woo_slug_to_be_replaced['product'] . '/' . $woo_slug_to_be_replaced['uncategorized'] . '/([^/]*)/?',
-        'index.php?product=$matches[1]&product_cat=uncategorized',
-        'top'
-    );
-
-    add_rewrite_rule(
-        '^' . $woo_slug_to_be_replaced['product-category'] . '/(.+)/?$',
-        'index.php?product_cat=$matches[1]',
-        'top'
-    );
-
-    add_rewrite_rule(
-        '^' . $woo_slug_to_be_replaced['product'] . '/([^/]+)/?', // Custom URL structure (e.g., my-product/product-name)
-        'index.php?product=$matches[1]', // Corresponding query variables
-        'top' // Priority of the rule
-    );
-
-    add_rewrite_rule(
-        '^' . $woo_slug_to_be_replaced['product-tag'] . '/([^/]+)/?', // Custom URL structure (e.g., product-tag/tag-name)
-        'index.php?product_tag=$matches[1]', // Corresponding query variables
-        'top' // Priority of the rule
-    );
-
-    add_rewrite_tag('%product_cat%', '([^&]+)');
-    add_rewrite_tag('%product%', '([^&]+)');
-    add_rewrite_tag('%product_tag%', '([^&]+)');
-    add_rewrite_tag('%uncategorized%', '([^&]+)');
-
-}
-
-function trp_custom_term_link($url, $term, $taxonomy) {
-
-    $trp = TRP_Translate_Press::get_trp_instance();
-    $trp_settings = $trp->get_component( 'settings' );
-    $settings = $trp_settings->get_settings();
-
-    $woo_slug_to_be_replaced = array();
-    $woo_slug_to_be_replaced['product-category'] = get_option( "trp_woo_english_slug_map_product_category_{$settings['default-language']}" );
-    $woo_slug_to_be_replaced['product-tag'] = get_option( "trp_woo_english_slug_map_product_tag_{$settings['default-language']}" );
-    $woo_slug_to_be_replaced['uncategorized'] = get_option( "trp_woo_english_slug_map_uncategorized_{$settings['default-language']}" );
-    ;
-
-    if ($taxonomy === 'product_cat') {
-        $url = str_replace('/uncategorized/', '/' . $woo_slug_to_be_replaced['uncategorized'] . '/', $url);
-
-        $url = str_replace('/product-category/', '/' . $woo_slug_to_be_replaced['product-category'] . '/', $url);
-    } elseif ($taxonomy === 'product_tag') {
-        return str_replace('/product-tag/', '/' . $woo_slug_to_be_replaced['product-tag'] . '/', $url);
+            $TRP_LANGUAGE = $trp_language_copy;
+        }
     }
-    return $url;
-}
 
-function trp_custom_post_type_link($url, $post) {
-    $trp = TRP_Translate_Press::get_trp_instance();
-    $trp_settings = $trp->get_component( 'settings' );
-    $settings = $trp_settings->get_settings();
+    /**
+     * We try to look for a possible posts archive link that can be on the front page or another page in order to add pagination.
+     */
+    $url_stripped = $url;
+    $posts_archive_link = get_post_type_archive_link('post');
 
-    $woo_slug_to_be_replaced['uncategorized'] = get_option( "trp_woo_english_slug_map_uncategorized_{$settings['default-language']}" );
-    $woo_slug_to_be_replaced['product'] = get_option( "trp_woo_english_slug_map_product_{$settings['default-language']}" );
-
-    $url = str_replace('/uncategorized/', '/' . $woo_slug_to_be_replaced['uncategorized'] . '/', $url);
-
-    if ($post->post_type === 'product') {
-        $url = str_replace('/product/', '/' . $woo_slug_to_be_replaced['product'] . '/', $url);
+    if( !empty($url_obj->getQuery()) ){
+        $url_stripped = strtok($url_stripped, '?');
     }
-    return $url;
+    $url_stripped = rtrim($url_stripped, '/');
+
+    $posts_archive_link = strtok($posts_archive_link, '?');
+    $posts_archive_link = rtrim($url_converter->maybe_add_pagination_to_blog_page($posts_archive_link), '/');
+
+    if( is_home() && $url_stripped === $posts_archive_link && ( isset( $_SERVER['REQUEST_URI'] ) && strpos( esc_url_raw( $_SERVER['REQUEST_URI'] ), 'sitemap') === false && strpos( esc_url_raw( $_SERVER['REQUEST_URI'] ), '.xml') === false ) &&
+        $new_url_has_been_determined === false)
+    {//for some reason in yoast sitemap is_home() is true ..so we need to check if we are not in the sitemap itself
+        $TRP_LANGUAGE = $language;
+        if ( empty($url_obj->getQuery()) ) {
+            $new_url = $url_converter->maybe_add_pagination_to_blog_page( trailingslashit(get_post_type_archive_link( 'post' ) ));
+        } else {
+            $new_url = rtrim( $url_converter->maybe_add_pagination_to_blog_page( get_post_type_archive_link( 'post' ) ), '/') . '/?' . $url_obj->getQuery();
+        }
+        $TRP_LANGUAGE = $trp_language_copy;
+
+        $new_url_has_been_determined = true;
+    }
+
+    if ($new_url_has_been_determined === false){
+        // we're just adding the new language to the url
+        $new_url_obj = $url_obj;
+        if ($abs_home_url_obj->getPath() == "/") {
+            $abs_home_url_obj->setPath('');
+        }
+        if ($url_converter->get_lang_from_url_string($url) === null) {
+            // these are the custom url. They don't have language
+            $abs_home_considered_path = trim(str_replace( $abs_home_url_obj->getPath() !== null ? $abs_home_url_obj->getPath() : '', '', $url_obj->getPath()), '/');
+            $new_url_obj->setPath(trailingslashit(trailingslashit($abs_home_url_obj->getPath()) . trailingslashit($url_converter->get_url_slug($language)) . $abs_home_considered_path));
+            $new_url = $new_url_obj->getUri();
+
+            trp_bulk_debug($debug, array('url' => $url, 'new url' => $new_url, 'lang' => $language, 'url type' => 'custom url without language parameter'));
+        } else {
+            // these have language param in them and we need to replace them with the new language
+            $abs_home_considered_path = trim(str_replace($abs_home_url_obj->getPath() !== null ? $abs_home_url_obj->getPath() : '', '', $url_obj->getPath()), '/');
+            $no_lang_orig_path = explode('/', $abs_home_considered_path);
+            unset($no_lang_orig_path[0]);
+            $no_lang_orig_path = implode('/', $no_lang_orig_path);
+
+            if (!$url_converter->get_url_slug($language)) {
+                $url_lang_slug = '';
+            } else {
+                $url_lang_slug = trailingslashit($url_converter->get_url_slug($language));
+            }
+
+            $new_url_obj->setPath(trailingslashit(trailingslashit($abs_home_url_obj->getPath() !== null ? $abs_home_url_obj->getPath() : '') . $url_lang_slug . ltrim($no_lang_orig_path, '/')));
+            $new_url = $new_url_obj->getUri();
+
+            trp_bulk_debug($debug, array('url' => $url, 'new url' => $new_url, 'lang' => $language, 'url type' => 'custom url with language', 'abs home path' => $abs_home_url_obj->getPath()));
+
+        }
+    }
+    $TRP_LANGUAGE = $trp_language_copy;
+
+    return $new_url;
 }
+add_filter('trp_get_url_for_language', 'trp_get_url_for_language_backwards_compatibility', 10, 3 );

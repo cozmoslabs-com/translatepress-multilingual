@@ -11,8 +11,10 @@ class TRP_Upgrade {
 	protected $db;
 	/* @var TRP_Query */
 	protected $trp_query;
-    const MINIMUM_PERSONAL_VERSION = '1.2.9';
-    const MINIMUM_DEVELOPER_VERSION = '1.4.2';
+
+    /** Major slug translation refactoring released in these versions */
+    const MINIMUM_PERSONAL_VERSION = '1.3.1';
+    const MINIMUM_DEVELOPER_VERSION = '1.4.4';
 
 	/**
 	 * TRP_Upgrade constructor.
@@ -50,19 +52,9 @@ class TRP_Upgrade {
 
             // Updates that require admins to trigger manual update of db because of long duration. Set an option in DB if this is the case.
             $updates = $this->get_updates_details();
-            $free_version = !class_exists( 'TRP_Handle_Included_Addons' );
-
-            if ( !$free_version ){
-                foreach ( $updates as $update ) {
-                    if ( version_compare( $update['version'], $stored_database_version, '>' ) ) {
-                        update_option( $update['option_name'], 'no' );
-                    }
-                }
-            }else {
-                foreach ( $updates as $update ) {
-                    if ( version_compare( $update['version'], $stored_database_version, '>' ) && ( !isset( $update['require_paid_version'] ) || $update['require_paid_version'] != true ) ) {
-                        update_option( $update['option_name'], 'no' );
-                    }
+            foreach ( $updates as $update ) {
+                if ( version_compare( $update['version'], $stored_database_version, '>' ) ) {
+                    update_option( $update['option_name'], 'no' );
                 }
             }
 
@@ -109,8 +101,9 @@ class TRP_Upgrade {
             if ( version_compare( $stored_database_version, '2.7.4', '<=' ) ) {
                 $this->add_tp_block_index();
             }
-            if ( version_compare( $stored_database_version, '2.8.3', '<=' ) ) {
-                $this->check_if_slug_tables_exist();
+            if ( version_compare( $stored_database_version, '2.8.4', '<=' ) ) {
+                $this->dont_update_db_if_seopack_inactive();
+                $this->set_the_options_set_in_db_optimization_tool_to_no();
             }
 
             /**
@@ -157,22 +150,6 @@ class TRP_Upgrade {
 		$gettext_table_creation->check_gettext_original_table();
 		$gettext_table_creation->check_gettext_original_meta_table();
 	}
-
-
-    /**
-     * Calls slug table checking
-     */
-    public function check_if_slug_tables_exist() {
-
-        $trp = TRP_Translate_Press::get_trp_instance();
-        if ( !$this->trp_query ) {
-            $this->trp_query = $trp->get_component( 'query' );
-        }
-
-        if ( function_exists( 'trp_in_sp_create_db_tables' ) ) {
-            trp_in_sp_create_db_tables();
-        }
-    }
 
 	public function get_updates_details(){
 		return apply_filters( 'trp_updates_details',
@@ -310,32 +287,29 @@ class TRP_Upgrade {
                     'message_processing'=> __('Updating gettext original string ids for language %s...', 'translatepress-multilingual' )
                 ),
                 'migrate_old_slugs_to_the_new_translate_table_structure_post_type_and_tax_284' => array(
-                    'version'              => '2.8.4',
-                    'option_name'          => 'trp_migrate_old_slug_to_new_parent_and_translate_slug_table_post_type_and_tax_284',
-                    'callback'             => array( $this, 'trp_migrate_old_slug_to_new_parent_and_translate_slug_table_post_type_and_tax_284' ),
-                    'batch_size'           => 1000000,
-                    'message_initial'      => '',
-                    'message_processing'   => __( 'Migrating taxonomy and post type base slugs to new table structure...', 'translatepress-multilingual' ),
-                    'execute_only_once'    => true,
-                    'require_paid_version' => true
+                    'version'            => '0',
+                    'option_name'        => 'trp_migrate_old_slug_to_new_parent_and_translate_slug_table_post_type_and_tax_284',
+                    'callback'           => array( $this, 'trp_migrate_old_slug_to_new_parent_and_translate_slug_table_post_type_and_tax_284' ),
+                    'batch_size'         => 1000000,
+                    'message_initial'    => '',
+                    'message_processing' => __( 'Migrating taxonomy and post type base slugs to new table structure...', 'translatepress-multilingual' ),
+                    'execute_only_once'  => true
                 ),
-                'migrate_old_slugs_to_the_new_translate_table_structure_post_meta_284' => array(
-                    'version'              => '2.8.4',
-                    'option_name'          => 'trp_migrate_old_slug_to_new_parent_and_translate_slug_table_post_meta_284',
-                    'callback'             => array( $this, 'trp_migrate_old_slug_to_new_parent_and_translate_slug_table_post_meta_284' ),
-                    'batch_size'           => 500,
-                    'message_initial'      => '',
-                    'message_processing'   => __( 'Migrating post slugs to new table structure for language %s...', 'translatepress-multilingual' ),
-                    'require_paid_version' => true
+                'migrate_old_slugs_to_the_new_translate_table_structure_post_meta_284'         => array(
+                    'version'            => '0',
+                    'option_name'        => 'trp_migrate_old_slug_to_new_parent_and_translate_slug_table_post_meta_284',
+                    'callback'           => array( $this, 'trp_migrate_old_slug_to_new_parent_and_translate_slug_table_post_meta_284' ),
+                    'batch_size'         => 500,
+                    'message_initial'    => '',
+                    'message_processing' => __( 'Migrating post slugs to new table structure for language %s...', 'translatepress-multilingual' )
                 ),
-                'migrate_old_slugs_to_the_new_translate_table_structure_term_meta_284' => array(
-                    'version'              => '2.8.4',
-                    'option_name'          => 'trp_migrate_old_slug_to_new_parent_and_translate_slug_table_term_meta_284',
-                    'callback'             => array( $this, 'trp_migrate_old_slug_to_new_parent_and_translate_slug_table_term_meta_284' ),
-                    'batch_size'           => 500,
-                    'message_initial'      => '',
-                    'message_processing'   => __( 'Migrating term slugs to new table structure for language %s...', 'translatepress-multilingual' ),
-                    'require_paid_version' => true
+                'migrate_old_slugs_to_the_new_translate_table_structure_term_meta_284'         => array(
+                    'version'            => '0',
+                    'option_name'        => 'trp_migrate_old_slug_to_new_parent_and_translate_slug_table_term_meta_284',
+                    'callback'           => array( $this, 'trp_migrate_old_slug_to_new_parent_and_translate_slug_table_term_meta_284' ),
+                    'batch_size'         => 500,
+                    'message_initial'    => '',
+                    'message_processing' => __( 'Migrating term slugs to new table structure for language %s...', 'translatepress-multilingual' )
                 ),
 
                 /** Add new entries above this line
@@ -1153,7 +1127,7 @@ class TRP_Upgrade {
 
                 if ( !empty( $meta_values['post_name'] ) ) {
                     $extracted_slugs_array[ $meta_values['post_name'] ]["original"] = $meta_values['post_name'];
-                    $extracted_slugs_array[ $meta_values['post_name'] ]["type"]     = 'postslug';
+                    $extracted_slugs_array[ $meta_values['post_name'] ]["type"]     = 'post';
 
                     if ( isset( $meta_values['meta_value'] ) ) {
                         $extracted_slugs_array[ $meta_values['post_name'] ]["language"]   = $language_code;
@@ -1311,10 +1285,10 @@ class TRP_Upgrade {
      *
      */
     public function trp_migrate_old_slug_to_new_parent_and_translate_slug_table_post_type_and_tax_284() {
-        if ( function_exists( 'trp_in_sp_create_db_tables' ) ) {
+        if ( class_exists( 'TRP_Slug_Query' ) ) {
 
             $trp                 = TRP_Translate_Press::get_trp_instance();
-            $trp->slug_query     = new TRP_Slug_Query();
+            $slug_query     = new TRP_Slug_Query();
             $trp_settings        = $trp->get_component( 'settings' );
             $settings            = $trp_settings->get_settings();
             $languages_to_verify = $settings['translation-languages'];
@@ -1346,11 +1320,14 @@ class TRP_Upgrade {
                         }
 
                         if ( $language_is_found_in_this_array_of_slugs ) {
-                            $trp->slug_query->insert_slugs( $array_for_translated_slugs, $language_code );
+                            $slug_query->insert_slugs( $array_for_translated_slugs, $language_code );
                         }
                     }
                 }
             }
+            return true;
+        }else{
+            update_option( 'trp_migrate_old_slug_to_new_parent_and_translate_slug_table_post_type_and_tax_284', 'seopack_inactive' );
             return true;
         }
     }
@@ -1361,10 +1338,10 @@ class TRP_Upgrade {
      * Using batches
      */
     public function trp_migrate_old_slug_to_new_parent_and_translate_slug_table_post_meta_284( $language_code, $inferior_limit, $batch_size ) {
-        if ( function_exists( 'trp_in_sp_create_db_tables' ) ) {
+        if ( class_exists( 'TRP_Slug_Query' ) ) {
 
             $trp             = TRP_Translate_Press::get_trp_instance();
-            $trp->slug_query = new TRP_Slug_Query();
+            $slug_query = new TRP_Slug_Query();
             $trp_settings    = $trp->get_component( 'settings' );
             $settings        = $trp_settings->get_settings();
 
@@ -1390,7 +1367,7 @@ class TRP_Upgrade {
             }
 
             if ( $language_is_found_in_this_array_of_slugs ) {
-                $trp->slug_query->insert_slugs( $array_for_translated_slugs, $language_code );
+                $slug_query->insert_slugs( $array_for_translated_slugs, $language_code );
             }
 
             if ( $inferior_limit + $batch_size <= $last_id ) {
@@ -1398,6 +1375,9 @@ class TRP_Upgrade {
             } else {
                 return true;
             }
+        }else{
+            update_option( 'trp_migrate_old_slug_to_new_parent_and_translate_slug_table_post_meta_284', 'seopack_inactive' );
+            return true;
         }
     }
 
@@ -1408,10 +1388,10 @@ class TRP_Upgrade {
      */
     public function trp_migrate_old_slug_to_new_parent_and_translate_slug_table_term_meta_284( $language_code, $inferior_limit, $batch_size ) {
 
-        if ( function_exists( 'trp_in_sp_create_db_tables' ) ) {
+        if ( class_exists( 'TRP_Slug_Query' ) ) {
 
             $trp             = TRP_Translate_Press::get_trp_instance();
-            $trp->slug_query = new TRP_Slug_Query();
+            $slug_query = new TRP_Slug_Query();
             $trp_settings    = $trp->get_component( 'settings' );
             $settings        = $trp_settings->get_settings();
 
@@ -1437,7 +1417,7 @@ class TRP_Upgrade {
             }
 
             if ( $language_is_found_in_this_array_of_slugs ) {
-                $trp->slug_query->insert_slugs( $array_for_translated_slugs, $language_code );
+                $slug_query->insert_slugs( $array_for_translated_slugs, $language_code );
             }
 
             if ( $inferior_limit + $batch_size <= $last_id ) {
@@ -1445,6 +1425,9 @@ class TRP_Upgrade {
             } else {
                 return true;
             }
+        }else{
+            update_option( 'trp_migrate_old_slug_to_new_parent_and_translate_slug_table_term_meta_284', 'seopack_inactive' );
+            return true;
         }
     }
 
@@ -1493,36 +1476,71 @@ class TRP_Upgrade {
 
     }
 
+    /**
+     * @return void
+     *
+     *  Verifies if the options set to 'no' in DB optimization tool are 'no' and, if so, setting them to 'yes'
+     */
+    public function set_the_options_set_in_db_optimization_tool_to_no(){
+        $array_of_options_to_check_and_set_for_db_optimization = array( "trp_regenerate_original_meta_table",
+                                                                        "trp_clean_original_meta_table",
+                                                                        "trp_updated_database_original_id_insert_166",
+                                                                        "trp_updated_database_original_id_cleanup_166",
+                                                                        "trp_updated_database_original_id_update_166",
+                                                                        "trp_remove_duplicate_dictionary_rows",
+                                                                        "trp_remove_duplicate_gettext_rows",
+                                                                        "trp_remove_duplicate_untranslated_gettext_rows",
+                                                                        "trp_remove_duplicate_untranslated_dictionary_rows",
+                                                                        "trp_remove_cdata_original_and_dictionary_rows",
+                                                                        "trp_remove_untranslated_links_dictionary_rows",
+                                                                        "trp_replace_original_id_null" );
+
+        foreach ( $array_of_options_to_check_and_set_for_db_optimization as $option ){
+
+            if ( ( get_option( $option, 'not_set' ) == 'no' ) ){
+                update_option( $option, 'yes' );
+            }
+        }
+
+    }
+
+    /**
+     *  Used to check if the minimum pro plugin version (required after refactoring slug translation) is installed.
+     *
+     * @return bool
+     */
+
+    public function is_pro_minimum_version_met(){
+        if ( !defined('TRP_IN_SP_PLUGIN_VERSION' ) ) return true;
+
+        return version_compare( TRP_IN_SP_PLUGIN_VERSION, self::MINIMUM_DEVELOPER_VERSION, '>=' );
+    }
+
     public function show_admin_notice_minimum_pro_version_required(){
-        if ( !class_exists( 'TRP_Handle_Included_Addons') || TRANSLATE_PRESS === 'TranslatePress - Dev' ) return; // Free or development version installed
+        if ( !class_exists( 'TRP_Handle_Included_Addons' ) || TRANSLATE_PRESS === 'TranslatePress - Dev' ) return; // Free or development version installed
 
-        $pro_version_map = [
-            'TranslatePress - Personal'  => 'translatepress-personal/index.php',
-            'TranslatePress - Business'  => 'translatepress-business/index.php',
-            'TranslatePress - Developer' => 'translatepress-developer/index.php'
-        ];
+        if ( $this->is_pro_minimum_version_met() ) return;
 
-        $pro_plugin_path = trailingslashit( WP_PLUGIN_DIR ) . $pro_version_map[TRANSLATE_PRESS];
-
-        $pro_plugin_data = get_plugin_data( $pro_plugin_path ); // Get plugin data of the currently installed pro version
-
-        if ( TRANSLATE_PRESS === 'TranslatePress - Personal' ){
-            $minimum_version = self::MINIMUM_PERSONAL_VERSION;
-
-            $version_met = version_compare( $pro_plugin_data['Version'], self::MINIMUM_PERSONAL_VERSION, '>=' );
-        }
-
-        else {
-            $minimum_version = self::MINIMUM_DEVELOPER_VERSION;
-
-            $version_met = version_compare( $pro_plugin_data['Version'], self::MINIMUM_DEVELOPER_VERSION, '>=' );
-        }
-
-        if ( $version_met ) return;
+        $minimum_version = TRANSLATE_PRESS === 'TranslatePress - Personal' ? self::MINIMUM_PERSONAL_VERSION : self::MINIMUM_DEVELOPER_VERSION;
 
         echo '<div class="notice notice-error">
-                      <p>' . wp_kses( sprintf( __('Please <strong> update %1$s </strong> to version %2$s or newer.<br>Your currently installed version of %1$s is no longer compatible with the current version of <strong>TranslatePress - Multilingual</strong>.', 'translatepress-multilingual'), TRANSLATE_PRESS, $minimum_version ), [ 'strong' => [], 'br' => [] ] ) . '</p>' .
+                      <p>' . wp_kses( sprintf( __('Please <strong> update %1$s </strong> to version %2$s or newer.<br>Your currently installed version of %1$s is deprecated. The plugin will continue to work as expected. However, newer versions have improved functionality and compatibility with various permalink structures. ', 'translatepress-multilingual'), TRANSLATE_PRESS, $minimum_version ), [ 'strong' => [], 'br' => [] ] ) . '</p>' .
              '</div>';
+    }
+
+    public function dont_update_db_if_seopack_inactive(){
+        $array_of_option_names = ['trp_migrate_old_slug_to_new_parent_and_translate_slug_table_post_type_and_tax_284','trp_migrate_old_slug_to_new_parent_and_translate_slug_table_post_meta_284','trp_migrate_old_slug_to_new_parent_and_translate_slug_table_term_meta_284'];
+        foreach ($array_of_option_names as $option ) {
+            $option_result = get_option( $option, 'not_set' );
+            if ( $option_result === 'yes' ) {
+                continue;
+            }
+
+            if ( $option_result === 'no' && !class_exists( 'TRP_Slug_Query' ) ) {
+                update_option( $option, 'seopack_inactive' );
+                delete_option('trp_show_error_db_message');
+            }
+        }
     }
 
 }

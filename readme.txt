@@ -3,9 +3,9 @@ Contributors: cozmoslabs, razvan.mo, madalin.ungureanu, sareiodata, cristophor
 Donate link: https://www.translatepress.com/
 Tags: translate, translation, multilingual, automatic translation, bilingual, front-end translation, google translate, language
 Requires at least: 3.1.0
-Tested up to: 6.6.1
+Tested up to: 6.6.2
 Requires PHP: 5.6.20
-Stable tag: 2.8.4
+Stable tag: 2.8.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -141,6 +141,14 @@ For more information please check out our [documentation](https://translatepress
 
 
 == Changelog ==
+= 2.8.5 =
+* Fixed url slug handling. It's recommended to back-up your database before updating
+* Fixed pencil icon not showing in correct place for some themes
+* Added filter trp_mtapi_chunk_size to change the number of string sent in one batch to TP AI
+* Added correct flag for Kurdish(Sorani) language
+* Fixed edge case issue with trp_settings db option saved incorrectly leading to php errors
+* Fixed PHP 8 deprecated notice when calling rtrim
+
 = 2.8.4 =
 * Major refactoring of url slugs handling. It's recommended to back-up your database before updating
 * Numerous fixes including support for WooCommerce custom permalinks, custom post permalinks, permalinks without base category

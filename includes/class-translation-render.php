@@ -426,14 +426,14 @@ class TRP_Translation_Render{
          */
         global $wp_rewrite;
         if( is_object($wp_rewrite) ) {
-            if( strpos( $this->url_converter->cur_page_url(), get_rest_url() ) !== false && strpos( current_filter(), 'rest_prepare_' ) !== 0 && current_filter() !== 'oembed_response_data' ){
+            if( strpos( $this->url_converter->cur_page_url( false ), get_rest_url() ) !== false && strpos( current_filter(), 'rest_prepare_' ) !== 0 && current_filter() !== 'oembed_response_data' ){
                 $trpremoved = $this->remove_trp_html_tags( $output );
                 return $trpremoved;
             }
         }
 
         /* don't do anything on xmlrpc.php  */
-        if( strpos( $this->url_converter->cur_page_url(), 'xmlrpc.php' ) !== false ){
+        if( strpos( $this->url_converter->cur_page_url( false ), 'xmlrpc.php' ) !== false ){
             $trpremoved = $this->remove_trp_html_tags( $output );
             return $trpremoved;
         }
@@ -1035,10 +1035,11 @@ class TRP_Translation_Render{
         // based on this we're filtering wp_redirect to include the proper URL when returning to the current page.
         foreach ( $html->find('form') as $k => $row ){
             $form_action      = $row->action;
+            $processed_action = null;
             $is_admin_link    = $this->is_admin_link( $form_action, $admin_url, $wp_login_url );
             $skip_this_action = apply_filters( 'trp_skip_form_action', false, $form_action );
 
-            if( !$is_admin_link && !$skip_this_action ) {
+            if( !$is_admin_link && !$skip_this_action && !$this->is_external_link( $form_action, $home_url ) ) {
                 $row->setAttribute( 'data-trp-original-action', $row->action );
                 $row->innertext .= apply_filters( 'trp_form_inputs', '<input type="hidden" name="trp-form-language" value="' . $this->settings['url-slugs'][ $TRP_LANGUAGE ] . '"/>', $TRP_LANGUAGE, $this->settings['url-slugs'][ $TRP_LANGUAGE ], $row );
 
@@ -1048,9 +1049,13 @@ class TRP_Translation_Render{
                     && $this->settings['force-language-to-custom-links'] == 'yes'
                     && !$is_external_link
                     && strpos( $form_action, '#TRPLINKPROCESSED' ) === false ) {
-                    $row->action = $this->url_converter->get_url_for_language( $TRP_LANGUAGE, $form_action );
+                        $action = $this->url_converter->get_path_no_lang_slug_from_url( $form_action );
+
+                        $processed_action = $this->url_converter->get_url_for_language( $TRP_LANGUAGE, $action );
                 }
-                $row->action = str_replace( '#TRPLINKPROCESSED', '', esc_url($row->action) );
+
+                if ( isset( $processed_action ) )
+                    $row->action = str_replace( '#TRPLINKPROCESSED', '', esc_url( $processed_action ) );
             }
         }
 
@@ -1382,8 +1387,11 @@ class TRP_Translation_Render{
      *
      * @param string $url           Url.
      * @return bool                 Whether given url links to an admin page.
+     *
+     * It's always been private, do not make public in the future so we don't use it in one of the paid addons,
+     * causing Fatal Errors for users who update the Paid but not the Free
      */
-    public function is_admin_link( $url, $admin_url = '', $wp_login_url = '' ){
+    protected function is_admin_link( $url, $admin_url = '', $wp_login_url = '' ){
 
 	    if( empty( $admin_url ) )
 		    $admin_url = admin_url();
@@ -1465,6 +1473,7 @@ class TRP_Translation_Render{
         }
 
         foreach ( $translateable_strings as $i => $string ) {
+
             // prevent accidentally machine translated strings from db such as for src to be displayed
             $skip_string = in_array( $string, $skip_machine_translating_strings );
 

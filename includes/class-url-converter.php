@@ -10,6 +10,7 @@ class TRP_Url_Converter {
     protected $absolute_home;
     protected $settings;
     protected $admin_url;
+    protected $trp_upgrade;
 
     /**
      * TRP_Url_Converter constructor.
@@ -20,6 +21,7 @@ class TRP_Url_Converter {
         $this->settings = $settings;
         //$admin_url is declared here because it was causing a conflict with Ultimate Dashboard since there was an action hooked on site_url
         $this->admin_url = strtolower( admin_url() );
+        $this->trp_upgrade = new Trp_Upgrade( $settings );
     }
 
     /**
@@ -76,7 +78,7 @@ class TRP_Url_Converter {
      * @return bool true if is admin request, otherwise false.
      */
     public function is_admin_request() {
-        $current_url = $this->cur_page_url( 'unset' );
+        $current_url = $this->cur_page_url( false );
 
         // we can't use wp_get_referer() It looks like it creates an infinite loop because it calls home_url() and we're filtering that
         // array('http','https') is added because of a compatibility issue with Scriptless Social Sharing that created an infinite loop
@@ -372,14 +374,6 @@ class TRP_Url_Converter {
             return $url;
         }
 
-        if ( $this->get_lang_from_url_string($url) === $language ){
-            trp_bulk_debug($debug, array('url' => $url, 'abort' => "URL already has the correct language added to it"));
-
-            wp_cache_set($cache_key . $hash, $url, 'trp');
-
-            return $url;
-        }
-
         if ( strpos( $url, '/wp-json' ) !== false || strpos( $url, '/wp-admin' ) !== false ) {
             trp_bulk_debug($debug, array('url' => $url, 'abort' => 'is wp-json or admin link'));
 
@@ -415,7 +409,7 @@ class TRP_Url_Converter {
         }
 
         if ( empty($url) ){
-            $url = $this->cur_page_url( 'unset' );
+            $url = $this->cur_page_url( false );
         }
 
         //moved urldecode here because calling it on null will trigger a PHP Deprecated notice
@@ -439,13 +433,16 @@ class TRP_Url_Converter {
         if ($abs_home_url_obj->getPath() == "/") {
             $abs_home_url_obj->setPath('');
         }
-        if ($this->get_lang_from_url_string($url) === null) {
+        $lang_from_url_string = $this->get_lang_from_url_string($url);
+        if ( $lang_from_url_string === null) {
             // these are the custom url. They don't have language
             $abs_home_considered_path = trim(str_replace( $abs_home_url_obj->getPath() !== null ? $abs_home_url_obj->getPath() : '', '', $url_obj->getPath()), '/');
             $new_url_obj->setPath(trailingslashit(trailingslashit($abs_home_url_obj->getPath()) . trailingslashit($this->get_url_slug($language)) . $abs_home_considered_path));
             $new_url = $new_url_obj->getUri();
 
             trp_bulk_debug($debug, array('url' => $url, 'new url' => $new_url, 'lang' => $language, 'url type' => 'custom url without language parameter'));
+        } else if ( $lang_from_url_string === $language ){
+            trp_bulk_debug($debug, array('url' => $url, 'abort' => "URL already has the correct language added to it"));
         } else {
             // these have language param in them and we need to replace them with the new language
             $abs_home_considered_path = trim(str_replace($abs_home_url_obj->getPath() !== null ? $abs_home_url_obj->getPath() : '', '', $url_obj->getPath()), '/');
@@ -459,7 +456,7 @@ class TRP_Url_Converter {
                 $url_lang_slug = trailingslashit($this->get_url_slug($language));
             }
 
-            $new_url_obj->setPath(trailingslashit(trailingslashit($abs_home_url_obj->getPath()) . $url_lang_slug . ltrim($no_lang_orig_path, '/')));
+            $new_url_obj->setPath(trailingslashit(trailingslashit(strval($abs_home_url_obj->getPath())) . $url_lang_slug . ltrim($no_lang_orig_path, '/')));
             $new_url = $new_url_obj->getUri();
 
             trp_bulk_debug($debug, array('url' => $url, 'new url' => $new_url, 'lang' => $language, 'url type' => 'custom url with language', 'abs home path' => $abs_home_url_obj->getPath()));
@@ -467,7 +464,7 @@ class TRP_Url_Converter {
 
         // Only when SEO Pack is not active, allow WooCommerce links to be translated. Otherwise, SEO Pack will handle this
         /* fix links for woocommerce on language switcher for product categories and product tags */
-        if( class_exists( 'WooCommerce' ) && !class_exists( 'TRP_IN_Seo_Pack' ) ){
+        if( class_exists( 'WooCommerce' ) && !class_exists( 'TRP_IN_Seo_Pack' ) && $lang_from_url_string !== $language ){
             $english_woocommerce_slugs = array('product-category', 'product-tag', 'product');
             foreach ($english_woocommerce_slugs as $english_woocommerce_slug){
                 // current woo slugs are based on the localized default language OR the current language
@@ -499,7 +496,9 @@ class TRP_Url_Converter {
             $new_url = $url;
         }
 
-        $new_url = apply_filters( 'trp_get_url_for_language', $new_url, $url, $language, $this->get_abs_home(), $this->get_lang_from_url_string($url), $this->get_url_slug( $language ) );
+        //when using this filter, if the user did not run the updater for slugs, calling this function will result in using the fallback functions in
+        // SeoPack->class-slug-manager.php->get_slug_translated_url_for_language->get_slugs_pairs_based_on_language
+        $new_url = apply_filters( 'trp_get_url_for_language', $new_url, $url, $language, $this->get_abs_home(), $lang_from_url_string, $this->get_url_slug( $language ) );
         wp_cache_set('get_url_for_language_' . $hash, $new_url . $trp_link_is_processed, 'trp');
         return $new_url . $trp_link_is_processed;
     }
@@ -643,7 +642,7 @@ class TRP_Url_Converter {
      */
     public function get_lang_from_url_string( $url = null ) {
         if ( ! $url ){
-            $url = $this->cur_page_url( 'unset' );
+            $url = $this->cur_page_url();
         }
 
         $language = trp_cache_get('url_language_' . hash('md4', $url) , 'trp' );
@@ -707,30 +706,29 @@ class TRP_Url_Converter {
     /**
      * Return current page url.
      * Always using $this->get_abs_home(), instead of home_url() since that one is filtered by TP
+     * Function is cached for both bool values of $translated_slugs
+     *
      * @return string
      *
-     * The returned value is the current url with the language determined but the slugs in the default language
-     * After adding the caching of 'cur_page_url' the result was the url with the translated slugs
-     * For some cases where this function is called this behaviour is exected
-     * However, in some cases we expect the slugs in the default languages
-     * I indicated this cases by using the arg 'unset' where we need the slugs untranslated
+     * The returned value is the current url with the language slug in it. (ex: /en/ )
+     * The actual path slugs will be translated or not according to the $translated_slugs parameter.
+     *
+     * The function may return the translated slugs even though false was passed if the function is called before
+     * plugins_loaded priority 1. Basically before \TRP_IN_SP_Slug_Manager::translate_request_uri()
+     * Caching of untranslated slugs url is deleted there in order to properly regenerate that version
      */
-    public function cur_page_url( $do_not_set_cache_for_url = 'set' ) {
+    public function cur_page_url( $translated_slugs = true ) {
+        $translated_slugs = ( $translated_slugs ) ? '_translated_slugs' : '_untranslated_slugs';
+        $req_uri          = trp_cache_get( 'cur_page_url' . $translated_slugs, 'trp' );
 
-        $req_uri = trp_cache_get('cur_page_url', 'trp');
         if ( $req_uri ){
             return $req_uri;
         }
 
         $req_uri = isset( $_SERVER['REQUEST_URI'] ) ? esc_url_raw( $_SERVER['REQUEST_URI'] ) : '';
 
-        //in some cases $this->get_abs_home() can be null and this causes a PHP 8 notice
-        $abs_home = $this->get_abs_home();
-        if ( $this->get_abs_home() !== null) {
-            $abs_home = $this->get_abs_home();
-        }else{
-            $abs_home = '';
-        }
+        // strval converts null to empty string. $this->get_abs_home() can be null and this causes a PHP 8 notice.
+        $abs_home = strval( $this->get_abs_home() );
 
         $abs_home_path_url = parse_url($abs_home, PHP_URL_PATH);
         $home_path = ($abs_home_path_url !== null )? trim($abs_home_path_url, '/') : '';
@@ -746,9 +744,8 @@ class TRP_Url_Converter {
 
         if ( function_exists('apply_filters') ) $req_uri = apply_filters('trp_curpageurl', $req_uri);
 
-        if ( $do_not_set_cache_for_url == 'set' ) {
-            wp_cache_set( 'cur_page_url', $req_uri, 'trp' );
-        }
+        wp_cache_set( 'cur_page_url' . $translated_slugs, $req_uri, 'trp' );
+
         return $req_uri;
     }
 
@@ -812,8 +809,7 @@ class TRP_Url_Converter {
 
     /* on frontend on other languages dinamically generate the woo permalink structure for the default slugs */
     public function woocommerce_filter_permalink_option( $value ){
-
-        if ( class_exists( 'TRP_IN_Seo_Pack' ) ) {
+        if ( class_exists( 'TRP_IN_Seo_Pack' ) && $this->trp_upgrade->is_pro_minimum_version_met() && ( !isset( $this->settings['trp_advanced_settings']['load_legacy_seo_pack'] ) || $this->settings['trp_advanced_settings']['load_legacy_seo_pack'] === 'no' ) ) {
             return $value;
         }
 
@@ -939,6 +935,35 @@ class TRP_Url_Converter {
         }
         else
             return $english_woocommerce_slug;//always return something
+    }
+
+    /**
+     * Takes the URL as a parameters and returns its path with no language slug
+     *
+     * Duplicated function for SEO Pack
+     *
+     * @param $url
+     * @return string
+     */
+    public function get_path_no_lang_slug_from_url( $url ) {
+        $language      = $this->get_lang_from_url_string( $url );
+        $url_lang_slug = $this->get_url_slug( $language );
+        $url_object    = trp_cache_get( 'url_obj_' . hash( 'md4', $url ), 'trp' );
+
+        if ( $url_object === false ) {
+            $url_object = new \TranslatePress\Uri( $url );
+            wp_cache_set( 'url_obj_' . hash( 'md4', $url ), $url_object, 'trp' );
+        }
+
+        // null or empty string
+        if ( empty( $url_lang_slug ) ) {
+            $path_no_lang_slug = $url_object->getPath();
+        } else {
+            $path_no_lang_slug = preg_replace( '/\/' . preg_quote( $url_lang_slug, '/' ) . '\/?/', '/', $url_object->getPath(), 1 );
+        }
+
+        // Returning the path using strval() to avoid an empty check.
+        return strval( $path_no_lang_slug );
     }
 
 }
