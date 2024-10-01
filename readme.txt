@@ -5,7 +5,7 @@ Tags: translate, translation, multilingual, automatic translation, bilingual, fr
 Requires at least: 3.1.0
 Tested up to: 6.6.2
 Requires PHP: 5.6.20
-Stable tag: 2.8.5
+Stable tag: 2.8.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -141,6 +141,13 @@ For more information please check out our [documentation](https://translatepress
 
 
 == Changelog ==
+= 2.8.6 =
+* Fixed version difference between TranslatePress plugins causing infinite loop and php errors when having specific settings
+* Fixed some cases of grayed out translation input box in String Translation Regular tab
+* Fixed showing Run the update notice in various cases
+* Fixed Translation Editor translation boxes showing incorrect values after saving translations in some cases
+* Fixed JS error in Advanced tab
+
 = 2.8.5 =
 * Fixed url slug handling. It's recommended to back-up your database before updating
 * Fixed pencil icon not showing in correct place for some themes

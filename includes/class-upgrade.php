@@ -514,8 +514,13 @@ class TRP_Upgrade {
                         // finish action due to completing all the translation languages
                         $request['progress_message'] .= __( ' done.', 'translatepress-multilingual' ) . '</br>';
                         $request['trp_updb_lang']    = '';
-                        // this will stop showing the admin notice
-                        update_option( $update_details['option_name'], 'yes' );
+                        $option_result = get_option( $update_details['option_name'], 'no' );
+
+                        // the next IF is helpful in case we set the option to something else (such as seopack_inactive) during update
+                        if ( $option_result === 'no' ) {
+                            // setting option to yes will stop showing the admin notice
+                            update_option( $update_details['option_name'], 'yes' );
+                        }
                         $request['trp_updb_action'] = '';
                     }
 		}else{

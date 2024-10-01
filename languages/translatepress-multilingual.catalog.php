@@ -4,8 +4,9 @@
 <?php __("Please update the TranslatePress - Multilingual plugin to version 2.0.5 at least for %s to work properly", "translatepress-multilingual"); ?>
 <?php __("Please install and activate the TranslatePress - Multilingual plugin", "translatepress-multilingual"); ?>
 <?php __("Install & Activate", "translatepress-multilingual"); ?>
-<?php __("Please <strong> update TranslatePress - Multilingual </strong> to version %2$s or newer. Your currently installed version of TranslatePress - Multilingual is no longer compatible with the current version of %1$s.", "translatepress-multilingual"); ?>
+<?php __("Please update TranslatePress - Multilingual to version %2$s or newer. Your currently installed version of TranslatePress - Multilingual is no longer compatible with the current version of %1$s.", "translatepress-multilingual"); ?>
 <?php __("All TranslatePress functionalities are disabled until then.", "translatepress-multilingual"); ?>
+<?php __("Update Now", "translatepress-multilingual"); ?>
 <?php __("This TranslatePress add-on has been migrated to the main plugin and is no longer used. You can delete it.", "translatepress-multilingual"); ?>
 <?php __("<strong>TranslatePress</strong> requires at least PHP version 5.6.20+ to run. It is the <a href=\"%s\">minimum requirement of the latest WordPress version</a>. Please contact your server administrator to update your PHP version.", "translatepress-multilingual"); ?>
 <?php __("Advanced", "translatepress-multilingual"); ?>

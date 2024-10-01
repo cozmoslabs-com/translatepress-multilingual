@@ -1391,7 +1391,7 @@ class TRP_Translation_Render{
      * It's always been private, do not make public in the future so we don't use it in one of the paid addons,
      * causing Fatal Errors for users who update the Paid but not the Free
      */
-    protected function is_admin_link( $url, $admin_url = '', $wp_login_url = '' ){
+    public function is_admin_link( $url, $admin_url = '', $wp_login_url = '' ){
 
 	    if( empty( $admin_url ) )
 		    $admin_url = admin_url();
