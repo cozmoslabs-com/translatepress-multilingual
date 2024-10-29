@@ -805,7 +805,7 @@ class TRP_Translation_Render{
 				    $trimmed_string = trp_full_trim( $row->$current_node_accessor_selector );
 			    	if ( $current_node_accessor_selector === 'href' ) {
 					    $translate_href = ( $this->is_external_link( $trimmed_string, $home_url ) || $this->url_converter->url_is_file( $trimmed_string ) || $this->url_converter->url_is_extra($trimmed_string) );
-					    $translate_href = apply_filters( 'trp_translate_this_href', $translate_href, $row, $TRP_LANGUAGE );
+					    $translate_href = apply_filters( 'trp_translate_this_href', $translate_href, $row, $TRP_LANGUAGE, $trimmed_string );
 					    $trimmed_string = ( $translate_href ) ? $trimmed_string : '';
 				    }
 

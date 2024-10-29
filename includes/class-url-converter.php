@@ -6,11 +6,9 @@
  * Manages urls of translated pages.
  */
 class TRP_Url_Converter {
-
     protected $absolute_home;
     protected $settings;
     protected $admin_url;
-    protected $trp_upgrade;
 
     /**
      * TRP_Url_Converter constructor.
@@ -21,7 +19,6 @@ class TRP_Url_Converter {
         $this->settings = $settings;
         //$admin_url is declared here because it was causing a conflict with Ultimate Dashboard since there was an action hooked on site_url
         $this->admin_url = strtolower( admin_url() );
-        $this->trp_upgrade = new Trp_Upgrade( $settings );
     }
 
     /**
@@ -809,7 +806,10 @@ class TRP_Url_Converter {
 
     /* on frontend on other languages dinamically generate the woo permalink structure for the default slugs */
     public function woocommerce_filter_permalink_option( $value ){
-        if ( class_exists( 'TRP_IN_Seo_Pack' ) && $this->trp_upgrade->is_pro_minimum_version_met() && ( !isset( $this->settings['trp_advanced_settings']['load_legacy_seo_pack'] ) || $this->settings['trp_advanced_settings']['load_legacy_seo_pack'] === 'no' ) ) {
+        $trp     = TRP_Translate_Press::get_trp_instance();
+        $upgrade = $trp->get_component( 'upgrade' );
+
+        if ( class_exists( 'TRP_IN_Seo_Pack' ) && $upgrade->is_pro_minimum_version_met() && ( !isset( $this->settings['trp_advanced_settings']['load_legacy_seo_pack'] ) || $this->settings['trp_advanced_settings']['load_legacy_seo_pack'] === 'no' ) ) {
             return $value;
         }
 

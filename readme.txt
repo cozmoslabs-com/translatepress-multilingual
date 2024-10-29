@@ -5,7 +5,7 @@ Tags: translate, translation, multilingual, automatic translation, bilingual, fr
 Requires at least: 3.1.0
 Tested up to: 6.6.2
 Requires PHP: 5.6.20
-Stable tag: 2.8.7
+Stable tag: 2.8.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -141,6 +141,11 @@ For more information please check out our [documentation](https://translatepress
 
 
 == Changelog ==
+= 2.8.8 =
+* Fixed compatibility with CTX Feed plugin
+* Improved security by doing a capability check on activating/deactivating license
+* Added new parameter to hook trp_translate_this_href
+
 = 2.8.7 =
 * Fixed url slug handling. It's recommended to back-up your database before updating
 * Fixed admin notices text

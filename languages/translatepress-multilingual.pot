@@ -97,35 +97,35 @@ msgstr ""
 msgid "Error"
 msgstr ""
 
-#: includes/class-edd-sl-plugin-updater.php:720
+#: includes/class-edd-sl-plugin-updater.php:722
 msgid "Your license key expired on %s."
 msgstr ""
 
-#: includes/class-edd-sl-plugin-updater.php:725
+#: includes/class-edd-sl-plugin-updater.php:727
 msgid "Your license key has been disabled."
 msgstr ""
 
-#: includes/class-edd-sl-plugin-updater.php:728
+#: includes/class-edd-sl-plugin-updater.php:730
 msgid "Invalid license."
 msgstr ""
 
-#: includes/class-edd-sl-plugin-updater.php:732
+#: includes/class-edd-sl-plugin-updater.php:734
 msgid "Your license is not active for this URL."
 msgstr ""
 
-#: includes/class-edd-sl-plugin-updater.php:735
+#: includes/class-edd-sl-plugin-updater.php:737
 msgid "This appears to be an invalid license key for %s."
 msgstr ""
 
-#: includes/class-edd-sl-plugin-updater.php:738
+#: includes/class-edd-sl-plugin-updater.php:740
 msgid "Your license key has reached its activation limit."
 msgstr ""
 
-#: includes/class-edd-sl-plugin-updater.php:741, includes/class-edd-sl-plugin-updater.php:709, includes/class-edd-sl-plugin-updater.php:812
+#: includes/class-edd-sl-plugin-updater.php:743, includes/class-edd-sl-plugin-updater.php:711, includes/class-edd-sl-plugin-updater.php:817
 msgid "An error occurred, please try again."
 msgstr ""
 
-#: includes/class-edd-sl-plugin-updater.php:774
+#: includes/class-edd-sl-plugin-updater.php:776
 msgid "You have successfully activated your license"
 msgstr ""
 
@@ -197,7 +197,7 @@ msgstr ""
 msgid "Automatic translation has been disabled."
 msgstr ""
 
-#: includes/class-error-manager.php:163, includes/class-plugin-notices.php:341, includes/class-plugin-notices.php:388, includes/class-plugin-notices.php:412, includes/class-plugin-notices.php:438, includes/class-plugin-notices.php:462, includes/class-reviews.php:119, includes/class-reviews.php:122, includes/class-upgrade.php:1017, add-ons-advanced/seo-pack/class-seo-pack.php:737
+#: includes/class-error-manager.php:163, includes/class-plugin-notices.php:341, includes/class-plugin-notices.php:388, includes/class-plugin-notices.php:412, includes/class-plugin-notices.php:438, includes/class-plugin-notices.php:462, includes/class-reviews.php:119, includes/class-reviews.php:122, includes/class-upgrade.php:1017, add-ons-advanced/seo-pack/class-seo-pack.php:742
 msgid "Dismiss this notice."
 msgstr ""
 
@@ -1813,11 +1813,11 @@ msgstr ""
 msgid "Updating TranslatePress tables"
 msgstr ""
 
-#: add-ons-advanced/seo-pack/class-seo-pack.php:732
+#: add-ons-advanced/seo-pack/class-seo-pack.php:737
 msgid "Automatic and manual slug translation changes performed when <strong>TranslatePress - Multilingual</strong> 2.8.4 was active had to be removed because of some issues with that version. All slug translations from before that version are now in use. Thank you for understanding!"
 msgstr ""
 
-#: add-ons-advanced/seo-pack/class-seo-pack.php:733
+#: add-ons-advanced/seo-pack/class-seo-pack.php:738
 msgid "If you absolutely need them, the removed translations can be found in tables trp_slug_original_obsolete and trp_slug_translation_obsolete."
 msgstr ""
 

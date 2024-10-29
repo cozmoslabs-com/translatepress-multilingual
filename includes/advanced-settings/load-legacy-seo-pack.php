@@ -4,7 +4,7 @@ add_filter( 'trp_register_advanced_settings', 'trp_register_load_legacy_seo_pack
 function trp_register_load_legacy_seo_pack( $settings_array ){
     // only add this if seo pack is active
     $add_ons_settings = get_option( 'trp_add_ons_settings', array() );
-    if( $add_ons_settings['tp-add-on-seo-pack/tp-seo-pack.php'] ){
+    if( isset( $add_ons_settings['tp-add-on-seo-pack/tp-seo-pack.php'] ) && $add_ons_settings['tp-add-on-seo-pack/tp-seo-pack.php'] ){
         $settings_array[] = array(
             'name'          => 'load_legacy_seo_pack',
             'type'          => 'checkbox',
