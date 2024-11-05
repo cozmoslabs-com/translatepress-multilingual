@@ -5,7 +5,7 @@ Tags: translate, translation, multilingual, automatic translation, bilingual, fr
 Requires at least: 3.1.0
 Tested up to: 6.6.2
 Requires PHP: 5.6.20
-Stable tag: 2.8.8
+Stable tag: 2.8.9
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -141,6 +141,11 @@ For more information please check out our [documentation](https://translatepress
 
 
 == Changelog ==
+= 2.8.9 =
+* Fixed WooCommerce emails being sent in default language instead of user's language when placing order as non-logged in guest on a Blocks checkout form
+* Fixed trp-gettext wrappings appearing on WooCommerce Blocks checkout form
+* Added admin notifications about Black Friday sale
+
 = 2.8.8 =
 * Fixed compatibility with CTX Feed plugin
 * Improved security by doing a capability check on activating/deactivating license

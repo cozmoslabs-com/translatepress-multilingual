@@ -555,7 +555,7 @@ function trp_bulk_debug($debug = false, $logger = array()){
  * @return bool
  */
 function trp_is_paid_version() {
-	$licence = get_option( 'trp_licence_key' );
+	$licence = get_option( 'trp_license_key' );
 
 	if ( ! empty( $licence ) ) {
 		return true;
