@@ -222,6 +222,10 @@ class TRP_Woocommerce_Emails{
         }
 
         $language = apply_filters( 'trp_woo_email_language', $language, $is_customer_email, $recipients, $user_id );
+
+        if ( empty( $language ) )
+            $language = $TRP_LANGUAGE;
+
         trp_switch_language( $language );
 
         WC()->load_plugin_textdomain();
