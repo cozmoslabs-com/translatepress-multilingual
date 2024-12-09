@@ -1009,7 +1009,8 @@ class TRP_Translation_Render{
 
 
         // We need to save here in order to access the translated links too.
-        if( apply_filters('tp_handle_custom_links_in_translation_blocks', false) ) {
+        $handle_custom_links_in_translation_blocks = $this->settings['force-language-to-custom-links'] == 'yes';
+        if( apply_filters('tp_handle_custom_links_in_translation_blocks', $handle_custom_links_in_translation_blocks) ) {
             $html_string = $html->save();
             $html = TranslatePress\str_get_html($html_string, true, true, TRP_DEFAULT_TARGET_CHARSET, false, TRP_DEFAULT_BR_TEXT, TRP_DEFAULT_SPAN_TEXT);
             if ( $html === false ){

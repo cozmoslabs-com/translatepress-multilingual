@@ -151,16 +151,46 @@ class TRP_Upgrade {
 		$gettext_table_creation->check_gettext_original_meta_table();
 	}
 
-	public function get_updates_details(){
-		return apply_filters( 'trp_updates_details',
-			array(
+    /**
+     * @param string $key of updates details array
+     * @return string
+     * @see get_updates_details()
+     */
+    public function get_updates_processing_message( $key ){
+        $messages = [
+            'remove_cdata_original_and_dictionary_rows'     => __('Removing cdata dictionary strings for language %s...', 'translatepress-multilingual' ),
+            'remove_untranslated_links_dictionary_rows'     => __('Removing untranslated dictionary links for language %s...', 'translatepress-multilingual' ),
+            'remove_duplicate_gettext_rows'                 => __('Removing duplicated gettext strings for language %s...', 'translatepress-multilingual' ),
+            'remove_duplicate_untranslated_gettext_rows'    => __('Removing untranslated gettext strings where translation is available for language %s...', 'translatepress-multilingual' ),
+            'remove_duplicate_dictionary_rows'              => __('Removing duplicated dictionary strings for language %s...', 'translatepress-multilingual' ),
+            'remove_duplicate_untranslated_dictionary_rows' => __('Removing untranslated dictionary strings where translation is available for language %s...', 'translatepress-multilingual' ),
+            'original_id_insert_166'                        => __('Inserting original strings for language %s...', 'translatepress-multilingual' ),
+            'original_id_cleanup_166'                       => __('Cleaning original strings table for language %s...', 'translatepress-multilingual' ),
+            'original_id_update_166'                        => __('Updating original string ids for language %s...', 'translatepress-multilingual' ),
+            'regenerate_original_meta'                      => __('Regenerating original meta table for language %s...', 'translatepress-multilingual' ),
+            'clean_original_meta'                           => __('Cleaning original meta table for language %s...', 'translatepress-multilingual' ),
+            'replace_original_id_null'                      => __('Replacing original id NULL with value for language %s...', 'translatepress-multilingual' ),
+            'gettext_original_id_insert'                    => __('Inserting gettext original strings for language %s...', 'translatepress-multilingual' ),
+            'gettext_original_id_cleanup'                   => __('Cleaning gettext original strings table for language %s...', 'translatepress-multilingual' ),
+            'gettext_original_id_update'                    => __('Updating gettext original string ids for language %s...', 'translatepress-multilingual' ),
+            'migrate_old_slugs_to_the_new_translate_table_structure_post_type_and_tax_284' => __( 'Migrating taxonomy and post type base slugs to new table structure...', 'translatepress-multilingual' ),
+            'migrate_old_slugs_to_the_new_translate_table_structure_post_meta_284'         => __( 'Migrating post slugs to new table structure for language %s...', 'translatepress-multilingual' ),
+            'migrate_old_slugs_to_the_new_translate_table_structure_term_meta_284'         => __( 'Migrating term slugs to new table structure for language %s...', 'translatepress-multilingual' ),
+            'show_error_db_message'                         => __( 'Finishing up...', 'translatepress-multilingual' )
+        ];
+
+        return in_array( $key, array_keys( $messages ) ) ? $messages[$key] : null;
+    }
+
+    public function get_updates_details(){
+        return apply_filters( 'trp_updates_details',
+            array(
                 'remove_cdata_original_and_dictionary_rows' => array(
                     'version'           => '0',
                     'option_name'       => 'trp_remove_cdata_original_and_dictionary_rows',
                     'callback'          => array( $this->trp_query,'remove_cdata_in_original_and_dictionary_tables'),
                     'batch_size'        => 1000,
                     'message_initial'   => '',
-                    'message_processing'=> __('Removing cdata dictionary strings for language %s...', 'translatepress-multilingual' )
                 ),
                 'remove_untranslated_links_dictionary_rows' => array(
                     'version'           => '0',
@@ -168,7 +198,6 @@ class TRP_Upgrade {
                     'callback'          => array( $this->trp_query,'remove_untranslated_links_in_dictionary_table'),
                     'batch_size'        => 10000,
                     'message_initial'   => '',
-                    'message_processing'=> __('Removing untranslated dictionary links for language %s...', 'translatepress-multilingual' )
                 ),
 				'full_trim_originals_140' => array(
 					'version'           => '1.4.0',
@@ -188,7 +217,6 @@ class TRP_Upgrade {
                     'callback'          => array( $this->trp_query,'remove_duplicate_rows_in_gettext_table'),
                     'batch_size'        => 10000,
                     'message_initial'   => '',
-                    'message_processing'=> __('Removing duplicated gettext strings for language %s...', 'translatepress-multilingual' )
                 ),
                 'remove_duplicate_untranslated_gettext_rows' => array(
                     'version'           => '0',
@@ -196,7 +224,6 @@ class TRP_Upgrade {
                     'callback'          => array( $this->trp_query,'remove_untranslated_strings_if_gettext_translation_available'),
                     'batch_size'        => 10000,
                     'message_initial'   => '',
-                    'message_processing'=> __('Removing untranslated gettext strings where translation is available for language %s...', 'translatepress-multilingual' )
                 ),
                 'remove_duplicate_dictionary_rows' => array(
                     'version'           => '0',
@@ -204,7 +231,6 @@ class TRP_Upgrade {
                     'callback'          => array( $this->trp_query,'remove_duplicate_rows_in_dictionary_table'),
                     'batch_size'        => 1000,
                     'message_initial'   => '',
-                    'message_processing'=> __('Removing duplicated dictionary strings for language %s...', 'translatepress-multilingual' )
                 ),
                 'remove_duplicate_untranslated_dictionary_rows' => array(
                     'version'           => '0',
@@ -212,14 +238,12 @@ class TRP_Upgrade {
                     'callback'          => array( $this->trp_query,'remove_untranslated_strings_if_translation_available'),
                     'batch_size'        => 10000,
                     'message_initial'   => '',
-                    'message_processing'=> __('Removing untranslated dictionary strings where translation is available for language %s...', 'translatepress-multilingual' )
                 ),
                 'original_id_insert_166' => array(
                     'version'           => '1.6.6',
                     'option_name'       => 'trp_updated_database_original_id_insert_166',
                     'callback'          => array( $this,'trp_updated_database_original_id_insert_166'),
                     'batch_size'        => 1000,
-                    'message_processing'=> __('Inserting original strings for language %s...', 'translatepress-multilingual' )
                 ),
                 'original_id_cleanup_166' => array(
                     'version'           => '1.6.6',
@@ -228,7 +252,6 @@ class TRP_Upgrade {
                     'progress_message'  => 'clean',
                     'batch_size'        => 1000,
                     'message_initial'   => '',
-                    'message_processing'=> __('Cleaning original strings table for language %s...', 'translatepress-multilingual' )
                 ),
                 'original_id_update_166' => array(
                     'version'           => '1.6.6',
@@ -236,7 +259,6 @@ class TRP_Upgrade {
                     'callback'          => array( $this,'trp_updated_database_original_id_update_166'),
                     'batch_size'        => 5000,
                     'message_initial'   => '',
-                    'message_processing'=> __('Updating original string ids for language %s...', 'translatepress-multilingual' )
                 ),
                 'regenerate_original_meta' => array(
                     'version'           => '0', // independent of tp version, available only on demand
@@ -244,7 +266,6 @@ class TRP_Upgrade {
                     'callback'          => array( $this,'trp_regenerate_original_meta_table'),
                     'batch_size'        => 200,
                     'message_initial'   => '',
-                    'message_processing'=> __('Regenerating original meta table for language %s...', 'translatepress-multilingual' )
                 ),
                 'clean_original_meta' => array(
                     'version'           => '0', // independent of tp version, available only on demand
@@ -252,7 +273,6 @@ class TRP_Upgrade {
                     'callback'          => array( $this,'trp_clean_original_meta_table'),
                     'batch_size'        => 20000,
                     'message_initial'   => '',
-                    'message_processing'=> __('Cleaning original meta table for language %s...', 'translatepress-multilingual' )
                 ),
                 'replace_original_id_null' => array(
                     'version'           => '0', // independent of tp version, available only on demand
@@ -260,14 +280,12 @@ class TRP_Upgrade {
                     'callback'          => array( $this,'trp_replace_original_id_null'),
                     'batch_size'        => 50,
                     'message_initial'   => '',
-                    'message_processing'=> __('Replacing original id NULL with value for language %s...', 'translatepress-multilingual' )
                 ),
                 'gettext_original_id_insert' => array(
                     'version'           => '2.3.8',
                     'option_name'       => 'trp_updated_database_gettext_original_id_insert',
                     'callback'          => array( $this,'trp_updated_database_gettext_original_id_insert'),
                     'batch_size'        => 1000,
-                    'message_processing'=> __('Inserting gettext original strings for language %s...', 'translatepress-multilingual' )
                 ),
                 'gettext_original_id_cleanup' => array(
                     'version'           => '2.3.8',
@@ -276,7 +294,6 @@ class TRP_Upgrade {
                     'progress_message'  => 'clean',
                     'batch_size'        => 1000,
                     'message_initial'   => '',
-                    'message_processing'=> __('Cleaning gettext original strings table for language %s...', 'translatepress-multilingual' )
                 ),
                 'gettext_original_id_update' => array(
                     'version'           => '2.3.8',
@@ -284,7 +301,6 @@ class TRP_Upgrade {
                     'callback'          => array( $this,'trp_updated_database_gettext_original_id_update'),
                     'batch_size'        => 5000,
                     'message_initial'   => '',
-                    'message_processing'=> __('Updating gettext original string ids for language %s...', 'translatepress-multilingual' )
                 ),
                 'migrate_old_slugs_to_the_new_translate_table_structure_post_type_and_tax_284' => array(
                     'version'            => '0',
@@ -292,7 +308,6 @@ class TRP_Upgrade {
                     'callback'           => array( $this, 'trp_migrate_old_slug_to_new_parent_and_translate_slug_table_post_type_and_tax_284' ),
                     'batch_size'         => 1000000,
                     'message_initial'    => '',
-                    'message_processing' => __( 'Migrating taxonomy and post type base slugs to new table structure...', 'translatepress-multilingual' ),
                     'execute_only_once'  => true
                 ),
                 'migrate_old_slugs_to_the_new_translate_table_structure_post_meta_284'         => array(
@@ -301,7 +316,6 @@ class TRP_Upgrade {
                     'callback'           => array( $this, 'trp_migrate_old_slug_to_new_parent_and_translate_slug_table_post_meta_284' ),
                     'batch_size'         => 500,
                     'message_initial'    => '',
-                    'message_processing' => __( 'Migrating post slugs to new table structure for language %s...', 'translatepress-multilingual' )
                 ),
                 'migrate_old_slugs_to_the_new_translate_table_structure_term_meta_284'         => array(
                     'version'            => '0',
@@ -309,7 +323,6 @@ class TRP_Upgrade {
                     'callback'           => array( $this, 'trp_migrate_old_slug_to_new_parent_and_translate_slug_table_term_meta_284' ),
                     'batch_size'         => 500,
                     'message_initial'    => '',
-                    'message_processing' => __( 'Migrating term slugs to new table structure for language %s...', 'translatepress-multilingual' )
                 ),
 
                 /** Add new entries above this line
@@ -321,7 +334,6 @@ class TRP_Upgrade {
                     'callback'           => array( $this, 'trp_successfully_run_database_optimization' ),
                     'batch_size'         => 10,
                     'message_initial'    => '',
-                    'message_processing' => __( 'Finishing up...', 'translatepress-multilingual' ),
                     'execute_only_once'  => true
                 )
 			)
@@ -437,17 +449,18 @@ class TRP_Upgrade {
 			}else{
 				$_REQUEST['trp_updb_lang'] = $this->settings['translation-languages'][0];
 				$_REQUEST['trp_updb_batch'] = 0;
+                $updb_action = sanitize_text_field( $_REQUEST['trp_updb_action'] );
 
-                $update_message_initial = isset( $updates_needed[$_REQUEST['trp_updb_action']]['message_initial'] ) ?
-                                            $updates_needed[sanitize_text_field( $_REQUEST['trp_updb_action'] )]['message_initial']
+                $update_message_initial = isset( $updates_needed[ $updb_action ]['message_initial'] ) ?
+                                            $updates_needed[ $updb_action ]['message_initial']
                                             : __('Updating database to version %s+', 'translatepress-multilingual' );
 
-                $update_message_processing = isset( $updates_needed[$_REQUEST['trp_updb_action']]['message_processing'] ) ?
-                                                $updates_needed[ sanitize_text_field( $_REQUEST['trp_updb_action'] )]['message_processing']
-                                                : __('Processing table for language %s...', 'translatepress-multilingual' );
+                $update_message_processing = $this->get_updates_processing_message( $updb_action ) ?
+                                             $this->get_updates_processing_message( $updb_action ) :
+                                             __('Processing table for language %s...', 'translatepress-multilingual' );
 
-                if ($updates_needed[ sanitize_text_field( $_REQUEST['trp_updb_action'] ) ]['version'] != 0) {
-                    $request['progress_message'] .= '<p>' . sprintf( $update_message_initial, $updates_needed[ sanitize_text_field( $_REQUEST['trp_updb_action'] ) ]['version'] ) . '</p>';
+                if ($updates_needed[ $updb_action ]['version'] != 0) {
+                    $request['progress_message'] .= '<p>' . sprintf( $update_message_initial, $updates_needed[ $updb_action ]['version'] ) . '</p>';
                 }
                 $request['progress_message'] .= '<br>' . sprintf( $update_message_processing, sanitize_text_field( $_REQUEST['trp_updb_lang'] ) );//phpcs:ignore
 			}
@@ -501,14 +514,14 @@ class TRP_Upgrade {
 			// finished with the current language
             $index = array_search( $language_code, $this->settings['translation-languages'] );
 
-                if ( isset ( $this->settings['translation-languages'][ $index + 1 ] ) && (!isset($update_details['execute_only_once']) || $update_details['execute_only_once'] == false)) {
-                        // next language code in array
-                        $request['trp_updb_lang']    = $this->settings['translation-languages'][ $index + 1 ];
-                        $request['progress_message'] .= __( ' done.', 'translatepress-multilingual' ) . '</br>';
-                        $update_message_processing   = isset( $updates_needed[ $_REQUEST['trp_updb_action'] ]['message_processing'] ) ?
-                            $updates_needed[ sanitize_text_field( $_REQUEST['trp_updb_action'] ) ]['message_processing']
-                            : __( 'Processing table for language %s...', 'translatepress-multilingual' );
-                        $request['progress_message'] .= '</br>' . sprintf( $update_message_processing, $request['trp_updb_lang'] );
+            if ( isset ( $this->settings['translation-languages'][ $index + 1 ] ) && (!isset($update_details['execute_only_once']) || $update_details['execute_only_once'] == false)) {
+                // next language code in array
+                $request['trp_updb_lang']    = $this->settings['translation-languages'][ $index + 1 ];
+                $request['progress_message'] .= __( ' done.', 'translatepress-multilingual' ) . '</br>';
+                $update_message_processing   = $this->get_updates_processing_message( sanitize_text_field( $_REQUEST['trp_updb_action'] ) ) ?
+                    $this->get_updates_processing_message( sanitize_text_field( $_REQUEST['trp_updb_action'] ) )
+                    : __( 'Processing table for language %s...', 'translatepress-multilingual' );
+                $request['progress_message'] .= '</br>' . sprintf( $update_message_processing, $request['trp_updb_lang'] );
 
                     } else {
                         // finish action due to completing all the translation languages

@@ -149,13 +149,12 @@ function trp_exclude_include_paths_to_run_on(){
         $current_slug = str_replace( trim( $site_url_components['path'] ), '', $current_slug );
     }
 
-    $replace = '/';
-
+    $replace = '\/';
     if( isset( $settings['add-subdirectory-to-default-language'] ) && $settings['add-subdirectory-to-default-language'] == 'yes' ) {
-	    $replace .= $settings['url-slugs'][ $current_lang ];
-	    $current_slug = str_replace( $replace, '', $current_slug );
-    }
 
+        $replace .= $settings['url-slugs'][ $current_lang ];
+        $current_slug = preg_replace( "/$replace/i", '', ltrim( $current_slug, '/' ), 1);
+    }
 
     // $array_slugs contains each part of $curent_slug split on "/"
     $array_slugs = array();
@@ -259,22 +258,30 @@ function trp_exclude_include_redirect_to_default_language(){
     // Attempt to redirect on default language only if the current URL contains the language
     if( !isset( $TRP_LANGUAGE ) || $settings['default-language'] == $TRP_LANGUAGE ){
 
-        if( $url_converter->get_lang_from_url_string( $current_original_url ) === null )
+        $language = $url_converter->get_lang_from_url_string( $current_original_url );
+
+        if( $language === null )
             return;
 
     }
 
     $absolute_home = $url_converter->get_abs_home();
 
+    $path_no_domain = trp_remove_prefix($absolute_home, $current_original_url );
     // Take into account the subdirectory for default language option
-    if ( isset( $settings['add-subdirectory-to-default-language'] ) && $settings['add-subdirectory-to-default-language'] == 'yes' )
-        $absolute_home = trailingslashit( $absolute_home ) . $settings['url-slugs'][$settings['default-language']];
+    if ( isset( $settings['add-subdirectory-to-default-language'] ) && $settings['add-subdirectory-to-default-language'] == 'yes' ) {
+        $absolute_home_with_lang = trailingslashit( $absolute_home ) . $settings['url-slugs'][ $settings['default-language'] ];
+    }else{
+        $absolute_home_with_lang = $absolute_home;
+    }
 
-    $current_slug = str_replace( $absolute_home, '', untrailingslashit( $current_original_url ) );
+    $current_slug = str_replace( $absolute_home_with_lang, '', untrailingslashit( $current_original_url ) );
     $paths        = trp_dntcp_get_paths();
 
     // Remove language from this URL if present
-    $current_original_url = str_replace( '/' . $settings['url-slugs'][$settings['default-language']], '', $current_original_url );
+    $searchText = '\/' . $settings['url-slugs'][$settings['default-language']];
+    $path_no_domain = preg_replace( "/$searchText/i", '' , $path_no_domain, 1 );
+    $current_original_url = $absolute_home . $path_no_domain;
 
     // $array_slugs contains each part of $curent_slug split on "/"
     $array_slugs = array();

@@ -5,7 +5,7 @@ Tags: translate, translation, multilingual, automatic translation, bilingual, fr
 Requires at least: 3.1.0
 Tested up to: 6.7.1
 Requires PHP: 5.6.20
-Stable tag: 2.9.0
+Stable tag: 2.9.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -141,6 +141,12 @@ For more information please check out our [documentation](https://translatepress
 
 
 == Changelog ==
+= 2.9.1 =
+* Added Gutenberg Language Restriction option to allow for easily including/excluding blocks in specific languages
+* Fixed PHP notice in WP 6.7: function _load_textdomain_just_in_time was called incorrectly
+* Fixed translating internal links from inside translation blocks
+* Fixed edge case with some excluded paths redirecting translated urls to incorrect original urls
+
 = 2.9.0 =
 * Improved database management by no longer inserting non-translated external URLs and images
 * Fixed detecting the same email address multiple times due to antispambot outputting it in different encodings

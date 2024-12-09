@@ -59,7 +59,7 @@
         array(  'slug' => 'tp-add-on-automatic-language-detection/tp-automatic-language-detection.php',
             'type' => 'add-on',
             'name' => __( 'Automatic User Language Detection', 'translatepress-multilingual' ),
-            'description' => __( 'Automatically redirects new visitors to their preferred language based on browser settings or IP address and remembers the last visited language.', 'translatepress-multilingual' ),
+            'description' => __( 'Prompts visitors to switch to their preferred language based on their browser settings or IP address and remembers the last visited language.', 'translatepress-multilingual' ),
             'icon' => 'auto-detect-language-add-on.png',
             'doc_url' => 'https://translatepress.com/docs/addons/automatic-user-language-detection/?utm_source=wpbackend&utm_medium=clientsite&utm_content=add-on-page&utm_campaign=TRP',
         ),

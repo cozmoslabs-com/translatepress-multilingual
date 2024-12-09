@@ -299,7 +299,7 @@
 <?php __("These addons extend your translation plugin and are available in the Business and Developer plans.", "translatepress-multilingual"); ?>
 <?php __("DeepL Automatic Translation", "translatepress-multilingual"); ?>
 <?php __("Automatically translate your website through the DeepL API.", "translatepress-multilingual"); ?>
-<?php __("Automatically redirects new visitors to their preferred language based on browser settings or IP address and remembers the last visited language.", "translatepress-multilingual"); ?>
+<?php __("Prompts visitors to switch to their preferred language based on their browser settings or IP address and remembers the last visited language.", "translatepress-multilingual"); ?>
 <?php __("Translator Accounts", "translatepress-multilingual"); ?>
 <?php __("Create translator accounts for new users or allow existing users that are not administrators to translate your website.", "translatepress-multilingual"); ?>
 <?php __("Browse As User Role", "translatepress-multilingual"); ?>
