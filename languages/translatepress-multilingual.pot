@@ -2511,7 +2511,7 @@ msgstr ""
 msgid "<br>* The inactive languages will still be visible and active for the admin. For other users they won't be visible in the language switchers and won't be accessible either."
 msgstr ""
 
-#: add-ons-advanced/seo-pack/includes/class-slug-manager.php:55, add-ons-advanced/seo-pack-legacy/includes/class-slug-manager.php:49, add-ons-advanced/seo-pack/includes/string-translation/class-string-translation-seo.php:56, add-ons-advanced/seo-pack-legacy/includes/string-translation/class-string-translation-seo.php:56
+#: add-ons-advanced/seo-pack/includes/class-slug-manager.php:56, add-ons-advanced/seo-pack-legacy/includes/class-slug-manager.php:49, add-ons-advanced/seo-pack/includes/string-translation/class-string-translation-seo.php:56, add-ons-advanced/seo-pack-legacy/includes/string-translation/class-string-translation-seo.php:56
 msgid "Post Slug"
 msgstr ""
 

@@ -5,7 +5,7 @@ Tags: translate, translation, multilingual, automatic translation, bilingual, fr
 Requires at least: 3.1.0
 Tested up to: 6.7.1
 Requires PHP: 5.6.20
-Stable tag: 2.9.1
+Stable tag: 2.9.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -141,6 +141,9 @@ For more information please check out our [documentation](https://translatepress
 
 
 == Changelog ==
+= 2.9.2 =
+* Fixed not setting srcset attributes properly for translated images
+
 = 2.9.1 =
 * Added Gutenberg Language Restriction option to allow for easily including/excluding blocks in specific languages
 * Fixed PHP notice in WP 6.7: function _load_textdomain_just_in_time was called incorrectly

@@ -911,7 +911,7 @@ class TRP_Translation_Render{
                 if ( $current_node_accessor[ 'attribute' ] ){
                     $translateable_string_manual = $this->maybe_correct_translatable_string( $translateable_strings_manual[$i], $node_manual['node']->getAttribute( $accessor ) );
                     $node_manual['node']->setAttribute( $accessor, str_replace( $translateable_string_manual, esc_attr( $translated_strings_manual[$i] ), $node_manual['node']->getAttribute( $accessor ) ) );
-                    do_action( 'trp_set_translation_for_attribute', $node_manual['node'], $accessor, $translateable_strings_manual[$i] );
+                    do_action( 'trp_set_translation_for_attribute', $node_manual['node'], $accessor, $translated_strings_manual[$i] );
                 }else{
                     $translateable_string_manual = $this->maybe_correct_translatable_string( $translateable_strings_manual[$i], $node_manual['node']->$accessor );
                     $nodes[$i]['node']->$accessor = str_replace( $translateable_string_manual, trp_sanitize_string($translated_strings_manual[$i]), $node_manual['node']->$accessor );
