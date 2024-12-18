@@ -197,7 +197,7 @@ msgstr ""
 msgid "Automatic translation has been disabled."
 msgstr ""
 
-#: includes/class-error-manager.php:163, includes/class-plugin-notices.php:341, includes/class-plugin-notices.php:396, includes/class-plugin-notices.php:372, includes/class-plugin-notices.php:449, includes/class-plugin-notices.php:473, includes/class-plugin-notices.php:521, includes/class-plugin-notices.php:506, includes/class-reviews.php:119, includes/class-reviews.php:122, includes/class-upgrade.php:1030, add-ons-advanced/seo-pack/class-seo-pack.php:752
+#: includes/class-error-manager.php:163, includes/class-plugin-notices.php:341, includes/class-plugin-notices.php:396, includes/class-plugin-notices.php:372, includes/class-plugin-notices.php:449, includes/class-plugin-notices.php:473, includes/class-plugin-notices.php:521, includes/class-plugin-notices.php:506, includes/class-reviews.php:119, includes/class-reviews.php:122, includes/class-upgrade.php:1030, add-ons-advanced/seo-pack/class-seo-pack.php:751
 msgid "Dismiss this notice."
 msgstr ""
 
@@ -1825,11 +1825,11 @@ msgstr ""
 msgid "Updating TranslatePress tables"
 msgstr ""
 
-#: add-ons-advanced/seo-pack/class-seo-pack.php:747
+#: add-ons-advanced/seo-pack/class-seo-pack.php:746
 msgid "Automatic and manual slug translation changes performed when <strong>TranslatePress - Multilingual</strong> 2.8.4 was active had to be removed because of some issues with that version. All slug translations from before that version are now in use. Thank you for understanding!"
 msgstr ""
 
-#: add-ons-advanced/seo-pack/class-seo-pack.php:748
+#: add-ons-advanced/seo-pack/class-seo-pack.php:747
 msgid "If you absolutely need them, the removed translations can be found in tables trp_slug_original_obsolete and trp_slug_translation_obsolete."
 msgstr ""
 
@@ -2511,7 +2511,7 @@ msgstr ""
 msgid "<br>* The inactive languages will still be visible and active for the admin. For other users they won't be visible in the language switchers and won't be accessible either."
 msgstr ""
 
-#: add-ons-advanced/seo-pack/includes/class-slug-manager.php:56, add-ons-advanced/seo-pack-legacy/includes/class-slug-manager.php:49, add-ons-advanced/seo-pack/includes/string-translation/class-string-translation-seo.php:56, add-ons-advanced/seo-pack-legacy/includes/string-translation/class-string-translation-seo.php:56
+#: add-ons-advanced/seo-pack/includes/class-slug-manager.php:55, add-ons-advanced/seo-pack-legacy/includes/class-slug-manager.php:49, add-ons-advanced/seo-pack/includes/string-translation/class-string-translation-seo.php:56, add-ons-advanced/seo-pack-legacy/includes/string-translation/class-string-translation-seo.php:56
 msgid "Post Slug"
 msgstr ""
 

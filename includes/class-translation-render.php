@@ -1089,7 +1089,6 @@ class TRP_Translation_Render{
         // based on this we're filtering wp_redirect to include the proper URL when returning to the current page.
         foreach ( $html->find('form') as $k => $row ){
             $form_action      = $row->action;
-            $processed_action = null;
             $is_admin_link    = $this->is_admin_link( $form_action, $admin_url, $wp_login_url );
             $skip_this_action = apply_filters( 'trp_skip_form_action', false, $form_action );
 
@@ -1103,13 +1102,19 @@ class TRP_Translation_Render{
                     && $this->settings['force-language-to-custom-links'] == 'yes'
                     && !$is_external_link
                     && strpos( $form_action, '#TRPLINKPROCESSED' ) === false ) {
-                        $action = $this->url_converter->get_path_no_lang_slug_from_url( $form_action );
-
-                        $processed_action = $this->url_converter->get_url_for_language( $TRP_LANGUAGE, $action );
+                    /* $form_action can have language slug in a secondary language but the path slugs in original language.
+                     * By converting to default language first, it helps set the language slug to default language
+                     * while keeping the path slugs unchanged (no language coincidences should appear because we check
+                     * for uniqueness between secondary language translations and originals other than its own)
+                     * Use filter trp_change_form_action to hardcode particular cases
+                     */
+                    $action_in_default_language = $this->url_converter->get_url_for_language( $this->settings['default-language'], $form_action, '' );
+                    $action_in_current_language = $this->url_converter->get_url_for_language( $TRP_LANGUAGE, $action_in_default_language, '' );
+                    $row->action                = apply_filters( 'trp_change_form_action', $action_in_current_language, $action_in_default_language, $TRP_LANGUAGE );
                 }
 
-                if ( isset( $processed_action ) )
-                    $row->action = str_replace( '#TRPLINKPROCESSED', '', esc_url( $processed_action ) );
+                // this should happen regardless of whether we made changes above
+                $row->action = str_replace( '#TRPLINKPROCESSED', '', esc_url( $row->action ) );
             }
         }
 
