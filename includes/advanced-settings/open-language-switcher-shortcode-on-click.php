@@ -1,5 +1,9 @@
 <?php
 
+
+if ( !defined('ABSPATH' ) )
+    exit();
+
 add_filter( 'trp_register_advanced_settings', 'trp_open_language_switcher_shortcode_on_click', 1350 );
 function trp_open_language_switcher_shortcode_on_click( $settings_array ){
     $settings_array[] = array(

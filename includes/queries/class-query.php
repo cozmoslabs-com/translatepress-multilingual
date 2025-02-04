@@ -1,5 +1,9 @@
 <?php
 
+
+if ( !defined('ABSPATH' ) )
+    exit();
+
 /**
  * Class TRP_Query
  *
@@ -941,7 +945,7 @@ class TRP_Query{
      */
     public function get_string_rows( $id_array, $original_array, $language_code, $output = OBJECT_K, $is_original_id_array = false ){
         $original_id = ($is_original_id_array) ? ' original_id, ' : '';
-        $select_query = "SELECT " . $original_id . "id, original, translated, status, block_type FROM `" . sanitize_text_field( $this->get_table_name( $language_code ) ) . "` WHERE ";
+        $select_query = "SELECT " . $original_id . "id, original, translated, status, block_type, original_id FROM `" . sanitize_text_field( $this->get_table_name( $language_code ) ) . "` WHERE ";
 
         $prepared_query1 = '';
         if ( is_array( $original_array ) && count ( $original_array ) > 0 ) {

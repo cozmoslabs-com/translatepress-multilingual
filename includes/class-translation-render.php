@@ -1,5 +1,9 @@
 <?php
 
+
+if ( !defined('ABSPATH' ) )
+    exit();
+
 /**
  * Class TRP_Translation_Render
  *
@@ -1119,10 +1123,14 @@ class TRP_Translation_Render{
         }
 
         foreach ( $html->find('link') as $link ) {
-            if ( isset($link->href) ) {
+            if ( isset( $link->href ) ) {
+                if ( isset( $link->rel ) && ( $link->rel == 'next' || $link->rel == 'prev' ) )
+                    $link->href = $this->url_converter->get_url_for_language( $TRP_LANGUAGE, $link->href );
+
                 $link->href = str_replace('#TRPLINKPROCESSED', '', $link->href);
             }
         }
+
         return $html;
     }
 

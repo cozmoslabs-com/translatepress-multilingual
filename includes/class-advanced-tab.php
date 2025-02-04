@@ -1,5 +1,9 @@
 <?php
 
+
+if ( !defined('ABSPATH' ) )
+    exit();
+
 class TRP_Advanced_Tab {
 
     private $settings;

@@ -1,5 +1,8 @@
 <?php
 
+if ( !defined('ABSPATH' ) )
+    exit();
+
 class TRP_Gutenberg_Blocks {
     private $settings;
 

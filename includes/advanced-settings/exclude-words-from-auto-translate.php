@@ -1,5 +1,9 @@
 <?php
 
+
+if ( !defined('ABSPATH' ) )
+    exit();
+
 add_filter( 'trp_register_advanced_settings', 'trp_register_exclude_words_from_auto_translate', 100 );
 function trp_register_exclude_words_from_auto_translate( $settings_array ){
     $settings_array[] = array(

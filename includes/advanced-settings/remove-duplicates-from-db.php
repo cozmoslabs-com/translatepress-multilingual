@@ -1,4 +1,8 @@
 <?php
+
+if ( !defined('ABSPATH' ) )
+    exit();
+
 add_filter( 'trp_register_advanced_settings', 'trp_register_remove_duplicate_entries_from_db', 530 );
 function trp_register_remove_duplicate_entries_from_db( $settings_array ){
     $settings_array[] = array(

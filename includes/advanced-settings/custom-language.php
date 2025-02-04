@@ -1,5 +1,9 @@
 <?php
 
+
+if ( !defined('ABSPATH' ) )
+    exit();
+
 add_filter('trp_register_advanced_settings', 'trp_register_custom_language', 2285);
 /*
  * To use the 'mixed' type for advanced settings, there needs to be specified the type of the control

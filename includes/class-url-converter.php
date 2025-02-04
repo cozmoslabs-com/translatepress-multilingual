@@ -1,5 +1,9 @@
 <?php
 
+
+if ( !defined('ABSPATH' ) )
+    exit();
+
 /**
  * Class TRP_Url_Converter
  *
@@ -287,8 +291,6 @@ class TRP_Url_Converter {
         $debug = false;
         global $TRP_LANGUAGE;
 
-        $url = urldecode($url);
-
         if ( apply_filters( 'trp_skip_url_for_language', false, $url ) ){
             return (string) $url;
         }
@@ -408,9 +410,6 @@ class TRP_Url_Converter {
         if ( empty($url) ){
             $url = $this->cur_page_url( false );
         }
-
-        //moved urldecode here because calling it on null will trigger a PHP Deprecated notice
-        $url = urldecode( $url );
 
         $url = apply_filters( 'trp_pre_get_url_for_language', $url, $language, $this->get_abs_home(), $this->get_lang_from_url_string( $url ), $this->get_url_slug( $language ) );
 
@@ -733,7 +732,7 @@ class TRP_Url_Converter {
         $home_path_regex = sprintf( '|^%s|i', preg_quote( $home_path, '|' ) );
 
         // Trim path info from the end and the leading home path from the front.
-        $req_uri = urldecode( $req_uri );
+
         $req_uri = ltrim( $req_uri, '/' );
         $req_uri = preg_replace( $home_path_regex, '', $req_uri );
         $req_uri = trim( $abs_home, '/' ) . '/' . ltrim( $req_uri, '/' );

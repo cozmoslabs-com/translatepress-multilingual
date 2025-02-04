@@ -1,4 +1,9 @@
 <?php
+
+if ( !defined('ABSPATH' ) )
+    exit();
+
+
 /**
  * Class that adds a misc notice
  *

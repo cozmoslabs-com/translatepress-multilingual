@@ -1,4 +1,9 @@
 <?php
+
+
+if ( !defined('ABSPATH' ) )
+    exit();
+
 /**
  * Add automatic translate exclude selectors.
  */

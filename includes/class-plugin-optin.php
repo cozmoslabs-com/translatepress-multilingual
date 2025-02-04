@@ -1,5 +1,9 @@
 <?php
 
+
+if ( !defined('ABSPATH' ) )
+    exit();
+
 class TRP_Plugin_Optin {
 
     public static $user_name = '';

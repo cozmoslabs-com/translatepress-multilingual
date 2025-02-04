@@ -1,5 +1,9 @@
 <?php
 
+
+if ( !defined('ABSPATH' ) )
+    exit();
+
 add_filter( 'trp_machine_translation_engines', 'trp_gt_add_engine', 10 );
 function trp_gt_add_engine( $engines ){
     $engines[] = array( 'value' => 'google_translate_v2', 'label' => __( 'Google Translate v2', 'translatepress-multilingual' ) );

@@ -1,4 +1,9 @@
 <?php
+
+
+if ( !defined('ABSPATH' ) )
+    exit();
+
 add_filter( 'trp_machine_translation_engines', 'trp_mtapi_add_engine', 10 );
 function trp_mtapi_add_engine( $engines ){
 	$engines[] = array( 'value' => 'mtapi', 'label' => __( 'TranslatePress AI', 'translatepress-multilingual' ) );

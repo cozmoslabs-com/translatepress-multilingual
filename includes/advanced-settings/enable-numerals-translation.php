@@ -1,5 +1,9 @@
 <?php
 
+
+if ( !defined('ABSPATH' ) )
+    exit();
+
 add_filter('trp_register_advanced_settings', 'trp_register_enable_numerals_translation', 1081);
 function trp_register_enable_numerals_translation($settings_array)
 {

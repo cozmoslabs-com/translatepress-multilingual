@@ -213,6 +213,8 @@
 <?php __("Edit translations by visually selecting them on each site page", "translatepress-multilingual"); ?>
 <?php __("String Translation", "translatepress-multilingual"); ?>
 <?php __("Edit url slug translations, plugins and theme translation (emails, forms etc.)", "translatepress-multilingual"); ?>
+<?php __("Current User", "translatepress-multilingual"); ?>
+<?php __("Logged Out", "translatepress-multilingual"); ?>
 <?php __("Translate Page", "translatepress-multilingual"); ?>
 <?php __("Opens post in the translation editor. Post must be saved as draft or published beforehand.", "translatepress-multilingual"); ?>
 <?php __("Security check", "translatepress-multilingual"); ?>
@@ -561,6 +563,7 @@
 <?php __("Bulk Actions", "translatepress-multilingual"); ?>
 <?php __("Delete entries", "translatepress-multilingual"); ?>
 <?php __("Edit", "translatepress-multilingual"); ?>
+<?php __("Delete", "translatepress-multilingual"); ?>
 <?php __("Filter", "translatepress-multilingual"); ?>
 <?php __("Clear filters", "translatepress-multilingual"); ?>
 <?php __("Add New", "translatepress-multilingual"); ?>
@@ -577,6 +580,7 @@
 <?php __("No strings match your query.", "translatepress-multilingual"); ?>
 <?php __("Try to rescan plugins and theme for strings.", "translatepress-multilingual"); ?>
 <?php __("An error occurred while loading results. Most likely you were logged out. Reload page?", "translatepress-multilingual"); ?>
+<?php __("found in translation", "translatepress-multilingual"); ?>
 <?php __("Select All", "translatepress-multilingual"); ?>
 <?php __("Select Visible", "translatepress-multilingual"); ?>
 <?php __("You are about to perform this action on all the strings matching your filter, not just the visibly checked. To perform the action only to the visible strings click \"Select Visible\" from the table header dropdown.", "translatepress-multilingual"); ?>
@@ -585,6 +589,7 @@
 <?php __("The word typed was incorrect. Action was cancelled.", "translatepress-multilingual"); ?>
 <?php __("in", "translatepress-multilingual"); ?>
 <?php __("Warning: This action cannot be undone. Deleting a string will remove its current translation. The original string will appear again in this interface after TranslatePress detects it. This action is NOT equivalent to excluding the string from being translated again.", "translatepress-multilingual"); ?>
+<?php __("%d original entries and their translations were deleted.", "translatepress-multilingual"); ?>
 <?php __("Navigate to next page", "translatepress-multilingual"); ?>
 <?php __("Navigate to previous page", "translatepress-multilingual"); ?>
 <?php __("Navigate to first page", "translatepress-multilingual"); ?>

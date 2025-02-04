@@ -1,4 +1,8 @@
 <?php
+
+if ( !defined('ABSPATH' ) )
+    exit();
+
 /**
  * Register advanced configuration option for custom date formatting for every translated language
  * The settings uses the 'input_array' advanced setting

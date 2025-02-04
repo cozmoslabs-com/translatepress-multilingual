@@ -1,5 +1,9 @@
 <?php
 
+
+if ( !defined('ABSPATH' ) )
+    exit();
+
 add_filter('trp_register_advanced_settings', 'serve_similar_translation', 1050);
 function serve_similar_translation($settings_array)
 {

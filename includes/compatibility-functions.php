@@ -1,5 +1,9 @@
 <?php
 
+
+if ( !defined('ABSPATH' ) )
+    exit();
+
 /** Compatibility functions with WP core and various themes and plugins*/
 
 /**

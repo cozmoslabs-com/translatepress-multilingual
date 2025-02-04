@@ -5,7 +5,7 @@ Tags: translate, translation, multilingual, automatic translation, bilingual, fr
 Requires at least: 3.1.0
 Tested up to: 6.7.1
 Requires PHP: 5.6.20
-Stable tag: 2.9.3
+Stable tag: 2.9.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -141,6 +141,15 @@ For more information please check out our [documentation](https://translatepress
 
 
 == Changelog ==
+= 2.9.4 =
+* Fixed potential security issue by preventing direct access to files
+* Extended keyword search in String Translation UI to return results from translations too, alongside matching default language text, for Gettext, Email and Regular strings
+* Added new feature to delete translations in String Translation UI, individually or in bulk, for Gettext, Email and Regular strings
+* Fixed incorrect translated urls in the page when reordering languages and using subdirectory for default language, while also excluding certain paths from translation
+* Fixed edge case PHP error in ajax request for front-end translations
+* Fixed edge case PHP error between Gutenberg language restrictions and WP Interactivity API
+* Fixed edge case PHP error argument must be of type string
+
 = 2.9.3 =
 * Fixed form action losing GET parameters on translated pages
 

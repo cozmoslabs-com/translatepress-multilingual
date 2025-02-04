@@ -1,5 +1,9 @@
 <?php
 
+
+if ( !defined('ABSPATH' ) )
+    exit();
+
 add_filter( 'trp_register_advanced_settings', 'trp_show_opposite_flag_language_switcher_shortcode', 1250 );
 function trp_show_opposite_flag_language_switcher_shortcode( $settings_array ){
     $settings_array[] = array(

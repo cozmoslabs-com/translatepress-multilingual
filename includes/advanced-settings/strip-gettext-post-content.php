@@ -1,4 +1,8 @@
 <?php
+
+if ( !defined('ABSPATH' ) )
+    exit();
+
 add_filter( 'trp_register_advanced_settings', 'trp_register_strip_gettext_post_content', 60 );
 function trp_register_strip_gettext_post_content( $settings_array ){
 	$settings_array[] = array(

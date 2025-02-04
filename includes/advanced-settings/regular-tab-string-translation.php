@@ -1,5 +1,9 @@
 <?php
 
+
+if ( !defined('ABSPATH' ) )
+    exit();
+
 add_filter( 'trp_register_advanced_settings', 'trp_show_regular_tab_in_string_translation', 525 );
 function trp_show_regular_tab_in_string_translation( $settings_array ){
 	$settings_array[] = array(

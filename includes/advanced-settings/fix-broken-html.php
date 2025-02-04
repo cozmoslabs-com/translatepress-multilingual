@@ -1,4 +1,9 @@
 <?php
+
+
+if ( !defined('ABSPATH' ) )
+    exit();
+
 function trp_register_fix_broken_html( $settings_array ){
     $settings_array[] = array(
         'name'          => 'fix_broken_html',

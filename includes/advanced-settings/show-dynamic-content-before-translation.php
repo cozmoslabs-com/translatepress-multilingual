@@ -1,5 +1,8 @@
 <?php
 
+if ( !defined('ABSPATH' ) )
+    exit();
+
 add_filter( 'trp_register_advanced_settings', 'trp_register_show_dynamic_content_before_translation', 20 );
 function trp_register_show_dynamic_content_before_translation( $settings_array ){
 	$settings_array[] = array(

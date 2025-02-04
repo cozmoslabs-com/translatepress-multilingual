@@ -1,5 +1,9 @@
 <?php
 
+
+if ( !defined('ABSPATH' ) )
+    exit();
+
 /** Post title */
 add_filter( 'trp_register_advanced_settings', 'trp_register_disable_post_container_tags_for_post_title', 510 );
 function trp_register_disable_post_container_tags_for_post_title( $settings_array ){

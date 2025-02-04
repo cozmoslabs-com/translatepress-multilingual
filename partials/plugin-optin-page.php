@@ -1,3 +1,8 @@
+<?php
+if ( !defined('ABSPATH' ) )
+    exit();
+
+?>
 <div class="wrap trp-optin-page">
 
     <div class="trp-optin-page__wrap">

@@ -1,5 +1,9 @@
 <?php
 
+
+if ( !defined('ABSPATH' ) )
+    exit();
+
 add_filter( 'trp_register_advanced_settings', 'trp_register_exclude_gettext_strings', 100 );
 function trp_register_exclude_gettext_strings( $settings_array ){
 	$settings_array[] = array(

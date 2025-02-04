@@ -1,5 +1,9 @@
 <?php
 
+
+if ( !defined('ABSPATH' ) )
+    exit();
+
 add_filter( 'trp_register_advanced_settings', 'trp_register_do_not_translate_certain_paths', 120 );
 function trp_register_do_not_translate_certain_paths( $settings_array ){
 
@@ -333,7 +337,7 @@ function trp_exclude_include_filter_custom_links( $new_url, $url, $TRP_LANGUAGE,
     $url_converter = $trp->get_component('url_converter');
 
     if( !isset( $TRP_LANGUAGE ) || $settings['default-language'] == $TRP_LANGUAGE )
-        return;
+        return $new_url;
 
     $current_original_url = $url_converter->get_url_for_language( $settings['default-language'], $new_url, '' );
 

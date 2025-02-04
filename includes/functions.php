@@ -1,5 +1,8 @@
 <?php
 
+if ( !defined('ABSPATH' ) )
+    exit();
+
 /**
  * Outputs language switcher.
  *
@@ -197,6 +200,8 @@ function trp_add_affiliate_id_to_link( $link ){
  * Do not confuse with trim.
  */
 function trp_sanitize_string( $filtered, $execute_wp_kses = true ){
+    if (!is_string($filtered)) return '';
+
 	$filtered = preg_replace( '/<script\b[^>]*>(.*?)<\/script>/is', '', $filtered );
 
 	// don't remove \r \n \t. They are part of the translation, they give structure and context to the text.

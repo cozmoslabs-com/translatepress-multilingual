@@ -1,3 +1,7 @@
+<?php
+if ( !defined('ABSPATH' ) )
+    exit();
+?>
 <div id="trp-addons-page" class="wrap">
 
     <h1> <?php esc_html_e( 'TranslatePress Database Updater', 'translatepress-multilingual' );?></h1>

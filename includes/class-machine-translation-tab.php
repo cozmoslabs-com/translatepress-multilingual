@@ -1,5 +1,9 @@
 <?php
 
+
+if ( !defined('ABSPATH' ) )
+    exit();
+
 class TRP_Machine_Translation_Tab {
 
     private $settings;

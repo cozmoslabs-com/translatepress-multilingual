@@ -1,4 +1,8 @@
 <?php
+
+if ( !defined('ABSPATH' ) )
+    exit();
+
 $trp = TRP_Translate_Press::get_trp_instance();
 if( !empty( $trp->active_pro_addons ) ){//if we have any Advanced or Pro addons active then show the license key activation form
     ?>

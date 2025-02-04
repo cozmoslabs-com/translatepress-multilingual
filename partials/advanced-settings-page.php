@@ -1,4 +1,7 @@
-
+<?php
+if ( !defined('ABSPATH' ) )
+    exit();
+?>
 <div id="trp-advanced-settings" class="wrap">
     <form method="post" action="options.php">
         <?php settings_fields( 'trp_advanced_settings' ); ?>

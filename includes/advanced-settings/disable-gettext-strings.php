@@ -1,5 +1,9 @@
 <?php
 
+
+if ( !defined('ABSPATH' ) )
+    exit();
+
 add_filter( 'trp_register_advanced_settings', 'trp_translation_for_gettext_strings', 523 );
 function trp_translation_for_gettext_strings( $settings_array ){
     $settings_array[] = array(

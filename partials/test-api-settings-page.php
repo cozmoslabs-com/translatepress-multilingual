@@ -1,5 +1,9 @@
 <?php
 
+
+if ( !defined('ABSPATH' ) )
+    exit();
+
 $trp                = TRP_Translate_Press::get_trp_instance();
 $machine_translator = $trp->get_component( 'machine_translator' );
 $response           = $machine_translator->test_request();

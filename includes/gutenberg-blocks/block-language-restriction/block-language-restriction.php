@@ -22,7 +22,7 @@ function trp_render_blocks( $block_content, $block ) {
     $should_exclude_block = $block_attrs['restriction_type'] === 'include' && !in_array( $current_language_name, $block_attrs['selected_languages'] )
                             || $block_attrs['restriction_type'] === 'exclude' && in_array( $current_language_name, $block_attrs['selected_languages'] );
 
-    if ( $should_exclude_block ) return null;
+    if ( $should_exclude_block ) return '';
 
     return $block_content;
 }

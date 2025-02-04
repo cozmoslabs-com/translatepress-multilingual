@@ -1,5 +1,9 @@
 <?php
 
+
+if ( !defined('ABSPATH' ) )
+    exit();
+
 add_filter( 'trp_register_advanced_settings', 'trp_register_troubleshoot_separator', 5 );
 function trp_register_troubleshoot_separator( $settings_array ){
     $settings_array[] = array(
