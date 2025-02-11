@@ -5,7 +5,7 @@ Tags: translate, translation, multilingual, automatic translation, bilingual, fr
 Requires at least: 3.1.0
 Tested up to: 6.7.1
 Requires PHP: 5.6.20
-Stable tag: 2.9.4
+Stable tag: 2.9.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -141,6 +141,13 @@ For more information please check out our [documentation](https://translatepress
 
 
 == Changelog ==
+= 2.9.5 =
+* Added support for video tag in order to show different videos according to selected language
+* Added compatibility for Elementor element caching on additional languages
+* Added compatibility with Profile Builder redirects after registration and edit profile forms
+* Reduced requests to TP AI when quota is unavailable
+* Fixed redirecting to wrong language after checkout in some cases
+
 = 2.9.4 =
 * Fixed potential security issue by preventing direct access to files
 * Extended keyword search in String Translation UI to return results from translations too, alongside matching default language text, for Gettext, Email and Regular strings

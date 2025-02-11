@@ -2446,3 +2446,21 @@ function trp_get_url_for_language_backwards_compatibility( $new_url, $url, $lang
     return $new_url;
 }
 add_filter('trp_get_url_for_language', 'trp_get_url_for_language_backwards_compatibility', 10, 3 );
+
+/**
+ * Redirects to the translated version of the `redirect_url` based on the current language.
+ *
+ * @param string $redirect_url Original URL.
+ */
+function trp_compatibility_profile_builder_redirect( $redirect_url ) {
+    $trp_instance = TRP_Translate_Press::get_trp_instance();
+
+    global $TRP_LANGUAGE;
+
+    $url_converter  = $trp_instance->get_component( 'url_converter' );
+
+    return $url_converter->get_url_for_language( $TRP_LANGUAGE, $redirect_url, '' );
+}
+
+add_filter( 'wppb_register_redirect', 'trp_compatibility_profile_builder_redirect' );
+add_filter( 'wppb_edit_profile_redirect', 'trp_compatibility_profile_builder_redirect' );

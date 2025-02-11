@@ -99,13 +99,14 @@ class TRP_Translation_Manager {
 
         return $this->string_groups() + array(
                 // attribute names
-                'src'         => esc_html__( 'Image source', 'translatepress-multilingual' ),
+                'src'         => esc_html__( 'Source', 'translatepress-multilingual' ),
                 'alt'         => esc_html__( 'Alt attribute', 'translatepress-multilingual' ),
                 'title'       => esc_html__( 'Title attribute', 'translatepress-multilingual' ),
                 'href'        => esc_html__( 'Anchor link', 'translatepress-multilingual' ),
                 'placeholder' => esc_html__( 'Placeholder attribute', 'translatepress-multilingual' ),
                 'submit'      => esc_html__( 'Submit attribute', 'translatepress-multilingual' ),
                 'text'        => esc_html__( 'Text', 'translatepress-multilingual' ),
+                'poster'      => esc_html__( 'Video Poster', 'translatepress-multilingual' ),
 
                 // plural form name variants
                 'plural_form_text'           => esc_html__( 'plural form', 'translatepress-multilingual' ),
@@ -319,6 +320,7 @@ class TRP_Translation_Manager {
             'stringlist'      => esc_html__( 'String List', 'translatepress-multilingual' ),
             'gettextstrings'  => esc_html__( 'Gettext Strings', 'translatepress-multilingual' ),
             'images'          => esc_html__( 'Images', 'translatepress-multilingual' ),
+            'videos'          => esc_html__( 'Videos', 'translatepress-multilingual' ),
             'dynamicstrings'  => esc_html__( 'Dynamically Added Strings', 'translatepress-multilingual' ),
         );
         return apply_filters( 'trp_string_groups', $string_groups );
@@ -909,7 +911,9 @@ class TRP_Translation_Manager {
 		$html .= '</a>';
 		$html .= '</div>';
 		$html .= '<div class="trp-image-upsale-slugs">';
-		$html .= '<img src="' . TRP_PLUGIN_URL.'assets/images/slug-upsale-new-editor-750x430.png' . '">';
+		$html .= '<div class="trp-image-container">';
+		$html .= '<img src="' . esc_url(TRP_PLUGIN_URL.'assets/images/slug-upsale-new-editor-new.png') . '" class="trp-image-zoom" alt="SEO Pack Add-on">';
+		$html .= '</div>';
 		$html .= '</div>';
 		$html .= '</div>';
 

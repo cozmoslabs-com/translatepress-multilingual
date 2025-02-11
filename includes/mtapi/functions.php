@@ -52,6 +52,7 @@ function trp_mtapi_add_settings( $mt_settings ){
 		$site_status = $mtapi_server->lookup_site($license, home_url());
 
         $site_status['quota'] = isset ( $site_status['quota'] ) ? $site_status['quota'] : 0;
+        set_transient("trp_mtapi_cached_quota", $site_status['quota'], 5*60);
         $quota = ceil($site_status['quota'] / 5);
 
     ?>

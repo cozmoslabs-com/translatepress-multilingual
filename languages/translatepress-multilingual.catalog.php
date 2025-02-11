@@ -121,13 +121,14 @@
 <?php __("Settings", "translatepress-multilingual"); ?>
 <?php __("Activate License", "translatepress-multilingual"); ?>
 <?php __("Pro Features", "translatepress-multilingual"); ?>
-<?php __("Image source", "translatepress-multilingual"); ?>
+<?php __("Source", "translatepress-multilingual"); ?>
 <?php __("Alt attribute", "translatepress-multilingual"); ?>
 <?php __("Title attribute", "translatepress-multilingual"); ?>
 <?php __("Anchor link", "translatepress-multilingual"); ?>
 <?php __("Placeholder attribute", "translatepress-multilingual"); ?>
 <?php __("Submit attribute", "translatepress-multilingual"); ?>
 <?php __("Text", "translatepress-multilingual"); ?>
+<?php __("Video Poster", "translatepress-multilingual"); ?>
 <?php __("plural form", "translatepress-multilingual"); ?>
 <?php __("one", "translatepress-multilingual"); ?>
 <?php __("few", "translatepress-multilingual"); ?>
@@ -208,6 +209,7 @@
 <?php __("String List", "translatepress-multilingual"); ?>
 <?php __("Gettext Strings", "translatepress-multilingual"); ?>
 <?php __("Images", "translatepress-multilingual"); ?>
+<?php __("Videos", "translatepress-multilingual"); ?>
 <?php __("Dynamically Added Strings", "translatepress-multilingual"); ?>
 <?php __("Translation Editor", "translatepress-multilingual"); ?>
 <?php __("Edit translations by visually selecting them on each site page", "translatepress-multilingual"); ?>
