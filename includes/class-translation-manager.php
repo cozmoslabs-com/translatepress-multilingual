@@ -100,6 +100,7 @@ class TRP_Translation_Manager {
         return $this->string_groups() + array(
                 // attribute names
                 'src'         => esc_html__( 'Source', 'translatepress-multilingual' ),
+                'srcset'      => esc_html__( 'Srcset', 'translatepress-multilingual' ),
                 'alt'         => esc_html__( 'Alt attribute', 'translatepress-multilingual' ),
                 'title'       => esc_html__( 'Title attribute', 'translatepress-multilingual' ),
                 'href'        => esc_html__( 'Anchor link', 'translatepress-multilingual' ),
@@ -321,6 +322,7 @@ class TRP_Translation_Manager {
             'gettextstrings'  => esc_html__( 'Gettext Strings', 'translatepress-multilingual' ),
             'images'          => esc_html__( 'Images', 'translatepress-multilingual' ),
             'videos'          => esc_html__( 'Videos', 'translatepress-multilingual' ),
+            'audios'          => esc_html__( 'Audios', 'translatepress-multilingual' ),
             'dynamicstrings'  => esc_html__( 'Dynamically Added Strings', 'translatepress-multilingual' ),
         );
         return apply_filters( 'trp_string_groups', $string_groups );

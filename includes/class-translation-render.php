@@ -131,8 +131,9 @@ class TRP_Translation_Render{
 
         $node_type_categories = apply_filters( 'trp_node_type_categories', array(
             $string_groups['metainformation']   => array( 'meta_desc', 'page_title', 'meta_desc_img' ),
-            $string_groups['images']            => array( 'image_src' ),
-            $string_groups['videos']             => array( 'video_src', 'video_poster', 'video_source_src')
+            $string_groups['images']            => array( 'image_src', 'picture_source_srcset', 'picture_image_src' ),
+            $string_groups['videos']             => array( 'video_src', 'video_poster', 'video_source_src'),
+            $string_groups['audios']             => array( 'audio_src', 'audio_source_src'),
         ));
 
         foreach( $node_type_categories as $category_name => $node_groups ){
@@ -1005,7 +1006,9 @@ class TRP_Translation_Render{
 
                     // video without a src can't be detected. So when we detect a video > source tag
                     // we add the ID to the parent video tag as well
-                    if($nodes[$i]['type'] == 'video_source_src')
+                    if( $nodes[$i]['type'] == 'video_source_src' ||
+                        $nodes[$i]['type'] == 'audio_source_src' ||
+                        $nodes[$i]['type'] == 'picture_source_srcset')
                     {
                         $parent = $nodes[$i]['node']->parent();
                         if (!array_key_exists('src', $parent->attr)){
@@ -1225,7 +1228,7 @@ class TRP_Translation_Render{
      * Hooked to trp_allow_machine_translation_for_string
      */
     public function allow_machine_translation_for_string( $allow, $entity_decoded_trimmed_string, $current_node_accessor_selector, $node_accessor ){
-    	$skip_attributes = apply_filters( 'trp_skip_machine_translation_for_attr', array( 'href', 'src', 'poster' ) );
+    	$skip_attributes = apply_filters( 'trp_skip_machine_translation_for_attr', array( 'href', 'src', 'poster', 'srcset' ) );
 	    if ( in_array( $current_node_accessor_selector, $skip_attributes ) ){
 	    	// do not machine translate href and src
 	    	return false;
@@ -1777,7 +1780,27 @@ class TRP_Translation_Render{
                 'selector' => 'video source[src]',
                 'accessor' => 'src',
                 'attribute' => true
-            )
+            ),
+            'audio_src' => array(
+                'selector' => 'audio[src]',
+                'accessor' => 'src',
+                'attribute' => true
+            ),
+            'audio_source_src' => array(
+                'selector' => 'audio source[src]',
+                'accessor' => 'src',
+                'attribute' => true
+            ),
+            'picture_image_src' => array(
+                'selector' => 'picture image[src]',
+                'accessor' => 'src',
+                'attribute' => true
+            ),
+            'picture_source_srcset' => array(
+                'selector' => 'picture source[srcset]',
+                'accessor' => 'srcset',
+                'attribute' => true
+            ),
 	    ));
     }
 

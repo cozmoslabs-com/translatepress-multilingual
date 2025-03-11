@@ -122,6 +122,7 @@
 <?php __("Activate License", "translatepress-multilingual"); ?>
 <?php __("Pro Features", "translatepress-multilingual"); ?>
 <?php __("Source", "translatepress-multilingual"); ?>
+<?php __("Srcset", "translatepress-multilingual"); ?>
 <?php __("Alt attribute", "translatepress-multilingual"); ?>
 <?php __("Title attribute", "translatepress-multilingual"); ?>
 <?php __("Anchor link", "translatepress-multilingual"); ?>
@@ -210,6 +211,7 @@
 <?php __("Gettext Strings", "translatepress-multilingual"); ?>
 <?php __("Images", "translatepress-multilingual"); ?>
 <?php __("Videos", "translatepress-multilingual"); ?>
+<?php __("Audios", "translatepress-multilingual"); ?>
 <?php __("Dynamically Added Strings", "translatepress-multilingual"); ?>
 <?php __("Translation Editor", "translatepress-multilingual"); ?>
 <?php __("Edit translations by visually selecting them on each site page", "translatepress-multilingual"); ?>
@@ -254,7 +256,6 @@
 <?php __("Removing cdata dictionary strings for language %s...", "translatepress-multilingual"); ?>
 <?php __("Removing untranslated dictionary links for language %s...", "translatepress-multilingual"); ?>
 <?php __("Removing duplicated gettext strings for language %s...", "translatepress-multilingual"); ?>
-<?php __("Removing untranslated gettext strings where translation is available for language %s...", "translatepress-multilingual"); ?>
 <?php __("Removing duplicated dictionary strings for language %s...", "translatepress-multilingual"); ?>
 <?php __("Removing untranslated dictionary strings where translation is available for language %s...", "translatepress-multilingual"); ?>
 <?php __("Inserting original strings for language %s...", "translatepress-multilingual"); ?>
@@ -453,7 +454,7 @@
 <?php __("Fixes an edge case issue where some gettext strings have the original id incorrectly set to NULL, causing problems in the Translation Editor.<br>This operation corrects the original ids in the trp_gettext_* tables.<br>Only check this option if you encountered an issue in the Translation Editor where clicking the green pencil did not bring up the gettext string for translation in the left sidebar.<br>Otherwise, please leave this option unchecked because it's an intensive operation.", "translatepress-multilingual"); ?>
 <?php __("Optimize Database", "translatepress-multilingual"); ?>
 <?php __("TranslatePress Database Updater", "translatepress-multilingual"); ?>
-<?php __("Updating TranslatePress tables", "translatepress-multilingual"); ?>
+<?php __("Updating TranslatePress tables. Please leave this window open.", "translatepress-multilingual"); ?>
 <?php __("Automatic and manual slug translation changes performed when <strong>TranslatePress - Multilingual</strong> 2.8.4 was active had to be removed because of some issues with that version. All slug translations from before that version are now in use. Thank you for understanding!", "translatepress-multilingual"); ?>
 <?php __("If you absolutely need them, the removed translations can be found in tables trp_slug_original_obsolete and trp_slug_translation_obsolete.", "translatepress-multilingual"); ?>
 <?php __("Limit this menu item to the following languages", "translatepress-multilingual"); ?>

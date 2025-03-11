@@ -3,9 +3,9 @@ Contributors: cozmoslabs, razvan.mo, madalin.ungureanu, sareiodata, cristophor
 Donate link: https://www.translatepress.com/
 Tags: translate, translation, multilingual, automatic translation, bilingual, front-end translation, google translate, language
 Requires at least: 3.1.0
-Tested up to: 6.7.1
+Tested up to: 6.7.2
 Requires PHP: 5.6.20
-Stable tag: 2.9.5
+Stable tag: 2.9.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -141,6 +141,11 @@ For more information please check out our [documentation](https://translatepress
 
 
 == Changelog ==
+= 2.9.6 =
+* Added support for translating html tags "picture" and "audio"
+* Improved query efficency for removing duplicate entries when running Database Optimization
+* Fixed compatibility issue with Blocksy in Customizer
+
 = 2.9.5 =
 * Added support for video tag in order to show different videos according to selected language
 * Added compatibility for Elementor element caching on additional languages

@@ -8,7 +8,7 @@ if ( !defined('ABSPATH' ) )
 
     <div class="grid feat-header">
         <div class="grid-cell">
-            <h2><?php esc_html_e('Updating TranslatePress tables', 'translatepress-multilingual' );?> </h2>
+            <h2><?php esc_html_e('Updating TranslatePress tables. Please leave this window open.', 'translatepress-multilingual' );?> </h2>
 	        <div id="trp-update-database-progress">
 
             </div>

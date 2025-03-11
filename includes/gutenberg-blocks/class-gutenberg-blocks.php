@@ -25,10 +25,13 @@ class TRP_Gutenberg_Blocks {
 
         wp_enqueue_style( 'trp-language-switcher-style', TRP_PLUGIN_URL . 'assets/css/trp-language-switcher.css', array(), TRP_PLUGIN_VERSION );
 
-        $arrDeps = ( $pagenow === 'widgets.php' ) ?
-            [ 'wp-blocks', 'wp-dom', 'wp-dom-ready', 'wp-edit-widgets', 'lodash' ]
-            :
-            [ 'wp-blocks', 'wp-dom', 'wp-dom-ready', 'wp-edit-post', 'lodash' ];
+        if ( $pagenow === 'widgets.php' ) {
+            $arrDeps = [ 'wp-blocks', 'wp-dom', 'wp-dom-ready', 'wp-edit-widgets', 'lodash' ];
+        } elseif ( $pagenow === 'customize.php' ) {
+            $arrDeps = [ 'wp-blocks', 'wp-dom', 'wp-dom-ready', 'lodash' ];
+        } else {
+            $arrDeps = [ 'wp-blocks', 'wp-dom', 'wp-dom-ready', 'wp-edit-post', 'lodash' ];
+        }
 
         $languagesObject = ( TRP_Translate_Press::get_trp_instance() )->get_component( 'languages' );
 

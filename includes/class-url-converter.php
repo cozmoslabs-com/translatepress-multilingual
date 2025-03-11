@@ -432,7 +432,7 @@ class TRP_Url_Converter {
         $lang_from_url_string = $this->get_lang_from_url_string($url);
         if ( $lang_from_url_string === null) {
             // these are the custom url. They don't have language
-            $abs_home_considered_path = trim(str_replace( $abs_home_url_obj->getPath() !== null ? $abs_home_url_obj->getPath() : '', '', $url_obj->getPath()), '/');
+            $abs_home_considered_path = trim(str_replace( strval( $abs_home_url_obj->getPath() ), '', strval( $url_obj->getPath() )), '/');
             $new_url_obj->setPath(trailingslashit(trailingslashit(strval($abs_home_url_obj->getPath())) . trailingslashit($this->get_url_slug($language)) . $abs_home_considered_path));
             $new_url = $new_url_obj->getUri();
 
@@ -441,7 +441,7 @@ class TRP_Url_Converter {
             trp_bulk_debug($debug, array('url' => $url, 'abort' => "URL already has the correct language added to it"));
         } else {
             // these have language param in them and we need to replace them with the new language
-            $abs_home_considered_path = trim(str_replace($abs_home_url_obj->getPath() !== null ? $abs_home_url_obj->getPath() : '', '', $url_obj->getPath()), '/');
+            $abs_home_considered_path = trim(str_replace(strval ( $abs_home_url_obj->getPath() ) ,'', strval( $url_obj->getPath() )), '/');
             $no_lang_orig_path = explode('/', $abs_home_considered_path);
             unset($no_lang_orig_path[0]);
             $no_lang_orig_path = implode('/', $no_lang_orig_path);
@@ -966,3 +966,4 @@ class TRP_Url_Converter {
     }
 
 }
+

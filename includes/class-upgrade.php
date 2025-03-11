@@ -165,7 +165,6 @@ class TRP_Upgrade {
             'remove_cdata_original_and_dictionary_rows'     => __('Removing cdata dictionary strings for language %s...', 'translatepress-multilingual' ),
             'remove_untranslated_links_dictionary_rows'     => __('Removing untranslated dictionary links for language %s...', 'translatepress-multilingual' ),
             'remove_duplicate_gettext_rows'                 => __('Removing duplicated gettext strings for language %s...', 'translatepress-multilingual' ),
-            'remove_duplicate_untranslated_gettext_rows'    => __('Removing untranslated gettext strings where translation is available for language %s...', 'translatepress-multilingual' ),
             'remove_duplicate_dictionary_rows'              => __('Removing duplicated dictionary strings for language %s...', 'translatepress-multilingual' ),
             'remove_duplicate_untranslated_dictionary_rows' => __('Removing untranslated dictionary strings where translation is available for language %s...', 'translatepress-multilingual' ),
             'original_id_insert_166'                        => __('Inserting original strings for language %s...', 'translatepress-multilingual' ),
@@ -219,14 +218,7 @@ class TRP_Upgrade {
                     'version'           => '0',
                     'option_name'       => 'trp_remove_duplicate_gettext_rows',
                     'callback'          => array( $this->trp_query,'remove_duplicate_rows_in_gettext_table'),
-                    'batch_size'        => 10000,
-                    'message_initial'   => '',
-                ),
-                'remove_duplicate_untranslated_gettext_rows' => array(
-                    'version'           => '0',
-                    'option_name'       => 'trp_remove_duplicate_untranslated_gettext_rows',
-                    'callback'          => array( $this->trp_query,'remove_untranslated_strings_if_gettext_translation_available'),
-                    'batch_size'        => 10000,
+                    'batch_size'        => 5000,
                     'message_initial'   => '',
                 ),
                 'remove_duplicate_dictionary_rows' => array(
@@ -234,13 +226,6 @@ class TRP_Upgrade {
                     'option_name'       => 'trp_remove_duplicate_dictionary_rows',
                     'callback'          => array( $this->trp_query,'remove_duplicate_rows_in_dictionary_table'),
                     'batch_size'        => 1000,
-                    'message_initial'   => '',
-                ),
-                'remove_duplicate_untranslated_dictionary_rows' => array(
-                    'version'           => '0',
-                    'option_name'       => 'trp_remove_duplicate_untranslated_dictionary_rows',
-                    'callback'          => array( $this->trp_query,'remove_untranslated_strings_if_translation_available'),
-                    'batch_size'        => 10000,
                     'message_initial'   => '',
                 ),
                 'original_id_insert_166' => array(
@@ -484,6 +469,8 @@ class TRP_Upgrade {
 			$get_batch = 0;
 		}
 
+        $extra_params = isset( $_REQUEST['trp_updb_extra_params'] ) ? unserialize(base64_decode(sanitize_text_field($_REQUEST['trp_updb_extra_params'] ))) : array();
+
 		$request['trp_updb_batch'] = 0;
 		$update_details = $updates_needed[ sanitize_text_field( $_REQUEST['trp_updb_action'] )];
 		$batch_size = apply_filters( 'trp_updb_batch_size', $update_details['batch_size'], sanitize_text_field( $_REQUEST['trp_updb_action'] ), $update_details );
@@ -499,23 +486,28 @@ class TRP_Upgrade {
 		$duration = 0;
 		while( $duration < 2 ){
 			$inferior_limit = $batch_size * $get_batch;
-			$finished_with_language = call_user_func( $update_details['callback'], $language_code, $inferior_limit, $batch_size );
-
-			if ( $finished_with_language ) {
+            $callback_return = call_user_func( $update_details['callback'], $language_code, $inferior_limit, $batch_size, $extra_params );
+			if ( (isset($callback_return['finalize_with_language']) && $callback_return['finalize_with_language']) || ($callback_return === true)  ) {
 				break;
 			}else {
 				$get_batch = $get_batch + 1;
+                $extra_params = isset($callback_return['extra_params']) ? $callback_return['extra_params'] : array();
 			}
 			$stop_time = microtime( true );
 			$duration = $stop_time - $start_time;
 		}
-		if ( ! $finished_with_language ) {
+        // the callback functions return different true or an array with finalized_with_language bool and extra_params based on what they need.
+        // In case call_user_func fails with string, object, etc, it will continue with the callback and batching.
+        // For example, if the function called uses to much memory, it will just continue.
+        $finalized_with_language = (isset($callback_return['finalize_with_language']) && $callback_return['finalize_with_language']) || ($callback_return === true);
+
+        if ( !$finalized_with_language ) {
 			$request['trp_updb_batch'] = $get_batch;
+            $request['trp_updb_extra_params'] = isset($callback_return['extra_params']) ? $callback_return['extra_params'] : array();
 		}
 
-
-		if ( $finished_with_language ) {
-			// finished with the current language
+		if ( $finalized_with_language ) {
+            // finished with the current language
             $index = array_search( $language_code, $this->settings['translation-languages'] );
 
             if ( isset ( $this->settings['translation-languages'][ $index + 1 ] ) && (!isset($update_details['execute_only_once']) || $update_details['execute_only_once'] == false)) {
@@ -542,7 +534,7 @@ class TRP_Upgrade {
                     }
 		}else{
 			$request['trp_updb_lang'] = $language_code;
-            $request['progress_message'] = '.';
+            $request['progress_message'] .= '.';
 		}
 
         if ( $this->db->last_error != '' ){
@@ -553,6 +545,7 @@ class TRP_Upgrade {
 			'trp_updb_action'           => $request['trp_updb_action'],
 			'trp_updb_lang'             => $request['trp_updb_lang'],
 			'trp_updb_batch'            => $request['trp_updb_batch'],
+			'trp_updb_extra_params'     => isset($request['trp_updb_extra_params']) ? base64_encode(serialize($request['trp_updb_extra_params'])) : base64_encode(serialize(array())),
 			'trp_updb_nonce'            => wp_create_nonce('tpupdatedatabase'),
 			'trp_update_completed'      => 'no',
 			'progress_message'          => $request['progress_message']
@@ -702,7 +695,6 @@ class TRP_Upgrade {
 
         if(isset( $_GET['trp_rm_duplicates_gettext'] )){
             update_option('trp_remove_duplicate_gettext_rows', 'no');
-            update_option('trp_remove_duplicate_untranslated_gettext_rows', 'no');
             $redirect = true;
         }
 
@@ -1527,7 +1519,6 @@ class TRP_Upgrade {
                                                                         "trp_updated_database_original_id_update_166",
                                                                         "trp_remove_duplicate_dictionary_rows",
                                                                         "trp_remove_duplicate_gettext_rows",
-                                                                        "trp_remove_duplicate_untranslated_gettext_rows",
                                                                         "trp_remove_duplicate_untranslated_dictionary_rows",
                                                                         "trp_remove_cdata_original_and_dictionary_rows",
                                                                         "trp_remove_untranslated_links_dictionary_rows",
