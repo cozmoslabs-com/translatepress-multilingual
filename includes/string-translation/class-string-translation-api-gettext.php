@@ -116,12 +116,18 @@ class TRP_String_Translation_API_Gettext {
 				}
 
 				/* html entity decode the strings so we display them properly in the textareas  */
-				foreach( $dictionaries as $lang => $dictionary ){
-					foreach( $dictionary as $key => $string ){
-						$string = array_map('html_entity_decode', $string );
-						$dictionaries[$lang][$key] = (object)$string;
-					}
-				}
+                foreach ($dictionaries as $lang => $dictionary) {
+                    foreach ($dictionary as $key => $string) {
+                        // Ensure $string is an array before applying array_map
+                        if (is_array($string)) {
+                            $string = array_map(function($value) {
+                                return $value !== null ? html_entity_decode($value) : '';
+                            }, $string);
+                        }
+
+                        $dictionaries[$lang][$key] = (object) $string;
+                    }
+                }
 
 				$translation_manager = $trp->get_component('translation_manager');
 				$localized_text = $translation_manager->string_groups();

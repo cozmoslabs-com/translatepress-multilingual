@@ -16,9 +16,12 @@ class TRP_Upgrade {
 	/* @var TRP_Query */
 	protected $trp_query;
 
-    /** Major slug translation refactoring released in these versions */
-    const MINIMUM_PERSONAL_VERSION = '1.3.3';
-    const MINIMUM_DEVELOPER_VERSION = '1.4.6';
+    /** Major slug translation refactoring released in this version */
+    const MINIMUM_SP_VERSION = '1.4.6';
+
+    /** Used to check if the currently installed Pro version matches the minimum required version */
+    const MINIMUM_PERSONAL_VERSION = '1.4.3';
+    const MINIMUM_DEVELOPER_VERSION = '1.5.6';
 
 	/**
 	 * TRP_Upgrade constructor.
@@ -428,7 +431,7 @@ class TRP_Upgrade {
 				}
 			}
 			if ( empty ( $_REQUEST['trp_updb_action'] ) ){
-				$back_to_settings_button = '<p><a href="' . site_url('wp-admin/options-general.php?page=translate-press') . '"> <input type="button" value="' . esc_html__('Back to TranslatePress Settings', 'translatepress-multilingual' ) . '" class="button-primary"></a></p>';
+				$back_to_settings_button = '<a class="trp-submit-btn button" href="' . site_url('wp-admin/options-general.php?page=translate-press') . '">' . esc_html__('Back to TranslatePress Settings', 'translatepress-multilingual' ) . '</a>';
 				// finished successfully
 				echo json_encode( array(
 					'trp_update_completed' => 'yes',
@@ -469,7 +472,10 @@ class TRP_Upgrade {
 			$get_batch = 0;
 		}
 
-        $extra_params = isset( $_REQUEST['trp_updb_extra_params'] ) ? unserialize(base64_decode(sanitize_text_field($_REQUEST['trp_updb_extra_params'] ))) : array();
+        $extra_params = isset( $_REQUEST['trp_updb_extra_params'] ) ? json_decode(base64_decode(sanitize_text_field($_REQUEST['trp_updb_extra_params'] )), true) : array();
+        if (!is_array($extra_params)) {
+            $extra_params = array();
+        }
 
 		$request['trp_updb_batch'] = 0;
 		$update_details = $updates_needed[ sanitize_text_field( $_REQUEST['trp_updb_action'] )];
@@ -545,7 +551,7 @@ class TRP_Upgrade {
 			'trp_updb_action'           => $request['trp_updb_action'],
 			'trp_updb_lang'             => $request['trp_updb_lang'],
 			'trp_updb_batch'            => $request['trp_updb_batch'],
-			'trp_updb_extra_params'     => isset($request['trp_updb_extra_params']) ? base64_encode(serialize($request['trp_updb_extra_params'])) : base64_encode(serialize(array())),
+			'trp_updb_extra_params'     => isset($request['trp_updb_extra_params']) ? base64_encode(json_encode($request['trp_updb_extra_params'])) : base64_encode(json_encode(array())),
 			'trp_updb_nonce'            => wp_create_nonce('tpupdatedatabase'),
 			'trp_update_completed'      => 'no',
 			'progress_message'          => $request['progress_message']
@@ -555,7 +561,7 @@ class TRP_Upgrade {
 	}
 
 	public function stop_and_print_error( $error_message ){
-		$back_to_settings_button = '<p><a href="' . site_url('wp-admin/options-general.php?page=translate-press') . '"> <input type="button" value="' . __('Back to TranslatePress Settings', 'translatepress-multilingual' ) . '" class="button-primary"></a></p>';
+		$back_to_settings_button = '<a class="trp-submit-btn button" href="' . site_url('wp-admin/options-general.php?page=translate-press') . '">' . esc_html__('Back to TranslatePress Settings', 'translatepress-multilingual' ) . '</a>';
 		$query_arguments = array(
 			'trp_update_completed'      => 'yes',
 			'progress_message'          => '<p><strong>' . $error_message . '</strong></strong></p>' . $back_to_settings_button
@@ -1538,27 +1544,32 @@ class TRP_Upgrade {
      *
      * @return bool
      */
-
-    public function is_pro_minimum_version_met(){
+    public function is_seo_pack_minimum_version_met(){
         if ( !defined('TRP_IN_SP_PLUGIN_VERSION' ) ) return true;
 
-        return version_compare( TRP_IN_SP_PLUGIN_VERSION, self::MINIMUM_DEVELOPER_VERSION, '>=' );
+        return version_compare( TRP_IN_SP_PLUGIN_VERSION, self::MINIMUM_SP_VERSION, '>=' );
+    }
+
+    public function is_pro_minimum_version_met(){
+        if ( !class_exists( 'TRP_Handle_Included_Addons') || TRANSLATE_PRESS === 'TranslatePress - Dev' )
+            return true; // Free or development version installed
+
+        // File added when we redesigned TP Settings, this is what we look for
+        return file_exists( TRP_IN_EL_PLUGIN_DIR . 'assets/js/trp-back-end-script-pro.js' );
     }
 
     public function show_admin_notice_minimum_pro_version_required(){
         //show this only on our translatepress admin pages
         if( isset( $_GET['page'] ) && ( sanitize_text_field( $_GET['page'] ) === 'translate-press' || strpos( sanitize_text_field( $_GET['page'] ), 'trp_' ) !== false ) ){
 
-        if ( !class_exists( 'TRP_Handle_Included_Addons' ) || TRANSLATE_PRESS === 'TranslatePress - Dev' ) return; // Free or development version installed
-
         // Legacy seo pack doesn't have the minimum version met. It is useful to keep the legacy seo pack version like this because it helps with knowing when to show Run the update
-        if ( $this->is_pro_minimum_version_met() || ( isset( $this->settings['trp_advanced_settings']['load_legacy_seo_pack'] ) && $this->settings['trp_advanced_settings']['load_legacy_seo_pack'] === 'yes' ) )
+        if ( $this->is_pro_minimum_version_met() )
             return;
 
         $minimum_version = TRANSLATE_PRESS === 'TranslatePress - Personal' ? self::MINIMUM_PERSONAL_VERSION : self::MINIMUM_DEVELOPER_VERSION;
 
         echo '<div class="notice notice-error">
-                      <p>' . wp_kses( sprintf( __('Please <strong> update %1$s </strong> to version %2$s or newer.<br>Your currently installed version of %1$s is deprecated. The plugin will continue to work as expected. However, newer versions have improved functionality and compatibility with various permalink structures. ', 'translatepress-multilingual'), TRANSLATE_PRESS, $minimum_version ), [ 'strong' => [], 'br' => [] ] ) . '</p>' .
+                <p>' . wp_kses( sprintf( __('We’ve redesigned the <strong>%1$s</strong> settings for a better experience!<br>To ensure full compatibility with the new settings structure and avoid potential layout discrepancies, please update to version <strong>%2$s</strong> or newer.<br>Your current version of <strong>%1$s</strong> may not fully support these improvements, but the plugin will continue to function as expected.', 'translatepress-multilingual'), TRANSLATE_PRESS, $minimum_version ), [ 'strong' => [], 'br' => [] ] ) . '</p>' .
              '</div>';
         }
     }

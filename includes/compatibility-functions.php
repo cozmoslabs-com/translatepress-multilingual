@@ -2260,7 +2260,7 @@ function trp_get_url_for_language_backwards_compatibility( $new_url, $url, $lang
 
     $upgrade = new TRP_Upgrade( $settings );
 
-    if ( $upgrade->is_pro_minimum_version_met() && ( !isset( $settings['trp_advanced_settings']['load_legacy_seo_pack'] ) || $settings['trp_advanced_settings']['load_legacy_seo_pack'] === 'no' ) ) return $new_url; // Abort -- New system can be used, process URL via get_slug_translated_url_for_language
+    if ( $upgrade->is_seo_pack_minimum_version_met() && ( !isset( $settings['trp_advanced_settings']['load_legacy_seo_pack'] ) || $settings['trp_advanced_settings']['load_legacy_seo_pack'] === 'no' ) ) return $new_url; // Abort -- New system can be used, process URL via get_slug_translated_url_for_language
 
     $url_converter = $trp->get_component( 'url_converter' );
 

@@ -612,6 +612,9 @@ class TRP_Url_Converter {
         if( empty($this->absolute_home) ){
             $this->absolute_home = get_option("siteurl");
         }
+        // home_url can have a space in front braking TP.
+        $this->absolute_home = trim($this->absolute_home);
+
         if ( apply_filters('trp_adjust_absolute_home_https_based_on_server_variable', true) ) {
             // always return absolute_home based on the http or https version of the current page request. This means no more redirects.
             if ( !empty( $_SERVER['HTTPS'] ) && strtolower( sanitize_text_field( $_SERVER['HTTPS'] ) ) != 'off' ) {
@@ -808,7 +811,7 @@ class TRP_Url_Converter {
         $trp     = TRP_Translate_Press::get_trp_instance();
         $upgrade = $trp->get_component( 'upgrade' );
 
-        if ( class_exists( 'TRP_IN_Seo_Pack' ) && $upgrade->is_pro_minimum_version_met() && ( !isset( $this->settings['trp_advanced_settings']['load_legacy_seo_pack'] ) || $this->settings['trp_advanced_settings']['load_legacy_seo_pack'] === 'no' ) ) {
+        if ( class_exists( 'TRP_IN_Seo_Pack' ) && $upgrade->is_seo_pack_minimum_version_met() && ( !isset( $this->settings['trp_advanced_settings']['load_legacy_seo_pack'] ) || $this->settings['trp_advanced_settings']['load_legacy_seo_pack'] === 'no' ) ) {
             return $value;
         }
 

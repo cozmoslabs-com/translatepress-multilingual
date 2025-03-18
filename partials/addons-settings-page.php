@@ -1,10 +1,11 @@
 <?php
-if ( !defined('ABSPATH' ) )
-    exit();
+    if ( !defined('ABSPATH' ) )
+        exit();
 ?>
-<div id="trp-addons-page" class="wrap">
 
-    <h1> <?php esc_html_e( 'TranslatePress Settings', 'translatepress-multilingual' );?></h1>
+<div id="trp-settings-page" class="wrap">
+    <?php require_once TRP_PLUGIN_DIR . 'partials/settings-header.php'; ?>
+
     <?php do_action ( 'trp_settings_navigation_tabs' ); ?>
 
     <?php
@@ -12,7 +13,7 @@ if ( !defined('ABSPATH' ) )
     $trp_addons_listing = new TRP_Addons_List_Table();
     $trp_addons_listing->images_folder = TRP_PLUGIN_URL.'assets/images/';
     $trp_addons_listing->text_domain = 'translatepress-multilingual';
-    $trp_addons_listing->header = array( 'title' => __('TranslatePress Add-ons', 'translatepress-multilingual' ) );
+
     if( defined( 'TRANSLATE_PRESS' ) )
         $trp_addons_listing->current_version = TRANSLATE_PRESS;
     else
@@ -104,7 +105,8 @@ if ( !defined('ABSPATH' ) )
             'icon' => 'pb_logo.jpg',
             'doc_url' => 'https://www.cozmoslabs.com/wordpress-profile-builder/?utm_source=tpbackend&utm_medium=clientsite&utm_content=tp-addons-page&utm_campaign=TPPB',
             'disabled' => $plugin_settings['pb']['disabled'],
-            'install_button' =>  $plugin_settings['pb']['install_button']
+            'install_button' =>  $plugin_settings['pb']['install_button'],
+            'action' => $plugin_settings['pb']['action']
         ),
         array(  'slug' => 'paid-member-subscriptions/index.php',
             'short-slug' => 'pms',
@@ -114,7 +116,8 @@ if ( !defined('ABSPATH' ) )
             'icon' => 'pms_logo.jpg',
             'doc_url' => 'https://www.cozmoslabs.com/wordpress-paid-member-subscriptions/?utm_source=tpbackend&utm_medium=clientsite&utm_content=tp-addons-page&utm_campaign=TPPMS',
             'disabled' => $plugin_settings['pms']['disabled'],
-            'install_button' =>  $plugin_settings['pms']['install_button']
+            'install_button' =>  $plugin_settings['pms']['install_button'],
+            'action' => $plugin_settings['pms']['action']
         ),
         array( 'slug' => 'wp-webhooks/wp-webhooks.php',
             'short-slug' => 'wha',
@@ -124,7 +127,8 @@ if ( !defined('ABSPATH' ) )
             'icon' => 'wha_logo.png',
             'doc_url' => 'https://wp-webhooks.com/integrations/?utm_source=tpbackend&utm_medium=clientsite&utm_content=tp-addons-page&utm_campaign=TPWPW',
             'disabled' => $plugin_settings['wha']['disabled'],
-            'install_button' =>  $plugin_settings['wha']['install_button']
+            'install_button' =>  $plugin_settings['wha']['install_button'],
+            'action' => $plugin_settings['wha']['action']
         )
     );
     $trp_addons_listing->add_section();

@@ -5,7 +5,7 @@ Tags: translate, translation, multilingual, automatic translation, bilingual, fr
 Requires at least: 3.1.0
 Tested up to: 6.7.2
 Requires PHP: 5.6.20
-Stable tag: 2.9.6
+Stable tag: 2.9.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -141,9 +141,15 @@ For more information please check out our [documentation](https://translatepress
 
 
 == Changelog ==
+= 2.9.7 =
+* Redesigned TranslatePress Settings UI
+* Improvements to the plugin stats API
+* Fixed insecure use of serialization function on request parameters
+* Fixed edge case issue with untrimmed home url preventing functioning on secondary languages
+
 = 2.9.6 =
 * Added support for translating html tags "picture" and "audio"
-* Improved query efficency for removing duplicate entries when running Database Optimization
+* Improved query efficiency for removing duplicate entries when running Database Optimization
 * Fixed compatibility issue with Blocksy in Customizer
 
 = 2.9.5 =

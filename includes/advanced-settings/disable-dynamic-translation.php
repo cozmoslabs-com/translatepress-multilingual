@@ -10,8 +10,10 @@ function trp_register_disable_dynamic_translation( $settings_array ){
 		'type'          => 'checkbox',
 		'label'         => esc_html__( 'Disable dynamic translation', 'translatepress-multilingual' ),
 		'description'   => wp_kses( __( 'It disables detection of strings displayed dynamically using JavaScript. <br/>Strings loaded via a server side AJAX call will still be translated.', 'translatepress-multilingual' ), array( 'br' => array() ) ),
-        'id'            =>'troubleshooting',
-	);
+        'id'            => 'troubleshooting',
+        'container'     => 'troubleshooting'
+
+    );
 	return $settings_array;
 }
 
