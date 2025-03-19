@@ -621,11 +621,9 @@ function TRP_Advanced_Settings_Tabs() {
         function showTargetContainer(targetClass) {
             containers.forEach(container => container.style.display = "none");
 
-            let targetContainers = targetClass !== 'ald_settings' ?
-                document.querySelectorAll(`.trp-settings-container-${targetClass}`) :
-                document.querySelectorAll('.advanced_settings_class.ald_settings');
-
-            console.log(targetContainers)
+            let targetContainers = targetClass === 'ald_settings' && aldSettingsContainer ?
+                document.querySelectorAll('.advanced_settings_class.ald_settings') :
+                document.querySelectorAll(`.trp-settings-container-${targetClass}`);
 
             if (targetContainers.length > 0) {
                 targetContainers.forEach(container => container.style.display = "block");

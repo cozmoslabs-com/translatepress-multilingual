@@ -11,13 +11,22 @@
                 <span><?php esc_html_e( 'All Languages', 'translatepress-multilingual' ); ?></span>
                 <div class="trp-settings-info-sign" data-tooltip="<?php echo wp_kses( __( 'Select the languages you wish to make your website available in.', 'translatepress-multilingual' ), array() ); ?> "></div>
             </th>
+            <th class="trp-languages-table-heading-item trp-primary-text-bold"><?php esc_html_e( 'Formality', 'translatepress-multilingual' ); ?></th>
             <th class="trp-languages-table-heading-item trp-primary-text-bold"><?php esc_html_e( 'Code', 'translatepress-multilingual' ); ?></th>
             <th class="trp-languages-table-heading-item trp-primary-text-bold trp-languages-table-heading-item__indented"><?php esc_html_e( 'Slug', 'translatepress-multilingual' ); ?></th>
         </tr>
         </thead>
         <tbody id="trp-sortable-languages">
             <?php
-                $data = get_option('trp_db_stored_data', array() );
+
+
+            $formality_array = array(
+                'default'  => __( 'Default', 'translatepress-multilingual' ),
+                'formal'   => __( 'Formal', 'translatepress-multilingual' ),
+                'informal' => __( 'Informal', 'translatepress-multilingual' )
+            );
+
+            $data = get_option('trp_db_stored_data', array() );
 
                 foreach ( $this->settings['translation-languages'] as $key=>$selected_language_code ){
                     $default_language            = ( $selected_language_code == $this->settings['default-language'] );
@@ -39,7 +48,22 @@
                                 </option>
                             <?php }?>
                         </select>
+                        <input type="hidden" class="trp-translation-published" name="trp_settings[publish-languages][]" value="<?php echo esc_attr( $selected_language_code );?>" />
+                        <?php if ( $default_language ) { ?>
+                            <input type="hidden" class="trp-hidden-default-language" name="trp_settings[translation-languages][]" value="<?php echo esc_attr( $selected_language_code );?>" />
+                        <?php } ?>
                     </div>
+                </td>
+                <td>
+                    <select name="trp_settings[translation-languages-formality][]" class="trp-translation-language-formality" >
+                        <?php
+                        foreach ( $formality_array as $value => $label ) {
+                            ?>
+                            <option value="<?php echo esc_attr( $value ); ?>" <?php echo ( isset($this->settings['translation-languages-formality-parameter'][$selected_language_code]) && $value == $this->settings['translation-languages-formality-parameter'][$selected_language_code] ) ? 'selected' : ''; ?>><?php echo esc_html( $label ); ?></option>
+                            <?php
+                        }
+                        ?>
+                    </select>
                 </td>
                 <td class="trp-col-language-code">
                     <input class="trp-language-code trp-code-slug" type="text" disabled value="<?php echo esc_html( $selected_language_code ); ?>">

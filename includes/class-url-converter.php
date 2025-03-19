@@ -248,13 +248,14 @@ class TRP_Url_Converter {
      */
     public function change_lang_attr_in_html_tag( $output ){
         global $TRP_LANGUAGE;
+        $tp_lang = str_replace('_formal', '', $TRP_LANGUAGE); // de-de-formal is not a valid lang attribute.
         $lang = get_bloginfo('language');
-        if ( $lang && !empty($TRP_LANGUAGE) ) {
+        if ( $lang && !empty($tp_lang) ) {
             if ( apply_filters( 'trp_add_default_lang_tags', true ) ) {
-                $output = str_replace( 'lang="' . $lang . '"', 'lang="' . str_replace( '_', '-', $TRP_LANGUAGE ) . '"', $output );
+                $output = str_replace( 'lang="' . $lang . '"', 'lang="' . str_replace( '_', '-', $tp_lang ) . '"', $output );
             }
             if ( apply_filters( 'trp_add_regional_lang_tags', true ) ) {
-                $language = strtok($TRP_LANGUAGE, '_');
+                $language = strtok($tp_lang, '_');
                 $output = str_replace( 'lang="' . $lang . '"', 'lang="' . $language . '"', $output );
 
             }

@@ -988,7 +988,7 @@ class TRP_Translation_Render{
                 }
 
             }
-            if ( $preview_mode ) {
+            if ( $preview_mode && !empty($translated_string_ids) ) {
                 if ( $accessor == 'outertext' && $nodes[$i]['type'] != 'button' ) {
                     $outertext_details = '<translate-press data-trp-translate-id="' . $translated_string_ids[$translateable_strings[$i]]->id . '" data-trp-node-group="' . $this->get_node_type_category( $nodes[$i]['type'] ) . '"';
                     if ( $this->get_node_description( $nodes[$i] ) ) {

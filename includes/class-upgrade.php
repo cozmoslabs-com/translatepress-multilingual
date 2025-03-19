@@ -112,6 +112,9 @@ class TRP_Upgrade {
                 $this->dont_update_db_if_seopack_inactive();
                 $this->set_the_options_set_in_db_optimization_tool_to_no();
             }
+            if ( version_compare( $stored_database_version, '2.9.7', '==' ) ) {
+                $this->set_publish_languages_from_translation_languages();
+            }
 
             /**
              * Write an upgrading function above this comment to be executed only once: while updating plugin to a higher version.
@@ -1551,11 +1554,29 @@ class TRP_Upgrade {
     }
 
     public function is_pro_minimum_version_met(){
+
         if ( !class_exists( 'TRP_Handle_Included_Addons') || TRANSLATE_PRESS === 'TranslatePress - Dev' )
             return true; // Free or development version installed
 
-        // File added when we redesigned TP Settings, this is what we look for
-        return file_exists( TRP_IN_EL_PLUGIN_DIR . 'assets/js/trp-back-end-script-pro.js' );
+        // File added when we redesigned TP Settings, this is what we look for and extra-language addon is active
+        if ( defined( 'TRP_IN_EL_PLUGIN_URL' ) && file_exists( TRP_IN_EL_PLUGIN_DIR . 'assets/js/trp-back-end-script-pro.js' )){
+            return true;
+        }
+
+        //In case extra-languages addon is not active we check with the paths hardcoded
+        $pro_version_map = [
+            'TranslatePress - Personal'  => 'translatepress-personal',
+            'TranslatePress - Business'  => 'translatepress-business',
+            'TranslatePress - Developer' => 'translatepress-developer'
+        ];
+
+        $pro_plugin_path = trailingslashit( WP_PLUGIN_DIR ) . $pro_version_map[TRANSLATE_PRESS];
+
+        if( file_exists( trailingslashit( $pro_plugin_path ) . 'add-ons-advanced/extra-languages/assets/js/trp-back-end-script-pro.js' )){
+            return true;
+        }
+
+        return false;
     }
 
     public function show_admin_notice_minimum_pro_version_required(){
@@ -1586,6 +1607,24 @@ class TRP_Upgrade {
                 update_option( $option, 'seopack_inactive' );
                 delete_option('trp_show_error_db_message');
             }
+        }
+    }
+
+    /**
+     * Fix bug specific to 2.9.7 version where if the user saved settings, the publish-languages were lost
+     *
+     * @return void
+     */
+    public function set_publish_languages_from_translation_languages() {
+        $extra_languages_is_active = class_exists( 'TRP_IN_Extra_Languages' );
+        $trp_settings              = get_option( 'trp_settings' );
+        if ( !$extra_languages_is_active &&
+            count( $trp_settings['translation-languages'] ) <= 2 &&
+            ( empty( array_diff( $trp_settings['translation-languages'], $trp_settings['publish-languages'] ) ) ||
+            empty( array_diff( $trp_settings['publish-languages'], $trp_settings['translation-languages'] ) ) )
+        ) {
+            $trp_settings['publish-languages'] = $trp_settings['translation-languages'];
+            update_option( 'trp_settings', $trp_settings );
         }
     }
 

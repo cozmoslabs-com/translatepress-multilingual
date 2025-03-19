@@ -376,8 +376,12 @@
 <?php __("Entire Response From wp_remote_get():", "translatepress-multilingual"); ?>
 <?php __("All Languages", "translatepress-multilingual"); ?>
 <?php __("Select the languages you wish to make your website available in.", "translatepress-multilingual"); ?>
+<?php __("Formality", "translatepress-multilingual"); ?>
 <?php __("Code", "translatepress-multilingual"); ?>
 <?php __("Slug", "translatepress-multilingual"); ?>
+<?php __("Default", "translatepress-multilingual"); ?>
+<?php __("Formal", "translatepress-multilingual"); ?>
+<?php __("Informal", "translatepress-multilingual"); ?>
 <?php __("Are you sure you want to remove this language?", "translatepress-multilingual"); ?>
 <?php __("Custom Languages", "translatepress-multilingual"); ?>
 <?php __("Adding more than two languages is a paid feature. Upgrade TranslatePress and unlock more premium features.", "translatepress-multilingual"); ?>
@@ -618,12 +622,8 @@
 <?php __("Filter by Translation Block", "translatepress-multilingual"); ?>
 <?php __("URL Slugs Translation", "translatepress-multilingual"); ?>
 <?php __("String Translation Editor", "translatepress-multilingual"); ?>
-<?php __("Formality", "translatepress-multilingual"); ?>
 <?php __("The Formality field is used by Automatic Translation to decide whether the translated text should lean towards formal or informal language. For now, it is supported only for a few languages and only by DeepL.", "translatepress-multilingual"); ?>
 <?php __("The inactive languages will still be visible and active for the admin. For other users they won't be visible in the language switchers and won't be accessible either.", "translatepress-multilingual"); ?>
-<?php __("Default", "translatepress-multilingual"); ?>
-<?php __("Formal", "translatepress-multilingual"); ?>
-<?php __("Informal", "translatepress-multilingual"); ?>
 <?php __("This language does not support formality. ", "translatepress-multilingual"); ?>
 <?php __("Post Slug", "translatepress-multilingual"); ?>
 <?php __("First by browser language, then IP address (recommended)", "translatepress-multilingual"); ?>
