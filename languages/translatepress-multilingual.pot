@@ -6,7 +6,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-03-19 12:14+0000\n"
+"POT-Creation-Date: 2025-03-25 11:08+0000\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
 "X-Poedit-SearchPath-0: .\n"
@@ -932,35 +932,43 @@ msgstr ""
 msgid "Updating will allow editing translations of slugs. Existing translation will still work as expected."
 msgstr ""
 
-#: includes/class-translation-manager.php:889
-msgid "The SEO Pack add-on allows translation of all the URL slugs:"
-msgstr ""
-
 #: includes/class-translation-manager.php:892
-msgid "Taxonomy slugs"
+msgid "Please activate the SEO Addon from <br/>WordPress -> Settings -> TranslatePress -> Addons section"
 msgstr ""
 
 #: includes/class-translation-manager.php:895
+msgid "Go to Addons"
+msgstr ""
+
+#: includes/class-translation-manager.php:910
+msgid "The SEO Pack add-on allows translation of all the URL slugs:"
+msgstr ""
+
+#: includes/class-translation-manager.php:913
+msgid "Taxonomy slugs"
+msgstr ""
+
+#: includes/class-translation-manager.php:916
 msgid "Term slugs"
 msgstr ""
 
-#: includes/class-translation-manager.php:898
+#: includes/class-translation-manager.php:919
 msgid "Post slugs (this includes pages and custom post types)"
 msgstr ""
 
-#: includes/class-translation-manager.php:901
+#: includes/class-translation-manager.php:922
 msgid "Post type base slugs"
 msgstr ""
 
-#: includes/class-translation-manager.php:904
+#: includes/class-translation-manager.php:925
 msgid "WooCommerce slugs"
 msgstr ""
 
-#: includes/class-translation-manager.php:909
+#: includes/class-translation-manager.php:930
 msgid "The SEO Pack add-on is available with ALL premium versions of the plugin."
 msgstr ""
 
-#: includes/class-translation-manager.php:912
+#: includes/class-translation-manager.php:933
 msgid "Upgrade to Pro"
 msgstr ""
 
@@ -1156,7 +1164,7 @@ msgstr ""
 msgid "<strong>TranslatePress</strong> requires <strong><a href=\"http://php.net/manual/en/book.mbstring.php\">Multibyte String PHP library</a></strong>. Please contact your server administrator to install it on your server."
 msgstr ""
 
-#: includes/compatibility-functions.php:1679
+#: includes/compatibility-functions.php:1646
 msgid "Detected long query limitation on WPEngine hosting. Some large pages may appear untranslated. You can remove limitation by adding the following to your site’s wp-config.php: define( 'WPE_GOVERNOR', false ); "
 msgstr ""
 

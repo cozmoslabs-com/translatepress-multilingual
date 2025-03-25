@@ -497,7 +497,7 @@ class TRP_Translation_Manager {
             'upgraded_gettext'            => ! ( ( get_option( 'trp_updated_database_gettext_original_id_update', 'yes' ) == 'no' ) ),
             'notice_upgrade_gettext'      => $this->display_notice_to_upgrade_gettext_in_editor(''),
             'notice_upgrade_slugs'        => $this->display_notice_to_upgrade_slugs_in_editor(''),
-            'upsale_slugs'                => $this->is_seo_pack_inactive(),
+            'upsale_slugs'                => $this->is_seo_pack_active(),
             'upsale_slugs_text'           => $this->upsale_slugs_text(),
             'license_notice_content'      => $this->get_license_notice_content()
         );
@@ -881,6 +881,27 @@ class TRP_Translation_Manager {
     }
 
 	public function upsale_slugs_text(){
+		// Check if SEO Pack is inactive
+		if ($this->is_seo_pack_active() === false) {
+			// Check if Pro version (Personal, Business or Developer) is active
+			if (trp_is_paid_version()) {
+				// Display activation message instead of upsale for Pro users
+				$html = '<div class="trp-text-and-image-upsale-slugs">';
+				$html .= '<div class="trp-text-upsale-slugs">';
+				$html .= '<p>';
+				$html .= esc_html__('Please activate the SEO Addon from <br/>WordPress -> Settings -> TranslatePress -> Addons section', 'translatepress-multilingual' );
+				$html .= '</p>';
+				$html .= '<a target="_blank" href="' . esc_url(admin_url('admin.php?page=trp_addons_page')) . '" class="trp-learn-more-upsale button-primary">';
+				$html .= esc_html__('Go to Addons', 'translatepress-multilingual' );
+				$html .= '</a>';
+				$html .= '</div>';
+				$html .= '</div>';
+				
+				return $html;
+			}
+		}
+	
+		// Default upsale text for free version
 		$upsale_url = 'https://translatepress.com/pricing/?utm_source=wpbackend&utm_medium=clientsite&utm_content=tpstringeditor&utm_campaign=tpfree';
 
 		$html = '<div class="trp-text-and-image-upsale-slugs">';
@@ -922,7 +943,7 @@ class TRP_Translation_Manager {
 		return $html;
 	}
 
-	public function is_seo_pack_inactive(){
+	public function is_seo_pack_active(){
 		return class_exists( 'TRP_IN_Seo_Pack');
 	}
 

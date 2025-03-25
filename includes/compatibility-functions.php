@@ -389,39 +389,6 @@ function trp_woo_wrap_variation($name, $product, $title_base, $title_suffix){
     return $title_suffix ? $title_base . $separator . $title_suffix : $title_base;
 }
 
-
-/**
- * Compatibility with Query Monitor
- *
- * Remove their HTML and reappend it after translate_page function finishes
- */
-add_filter('trp_before_translate_content', 'trp_qm_strip_query_monitor_html', 10, 1 );
-function trp_qm_strip_query_monitor_html( $output ) {
-
-    $query_monitor = apply_filters( 'trp_query_monitor_begining_string', '<!-- Begin Query Monitor output -->' );
-    $pos = strpos( $output, $query_monitor );
-
-    if ( $pos !== false ){
-        global $trp_query_monitor_string;
-        $trp_query_monitor_string = substr( $output, $pos );
-        $output = substr( $output, 0, $pos );
-
-    }
-
-    return $output;
-}
-
-add_filter( 'trp_translated_html', 'trp_qm_reappend_query_monitor_html', 10, 1 );
-function trp_qm_reappend_query_monitor_html( $final_html ){
-    global $trp_query_monitor_string;
-
-    if ( isset( $trp_query_monitor_string ) && !empty( $trp_query_monitor_string ) ){
-        $final_html .= $trp_query_monitor_string;
-    }
-
-    return $final_html;
-}
-
 // trpgettext tags don't get escaped because they add <small> tags through a regex.
 add_filter( 'qm/output/title', 'trp_qm_strip_gettext', 100);
 function trp_qm_strip_gettext( $data ){
@@ -2053,12 +2020,23 @@ function trp_delete_slug_translation_from_duplicated_pages() {
  */
 if ( class_exists( 'QueryMonitor' ) ) {
     add_filter( 'trp_skip_gettext_processing', 'trp_exclude_query_monitor_strings', 10, 4 );
+    add_filter( 'trp_no_translate_selectors', 'trp_exclude_query_monitor_selector' );
+    add_filter( 'trp_skip_selectors_from_dynamic_translation', 'trp_exclude_query_monitor_selector' );
 }
 function trp_exclude_query_monitor_strings( $bool, $translation, $text, $domain ){
     if ( trim( $domain ) === 'query-monitor' ) return true;
 
     return $bool;
 }
+
+/**
+ * Exclude Query Monitor selector from being translated
+ */
+function trp_exclude_query_monitor_selector( $skip_selectors ) {
+    $skip_selectors[] = '#query-monitor-main';
+    return $skip_selectors;
+}
+
 
 /**
  * Compatibility with Complianz plugin blocking trp_data script

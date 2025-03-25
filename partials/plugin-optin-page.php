@@ -3,7 +3,7 @@ if ( !defined('ABSPATH' ) )
     exit();
 
 ?>
-<div class="wrap trp-optin-page">
+<div class="wrap trp-optin-page" id="trp-settings-page">
 
     <div class="trp-optin-page__wrap">
         <div class="trp-optin-page__content">

@@ -5,7 +5,7 @@ Tags: translate, translation, multilingual, automatic translation, bilingual, fr
 Requires at least: 3.1.0
 Tested up to: 6.7.2
 Requires PHP: 5.6.20
-Stable tag: 2.9.8
+Stable tag: 2.9.9
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -141,6 +141,12 @@ For more information please check out our [documentation](https://translatepress
 
 
 == Changelog ==
+= 2.9.9 =
+* Fixed compatibility issue with Query Monitor plugin
+* Fixed edge case issue with changing languages in Translation Editor when removing country from hreflang option was used
+* Fixed edge case php error when WP Cache was disabled
+* Fixed css on plugin stats opt-in pop-up from TranslatePress Settings
+
 = 2.9.8 =
 * Fixed issue with language switcher not showing all languages on non-admin visits for free version users that manually changed TranslatePress settings in version 2.9.7
 * Fixed error about undefined constant TRP_IN_EL_PLUGIN_DIR for paid version users in case Multiple Languages add-on was disabled

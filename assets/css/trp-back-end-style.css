@@ -1306,6 +1306,139 @@ td.trp-add-list-entry-input-col, .trp-list-entry td{
     box-shadow: none;
 }
 
+/* Optin Page */
+.trp-optin-page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.trp-optin-page__wrap {
+    width: 400px;
+    background-color: white;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    border-radius: 8px;
+    margin-top: 120px;
+}
+
+.trp-optin-page__content {
+    padding: 16px;
+}
+
+.trp-optin-page__message {
+    font-size: 110%;
+}
+
+.trp-optin-page__bottom {
+    display: flex;
+    justify-content: space-between;
+}
+
+.trp-optin-page__bottom a.disabled, .trp-email-course__form .button-primary.disabled {
+    pointer-events: none;
+}
+
+.trp-optin-page__footer {
+    background-color: #f2f2f2;
+    border-bottom-right-radius: 8px;
+    border-bottom-left-radius: 8px;
+}
+
+.trp-optin-page__extra {
+    padding-left: 40px;
+    padding-right: 40px;
+}
+
+.trp-optin-page__extra.hidden {
+    display: none;
+}
+
+.trp-optin-page__extra-line {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.trp-optin-page__extra-icon {
+    width: 40px;
+    height: 40px;
+    font-size: 40px;
+    margin-right: 12px;
+    padding-top: 4px;
+}
+
+.trp-optin-page__extra-content h4 {
+    margin-top: 0px;
+    margin-bottom: 0px;
+    text-transform: uppercase;
+}
+
+.trp-optin-page__extra-content p {
+    margin-top: 0px;
+    margin-bottom: 0px;
+    color: #646970;
+}
+
+.trp-optin-page__more-wrap {
+    display: flex;
+    justify-content: center;
+    padding-top: 12px;
+    padding-bottom: 12px;
+}
+
+.trp-optin-page__more {
+    font-size: 90%;
+    opacity: 0.8;
+    text-decoration: none;
+}
+
+.trp-optin-page__more:hover {
+    opacity: 0.8;
+    text-decoration: underline;
+}
+
+.trp-optin-page__footer-links {
+    display: flex;
+    justify-content: center;
+    font-size: 90%;
+    padding-bottom: 12px;
+    color: #bebfb0;
+}
+
+.trp-optin-page__footer-links a {
+    color: #bebfb0;
+    text-decoration: none;
+}
+
+.trp-optin-page__footer-links a:hover {
+    color: black;
+}
+
+.trp-optin-page__footer-links a:first-child {
+    margin-right: 8px;
+}
+
+.trp-optin-page__footer-links a:last-child {
+    margin-left: 8px;
+}
+
+.trp-optin-page__top {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.trp-optin-page__top img {
+    width: 90px;
+    border-radius: 50%;
+}
+
+.trp-optin-page__top .trp-optin-page__extra-icon {
+    margin-left: 12px;
+    color: rgba(100, 100, 111, 0.3);
+}
+
 
 /* Media Queries */
 

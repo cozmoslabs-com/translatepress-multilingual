@@ -1,5 +1,5 @@
 <?php
-    $full_logo = TRP_PLUGIN_URL . 'assets/images/tp-logo-with-text-dark.png';
+    $full_logo = TRP_PLUGIN_URL . 'assets/images/tp-logo-with-text-dark.svg';
     $small_logo = TRP_PLUGIN_URL . 'assets/images/tp-logo.png';
 ?>
 

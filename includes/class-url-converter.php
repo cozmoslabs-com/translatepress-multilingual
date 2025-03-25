@@ -420,10 +420,19 @@ class TRP_Url_Converter {
 
         $hash = $cached_url['hash'];
 
-        // Both url_obj and abs_home_url_obj are set in self::check_if_url_is_valid_and_set_cache
         $url_obj = trp_cache_get('url_obj_' . hash('md4', $url), 'trp');
 
+        if ( $url_obj === false ){
+            $url_obj = new \TranslatePress\Uri($url);
+            wp_cache_set('url_obj_' . hash('md4', $url), $url_obj, 'trp' );
+        }
+
         $abs_home_url_obj = trp_cache_get('url_obj_' . hash('md4',  $this->get_abs_home() ), 'trp');
+
+        if ( $abs_home_url_obj === false ){
+            $abs_home_url_obj = new \TranslatePress\Uri( $this->get_abs_home() );
+            wp_cache_set('url_obj_' . hash('md4', $this->get_abs_home()), $abs_home_url_obj, 'trp' );
+        }
 
         // we're just adding the new language to the url
         $new_url_obj = clone $url_obj;

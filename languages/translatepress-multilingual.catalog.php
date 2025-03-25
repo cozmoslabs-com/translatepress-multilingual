@@ -228,6 +228,8 @@
 <?php __("IMPORTANT: It is strongly recommended to first backup the database!\nAre you sure you want to continue?", "translatepress-multilingual"); ?>
 <?php __("Run the updater", "translatepress-multilingual"); ?>
 <?php __("Updating will allow editing translations of slugs. Existing translation will still work as expected.", "translatepress-multilingual"); ?>
+<?php __("Please activate the SEO Addon from <br/>WordPress -> Settings -> TranslatePress -> Addons section", "translatepress-multilingual"); ?>
+<?php __("Go to Addons", "translatepress-multilingual"); ?>
 <?php __("The SEO Pack add-on allows translation of all the URL slugs:", "translatepress-multilingual"); ?>
 <?php __("Taxonomy slugs", "translatepress-multilingual"); ?>
 <?php __("Term slugs", "translatepress-multilingual"); ?>
