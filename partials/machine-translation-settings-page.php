@@ -309,7 +309,7 @@
                                 <span class="trp-primary-text"><?php esc_html_e("Today's Character Count: ", 'translatepress-multilingual'); ?></span>
                                 <strong>
                                     <?php echo esc_html( $today_count . ' / ' . number_format( isset($this->settings['trp_machine_translation_settings']['machine_translation_limit'])
-                                       ? esc_attr($this->settings['trp_machine_translation_settings']['machine_translation_limit'])
+                                       ? (int) $this->settings['trp_machine_translation_settings']['machine_translation_limit']
                                        : 1000000 ) ); ?>
                                 </strong>
                             </div>

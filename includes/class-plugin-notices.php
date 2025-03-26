@@ -432,7 +432,7 @@ class TRP_Trigger_Plugin_Notifications{
             /* this must be unique */
             $notification_id = 'trp_machine_translation_quota_exceeded_'. date('Ymd');
 
-            $message = '<img style="float: left; margin: 10px 12px 10px 0; max-width: 80px;" src="' . TRP_PLUGIN_URL . 'assets/images/get_param_addon.jpg" />';
+            $message = '';
             $message .= '<p style="margin-top: 16px;padding-right:30px;">';
                 $message .= sprintf( __( 'The daily quota for machine translation characters exceeded. Please check the <strong>TranslatePress -> <a href="%s">Automatic Translation</a></strong> page for more information.', 'translatepress-multilingual' ), admin_url( 'admin.php?page=trp_machine_translation' ) );
             $message .= '</p>';

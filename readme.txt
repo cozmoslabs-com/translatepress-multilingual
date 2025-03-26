@@ -5,7 +5,7 @@ Tags: translate, translation, multilingual, automatic translation, bilingual, fr
 Requires at least: 3.1.0
 Tested up to: 6.7.2
 Requires PHP: 5.6.20
-Stable tag: 2.9.9
+Stable tag: 2.9.10
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -141,6 +141,10 @@ For more information please check out our [documentation](https://translatepress
 
 
 == Changelog ==
+= 2.9.10 =
+* Fixed error on Automatic Translation tab from TranslatePress Settings when trying to remove the machine translation limit
+* Fixed admin notice positioning when exceeding daily quota
+
 = 2.9.9 =
 * Fixed compatibility issue with Query Monitor plugin
 * Fixed edge case issue with changing languages in Translation Editor when removing country from hreflang option was used
