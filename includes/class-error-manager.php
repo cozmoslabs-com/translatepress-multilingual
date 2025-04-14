@@ -16,6 +16,7 @@ class TRP_Error_Manager{
         $this->settings = $settings;
     }
 
+    
     public function is_error_manager_disabled(){
         return apply_filters( 'trp_disable_error_manager', false );
     }

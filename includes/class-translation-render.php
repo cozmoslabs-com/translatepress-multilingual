@@ -321,6 +321,20 @@ class TRP_Translation_Render{
             // the ideea is that if a dom node contains any top parent tags for blocks it can't be a block itself so we skip it
             $skip = $this->check_children_for_tags( $row, $merge_rules['top_parents'] );
             if( !$skip ) {
+
+                // Defensive: skip if only one child, and that child matches. 
+                // Otwherewise we detect a translation block on the parent of the block since trim strips all HTML and both the parent and child match. 
+                if ( count($row->children) === 1 ) {
+                    $child = $row->children[0];
+                    $child_trimmed_text = $this->trim_translation_block($child->innertext);
+                    foreach ( $all_existing_translation_blocks as $existing_translation_block ) {
+                        if ( $existing_translation_block->trimmed_original === $child_trimmed_text ) {
+                            // child matches, skip parent. We'll be back here with the correct parent where this function is being called. 
+                            return null;
+                        }
+                    }
+                }
+
                 $trimmed_inner_text = $this->trim_translation_block($row->innertext);
                 foreach ($all_existing_translation_blocks as $existing_translation_block) {
                     if ($existing_translation_block->trimmed_original == $trimmed_inner_text) {

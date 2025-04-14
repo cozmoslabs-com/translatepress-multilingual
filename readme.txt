@@ -5,7 +5,7 @@ Tags: translate, translation, multilingual, automatic translation, bilingual, fr
 Requires at least: 3.1.0
 Tested up to: 6.7.2
 Requires PHP: 5.6.20
-Stable tag: 2.9.10
+Stable tag: 2.9.11
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -141,6 +141,11 @@ For more information please check out our [documentation](https://translatepress
 
 
 == Changelog ==
+= 2.9.11 =
+* Updated Translation Editor to Vue 3.5 framework resulting in reduced loading time and improved security
+* Fixed edge case with translation blocks on translated pages accidentaly removing a parent html tag
+* Reduced the number of unnecessary calls to TP AI translation engine
+
 = 2.9.10 =
 * Fixed error on Automatic Translation tab from TranslatePress Settings when trying to remove the machine translation limit
 * Fixed admin notice positioning when exceeding daily quota

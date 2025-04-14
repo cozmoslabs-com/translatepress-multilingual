@@ -128,13 +128,13 @@ function trp_mtapi_add_settings( $mt_settings ){
 /**
  * Store url
  *
- * In order of priority MTAPI_STORE_URL, tpcom.local, translatepress.com
+ * In order of priority MTAPI_STORE_URL, tpcom.ddev.site, translatepress.com
  *
  * @return string
  */
 function trp_mtapi_get_store_url() {
     $store_url = ( !isset( $store_url ) ) ? ( ( defined( 'MTAPI_STORE_URL' ) ) ? MTAPI_STORE_URL : null ) : $store_url;
-    $store_url = ( !isset( $store_url ) ) ? ( ( defined( 'MTAPI_URL' ) && MTAPI_URL == 'http://mtapi.local' ) ? 'http://tpcom.local' : null ) : $store_url;
+    $store_url = ( !isset( $store_url ) ) ? ( ( defined( 'MTAPI_URL' ) && MTAPI_URL == 'https://mtapi.ddev.site' ) ? 'https://tpcom.ddev.site' : null ) : $store_url;
     return ( !isset( $store_url ) ) ? "https://translatepress.com" : $store_url;
 }
 

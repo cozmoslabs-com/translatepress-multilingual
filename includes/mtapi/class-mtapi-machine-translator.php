@@ -100,6 +100,7 @@ class TRP_MTAPI_Machine_Translator extends TRP_Machine_Translator {
 
                 if ($exception_message == 'Site not found.'
                     || $exception_message == 'Insufficient quota.'
+                    || $exception_message == 'Site is not active.'
                     || $exception_message == 'Out of valid license dates.')
                 {
                     set_transient("trp_mtapi_cached_quota", 0, 5*60);

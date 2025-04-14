@@ -112,7 +112,7 @@ jQuery( function() {
         }
 
         this.remove_language = function( element ){
-            var message = jQuery( element.target ).attr( 'data-confirm-message' );
+            var message = jQuery( '.trp-remove-language' ).attr( 'data-confirm-message' );
             var confirmed = confirm( message );
 
             if ( confirmed ) {
@@ -223,7 +223,7 @@ jQuery( function() {
 
             jQuery( '#trp-sortable-languages' ).sortable({ handle: '.trp-sortable-handle' });
             jQuery( '#trp-add-language' ).click( _this.add_language );
-            jQuery( '.trp-remove-language' ).click( _this.remove_language );
+            jQuery( '.trp-remove-language__container' ).click( _this.remove_language );
             jQuery( '#trp-default-language' ).on( 'change', _this.update_default_language );
             jQuery( "form[action='options.php']").on ( 'submit', _this.check_unique_url_slugs );
             jQuery( '#trp-languages-table' ).on( 'change', '.trp-translation-language', _this.update_url_slug_and_status );

@@ -559,11 +559,15 @@ a.nav-tab.trp-translation-editor:hover {
 }
 
 .trp-col-formality{
-    padding: 16px;
+    padding: 16px 16px 16px 0;
 }
 
 .trp-free-language-selector .trp-col-select-language{
     padding-right: 30px;
+}
+
+.trp-col-select-language{
+    padding-right: 16px;
 }
 
 .trp-free-language-selector .trp-language > *:not(:last-child) {
