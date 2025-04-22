@@ -1590,7 +1590,13 @@ class TRP_Translation_Render{
 
                 $new_strings[ $i ] = $translateable_strings[ $i ];
                 // if the string is not a url then allow machine translation for it
-                if ( $machine_translation_available && !$skip_string && filter_var( $new_strings[ $i ], FILTER_VALIDATE_URL ) === false ) {
+
+                if ( !$this->url_converter ){
+                    $trp = TRP_Translate_Press::get_trp_instance();
+                    $this->url_converter = $trp->get_component('url_converter');
+                }
+
+                if ( $machine_translation_available && !$skip_string && filter_var( $new_strings[ $i ], FILTER_VALIDATE_URL ) === false && !$this->url_converter->url_is_extra( $new_strings[ $i ] ) ) {
                     $machine_translatable_strings[ $i ] = $new_strings[ $i ];
                 }
             }

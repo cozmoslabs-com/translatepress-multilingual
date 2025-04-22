@@ -223,7 +223,7 @@ jQuery( function() {
 
             jQuery( '#trp-sortable-languages' ).sortable({ handle: '.trp-sortable-handle' });
             jQuery( '#trp-add-language' ).click( _this.add_language );
-            jQuery( '.trp-remove-language__container' ).click( _this.remove_language );
+            jQuery('.trp-remove-language__container:not(.trp-adst-remove-element)').click(_this.remove_language);
             jQuery( '#trp-default-language' ).on( 'change', _this.update_default_language );
             jQuery( "form[action='options.php']").on ( 'submit', _this.check_unique_url_slugs );
             jQuery( '#trp-languages-table' ).on( 'change', '.trp-translation-language', _this.update_url_slug_and_status );
@@ -256,7 +256,7 @@ jQuery( function() {
         }
 
         this.remove_item = function( event ){
-            if ( confirm( event.target.getAttribute( 'data-confirm-message' ) ) ){
+            if ( confirm( document.querySelector('.trp-adst-remove-element-text').getAttribute( 'data-confirm-message' ) ) ){
                 jQuery( event.target ).closest( '.trp-list-entry' ).remove()
             }
         }

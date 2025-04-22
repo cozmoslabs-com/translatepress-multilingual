@@ -324,6 +324,7 @@ class TRP_Plugin_Optin {
                 'plugin_version'        => defined( 'TRP_PLUGIN_VERSION' ) ? TRP_PLUGIN_VERSION : '',
                 'php_version'           => defined( 'PHP_VERSION' ) ? PHP_VERSION : '',
             ),
+            'timeout' => 60,
         );
 
         // Only send the major version for WordPress and PHP
@@ -496,6 +497,7 @@ class Cozmoslabs_Plugin_Optin_Metadata_Builder_TRP extends Cozmoslabs_Plugin_Opt
 
         $this->blacklisted_option_patterns = [
             'trp_migrate_old_slug_to_new_parent_and_translate_slug_table',
+            'trp_woo_',
         ];
 
         add_action( 'cozmoslabs_plugin_optin_'. $this->option_prefix .'metadata_builder_metadata', array( $this, 'build_custom_plugin_metadata' ) );

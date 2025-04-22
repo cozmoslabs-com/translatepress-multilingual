@@ -145,7 +145,11 @@ function trp_mtapi_get_store_url() {
  */
 add_filter( 'trp_machine_translation_sanitize_settings', 'trp_mtapi_sync_license', 10, 2 );
 function trp_mtapi_sync_license( $settings, $mt_settings ) {
-    if ( $settings['translation-engine'] === 'mtapi' ) {
+    if ( isset ( $_POST['option_page'] ) &&
+        $_POST['option_page'] === 'trp_machine_translation_settings' &&
+        current_user_can( apply_filters( 'trp_translating_capability', 'manage_options' ) ) &&
+        $settings['translation-engine'] === 'mtapi' )
+    {
         $license = get_option( 'trp_license_key' );
         $status  = get_option( 'trp_license_status' );
 
@@ -169,7 +173,8 @@ function trp_mtapi_sync_license_call( $license_key ) {
         $api_params = array(
             'edd_action' => 'sync_mtapi_license',
             'license'    => $license_key,
-            'url'        => home_url()
+            'url'        => home_url(),
+            'version'    => TRP_PLUGIN_VERSION
         );
         $store_url  = trp_mtapi_get_store_url();
         // Call the custom API.

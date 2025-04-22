@@ -548,9 +548,11 @@ if( !class_exists('TRP_LICENSE_PAGE') ) {
 
 class TRP_Plugin_Updater{
 
-    private $store_url = "https://translatepress.com";
+    private $store_url;
 
     public function __construct(){
+        // Use constant from wp-config.php if defined, otherwise use default URL
+        $this->store_url = defined('TRP_STORE_URL') ? TRP_STORE_URL : "https://translatepress.com";
     }
 
     protected function get_option( $license_key_option ){
