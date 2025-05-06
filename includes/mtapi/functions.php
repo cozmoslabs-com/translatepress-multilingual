@@ -64,6 +64,11 @@ function trp_mtapi_add_settings( $mt_settings ){
         set_transient("trp_mtapi_cached_quota", $site_status['quota'], 5*60);
 
         $quota       = ceil($site_status['quota'] / 5 );
+
+        // this $total_quota is not correct due to quota_used should account for ALL websites added to this license.
+        // however, in case the site does have a user defined limit, the quota_used is correct.
+        // without further changes to mtapi we don't have a proper way of knowing what's the quota_used.
+        // will hide total_quota and let progress bar in place as the approximation is good enough
         $total_quota = ceil( ( $site_status['quota'] + $site_status['quota_used'] ) / 5 );
 
         $formatted_quota = number_format( $quota );
@@ -90,7 +95,7 @@ function trp_mtapi_add_settings( $mt_settings ){
         </div>
 
         <span class="trp-secondary-text">
-            <?php echo "<strong>" . esc_html( $formatted_quota ) . "</strong>" . " / " . esc_html( $formatted_total_quota ) .  esc_html__( ' words remaining. ', 'translatepress-multilingual' ); ?>
+            <?php echo "<strong>" . esc_html( $formatted_quota ) . "</strong>" .  esc_html__( ' words remaining. ', 'translatepress-multilingual' ); ?>
 
             <?php if ( isset( $site_status['exception'][0]['message'] ) && $site_status['exception'][0]['message'] == "Site not found." ){ ?>
                 <span id="trp-refresh-tpai">

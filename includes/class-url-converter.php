@@ -647,7 +647,7 @@ class TRP_Url_Converter {
      * Uses current url if none given.
      *
      * @param string $url       Url.
-     * @return string           Language code.
+     * @return string|null      Language code or null if not found
      */
     public function get_lang_from_url_string( $url = null ) {
         if ( ! $url ){

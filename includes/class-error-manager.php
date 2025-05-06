@@ -90,6 +90,8 @@ class TRP_Error_Manager{
             );
         }
 
+        // this action allows you to trigger an action like send an email with the error details
+        do_action( 'trp_error_details', $error_details );
 
         $option['errors'][] = $error_details;
         update_option( 'trp_db_errors', $option );
