@@ -294,14 +294,16 @@ class TRP_Translation_Render{
      * @return bool
      */
     public function check_children_for_tags( $row, $tags ){
-        foreach( $row->children as $child ){
-            if( in_array( $child->tag, $tags ) ){
+        foreach ( $row->children as $child ) {
+            if ( in_array( $child->tag, $tags ) ) {
                 return true;
-            }
-            else{
-                $this->check_children_for_tags( $child, $tags );
+            } else {
+                if ( $this->check_children_for_tags( $child, $tags ) ) {
+                    return true;
+                }
             }
         }
+        return false;
     }
 
 	/**
@@ -321,20 +323,6 @@ class TRP_Translation_Render{
             // the ideea is that if a dom node contains any top parent tags for blocks it can't be a block itself so we skip it
             $skip = $this->check_children_for_tags( $row, $merge_rules['top_parents'] );
             if( !$skip ) {
-
-                // Defensive: skip if only one child, and that child matches. 
-                // Otwherewise we detect a translation block on the parent of the block since trim strips all HTML and both the parent and child match. 
-                if ( count($row->children) === 1 ) {
-                    $child = $row->children[0];
-                    $child_trimmed_text = $this->trim_translation_block($child->innertext);
-                    foreach ( $all_existing_translation_blocks as $existing_translation_block ) {
-                        if ( $existing_translation_block->trimmed_original === $child_trimmed_text ) {
-                            // child matches, skip parent. We'll be back here with the correct parent where this function is being called. 
-                            return null;
-                        }
-                    }
-                }
-
                 $trimmed_inner_text = $this->trim_translation_block($row->innertext);
                 foreach ($all_existing_translation_blocks as $existing_translation_block) {
                     if ($existing_translation_block->trimmed_original == $trimmed_inner_text) {
@@ -522,16 +510,8 @@ class TRP_Translation_Render{
          * Tries to fix the HTML document. It is off by default. Use at own risk.
          * Solves the problem where a duplicate attribute inside a tag causes the plugin to remove the duplicated attribute and all the other attributes to the right of the it.
          */
-        if( apply_filters( 'trp_try_fixing_invalid_html', false ) ) {
-            if( class_exists('DOMDocument') ) {
-                $dom = new DOMDocument();
-                $dom->encoding = 'utf-8';
 
-                libxml_use_internal_errors(true);//so no warnings will show up for invalid html
-                $dom->loadHTML(utf8_decode($output), LIBXML_NOWARNING | LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD );
-                $output = $dom->saveHTML();
-            }
-        }
+        $output = apply_filters( 'trp_pre_translating_html', $output );
 
         $no_translate_attribute      = 'data-no-translation';
         $no_auto_translate_attribute = 'data-no-auto-translation';

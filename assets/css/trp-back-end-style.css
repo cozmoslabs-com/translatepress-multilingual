@@ -14,7 +14,7 @@
     padding-left:0;
 }
 
-#trp-settings-page .notice, #trp-settings-page .error{
+#trp-settings-page .notice, #trp-settings-page .error, #trp-settings-page .updated{
     margin: 12px 32px;
 }
 

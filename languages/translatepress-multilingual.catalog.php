@@ -73,10 +73,11 @@
 <?php __("API key verification was successful.", "translatepress-multilingual"); ?>
 <?php __("Please enter your Google Translate key.", "translatepress-multilingual"); ?>
 <?php __("Please enter your DeepL API key.", "translatepress-multilingual"); ?>
+<?php __("Your <strong>TranslatePress</strong> serial number is invalid or missing. <br/>Please %1$sregister your copy%2$s to receive access to automatic updates and support. Need a license key? %3$sPurchase one now%4$s", "translatepress-multilingual"); ?>
 <?php __("Your <strong>TranslatePress</strong> license will expire on %1$s. Please %2$sRenew Your Licence%3$s to continue receiving access to product downloads, automatic updates and support.", "translatepress-multilingual"); ?>
+<?php __("Error: ", "translatepress-multilingual"); ?>
 <?php __("Something went wrong, please try again.", "translatepress-multilingual"); ?>
 <?php __("Your <strong>TranslatePress</strong> license has expired. <br/>Please %1$sRenew Your Licence%2$s to continue receiving access to product downloads, automatic updates and support. %3$sRenew now %4$s", "translatepress-multilingual"); ?>
-<?php __("Your <strong>TranslatePress</strong> serial number is invalid or missing. <br/>Please %1$sregister your copy%2$s to receive access to automatic updates and support. Need a license key? %3$sPurchase one now%4$s", "translatepress-multilingual"); ?>
 <?php __("The daily quota for machine translation characters exceeded. Please check the <strong>TranslatePress -> <a href=\"%s\">Automatic Translation</a></strong> page for more information.", "translatepress-multilingual"); ?>
 <?php __("One or more languages are unsupported by the automatic translation provider. Please check the <strong>TranslatePress -> <a href=\"%s\">Automatic Translation</a></strong> page for more information.", "translatepress-multilingual"); ?>
 <?php __("Marketing optin", "translatepress-multilingual"); ?>
@@ -326,6 +327,9 @@
 <?php __("Your License Key is valid.", "translatepress-multilingual"); ?>
 <?php __("Your License Key is invalid.", "translatepress-multilingual"); ?>
 <?php __("Your License has expired.", "translatepress-multilingual"); ?>
+<?php __("License Key", "translatepress-multilingual"); ?>
+<?php __("Manage your license in your %1$s.", "translatepress-multilingual"); ?>
+<?php __("Account Page", "translatepress-multilingual"); ?>
 <?php __("Enjoy seamless, automated and correct translations with TranslatePress AI", "translatepress-multilingual"); ?>
 <?php __("Are you tired of the slow, manual effort of translating your website? Experience the future of website translation with TranslatePress AI.", "translatepress-multilingual"); ?>
 <?php __("Automatically translate your entire website", "translatepress-multilingual"); ?>
@@ -338,9 +342,6 @@
 <?php __("TranslatePress.com Account", "translatepress-multilingual"); ?>
 <?php __("Download & Install the Pro plugin", "translatepress-multilingual"); ?>
 <?php __("Learn More", "translatepress-multilingual"); ?>
-<?php __("License Key", "translatepress-multilingual"); ?>
-<?php __("Manage your license in your %1$s.", "translatepress-multilingual"); ?>
-<?php __("Account Page", "translatepress-multilingual"); ?>
 <?php __("Enable Automatic Translation", "translatepress-multilingual"); ?>
 <?php __("To use <strong>DeepL</strong> for automatic translation, activate this Pro add-on from the <a href=\"%1$s\" target=\"_self\" title=\"%2$s\">%2$s</a>.", "translatepress-multilingual"); ?>
 <?php __("<strong>DeepL</strong> automatic translation is available as a <a href=\"%1$s\" target=\"_blank\" title=\"%2$s\">%2$s</a>.", "translatepress-multilingual"); ?>

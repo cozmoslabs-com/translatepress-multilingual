@@ -225,7 +225,7 @@ class TRP_Translation_Manager {
         if ( !$free_version ){
             $license_status = trp_get_license_status();
             if ( $license_status != 'valid' && $license_status != 'free-version' ) {
-                $translatepress_product = ( defined( 'TRANSLATE_PRESS' ) ) ? TRANSLATE_PRESS : "TranslatePress";
+                $translatepress_product = ( defined( 'TRANSLATE_PRESS' ) ) ? TRANSLATE_PRESS : "TranslatePress AI Free";
                 switch ( $license_status ) {
                     case 'expired':
                         {

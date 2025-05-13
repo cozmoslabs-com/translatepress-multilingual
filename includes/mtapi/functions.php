@@ -172,7 +172,7 @@ function trp_mtapi_sync_license( $settings, $mt_settings ) {
 function trp_mtapi_sync_license_call( $license_key ) {
     $trp = TRP_Translate_Press::get_trp_instance();
 
-    if ( !empty( $trp->active_pro_addons ) ) {
+    if ( !empty( $trp->tp_product_name ) ) {
 
         // data to send in our API request
         $api_params = array(

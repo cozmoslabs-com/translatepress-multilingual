@@ -5,7 +5,7 @@ Tags: translate, translation, multilingual, automatic translation, bilingual, fr
 Requires at least: 3.1.0
 Tested up to: 6.8.1
 Requires PHP: 5.6.20
-Stable tag: 2.9.13
+Stable tag: 2.9.14
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -141,6 +141,12 @@ For more information please check out our [documentation](https://translatepress
 
 
 == Changelog ==
+= 2.9.14 =
+* Fixed deprecated call to uft8_decode starting with PHP 8.2
+* Fixed edge case issue with translation blocks
+* Updated notice messages regarding licenses to provide more details
+* Updated icon images on Add-ons page in TranslatePress Settings
+
 = 2.9.13 =
 * Added support for translating tags and all other taxonomies through REST API
 * Added hook trp_error_details for triggering actions when encountering an error
