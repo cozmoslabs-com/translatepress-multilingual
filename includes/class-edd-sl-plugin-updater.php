@@ -708,11 +708,13 @@ class TRP_Plugin_Updater{
 
                     // make sure the response came back okay
                     if ( is_wp_error( $response ) || 200 !== wp_remote_retrieve_response_code( $response ) ) {
-
-                        $response_error_message = $response->get_error_message();
-                        $message[] = ( is_wp_error( $response ) && ! empty( $response_error_message ) ) ? $response->get_error_message() : __( 'An error occurred, please try again.', 'translatepress-multilingual' );
-
-                    } else {
+                        $response_error_message = '';
+                        if ( is_wp_error( $response ) && ! empty( $response->get_error_message() ) ) {
+                            $response_error_message = $response->get_error_message();
+                        }
+                        $message[] = ! empty( $response_error_message ) ? $response_error_message : __( 'An error occurred, please try again.', 'translatepress-multilingual' );
+                    }
+                    else {
 
                         $license_data = json_decode( wp_remote_retrieve_body( $response ) );
 
@@ -831,6 +833,7 @@ class TRP_Plugin_Updater{
                     // regardless, we delete the record in the client website. Otherwise, if he tries to add a new license, he can't.
                     if( $license_data->license == 'deactivated' || $license_data->license == 'failed') {
                         delete_option( 'trp_license_status' );
+                        delete_option( 'trp_license_details' );
                     }
 
                     wp_redirect( $this->license_page_url() );

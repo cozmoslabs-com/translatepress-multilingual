@@ -5,16 +5,6 @@ if ( !defined('ABSPATH' ) )
 
 $trp = TRP_Translate_Press::get_trp_instance();
 
-if ( $status !== false && $status == 'valid' ) {
-    $button_name  = 'trp_edd_license_deactivate';
-    $button_value = __( 'Deactivate License', 'translatepress-multilingual' );
-    $button_class = 'trp-button-secondary';
-} else {
-    $button_name  = 'trp_edd_license_activate';
-    $button_value = __( 'Activate License', 'translatepress-multilingual' );
-    $button_class = 'trp-submit-btn';
-}
-
 $license_message = [
     'valid'   => __( 'Your License Key is valid.', 'translatepress-multilingual' ),
     'invalid' => __( 'Your License Key is invalid.', 'translatepress-multilingual' ),
@@ -30,6 +20,15 @@ if ( !empty( $details['invalid'] ) ){
     $license_status = 'valid';
 }
 
+if ( $license_status == 'valid' ) {
+    $button_name  = 'trp_edd_license_deactivate';
+    $button_value = __( 'Deactivate License', 'translatepress-multilingual' );
+    $button_class = 'trp-button-secondary';
+} else {
+    $button_name  = 'trp_edd_license_activate';
+    $button_value = __( 'Activate License', 'translatepress-multilingual' );
+    $button_class = 'trp-submit-btn';
+}
     ?>
     <div id="trp-settings-page" class="wrap">
         <?php require_once TRP_PLUGIN_DIR . 'partials/settings-header.php'; ?>
@@ -79,7 +78,8 @@ if ( !empty( $details['invalid'] ) ){
                                     </div>
                                 </div>
                             </div>
-                    </div>
+                        </div>
+                        <?php if ($license_status != 'valid') : ?>
                         <div class="trp-settings-container">
                             <h3 class="trp-settings-primary-heading">
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -132,7 +132,9 @@ if ( !empty( $details['invalid'] ) ){
                                 </div>
                             </div>
                         </div>
+                        <?php endif; ?>
                     </div>
+                    <?php if ($license_status != 'valid') : ?>
                     <div class="trp-license-page-upsell-container__right">
                         <div class="trp-settings-container trp-license-page-upsell-container-content">
                             <h3 class="trp-settings-secondary-heading">
@@ -163,6 +165,7 @@ if ( !empty( $details['invalid'] ) ){
                             </div>
                         </div>
                 </div>
+                    <?php endif; ?>
                 </div>
             </div>
         </form>

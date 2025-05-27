@@ -69,7 +69,7 @@ class TRP_Translate_Press{
         define( 'TRP_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
         define( 'TRP_PLUGIN_BASE', plugin_basename( __DIR__ . '/index.php' ) );
         define( 'TRP_PLUGIN_SLUG', 'translatepress-multilingual' );
-        define( 'TRP_PLUGIN_VERSION', '2.9.15' );
+        define( 'TRP_PLUGIN_VERSION', '2.9.16' );
 
 	    wp_cache_add_non_persistent_groups(array('trp'));
 
@@ -212,7 +212,7 @@ class TRP_Translate_Press{
         // the names of your product should match the download names in EDD exactly
         // The order is important because we only match the last one.
         $trp_all_tp_product_names = array(
-            "translatepress-multilingual"  => "TranslatePress AI Free",
+            "translatepress-multilingual"  => "TranslatePress",
             "translatepress-business"      => "TranslatePress Business",
             "translatepress-developer"     => "TranslatePress Developer",
             "translatepress-personal"      => "TranslatePress Personal",
@@ -228,13 +228,15 @@ class TRP_Translate_Press{
         }
 
         // Only define the last found product name. We can only have ONE product name.
-        $this->tp_product_name = array(end( $this->tp_product_name ));
+        if(!empty($this->tp_product_name)) {
+            $this->tp_product_name = array(end($this->tp_product_name));
+        }
 
         //for the dev version simulate PRO version active
         if( ( defined('TRANSLATE_PRESS') && TRANSLATE_PRESS === 'TranslatePress - Dev' ) ){
             $this->tp_product_name["translatepress-business"] = "TranslatePress Business";
-        } elseif (defined('TRANSLATE_PRESS') && TRANSLATE_PRESS === 'TranslatePress AI Free' ){
-            $this->tp_product_name["translatepress-multilingual"] = "TranslatePress AI Free";
+        } elseif (defined('TRANSLATE_PRESS') && TRANSLATE_PRESS === 'TranslatePress' ){
+            $this->tp_product_name["translatepress-multilingual"] = "TranslatePress";
         }
     }
 

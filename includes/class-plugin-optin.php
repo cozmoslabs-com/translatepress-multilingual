@@ -324,7 +324,6 @@ class TRP_Plugin_Optin {
                 'plugin_version'        => defined( 'TRP_PLUGIN_VERSION' ) ? TRP_PLUGIN_VERSION : '',
                 'php_version'           => defined( 'PHP_VERSION' ) ? PHP_VERSION : '',
             ),
-            'timeout' => 60,
         );
 
         // Only send the major version for WordPress and PHP

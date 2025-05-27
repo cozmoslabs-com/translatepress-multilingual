@@ -323,10 +323,10 @@
 <?php __("Save Changes", "translatepress-multilingual"); ?>
 <?php __("TranslatePress Errors", "translatepress-multilingual"); ?>
 <?php __("There are no logged errors.", "translatepress-multilingual"); ?>
-<?php __("Deactivate License", "translatepress-multilingual"); ?>
 <?php __("Your License Key is valid.", "translatepress-multilingual"); ?>
 <?php __("Your License Key is invalid.", "translatepress-multilingual"); ?>
 <?php __("Your License has expired.", "translatepress-multilingual"); ?>
+<?php __("Deactivate License", "translatepress-multilingual"); ?>
 <?php __("License Key", "translatepress-multilingual"); ?>
 <?php __("Manage your license in your %1$s.", "translatepress-multilingual"); ?>
 <?php __("Account Page", "translatepress-multilingual"); ?>
