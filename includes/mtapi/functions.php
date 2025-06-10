@@ -19,12 +19,15 @@ function trp_mtapi_add_settings( $mt_settings ){
 	$details = get_option('trp_license_details');
 
     if (!isset($details['valid'][0])) $status = false;
-        //dd($status);
+
+    $translatepress_version_name = (defined('TRANSLATE_PRESS')) ? TRANSLATE_PRESS : 'TranslatePress';
+
+    //dd($status);
 	//dd(array($license, $status, $details));
     if ($status === false) : ?>
 
     <div class="trp-get-free-license__container"
-        <?php if (TRANSLATE_PRESS !== 'TranslatePress') echo 'style="background: #F6F7F7"'; ?>>
+        <?php if ($translatepress_version_name !== 'TranslatePress') echo 'style="background: #F6F7F7"'; ?>>
         <div class="trp-engine trp-automatic-translation-engine__container" id="mtapi">
             <span class="trp-primary-text-bold">
                 <img src="<?php echo esc_url(TRP_PLUGIN_URL.'assets/images/'); ?>ai-icon.svg" width="24" height="24"/>
@@ -40,14 +43,14 @@ function trp_mtapi_add_settings( $mt_settings ){
                     <?php esc_html_e('No Active License Detected for this website.', 'translatepress-multilingual'); ?>
                 </span>
             </div>
-<?php if (TRANSLATE_PRESS == 'TranslatePress') :
+<?php if ($translatepress_version_name == 'TranslatePress') :
             ?>
             <span class="trp-secondary-text trp-get-free-license-text">
                 <?php esc_html_e('In order to enable Automatic Translation using TranslatePress AI, you need a license key by creating a free account.', 'translatepress-multilingual'); ?>
             </span>
 <?php endif;?>
             <div class="trp-automatic-translation-get-license-buttons">
-<?php if ( TRANSLATE_PRESS == 'TranslatePress' ) : ?>
+<?php if ( $translatepress_version_name == 'TranslatePress' ) : ?>
                 <a href="<?php echo esc_url( 'https://translatepress.com/tp-ai-free/?utm_source=wpbackend&utm_medium=clientsite&utm_content=tpsettingsAT&utm_campaign=tpaifree' ) ?>" class="trp-get-free-license-link trp-get-free-license-button button-primary" target="_blank" id="trp-enter-license-button">
                     <?php esc_html_e( 'Create your Free Account', 'translatepress-multilingual' ); ?>
                 </a>
@@ -61,7 +64,7 @@ function trp_mtapi_add_settings( $mt_settings ){
             </div>
         </div>
 
-        <?php if ( TRANSLATE_PRESS == 'TranslatePress' ) : ?>
+        <?php if ( $translatepress_version_name == 'TranslatePress' ) : ?>
         <div class="trp-automatic-translation-engine__upsale" id="tpai-upsale">
             <span class="trp-primary-text-bold">
                 <?php esc_html_e('Your free account includes: ', 'translatepress-multilingual'); ?>
@@ -77,7 +80,7 @@ function trp_mtapi_add_settings( $mt_settings ){
                 <?php esc_html_e('2000 AI words to translate automatically', 'translatepress-multilingual'); ?>
             </span>
 
-            <div class="trp-upsale-fill" id="<?php echo esc_html( TRANSLATE_PRESS )  ?>" style="display: none;">
+            <div class="trp-upsale-fill" id="<?php echo esc_html( $translatepress_version_name )  ?>" style="display: none;">
                 <span class="trp-primary-text trp-upsale-text-red">
                    <?php esc_html_e("Get more AI Tokens and unlock all AI features with TranslatePress Pro.", "translatepress-multilingual"); ?>
                         <a href="https://translatepress.com/pricing/?utm_source=wpbackend&utm_medium=clientsite&utm_content=tpsettingsAT&utm_campaign=tpaifree" id="trp-upgrade-link" target="_blank">
@@ -177,7 +180,7 @@ function trp_mtapi_add_settings( $mt_settings ){
         </span>
     </div>
 
-        <div class="trp-upsale-fill trp-upsale-fill-active-license" id="<?php echo esc_html( TRANSLATE_PRESS )?>" style=" display: none " >
+        <div class="trp-upsale-fill trp-upsale-fill-active-license" id="<?php echo esc_html( $translatepress_version_name )?>" style=" display: none " >
                 <span class="trp-primary-text trp-upsale-text-red">
                    <?php esc_html_e("Get more AI Tokens and unlock all AI features with TranslatePress Pro.", "translatepress-multilingual"); ?>
                         <a href="https://translatepress.com/pricing/?utm_source=wpbackend&utm_medium=clientsite&utm_content=tpsettingsAT&utm_campaign=tpaifree" id="trp-upgrade-link" target="_blank">

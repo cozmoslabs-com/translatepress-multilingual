@@ -5,7 +5,7 @@ Tags: translate, translation, multilingual, automatic translation, bilingual, fr
 Requires at least: 3.1.0
 Tested up to: 6.8.1
 Requires PHP: 5.6.20
-Stable tag: 2.9.17
+Stable tag: 2.9.18
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -141,6 +141,9 @@ For more information please check out our [documentation](https://translatepress
 
 
 == Changelog ==
+= 2.9.18 =
+* Fixed bug introduced in previous version which prevented some users from accessing Automatic Translation tab 
+
 = 2.9.17 =
 * Allow using a free license with 2000 words for automatic translation in the free version of the plugin
 * Fixed taxonomy slug issues in the backwards compatibility code for older versions of SEO Pack
