@@ -437,7 +437,7 @@ class TRP_Translation_Render{
 
         $output = apply_filters('trp_before_translate_content', $output);
 
-        if ( strlen( $output ) < 1 || $output == false ){
+        if ( $output == false || !is_string( $output ) || strlen( $output ) < 1 ) {
             return $output;
         }
 

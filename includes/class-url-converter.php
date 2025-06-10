@@ -529,7 +529,7 @@ class TRP_Url_Converter {
                 $path = trailingslashit( ABSPATH ) . str_replace( untrailingslashit( $this->get_abs_home() ), '', $url );
 
                 if(apply_filters('trp_is_file', true, $path)) {
-                    $return = is_file( $path );
+                    $return = @is_file( $path );
                 }else{
                     $return = true;
                 }

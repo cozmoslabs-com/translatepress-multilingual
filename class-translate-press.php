@@ -69,7 +69,7 @@ class TRP_Translate_Press{
         define( 'TRP_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
         define( 'TRP_PLUGIN_BASE', plugin_basename( __DIR__ . '/index.php' ) );
         define( 'TRP_PLUGIN_SLUG', 'translatepress-multilingual' );
-        define( 'TRP_PLUGIN_VERSION', '2.9.16' );
+        define( 'TRP_PLUGIN_VERSION', '2.9.17' );
 
 	    wp_cache_add_non_persistent_groups(array('trp'));
 
@@ -234,8 +234,10 @@ class TRP_Translate_Press{
 
         //for the dev version simulate PRO version active
         if( ( defined('TRANSLATE_PRESS') && TRANSLATE_PRESS === 'TranslatePress - Dev' ) ){
+            $this->tp_product_name = array(); // only one product name
             $this->tp_product_name["translatepress-business"] = "TranslatePress Business";
         } elseif (defined('TRANSLATE_PRESS') && TRANSLATE_PRESS === 'TranslatePress' ){
+            $this->tp_product_name = array(); // only one product name
             $this->tp_product_name["translatepress-multilingual"] = "TranslatePress";
         }
     }
@@ -315,7 +317,10 @@ class TRP_Translate_Press{
         /* add hooks for license operations  */
         if( !empty( $this->tp_product_name ) ) {
             $this->loader->add_action('admin_init', $this->plugin_updater, 'activate_license');
-            $this->loader->add_filter('pre_set_site_transient_update_plugins', $this->plugin_updater, 'check_license');
+            if(!array_key_exists('translatepress-multilingual', $this->tp_product_name)){
+                // check for license updates for paid licenses only. Accessing the License tab directly does the same thing.
+                $this->loader->add_filter('pre_set_site_transient_update_plugins', $this->plugin_updater, 'check_license');
+            }
             $this->loader->add_action('admin_init', $this->plugin_updater, 'deactivate_license');
             $this->loader->add_action('admin_notices', $this->plugin_updater, 'admin_activation_notices');
         }
@@ -325,6 +330,7 @@ class TRP_Translate_Press{
         if( !isset( $trp_license_page )  ) {
             $trp_license_page = $this->license_page;
             $this->loader->add_action('admin_menu', $this->license_page, 'license_menu');
+            $this->loader->add_action('admin_init', $this->license_page, 'register_license_setting');
         }
 
         $this->loader->add_action( 'admin_init', $this->reviews, 'display_review_notice' );

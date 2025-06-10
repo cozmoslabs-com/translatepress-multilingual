@@ -22,7 +22,7 @@
 <?php __("Your license key expired on %s.", "translatepress-multilingual"); ?>
 <?php __("Your license key has been disabled.", "translatepress-multilingual"); ?>
 <?php __("Invalid license.", "translatepress-multilingual"); ?>
-<?php __("Your license is not active for this URL.", "translatepress-multilingual"); ?>
+<?php __("Your license is not active for this URL. Re-enable it from <a target=\"_blank\" href=\"https://translatepress.com/account/\">https://translatepress.com/account</a> -> Manage Sites.", "translatepress-multilingual"); ?>
 <?php __("This appears to be an invalid license key for %s.", "translatepress-multilingual"); ?>
 <?php __("Your license key has reached its activation limit.", "translatepress-multilingual"); ?>
 <?php __("An error occurred, please try again.", "translatepress-multilingual"); ?>
@@ -327,16 +327,15 @@
 <?php __("Your License Key is invalid.", "translatepress-multilingual"); ?>
 <?php __("Your License has expired.", "translatepress-multilingual"); ?>
 <?php __("Deactivate License", "translatepress-multilingual"); ?>
+<?php __("Add a license key", "translatepress-multilingual"); ?>
 <?php __("License Key", "translatepress-multilingual"); ?>
 <?php __("Manage your license in your %1$s.", "translatepress-multilingual"); ?>
 <?php __("Account Page", "translatepress-multilingual"); ?>
-<?php __("Enjoy seamless, automated and correct translations with TranslatePress AI", "translatepress-multilingual"); ?>
-<?php __("Are you tired of the slow, manual effort of translating your website? Experience the future of website translation with TranslatePress AI.", "translatepress-multilingual"); ?>
-<?php __("Automatically translate your entire website", "translatepress-multilingual"); ?>
-<?php __("Accurate and Fast Translations", "translatepress-multilingual"); ?>
-<?php __("Your message in a language your users understand", "translatepress-multilingual"); ?>
-<?php __("Extra Features from the paid versions: Extra languages, SEO support and much more...", "translatepress-multilingual"); ?>
-<?php __("Get a License Today", "translatepress-multilingual"); ?>
+<?php __("Don’t have a TranslatePress AI License Key?", "translatepress-multilingual"); ?>
+<?php __("You can get one for %1$sfree%2$s, by creating a free account. It includes:", "translatepress-multilingual"); ?>
+<?php __("Access to TranslatePress AI for instant automatic translations", "translatepress-multilingual"); ?>
+<?php __("2000 AI words to translate automatically", "translatepress-multilingual"); ?>
+<?php __("Get a free License Today", "translatepress-multilingual"); ?>
 <?php __("Already purchased a Premium version?", "translatepress-multilingual"); ?>
 <?php __("Go to your %1$s", "translatepress-multilingual"); ?>
 <?php __("TranslatePress.com Account", "translatepress-multilingual"); ?>
@@ -550,8 +549,13 @@
 <?php __("Please check your TranslatePress license key.", "translatepress-multilingual"); ?>
 <?php __("TranslatePress AI", "translatepress-multilingual"); ?>
 <?php __("No Active License Detected for this website.", "translatepress-multilingual"); ?>
-<?php __("Add a license by visiting the %1$s tab.", "translatepress-multilingual"); ?>
-<?php __("You have a valid %s license.", "translatepress-multilingual"); ?>
+<?php __("In order to enable Automatic Translation using TranslatePress AI, you need a license key by creating a free account.", "translatepress-multilingual"); ?>
+<?php __("Create your Free Account", "translatepress-multilingual"); ?>
+<?php __(" or ", "translatepress-multilingual"); ?>
+<?php __("Enter your license key", "translatepress-multilingual"); ?>
+<?php __("Your free account includes: ", "translatepress-multilingual"); ?>
+<?php __("Get more AI Tokens and unlock all AI features with TranslatePress Pro.", "translatepress-multilingual"); ?>
+<?php __("You have a valid %s <strong>license</strong>.", "translatepress-multilingual"); ?>
 <?php __(" words remaining. ", "translatepress-multilingual"); ?>
 <?php __("Recheck", "translatepress-multilingual"); ?>
 <?php __("Rechecking...", "translatepress-multilingual"); ?>

@@ -531,8 +531,22 @@ if( !class_exists('TRP_LICENSE_PAGE') ) {
             );
         }
 
+        public function register_license_setting(){
+            register_setting( 'trp_license_key', 'trp_license_key', array( $this, 'sanitize_license_key' ) );
+        }
+
+        public function sanitize_license_key( $license_key ) {
+            return sanitize_text_field( trim( $license_key ) );
+        }
+
         public function license_page()
         {
+
+            $trp = TRP_Translate_Press::get_trp_instance();
+
+            // force check license when accessing the License Tab.
+            $trp->get_component('plugin_updater')->force_check_license('true');
+
             $license = get_option('trp_license_key');
             // don't show the license in html
             $license = str_repeat("*", strlen($license));
@@ -591,61 +605,72 @@ class TRP_Plugin_Updater{
             return $transient_data;
 
         if ( false === ( $trp_check_license = get_transient( 'trp_checked_licence' ) ) ) {
-
-            $license = trim( $this->get_option( 'trp_license_key' ) );
-
-            $license_information_for_all_addons = array();
-
-            $trp = TRP_Translate_Press::get_trp_instance();
-
-            if (!empty($trp->tp_product_name)) {
-                foreach ($trp->tp_product_name as $active_pro_addon_name) {
-                    // data to send in our API request
-                    $api_params = array(
-                        'edd_action' => 'activate_license',                  //as the license is already activated this does not do anything. We could use check_license action but it gives different results  so we can't use it consistently with the result we get from the moment we activate it
-                        'license'    => $license,
-                        'item_name'  => urlencode($active_pro_addon_name),   // the name of our product in EDD
-                        'url'        => home_url()
-                    );
-
-                    if( !empty( $license ) || get_option( 'trp_plugin_optin' ) == 'yes' ){
-                        $api_params['machine_translated_strings_data'] = json_encode( get_option( 'trp_machine_translated_characters', array() ), JSON_HEX_QUOT );
-                    }
-
-                    // Call the custom API.
-                    $response = wp_remote_post($this->store_url, array('timeout' => 15, 'sslverify' => false, 'body' => $api_params));
-
-                    // make sure the response came back okay
-                    if (!is_wp_error($response)) {
-                        $license_data = json_decode(wp_remote_retrieve_body($response));
-                        if (false === $license_data->success) {
-                            $license_information_for_all_addons['invalid'][] = $license_data;
-                            break;//we only need one failure
-                        } else {
-                            $license_information_for_all_addons['valid'][] = $license_data;
-                        }
-                    }
-                }
-            }
-
-            //store the license reponse for each addon in the database
-            $this->update_option('trp_license_details', $license_information_for_all_addons);
-
-            if( !$license ){
-                //we need to throw a notice if we have a pro addon active and no license entered
-                $license_information_for_all_addons['invalid'][] = (object) array( 'error' => 'missing' );
-                $this->update_option('trp_license_details', $license_information_for_all_addons);
-            }
-
+            $this->force_check_license();
             set_transient( 'trp_checked_licence', 'yes', DAY_IN_SECONDS );
-
         }
 
         return $transient_data;
     }
 
+    /**
+     * This function is run when accessing the license page.
+     * @return null
+     */
+    public function force_check_license($api_cache_bypass = 'false'){
+        $license = trim( $this->get_option( 'trp_license_key' ) );
+
+        $license_information_for_all_addons = array();
+
+        $trp = TRP_Translate_Press::get_trp_instance();
+
+        if (!empty($trp->tp_product_name)) {
+            foreach ($trp->tp_product_name as $active_pro_addon_name) {
+                // data to send in our API request
+                $api_params = array(
+                    'edd_action' => 'activate_license',                  //as the license is already activated this does not do anything. We could use check_license action but it gives different results  so we can't use it consistently with the result we get from the moment we activate it
+                    'license'    => $license,
+                    'item_name'  => urlencode($active_pro_addon_name),   // the name of our product in EDD
+                    'url'        => home_url()
+                );
+
+                if($api_cache_bypass){
+                    $api_params['cache_bypass'] = $api_cache_bypass;
+                }
+
+                if( !empty( $license ) || get_option( 'trp_plugin_optin' ) == 'yes' ){
+                    $api_params['machine_translated_strings_data'] = json_encode( get_option( 'trp_machine_translated_characters', array() ), JSON_HEX_QUOT );
+                }
+
+                // Call the custom API.
+                $response = wp_remote_post($this->store_url, array('timeout' => 15, 'sslverify' => false, 'body' => $api_params));
+
+                // make sure the response came back okay
+                if (!is_wp_error($response)) {
+                    $license_data = json_decode(wp_remote_retrieve_body($response));
+                    if (false === $license_data->success) {
+                        $license_information_for_all_addons['invalid'][] = $license_data;
+                        break;//we only need one failure
+                    } else {
+                        $license_information_for_all_addons['valid'][] = $license_data;
+                    }
+                }
+            }
+        }
+
+        //store the license reponse for each addon in the database
+        $this->update_option('trp_license_details', $license_information_for_all_addons);
+        // $license_data->license will be either "valid" or "invalid"
+        $this->update_option( 'trp_license_status', $license_data->license );
+
+        if( !$license ){
+            //we need to throw a notice if we have a pro addon active and no license entered
+            $license_information_for_all_addons['invalid'][] = (object) array( 'error' => 'missing' );
+            $this->update_option('trp_license_details', $license_information_for_all_addons);
+        }
+    }
+
     public function admin_activation_notices() {
-        if ( isset( $_GET['trp_sl_activation'] ) && ! empty( $_GET['message'] ) ) {
+        if ( isset( $_GET['trp_sl_activation'] ) && ! empty( $_GET['message'] ) && isset( $_GET['trp_license_nonce'] ) && wp_verify_nonce( sanitize_text_field( $_GET['trp_license_nonce'] ), 'trp_license_display_message' ) ) {
 
             switch( $_GET['trp_sl_activation'] ) {
                 case 'false':
@@ -735,7 +760,7 @@ class TRP_Plugin_Updater{
                                     break;
                                 case 'invalid' :
                                 case 'site_inactive' :
-                                    $message[] = __( 'Your license is not active for this URL.', 'translatepress-multilingual' );
+                                    $message[] = __( 'Your license is not active for this URL. Re-enable it from <a target="_blank" href="https://translatepress.com/account/">https://translatepress.com/account</a> -> Manage Sites.', 'translatepress-multilingual' );
                                     break;
                                 case 'item_name_mismatch' :
                                     $message[] = sprintf( __( 'This appears to be an invalid license key for %s.', 'translatepress-multilingual' ), $active_pro_addon_name );
@@ -767,7 +792,7 @@ class TRP_Plugin_Updater{
             // Check if anything passed on a message constituting a failure
             if ( ! empty( $message ) ) {
                 $message = implode( "<br/>", array_unique($message) );//if we got the same message for multiple addons show just one, and add a br in case we show multiple messages
-                $redirect = add_query_arg( array( 'trp_sl_activation' => 'false', 'message' => urlencode( $message ) ), $this->license_page_url() );
+                $redirect = add_query_arg( array( 'trp_sl_activation' => 'false', 'message' => urlencode( $message ) ), wp_nonce_url( $this->license_page_url(), 'trp_license_display_message', 'trp_license_nonce' ) );
 
                 wp_redirect( $redirect );
                 exit();
@@ -777,7 +802,7 @@ class TRP_Plugin_Updater{
 
             $this->update_option( 'trp_license_status', $license_data->license );
 
-            wp_redirect( add_query_arg( array( 'trp_sl_activation' => 'true', 'message' => urlencode( __( 'You have successfully activated your license', 'translatepress-multilingual' ) ) ), $this->license_page_url() ) );
+            wp_redirect( add_query_arg( array( 'trp_sl_activation' => 'true', 'message' => urlencode( __( 'You have successfully activated your license', 'translatepress-multilingual' ) ) ), wp_nonce_url( $this->license_page_url(), 'trp_license_display_message', 'trp_license_nonce' ) ) );
             exit();
         }
     }
@@ -821,7 +846,7 @@ class TRP_Plugin_Updater{
                             $message = __( 'An error occurred, please try again.', 'translatepress-multilingual' );
                         }
 
-                        $redirect = add_query_arg( array( 'trp_sl_activation' => 'false', 'message' => urlencode( $message ) ), $this->license_page_url() );
+                        $redirect = add_query_arg( array( 'trp_sl_activation' => 'false', 'message' => urlencode( $message ) ), wp_nonce_url( $this->license_page_url(), 'trp_license_display_message', 'trp_license_nonce' ) );
                         wp_redirect( $redirect );
                         exit();
                     }

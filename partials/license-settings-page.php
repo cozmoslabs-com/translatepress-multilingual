@@ -3,8 +3,6 @@
 if ( !defined('ABSPATH' ) )
     exit();
 
-$trp = TRP_Translate_Press::get_trp_instance();
-
 $license_message = [
     'valid'   => __( 'Your License Key is valid.', 'translatepress-multilingual' ),
     'invalid' => __( 'Your License Key is invalid.', 'translatepress-multilingual' ),
@@ -42,7 +40,9 @@ if ( $license_status == 'valid' ) {
                 <div class="trp-license-page-upsell-container">
                     <div class="trp-license-page-upsell-container__left">
                         <div class="trp-settings-container">
-                            <h3 class="trp-settings-primary-heading"><?php esc_html_e( 'License', 'translatepress-multilingual' ); ?></h3>
+                            <h3 class="trp-settings-primary-heading">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align: middle"><path d="M15 21H6C5.20435 21 4.44129 20.6839 3.87868 20.1213C3.31607 19.5587 3 18.7957 3 18V17H13V19C13 19.5304 13.2107 20.0391 13.5858 20.4142C13.9609 20.7893 14.4696 21 15 21ZM15 21C15.5304 21 16.0391 20.7893 16.4142 20.4142C16.7893 20.0391 17 19.5304 17 19V5C17 4.60444 17.1173 4.21776 17.3371 3.88886C17.5568 3.55996 17.8692 3.30362 18.2346 3.15224C18.6001 3.00087 19.0022 2.96126 19.3902 3.03843C19.7781 3.1156 20.1345 3.30608 20.4142 3.58579C20.6939 3.86549 20.8844 4.22186 20.9616 4.60982C21.0387 4.99778 20.9991 5.39992 20.8478 5.76537C20.6964 6.13082 20.44 6.44318 20.1111 6.66294C19.7822 6.8827 19.3956 7 19 7H17M19 3H8C7.20435 3 6.44129 3.31607 5.87868 3.87868C5.31607 4.44129 5 5.20435 5 6V17M9 7H13M9 11H13" stroke="#354052" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                                <?php esc_html_e( 'Add a license key', 'translatepress-multilingual' ); ?></h3>
                             <div class="trp-settings-separator"></div>
 
                             <div class="trp-license__wrapper">
@@ -96,39 +96,29 @@ if ( $license_status == 'valid' ) {
                                         </linearGradient>
                                     </defs>
                                 </svg>
-                                <?php esc_html_e( 'Enjoy seamless, automated and correct translations with TranslatePress AI', 'translatepress-multilingual' ); ?>
+                                <?php esc_html_e( 'Don’t have a TranslatePress AI License Key?', 'translatepress-multilingual' ); ?>
                             </h3>
                             <div class="trp-settings-separator"></div>
 
                             <div class="trp-license-page-upsell-container-content">
                                 <span class="trp-primary-text">
-                                    <?php esc_html_e( 'Are you tired of the slow, manual effort of translating your website? Experience the future of website translation with TranslatePress AI.', 'translatepress-multilingual' ); ?>
+                                    <?php echo sprintf( esc_html__( 'You can get one for %1$sfree%2$s, by creating a free account. It includes:', 'translatepress-multilingual' ), '<strong>', '</strong>' ); ?>
                                 </span>
 
                                 <div class="trp-license-page-upsell-container-ul">
                                     <div class="trp-license-page-upsell-li">
                                         <span class="trp-license-icon-check"></span>
-                                        <span><?php esc_html_e( 'Automatically translate your entire website', 'translatepress-multilingual' ); ?> </span>
+                                        <span><?php esc_html_e( 'Access to TranslatePress AI for instant automatic translations', 'translatepress-multilingual' ); ?> </span>
                                     </div>
 
                                     <div class="trp-license-page-upsell-li">
                                         <span class="trp-license-icon-check"></span>
-                                        <span><?php esc_html_e( 'Accurate and Fast Translations', 'translatepress-multilingual' ); ?> </span>
-                                    </div>
-
-                                    <div class="trp-license-page-upsell-li">
-                                        <span class="trp-license-icon-check"></span>
-                                        <span><?php esc_html_e( 'Your message in a language your users understand', 'translatepress-multilingual' ); ?> </span>
-                                    </div>
-
-                                    <div class="trp-license-page-upsell-li">
-                                        <span class="trp-license-icon-check"></span>
-                                        <span><?php esc_html_e( 'Extra Features from the paid versions: Extra languages, SEO support and much more...', 'translatepress-multilingual' ); ?> </span>
+                                        <span><?php esc_html_e( '2000 AI words to translate automatically', 'translatepress-multilingual' ); ?> </span>
                                     </div>
                                 </div>
 
                                 <div>
-                                    <a href="https://translatepress.com/pricing/?utm_source=wpbackend&utm_medium=clientsite&utm_content=license-page&utm_campaign=tp-ai" class="trp-submit-btn" target="_blank"><?php esc_html_e("Get a License Today", 'translatepress-multilingual') ?></a>
+                                    <a href="https://translatepress.com/tp-ai-free/?utm_source=wpbackend&utm_medium=clientsite&utm_content=license-page&utm_campaign=tpaifree" class="trp-submit-btn" target="_blank"><?php esc_html_e("Get a free License Today", 'translatepress-multilingual') ?></a>
                                 </div>
                             </div>
                         </div>

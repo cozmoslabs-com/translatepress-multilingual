@@ -385,6 +385,8 @@ jQuery( function() {
 
         if ( jQuery("#" + this.value).length > 0 ){
             jQuery("#" + this.value).show();
+            TRP_check_visible_engine_for_upsale_mtapi( this.value );
+
         }else{
             // backwards compatibility for when Paid version not updated. Deepl missing .trp-engine and #deepl selectors in html
             jQuery("#trp-deepl-api-type-pro").closest('tr').show();
@@ -411,6 +413,21 @@ jQuery( function() {
     jQuery('#trp-machine-translation-enabled').on( 'change', function(){
         TRP_show_hide_machine_translation_options()
     })
+
+    function TRP_check_visible_engine_for_upsale_mtapi( selected_engine ) {
+
+        jQuery('#tpai-upsale').hide();
+        jQuery( '.trp-upsale-fill' ).hide();
+
+        if (selected_engine == 'mtapi' && jQuery('.trp-upsale-fill').attr('id') === 'TranslatePress') {
+            jQuery('#tpai-upsale').show();
+            jQuery( '.trp-upsale-fill' ).show();
+        } else {
+            jQuery('#tpai-upsale').hide();
+            jQuery( '.trp-upsale-fill' ).hide();
+
+        }
+    }
 
     function TRP_test_API_key(){
         const testPopupOverlay = document.querySelector( '.trp-test-api-key-popup-overlay');
@@ -441,35 +458,37 @@ jQuery( function() {
         });
 
 
-        testApiBtn.addEventListener( "click", function(){
-            testPopupOverlay.style.visibility = 'visible';
+        if ( typeof testApiBtn !== 'undefined' && testApiBtn ) {
+            testApiBtn.addEventListener("click", function () {
+                testPopupOverlay.style.visibility = 'visible';
 
-            jQuery('.trp-loading-spinner').show();
+                jQuery('.trp-loading-spinner').show();
 
-            jQuery.ajax({
+                jQuery.ajax({
                     url: trp_url_slugs_info['admin-ajax'],
                     type: 'POST',
                     data: {
                         action: 'test_api_key',
-                        security: document.querySelector( '#trp_test_api_nonce_field' ).value
+                        security: document.querySelector('#trp_test_api_nonce_field').value
                     },
-                    success: function(response) {
+                    success: function (response) {
                         if (response.success) {
-                            testPopup.style.visibility        = 'visible';
+                            testPopup.style.visibility = 'visible';
 
                             populatePopup(response.data);
                         } else {
                             console.error("Error:", response.data.message);
                         }
                     },
-                    error: function() {
+                    error: function () {
                         console.error("AJAX request failed");
                     },
-                    complete: function(){
+                    complete: function () {
                         jQuery('.trp-loading-spinner').hide();
                     }
+                });
             });
-        });
+        }
 
         function populatePopup( response ){
             const popupResponse = testPopup.querySelector('.trp-test-api-key-response .trp-settings-container');
@@ -482,30 +501,6 @@ jQuery( function() {
         }
     }
     TRP_test_API_key();
-
-    function TRP_show_hide_automatic_translation_content(){
-        const toggleSwitch = document.getElementById( "trp-machine-translation-enabled" );
-
-        if ( !toggleSwitch )
-            return;
-
-        function toggleSwitchFn(){
-            const toHideElements = document.querySelectorAll('.trp-to-hide');
-
-            toHideElements.forEach( (element) => {
-               if ( toggleSwitch.checked )
-                   element.classList.remove( 'trp-hidden' )
-
-               else
-                   element.classList.add( 'trp-hidden' )
-            });
-        }
-
-        toggleSwitchFn();
-
-        toggleSwitch.addEventListener( 'change', toggleSwitchFn );
-    }
-    TRP_show_hide_automatic_translation_content();
 
     // check quota for site on TP AI
     function TRP_TP_AI_Recheck(){
