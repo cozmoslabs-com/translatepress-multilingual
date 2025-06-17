@@ -780,6 +780,14 @@ input.trp-language-slug{
     fill: var(--trp-settings-warning-text-color);
 }
 
+#trp-refresh-tpai{
+    cursor: pointer;
+}
+#trp-refresh-tpai:hover,
+#trp-refresh-tpai:hover span{
+    color: var(--trp-settings-accent-color);
+}
+
 .trp-get-free-license__container{
     display: flex;
     width: 100%;
@@ -1203,6 +1211,22 @@ details .trp-description-text{
 .trp-license-page-upsell-container{
     display: flex;
     gap: 13px;
+}
+
+.trp-license-page-upsell-container summary{
+    cursor: pointer; font-weight: bold; padding: 10px 0;
+}
+
+.trp-license-page-upsell-container code{
+    display: block;
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    padding: 15px;
+    font-family: monospace;
+    font-size: 12px;
+    white-space: pre-wrap;
+    overflow-x: auto;
+    margin: 10px 0;
 }
 
 .trp-license-page-upsell-container-content{

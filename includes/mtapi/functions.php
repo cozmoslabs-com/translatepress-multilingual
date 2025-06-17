@@ -153,14 +153,14 @@ function trp_mtapi_add_settings( $mt_settings ){
             <?php if ( isset( $site_status['exception'][0]['message'] ) && $site_status['exception'][0]['message'] == "Site not found." ) : ?>
                 <span id="trp-refresh-tpai">
                     <span id="trp-refresh-tpai-dashicon" class="dashicons dashicons-controls-repeat"></span>
-                    <span id="trp-refresh-tpai-text-recheck trp-primary-text">
+                    <span id="trp-refresh-tpai-text-recheck" class="trp-primary-text">
                         <?php esc_html_e( 'Recheck', 'translatepress-multilingual' ); ?>
                     </span>
                 </span>
-                <span id="trp-refresh-tpai-text-rechecking trp-primary-text" style="display:none">
+                <span id="trp-refresh-tpai-text-rechecking "  class="trp-primary-text" style="display:none">
                     <?php esc_html_e( 'Rechecking...', 'translatepress-multilingual' ); ?>
                 </span>
-                <span id="trp-refresh-tpai-text-done trp-primary-text" style="display:none">
+                <span id="trp-refresh-tpai-text-done" class="trp-primary-text" style="display:none">
                     <?php esc_html_e( 'Done.', 'translatepress-multilingual' ); ?>
                 </span>
             <?php endif; ?>

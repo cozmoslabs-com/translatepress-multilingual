@@ -326,7 +326,7 @@ class TRP_Url_Converter {
             $trp_link_is_processed = '';
         }
 
-        if ( $this->is_sitemap_path('') ){
+        if ( $this->is_sitemap_path($url_obj->getPath()) ){
             trp_bulk_debug( $debug, array( 'url' => $url, 'abort' => 'is file' ) );
 
             wp_cache_set($cache_key . $hash, $url . $trp_link_is_processed, 'trp');

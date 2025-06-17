@@ -25,6 +25,7 @@
 <?php __("Your license is not active for this URL. Re-enable it from <a target=\"_blank\" href=\"https://translatepress.com/account/\">https://translatepress.com/account</a> -> Manage Sites.", "translatepress-multilingual"); ?>
 <?php __("This appears to be an invalid license key for %s.", "translatepress-multilingual"); ?>
 <?php __("Your license key has reached its activation limit.", "translatepress-multilingual"); ?>
+<?php __("This website is already activated under a free license. Each website can only use one free license.", "translatepress-multilingual"); ?>
 <?php __("An error occurred, please try again.", "translatepress-multilingual"); ?>
 <?php __("You have successfully activated your license", "translatepress-multilingual"); ?>
 <?php __("Others", "translatepress-multilingual"); ?>
@@ -78,6 +79,11 @@
 <?php __("Error: ", "translatepress-multilingual"); ?>
 <?php __("Something went wrong, please try again.", "translatepress-multilingual"); ?>
 <?php __("Your <strong>TranslatePress</strong> license has expired. <br/>Please %1$sRenew Your Licence%2$s to continue receiving access to product downloads, automatic updates and support. %3$sRenew now %4$s", "translatepress-multilingual"); ?>
+<?php __("This license is for a different version of TranslatePress than your installed <strong>%1$s</strong> version. <br/>Please use the correct key from %2$s your account %3$s.", "translatepress-multilingual"); ?>
+<?php __("You have reached the activation limit for your <strong>%1$s</strong> license. <br/>Manage your active sites from %2$s your account %3$s.", "translatepress-multilingual"); ?>
+<?php __(" Error: ", "translatepress-multilingual"); ?>
+<?php __("This website is already activated under a free license. Each website can only use one free license. Please upgrade to a premium plan for more TranslatePress AI words from %1$s your account %2$s.", "translatepress-multilingual"); ?>
+<?php __("You do not have a valid license for <strong>TranslatePress</strong>. %1$sGet one for free%2$s to get access to TranslatePress AI.", "translatepress-multilingual"); ?>
 <?php __("The daily quota for machine translation characters exceeded. Please check the <strong>TranslatePress -> <a href=\"%s\">Automatic Translation</a></strong> page for more information.", "translatepress-multilingual"); ?>
 <?php __("One or more languages are unsupported by the automatic translation provider. Please check the <strong>TranslatePress -> <a href=\"%s\">Automatic Translation</a></strong> page for more information.", "translatepress-multilingual"); ?>
 <?php __("Marketing optin", "translatepress-multilingual"); ?>
@@ -336,6 +342,9 @@
 <?php __("Access to TranslatePress AI for instant automatic translations", "translatepress-multilingual"); ?>
 <?php __("2000 AI words to translate automatically", "translatepress-multilingual"); ?>
 <?php __("Get a free License Today", "translatepress-multilingual"); ?>
+<?php __("Debug Information", "translatepress-multilingual"); ?>
+<?php __("Debug Data for License Checking", "translatepress-multilingual"); ?>
+<?php __("Debug Data for License Activation", "translatepress-multilingual"); ?>
 <?php __("Already purchased a Premium version?", "translatepress-multilingual"); ?>
 <?php __("Go to your %1$s", "translatepress-multilingual"); ?>
 <?php __("TranslatePress.com Account", "translatepress-multilingual"); ?>
