@@ -69,13 +69,13 @@ class TRP_Translate_Press{
         define( 'TRP_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
         define( 'TRP_PLUGIN_BASE', plugin_basename( __DIR__ . '/index.php' ) );
         define( 'TRP_PLUGIN_SLUG', 'translatepress-multilingual' );
-        define( 'TRP_PLUGIN_VERSION', '2.9.19' );
+        define( 'TRP_PLUGIN_VERSION', '2.9.20' );
 
 	    wp_cache_add_non_persistent_groups(array('trp'));
 
         $this->load_dependencies();
         $this->initialize_components();
-        $this->get_tp_product_name();
+        $this->set_tp_product_name();
         $this->define_admin_hooks();
         $this->define_frontend_hooks();
     }
@@ -202,12 +202,14 @@ class TRP_Translate_Press{
 
     /**
      * We use this function to detect if we have any addons that require a license
+     * Used throughout the plugin to detect the version for notifications, license checks, different messages.
+     * Sets $this->tp_product_name that is different from TRANSLATE_PRESS constant.
      */
-    public function get_tp_product_name(){
+    public function set_tp_product_name(){
 
-        //don't do nothing in frontend
-        if( !is_admin() )
-            return;
+        // by default, set tp_product_name is not set.
+        // will be overwritten by active plugin names OR based on TRANSLATE_PRESS constant
+        $this->tp_product_name = array();
 
         // the names of your product should match the download names in EDD exactly
         // The order is important because we only match the last one.
@@ -218,27 +220,49 @@ class TRP_Translate_Press{
             "translatepress-personal"      => "TranslatePress Personal",
         );
         $active_plugins = get_option('active_plugins');
+        $last_found_product_name = array();
         foreach ( $trp_all_tp_product_names as $trp_tp_product_folder => $trp_tp_product_name ){
             foreach( $active_plugins as $active_plugin ){
                 if( strpos( $active_plugin, $trp_tp_product_folder.'/' ) === 0 ){
-                    $this->tp_product_name[$trp_tp_product_folder] = $trp_tp_product_name;
+                    $last_found_product_name = array($trp_tp_product_folder => $trp_tp_product_name);
                     break;
                 }
             }
         }
+        $this->tp_product_name = $last_found_product_name;
 
-        // Only define the last found product name. We can only have ONE product name.
-        if(!empty($this->tp_product_name)) {
-            $this->tp_product_name = array(end($this->tp_product_name));
-        }
 
-        //for the dev version simulate PRO version active
+        /*
+         * For the dev version simulate the business version
+         *
+         * TRANSLATE_PRESS possible values:
+         * TranslatePress
+         * TranslatePress - Dev
+         * TranslatePress - Personal
+         * TranslatePress - Business
+         * TranslatePress - Developer
+         */
         if( ( defined('TRANSLATE_PRESS') && TRANSLATE_PRESS === 'TranslatePress - Dev' ) ){
             $this->tp_product_name = array(); // only one product name
             $this->tp_product_name["translatepress-business"] = "TranslatePress Business";
         } elseif (defined('TRANSLATE_PRESS') && TRANSLATE_PRESS === 'TranslatePress' ){
             $this->tp_product_name = array(); // only one product name
             $this->tp_product_name["translatepress-multilingual"] = "TranslatePress";
+        } elseif (defined('TRANSLATE_PRESS') && TRANSLATE_PRESS === 'TranslatePress - Personal' ){
+            $this->tp_product_name = array(); // only one product name
+            $this->tp_product_name["translatepress-personal"] = "TranslatePress Personal";
+        } elseif (defined('TRANSLATE_PRESS') && TRANSLATE_PRESS === 'TranslatePress - Business' ){
+            $this->tp_product_name = array(); // only one product name
+            $this->tp_product_name["translatepress-business"] = "TranslatePress Business";
+        } elseif (defined('TRANSLATE_PRESS') && TRANSLATE_PRESS === 'TranslatePress - Developer' ){
+            $this->tp_product_name = array(); // only one product name
+            $this->tp_product_name["translatepress-developer"] = "TranslatePress Developer";
+        }
+
+        // if tp_product_name not yet set, force set it to TranslatePress business
+        if (!$this->tp_product_name){
+            $this->tp_product_name = array(); // only one product name
+            $this->tp_product_name["translatepress-business"] = "TranslatePress Business";
         }
     }
 
@@ -322,7 +346,6 @@ class TRP_Translate_Press{
                 $this->loader->add_filter('pre_set_site_transient_update_plugins', $this->plugin_updater, 'check_license');
             }
             $this->loader->add_action('admin_init', $this->plugin_updater, 'deactivate_license');
-            $this->loader->add_action('admin_notices', $this->plugin_updater, 'admin_activation_notices');
         }
 
         /* add license page */
@@ -380,7 +403,7 @@ class TRP_Translate_Press{
         $this->loader->add_filter( "trp_translateable_strings", $this->translation_render, 'antispambot_infinite_detection_fix', 10, 6 );
         $this->loader->add_filter( "trp_allow_machine_translation_for_string", $this->translation_render, 'allow_machine_translation_for_string', 10, 4 );
         $this->loader->add_filter( "trp_allow_machine_translation_for_string", $this->translation_render, 'skip_automatic_translation_for_no_auto_translation_selector', 10, 5 );
-        $this->loader->add_action( "init", $this->translation_render, 'add_callbacks_for_translating_rest_api', 10, 4 );
+        $this->loader->add_filter( "rest_pre_echo_response", $this->translation_render, 'handle_generic_rest_api_translations', 10, 3 );
         $this->loader->add_filter( "oembed_response_data", $this->translation_render, 'oembed_response_data', 10, 4 );
 
         /* add custom containers for post content and pots title so we can identify string that are part of them */

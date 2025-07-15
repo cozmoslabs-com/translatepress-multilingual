@@ -1145,6 +1145,9 @@ details .trp-description-text{
 }
 
 .trp-license-right-row{
+
+}
+.trp-license-key-action{
     display: flex;
     gap: 8px;
 }
@@ -1166,8 +1169,13 @@ details .trp-description-text{
     border-radius: 6px;
     font-size: 14px;
     gap: 8px;
+    margin-bottom: 8px;
 }
-
+.trp-license-message p{
+    font-size: 14px;
+    line-height: 1.8em;
+    margin:0;
+}
 .trp-license-status-invalid{
     color: var(--trp-settings-warning-text-color);
     background-color: var(--trp-settings-warning-bg-color);
@@ -1233,6 +1241,7 @@ details .trp-description-text{
     display: flex;
     flex-direction: column;
     gap: 24px;
+    font-size: var(--trp-settings-primary-font-size);
 }
 
 .trp-license-page-upsell-container__left{
@@ -1652,6 +1661,9 @@ td.trp-add-list-entry-input-col, .trp-list-entry td{
     }
 
     .trp-license-right-row{
+    }
+
+    .trp-license-key-action{
         flex-direction: column;
     }
 

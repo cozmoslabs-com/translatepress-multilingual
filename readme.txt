@@ -5,7 +5,7 @@ Tags: translate, translation, multilingual, automatic translation, bilingual, fr
 Requires at least: 3.1.0
 Tested up to: 6.8.1
 Requires PHP: 5.6.20
-Stable tag: 2.9.19
+Stable tag: 2.9.20
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -141,6 +141,21 @@ For more information please check out our [documentation](https://translatepress
 
 
 == Changelog ==
+= 2.9.20 =
+* Added support for WordPress search REST API
+* Added compatibility with WP Bakery Editor
+* Fixed translating WooCommerce product through REST API
+* Fixed bug where sitemaps were getting translated
+* Fixed JS error in Translation Editor triggered by missing href attributes on anchor links in previewed pages
+* Fixed caching issues on license activation
+* Fixed edge case issue with wrong translated links for unset href attributes
+* Fixed home page triggering 404 when using {{home}} wildcard in 'Translate Only Certain Paths' and 'Use a Subdirectory for the Default Language' is enabled
+* Improved license activation messaging
+* Improved code around product name detection
+* Improved notifications when paid user installs only the free version
+* Improved unsupported language message when API key was invalid
+* Made the notice about Gettext being disabled dismissible in Translation Editor
+
 = 2.9.19 =
 * Improved license status notices upon activation
 * Fixed sitemap issues occurring when languages are reordered so that the default language is not first

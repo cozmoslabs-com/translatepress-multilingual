@@ -39,8 +39,14 @@ class TRP_Search extends WP_Query{
     public function trp_search_filter( $query ) {
         global $TRP_LANGUAGE;
 
+        if ( defined( 'REST_REQUEST' ) ) {
+            $is_rest_request = REST_REQUEST;
+        } else {
+            $is_rest_request = false;
+        }
+
         if ( $TRP_LANGUAGE !== $this->settings['default-language'] ) {
-            if ( ( !is_admin() && $query->is_main_query() && $query->is_search() ) || apply_filters( 'trp_force_search', false ) ) {
+            if ( ( !is_admin() && $query->is_main_query() && $query->is_search() ) || $is_rest_request || apply_filters( 'trp_force_search', false ) ) {
 
                 // Get the "s" query arg from the initial search
                 $search_query = get_query_var('s');

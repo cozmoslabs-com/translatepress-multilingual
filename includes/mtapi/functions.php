@@ -51,7 +51,7 @@ function trp_mtapi_add_settings( $mt_settings ){
 <?php endif;?>
             <div class="trp-automatic-translation-get-license-buttons">
 <?php if ( $translatepress_version_name == 'TranslatePress' ) : ?>
-                <a href="<?php echo esc_url( 'https://translatepress.com/tp-ai-free/?utm_source=wpbackend&utm_medium=clientsite&utm_content=tpsettingsAT&utm_campaign=tpaifree' ) ?>" class="trp-get-free-license-link trp-get-free-license-button button-primary" target="_blank" id="trp-enter-license-button">
+                <a href="<?php echo esc_url( 'https://translatepress.com/ai-free/?utm_source=wpbackend&utm_medium=clientsite&utm_content=tpsettingsAT&utm_campaign=tpaifree' ) ?>" class="trp-get-free-license-link trp-get-free-license-button button-primary" target="_blank" id="trp-enter-license-button">
                     <?php esc_html_e( 'Create your Free Account', 'translatepress-multilingual' ); ?>
                 </a>
 

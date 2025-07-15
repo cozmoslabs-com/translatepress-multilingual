@@ -557,6 +557,13 @@ if( !class_exists('TRP_LICENSE_PAGE') ) {
             require TRP_PLUGIN_DIR . 'partials/license-settings-page.php';
             echo ob_get_clean();//phpcs:ignore
         }
+
+        public function license_activation_message() {
+            if ( isset( $_GET['trp_sl_activation'] ) && ! empty( $_GET['message'] ) && isset( $_GET['trp_license_nonce'] ) && wp_verify_nonce( sanitize_text_field( $_GET['trp_license_nonce'] ), 'trp_license_display_message' ) ) {
+                return wp_kses_post( urldecode( $_GET['message'] ) );//phpcs:ignore
+            }
+            return '';
+        }
     }
 }
 
@@ -689,27 +696,6 @@ class TRP_Plugin_Updater{
         }
     }
 
-    public function admin_activation_notices() {
-        if ( isset( $_GET['trp_sl_activation'] ) && ! empty( $_GET['message'] ) && isset( $_GET['trp_license_nonce'] ) && wp_verify_nonce( sanitize_text_field( $_GET['trp_license_nonce'] ), 'trp_license_display_message' ) ) {
-
-            switch( $_GET['trp_sl_activation'] ) {
-                case 'false':
-                    $class ="error";
-                    break;
-                case 'true':
-                default:
-                    $class ="updated";
-                    break;
-            }
-
-            ?>
-            <div class="<?php echo esc_attr( $class ); ?>">
-                <p><?php echo wp_kses_post( urldecode( $_GET['message'] ) );//phpcs:ignore ?></p>
-            </div>
-            <?php
-        }
-    }
-
     public function activate_license() {
 
         // listen for our activate button to be clicked
@@ -739,6 +725,7 @@ class TRP_Plugin_Updater{
                     // data to send in our API request
                     $api_params = array(
                         'edd_action' => 'activate_license',
+                        'cache_bypass' => 'true',
                         'license'    => $license,
                         'item_name'  => urlencode( $active_pro_addon_name ), // the name of our product in EDD
                         'url'        => home_url()
@@ -794,14 +781,14 @@ class TRP_Plugin_Updater{
                                     $message[] = __( 'Your license key has been disabled.', 'translatepress-multilingual' );
                                     break;
                                 case 'missing' :
-                                    $message[] = __( 'Invalid license.', 'translatepress-multilingual' );
+                                    $message[] = __( 'Your TranslatePress license key is invalid or missing.', 'translatepress-multilingual' );
                                     break;
                                 case 'invalid' :
                                 case 'site_inactive' :
-                                    $message[] = __( 'Your license is not active for this URL. Re-enable it from <a target="_blank" href="https://translatepress.com/account/">https://translatepress.com/account</a> -> Manage Sites.', 'translatepress-multilingual' );
+                                    $message[] = __( 'Your license key is disabled for this URL. Re-enable it from <a target="_blank" href="https://translatepress.com/account/">https://translatepress.com/account</a> -> Manage Sites.', 'translatepress-multilingual' );
                                     break;
                                 case 'item_name_mismatch' :
-                                    $message[] = sprintf( __( 'This appears to be an invalid license key for %s.', 'translatepress-multilingual' ), $active_pro_addon_name );
+                                    $message[] = __( '<p><strong>License key mismatch.</strong> The license you entered doesn’t match the TranslatePress version you have installed.</p><p>Please check that you’ve installed the correct version for your license from your TranslatePress account.</p>' , 'translatepress-multilingual' );
                                     break;
                                 case 'no_activations_left':
 

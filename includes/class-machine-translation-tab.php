@@ -208,14 +208,12 @@ class TRP_Machine_Translation_Tab {
         $trp_languages = $trp->get_component( 'languages' );
 
         $correct_key = $machine_translator->is_correct_api_key();
-        $display_recheck_button = false;
 
         if ( 'yes' === $this->settings['trp_machine_translation_settings']['machine-translation'] &&
             !empty( $machine_translator->get_api_key() ) &&
             !$machine_translator->check_languages_availability($this->settings['translation-languages']) &&
-            $correct_key != null
+            $correct_key
         ){
-            $display_recheck_button = true;
             $language_names = $trp_languages->get_language_names( $this->settings['translation-languages'], 'english_name' );
 
             ?>
