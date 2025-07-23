@@ -191,7 +191,7 @@ Class TRP_Plugin_Notifications {
                 return;
             }
             else{
-                $force_show = true; //if $show_in_all_backend is true then we ignore the dismiss on plugin pages, but on the rest of the pages it can be dismissed
+                $force_show = true; //if $show_in_all_backend is true, then we ignore the dismiss on plugin pages, but on the rest of the pages it can be dismissed
             }
         }
 
@@ -337,6 +337,7 @@ class TRP_Trigger_Plugin_Notifications{
 
         /* License Notifications */
         $license_details = get_option( 'trp_license_details' );
+        $license_status = get_option( 'trp_license_status' );
         $is_demosite = ( strpos(site_url(), 'https://demo.translatepress.com' ) !== false );
         $trp             = TRP_Translate_Press::get_trp_instance();
         $tp_product_name = reset($trp->tp_product_name);
@@ -430,6 +431,36 @@ class TRP_Trigger_Plugin_Notifications{
             }
         }
 
+        // If the license is invalid and the translation engine is DeepL, show a notification
+        if ( isset( $this->settings['trp_machine_translation_settings']['translation-engine'] ) && $this->settings['trp_machine_translation_settings']['translation-engine'] === 'deepl' ) {
+            $notification_id = 'trp_deepl_invalid_license';
+            $message = '';
+
+            if( empty( $license_status ) ){
+                $message = '<p style="padding-right:30px;">';
+                $message .= sprintf(
+                    __('Please %1$senter%2$s your license key to enable DeepL automatic translation.', 'translatepress-multilingual'),
+                    '<a href="' . admin_url('/admin.php?page=trp_license_key') . '">',
+                    '</a>'
+                );
+                $message .= '</p>';
+            }
+            elseif( $license_status !== 'valid' ) {
+                $message = '<p style="padding-right:30px;">';
+                $message .= sprintf(
+                    __('DeepL automatic translation requires an active license. Please %1$srenew%2$s your license or purchase a new one %3$shere%4$s.', 'translatepress-multilingual'),
+                    '<a href="https://translatepress.com/account/?utm_source=tp-automatic-translation&utm_medium=client-site&utm_campaign=expired-license">',
+                    '</a>',
+                    '<a href="https://translatepress.com/pricing/?utm_source=tp-automatic-translation&utm_medium=client-site&utm_campaign=deepl">',
+                    '</a>'
+                );
+                $message .= '</p>';
+            }
+
+            if( !empty( $message ) )
+                $notifications->add_notification($notification_id, $message, 'trp-notice notice error', true, array('translate-press'), true, true);
+        }
+
         /*
          * Free Licenses Notifications
          */
@@ -507,7 +538,7 @@ class TRP_Trigger_Plugin_Notifications{
 
 
 	    /*
-		 *  Machine translation enabled and  quota is met.
+		 *  Machine translation enabled and quota are met.
 		 */
         $trp = TRP_Translate_Press::get_trp_instance();
         if ( ! $this->settings_obj )
@@ -561,7 +592,7 @@ class TRP_Trigger_Plugin_Notifications{
          * Black Friday
          * 
          * Showing this to:
-         *   free users
+         *   free users or
          *   users that have expired or disabled licenses
          */
         if( trp_bf_show_promotion() ){

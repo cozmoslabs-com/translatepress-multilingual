@@ -82,6 +82,8 @@
 <?php __("License key mismatch. The license you entered doesn’t match the <strong>%1$s</strong> version you have installed. <br/>Please check that you’ve installed the correct version for your license from your %2$sTranslatePress account%3$s.", "translatepress-multilingual"); ?>
 <?php __("You have reached the activation limit for your <strong>%1$s</strong> license. <br/>Manage your active sites from %2$s your account %3$s.", "translatepress-multilingual"); ?>
 <?php __("Your license is disabled for this URL. Re-enable it from <a target=\"_blank\" href=\"https://translatepress.com/account/\">https://translatepress.com/account</a> -> Manage Sites.", "translatepress-multilingual"); ?>
+<?php __("DeepL automatic translation requires an active license. Please %1$srenew%2$s your license or purchase a new one %3$shere%4$s.", "translatepress-multilingual"); ?>
+<?php __("Please %1$senter%2$s your license key to enable DeepL automatic translation.", "translatepress-multilingual"); ?>
 <?php __(" Error: ", "translatepress-multilingual"); ?>
 <?php __("This website is already activated under a free license. Each website can only use one free license. Please upgrade to a premium plan for more TranslatePress AI words from %1$s your account %2$s.", "translatepress-multilingual"); ?>
 <?php __("You do not have a valid license for <strong>TranslatePress</strong>. %1$sGet one for free%2$s to get access to TranslatePress AI.", "translatepress-multilingual"); ?>
@@ -301,6 +303,8 @@
 <?php __("The Automatic Translation Code of the added custom language is invalid.", "translatepress-multilingual"); ?>
 <?php __("TranslatePress Add-ons", "translatepress-multilingual"); ?>
 <?php __("You must first purchase this version to have access to the addon %1$shere%2$s", "translatepress-multilingual"); ?>
+<?php __("Please %1$senter your license%2$s key first, to activate this addon.", "translatepress-multilingual"); ?>
+<?php __("You need an active license to have access to the addon. Renew or purchase a new one %1$shere%2$s.", "translatepress-multilingual"); ?>
 <?php __("Advanced Add-ons", "translatepress-multilingual"); ?>
 <?php __("These addons extend your translation plugin and are available in the Developer, Business and Personal plans.", "translatepress-multilingual"); ?>
 <?php __("SEO Pack", "translatepress-multilingual"); ?>
@@ -398,6 +402,9 @@
 <?php __("Informal", "translatepress-multilingual"); ?>
 <?php __("Are you sure you want to remove this language?", "translatepress-multilingual"); ?>
 <?php __("Custom Languages", "translatepress-multilingual"); ?>
+<?php __("To Add more languages activate the Multiple Languages Addon", "translatepress-multilingual"); ?>
+<?php __("You need an active license to add more languages. Verify in your %1$saccount%2$s that your license is valid", "translatepress-multilingual"); ?>
+<?php __("Please %1$senter your license%2$s key first to add more languages.", "translatepress-multilingual"); ?>
 <?php __("Adding more than two languages is a paid feature. Upgrade TranslatePress and unlock more premium features.", "translatepress-multilingual"); ?>
 <?php __("Website Languages", "translatepress-multilingual"); ?>
 <?php __("Default Language", "translatepress-multilingual"); ?>

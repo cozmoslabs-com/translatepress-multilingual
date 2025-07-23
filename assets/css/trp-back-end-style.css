@@ -331,8 +331,8 @@ div.trp-switch .trp-switch-input {
 }
 
 .trp-upgrade-notice-table__wrapper{
-    width: 700px; /* Match the language table*/
-    margin-top: 4px;
+    width: 875px; /* Match the language table*/
+    margin-top: 10px;
 }
 
 .trp-upgrade-notice{
@@ -548,7 +548,7 @@ a.nav-tab.trp-translation-editor:hover {
 }
 
 .trp-free-language-selector.trp-languages-table__wrapper{
-    width: 700px;
+    width: 875px;
 }
 
 #trp-languages-table {
