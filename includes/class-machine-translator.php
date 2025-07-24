@@ -354,10 +354,9 @@ class TRP_Machine_Translator {
                 if( $license_status !== 'valid' ){
                     return array();
                 }
-
-                $machine_strings = $this->translate_array($strings, $target_language_code, $source_language_code);
-
             }
+
+            $machine_strings = $this->translate_array($strings, $target_language_code, $source_language_code);
 
             $machine_strings_return_array = array();
             if (!empty($machine_strings)) {

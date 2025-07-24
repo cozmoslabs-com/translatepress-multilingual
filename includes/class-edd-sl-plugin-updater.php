@@ -821,7 +821,7 @@ class TRP_Plugin_Updater{
             // Check if anything passed on a message constituting a failure
             if ( ! empty( $message ) ) {
                 $message = implode( "<br/>", array_unique($message) );//if we got the same message for multiple addons show just one, and add a br in case we show multiple messages
-                $redirect = add_query_arg( array( 'trp_sl_activation' => 'false', 'message' => urlencode( $message ) ), wp_nonce_url( $this->license_page_url(), 'trp_license_display_message', 'trp_license_nonce' ) );
+                $redirect = add_query_arg( array( 'trp_sl_activation' => 'false', 'message' => urlencode( $message ), 'trp_license_nonce' => wp_create_nonce('trp_license_display_message') ), $this->license_page_url() );
 
                 wp_redirect( $redirect );
                 exit();
@@ -831,7 +831,7 @@ class TRP_Plugin_Updater{
 
             $this->update_option( 'trp_license_status', $license_data->license );
 
-            wp_redirect( add_query_arg( array( 'trp_sl_activation' => 'true', 'message' => urlencode( __( 'You have successfully activated your license', 'translatepress-multilingual' ) ) ), wp_nonce_url( $this->license_page_url(), 'trp_license_display_message', 'trp_license_nonce' ) ) );
+            wp_redirect( add_query_arg( array( 'trp_sl_activation' => 'true', 'message' => urlencode( __( 'You have successfully activated your license', 'translatepress-multilingual' ) ), 'trp_license_nonce' => wp_create_nonce('trp_license_display_message')), $this->license_page_url() ) );
             exit();
         }
     }
@@ -875,7 +875,7 @@ class TRP_Plugin_Updater{
                             $message = __( 'An error occurred, please try again.', 'translatepress-multilingual' );
                         }
 
-                        $redirect = add_query_arg( array( 'trp_sl_activation' => 'false', 'message' => urlencode( $message ) ), wp_nonce_url( $this->license_page_url(), 'trp_license_display_message', 'trp_license_nonce' ) );
+                        $redirect = add_query_arg( array( 'trp_sl_activation' => 'false', 'message' => urlencode( $message ), 'trp_license_nonce' => wp_create_nonce('trp_license_display_message') ), $this->license_page_url() );
                         wp_redirect( $redirect );
                         exit();
                     }
