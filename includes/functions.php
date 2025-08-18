@@ -769,6 +769,10 @@ function trp_translate( $content, $language = null, $prevent_over_translation = 
     return $translated_custom_content;
 }
 
+/**
+ * Function that returns the license status of the TranslatePress plugin.
+ * @return string
+ */
 function trp_get_license_status(){
     $license_details = get_option( 'trp_license_details' );
     $is_demosite = ( strpos(site_url(), 'https://demo.translatepress.com' ) !== false );

@@ -219,6 +219,40 @@ if( !class_exists('TRP_EDD_SL_Plugin_Updater') ) {
                         esc_html($version_info->new_version),
                         '</a>'
                     );
+
+                    // get license status
+                    $license_status = get_option( 'trp_license_status' );
+                    if( !empty($license_status)  ) {
+                        $license_state = trp_get_license_status();
+                        if( $license_state === 'expired' ) {
+                            printf(
+                                __('To enable updates, your licence needs to be renewed. Please go to the %1$sTranslatePress Account%2$s page and login to renew.', 'translatepress-multilingual'), //phpcs:ignore
+                                '<a target="_blank" href="https://translatepress.com/account/?utm_source=wp-plugins-page&utm_medium=client-site&utm_campaign=expired-license">',
+                                '</a>'
+                            );
+                        }
+                        elseif( $license_state !== 'valid' ){
+                            printf(
+                                __('To enable updates, please go to the %1$slicense page%2$s and check that you have a valid license.', 'translatepress-multilingual'), //phpcs:ignore
+                                esc_url( admin_url( 'admin.php?page=trp_license_key' ) ),
+                                '</a>'
+                            );
+                        }
+
+                    }
+                    else{
+                        printf(
+                            __('To enable updates, please %1$senter your license key%2$s. Need a license key? %3$sPurchase one now%4$s.', 'translatepress-multilingual'), //phpcs:ignore
+                            esc_url( admin_url( 'admin.php?page=trp_license_key' ) ),
+                            '</a>',
+                            '<a target="_blank" href="https://translatepress.com/pricing/?utm_source=wp-plugins-page&utm_medium=client-site&utm_campaign=pro-no-active-license">',
+                            '</a>'
+                        );
+                    }
+
+
+
+
                 } else {
                     printf(
                         __('There is a new version of %1$s available. %2$sView version %3$s details%4$s or %5$supdate now%6$s.', 'translatepress-multilingual'), //phpcs:ignore
@@ -793,6 +827,8 @@ class TRP_Plugin_Updater{
                                 case 'no_activations_left':
 
                                     $message[] = __( 'Your license key has reached its activation limit.', 'translatepress-multilingual' );
+                                    if( !empty( $license_data->item_name ) && urldecode( $license_data->item_name ) !== 'TranslatePress Developer' )
+                                        $message[] = sprintf( __( 'Upgrade your plan to add more sites. %1$sUpgrade now%2$s', 'translatepress-multilingual' ), '<a href="https://translatepress.com/account/?utm_source=wp-dashboard&utm_medium=client-site&utm_campaign=activation-limit" target="_blank" class="button-primary">', '</a>' );
                                     break;
                                 case 'website_already_on_free_license':
                                     $message[] = __( 'This website is already activated under a free license. Each website can only use one free license.', 'translatepress-multilingual' );
