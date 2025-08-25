@@ -178,7 +178,7 @@ Response Code: <?php echo esc_html($force_check_response['response_code']); ?>
 Timestamp: <?php echo esc_html($force_check_response['timestamp']); ?>
 
 Response Body:
-<?php echo esc_html(str_replace(['{', '}', ','], ["\n{\n", "\n}\n", ",\n"], $force_check_response['response_body'])); ?>
+<?php echo esc_html(str_replace(['{', '}', ','], ["\n{\n", "\n}\n", ",\n"], trp_obfuscate_sensitive_data_in_json_response( $force_check_response['response_body'] ))); ?>
 <?php endif; ?>
                                 </code>
                             </details>
@@ -206,7 +206,7 @@ Response Code: <?php echo esc_html($activate_response['response_code']); ?>
 Timestamp: <?php echo esc_html($activate_response['timestamp']); ?>
 
 Response Body:
-<?php echo esc_html(str_replace(['{', '}', ','], ["\n{\n", "\n}\n", ",\n"], $activate_response['response_body'])); ?>
+<?php echo esc_html(str_replace(['{', '}', ','], ["\n{\n", "\n}\n", ",\n"], trp_obfuscate_sensitive_data_in_json_response($activate_response['response_body']))); ?>
 <?php endif; ?>
                                 </code>
                             </details>
