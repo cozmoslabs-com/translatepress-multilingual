@@ -5,7 +5,7 @@ Tags: translate, translation, multilingual, automatic translation, bilingual, fr
 Requires at least: 3.1.0
 Tested up to: 6.8.2
 Requires PHP: 7.4
-Stable tag: 2.9.24
+Stable tag: 2.10
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -142,6 +142,10 @@ For more information please check out our [documentation](https://translatepress
 
 
 == Changelog ==
+= 2.10 =
+* New feature: Language Switcher customization from TranslatePress Settings. Explore pre-made templates, switch colors, flag styles, spacing, layouts & more
+* Added compatibility with LiteSpeed Cache and its ESI feature
+
 = 2.9.24 =
 * Fixed bug with custom REST API endpoints
 * Fixed issue caused by product name function

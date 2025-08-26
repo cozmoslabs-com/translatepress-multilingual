@@ -2505,3 +2505,20 @@ function trp_wpbackery_compatibility_strip_params($url) {
 
     return $uri->getUri();
 }
+
+/**
+ * Add compatibility fix for LiteSpeed Cache and it's ESI feature
+ * https://docs.litespeedtech.com/lscache/lscwp/cache/#esi-tab
+ * @param $url
+ * @return mixed|string
+ */
+function trp_use_lightspeedcache_esi_referer($url){
+    if( strpos($url, 'lsesi=') > 0 && !empty($_SERVER['ESI_REFERER']) ){
+        return esc_url_raw($_SERVER['ESI_REFERER']);
+    }
+
+    return $url;
+}
+if (class_exists('LiteSpeed\ESI')) {
+    add_filter('trp_curpageurl', 'trp_use_lightspeedcache_esi_referer');
+}

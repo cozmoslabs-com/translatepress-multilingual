@@ -70,6 +70,11 @@
 <?php __("Plan C.", "translatepress-multilingual"); ?>
 <?php __("If your problem still isn't solved, try asking your hosting about your errors. The most common issue is missing permissions for the SQL user, such as the Create Tables permission.", "translatepress-multilingual"); ?>
 <?php __("Active", "translatepress-multilingual"); ?>
+<?php __("Permission denied.", "translatepress-multilingual"); ?>
+<?php __("Invalid nonce.", "translatepress-multilingual"); ?>
+<?php __("Settings scope unknown.", "translatepress-multilingual"); ?>
+<?php __("Legacy disabled.", "translatepress-multilingual"); ?>
+<?php __("Language Switcher", "translatepress-multilingual"); ?>
 <?php __("Automatic Translation", "translatepress-multilingual"); ?>
 <?php __("DeepL", "translatepress-multilingual"); ?>
 <?php __("Unsupported languages", "translatepress-multilingual"); ?>
@@ -299,6 +304,10 @@
 <?php __(" done.", "translatepress-multilingual"); ?>
 <?php __("All individual TranslatePress add-on plugins <a href=\"%1$s\" target=\"_blank\">have been discontinued</a> and are now included in the premium Personal, Business and Developer versions of TranslatePress. Please log into your <a href=\"%2$s\" target=\"_blank\">account page</a>, download the new premium version and install it. Your individual addons settings will be ported over.", "translatepress-multilingual"); ?>
 <?php __("We’ve redesigned the <strong>%1$s</strong> settings for a better experience!<br>To ensure full compatibility with the new settings structure and avoid potential layout discrepancies, please update to version <strong>%2$s</strong> or newer.<br>Your current version of <strong>%1$s</strong> may not fully support these improvements, but the plugin will continue to function as expected.", "translatepress-multilingual"); ?>
+<?php __("Brand-new Language Switcher Settings are here!", "translatepress-multilingual"); ?>
+<?php __("Explore pre-made templates, switch colors, flag styles, spacing, layouts & more. Use the live preview to perfect your switcher in seconds.", "translatepress-multilingual"); ?>
+<?php __("Start customizing", "translatepress-multilingual"); ?>
+<?php __("Read documentation", "translatepress-multilingual"); ?>
 <?php __("TranslatePress", "translatepress-multilingual"); ?>
 <?php __("<strong>TranslatePress</strong> requires <strong><a href=\"http://php.net/manual/en/book.mbstring.php\">Multibyte String PHP library</a></strong>. Please contact your server administrator to install it on your server.", "translatepress-multilingual"); ?>
 <?php __("Detected long query limitation on WPEngine hosting. Some large pages may appear untranslated. You can remove limitation by adding the following to your site’s wp-config.php: define( 'WPE_GOVERNOR', false ); ", "translatepress-multilingual"); ?>
@@ -339,6 +348,11 @@
 <?php __("Save Changes", "translatepress-multilingual"); ?>
 <?php __("TranslatePress Errors", "translatepress-multilingual"); ?>
 <?php __("There are no logged errors.", "translatepress-multilingual"); ?>
+<?php __("Language Switcher update notice", "translatepress-multilingual"); ?>
+<?php __("Legacy language switcher is currently enabled", "translatepress-multilingual"); ?>
+<?php __("We’ve upgraded the switcher for richer customization and a better user experience.<br>In order to use the new configurator, turn off\n                            <strong>Load legacy language switcher</strong>.", "translatepress-multilingual"); ?>
+<?php __("Note: You can switch back anytime from <strong>Advanced Settings → <a href=\"%s\">Troubleshooting</a></strong>.", "translatepress-multilingual"); ?>
+<?php __("Enable the new switcher", "translatepress-multilingual"); ?>
 <?php __("Your License Key is valid.", "translatepress-multilingual"); ?>
 <?php __("Your License Key is invalid.", "translatepress-multilingual"); ?>
 <?php __("Your License has expired.", "translatepress-multilingual"); ?>
@@ -425,7 +439,6 @@
 <?php __("Check if you want to add the subdirectory in the URL for the default language.</br>By checking this option, the default language seen by website visitors will become the first one in the \"All Languages\" list.", "translatepress-multilingual"); ?>
 <?php __("Force language in custom links", "translatepress-multilingual"); ?>
 <?php __("Select Yes if you want to force custom links without language encoding to keep the currently selected language.", "translatepress-multilingual"); ?>
-<?php __("Language Switcher", "translatepress-multilingual"); ?>
 <?php __("Shortcode ", "translatepress-multilingual"); ?>
 <?php __("Use shortcode on any page or widget.", "translatepress-multilingual"); ?>
 <?php __("You can also add the <a href=\"%s\" title=\"Language Switcher Block Documentation\">Language Switcher Block</a> in the WP Gutenberg Editor.", "translatepress-multilingual"); ?>
@@ -538,6 +551,8 @@
 <?php __("Regional (example: en, fr, es, etc.)", "translatepress-multilingual"); ?>
 <?php __("HTML Lang Attribute Format", "translatepress-multilingual"); ?>
 <?php __("Change lang attribute of the html tag to a format that includes country regional or not. <br>In HTML, the lang attribute (<html lang=\"en-US\">)  should be used to  specify the language of text content so that the  browser can correctly display or process  your content (eg. for  hyphenation, styling, spell checking, etc).", "translatepress-multilingual"); ?>
+<?php __("Load legacy Language Switcher", "translatepress-multilingual"); ?>
+<?php __("Applies to all types of language switchers (floating, shortcode, and menu). When enabled, the site will revert to using the original Language Switcher configured in the General Settings tab, replacing the new customizable version. Your existing switcher settings will remain saved, but they will be ignored while this option is active.", "translatepress-multilingual"); ?>
 <?php __("Load legacy SEO Pack Add-On", "translatepress-multilingual"); ?>
 <?php __("In case the recent migration to the new slug rewrite is causing trouble, set this to Yes to use the old method <br> Please <a href=\"https://translatepress.com/support/open-ticket/\" target=\"_blank\">open a support ticket</a> letting us know of the issues you are having.", "translatepress-multilingual"); ?>
 <?php __("Open language switcher only on click", "translatepress-multilingual"); ?>

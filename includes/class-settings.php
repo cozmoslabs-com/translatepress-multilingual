@@ -154,6 +154,7 @@ class TRP_Settings{
         }
 
         $languages = $this->trp_languages->get_languages( 'english_name' );
+        $is_legacy_switcher = ( $this->settings['trp_advanced_settings']['load_legacy_language_switcher'] ?? 'no' ) === 'yes';
 
         require_once TRP_PLUGIN_DIR . 'partials/main-settings-page.php';
     }
@@ -270,15 +271,20 @@ class TRP_Settings{
             $settings['trp-ls-floater'] = 'no';
         }
 
-        $language_switcher_options = $this->get_language_switcher_options();
-        if ( ! isset( $language_switcher_options[ $settings['shortcode-options'] ] ) ){
-            $settings['shortcode-options'] = 'flags-full-names';
-        }
-        if ( ! isset( $language_switcher_options[ $settings['menu-options'] ] ) ){
-            $settings['menu-options'] = 'flags-full-names';
-        }
-        if ( ! isset( $language_switcher_options[ $settings['floater-options'] ] ) ){
-            $settings['floater-options'] = 'flags-full-names';
+        $is_legacy_switcher = ( $this->settings['trp_advanced_settings']['load_legacy_language_switcher'] ?? 'no' ) === 'yes';
+
+        // Only if legacy switcher is enabled. Those settings are not shown otherwise.
+        if ( $is_legacy_switcher ) {
+            $language_switcher_options = $this->get_language_switcher_options();
+            if ( ! isset( $language_switcher_options[ $settings['shortcode-options'] ] ) ){
+                $settings['shortcode-options'] = 'flags-full-names';
+            }
+            if ( ! isset( $language_switcher_options[ $settings['menu-options'] ] ) ){
+                $settings['menu-options'] = 'flags-full-names';
+            }
+            if ( ! isset( $language_switcher_options[ $settings['floater-options'] ] ) ){
+                $settings['floater-options'] = 'flags-full-names';
+            }
         }
 
         if ( ! isset( $settings['floater-position'] ) ){
@@ -424,10 +430,12 @@ class TRP_Settings{
 
 
         /**
-         * These options (trp_advanced_settings, trp_machine_translation_settings) are not part of the actual trp_settings DB option.
+         * These options (trp_advanced_settings, trp_machine_translation_settings, trp_language_switcher_settings) are not part of the actual trp_settings DB option.
          * But they are included in $settings variable across TP
          */
         $settings_option['trp_advanced_settings'] = get_option('trp_advanced_settings', array() );
+
+        $settings_option['trp_language_switcher_settings'] = get_option( 'trp_language_switcher_settings', [] );
 
         // Add any missing default option for trp_machine_translation_settings
         $default_trp_machine_translation_settings = $this->get_default_trp_machine_translation_settings();
@@ -488,7 +496,7 @@ class TRP_Settings{
      * @param string $hook          Admin page.
      */
     public function enqueue_scripts_and_styles( $hook ) {
-        if( in_array( $hook, [ 'settings_page_translate-press', 'admin_page_trp_license_key', 'admin_page_trp_addons_page', 'admin_page_trp_advanced_page', 'admin_page_trp_machine_translation', 'admin_page_trp_test_machine_api', 'admin_page_trp_optin_page', 'admin_page_trp_remove_duplicate_rows', 'admin_page_trp_update_database' ] ) ){
+        if( in_array( $hook, [ 'settings_page_translate-press', 'admin_page_trp_license_key', 'admin_page_trp_addons_page', 'admin_page_trp_advanced_page', 'admin_page_trp_machine_translation', 'admin_page_trp_test_machine_api', 'admin_page_trp_optin_page', 'admin_page_trp_remove_duplicate_rows', 'admin_page_trp_update_database', 'admin_page_trp_language_switcher' ] ) ){
             wp_enqueue_style(
                 'trp-settings-style',
                 TRP_PLUGIN_URL . 'assets/css/trp-back-end-style.css',

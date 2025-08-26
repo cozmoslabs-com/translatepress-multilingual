@@ -83,7 +83,7 @@ Class TRP_Plugin_Notifications {
     private static $_instance = null;
     private $prefix = 'trp';
     private $menu_slug = 'options-general.php';
-    public $pluginPages = array( 'translate-press', 'trp_addons_page', 'trp_license_key', 'trp_advanced_page', 'trp_machine_translation', 'trp_test_machine_api' );
+    public $pluginPages = array( 'translate-press', 'trp_addons_page', 'trp_license_key', 'trp_advanced_page', 'trp_machine_translation', 'trp_test_machine_api', 'trp_language_switcher' );
 
     protected function __construct() {
         add_action( 'admin_init', array( $this, 'dismiss_admin_notifications' ), 200 );
