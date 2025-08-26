@@ -278,7 +278,7 @@ class TRP_Language_Switcher_V2 {
      * @param array $atts Shortcode attributes (currently unused).
      * @return string
      */
-    public function render_shortcode( array $atts = [] ): string {
+    public function render_shortcode( $atts = [] ): string {
         $atts = shortcode_atts( [
             'is_editor' => 'false',
         ], $atts, 'language-switcher' );
