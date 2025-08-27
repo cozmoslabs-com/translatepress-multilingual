@@ -760,5 +760,71 @@ class TRP_Language_Switcher_V2 {
 
         return apply_filters( 'trp_flag_html', $html, $language_code, $url );
     }
-}
 
+    /**
+     * Legacy function to add flag
+     *
+     * @param $language_code
+     * @param $language_name
+     * @param $location
+     * @return string
+     * @deprecated
+     */
+    public function add_flag( $language_code, $language_name, $location = NULL ) {
+        $flags_path     = TRP_PLUGIN_URL . 'assets/images/flags/';
+        $flags_path     = apply_filters( 'trp_flags_path', $flags_path, $language_code );
+        $flag_file_name = $language_code . '.png';
+        if ( $location == 'ls_shortcode' ) {
+            $flag_url = $flags_path . $flag_file_name;
+            return esc_url( $flag_url );
+        }
+
+        return $this->get_flag_html( $language_code, 'rect' );
+    }
+
+    /**
+     * Legacy function for rendering shortcode LS
+     *
+     * @param $atts
+     * @return void
+     * @deprecated
+     */
+    public function language_switcher( $atts ){
+        return $this->render_shortcode();
+    }
+
+    /**
+     * Legacy function for rendering floater LS
+     *
+     */
+    public function add_floater_language_switcher(){
+        return $this->render_floater();
+    }
+
+    /**
+     * Legacy function used in older versions of Automatic Language Detection Add-on
+     *
+     */
+    public function add_shortcode_preferences( $settings, $language_code, $language_name ) {
+        if ( $settings['flags'] ){
+            $flag = $this->add_flag($language_code, $language_name);
+        } else {
+            $flag = '';
+        }
+
+        if ( $settings['full_names'] ){
+            $full_name = $language_name;
+        } else {
+            $full_name = '';
+        }
+
+        if ( $settings['short_names'] ){
+            $short_name = strtoupper( $this->url_converter->get_url_slug( $language_code, false ) );
+        } else {
+            $short_name = '';
+        }
+
+        return $flag . ' ' . esc_html( $short_name . $full_name );
+    }
+
+}

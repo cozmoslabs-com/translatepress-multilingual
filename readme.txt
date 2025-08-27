@@ -5,7 +5,7 @@ Tags: translate, translation, multilingual, automatic translation, bilingual, fr
 Requires at least: 3.1.0
 Tested up to: 6.8.2
 Requires PHP: 7.4
-Stable tag: 2.10.1
+Stable tag: 2.10.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -142,6 +142,10 @@ For more information please check out our [documentation](https://translatepress
 
 
 == Changelog ==
+= 2.10.2 =
+* Fixed an error occurring when WP Rocket plugin is active
+* Fixed broken front-end layout when Automatic User Language Detection was enabled and the new language switcher was active
+
 = 2.10.1 =
 * Fixed an edge case bug with rendering the new language switcher in shortcode
 

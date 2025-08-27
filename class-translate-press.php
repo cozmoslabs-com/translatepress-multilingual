@@ -17,7 +17,6 @@ class TRP_Translate_Press{
     protected $machine_translator_logger;
     protected $query;
     protected $language_switcher;
-    protected $language_switcher_v2;
     protected $translation_manager;
     protected $editor_api_regular_strings;
     protected $editor_api_gettext_strings;
@@ -71,7 +70,7 @@ class TRP_Translate_Press{
         define( 'TRP_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
         define( 'TRP_PLUGIN_BASE', plugin_basename( __DIR__ . '/index.php' ) );
         define( 'TRP_PLUGIN_SLUG', 'translatepress-multilingual' );
-        define( 'TRP_PLUGIN_VERSION', '2.10.1' );
+        define( 'TRP_PLUGIN_VERSION', '2.10.2' );
 
 	    wp_cache_add_non_persistent_groups(array('trp'));
 
@@ -429,8 +428,8 @@ class TRP_Translate_Press{
             $this->loader->add_action( 'wp_get_nav_menu_items', $this->language_switcher, 'ls_menu_permalinks', 10, 3 );
             add_shortcode( 'language-switcher', [ $this->language_switcher, 'language_switcher' ] );
         } else {
-            $this->language_switcher_v2 = TRP_Language_Switcher_V2::instance( $this->settings->get_settings(), $this );
-            $this->loader->add_action( 'init', $this->language_switcher_v2, 'init', 1 );
+            $this->language_switcher = TRP_Language_Switcher_V2::instance( $this->settings->get_settings(), $this );
+            $this->loader->add_action( 'init', $this->language_switcher, 'init', 1 );
         }
 
         $this->loader->add_action( 'trp_translation_manager_footer', $this->translation_manager, 'enqueue_scripts_and_styles' );

@@ -242,3 +242,101 @@ div.trp-ls-inline .trp-language-switcher-inner {
     padding-left: 5px;
 }
 
+
+
+
+/* Legacy Language Switcher shortcode css rules
+ * Useful for displaying the Automatic Language Detection language switcher
+*/
+
+
+.trp_ald_ls_container img.trp-flag-image{
+    padding-top: 0 !important;
+}
+
+.trp_ald_ls_container .trp-language-switcher{
+    position: relative;
+    display: inline-block;
+    padding: 0;
+    border: 0;
+
+    box-sizing: border-box;
+}
+
+
+.trp_ald_ls_container .trp-language-switcher > div {
+    box-sizing: border-box;
+
+    padding-right: 20px;
+    padding-bottom: 3px;
+    padding-left: 13px;
+
+    border: 1px solid #c1c1c1;
+    border-radius: 3px;
+
+    background-color: #fff;
+}
+
+.trp_ald_ls_container .trp-language-switcher > div > a {
+    display: block;
+    padding: 2px;
+    border-radius: 3px;
+    color: rgb(7, 105, 173);
+}
+
+.trp_ald_ls_container .trp-language-switcher > div > a:hover {
+    background: #f1f1f1;
+}
+.trp_ald_ls_container .trp-language-switcher > div > a.trp-ls-shortcode-disabled-language {
+    cursor: default;
+}
+.trp_ald_ls_container .trp-language-switcher > div > a.trp-ls-shortcode-disabled-language:hover {
+    background: none;
+}
+
+.trp_ald_ls_container .trp-language-switcher > div > a > img{
+    display: inline;
+    margin: 0 3px;
+    width: 18px;
+    height: 12px;
+    border-radius: 0;
+}
+
+.trp_ald_ls_container .trp-language-switcher .trp-ls-shortcode-current-language{
+    display: inline-block;
+}
+.trp_ald_ls_container .trp-language-switcher:focus .trp-ls-shortcode-current-language,
+.trp_ald_ls_container .trp-language-switcher:hover .trp-ls-shortcode-current-language{
+    visibility: hidden;
+}
+
+.trp_ald_ls_container .trp-language-switcher .trp-ls-shortcode-language{
+    display: inline-block;
+    height: 1px;
+    overflow: hidden;
+    visibility: hidden;
+    z-index: 1;
+
+    max-height: 250px;
+    overflow-y: auto;
+    left: 0;
+    top: 0;
+    min-height: auto;
+}
+
+.trp_ald_ls_container .trp-language-switcher:focus .trp-ls-shortcode-language,
+.trp_ald_ls_container .trp-language-switcher:hover .trp-ls-shortcode-language{
+    visibility: visible;
+    max-height: 250px;
+    height: auto;
+    overflow-y: auto;
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: inline-block !important;
+    min-height: auto;
+}
+
+#trp_ald_x_button{
+    z-index: 0 !important;
+}
