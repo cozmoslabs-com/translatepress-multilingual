@@ -1,5 +1,3 @@
-@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&display=swap");
-
 /* Floating switcher */
 .trp-floating-switcher {
     display: flex;
@@ -16,7 +14,6 @@
     right: var(--right, unset);
     bottom: var(--bottom, unset);
     left: var(--left, unset);
-    font-family: "Outfit", sans-serif !important;
     box-shadow: 0 10px 20px 0 #0000000D;
 }
 
@@ -82,7 +79,6 @@ div.trp-ls-inline .trp-language-switcher-inner {
     background: var(--bg, #fff);
     width: auto;
     box-shadow: none;
-    font-family: "Outfit", sans-serif;
 }
 
 .trp-shortcode-switcher.trp-open-on-click {
@@ -119,10 +115,9 @@ div.trp-ls-inline .trp-language-switcher-inner {
 .trp-switcher-dropdown-list {
     display: flex;
     overflow-y: hidden; /* closed state */
-    transition: max-height 0.2s linear;
+    transition: max-height 0.2s ease-in-out;
     max-height: 0;
     transition-duration: var(--transition-duration);
-    gap: 5px;
 }
 
 .trp-shortcode-switcher .trp-switcher-dropdown-list {
@@ -172,7 +167,7 @@ div.trp-ls-inline .trp-language-switcher-inner {
     display: flex;
     align-items: center;
     gap: 8px;
-    padding: 5px 5px 5px 16px;
+    padding: 7px 16px;
     text-decoration: none;
     min-height: 19px;
     box-sizing: content-box;
@@ -199,6 +194,8 @@ div.trp-ls-inline .trp-language-switcher-inner {
     color: var(--text, #000);
     font-size: var(--font-size, 14px);
     line-height: 1.2;
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
+    font-weight: 400;
 }
 
 .trp-flag-image {

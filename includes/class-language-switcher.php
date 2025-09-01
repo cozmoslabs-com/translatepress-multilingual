@@ -381,6 +381,8 @@ class TRP_Language_Switcher{
     /**
      * Return flag html.
      *
+     * @important This function is used in WP Rocket plugin. Please don't remove it or change its signature.
+     *
      * @param string $language_code         Language code.
      * @param string $language_name         Language full name or shortname.
      * @param string $location              NULL | ls_shortcode

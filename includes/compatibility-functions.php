@@ -1144,6 +1144,25 @@ if( class_exists('WC_Gateway_RECON') ) {
     }
 }
 
+/*
+ * Add compatibility for tribe events that crash the JS for the input not having an error field assigned to it.
+ * It expects a div with a class="error" like so: <div class="tribe-common-b3 tribe-tickets__form-field-description tribe-common-a11y-hidden error">Your first and last names are required</div>
+ */
+if (class_exists('Tribe__Tickets__Main')){
+    add_filter( 'trp_form_inputs', 'trp_tribe_tickets_form_compatibility', 10, 4 );
+}
+function trp_tribe_tickets_form_compatibility( $input, $trp_language, $slug, $row ) {
+    if ( isset( $row->attr['class'] ) ) {
+        $classes = explode( ' ', $row->attr['class'] );
+        foreach ( $classes as $class ) {
+            if ( strpos( $class, 'tribe-tickets' ) !== false ) {
+                $input = '';
+                break;
+            }
+        }
+    }
+    return $input;
+}
 
 /**
  * Compatibility with Classified Listing plugin Search in secondary language

@@ -30,7 +30,13 @@ $render_header = static function( array $item, bool $show_arrow,  bool $clickabl
     <div class="trp-current-language-item__wrapper">
         <a class="trp-language-item trp-language-item__default trp-language-item__current"
            href="<?php echo !$clickable ? esc_url( $item['url'] ) : '#'; ?>"
-           aria-current="true" role="option" aria-selected="true" tabindex="0" data-no-translation>
+           aria-current="true"
+           role="option"
+           aria-selected="true"
+           tabindex="0"
+           data-no-translation
+           title="<?php echo esc_html( $item['name'] ); ?>"
+        >
             <?php if ( $flag_position === 'before' ) echo wp_kses( $item['flag'], $allowed_flag_html ); ?>
             <?php if ( $item['name'] !== '' ) : ?>
                 <span class="trp-language-item-name"><?php echo esc_html( $item['name'] ); ?></span>
@@ -75,7 +81,7 @@ $header_html = $render_header( $current, true, $is_editor );
         <div class="trp-switcher-dropdown-list" hidden inert>
             <?php if ( $has_more ) : ?>
                 <?php foreach ( array_slice( $list, 1 ) as $item ) : ?>
-                    <a class="trp-language-item" href="<?php echo !$is_editor ? esc_url( $item['url'] ) : '#';  ?>" role="option" tabindex="-1">
+                    <a class="trp-language-item" href="<?php echo !$is_editor ? esc_url( $item['url'] ) : '#';  ?>" role="option" tabindex="-1" title="<?php echo esc_html( $item['name'] ); ?>">
                         <?php if ( $flag_position === 'before' ) echo wp_kses( $item['flag'], $allowed_flag_html ); ?>
                         <?php if ( $item['name'] !== '' ) : ?>
                             <span class="trp-language-item-name" data-no-translation><?php echo esc_html( $item['name'] ); ?></span>

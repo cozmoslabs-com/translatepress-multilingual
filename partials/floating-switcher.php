@@ -27,9 +27,10 @@ $render_item = function ( $lang, $flag_ratio, $disabled = false ) use ($flag_pos
     $aria_selected  = $disabled ? 'aria-selected="true"' : 'aria-selected="false"';
     $role           = 'role="option"';
     $no_translation = 'data-no-translation';
+    $title          = esc_html( $lang['name'] );
 
     // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-    echo "<{$tag} href=\"{$url}\" class=\"{$class}\" {$role} {$aria_selected} {$no_translation}>";
+    echo "<$tag href=\"$url\" class=\"$class\" title=\"$title\" $role $aria_selected $no_translation>";
 
     if ( $flag_position === 'before' )
         // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- HTML is escaped inside get_flag_html().

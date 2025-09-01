@@ -5,7 +5,7 @@ Tags: translate, translation, multilingual, automatic translation, bilingual, fr
 Requires at least: 3.1.0
 Tested up to: 6.8.2
 Requires PHP: 7.4
-Stable tag: 2.10.2
+Stable tag: 2.10.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -142,6 +142,16 @@ For more information please check out our [documentation](https://translatepress
 
 
 == Changelog ==
+= 2.10.3 =
+* Fixed vulnerability when Advanced option Filter Gettext wrapping from post meta was active
+* Fixed Stripe forms from Event Tickets plugin not working on additional languages
+* Fixed previewing draft posts when the new language switcher is active
+* Fixed a compatibility issue between Elementor and the new language switcher
+* Fixed wrong flags from the new language switcher for a few languages including Catalan, Welsh and Galician
+* Added title attributes for the new LS
+* Use default fonts instead of Google fonts for the new LS
+* Minor CSS tweaks for the new LS
+
 = 2.10.2 =
 * Fixed an error occurring when WP Rocket plugin is active
 * Fixed broken front-end layout when Automatic User Language Detection was enabled and the new language switcher was active
