@@ -30,11 +30,11 @@ https://www.youtube.com/watch?v=pUlYisvBm8g
 * Live preview of your translated pages, as you edit them.
 * Automatic translation support through [TranslatePress AI Free](https://translatepress.com/ai-free/?utm_source=wp.org&utm_medium=tp-description-page&utm_campaign=TPFree), with a 2.000 AI words limit.
 * Integrates with Google Translate, allowing you to set up unlimited automatic translations using your own Google API key.
+* Fully customizable language switcher that you can display as a menu item, a floating dropdown, or place anywhere else using the Language Switcher block, or the **[language-switcher]** shortcode.
 * [Image translation](https://translatepress.com/docs/image-translation/?utm_source=wp.org&utm_medium=tp-description-page&utm_campaign=TPFree) support, for [translating images, sliders and other media](https://translatepress.com/translate-images-in-wordpress/?utm_source=wp.org&utm_medium=tp-description-page&utm_campaign=TPFree).
 * Support for both manual and automatic translation
 * Ability to [translate dynamic strings](https://translatepress.com/translate-dynamic-strings-wordpress/?utm_source=wp.org&utm_medium=tp-description-page&utm_campaign=TPFree) (gettext) added by WordPress, plugins and themes.
 * Translate larger html blocks by merging strings into translation blocks.
-* Place language switchers anywhere using shortcode **[language-switcher]**, WP menu item or as a floating dropdown.
 * Editorial control allowing you to publish your language only when all your translations are done
 * Conditional display content shortcode based on language [trp_language language="en_US"] English content only [/trp_language]
 * Possibility to [edit gettext strings](https://translatepress.com/edit-plugin-strings/?utm_source=wp.org&utm_medium=tp-description-page&utm_campaign=TPFree) from themes and plugins from English to English, without adding another language. Basically a string-replace functionality.
