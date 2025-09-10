@@ -35,7 +35,7 @@ class TRP_Language_Switcher_Tab {
      * @return array
      */
     public function get_initial_config(): array {
-        $saved = get_option('trp_language_switcher_settings', null);
+        $saved = get_option( 'trp_language_switcher_settings', null );
 
         if ( is_array( $saved ) && !empty( $saved ) )
             return $saved;
@@ -458,11 +458,16 @@ class TRP_Language_Switcher_Tab {
 
     /**
      * Enqueue the Vue app script & CSS.
+     * @param ?string $hook
      */
-    public function enqueue_assets( string $hook ): void {
-        if ( 'admin_page_trp_language_switcher' !== $hook ) {
-            return;
+    public function enqueue_assets( $hook = null ): void {
+        if ( !is_string( $hook ) && function_exists( 'get_current_screen' ) ) {
+            $screen = get_current_screen();
+            $hook   = $screen ? $screen->id : '';
         }
+
+        if ( 'admin_page_trp_language_switcher' !== $hook )
+            return;
 
         $script_url = TRP_PLUGIN_URL . 'assets/js/trp-lang-switcher-configurator.js';
         $style_url  = TRP_PLUGIN_URL . 'assets/css/trp-lang-switcher-configurator.css';

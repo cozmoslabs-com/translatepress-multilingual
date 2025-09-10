@@ -203,6 +203,7 @@ div.trp-ls-inline .trp-language-switcher-inner {
     aspect-ratio: var(--aspect-ratio, 4/3);
     width: var(--flag-size, 18px);
     display: inline-block;
+    height: auto;
 }
 
 .trp-menu-ls-label .trp-flag-image {
