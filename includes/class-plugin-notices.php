@@ -605,33 +605,6 @@ class TRP_Trigger_Plugin_Notifications{
             $notifications->add_notification($notification_id, $message, 'trp-notice trp-narrow notice notice-info', true, array('translate-press'));
         }
 
-
-        /*
-         * One or more languages are unsupported by automatic translation.
-         */
-        $trp = TRP_Translate_Press::get_trp_instance();
-        $machine_translator = $trp->get_component( 'machine_translator' );
-
-        if ($machine_translator != null ) {
-            $correct_key = $machine_translator->is_correct_api_key();
-            if ( apply_filters( 'trp_mt_available_supported_languages_show_notice', true, $this->settings['translation-languages'], $this->settings ) &&
-                'yes' === $this->settings['trp_machine_translation_settings']['machine-translation'] &&
-                !$machine_translator->check_languages_availability( $this->settings['translation-languages'] )
-                && $correct_key
-            ) {
-                /* this must be unique */
-                $notification_id = 'trp_mt_unsupported_languages';
-
-                $message = '<p style="margin-top: 16px;padding-right:30px;">';
-                $message .= sprintf( __( 'One or more languages are unsupported by the automatic translation provider. Please check the <strong>TranslatePress -> <a href="%s">Automatic Translation</a></strong> page for more information.', 'translatepress-multilingual' ), admin_url( 'admin.php?page=trp_machine_translation#trp_unsupported_languages' ) );
-                $message .= '</p>';
-                //make sure to use the trp_dismiss_admin_notification arg
-                $message .= '<a href="' . add_query_arg( array( 'trp_dismiss_admin_notification' => $notification_id ) ) . '" type="button" class="notice-dismiss"><span class="screen-reader-text">' . esc_html__( 'Dismiss this notice.', 'translatepress-multilingual' ) . '</span></a>';
-
-                $notifications->add_notification( $notification_id, $message, 'trp-notice trp-narrow notice notice-info', true, array( 'translate-press' ) );
-            }
-        }
-
         /**
          * Black Friday
          * 

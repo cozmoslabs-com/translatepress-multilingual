@@ -5,7 +5,7 @@ Tags: translate, translation, multilingual, automatic translation, bilingual, fr
 Requires at least: 3.1.0
 Tested up to: 6.8.2
 Requires PHP: 7.4
-Stable tag: 2.10.4
+Stable tag: 2.10.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -142,6 +142,9 @@ For more information please check out our [documentation](https://translatepress
 
 
 == Changelog ==
+= 2.10.5 =
+* Fixed bug that made unnecessary site lookup calls to TP AI
+
 = 2.10.4 =
 * Added compatibility with Breakdance theme
 * Fixed WooCommerce product names for variable products having missing attributes in the cart when using woocommerce_cart shortcode

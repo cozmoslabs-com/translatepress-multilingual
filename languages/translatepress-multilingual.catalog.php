@@ -98,7 +98,6 @@
 <?php __("This website is already activated under a free license. Each website can only use one free license. Please upgrade to a premium plan for more TranslatePress AI words from %1$s your account %2$s.", "translatepress-multilingual"); ?>
 <?php __("You do not have a valid license for <strong>TranslatePress</strong>. %1$sGet one for free%2$s to get access to TranslatePress AI.", "translatepress-multilingual"); ?>
 <?php __("The daily quota for machine translation characters exceeded. Please check the <strong>TranslatePress -> <a href=\"%s\">Automatic Translation</a></strong> page for more information.", "translatepress-multilingual"); ?>
-<?php __("One or more languages are unsupported by the automatic translation provider. Please check the <strong>TranslatePress -> <a href=\"%s\">Automatic Translation</a></strong> page for more information.", "translatepress-multilingual"); ?>
 <?php __("Marketing optin", "translatepress-multilingual"); ?>
 <?php __("Opt in to our security and feature updates notifications, and non-sensitive diagnostic tracking.", "translatepress-multilingual"); ?>
 <?php __("TranslatePress Preferred User Language", "translatepress-multilingual"); ?>
