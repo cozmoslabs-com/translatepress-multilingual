@@ -51,20 +51,22 @@ class TRP_Machine_Translator {
         ) {
             if ( empty( $languages ) ){
                 // can be used to simply know if machine translation is available
-                return true;
+                $is_available = true;
             }
 
             // If the license is invalid and the translation engine is DeepL,return false
             $license_status = get_option( 'trp_license_status' );
             if ( $license_status !== 'valid' && isset( $this->settings['trp_machine_translation_settings']['translation-engine'] ) && $this->settings['trp_machine_translation_settings']['translation-engine'] === 'deepl' ) {
-                return false;
+                $is_available = false;
             }
 
-            return $this->check_languages_availability($languages);
+            $is_available = $this->check_languages_availability($languages);
 
         }else {
-            return false;
+            $is_available = false;
         }
+
+        return apply_filters('trp_machine_translator_is_available', $is_available);
     }
 
     public function check_languages_availability( $languages, $force_recheck = false ){

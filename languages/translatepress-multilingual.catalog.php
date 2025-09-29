@@ -467,6 +467,7 @@
 <?php __("Active, Deactivated, installed version and settings", "translatepress-multilingual"); ?>
 <?php __("Privacy Policy", "translatepress-multilingual"); ?>
 <?php __("Terms of Service", "translatepress-multilingual"); ?>
+<?php __("Website language selector", "translatepress-multilingual"); ?>
 <?php __("Optimize TranslatePress database tables", "translatepress-multilingual"); ?>
 <?php __("<strong>IMPORTANT NOTE:</strong> Before performing this action it is strongly recommended to first backup the database.", "translatepress-multilingual"); ?>
 <?php __("IMPORTANT: It is strongly recommended to first backup the database!! Are you sure you want to continue?", "translatepress-multilingual"); ?>
@@ -554,6 +555,8 @@
 <?php __("Applies to all types of language switchers (floating, shortcode, and menu). When enabled, the site will revert to using the original Language Switcher configured in the General Settings tab, replacing the new customizable version. Your existing switcher settings will remain saved, but they will be ignored while this option is active.", "translatepress-multilingual"); ?>
 <?php __("Load legacy SEO Pack Add-On", "translatepress-multilingual"); ?>
 <?php __("In case the recent migration to the new slug rewrite is causing trouble, set this to Yes to use the old method <br> Please <a href=\"https://translatepress.com/support/open-ticket/\" target=\"_blank\">open a support ticket</a> letting us know of the issues you are having.", "translatepress-multilingual"); ?>
+<?php __("Manual Translation Only", "translatepress-multilingual"); ?>
+<?php __("TranslatePress pro-actively scans and saves strings in the database when users access translated pages.\n        \n                                             This setting disables this functionality and only allows translation and string saving when inside the Translation Editor. \n                                             \n                                             Also disables machine translation outside the Translation Editor, giving you better control over character spending, by translating only the pages you visit in the Translation Editor.", "translatepress-multilingual"); ?>
 <?php __("Open language switcher only on click", "translatepress-multilingual"); ?>
 <?php __("Open the language switcher shortcode by clicking on it instead of hovering.<br> Close it by clicking on it, anywhere else on the screen or by pressing the escape key. This will affect only the shortcode language switcher.", "translatepress-multilingual"); ?>
 <?php __("Show opposite language in the language switcher", "translatepress-multilingual"); ?>

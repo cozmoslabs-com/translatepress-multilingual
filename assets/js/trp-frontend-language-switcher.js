@@ -125,11 +125,6 @@ class ShortcodeSwitcher extends BaseSwitcher {
                   || [...wrapper.querySelectorAll('.trp-language-switcher')]
                       .find(el => el.classList.contains('trp-shortcode-overlay'));
 
-        if (!overlay) {
-            console.warn('[TRP] Shortcode overlay not found inside wrapper:', wrapper);
-            return;
-        }
-
         // Overlay must be interactable; ensure no accidental hidden/inert from server
         overlay.hidden = false;
         overlay.removeAttribute('hidden');
@@ -185,7 +180,6 @@ class ShortcodeSwitcher extends BaseSwitcher {
 
 class FloaterSwitcher extends BaseSwitcher {
     constructor(el) {
-        if (el.classList.contains('trp-opposite-language')) return;
         super(el);
 
         el.addEventListener('mouseenter', (e) => this.setOpen(true,  { source: e }));
@@ -230,12 +224,12 @@ function getEditorDoc() {
 }
 
 function initLanguageSwitchers(root = document) {
-    root.querySelectorAll('.trp-language-switcher.trp-ls-dropdown:not(.trp-shortcode-switcher)')
+    root.querySelectorAll('.trp-language-switcher.trp-ls-dropdown:not(.trp-shortcode-switcher):not(.trp-opposite-language)')
         .forEach(el => { if (!isMarked(el)) { mark(el); new FloaterSwitcher(el); } });
 
     root.querySelectorAll('.trp-shortcode-switcher__wrapper')
         .forEach(wrapper => {
-            const overlay = wrapper.querySelector('.trp-language-switcher');
+            const overlay = wrapper.querySelector('.trp-language-switcher:not(.trp-opposite-button)');
 
             if (overlay && !isMarked(overlay)) {
                 mark(overlay);

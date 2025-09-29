@@ -81,6 +81,11 @@ div.trp-ls-inline .trp-language-switcher-inner {
     box-shadow: none;
 }
 
+/* Hide the anchor that holds space in the document for the actual switcher */
+.trp-shortcode-anchor {
+    visibility: hidden;
+}
+
 .trp-shortcode-switcher.trp-open-on-click {
     cursor: pointer;
 }
@@ -91,8 +96,8 @@ div.trp-ls-inline .trp-language-switcher-inner {
     top: 0;
     z-index: 9999;
 }
-
-.trp-current-language-item__wrapper {
+/* Opposite mode enabled */
+.trp-current-language-item__wrapper:not(.trp-hide-arrow) {
     display: flex;
     align-items: center;
     padding-right: 10px;
@@ -199,11 +204,11 @@ div.trp-ls-inline .trp-language-switcher-inner {
 }
 
 .trp-flag-image {
-    border-radius: var(--flag-radius, 0);
-    aspect-ratio: var(--aspect-ratio, 4/3);
-    width: var(--flag-size, 18px);
-    display: inline-block;
-    height: auto;
+    border-radius: var(--flag-radius, 0) !important;
+    aspect-ratio: var(--aspect-ratio, 4/3) !important;
+    width: var(--flag-size, 18px) !important;
+    display: inline-block !important;
+    height: auto !important;
 }
 
 .trp-menu-ls-label .trp-flag-image {
@@ -211,10 +216,6 @@ div.trp-ls-inline .trp-language-switcher-inner {
 }
 
 .trp-custom-flag {
-    width: var(--flag-size, 18px);
-    height: auto;
-    aspect-ratio: var(--aspect-ratio, 4/3);
-    border-radius: var(--flag-radius, 2px);
     object-fit: cover;
 }
 
@@ -232,8 +233,8 @@ div.trp-ls-inline .trp-language-switcher-inner {
 
 /* Menu item */
 .trp-flag-rounded {
-    border-radius: 9999px;
-    aspect-ratio: 1 / 1;
+    border-radius: 9999px !important;
+    aspect-ratio: 1 / 1 !important;
 }
 
 .trp-ls-name {

@@ -281,10 +281,11 @@ class TRP_Language_Switcher_V2 {
         $flag_position = $layout['flagIconPosition'] ?? 'before';
         $flag_shape    = $config['flagShape']        ?? 'rect';
         $open_on_click = ! empty( $config['clickLanguage'] );
-
         $flag_ratio    = ( $flag_shape === 'square' ) ? 'square' : 'rect';
 
-        $list = $this->get_language_items( $name_type, false );
+        $is_opposite = (bool) $config['oppositeLanguage'];
+
+        $list = $this->get_language_items( $name_type, $is_opposite );
 
         if ( empty( $list ) || !isset( $list[0]['code'] ) )
             return ''; // nothing to render
@@ -302,7 +303,7 @@ class TRP_Language_Switcher_V2 {
         // Render the partial (string), then allow filtering of the final HTML
         $html = $this->get_template(
             $this->template_path( 'shortcode-switcher.php' ),
-            compact( 'list', 'config', 'style_value', 'flag_position', 'open_on_click', 'is_editor' ),
+            compact( 'list', 'config', 'style_value', 'flag_position', 'open_on_click', 'is_editor', 'is_opposite' ),
             true
         );
 

@@ -6,7 +6,8 @@
  * @var string $style_value     e.g. "--bg:#fff;--text:#000;--border-width:1px;--border-color:#ccc;--border-radius:8px"
  * @var string $flag_position   'before'|'after'
  * @var bool   $open_on_click
- * @var bool $is_editor
+ * @var bool   $is_editor
+ * @var bool   $is_opposite     Show only the “opposite button” (single current language, no dropdown)
  */
 if ( ! defined( 'ABSPATH' ) ) exit;
 
@@ -22,17 +23,24 @@ $mode_class      = $open_on_click ? 'trp-open-on-click' : 'trp-open-on-hover';
 $anchor_classes[]  = $mode_class;   // harmless on anchor (layout only)
 $overlay_classes[] = $mode_class;   // used by CSS/JS on overlay
 
+if ( ! empty( $is_opposite ) ) {
+    $anchor_classes[]  = 'trp-opposite-button';
+    $overlay_classes[] = 'trp-opposite-button';
+}
+
 $current  = $list[0];
 $has_more = count( $list ) > 1;
 
-$render_header = static function( array $item, bool $show_arrow,  bool $clickable ) use ( $flag_position, $allowed_flag_html, $has_more ): string {
+$render_header = static function( array $item, bool $show_arrow, bool $clickable, bool $is_opposite, string $flag_position, array $allowed_flag_html, bool $has_more ): string {
     ob_start(); ?>
-    <div class="trp-current-language-item__wrapper">
-        <a class="trp-language-item trp-language-item__default trp-language-item__current"
-           href="<?php echo !$clickable ? esc_url( $item['url'] ) : '#'; ?>"
-           aria-current="true"
-           role="option"
-           aria-selected="true"
+    <div class="trp-current-language-item__wrapper<?php echo $show_arrow ? '' : ' trp-hide-arrow'; ?>">
+        <a class="trp-language-item trp-language-item__default<?php echo $is_opposite ? '' : ' trp-language-item__current'; ?>"
+           href="<?php echo ! $clickable ? esc_url( $item['url'] ) : '#'; ?>"
+            <?php if ( ! $is_opposite ) : ?>
+                aria-current="true"
+                role="option"
+                aria-selected="true"
+            <?php endif; ?>
            tabindex="0"
            data-no-translation
            title="<?php echo esc_html( $item['name'] ); ?>"
@@ -53,43 +61,58 @@ $render_header = static function( array $item, bool $show_arrow,  bool $clickabl
     return (string) ob_get_clean();
 };
 
-$header_html = $render_header( $current, true, $is_editor );
+// In opposite mode we still render the header, but without arrow and without dropdown.
+$header_html = $render_header( $current, empty( $is_opposite ), $is_editor, ! empty( $is_opposite ), $flag_position, $allowed_flag_html, $has_more );
 ?>
 <div class="trp-shortcode-switcher__wrapper"
      style="<?php echo esc_attr( $style_value ); ?>"
      role="group"
      data-open-mode="<?php echo esc_attr( $open_on_click ? 'click' : 'hover' ); ?>">
 
-    <!-- ANCHOR (in-flow only; sizing/borders; inert) -->
-    <div class="<?php echo esc_attr( implode( ' ', $anchor_classes ) ); ?>"
-         aria-hidden="true"
-         inert
-         data-no-translation>
-        <?php echo $header_html; // phpcs:ignore WordPress.Security.EscapeOutput ?>
-    </div>
+    <?php if ( ! empty( $is_opposite ) ) : ?>
 
-    <!-- OVERLAY (positioned; interactive surface) -->
-    <div class="<?php echo esc_attr( implode( ' ', $overlay_classes ) ); ?>"
-         role="listbox"
-         aria-haspopup="listbox"
-         aria-expanded="false"
-         tabindex="0"
-         data-no-translation
-    >
-        <?php echo $header_html; // phpcs:ignore WordPress.Security.EscapeOutput ?>
-
-        <div class="trp-switcher-dropdown-list" hidden inert>
-            <?php if ( $has_more ) : ?>
-                <?php foreach ( array_slice( $list, 1 ) as $item ) : ?>
-                    <a class="trp-language-item" href="<?php echo !$is_editor ? esc_url( $item['url'] ) : '#';  ?>" role="option" tabindex="-1" title="<?php echo esc_html( $item['name'] ); ?>">
-                        <?php if ( $flag_position === 'before' ) echo wp_kses( $item['flag'], $allowed_flag_html ); ?>
-                        <?php if ( $item['name'] !== '' ) : ?>
-                            <span class="trp-language-item-name" data-no-translation><?php echo esc_html( $item['name'] ); ?></span>
-                        <?php endif; ?>
-                        <?php if ( $flag_position === 'after' ) echo wp_kses( $item['flag'], $allowed_flag_html ); ?>
-                    </a>
-                <?php endforeach; ?>
-            <?php endif; ?>
+        <!-- Opposite mode: render ONLY the in-flow (relative) element so it holds space -->
+        <div class="<?php echo esc_attr( implode( ' ', $anchor_classes ) ); ?>"
+             role="navigation"
+             aria-label="<?php echo esc_attr__( 'Website language selector', 'translatepress-multilingual' ); ?>"
+             data-no-translation>
+            <?php echo $header_html; // phpcs:ignore WordPress.Security.EscapeOutput ?>
         </div>
-    </div>
+
+    <?php else : ?>
+
+        <!-- ANCHOR (in-flow only; sizing/borders; inert) -->
+        <div class="<?php echo esc_attr( implode( ' ', $anchor_classes ) ); ?>"
+             aria-hidden="true"
+             inert
+             data-no-translation>
+            <?php echo $header_html; // phpcs:ignore WordPress.Security.EscapeOutput ?>
+        </div>
+
+        <!-- OVERLAY (positioned; interactive surface) -->
+        <div class="<?php echo esc_attr( implode( ' ', $overlay_classes ) ); ?>"
+             role="listbox"
+             aria-haspopup="listbox"
+             aria-expanded="false"
+             tabindex="0"
+             data-no-translation
+        >
+            <?php echo $header_html; // phpcs:ignore WordPress.Security.EscapeOutput ?>
+
+            <div class="trp-switcher-dropdown-list" hidden inert>
+                <?php if ( $has_more ) : ?>
+                    <?php foreach ( array_slice( $list, 1 ) as $item ) : ?>
+                        <a class="trp-language-item" href="<?php echo ! $is_editor ? esc_url( $item['url'] ) : '#';  ?>" role="option" tabindex="-1" title="<?php echo esc_html( $item['name'] ); ?>">
+                            <?php if ( $flag_position === 'before' ) echo wp_kses( $item['flag'], $allowed_flag_html ); ?>
+                            <?php if ( $item['name'] !== '' ) : ?>
+                                <span class="trp-language-item-name" data-no-translation><?php echo esc_html( $item['name'] ); ?></span>
+                            <?php endif; ?>
+                            <?php if ( $flag_position === 'after' ) echo wp_kses( $item['flag'], $allowed_flag_html ); ?>
+                        </a>
+                    <?php endforeach; ?>
+                <?php endif; ?>
+            </div>
+        </div>
+
+    <?php endif; ?>
 </div>

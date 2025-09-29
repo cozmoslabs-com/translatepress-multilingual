@@ -1747,8 +1747,10 @@ class TRP_Upgrade {
         }
 
         if ( !isset($cfg['floater']['oppositeLanguage']) ) {
-            $cfg['floater']['oppositeLanguage'] =
-                ( isset($adv_settings['show_opposite_flag_language_switcher_shortcode']) && $adv_settings['show_opposite_flag_language_switcher_shortcode'] === 'yes' );
+            $is_opposite_language_enabled = ( isset($adv_settings['show_opposite_flag_language_switcher_shortcode']) && $adv_settings['show_opposite_flag_language_switcher_shortcode'] === 'yes' );
+
+            $cfg['floater']['oppositeLanguage']   = $is_opposite_language_enabled;
+            $cfg['shortcode']['oppositeLanguage'] = $is_opposite_language_enabled;
         }
 
         $adv_settings['load_legacy_language_switcher'] = 'yes';

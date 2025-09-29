@@ -126,6 +126,7 @@ class TRP_Language_Switcher_Tab {
                 'clickLanguage'     => false,
                 'layoutCustomizer'  => $layoutCustomizerDefault['shortcode'],
                 'enableTransitions' => true,
+                'oppositeLanguage'  => false
 
             ],
             'menu' => [
@@ -255,7 +256,8 @@ class TRP_Language_Switcher_Tab {
                 'customCss'         => 'css',
                 'layoutCustomizer'  => 'layoutCustomizer',
                 'clickLanguage'     => 'bool',
-                'enableTransitions' => 'bool'
+                'enableTransitions' => 'bool',
+                'oppositeLanguage'  => 'bool'
             ],
             'menu' => [
                 'flagShape'        => 'text',

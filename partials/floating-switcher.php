@@ -8,7 +8,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  * @var string $styles           Inline CSS vars
  * @var string $viewport         Current Viewport
  * @var string $positionClass    Position based class
- * @var string $is_opposite      Is "Show opposite language" checked
+ * @var bool   $is_opposite      Is "Show opposite language" checked
  * @var array  $current_language Current language element
  */
 
