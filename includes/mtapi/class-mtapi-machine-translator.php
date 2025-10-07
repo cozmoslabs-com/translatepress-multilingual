@@ -345,24 +345,18 @@ class TRP_MTAPI_Machine_Translator extends TRP_Machine_Translator {
 
     public function get_languages_that_support_formality(){
 
-        $formality_supported_languages = array();
-
         $data = get_option('trp_db_stored_data', array() );
 
-        if (isset($data['trp_mt_supported_languages'][$this->settings['trp_machine_translation_settings']['translation-engine']]['formality-supported-languages'])){
-            foreach ($this->settings['translation-languages'] as $language){
-                if(array_key_exists($language, $data['trp_mt_supported_languages'][$this->settings['trp_machine_translation_settings']['translation-engine']]['formality-supported-languages'])){
-                    $formality_supported_languages[$language] = $data['trp_mt_supported_languages'][$this->settings['trp_machine_translation_settings']['translation-engine']]['formality-supported-languages'][$language];
-                }else{
-                    $this->check_languages_availability($this->settings['translation-languages'], true);
-                    $data = get_option('trp_db_stored_data', array());
-                    $formality_supported_languages = $data['trp_mt_supported_languages'][$this->settings['trp_machine_translation_settings']['translation-engine']]['formality-supported-languages'];
-                    break;
-                }
-            }
-
+        if(!isset($data['trp_mt_supported_languages'][$this->settings['trp_machine_translation_settings']['translation-engine']]['formality-supported-languages'])) {
+            $this->check_languages_availability($this->settings['translation-languages'], true);
+            $data = get_option('trp_db_stored_data', array());
         }
+
+        $formality_supported_languages = isset( $data['trp_mt_supported_languages'][$this->settings['trp_machine_translation_settings']['translation-engine']]['formality-supported-languages'] ) ?
+            $data['trp_mt_supported_languages'][$this->settings['trp_machine_translation_settings']['translation-engine']]['formality-supported-languages'] : [];
+
         return $formality_supported_languages;
+
     }
 
     public function get_request_formality_for_language($target_language_code){

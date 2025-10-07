@@ -235,8 +235,14 @@ class TRP_String_Translation_Helper {
             foreach ( $translation_languages as $language ){
                 $table = $trp_query->$get_table_name_func( $language );
 
-                $search['queries'][$language] = $results_query . "FROM `" . sanitize_text_field( $original_table ) . "` AS original_strings " .
-                                                                 "LEFT JOIN $table AS $language ON $language.original_id = original_strings.id ";
+                $search['queries'][ $language ] = $results_query . "FROM `" . sanitize_text_field( $original_table ) . "` AS original_strings "
+                    . "LEFT JOIN $table AS $language ON $language.original_id = original_strings.id ";
+
+                if ( ! empty( $sanitized_args['type'] ) && $sanitized_args['type'] !== 'trp_default' ) {
+                    // Ensure we also join the meta table for language-specific search queries when filtering by type (e.g., 'email')
+                    $search['queries'][ $language ] .= $this->get_join_meta_table_sql( $original_meta_table );
+                }
+
                 $language_clauses = ["$language.translated LIKE '$search_term%'"];
 
                 if ( !empty( $sanitized_args['status'] ) ) {

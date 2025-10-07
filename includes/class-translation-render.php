@@ -540,7 +540,9 @@ class TRP_Translation_Render{
         if( is_object($wp_rewrite) ) {
             if( strpos( $this->url_converter->cur_page_url( false ), get_rest_url() ) !== false
                 && current_filter() !== 'oembed_response_data'
-                && current_filter() !== 'rest_pre_echo_response' )
+                && current_filter() !== 'rest_pre_echo_response'
+                && current_filter() !== 'wp_mail'
+            )
             {
                 $trpremoved = $this->remove_trp_html_tags( $output );
                 /* add back the excluded tags like script and style to the html */
@@ -2078,16 +2080,18 @@ class TRP_Translation_Render{
      * @return array
      */
     public function wp_mail_filter( $args ){
-        if (!is_array($args)){
+        if ( !is_array( $args ) ){
             return $args;
         }
 
-        if(array_key_exists('subject', $args)){
-            $args['subject'] = $this->translate_page( do_shortcode( $args['subject'] ) );
+        $whitelisted_shortcodes = apply_filters( 'trp_whitelisted_shortcodes_for_wp_mail', [ 'trp_language', 'language-include', 'language-exclude' ] );
+
+        if ( array_key_exists( 'subject', $args ) ){
+            $args['subject'] = $this->translate_page( trp_do_these_shortcodes( $args['subject'], $whitelisted_shortcodes ) );
         }
 
-        if(array_key_exists('message', $args)){
-            $args['message'] = $this->translate_page( do_shortcode( $args['message'] ) );
+        if ( array_key_exists( 'message', $args ) ){
+            $args['message'] = $this->translate_page( trp_do_these_shortcodes( $args['message'], $whitelisted_shortcodes ) );
         }
 
         return $args;

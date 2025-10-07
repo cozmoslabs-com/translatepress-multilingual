@@ -49,7 +49,8 @@
                                 <?php
                                 //link and message in case the user has the free version of TranslatePress
                                 if( !class_exists( 'TRP_Handle_Included_Addons' ) ):
-                                    $url = trp_add_affiliate_id_to_link('https://translatepress.com/pricing/?utm_source=wpbackend&utm_medium=clientsite&utm_content=deepl_upsell&utm_campaign=tpfree');
+                                    // [utm61]
+                                    $url = trp_add_affiliate_id_to_link('https://translatepress.com/pricing/?utm_source=tp-automatic-translation&utm_medium=client-site&utm_campaign=deepl');
                                     $message = __( '<strong>DeepL</strong> automatic translation is available as a <a href="%1$s" target="_blank" title="%2$s">%2$s</a>.', 'translatepress-multilingual' );
                                     $message_upgrade = __( 'By upgrading you\'ll get access to all paid add-ons, premium support and help fund the future development of TranslatePress.', 'translatepress-multilingual' );
                                     ?>
@@ -125,8 +126,8 @@
                                                         <?php esc_html_e("Switch to TranslatePress AI", "translatepress-multilingual"); ?>
                                                     </span>
                                                     <span class="trp-primary-text">
-                                                        <?php esc_html_e("Integrate machine translation directly with your WordPress website.", "translatepress-multilingual"); ?>
-                                                        <a href="https://translatepress.com/ai/?utm_source=wpbackend&utm_medium=clientsite&utm_content=tpsettingsAT&utm_campaign=tp-ai" target="_blank">
+                                                        <?php esc_html_e("Integrate machine translation directly with your WordPress website.", "translatepress-multilingual"); /* [utm62] */ ?>
+                                                        <a href="https://translatepress.com/ai/?utm_source=tp-automatic-translation&utm_medium=client-site&utm_campaign=tp-ai" target="_blank">
                                                             <span class="trp-upsell-button">
                                                                 <span><?php esc_html_e("Learn More", "translatepress-multilingual"); ?></span>
                                                                 <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -228,8 +229,10 @@
                                 </span>
                                 <?php
                                 if ( $is_disabled ) {
-                                    $upgrade_url = esc_url(trp_add_affiliate_id_to_link('https://translatepress.com/pricing/?utm_source=wpbackend&utm_medium=clientsite&utm_content=automatically_translate_slugs&utm_campaign=tpfree'));
-                                    $seo_pack_url = esc_url('https://translatepress.com/docs/addons/seo-pack/');
+                                    // [utm63]
+                                    $upgrade_url = esc_url(trp_add_affiliate_id_to_link('https://translatepress.com/pricing/?utm_source=tp-automatic-translation&utm_medium=client-site&utm_campaign=slugs-at'));
+                                    // [utm64]
+                                    $seo_pack_url = esc_url('https://translatepress.com/docs/addons/seo-pack/?utm_source=tp-automatic-translation&utm_medium=client-site&utm_campaign=slugs-at');
 
                                     $is_free_version = $free_version;
                                     $message = $is_free_version

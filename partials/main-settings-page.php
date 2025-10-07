@@ -34,7 +34,7 @@
                     <?php esc_html_e( 'WARNING. Changing the default language will invalidate existing translations.', 'translatepress-multilingual' ); ?><br/>
                     <?php esc_html_e( 'Even changing from en_US to en_GB, because they are treated as two different languages.', 'translatepress-multilingual' ); ?><br/>
                     <?php esc_html_e( 'In most cases changing the default flag is all it is needed: ', 'translatepress-multilingual' ); ?>
-                    <a href="https://translatepress.com/docs/developers/replace-default-flags/"><?php esc_html_e( 'replace the default flag', 'translatepress-multilingual' ); ?></a>
+                    <a href="https://translatepress.com/docs/developers/replace-default-flags/?utm_source=tp-website-languages&utm_medium=client-site&utm_campaign=change-default-language"><?php /* [utm67] */ esc_html_e( 'replace the default flag', 'translatepress-multilingual' ); ?></a>
                 </p>
 
                 <?php do_action( 'trp_language_selector', $languages ); ?>
@@ -103,7 +103,7 @@
 
                                 <span class="trp-description-text">
                                     <?php esc_html_e( 'Use shortcode on any page or widget.', 'translatepress-multilingual' ); ?>
-                                    <?php echo wp_kses_post( sprintf( __('You can also add the <a href="%s" title="Language Switcher Block Documentation">Language Switcher Block</a> in the WP Gutenberg Editor.', 'translatepress-multilingual'), esc_url('https://translatepress.com/docs/settings/#language-switcher-block' ) ) ); ?>
+                                    <?php /* [utm68] */ echo wp_kses_post( sprintf( __('You can also add the <a href="%s" title="Language Switcher Block Documentation">Language Switcher Block</a> in the WP Gutenberg Editor.', 'translatepress-multilingual'), esc_url('https://translatepress.com/docs/settings/?utm_source=tp-language-switcher&utm_medium=client-site&utm_campaign=ls-block#language-switcher-block' ) ) ); ?>
                                 </span>
                             </div>
                         </label>
@@ -121,7 +121,7 @@
                                     $link_start = '<a href="' . esc_url( admin_url( 'nav-menus.php' ) ) .'">';
                                     $link_end = '</a>';
                                     printf( wp_kses( __( 'Go to  %1$s Appearance -> Menus%2$s to add languages to the Language Switcher in any menu.', 'translatepress-multilingual' ), [ 'a' => [ 'href' => [] ] ] ), $link_start, $link_end ); //phpcs:ignore ?>
-                                    <a href="https://translatepress.com/docs/settings/#language-switcher" target="_blank"><?php esc_html_e( 'Learn more in our documentation.', 'translatepress-multilingual' ); ?></a>
+                                    <a href="https://translatepress.com/docs/settings/language-switcher/?utm_source=tp-language-switcher&utm_medium=client-site&utm_campaign=ls-menu-item#menu-switcher" target="_blank"><?php /* [utm69] */esc_html_e( 'Learn more in our documentation.', 'translatepress-multilingual' ); ?></a>
                                 </span>
                             </div>
                         </label>

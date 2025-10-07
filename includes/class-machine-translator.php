@@ -335,7 +335,7 @@ class TRP_Machine_Translator {
             $imploded_strings = implode(" ", $strings);
             $trp_exclude_words_from_automatic_translation = apply_filters('trp_exclude_words_from_automatic_translation', array('%s', '%d', '%', '$', '#'), $imploded_strings);
             $placeholders = $this->get_placeholders(count($trp_exclude_words_from_automatic_translation));
-            $shortcode_tags_to_execute = apply_filters( 'trp_do_these_shortcodes_before_automatic_translation', array('trp_language') );
+            $shortcode_tags_to_execute = apply_filters( 'trp_do_these_shortcodes_before_automatic_translation', array('trp_language', 'language-include', 'language-exclude') );
 
             $strings = array_unique($strings);
             $original_strings = $strings;

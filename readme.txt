@@ -3,9 +3,9 @@ Contributors: cozmoslabs, razvan.mo, madalin.ungureanu, sareiodata, cristophor
 Donate link: https://www.translatepress.com/
 Tags: translate, translation, multilingual, automatic translation, bilingual, front-end translation, google translate, language
 Requires at least: 3.1.0
-Tested up to: 6.8.2
+Tested up to: 6.8.3
 Requires PHP: 7.4
-Stable tag: 2.10.6
+Stable tag: 2.10.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -142,6 +142,14 @@ For more information please check out our [documentation](https://translatepress
 
 
 == Changelog ==
+= 2.10.7 =
+* Fixed a security vulnerability regarding shortcodes in emails
+* Fixed unnecessary non-costly calls to TranslatePress AI when having unsupported languages
+* Fixed translating gettext strings from WooCommerce emails
+* Fixed sending admin WooCommerce emails in user's language instead of admin's language
+* Fixed WooCommerce emails not being having user-inputted text translated when using checkout WooCommerce block
+* Fixed search filter in Emails tab from String Translation
+
 = 2.10.6 =
 * Added Opposite Language mode for language switcher shortcode
 * Added Manual Translation Only - advanced option for better control over character spending by translating only the pages visited in the Translation Editor.
