@@ -1,4 +1,4 @@
-﻿=== Translate Multilingual sites - TranslatePress ===
+=== Translate Multilingual sites - TranslatePress ===
 Contributors: cozmoslabs, razvan.mo, madalin.ungureanu, sareiodata, cristophor
 Donate link: https://www.translatepress.com/
 Tags: translate, translation, multilingual, automatic translation, bilingual, front-end translation, google translate, language
@@ -90,7 +90,7 @@ TranslatePress - Multilingual has a range of [premium Add-ons](https://translate
 
 = Demo Site =
 
-You can test out TranslatePress - Multilingual plugin by [visiting our demo site](https://demo.translatepress.com/)
+You can test out TranslatePress - Multilingual plugin by [visiting our demo site](https://demo.translatepress.com/?utm_source=wp.org&utm_medium=tp-description-page&utm_campaign=TPFree)
 
 == Installation ==
 
@@ -111,7 +111,7 @@ TranslatePress - Multilingual plugin works out of the box with WooCommerce, cust
 
 = How is it different from other multilingual & translation plugins like WPML or Polylang? =
 
-TranslatePress is easier to use and more intuitive altogether. No more switching between the editor, string translation interfaces or badly translated plugins. You can now translate the full page content directly from the front-end. This makes TranslatePress a great alternative to plugins like Polylang and WPML. For more details check out this [WordPress Translation Plugin Comparison: TranslatePress vs WPML vs Polylang vs Gtranslate](https://translatepress.com/wordpress-translation-plugin-comparison-translatepress-vs-free-and-paid-alternatives/translate-woocommerce-products-translatepress/?utm_source=wp.org&utm_medium=tp-description-page&utm_campaign=TPFree).
+TranslatePress is easier to use and more intuitive altogether. No more switching between the editor, string translation interfaces or badly translated plugins. You can now translate the full page content directly from the front-end. This makes TranslatePress a great alternative to plugins like Polylang and WPML. For more details check out this [WordPress Translation Plugin Comparison: TranslatePress vs WPML vs Polylang vs Gtranslate](https://translatepress.com/wordpress-translation-plugin-comparison-translatepress-vs-free-and-paid-alternatives/?utm_source=wp.org&utm_medium=tp-description-page&utm_campaign=TPFree).
 
 = How do I start to translate my WordPress site? =
 
