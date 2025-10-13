@@ -732,6 +732,11 @@ class TRP_Plugin_Updater{
         }
     }
 
+    /*
+     * This is triggered on admin_init inside class-translate-press.php
+     * It's stupid and should be refactored so it's in the same flow as the license_page() function in TRP_LICENSE_PAGE class
+     * The messages are duplicated in the includes/onboarding/class-license.php since we can't use this function as it is
+     */
     public function activate_license() {
 
         // listen for our activate button to be clicked

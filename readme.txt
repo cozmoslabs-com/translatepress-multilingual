@@ -5,7 +5,7 @@ Tags: translate, translation, multilingual, automatic translation, bilingual, fr
 Requires at least: 3.1.0
 Tested up to: 6.8.3
 Requires PHP: 7.4
-Stable tag: 2.10.7
+Stable tag: 3.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -142,6 +142,9 @@ For more information please check out our [documentation](https://translatepress
 
 
 == Changelog ==
+= 3.0 =
+* Start Translating in under 5 minutes with a new onboarding flow for TranslatePress to quickly setup languages, automatic translation and add-ons
+
 = 2.10.7 =
 * Fixed a security vulnerability regarding shortcodes in emails
 * Fixed unnecessary non-costly calls to TranslatePress AI when having unsupported languages

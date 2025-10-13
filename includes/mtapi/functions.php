@@ -85,7 +85,7 @@ function trp_mtapi_add_settings( $mt_settings ){
                         <a href="https://translatepress.com/pricing/?utm_source=wpbackend&utm_medium=clientsite&utm_content=tpsettingsAT&utm_campaign=tpaifree" id="trp-upgrade-link" target="_blank">
                             <span class="trp-upsale-text-link">
                                 <span><?php esc_html_e("Upgrade now", "translatepress-multilingual"); ?></span>
-                            <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <svg width="12" height="12" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M17 7.3252L7 17.3252M17 7.3252H8M17 7.3252V16.3252" stroke="#354052" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
                             </span>

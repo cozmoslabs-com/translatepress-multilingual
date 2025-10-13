@@ -44,6 +44,7 @@ class TRP_Translate_Press{
     protected $woocommerce_emails;
     protected $preferred_user_language;
     protected $gutenberg_blocks;
+    protected $onboarding_setup;
     protected $language_switcher_tab;
 
     public $tp_product_name = array();
@@ -70,7 +71,7 @@ class TRP_Translate_Press{
         define( 'TRP_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
         define( 'TRP_PLUGIN_BASE', plugin_basename( __DIR__ . '/index.php' ) );
         define( 'TRP_PLUGIN_SLUG', 'translatepress-multilingual' );
-        define( 'TRP_PLUGIN_VERSION', '2.10.7' );
+        define( 'TRP_PLUGIN_VERSION', '3.0' );
 
 	    wp_cache_add_non_persistent_groups(array('trp'));
 
@@ -147,6 +148,7 @@ class TRP_Translate_Press{
         require_once TRP_PLUGIN_DIR . 'includes/class-plugin-optin.php';
         require_once TRP_PLUGIN_DIR . 'includes/class-preferred-user-language.php';
         require_once TRP_PLUGIN_DIR . 'includes/gutenberg-blocks/class-gutenberg-blocks.php';
+        require_once TRP_PLUGIN_DIR . 'includes/class-onboarding.php';
         require_once TRP_PLUGIN_DIR . 'includes/class-language-switcher-tab.php';
 
         if ( did_action( 'elementor/loaded' ) )
@@ -196,6 +198,7 @@ class TRP_Translate_Press{
         $this->check_invalid_text         = new TRP_Check_Invalid_Text( );
         $this->woocommerce_emails         = new TRP_Woocommerce_Emails();
         $this->preferred_user_language    = new TRP_Preferred_User_Language();
+        $this->onboarding_setup           = new TRP_Onboarding( $this->settings->get_settings() );
 
         //Gutenberg Blocks
         global $wp_version;

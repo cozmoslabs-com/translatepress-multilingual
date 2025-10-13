@@ -620,6 +620,7 @@ class TRP_Trigger_Plugin_Notifications{
             $notifications->add_notification($notification_id, $message, 'trp-notice trp-narrow notice notice-info', true, array('translate-press'));
         }
 
+
         /**
          * Black Friday
          * 
