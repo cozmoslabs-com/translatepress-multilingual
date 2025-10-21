@@ -6,7 +6,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-10-13 08:12+0000\n"
+"POT-Creation-Date: 2025-10-21 05:13+0000\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
 "X-Poedit-SearchPath-0: .\n"
@@ -50,7 +50,7 @@ msgstr ""
 msgid "Advanced"
 msgstr ""
 
-#: includes/class-advanced-tab.php:231, includes/class-language-switcher-tab.php:172
+#: includes/class-advanced-tab.php:231, includes/class-language-switcher-tab.php:197
 msgid "Settings saved."
 msgstr ""
 
@@ -98,15 +98,15 @@ msgstr ""
 msgid "Error"
 msgstr ""
 
-#: includes/class-edd-sl-plugin-updater.php:817, includes/onboarding/class-autotranslation.php:84, includes/onboarding/class-license.php:58
+#: includes/class-edd-sl-plugin-updater.php:817, includes/onboarding/class-autotranslation.php:90, includes/onboarding/class-license.php:61
 msgid "Your license key expired on %s."
 msgstr ""
 
-#: includes/class-edd-sl-plugin-updater.php:822, includes/onboarding/class-autotranslation.php:89, includes/onboarding/class-license.php:63
+#: includes/class-edd-sl-plugin-updater.php:822, includes/onboarding/class-autotranslation.php:95, includes/onboarding/class-license.php:66
 msgid "Your license key has been disabled."
 msgstr ""
 
-#: includes/class-edd-sl-plugin-updater.php:825, includes/onboarding/class-autotranslation.php:92, includes/onboarding/class-license.php:33, includes/onboarding/class-license.php:66
+#: includes/class-edd-sl-plugin-updater.php:825, includes/onboarding/class-autotranslation.php:98, includes/onboarding/class-license.php:33, includes/onboarding/class-license.php:69
 msgid "Your TranslatePress license key is invalid or missing."
 msgstr ""
 
@@ -118,7 +118,7 @@ msgstr ""
 msgid "<p><strong>License key mismatch.</strong> The license you entered doesn’t match the TranslatePress version you have installed.</p><p>Please check that you’ve installed the correct version for your license from your TranslatePress account.</p>"
 msgstr ""
 
-#: includes/class-edd-sl-plugin-updater.php:837, includes/onboarding/class-autotranslation.php:102, includes/onboarding/class-license.php:76
+#: includes/class-edd-sl-plugin-updater.php:837, includes/onboarding/class-autotranslation.php:108, includes/onboarding/class-license.php:79
 msgid "Your license key has reached its activation limit."
 msgstr ""
 
@@ -126,11 +126,11 @@ msgstr ""
 msgid "Upgrade your plan to add more sites. %1$sUpgrade now%2$s"
 msgstr ""
 
-#: includes/class-edd-sl-plugin-updater.php:843, includes/onboarding/class-autotranslation.php:105, includes/onboarding/class-license.php:79
+#: includes/class-edd-sl-plugin-updater.php:843, includes/onboarding/class-autotranslation.php:111, includes/onboarding/class-license.php:82
 msgid "This website is already activated under a free license. Each website can only use one free license."
 msgstr ""
 
-#: includes/class-edd-sl-plugin-updater.php:846, includes/class-edd-sl-plugin-updater.php:806, includes/class-edd-sl-plugin-updater.php:920, includes/onboarding/class-autotranslation.php:108, includes/onboarding/class-license.php:82
+#: includes/class-edd-sl-plugin-updater.php:846, includes/class-edd-sl-plugin-updater.php:806, includes/class-edd-sl-plugin-updater.php:920, includes/onboarding/class-autotranslation.php:114, includes/onboarding/class-license.php:85
 msgid "An error occurred, please try again."
 msgstr ""
 
@@ -294,23 +294,23 @@ msgstr ""
 msgid "Active"
 msgstr ""
 
-#: includes/class-language-switcher-tab.php:144, includes/class-language-switcher-tab.php:188
+#: includes/class-language-switcher-tab.php:169, includes/class-language-switcher-tab.php:213
 msgid "Permission denied."
 msgstr ""
 
-#: includes/class-language-switcher-tab.php:151, includes/class-language-switcher-tab.php:196
+#: includes/class-language-switcher-tab.php:176, includes/class-language-switcher-tab.php:221
 msgid "Invalid nonce."
 msgstr ""
 
-#: includes/class-language-switcher-tab.php:162
+#: includes/class-language-switcher-tab.php:187
 msgid "Settings scope unknown."
 msgstr ""
 
-#: includes/class-language-switcher-tab.php:210
+#: includes/class-language-switcher-tab.php:235
 msgid "Legacy disabled."
 msgstr ""
 
-#: includes/class-language-switcher-tab.php:371, includes/class-language-switcher-tab.php:389, includes/class-onboarding.php:118, includes/class-onboarding.php:118, partials/main-settings-page.php:113, includes/advanced-settings/separators.php:95
+#: includes/class-language-switcher-tab.php:396, includes/class-language-switcher-tab.php:414, includes/class-onboarding.php:118, includes/class-onboarding.php:118, partials/main-settings-page.php:113, includes/advanced-settings/separators.php:95
 msgid "Language Switcher"
 msgstr ""
 
@@ -598,7 +598,7 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
-#: includes/class-settings.php:715, partials/license-settings-page.php:29, includes/onboarding/class-autotranslation.php:163, includes/onboarding/class-license.php:128
+#: includes/class-settings.php:715, partials/license-settings-page.php:29, includes/onboarding/class-autotranslation.php:169, includes/onboarding/class-license.php:131
 msgid "Activate License"
 msgstr ""
 
@@ -1503,11 +1503,11 @@ msgstr ""
 msgid "You can get one for %1$sfree%2$s, by creating a free account. It includes:"
 msgstr ""
 
-#: partials/license-settings-page.php:125, includes/mtapi/functions.php:74, includes/onboarding/class-autotranslation.php:206
+#: partials/license-settings-page.php:125, includes/mtapi/functions.php:74, includes/onboarding/class-autotranslation.php:212
 msgid "Access to TranslatePress AI for instant automatic translations"
 msgstr ""
 
-#: partials/license-settings-page.php:130, includes/mtapi/functions.php:79, includes/onboarding/class-autotranslation.php:211
+#: partials/license-settings-page.php:130, includes/mtapi/functions.php:79, includes/onboarding/class-autotranslation.php:217
 msgid "2000 AI words to translate automatically"
 msgstr ""
 
@@ -1555,7 +1555,7 @@ msgstr ""
 msgid "Learn More"
 msgstr ""
 
-#: partials/machine-translation-settings-page.php:29, includes/onboarding/class-autotranslation.php:120, includes/onboarding/class-autotranslation.php:151
+#: partials/machine-translation-settings-page.php:29, includes/onboarding/class-autotranslation.php:126, includes/onboarding/class-autotranslation.php:157
 msgid "Enable Automatic Translation"
 msgstr ""
 
@@ -2440,7 +2440,7 @@ msgstr ""
 msgid "TranslatePress AI"
 msgstr ""
 
-#: includes/mtapi/functions.php:40, includes/onboarding/class-autotranslation.php:175, add-ons-pro/deepl/includes/class-deepl.php:195
+#: includes/mtapi/functions.php:40, includes/onboarding/class-autotranslation.php:181, add-ons-pro/deepl/includes/class-deepl.php:195
 msgid "No Active License Detected for this website."
 msgstr ""
 
@@ -2472,11 +2472,11 @@ msgstr ""
 msgid "Get more AI Tokens and unlock all AI features with TranslatePress Pro."
 msgstr ""
 
-#: includes/mtapi/functions.php:143, includes/onboarding/class-autotranslation.php:283
+#: includes/mtapi/functions.php:143, includes/onboarding/class-autotranslation.php:289
 msgid "You have a valid %s <strong>license</strong>."
 msgstr ""
 
-#: includes/mtapi/functions.php:150, includes/onboarding/class-autotranslation.php:290
+#: includes/mtapi/functions.php:150, includes/onboarding/class-autotranslation.php:296
 msgid " words remaining. "
 msgstr ""
 
@@ -2492,11 +2492,11 @@ msgstr ""
 msgid "Done."
 msgstr ""
 
-#: includes/mtapi/functions.php:175, includes/onboarding/class-autotranslation.php:300
+#: includes/mtapi/functions.php:175, includes/onboarding/class-autotranslation.php:306
 msgid "Manage your license & quota on the %s"
 msgstr ""
 
-#: includes/mtapi/functions.php:177, includes/onboarding/class-autotranslation.php:301
+#: includes/mtapi/functions.php:177, includes/onboarding/class-autotranslation.php:307
 msgid "TranslatePress.com Account Page"
 msgstr ""
 
@@ -2528,7 +2528,7 @@ msgstr ""
 msgid "This add-on is not available on your current plan."
 msgstr ""
 
-#: includes/onboarding/class-addons.php:222, includes/onboarding/class-autotranslation.php:183, includes/onboarding/class-autotranslation.php:307, includes/onboarding/class-languages.php:125, includes/onboarding/class-switcher.php:322, includes/onboarding/class-welcome.php:43
+#: includes/onboarding/class-addons.php:222, includes/onboarding/class-autotranslation.php:189, includes/onboarding/class-autotranslation.php:313, includes/onboarding/class-languages.php:125, includes/onboarding/class-switcher.php:322, includes/onboarding/class-welcome.php:43
 msgid "Continue"
 msgstr ""
 
@@ -2540,51 +2540,51 @@ msgstr ""
 msgid "A valid license is required to enable Automatic Translation."
 msgstr ""
 
-#: includes/onboarding/class-autotranslation.php:96
+#: includes/onboarding/class-autotranslation.php:102
 msgid "Your license key is disabled for this URL. Re-enable it from <a target=\"_blank\" href=\"https://translatepress.com/account/?utm_source=tp-onboarding&utm_medium=client-site&utm_campaign=tp-ai\">https://translatepress.com/account</a> -> Manage Sites."
 msgstr ""
 
-#: includes/onboarding/class-autotranslation.php:99, includes/onboarding/class-license.php:73
+#: includes/onboarding/class-autotranslation.php:105, includes/onboarding/class-license.php:76
 msgid "<p><strong>License key mismatch.</strong> The license you entered doesn't match the TranslatePress version you have installed.</p><p>Please check that you've installed the correct version for your license from your TranslatePress account.</p>"
 msgstr ""
 
-#: includes/onboarding/class-autotranslation.php:121
+#: includes/onboarding/class-autotranslation.php:127
 msgid "Automatically translate your website using TranslatePress AI."
 msgstr ""
 
-#: includes/onboarding/class-autotranslation.php:158
+#: includes/onboarding/class-autotranslation.php:164
 msgid "In order to enable Automatic Translation using TranslatePress AI, please enter your license key from"
 msgstr ""
 
-#: includes/onboarding/class-autotranslation.php:158
+#: includes/onboarding/class-autotranslation.php:164
 msgid "your account."
 msgstr ""
 
-#: includes/onboarding/class-autotranslation.php:186, includes/onboarding/class-autotranslation.php:219
+#: includes/onboarding/class-autotranslation.php:192, includes/onboarding/class-autotranslation.php:225
 msgid "Skip and continue with manual translation »"
 msgstr ""
 
-#: includes/onboarding/class-autotranslation.php:194
+#: includes/onboarding/class-autotranslation.php:200
 msgid "Get Your Free TranslatePress AI License"
 msgstr ""
 
-#: includes/onboarding/class-autotranslation.php:198
+#: includes/onboarding/class-autotranslation.php:204
 msgid "Generate License"
 msgstr ""
 
-#: includes/onboarding/class-autotranslation.php:203
+#: includes/onboarding/class-autotranslation.php:209
 msgid "Creating a free account includes: "
 msgstr ""
 
-#: includes/onboarding/class-autotranslation.php:215
+#: includes/onboarding/class-autotranslation.php:221
 msgid "Are you a TranslatePress PRO user?"
 msgstr ""
 
-#: includes/onboarding/class-autotranslation.php:215
+#: includes/onboarding/class-autotranslation.php:221
 msgid "Install & Activate your pro plugin."
 msgstr ""
 
-#: includes/onboarding/class-autotranslation.php:310
+#: includes/onboarding/class-autotranslation.php:316
 msgid "Skip this step"
 msgstr ""
 
@@ -2664,7 +2664,7 @@ msgstr ""
 msgid "Please upload the TranslatePress PRO zip archive from your"
 msgstr ""
 
-#: includes/onboarding/class-install.php:141, includes/onboarding/class-license.php:100
+#: includes/onboarding/class-install.php:141, includes/onboarding/class-license.php:103
 msgid "TranslatePress Account"
 msgstr ""
 
@@ -2732,23 +2732,23 @@ msgstr ""
 msgid "Add more than two languages with TranslatePress Pro."
 msgstr ""
 
-#: includes/onboarding/class-license.php:70
+#: includes/onboarding/class-license.php:73
 msgid "Your license key is disabled for this URL. Re-enable it from <a target=\"_blank\" href=\"https://translatepress.com/account/?utm_source=tp-onboarding&utm_medium=client-site&utm_campaign=activate-license\">https://translatepress.com/account</a> -> Manage Sites."
 msgstr ""
 
-#: includes/onboarding/class-license.php:97
+#: includes/onboarding/class-license.php:100
 msgid "Add your License Key"
 msgstr ""
 
-#: includes/onboarding/class-license.php:99
+#: includes/onboarding/class-license.php:102
 msgid "Add your License Key to unlock all premium features. Find the License Key in your"
 msgstr ""
 
-#: includes/onboarding/class-license.php:114
+#: includes/onboarding/class-license.php:117
 msgid "Your license is valid and active."
 msgstr ""
 
-#: includes/onboarding/class-license.php:133
+#: includes/onboarding/class-license.php:136
 msgid "« Go Back"
 msgstr ""
 

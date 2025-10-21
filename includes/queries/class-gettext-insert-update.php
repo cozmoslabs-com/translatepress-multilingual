@@ -62,6 +62,10 @@ class TRP_Gettext_Insert_Update extends TRP_Query {
 				$translated = $string['translated'];
 				$status     = self::HUMAN_REVIEWED;
 			}
+			// Skip if original_id doesn't exist for this key
+			if ( !isset( $original_ids[ $key ] ) ) {
+				continue;
+			}
 			array_push( $values, $string['original'], $translated, $string['domain'], $status, $string['plural_form'], $original_ids[ $key ] );
 			$place_holders[] = "( '%s', '%s', '%s', '%d', '%d', '%d')";
 		}

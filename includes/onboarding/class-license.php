@@ -37,6 +37,9 @@ class TRP_Step_License implements TRP_Onboarding_Step_Interface {
         }
 
         if (!$this->errors->has_errors()) {
+            //synchronize EDD license with MTAPI
+            trp_mtapi_sync_license_call(sanitize_text_field($license));
+
             // If no errors, we save our data and redirect to next step
             $previous_step = get_transient('trp_onboarding_previous_step');
             $previous_step = ($previous_step) ? $previous_step : 'languages';

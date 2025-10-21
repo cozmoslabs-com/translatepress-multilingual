@@ -88,7 +88,7 @@ class TRP_Step_Finish implements TRP_Onboarding_Step_Interface {
         }
 
         $version_map = [
-                'Translatepress' => 'free',
+                'TranslatePress' => 'free',
                 'TranslatePress Personal' => 'personal',
                 'TranslatePress Business' => 'business',
                 'TranslatePress Developer' => 'developer',

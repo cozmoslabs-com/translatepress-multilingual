@@ -1170,11 +1170,11 @@ class TRP_Translation_Render{
 	    }
 	    $final_html = $html->save();
 
-       /* perform preg replace on the remaining trp-gettext tags */
-        $final_html = $this->remove_trp_html_tags( $final_html );
-
         /* add back the excluded tags like script and style to the html */
         $final_html = $this->add_excluded_tags_after_translation( $final_html, $output_with_excluded_tags_removed['excluded_tags'] );
+
+       /* perform preg replace on the remaining trp-gettext tags */
+        $final_html = $this->remove_trp_html_tags( $final_html );
 
 	    return apply_filters( 'trp_translated_html', $final_html, $TRP_LANGUAGE, $language_code, $preview_mode );
     }

@@ -363,7 +363,16 @@ class TRP_Machine_Translator {
             $machine_strings_return_array = array();
             if (!empty($machine_strings)) {
                 foreach ($machine_strings as $key => $machine_string) {
-                    $machine_strings_return_array[$original_strings[$key]] = str_ireplace( $placeholders, $trp_exclude_words_from_automatic_translation, $machine_string );
+                    // Restore placeholders to original excluded words
+                    $processed_string = str_ireplace( $placeholders, $trp_exclude_words_from_automatic_translation, $machine_string );
+
+                    // Restore quote patterns (use $strings which is decoded, not $original_strings with HTML entities)
+                    $processed_string = $this->restore_translation_quotes($strings[$key], $processed_string);
+
+                    // Restore punctuation and spacing patterns (use $strings which is decoded, not $original_strings with HTML entities)
+                    $processed_string = $this->restore_punctuation_patterns($strings[$key], $processed_string);
+
+                    $machine_strings_return_array[$original_strings[$key]] = $processed_string;
                 }
             }
             return $machine_strings_return_array;
@@ -412,6 +421,167 @@ class TRP_Machine_Translator {
             }
         }
         return $array;
+    }
+
+    /**
+     * Restore and normalize quotes in translated strings to match the original
+     *
+     * @param string $original_string The original untranslated string
+     * @param string $translated_string The translated string from the API
+     * @return string The translated string with quotes restored and normalized
+     */
+    public function restore_translation_quotes($original_string, $translated_string) {
+        // Allow disabling this functionality via filter
+        if ( apply_filters( 'trp_disable_restore_translation_quotes', false ) ) {
+            return $translated_string;
+        }
+
+        // Check if original string is empty or translated string is empty
+        if ( empty($original_string) || empty($translated_string) ) {
+            return $translated_string;
+        }
+
+        // Define all quote characters to check for
+        $quote_chars = [
+            // Straight quotes
+            "'",   // U+0027 Apostrophe / single quote
+            '"',   // U+0022 Double quote
+
+            // Curly / typographic quotes
+            '‘',   // U+2018 Left single curly quote
+            '’',   // U+2019 Right single curly quote (also apostrophe)
+            '“',   // U+201C Left double curly quote
+            '”',   // U+201D Right double curly quote
+
+            // Common international quotes
+            '„',   // U+201E Low double quote (German, Polish)
+            '‚',   // U+201A Low single quote
+            '«',   // U+00AB Left double angle quote (French, Italian, etc.)
+            '»',   // U+00BB Right double angle quote
+        ];
+
+        // Step 1: Restore boundary quotes if they were stripped
+        $original_first_char = mb_substr($original_string, 0, 1, 'UTF-8');
+        $original_last_char = mb_substr($original_string, -1, 1, 'UTF-8');
+        $translated_first_char = mb_substr($translated_string, 0, 1, 'UTF-8');
+        $translated_last_char = mb_substr($translated_string, -1, 1, 'UTF-8');
+
+        // Check if original starts with a quote character and translated doesn't
+        if ( in_array($original_first_char, $quote_chars, true) && !in_array($translated_first_char, $quote_chars, true) ) {
+            $translated_string = $original_first_char . $translated_string;
+        }
+
+        // Check if original ends with a quote character and translated doesn't
+        // Need to recalculate last char if we added a quote at the beginning
+        if ( in_array($original_last_char, $quote_chars, true) && !in_array($translated_last_char, $quote_chars, true) ) {
+            $translated_string = $translated_string . $original_last_char;
+        }
+
+        // Step 2: Normalize ALL quotes - collect all quotes from original (excluding apostrophes)
+        $original_quotes = array();
+        $original_len = mb_strlen($original_string, 'UTF-8');
+
+        for ($i = 0; $i < $original_len; $i++) {
+            $char = mb_substr($original_string, $i, 1, 'UTF-8');
+            if ( in_array($char, $quote_chars, true) ) {
+                // Check if this is an apostrophe (letter-apostrophe-letter pattern)
+                $prev_char = ($i > 0) ? mb_substr($original_string, $i - 1, 1, 'UTF-8') : '';
+                $next_char = ($i < $original_len - 1) ? mb_substr($original_string, $i + 1, 1, 'UTF-8') : '';
+
+                $is_apostrophe = ($char === "'" || $char === '’') &&
+                    preg_match('/^\p{L}$/u', $prev_char) &&
+                    preg_match('/^\p{L}$/u', $next_char);
+
+                if ( !$is_apostrophe ) {
+                    $original_quotes[] = $char;
+                }
+            }
+        }
+
+        // If we found quotes in the original, replace them in order in the translation
+        if ( !empty($original_quotes) ) {
+            $quote_index = 0;
+            $translated_len = mb_strlen($translated_string, 'UTF-8');
+            $translated_chars = array();
+
+            // Convert translation to array of characters
+            for ($i = 0; $i < $translated_len; $i++) {
+                $translated_chars[] = mb_substr($translated_string, $i, 1, 'UTF-8');
+            }
+
+            // Replace all quotes in translation in order (excluding apostrophes)
+            for ($i = 0; $i < $translated_len; $i++) {
+                $char = $translated_chars[$i];
+                if ( in_array($char, $quote_chars, true) ) {
+                    // Check if this is an apostrophe (letter-apostrophe-letter pattern)
+                    $prev_char = ($i > 0) ? $translated_chars[$i - 1] : '';
+                    $next_char = ($i < $translated_len - 1) ? $translated_chars[$i + 1] : '';
+
+                    $is_apostrophe = ($char === "'" || $char === '’') &&
+                        preg_match('/^\p{L}$/u', $prev_char) &&
+                        preg_match('/^\p{L}$/u', $next_char);
+
+                    if ( !$is_apostrophe && $quote_index < count($original_quotes) ) {
+                        $translated_chars[$i] = $original_quotes[$quote_index];
+                        $quote_index++;
+                    }
+                }
+            }
+
+            $translated_string = implode('', $translated_chars);
+        }
+
+        return $translated_string;
+    }
+
+    /**
+     * Restore punctuation and spacing patterns at string boundaries
+     *
+     * Handles patterns at the beginning or end of strings:
+     * - Two-character: ", " (comma+space), ". " (period+space), "; " (semicolon+space)
+     * - Single character: "," (comma), "." (period), ";" (semicolon), " " (space)
+     *
+     * @param string $original_string The original untranslated string
+     * @param string $translated_string The translated string from the API
+     * @return string The translated string with punctuation patterns restored
+     */
+    public function restore_punctuation_patterns($original_string, $translated_string) {
+        // Allow disabling this functionality via filter
+        if ( apply_filters( 'trp_disable_restore_punctuation_patterns', false ) ) {
+            return $translated_string;
+        }
+
+        // Check if original string is empty or translated string is empty
+        if ( empty($original_string) || empty($translated_string) ) {
+            return $translated_string;
+        }
+
+        // Define patterns to check (longer patterns first to avoid partial matches)
+        // leading or trailing spaces are trimmed by trp_full_trim() inside translate_page but we still check here as "space+comma" at the end is valid for example
+        $patterns = [', ', '. ', '; ', ' ,', ' .', ' ;', ',', '.', ';', ' '];
+
+        // Check all patterns and restore at both leading and trailing positions
+        foreach ($patterns as $pattern) {
+            $pattern_len = mb_strlen($pattern, 'UTF-8');
+
+            // Check and restore leading pattern
+            $original_start = mb_substr($original_string, 0, $pattern_len, 'UTF-8');
+            $translated_start = mb_substr($translated_string, 0, $pattern_len, 'UTF-8');
+
+            if ($original_start === $pattern && $translated_start !== $pattern) {
+                $translated_string = $pattern . $translated_string;
+            }
+
+            // Check and restore trailing pattern
+            $original_end = mb_substr($original_string, -$pattern_len, $pattern_len, 'UTF-8');
+            $translated_end = mb_substr($translated_string, -$pattern_len, $pattern_len, 'UTF-8');
+
+            if ($original_end === $pattern && $translated_end !== $pattern) {
+                $translated_string = $translated_string . $pattern;
+            }
+        }
+
+        return $translated_string;
     }
 
 }

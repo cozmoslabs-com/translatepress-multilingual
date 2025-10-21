@@ -5,7 +5,7 @@ Tags: translate, translation, multilingual, automatic translation, bilingual, fr
 Requires at least: 3.1.0
 Tested up to: 6.8.3
 Requires PHP: 7.4
-Stable tag: 3.0
+Stable tag: 3.0.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -142,6 +142,16 @@ For more information please check out our [documentation](https://translatepress
 
 
 == Changelog ==
+= 3.0.1 =
+* Fixed cases of #!trpst# wrappings appearing on texts from localized scripts such as the WooCommerce checkout page
+* Fixed layout issues on Gutenberg pages by upgrading Language Switcher block to Gutenberg API v3
+* Fixed missing punctuation (e.g. quotes, commas) at the start or end of automatically translated texts
+* Fixed incorrect html tags appearing in the License key error message during onboarding
+* Fixed issue with not showing available TranslatePress AI words after activating license in the onboarding process
+* Fixed PHP warning about undefined array key "oppositeLanguage"
+* Fixed PHP warning on gettext insert update
+* Added Slim SEO hooks in is_sitemap_path function to allow translation of links in sitemap
+
 = 3.0 =
 * Start Translating in under 5 minutes with a new onboarding flow for TranslatePress to quickly setup languages, automatic translation and add-ons
 

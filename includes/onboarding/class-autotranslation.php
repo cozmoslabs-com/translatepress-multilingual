@@ -59,6 +59,12 @@ class TRP_Step_AutoTranslation implements TRP_Onboarding_Step_Interface {
         if ($this->errors->has_errors()) {
             return;
         }
+
+        //synchronize EDD license with MTAPI
+        if(!empty($license)){
+            trp_mtapi_sync_license_call(sanitize_text_field($license));
+        }
+
         // Check if continue button was pressed (hidden input is present)
         if (isset($data['submit']) && $data['submit'] == 'activate') {
             // If no errors and continue button was pressed, redirect to addons step
@@ -121,7 +127,7 @@ class TRP_Step_AutoTranslation implements TRP_Onboarding_Step_Interface {
         <h3><?php esc_html_e('Automatically translate your website using TranslatePress AI.', 'translatepress-multilingual'); ?></h3>
         <?php
         foreach ($this->errors->get_error_messages() as $message) {
-            echo '<div class="ob-notice ob-notice-error">' . esc_html($message) . '</div>';
+            echo '<div class="ob-notice ob-notice-error">' . wp_kses_post($message) . '</div>';
         }
         ?>
         <form method="post">

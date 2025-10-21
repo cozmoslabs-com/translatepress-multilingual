@@ -241,8 +241,11 @@ div.trp-ls-inline .trp-language-switcher-inner {
     padding-left: 5px;
 }
 
-
-
+@media (prefers-reduced-motion: reduce) {
+    .trp-switcher-dropdown-list {
+        transition: none !important; /* no max-height animation */
+    }
+}
 
 /* Legacy Language Switcher shortcode css rules
  * Useful for displaying the Automatic Language Detection language switcher
