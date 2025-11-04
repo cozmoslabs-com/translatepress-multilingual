@@ -244,7 +244,7 @@ class TRP_Woocommerce_Emails{
 
         WC()->load_plugin_textdomain();
 
-        $this->bootstrap_trp_gettext_for_emails();
+        $this->bootstrap_trp_gettext_for_email_language( $language );
 
         // calls necessary because the default additional_content field of an email is localized before this point and stored in a variable in the previous locale
         $wc_email->init_form_fields();
@@ -288,7 +288,7 @@ class TRP_Woocommerce_Emails{
      * This way, even when emails are sent outside a normal page render, the
      * gettext translations stored in TranslatePress are applied correctly.
      */
-    private function bootstrap_trp_gettext_for_emails() {
+    private function bootstrap_trp_gettext_for_email_language( $language ) {
         $trp             = TRP_Translate_Press::get_trp_instance();
         $gettext_manager = $trp->get_component( 'gettext_manager' );
         $pg              = $gettext_manager->get_gettext_component( 'process_gettext' );
@@ -296,9 +296,6 @@ class TRP_Woocommerce_Emails{
         // If at least one core handler is already attached, return
         if ( has_filter( 'gettext', [ $pg, 'woocommerce_process_gettext_strings_no_context' ] ) )
             return;
-
-        if ( !$trp->get_component( 'machine_translator' ) )
-            $trp->init_machine_translation(); // Machine translator should be initialized by the get_trp_instance() call. In the case of cron jobs, it is not - so we initialize it here manually.
 
         // Bypass processing_gettext_is_needed usual checks. Otherwise, the below method calls wouldn't go through
         add_filter( 'trp_processing_gettext_is_needed', '__return_true' );

@@ -5,7 +5,7 @@ Tags: translate, translation, multilingual, automatic translation, bilingual, fr
 Requires at least: 3.1.0
 Tested up to: 6.8.3
 Requires PHP: 7.4
-Stable tag: 3.0.2
+Stable tag: 3.0.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -142,6 +142,9 @@ For more information please check out our [documentation](https://translatepress
 
 
 == Changelog ==
+= 3.0.3 =
+* Fixed an issue introduced in the previous update that occurred when using Google Translate as the translation engine
+
 = 3.0.2 =
 * Fixed potential security issue due to calling extract on shortcode attribute
 * Fixed issue with shortcode language switcher disappearing when "Show opposite language" option was enabled
