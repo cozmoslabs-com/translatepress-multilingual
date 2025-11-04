@@ -259,6 +259,10 @@ class TRP_Gettext_Insert_Update extends TRP_Query {
 			}
 		}
 
+		if ( empty( $place_holders ) || empty( $values ) ) {
+			return;
+		}
+
 		$on_duplicate    = ' ON DUPLICATE KEY UPDATE ';
 		$key_term_values = $this->is_values_accepted() ? 'VALUES' : 'VALUE';
 		foreach ( $columns_to_update as $column ) {

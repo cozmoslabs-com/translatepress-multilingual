@@ -74,6 +74,7 @@
 <?php __("Settings scope unknown.", "translatepress-multilingual"); ?>
 <?php __("Legacy disabled.", "translatepress-multilingual"); ?>
 <?php __("Language Switcher", "translatepress-multilingual"); ?>
+<?php __("Change language to %s", "translatepress-multilingual"); ?>
 <?php __("Automatic Translation", "translatepress-multilingual"); ?>
 <?php __("DeepL", "translatepress-multilingual"); ?>
 <?php __("Unsupported languages", "translatepress-multilingual"); ?>
@@ -355,6 +356,10 @@
 <?php __("Save Changes", "translatepress-multilingual"); ?>
 <?php __("TranslatePress Errors", "translatepress-multilingual"); ?>
 <?php __("There are no logged errors.", "translatepress-multilingual"); ?>
+<?php __("Change language", "translatepress-multilingual"); ?>
+<?php __("Website language selector", "translatepress-multilingual"); ?>
+<?php __("WordPress Translation Plugin", "translatepress-multilingual"); ?>
+<?php __("Available languages", "translatepress-multilingual"); ?>
 <?php __("Language Switcher update notice", "translatepress-multilingual"); ?>
 <?php __("Legacy language switcher is currently enabled", "translatepress-multilingual"); ?>
 <?php __("We’ve upgraded the switcher for richer customization and a better user experience.<br>In order to use the new configurator, turn off\n                            <strong>Load legacy language switcher</strong>.", "translatepress-multilingual"); ?>
@@ -479,7 +484,6 @@
 <?php __("Terms of Service", "translatepress-multilingual"); ?>
 <?php __("Support", "translatepress-multilingual"); ?>
 <?php __("Documentation", "translatepress-multilingual"); ?>
-<?php __("Website language selector", "translatepress-multilingual"); ?>
 <?php __("Optimize TranslatePress database tables", "translatepress-multilingual"); ?>
 <?php __("<strong>IMPORTANT NOTE:</strong> Before performing this action it is strongly recommended to first backup the database.", "translatepress-multilingual"); ?>
 <?php __("IMPORTANT: It is strongly recommended to first backup the database!! Are you sure you want to continue?", "translatepress-multilingual"); ?>

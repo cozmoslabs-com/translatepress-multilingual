@@ -31,8 +31,7 @@ class BaseSwitcher {
 
         this.collapse();
         this.setAutoWidth();
-
-        this.bindKeyboard(this.root);
+        this.bindKeyboard();
     }
 
     collapse() {
@@ -40,7 +39,6 @@ class BaseSwitcher {
         this.list.setAttribute('inert', '');
         this.setExpanded(false);
         this.root.classList.remove('is-transitioning');
-        setListTabbing(this.list, false);
     }
 
     /**
@@ -48,12 +46,12 @@ class BaseSwitcher {
      * We do this in order to avoid width shift on hover
      * */
     setAutoWidth() {
-        const bonusWidth = 20;
+        const bonusWidth = 10;
 
         const cs = getComputedStyle(this.root);
         const declaredWidth = cs.getPropertyValue('--switcher-width').trim();
 
-        if (declaredWidth === 'auto') {
+        if (declaredWidth === 'auto' && this.root.querySelector('.trp-language-item-name')) { // In case trp-language-item-name is not present, we are in flags only mode - so no auto width sizing is needed
             const initialWidth = this.root.getBoundingClientRect().width;
 
             this.root.style.setProperty('--switcher-width', (initialWidth + bonusWidth) + 'px');
@@ -61,8 +59,9 @@ class BaseSwitcher {
     }
 
     setExpanded(open) {
-        const val = String(!!open);
-        this.root.setAttribute('aria-expanded', val);
+        const trigger = this.root.querySelector('.trp-language-item__current[role="button"]');
+        const val = String( !!open );
+        trigger?.setAttribute('aria-expanded', val);
         this.root.classList.toggle('is-open', !!open);
     }
 
@@ -87,7 +86,6 @@ class BaseSwitcher {
                 // Next frame so the browser registers the pre-open (max-height:0) state
                 requestAnimationFrame(() => this.setExpanded(true));
             }
-            setListTabbing( this.list, true );
 
             // keyboard open should move focus after transition completes
             this._pendingFocusOnOpen = (source?.type === 'keydown');
@@ -101,26 +99,30 @@ class BaseSwitcher {
         }
     }
 
-    bindKeyboard(target) {
-        target.addEventListener('keydown', (e) => {
-            const isOnTrigger = e.target === target;
-            const inList = !!e.target.closest('.trp-switcher-dropdown-list');
+    bindKeyboard() {
+        const trigger = this.root.querySelector('.trp-language-item__current[role="button"]');
+        if ( !trigger ) return;
 
-            // Toggle only from the trigger, not when focus is on list items
-            if (isOnTrigger && (e.key === 'Enter' || e.key === ' ')) {
+        trigger.addEventListener('keydown', (e) => {
+            const inList = !!e.target.closest?.('.trp-switcher-dropdown-list');
+
+            if ( e.key === 'Enter' || e.key === ' ' ) {
                 e.preventDefault();
                 this.setOpen(!this.isOpen, { source: e });
                 return;
             }
 
-            // Collapse on escape
-            if (e.key === 'Escape') {
+            if ( e.key === 'ArrowDown' && !this.isOpen ) {
+                e.preventDefault();
+                this.setOpen(true, { source: e });
+            }
+
+            if ( e.key === 'Escape' ) {
                 this.setOpen(false, { source: e });
-                if (!inList) target.focus?.();
+                trigger.focus?.();
             }
         });
     }
-
 }
 
 class ShortcodeSwitcher extends BaseSwitcher {
@@ -137,12 +139,13 @@ class ShortcodeSwitcher extends BaseSwitcher {
         if ('inert' in overlay) overlay.inert = false;
 
         super(overlay);
+
         if (!this.root || !this.list) return;
-        // ARIA on overlay (focusable container)
-        this.root.setAttribute('role', 'listbox');
-        this.root.setAttribute('aria-haspopup', 'true');
-        this.root.setAttribute('aria-controls', this.list.id);
-        if (!this.root.hasAttribute('tabindex')) this.root.setAttribute('tabindex', '0');
+
+        const control = this.root.querySelector('.trp-language-item__current[role="button"]');
+        if (control && this.list && !control.hasAttribute('aria-controls')) {
+            control.setAttribute('aria-controls', this.list.id);
+        }
 
         const isClickMode =
                   this.root.classList.contains('trp-open-on-click') ||
@@ -201,10 +204,13 @@ document.addEventListener('DOMContentLoaded', () => {
     // If no wrapper and we are in Gutenberg, watch for async SSR insert
     if (
         inGutenberg() &&
-        !getEditorDoc().querySelector('.trp-shortcode-switcher__wrapper')
+        !getEditorDoc().querySelector(WRAPPER)
     ) {
         observeWrapperUntilFound();
     }
+
+    if ( !inGutenberg() )
+        observeShortcodeSwitcher();
 });
 
 /** For shortcode switcher
@@ -214,17 +220,13 @@ const TRP_BOUND = new WeakSet();
 const mark = (el) => TRP_BOUND.add(el);
 const isMarked = (el) => TRP_BOUND.has(el);
 
+const WRAPPER = '.trp-shortcode-switcher__wrapper';
+const OVERLAY = '.trp-language-switcher:not(.trp-opposite-button)';
+
 // Helpers
 function inGutenberg() {
     return document.body?.classList?.contains('block-editor-page')
         || !!(window.wp?.data?.select?.('core/block-editor'));
-}
-
-function setListTabbing ( listEl, enable ) {
-    if ( !listEl ) return;
-    listEl.querySelectorAll('[role="option"], a.trp-language-item').forEach( el => {
-        el.tabIndex = enable ? 0 : -1;
-    } );
 }
 
 // If editor uses an iframe canvas, work inside it
@@ -242,7 +244,7 @@ function initLanguageSwitchers(root = document) {
     if (floater)
         new FloaterSwitcher(floater);
 
-    root.querySelectorAll('.trp-shortcode-switcher__wrapper')
+    root.querySelectorAll(WRAPPER)
         .forEach(wrapper => {
             const overlay = wrapper.querySelector('.trp-language-switcher:not(.trp-opposite-button)');
 
@@ -251,6 +253,41 @@ function initLanguageSwitchers(root = document) {
                 new ShortcodeSwitcher(wrapper);
             }
         });
+}
+
+/**
+ * Observes the document for dynamically inserted shortcode switchers and initializes them automatically when detected.
+ */
+function observeShortcodeSwitcher() {
+    const initWrapper = ( wrapper ) => {
+        if ( !wrapper )
+            return;
+
+        const overlay = wrapper.querySelector( OVERLAY );
+
+        if ( !overlay || isMarked( overlay ) )
+            return;
+
+        mark( overlay );
+
+        new ShortcodeSwitcher( wrapper );
+    }
+
+    const mo = new MutationObserver( ( mutations ) => {
+        for ( const m of mutations ) {
+            for ( const n of m.addedNodes ) {
+                if ( n.nodeType !== 1 )
+                    continue;
+
+                if ( n.matches?.( WRAPPER ) )
+                    initWrapper( n );
+
+                n.querySelectorAll?.( WRAPPER ).forEach( initWrapper );
+            }
+        }
+    });
+
+    mo.observe( document, { childList: true, subtree: true } );
 }
 
 /**
@@ -269,7 +306,7 @@ function initLanguageSwitchers(root = document) {
 function observeWrapperUntilFound() {
     // If wrapper already exists in current editor doc, init
     const edDoc = getEditorDoc();
-    const existing = edDoc.querySelector('.trp-shortcode-switcher__wrapper');
+    const existing = edDoc.querySelector(WRAPPER);
 
     if ( existing ) {
         initLanguageSwitchers( edDoc );
@@ -305,9 +342,9 @@ function observeWrapperUntilFound() {
 
                 // Also catch shortcode wrapper added directly to the outer document (API v2, no iframe)
                 const wrapper =
-                          n.matches?.('.trp-shortcode-switcher__wrapper')
+                          n.matches?.(WRAPPER)
                               ? n
-                              : n.querySelector?.('.trp-shortcode-switcher__wrapper');
+                              : n.querySelector?.(WRAPPER);
 
                 if ( wrapper ) {
                     outerMO.disconnect();
@@ -338,7 +375,7 @@ function observeWrapperUntilFound() {
             if ( !doc ) return;
 
             // If wrapper is already there, init once and stop.
-            const hit = doc.querySelector('.trp-shortcode-switcher__wrapper');
+            const hit = doc.querySelector(WRAPPER);
             if ( hit ) {
                 initLanguageSwitchers( doc );
                 return;
@@ -350,8 +387,8 @@ function observeWrapperUntilFound() {
                     for ( const nn of mm.addedNodes ) {
                         if ( nn.nodeType !== 1 ) continue;
                         if (
-                            nn.matches?.('.trp-shortcode-switcher__wrapper') ||
-                            nn.querySelector?.('.trp-shortcode-switcher__wrapper')
+                            nn.matches?.(WRAPPER) ||
+                            nn.querySelector?.(WRAPPER)
                         ) {
                             innerMO.disconnect();
                             initLanguageSwitchers( doc );
@@ -359,7 +396,7 @@ function observeWrapperUntilFound() {
                         }
                     }
                 }
-                if ( doc.querySelector('.trp-shortcode-switcher__wrapper') ) {
+                if ( doc.querySelector(WRAPPER) ) {
                     innerMO.disconnect();
                     initLanguageSwitchers( doc );
                 }
@@ -369,4 +406,3 @@ function observeWrapperUntilFound() {
         }
     }
 }
-

@@ -23,6 +23,7 @@
 
 .trp-switcher-position-top.trp-floating-switcher {
     flex-direction: column;
+    top: var(--wp-admin--admin-bar--height, 0);
 }
 
 .trp-floating-switcher.trp-switcher-position-top:not(.trp-ls-inline) .trp-language-switcher-inner,
@@ -31,7 +32,7 @@
 }
 
 /* Inline variant */
-div.trp-ls-inline .trp-language-switcher-inner {
+nav.trp-ls-inline .trp-language-switcher-inner {
     flex-direction: row;
 }
 
@@ -81,8 +82,8 @@ div.trp-ls-inline .trp-language-switcher-inner {
     box-shadow: none;
 }
 
-/* Hide the anchor that holds space in the document for the actual switcher */
-.trp-shortcode-anchor {
+/* Hide the anchor that holds space in the document for the actual switcher. Only if opposite mode is not enabled. We show only the anchor in opposite mode */
+.trp-shortcode-anchor:not(.trp-opposite-button) {
     visibility: hidden;
 }
 
@@ -154,17 +155,11 @@ div.trp-ls-inline .trp-language-switcher-inner {
     transform: rotate(180deg);
 }
 
-.trp-shortcode-overlay:focus { outline: none; }
-.trp-shortcode-overlay:focus-visible {
+/* Links inside switcher */
+.trp-language-item:focus { outline: none; }
+.trp-language-item:focus-visible {
     outline: 2px solid var(--text);
-    outline-offset: 2px;
-}
-
-/* Links inside (optional) */
-.trp-shortcode-overlay .trp-language-item:focus { outline: none; }
-.trp-shortcode-overlay .trp-language-item:focus-visible {
-    outline: 2px solid var(--text);
-    outline-offset: 2px;
+    outline-offset: -2px;
 }
 
 /* Items */

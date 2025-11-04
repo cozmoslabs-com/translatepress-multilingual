@@ -5,7 +5,7 @@ Tags: translate, translation, multilingual, automatic translation, bilingual, fr
 Requires at least: 3.1.0
 Tested up to: 6.8.3
 Requires PHP: 7.4
-Stable tag: 3.0.1
+Stable tag: 3.0.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -142,6 +142,20 @@ For more information please check out our [documentation](https://translatepress
 
 
 == Changelog ==
+= 3.0.2 =
+* Fixed potential security issue due to calling extract on shortcode attribute
+* Fixed issue with shortcode language switcher disappearing when "Show opposite language" option was enabled
+* Fixed mysql syntax error regarding machine translating gettext when trying to update with no values
+* Fixed flags for Catalan, Galician and Basque languages
+* Fixed edge case error "call to a member function is_available() on null"
+* Fixed WooCommerce failed order emails not being translated
+* Fixed shortcode switcher not being interactive inside pop-up
+* Compatibility added for Simple Download Manager on certain web-hosts due to object buffer
+* Accessibility improvements for floating and shortcode language switchers
+* Take WP admin bar into account when floating switcher is top positioned.
+* Better support for browser zoom in the String Translation
+* Ignore gettext translation for WP Job Manager base slugs as they cause issues with TranslatePress translated slugs
+
 = 3.0.1 =
 * Fixed cases of #!trpst# wrappings appearing on texts from localized scripts such as the WooCommerce checkout page
 * Fixed layout issues on Gutenberg pages by upgrading Language Switcher block to Gutenberg API v3

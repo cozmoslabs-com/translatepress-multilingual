@@ -2677,3 +2677,32 @@ function trp_breakdance_compat__remove_filter() {
         remove_filter( 'template_include', 'Breakdance\\ActionsFilters\\template_include', 1000000 );
 }
 add_action( 'plugins_loaded', 'trp_breakdance_compat__remove_filter', 20 );
+
+/*
+ * Add support for Simple Download Manager on certain hosts (not replicated locally)
+ * Having TP installed will brake archives, an extra line gets added to the archive processing due to output buffer.
+ * Do not translate url's like this as it brakes them because they are archives's: https://translatepress.ddev.site/ro/?sdm_process_download=1&download_id=95
+ */
+add_action( 'trp_before_running_hooks', 'trp_sdm_compat_remove_hooks_that_start_object_buffer', 10, 1);
+function trp_sdm_compat_remove_hooks_that_start_object_buffer( $trp_loader ) {
+    if ( isset( $_GET['sdm_process_download'] ) && isset( $_GET['download_id'] ) ) {
+        add_filter( 'trp_skip_gettext_processing', '__return_true' );
+        $trp                = TRP_Translate_Press::get_trp_instance();
+        $translation_render = $trp->get_component( 'translation_render' );
+        $trp_loader->remove_hook( 'init', 'start_output_buffer', $translation_render );
+    }
+}
+
+/*
+ * Disable gettext translation of the job manager slugs as they conflict with TranslatePress.
+ */
+add_filter( 'gettext_with_context', 'trp_ignore_wp_job_manager_slugs', 99, 4 );
+function trp_ignore_wp_job_manager_slugs( $translation, $text, $context = null, $domain = null ) {
+    static $targets = [ 'job', 'job-category', 'job-type', 'job-listings' ];
+
+    if ( $domain == 'wp-job-manager' && in_array( $text, $targets, true ) ) {
+        return $text; // Always return the original untranslated string
+    }
+
+    return $translation;
+}
