@@ -283,7 +283,8 @@ class TRP_MTAPI_Machine_Translator extends TRP_Machine_Translator {
             'zh_TW' => 'zh',
             'zh_CN' => 'zh',
             'de_DE_formal' => 'de',
-            'nb_NO' => 'nb'
+            'nb_NO' => 'nb',
+            'ckb'   => 'ckb' // Kurdish (Sorani)
         );
         if ( isset( $exceptions_source_mapping_codes[$source_language_code] ) ){
             $source_language = $exceptions_source_mapping_codes[$source_language_code];
@@ -316,7 +317,20 @@ class TRP_MTAPI_Machine_Translator extends TRP_Machine_Translator {
             'en_ZA' => 'en-gb',
             'en_NZ' => 'en-gb',
             'en_AU' => 'en-gb',
-            'nb_NO' => 'nb'
+            'nb_NO' => 'nb',
+            'ckb'   => 'ckb', // Kurdish (Sorani)
+            'es_AR' => 'es-419',
+            'es_CL' => 'es-419',
+            'es_CO' => 'es-419',
+            'es_CR' => 'es-419',
+            'es_DO' => 'es-419',
+            'es_EC' => 'es-419',
+            'es_GT' => 'es-419',
+            'es_MX' => 'es-419',
+            'es_PE' => 'es-419',
+            'es_PR' => 'es-419',
+            'es_UY' => 'es-419',
+            'es_VE' => 'es-419'
         );
         if ( isset( $exceptions_target_mapping_codes[$target_language_code] ) ){
             $target_language = $exceptions_target_mapping_codes[$target_language_code];

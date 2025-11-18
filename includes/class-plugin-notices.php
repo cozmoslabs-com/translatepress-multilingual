@@ -48,7 +48,7 @@ class TRP_Add_General_Notices{
             // Check that the user hasn't already clicked to ignore the message
             if ( ! get_user_meta($user_id, $this->notificationId.'_dismiss_notification' ) || $this->force_show  ) {//ignore the dismissal if we have force_show
                 add_filter('safe_style_css', array( $this, 'allow_z_index_in_wp_kses'));
-                echo wp_kses( apply_filters($this->notificationId.'_notification_message','<div class="'. $this->notificationClass .'" style="position:relative;'  . ((strpos($this->notificationClass, 'trp-narrow')!==false ) ? 'max-width: 825px;' : '') . '" >'.$this->notificationMessage.'</div>', $this->notificationMessage), [ 'div' => [ 'class' => [],'style' => [] ], 'p' => ['style' => [], 'class' => []], 'a' => ['href' => [], 'type'=> [], 'class'=> [], 'style'=>[], 'title'=>[],'target'=>[]], 'span' => ['class'=> []], 'strong' => [], 'img' => [ 'src' => [], 'style' => [] ] ] );
+                echo wp_kses( apply_filters($this->notificationId.'_notification_message','<div class="'. $this->notificationClass .'" style="position:relative;'  . ((strpos($this->notificationClass, 'trp-narrow')!==false ) ? 'max-width: 825px;' : '') . '" >'.$this->notificationMessage.'</div>', $this->notificationMessage), [ 'div' => [ 'class' => [],'style' => [] ], 'p' => ['style' => [], 'class' => []], 'a' => ['href' => [], 'type'=> [], 'class'=> [], 'style'=>[], 'title'=>[],'target'=>[]], 'span' => ['class'=> []], 'strong' => [], 'img' => [ 'src' => [], 'style' => [] ], 'br' => [] ]  );
                 remove_filter('safe_style_css', array( $this, 'allow_z_index_in_wp_kses'));
             }
             do_action( $this->notificationId.'_notification_displayed', $current_user, $pagenow );
@@ -378,9 +378,13 @@ class TRP_Trigger_Plugin_Notifications{
                 elseif( $license_detail->error == 'no_activations_left' )
                     //[utm13]
                     $message .= sprintf( __('You have reached the activation limit for your <strong>%1$s</strong> license. <br/>Manage your active sites from %2$s your account %3$s.' , 'translatepress-multilingual' ), $tp_product_name, "<a href='https://translatepress.com/account/?utm_source=wp-dashboard&utm_medium=client-site&utm_campaign=activation-limit' target='_blank' >", "</a>" );
-                elseif( $license_detail->error == 'item_name_mismatch' )
+                elseif( $license_detail->error == 'item_name_mismatch' ){
                     //[utm14]
                     $message .= sprintf( __('License key mismatch. The license you entered doesn’t match the <strong>%1$s</strong> version you have installed. <br/>Please check that you’ve installed the correct version for your license from your %2$sTranslatePress account%3$s.' , 'translatepress-multilingual' ), $tp_product_name, "<a href='https://translatepress.com/account/?utm_source=wp-dashboard&utm_medium=client-site&utm_campaign=license-mismatch' target='_blank' >", "</a>" );
+                    if( !empty( $license_detail->item_name ) && urldecode( $license_detail->item_name ) === 'TranslatePress' ) {
+                        $message .= __( '<br/>If you have only the free plugin installed but added a paid license, please install the paid plugin from your TranslatePress account.' , 'translatepress-multilingual' );
+                    }
+                }
                 elseif( $license_detail->error == 'expired' )
                     //[utm15]
                     $message .= sprintf( __('Your <strong>TranslatePress</strong> license has expired. <br/>Please %1$sRenew Your Licence%2$s to continue receiving access to automatic translations via TranslatePress AI, premium addons, product downloads, and automatic updates. %3$sRenew now %4$s' , 'translatepress-multilingual' ), "<a href='https://translatepress.com/account/?utm_source=wp-dashboard&utm_medium=client-site&utm_campaign=expired-license' target='_blank'>", "</a>", "<a href='https://translatepress.com/account/?utm_source=wp-dashboard&utm_medium=client-site&utm_campaign=expired-license' target='_blank' class='button-primary'>", "</a>" );
@@ -541,9 +545,13 @@ class TRP_Trigger_Plugin_Notifications{
                 elseif( $license_detail->error == 'no_activations_left' )
                     //[utm21]
                     $message .= sprintf( __('You have reached the activation limit for your <strong>%1$s</strong> license. <br/>Manage your active sites from %2$s your account %3$s.' , 'translatepress-multilingual' ), $tp_product_name, "<a href='https://translatepress.com/account/?utm_source=wp-dashboard&utm_medium=client-site&utm_campaign=activation-limit' target='_blank' >", "</a>" );
-                elseif( $license_detail->error == 'item_name_mismatch' )
+                elseif( $license_detail->error == 'item_name_mismatch' ){
                     //[utm22]
                     $message .= sprintf( __('License key mismatch. The license you entered doesn’t match the <strong>%1$s</strong> version you have installed. <br/>Please check that you’ve installed the correct version for your license from your %2$sTranslatePress account%3$s.' , 'translatepress-multilingual' ), $tp_product_name, "<a href='https://translatepress.com/account/?utm_source=wp-dashboard&utm_medium=client-site&utm_campaign=license-mismatch' target='_blank' >", "</a>" );
+                    if( !empty( $license_detail->item_name ) && urldecode( $license_detail->item_name ) === 'TranslatePress' ) {
+                        $message .= __( '<br/>If you have only the free plugin installed but added a paid license, please install the paid plugin from your TranslatePress account.' , 'translatepress-multilingual' );
+                    }
+                }
                 elseif( $license_detail->error == 'website_already_on_free_license' )
                     //[utm23]
                     $message .= sprintf( __('This website is already activated under a free license. Each website can only use one free license. Please upgrade to a premium plan for more TranslatePress AI words from %1$s your account %2$s.' , 'translatepress-multilingual' ),  "<a href='https://translatepress.com/account/?utm_source=wp-dashboard&utm_medium=client-site&utm_campaign=tp-ai-free-used-key' target='_blank' class='button-primary' >", "</a>" );

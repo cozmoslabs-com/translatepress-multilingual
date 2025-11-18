@@ -2706,3 +2706,22 @@ function trp_ignore_wp_job_manager_slugs( $translation, $text, $context = null, 
 
     return $translation;
 }
+
+/**
+ * Override the wrap_with_post_id condition for Divi
+ *
+ * Divi doesn't use the main loop in the traditional way, so we need to override
+ * the condition that checks for in_the_loop and is_main_query.
+ *
+ * @param bool $return Whether to bypass the wrap condition
+ * @return bool
+ */
+add_filter('trp_wrap_with_post_id_overrule', 'trp_divi_override_wrap_condition', 10);
+function trp_divi_override_wrap_condition($return) {
+    // Check if Divi is the active theme
+    if (function_exists('et_setup_theme')) {
+        // Return false to bypass the in_the_loop check
+        return false;
+    }
+    return $return;
+}

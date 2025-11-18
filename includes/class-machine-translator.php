@@ -25,18 +25,20 @@ class TRP_Machine_Translator {
     public function __construct( $settings ){
         $this->settings = $settings;
 
-        $trp                             = TRP_Translate_Press::get_trp_instance();
+        $trp = TRP_Translate_Press::get_trp_instance();
+
         if ( ! $this->machine_translator_logger ) {
             $this->machine_translator_logger = $trp->get_component('machine_translator_logger');
         }
+
         if ( ! $this->trp_languages ) {
             $this->trp_languages = $trp->get_component('languages');
         }
+
         $this->machine_translation_codes = $this->trp_languages->get_iso_codes($this->settings['translation-languages']);
+
         add_filter( 'trp_exclude_words_from_automatic_translation', array( $this, 'sort_exclude_words_from_automatic_translation_array' ), 99999, 1 );
         add_filter( 'trp_exclude_words_from_automatic_translation', array( $this, 'exclude_special_symbol_from_translation' ), 9999, 2 );
-
-        add_filter('trp_add_google_v2_supported_languages_to_the_array', array( $this, 'add_google_v2_supported_languages_that_are_not_returned_by_the_post_response'), 10, 1);
     }
 
     /**
@@ -320,6 +322,39 @@ class TRP_Machine_Translator {
     }
 
     /**
+     * Check if a string should be sent for translation based on minimum length and content criteria
+     *
+     * @param string $string The string to check
+     * @return bool True if the string should be translated, false otherwise
+     */
+    private function should_translate_string( $string ) {
+        // Trim whitespace for accurate length check
+        $trimmed = trim( $string );
+
+        // Check if string is empty after trimming
+        if ( empty( $trimmed ) ) {
+            return false;
+        }
+
+        // Get minimum length (default: 2 characters)
+        // Allow customization via filter
+        $min_length = apply_filters( 'trp_minimum_translation_length', 2 );
+
+        // Check minimum length
+        if ( mb_strlen( $trimmed, 'UTF-8' ) < $min_length ) {
+            return false;
+        }
+
+        // Check if string is only punctuation/special characters (optional, can be disabled via filter)
+        $skip_punctuation_only = apply_filters( 'trp_skip_punctuation_only_strings', true );
+        if ( $skip_punctuation_only && preg_match( '/^[[:punct:][:space:]]+$/u', $trimmed ) ) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
      * Function to be used externally
      *
      * @param $strings
@@ -339,6 +374,25 @@ class TRP_Machine_Translator {
 
             $strings = array_unique($strings);
             $original_strings = $strings;
+
+            // Filter out strings that are too short to translate
+            $strings_to_skip = array();
+            $strings_to_translate = array();
+            foreach ($strings as $key => $string) {
+                if ( !$this->should_translate_string($string) ) {
+                    $strings_to_skip[$key] = $string;
+                } else {
+                    $strings_to_translate[$key] = $string;
+                }
+            }
+
+            // If all strings are too short, return them as-is
+            if ( empty($strings_to_translate) ) {
+                return $original_strings;
+            }
+
+            // Continue with only the strings that meet the minimum length
+            $strings = $strings_to_translate;
 
             foreach ($strings as $key => $string) {
                 /* html_entity_decode is needed before replacing the character "#" from the list because characters like &#8220; (8220 utf8)
@@ -375,6 +429,12 @@ class TRP_Machine_Translator {
                     $machine_strings_return_array[$original_strings[$key]] = $processed_string;
                 }
             }
+
+            // Add skipped strings back to the return array with their original values
+            foreach ($strings_to_skip as $key => $skipped_string) {
+                $machine_strings_return_array[$original_strings[$key]] = $original_strings[$key];
+            }
+
             return $machine_strings_return_array;
         }else {
             return array();

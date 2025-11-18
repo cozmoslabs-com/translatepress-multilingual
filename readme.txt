@@ -5,7 +5,7 @@ Tags: translate, translation, multilingual, automatic translation, bilingual, fr
 Requires at least: 3.1.0
 Tested up to: 6.8.3
 Requires PHP: 7.4
-Stable tag: 3.0.3
+Stable tag: 3.0.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -142,22 +142,21 @@ For more information please check out our [documentation](https://translatepress
 
 
 == Changelog ==
-= 3.0.3 =
-* Fixed an issue introduced in the previous update that occurred when using Google Translate as the translation engine
-
-= 3.0.2 =
-* Fixed potential security issue due to calling extract on shortcode attribute
-* Fixed issue with shortcode language switcher disappearing when "Show opposite language" option was enabled
-* Fixed mysql syntax error regarding machine translating gettext when trying to update with no values
-* Fixed flags for Catalan, Galician and Basque languages
+= 3.0.4 =
+* Added 39 more languages including Irish, Maltese and Sicilian
+* Added support for Latin American Spanish automatic translation in TranslatePress AI
+* Added support for Divi search in secondary language
+* Added support for exact match search in String Translation by placing the string in quotes: "example"
+* Allow schema.org data to be translated
+* Fixed Regular String Translation search so filtered languages also match terms appearing in the middle of translated strings, not only at the start
+* Prevent automatic translation of strings that are 0 or 1 characters long or strings that are punctuation only
+* Change background hover color for transparent preset in order to improve contrast of language switcher
+* Fixed two missing spaces in floating switcher HTML markup
+* Fix PHP warning with empty domain for gettext with context
 * Fixed edge case error "call to a member function is_available() on null"
-* Fixed WooCommerce failed order emails not being translated
-* Fixed shortcode switcher not being interactive inside pop-up
-* Compatibility added for Simple Download Manager on certain web-hosts due to object buffer
-* Accessibility improvements for floating and shortcode language switchers
-* Take WP admin bar into account when floating switcher is top positioned.
-* Better support for browser zoom in the String Translation
-* Ignore gettext translation for WP Job Manager base slugs as they cause issues with TranslatePress translated slugs
+* Moved the "Automatically Translate Slug" setting to be first in line
+* Extended the license message for item_name_mismatch to provide more context
+* Improved text information next to the default language
 
 
 = Older versions =

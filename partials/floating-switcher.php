@@ -33,7 +33,7 @@ $render_item = function ( $lang, $flag_ratio, $as_control = false ) use ( $flag_
         $current_language_label = __( 'Change language', 'translatepress-multilingual' );
         // Toggle control: NOT a link; carries state and relationship to the popup
         // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-        echo '<div class="' . esc_attr( $class ) . '" ' . $title . ' role="button" tabindex="0" aria-expanded="false"' . 'aria-label="' .  esc_attr( $current_language_label ) . '" aria-controls="' . esc_attr( $dropdown_id ) . '" ' . $no_translation . '>';
+        echo '<div class="' . esc_attr( $class ) . '" ' . $title . ' role="button" tabindex="0" aria-expanded="false" aria-label="' . esc_attr( $current_language_label ) . '" aria-controls="' . esc_attr( $dropdown_id ) . '" ' . $no_translation . '>';
 
         if ( $flag_position === 'before' ) {
             // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
@@ -55,7 +55,7 @@ $render_item = function ( $lang, $flag_ratio, $as_control = false ) use ( $flag_
     $url = esc_url( $this->url_converter->get_url_for_language( $lang['code'] ) );
 
     // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-    echo '<a href="' . $url . '" class="' . esc_attr( $class ) . '" ' . $title . $no_translation . '>';
+    echo '<a href="' . $url . '" class="' . esc_attr( $class ) . '" ' . $title . ' ' . $no_translation . '>';
 
     if ( $flag_position === 'before' ) {
         // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped

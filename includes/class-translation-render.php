@@ -2433,6 +2433,32 @@ class TRP_Translation_Render{
                 break;
             }
 
+            /**
+             * Preserve <script type="application/ld+json"> blocks,
+             * so they remain in the DOM and can be processed by
+             * translate_schema_data() via trp_process_other_text_nodes.
+             */
+            if ( $tag === 'script' ) {
+                $open_tag_end = strpos( $output, '>', $start );
+                if ( $open_tag_end === false ) {
+                    // malformed: no ">" on opening tag
+                    $result .= substr( $output, $start );
+                    break;
+                }
+
+                // Opening <script ...> tag only
+                $opening_tag_html = substr( $output, $start, $open_tag_end - $start + 1 );
+
+                // If this is JSON-LD, keep the whole block untouched
+                if ( stripos( $opening_tag_html, 'application/ld+json' ) !== false ) {
+                    // Append the full <script>...</script> block
+                    $result .= substr( $output, $start, $close_pos - $start + 1 );
+                    $offset = $close_pos + 1;
+                    // Do NOT record a replacement / placeholder for this one
+                    continue;
+                }
+            }
+
             // Full <tag>...</tag>
             $tag_html = substr($output, $start, $close_pos - $start + 1);
 

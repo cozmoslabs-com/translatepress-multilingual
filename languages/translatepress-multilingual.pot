@@ -6,7 +6,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-11-04 12:55+0000\n"
+"POT-Creation-Date: 2025-11-18 12:25+0000\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
 "X-Poedit-SearchPath-0: .\n"
@@ -118,23 +118,27 @@ msgstr ""
 msgid "<p><strong>License key mismatch.</strong> The license you entered doesn’t match the TranslatePress version you have installed.</p><p>Please check that you’ve installed the correct version for your license from your TranslatePress account.</p>"
 msgstr ""
 
-#: includes/class-edd-sl-plugin-updater.php:837, includes/onboarding/class-autotranslation.php:108, includes/onboarding/class-license.php:79
+#: includes/class-edd-sl-plugin-updater.php:836
+msgid "If you have only the free plugin installed but added a paid license, please install the paid plugin from your TranslatePress account."
+msgstr ""
+
+#: includes/class-edd-sl-plugin-updater.php:842, includes/onboarding/class-autotranslation.php:108, includes/onboarding/class-license.php:79
 msgid "Your license key has reached its activation limit."
 msgstr ""
 
-#: includes/class-edd-sl-plugin-updater.php:840
+#: includes/class-edd-sl-plugin-updater.php:845
 msgid "Upgrade your plan to add more sites. %1$sUpgrade now%2$s"
 msgstr ""
 
-#: includes/class-edd-sl-plugin-updater.php:843, includes/onboarding/class-autotranslation.php:111, includes/onboarding/class-license.php:82
+#: includes/class-edd-sl-plugin-updater.php:848, includes/onboarding/class-autotranslation.php:111, includes/onboarding/class-license.php:82
 msgid "This website is already activated under a free license. Each website can only use one free license."
 msgstr ""
 
-#: includes/class-edd-sl-plugin-updater.php:846, includes/class-edd-sl-plugin-updater.php:806, includes/class-edd-sl-plugin-updater.php:920, includes/onboarding/class-autotranslation.php:114, includes/onboarding/class-license.php:85
+#: includes/class-edd-sl-plugin-updater.php:851, includes/class-edd-sl-plugin-updater.php:806, includes/class-edd-sl-plugin-updater.php:925, includes/onboarding/class-autotranslation.php:114, includes/onboarding/class-license.php:85
 msgid "An error occurred, please try again."
 msgstr ""
 
-#: includes/class-edd-sl-plugin-updater.php:879
+#: includes/class-edd-sl-plugin-updater.php:884
 msgid "You have successfully activated your license"
 msgstr ""
 
@@ -206,7 +210,7 @@ msgstr ""
 msgid "Automatic translation has been disabled."
 msgstr ""
 
-#: includes/class-error-manager.php:170, includes/class-plugin-notices.php:347, includes/class-plugin-notices.php:421, includes/class-plugin-notices.php:396, includes/class-plugin-notices.php:481, includes/class-plugin-notices.php:459, includes/class-plugin-notices.php:510, includes/class-plugin-notices.php:562, includes/class-plugin-notices.php:618, includes/class-plugin-notices.php:670, includes/class-plugin-notices.php:653, includes/class-reviews.php:123, includes/class-reviews.php:126, includes/class-upgrade.php:1040, includes/class-upgrade.php:1791, add-ons-advanced/seo-pack/class-seo-pack.php:810
+#: includes/class-error-manager.php:170, includes/class-plugin-notices.php:347, includes/class-plugin-notices.php:425, includes/class-plugin-notices.php:400, includes/class-plugin-notices.php:485, includes/class-plugin-notices.php:463, includes/class-plugin-notices.php:514, includes/class-plugin-notices.php:570, includes/class-plugin-notices.php:626, includes/class-plugin-notices.php:678, includes/class-plugin-notices.php:661, includes/class-reviews.php:123, includes/class-reviews.php:126, includes/class-upgrade.php:1040, includes/class-upgrade.php:1791, add-ons-advanced/seo-pack/class-seo-pack.php:810
 msgid "Dismiss this notice."
 msgstr ""
 
@@ -342,11 +346,11 @@ msgstr ""
 msgid "API key verification was successful."
 msgstr ""
 
-#: includes/class-machine-translator.php:152, includes/google-translate/class-google-translate-v2-machine-translator.php:190
+#: includes/class-machine-translator.php:154, includes/google-translate/class-google-translate-v2-machine-translator.php:200
 msgid "Please enter your Google Translate key."
 msgstr ""
 
-#: includes/class-machine-translator.php:167, add-ons-pro/deepl/includes/class-deepl-machine-translator.php:386
+#: includes/class-machine-translator.php:169, add-ons-pro/deepl/includes/class-deepl-machine-translator.php:365
 msgid "Please enter your DeepL API key."
 msgstr ""
 
@@ -390,59 +394,63 @@ msgstr ""
 msgid "Your <strong>TranslatePress</strong> license is missing or invalid. <br/>Please %1$sregister your copy%2$s to enable automatic website translation via TranslatePress AI, premium addons, automatic updates and support. Need a license key? %3$sPurchase one now%4$s"
 msgstr ""
 
-#: includes/class-plugin-notices.php:417
+#: includes/class-plugin-notices.php:421
 msgid "Your <strong>TranslatePress</strong> license will expire on %1$s. Please %2$sRenew Your Licence%3$s to continue receiving access to automatic translations via TP AI, premium addons, product downloads and automatic updates. %4$sRenew Now%5$s"
 msgstr ""
 
-#: includes/class-plugin-notices.php:388
+#: includes/class-plugin-notices.php:392
 msgid "Error: "
 msgstr ""
 
-#: includes/class-plugin-notices.php:392, includes/class-plugin-notices.php:558
+#: includes/class-plugin-notices.php:396, includes/class-plugin-notices.php:566
 msgid "Something went wrong, please try again."
 msgstr ""
 
-#: includes/class-plugin-notices.php:386, includes/class-plugin-notices.php:552
+#: includes/class-plugin-notices.php:390, includes/class-plugin-notices.php:560
 msgid "Your <strong>TranslatePress</strong> license has expired. <br/>Please %1$sRenew Your Licence%2$s to continue receiving access to automatic translations via TranslatePress AI, premium addons, product downloads, and automatic updates. %3$sRenew now %4$s"
 msgstr ""
 
-#: includes/class-plugin-notices.php:383, includes/class-plugin-notices.php:546
+#: includes/class-plugin-notices.php:383, includes/class-plugin-notices.php:550
 msgid "License key mismatch. The license you entered doesn’t match the <strong>%1$s</strong> version you have installed. <br/>Please check that you’ve installed the correct version for your license from your %2$sTranslatePress account%3$s."
 msgstr ""
 
-#: includes/class-plugin-notices.php:380, includes/class-plugin-notices.php:543
+#: includes/class-plugin-notices.php:385, includes/class-plugin-notices.php:552
+msgid "<br/>If you have only the free plugin installed but added a paid license, please install the paid plugin from your TranslatePress account."
+msgstr ""
+
+#: includes/class-plugin-notices.php:380, includes/class-plugin-notices.php:547
 msgid "You have reached the activation limit for your <strong>%1$s</strong> license. <br/>Manage your active sites from %2$s your account %3$s."
 msgstr ""
 
-#: includes/class-plugin-notices.php:377, includes/class-plugin-notices.php:540
+#: includes/class-plugin-notices.php:377, includes/class-plugin-notices.php:544
 msgid "Your license is disabled for this URL. Re-enable it from <a target=\"_blank\" href=\"https://translatepress.com/account/?utm_source=wp-dashboard&utm_medium=client-site&utm_campaign=license-deactivated\">https://translatepress.com/account</a> -> Manage Sites."
 msgstr ""
 
-#: includes/class-plugin-notices.php:471
+#: includes/class-plugin-notices.php:475
 msgid "%1$s automatic translation requires an active license. Please %2$srenew%3$s your license or purchase a new one %4$shere%5$s."
 msgstr ""
 
-#: includes/class-plugin-notices.php:451
+#: includes/class-plugin-notices.php:455
 msgid "Please %1$senter%2$s your license key to enable %3$s automatic translation."
 msgstr ""
 
-#: includes/class-plugin-notices.php:506
+#: includes/class-plugin-notices.php:510
 msgid "You have less than 5,000 TranslatePress AI words remaining. To continue automatically translating your website, please %spurchase additional AI words at a discount from your account%s."
 msgstr ""
 
-#: includes/class-plugin-notices.php:554
+#: includes/class-plugin-notices.php:562
 msgid " Error: "
 msgstr ""
 
-#: includes/class-plugin-notices.php:549
+#: includes/class-plugin-notices.php:557
 msgid "This website is already activated under a free license. Each website can only use one free license. Please upgrade to a premium plan for more TranslatePress AI words from %1$s your account %2$s."
 msgstr ""
 
-#: includes/class-plugin-notices.php:537
+#: includes/class-plugin-notices.php:541
 msgid "You do not have a valid license for <strong>TranslatePress</strong>. %1$sGet one for free%2$s to get access to TranslatePress AI."
 msgstr ""
 
-#: includes/class-plugin-notices.php:615
+#: includes/class-plugin-notices.php:623
 msgid "The daily quota for machine translation characters exceeded. Please check the <strong>TranslatePress -> <a href=\"%s\">Automatic Translation</a></strong> page for more information."
 msgstr ""
 
@@ -948,7 +956,7 @@ msgstr ""
 msgid "Enter a valid license"
 msgstr ""
 
-#: includes/class-translation-manager.php:326, includes/string-translation/class-string-translation.php:373, add-ons-advanced/seo-pack/includes/string-translation/class-string-translation-seo.php:17, add-ons-advanced/seo-pack-legacy/includes/string-translation/class-string-translation-seo.php:16
+#: includes/class-translation-manager.php:326, includes/string-translation/class-string-translation.php:372, add-ons-advanced/seo-pack/includes/string-translation/class-string-translation-seo.php:17, add-ons-advanced/seo-pack-legacy/includes/string-translation/class-string-translation-seo.php:16
 msgid "Slugs"
 msgstr ""
 
@@ -1432,7 +1440,7 @@ msgstr ""
 msgid "Create no-code automations and workflows on your WordPress site. Easily connect your plugins, sites and apps together."
 msgstr ""
 
-#: partials/advanced-settings-page.php:18, partials/machine-translation-settings-page.php:354, partials/main-settings-page.php:219
+#: partials/advanced-settings-page.php:18, partials/machine-translation-settings-page.php:352, partials/main-settings-page.php:219
 msgid "Save Changes"
 msgstr ""
 
@@ -1643,55 +1651,55 @@ msgstr ""
 msgid "Automatic Translation Settings"
 msgstr ""
 
-#: partials/machine-translation-settings-page.php:190
-msgid "Block Crawlers"
-msgstr ""
-
-#: partials/machine-translation-settings-page.php:193
-msgid "Block crawlers from triggering automatic translations on your website.<br>This will not prevent crawlers from accessing this site's pages."
-msgstr ""
-
-#: partials/machine-translation-settings-page.php:221
+#: partials/machine-translation-settings-page.php:198
 msgid "Automatically Translate Slugs"
 msgstr ""
 
-#: partials/machine-translation-settings-page.php:225
+#: partials/machine-translation-settings-page.php:202
 msgid "Generate automatic translations of slugs for posts, pages and Custom Post Types.<br/>The slugs will be automatically translated starting with the second refresh of each page."
 msgstr ""
 
-#: partials/machine-translation-settings-page.php:239
+#: partials/machine-translation-settings-page.php:216
 msgid "This feature is only available in the paid version. Upgrade TranslatePress and unlock more premium features."
 msgstr ""
 
-#: partials/machine-translation-settings-page.php:241
+#: partials/machine-translation-settings-page.php:218
 msgid "Requires <a href=\"%s\" title=\"TranslatePress Add-on SEO Pack documentation\" target=\"_blank\">SEO Pack Add-on</a> to be installed and activated."
 msgstr ""
 
-#: partials/machine-translation-settings-page.php:258, partials/main-settings-language-selector.php:140, partials/settings-header.php:27, includes/mtapi/functions.php:87, includes/mtapi/functions.php:188
+#: partials/machine-translation-settings-page.php:235, partials/main-settings-language-selector.php:140, partials/settings-header.php:27, includes/mtapi/functions.php:87, includes/mtapi/functions.php:188
 msgid "Upgrade now"
 msgstr ""
 
-#: partials/machine-translation-settings-page.php:283
+#: partials/machine-translation-settings-page.php:259
+msgid "Block Crawlers"
+msgstr ""
+
+#: partials/machine-translation-settings-page.php:262
+msgid "Block crawlers from triggering automatic translations on your website.<br>This will not prevent crawlers from accessing this site's pages."
+msgstr ""
+
+#: partials/machine-translation-settings-page.php:281
 msgid "Limit machine translation / characters per day"
 msgstr ""
 
-#: partials/machine-translation-settings-page.php:286
+#: partials/machine-translation-settings-page.php:284
 msgid "Add a limit to the number of automatically translated characters so you can better budget your project."
 msgstr ""
 
-#: partials/machine-translation-settings-page.php:309
+#: partials/machine-translation-settings-page.php:307
 msgid "characters per day"
 msgstr ""
 
-#: partials/machine-translation-settings-page.php:312
+#: partials/machine-translation-settings-page.php:310
 msgid "Today's Character Count: "
 msgstr ""
 
-#: partials/machine-translation-settings-page.php:332
+#: partials/machine-translation-settings-page.php:330
 msgid "Log machine translation queries."
 msgstr ""
 
-#: partials/machine-translation-settings-page.php:336
+#: partials/machine-translation-settings-page.php:334
 msgid "Only enable for testing purposes. Can impact performance.<br>All records are stored in the wp_trp_machine_translation_log database table. Use a plugin like <a href=\"https://wordpress.org/plugins/wp-data-access/\" target=\"_blank\">WP Data Access</a> to browse the logs or directly from your database manager (PHPMyAdmin, etc.)"
 msgstr ""
 
@@ -1784,7 +1792,7 @@ msgid "Default Language"
 msgstr ""
 
 #: partials/main-settings-page.php:29, includes/onboarding/class-languages.php:99
-msgid "Select the original language of your content."
+msgid "Select the language your content is written in."
 msgstr ""
 
 #: partials/main-settings-page.php:34
@@ -2203,7 +2211,7 @@ msgstr ""
 msgid "Gettext String"
 msgstr ""
 
-#: includes/advanced-settings/exclude-gettext-strings.php:14, includes/string-translation/class-string-translation.php:295, includes/string-translation/class-string-translation.php:325
+#: includes/advanced-settings/exclude-gettext-strings.php:14, includes/string-translation/class-string-translation.php:294, includes/string-translation/class-string-translation.php:324
 msgid "Domain"
 msgstr ""
 
@@ -2832,265 +2840,265 @@ msgstr ""
 msgid "Scanning item %1$d of %2$d..."
 msgstr ""
 
-#: includes/string-translation/class-string-translation.php:177
+#: includes/string-translation/class-string-translation.php:176
 msgid "Manually translated"
 msgstr ""
 
-#: includes/string-translation/class-string-translation.php:178
+#: includes/string-translation/class-string-translation.php:177
 msgid "Automatically translated"
 msgstr ""
 
-#: includes/string-translation/class-string-translation.php:179
+#: includes/string-translation/class-string-translation.php:178
 msgid "Not translated"
 msgstr ""
 
-#: includes/string-translation/class-string-translation.php:189
+#: includes/string-translation/class-string-translation.php:188
 msgid "Bulk Actions"
 msgstr ""
 
-#: includes/string-translation/class-string-translation.php:191
+#: includes/string-translation/class-string-translation.php:190
 msgid "Delete entries"
 msgstr ""
 
-#: includes/string-translation/class-string-translation.php:196
+#: includes/string-translation/class-string-translation.php:195
 msgid "Edit"
 msgstr ""
 
-#: includes/string-translation/class-string-translation.php:197
+#: includes/string-translation/class-string-translation.php:196
 msgid "Delete"
 msgstr ""
 
-#: includes/string-translation/class-string-translation.php:224
+#: includes/string-translation/class-string-translation.php:223
 msgid "Filter"
 msgstr ""
 
-#: includes/string-translation/class-string-translation.php:225
+#: includes/string-translation/class-string-translation.php:224
 msgid "Clear filters"
 msgstr ""
 
-#: includes/string-translation/class-string-translation.php:226
+#: includes/string-translation/class-string-translation.php:225
 msgid "Language"
 msgstr ""
 
-#: includes/string-translation/class-string-translation.php:227
+#: includes/string-translation/class-string-translation.php:226
 msgid "Add New"
 msgstr ""
 
-#: includes/string-translation/class-string-translation.php:228
+#: includes/string-translation/class-string-translation.php:227
 msgid "Rescan plugins and theme for strings"
 msgstr ""
 
-#: includes/string-translation/class-string-translation.php:229
+#: includes/string-translation/class-string-translation.php:228
 msgid "Scanning plugins and theme for strings..."
 msgstr ""
 
-#: includes/string-translation/class-string-translation.php:230
+#: includes/string-translation/class-string-translation.php:229
 msgid "Plugins and theme scan is complete"
 msgstr ""
 
-#: includes/string-translation/class-string-translation.php:231
+#: includes/string-translation/class-string-translation.php:230
 msgid "Plugins and theme scan did not finish due to an error"
 msgstr ""
 
-#: includes/string-translation/class-string-translation.php:232
+#: includes/string-translation/class-string-translation.php:231
 msgid "Import / Export"
 msgstr ""
 
-#: includes/string-translation/class-string-translation.php:233
+#: includes/string-translation/class-string-translation.php:232
 msgid "items"
 msgstr ""
 
-#: includes/string-translation/class-string-translation.php:234
+#: includes/string-translation/class-string-translation.php:233
 msgctxt "page 1 of 3"
 msgid "of"
 msgstr ""
 
-#: includes/string-translation/class-string-translation.php:235
+#: includes/string-translation/class-string-translation.php:234
 msgid "See More"
 msgstr ""
 
-#: includes/string-translation/class-string-translation.php:236
+#: includes/string-translation/class-string-translation.php:235
 msgid "See Less"
 msgstr ""
 
-#: includes/string-translation/class-string-translation.php:237
+#: includes/string-translation/class-string-translation.php:236
 msgid "Apply"
 msgstr ""
 
-#: includes/string-translation/class-string-translation.php:238
+#: includes/string-translation/class-string-translation.php:237
 msgid "No strings match your query."
 msgstr ""
 
-#: includes/string-translation/class-string-translation.php:239
+#: includes/string-translation/class-string-translation.php:238
 msgid "Try to rescan plugins and theme for strings."
 msgstr ""
 
-#: includes/string-translation/class-string-translation.php:240
+#: includes/string-translation/class-string-translation.php:239
 msgid "An error occurred while loading results. Most likely you were logged out. Reload page?"
 msgstr ""
 
-#: includes/string-translation/class-string-translation.php:241
+#: includes/string-translation/class-string-translation.php:240
 msgid "found in translation"
 msgstr ""
 
-#: includes/string-translation/class-string-translation.php:243
+#: includes/string-translation/class-string-translation.php:242
 msgid "Select All"
 msgstr ""
 
-#: includes/string-translation/class-string-translation.php:244
+#: includes/string-translation/class-string-translation.php:243
 msgid "Select Visible"
 msgstr ""
 
-#: includes/string-translation/class-string-translation.php:245
+#: includes/string-translation/class-string-translation.php:244
 msgid "You are about to perform this action on all the strings matching your filter, not just the visibly checked. To perform the action only to the visible strings click \"Select Visible\" from the table header dropdown."
 msgstr ""
 
-#: includes/string-translation/class-string-translation.php:246
+#: includes/string-translation/class-string-translation.php:245
 msgid "You are about to perform this action only on the visible strings. To perform the action on all the strings matching the filter click \"Select All\" from the table header dropdown."
 msgstr ""
 
-#: includes/string-translation/class-string-translation.php:247
+#: includes/string-translation/class-string-translation.php:246
 msgid "To continue please type the word:"
 msgstr ""
 
-#: includes/string-translation/class-string-translation.php:248
+#: includes/string-translation/class-string-translation.php:247
 msgid "The word typed was incorrect. Action was cancelled."
 msgstr ""
 
-#: includes/string-translation/class-string-translation.php:250
+#: includes/string-translation/class-string-translation.php:249
 msgctxt "Untranslated in this language"
 msgid "in"
 msgstr ""
 
-#: includes/string-translation/class-string-translation.php:253
+#: includes/string-translation/class-string-translation.php:252
 msgid "Warning: This action cannot be undone. Deleting a string will remove its current translation. The original string will appear again in this interface after TranslatePress detects it. This action is NOT equivalent to excluding the string from being translated again."
 msgstr ""
 
-#: includes/string-translation/class-string-translation.php:254
+#: includes/string-translation/class-string-translation.php:253
 msgid "%d original entries and their translations were deleted."
 msgstr ""
 
-#: includes/string-translation/class-string-translation.php:257
+#: includes/string-translation/class-string-translation.php:256
 msgid "Navigate to next page"
 msgstr ""
 
-#: includes/string-translation/class-string-translation.php:258
+#: includes/string-translation/class-string-translation.php:257
 msgid "Navigate to previous page"
 msgstr ""
 
-#: includes/string-translation/class-string-translation.php:259
+#: includes/string-translation/class-string-translation.php:258
 msgid "Navigate to first page"
 msgstr ""
 
-#: includes/string-translation/class-string-translation.php:260
+#: includes/string-translation/class-string-translation.php:259
 msgid "Navigate to last page"
 msgstr ""
 
-#: includes/string-translation/class-string-translation.php:261
+#: includes/string-translation/class-string-translation.php:260
 msgid "Type a page number to navigate to"
 msgstr ""
 
-#: includes/string-translation/class-string-translation.php:262
+#: includes/string-translation/class-string-translation.php:261
 msgid "Incorrect page number. Type a page number between 1 and total number of pages"
 msgstr ""
 
-#: includes/string-translation/class-string-translation.php:263
-msgid "Search original strings containing typed keywords while also matching selected filters"
+#: includes/string-translation/class-string-translation.php:262
+msgid "Search original and translated strings containing typed keywords while also matching selected filters. Place string in quotes for exact match: \"string\""
 msgstr ""
 
-#: includes/string-translation/class-string-translation.php:264
+#: includes/string-translation/class-string-translation.php:263
 msgid "Filter strings according to selected translation status, filters and keywords and selected filters"
 msgstr ""
 
-#: includes/string-translation/class-string-translation.php:265
+#: includes/string-translation/class-string-translation.php:264
 msgid "Removes selected filters"
 msgstr ""
 
-#: includes/string-translation/class-string-translation.php:266
+#: includes/string-translation/class-string-translation.php:265
 msgid "See options for selecting all strings"
 msgstr ""
 
-#: includes/string-translation/class-string-translation.php:267
+#: includes/string-translation/class-string-translation.php:266
 msgid "Click to sort strings by this column"
 msgstr ""
 
-#: includes/string-translation/class-string-translation.php:268
+#: includes/string-translation/class-string-translation.php:267
 msgid "Language in which the translation status filter applies. Leave unselected for the translation status to apply to ANY language"
 msgstr ""
 
-#: includes/string-translation/class-string-translation.php:269
+#: includes/string-translation/class-string-translation.php:268
 msgid "Search"
 msgstr ""
 
-#: includes/string-translation/class-string-translation.php:270
+#: includes/string-translation/class-string-translation.php:269
 msgid "Slugs that are not found in either one of the other categories."
 msgstr ""
 
-#: includes/string-translation/class-string-translation.php:283
+#: includes/string-translation/class-string-translation.php:282
 msgid "Plugins and Theme String Translation"
 msgstr ""
 
-#: includes/string-translation/class-string-translation.php:284
+#: includes/string-translation/class-string-translation.php:283
 msgid "Gettext"
 msgstr ""
 
-#: includes/string-translation/class-string-translation.php:285
+#: includes/string-translation/class-string-translation.php:284
 msgid "Search Gettext Strings"
 msgstr ""
 
-#: includes/string-translation/class-string-translation.php:292, includes/string-translation/class-string-translation.php:322, includes/string-translation/class-string-translation.php:347
+#: includes/string-translation/class-string-translation.php:291, includes/string-translation/class-string-translation.php:321, includes/string-translation/class-string-translation.php:346
 msgid "ID"
 msgstr ""
 
-#: includes/string-translation/class-string-translation.php:293, includes/string-translation/class-string-translation.php:323, includes/string-translation/class-string-translation.php:348
+#: includes/string-translation/class-string-translation.php:292, includes/string-translation/class-string-translation.php:322, includes/string-translation/class-string-translation.php:347
 msgid "Original String"
 msgstr ""
 
-#: includes/string-translation/class-string-translation.php:294, includes/string-translation/class-string-translation.php:324, includes/string-translation/class-string-translation.php:349, add-ons-advanced/seo-pack/includes/string-translation/class-string-translation-seo.php:29, add-ons-advanced/seo-pack/includes/string-translation/class-string-translation-seo.php:42, add-ons-advanced/seo-pack/includes/string-translation/class-string-translation-seo.php:62, add-ons-advanced/seo-pack/includes/string-translation/class-string-translation-seo.php:82, add-ons-advanced/seo-pack/includes/string-translation/class-string-translation-seo.php:100, add-ons-advanced/seo-pack/includes/string-translation/class-string-translation-seo.php:117, add-ons-advanced/seo-pack-legacy/includes/string-translation/class-string-translation-seo.php:28, add-ons-advanced/seo-pack-legacy/includes/string-translation/class-string-translation-seo.php:41, add-ons-advanced/seo-pack-legacy/includes/string-translation/class-string-translation-seo.php:61, add-ons-advanced/seo-pack-legacy/includes/string-translation/class-string-translation-seo.php:81, add-ons-advanced/seo-pack-legacy/includes/string-translation/class-string-translation-seo.php:99
+#: includes/string-translation/class-string-translation.php:293, includes/string-translation/class-string-translation.php:323, includes/string-translation/class-string-translation.php:348, add-ons-advanced/seo-pack/includes/string-translation/class-string-translation-seo.php:29, add-ons-advanced/seo-pack/includes/string-translation/class-string-translation-seo.php:42, add-ons-advanced/seo-pack/includes/string-translation/class-string-translation-seo.php:62, add-ons-advanced/seo-pack/includes/string-translation/class-string-translation-seo.php:82, add-ons-advanced/seo-pack/includes/string-translation/class-string-translation-seo.php:100, add-ons-advanced/seo-pack/includes/string-translation/class-string-translation-seo.php:117, add-ons-advanced/seo-pack-legacy/includes/string-translation/class-string-translation-seo.php:28, add-ons-advanced/seo-pack-legacy/includes/string-translation/class-string-translation-seo.php:41, add-ons-advanced/seo-pack-legacy/includes/string-translation/class-string-translation-seo.php:61, add-ons-advanced/seo-pack-legacy/includes/string-translation/class-string-translation-seo.php:81, add-ons-advanced/seo-pack-legacy/includes/string-translation/class-string-translation-seo.php:99
 msgid "Translation"
 msgstr ""
 
-#: includes/string-translation/class-string-translation.php:301, includes/string-translation/class-string-translation.php:331
+#: includes/string-translation/class-string-translation.php:300, includes/string-translation/class-string-translation.php:330
 msgid "Filter by domain"
 msgstr ""
 
-#: includes/string-translation/class-string-translation.php:305
+#: includes/string-translation/class-string-translation.php:304
 msgid "Filter by type"
 msgstr ""
 
-#: includes/string-translation/class-string-translation.php:306
+#: includes/string-translation/class-string-translation.php:305
 msgid "Email text"
 msgstr ""
 
-#: includes/string-translation/class-string-translation.php:313
+#: includes/string-translation/class-string-translation.php:312
 msgid "Emails String Translation"
 msgstr ""
 
-#: includes/string-translation/class-string-translation.php:314
+#: includes/string-translation/class-string-translation.php:313
 msgid "Emails"
 msgstr ""
 
-#: includes/string-translation/class-string-translation.php:315
+#: includes/string-translation/class-string-translation.php:314
 msgid "Search Email Strings"
 msgstr ""
 
-#: includes/string-translation/class-string-translation.php:339
+#: includes/string-translation/class-string-translation.php:338
 msgid "User Inputted String Translation"
 msgstr ""
 
-#: includes/string-translation/class-string-translation.php:340
+#: includes/string-translation/class-string-translation.php:339
 msgid "Regular"
 msgstr ""
 
-#: includes/string-translation/class-string-translation.php:341
+#: includes/string-translation/class-string-translation.php:340
 msgid "Search Regular Strings"
 msgstr ""
 
-#: includes/string-translation/class-string-translation.php:355
+#: includes/string-translation/class-string-translation.php:354
 msgid "Filter by Translation Block"
 msgstr ""
 
-#: includes/string-translation/class-string-translation.php:372, add-ons-advanced/seo-pack/includes/string-translation/class-string-translation-seo.php:16, add-ons-advanced/seo-pack-legacy/includes/string-translation/class-string-translation-seo.php:15
+#: includes/string-translation/class-string-translation.php:371, add-ons-advanced/seo-pack/includes/string-translation/class-string-translation-seo.php:16, add-ons-advanced/seo-pack-legacy/includes/string-translation/class-string-translation-seo.php:15
 msgid "URL Slugs Translation"
 msgstr ""
 

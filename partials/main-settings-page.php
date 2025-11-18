@@ -26,7 +26,7 @@
                                 </option>
                             <?php }?>
                         </select>
-                        <span class="trp-description-text"><?php esc_html_e( 'Select the original language of your content.', 'translatepress-multilingual' ); ?></span>
+                        <span class="trp-description-text"><?php esc_html_e( 'Select the language your content is written in.', 'translatepress-multilingual' ); ?></span>
                     </div>
                 </div>
 

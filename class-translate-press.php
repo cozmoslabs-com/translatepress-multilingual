@@ -71,7 +71,7 @@ class TRP_Translate_Press{
         define( 'TRP_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
         define( 'TRP_PLUGIN_BASE', plugin_basename( __DIR__ . '/index.php' ) );
         define( 'TRP_PLUGIN_SLUG', 'translatepress-multilingual' );
-        define( 'TRP_PLUGIN_VERSION', '3.0.3' );
+        define( 'TRP_PLUGIN_VERSION', '3.0.4' );
 
 	    wp_cache_add_non_persistent_groups(array('trp'));
 
@@ -390,6 +390,7 @@ class TRP_Translate_Press{
         $this->loader->add_action( 'edit_user_profile', $this->preferred_user_language, 'always_use_this_language', 99, 1 );
         $this->loader->add_action( 'personal_options_update', $this->preferred_user_language, 'update_profile_fields', 99, 1 );
         $this->loader->add_action( 'edit_user_profile_update', $this->preferred_user_language, 'update_profile_fields', 99, 1 );
+        $this->loader->add_filter( 'trp_wp_languages', $this->languages, 'add_extra_languages', 10, 1 );
 
     }
 

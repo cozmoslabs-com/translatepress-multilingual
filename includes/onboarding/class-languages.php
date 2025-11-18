@@ -96,7 +96,7 @@ class TRP_Step_Languages implements TRP_Onboarding_Step_Interface {
                 </select>
                 <div class="trp-slug-field" style="display: none;"><input type="hidden" name="url_slugs[<?php echo esc_attr($default_language); ?>]" value="<?php echo esc_attr($default_slug); ?>"/></div>
             </div>
-            <p class="trp-onboarding-description"><?php esc_html_e('Select the original language of your content.', 'translatepress-multilingual'); ?></p>
+            <p class="trp-onboarding-description"><?php esc_html_e('Select the language your content is written in.', 'translatepress-multilingual'); ?></p>
 
             <?php foreach ($translation_languages as $translation_lang_code) : ?>
             <div class="trp-additional-language trp-language-wrap">

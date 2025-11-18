@@ -297,6 +297,9 @@ class TRP_Woocommerce_Emails{
         if ( has_filter( 'gettext', [ $pg, 'woocommerce_process_gettext_strings_no_context' ] ) )
             return;
 
+        if ( !$trp->get_component( 'machine_translator') || get_class( $trp->get_component( 'machine_translator' ) ) === TRP_Machine_Translator::class )
+            $trp->init_machine_translation(); // Machine translator should be initialized by the get_trp_instance() call. In the case of cron jobs, it is not - so we initialize it here manually.
+
         // Bypass processing_gettext_is_needed usual checks. Otherwise, the below method calls wouldn't go through
         add_filter( 'trp_processing_gettext_is_needed', '__return_true' );
 
