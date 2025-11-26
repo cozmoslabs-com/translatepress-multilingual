@@ -1,11 +1,11 @@
-=== Translate Multilingual sites - TranslatePress ===
+﻿=== Translate Multilingual sites - TranslatePress ===
 Contributors: cozmoslabs, razvan.mo, madalin.ungureanu, sareiodata, cristophor
 Donate link: https://www.translatepress.com/
 Tags: translate, translation, multilingual, automatic translation, bilingual, front-end translation, google translate, language
 Requires at least: 3.1.0
 Tested up to: 6.8.3
 Requires PHP: 7.4
-Stable tag: 3.0.4
+Stable tag: 3.0.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -142,6 +142,9 @@ For more information please check out our [documentation](https://translatepress
 
 
 == Changelog ==
+= 3.0.5 =
+* Fixed CSS for Black Friday offer from admin notice
+
 = 3.0.4 =
 * Added 39 more languages including Irish, Maltese and Sicilian
 * Added support for Latin American Spanish automatic translation in TranslatePress AI

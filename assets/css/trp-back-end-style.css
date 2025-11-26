@@ -1610,6 +1610,14 @@ td.trp-add-list-entry-input-col, .trp-list-entry td{
     margin: 0;
 }
 
+.trp-bf-notice-container {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    padding-left: 15px;
+    gap: 8px;
+}
+
 /* Media Queries */
 @media screen and (max-width: 1200px) {
     .trp-upgrade-notice-table__wrapper{
