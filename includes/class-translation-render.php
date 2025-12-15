@@ -1019,7 +1019,7 @@ class TRP_Translation_Render{
             $translated_strings_manual_dictionary = $this->trp_query->get_existing_translations( array_values( $translateable_strings_manual ), $language_code );
             $translated_strings_manual = array();
             foreach ( $translateable_strings_manual as $i => $string_manual ) {
-                if ( isset( $translated_strings_manual_dictionary[ $string_manual ]->translated ) ) {
+                if ( isset( $translated_strings_manual_dictionary[ $string_manual ]->translated ) && !empty( $translated_strings_manual_dictionary[ $string_manual ]->translated )) {
                     $translated_strings_manual[$i] = $translated_strings_manual_dictionary[ $string_manual ]->translated;
                 }
             }
@@ -1685,7 +1685,14 @@ class TRP_Translation_Render{
         }
 
         foreach ( $translateable_strings as $i => $string ) {
-
+            if ( isset( $dictionary[ $string ]->translated ) && empty( $dictionary[ $string ]->translated ) ) {
+                /* If we have an empty string with a status != NOT TRANSLATED, it's possible we are dealing with
+                 * an intentional thing. After Automatic translation, a text can be translated with unallowed html
+                 * thus being stored in DB as empty string with status = MACHINE TRANSLATED. By doing continue; we avoid
+                 * re-autotranslating over and over again.
+                 */
+                continue;
+            }
             // prevent accidentally machine translated strings from db such as for src to be displayed
             $skip_string = in_array( $string, $skip_machine_translating_strings );
 
@@ -1762,7 +1769,11 @@ class TRP_Translation_Render{
         foreach( $new_strings as $i => $string ){
 
             if ( !isset($translated_strings[$i]) && isset( $machine_strings[$string] ) ) {
-                $translated_strings[$i] = $machine_strings[$string];
+                $sanitized_machine_string = trp_sanitize_string( $machine_strings[$string] );
+                if ( !empty( $sanitized_machine_string ) ){
+                    // Unallowed HTML can be turned into empty string. Show original text instead
+                    $translated_strings[$i] = $sanitized_machine_string;
+                }
             }
 
             /**
@@ -2079,20 +2090,55 @@ class TRP_Translation_Render{
      * @param $args
      * @return array
      */
-    public function wp_mail_filter( $args ){
-        if ( !is_array( $args ) ){
+    public function wp_mail_filter( $args ) {
+        if ( ! is_array( $args ) ) {
             return $args;
         }
 
-        $whitelisted_shortcodes = apply_filters( 'trp_whitelisted_shortcodes_for_wp_mail', [ 'trp_language', 'language-include', 'language-exclude' ] );
-
-        if ( array_key_exists( 'subject', $args ) ){
-            $args['subject'] = $this->translate_page( trp_do_these_shortcodes( $args['subject'], $whitelisted_shortcodes ) );
+        if ( empty( $args['to'] ) ) {
+            return $args;
         }
 
-        if ( array_key_exists( 'message', $args ) ){
-            $args['message'] = $this->translate_page( trp_do_these_shortcodes( $args['message'], $whitelisted_shortcodes ) );
+        global $TRP_LANGUAGE;
+
+        $initial_language = $TRP_LANGUAGE;
+
+        $recipient = $args['to'];
+
+        // Normalize $recipient to a single email string (first recipient only - that's the main one)
+        if ( is_array( $recipient ) ) {
+            $first = reset( $recipient );
+            $recipient = is_string( $first ) ? $first : '';
         }
+
+        $recipient = (string) $recipient;
+
+        // Keep only the first comma-separated entry if multiple are present in the string
+        $recipient = trim( strtok( $recipient, ',' ) );
+
+        if ( $recipient !== '' ) {
+            trp_switch_to_preffered_language( $recipient );
+        }
+
+        $whitelisted_shortcodes = apply_filters(
+            'trp_whitelisted_shortcodes_for_wp_mail',
+            array( 'trp_language', 'language-include', 'language-exclude' )
+        );
+
+        if ( array_key_exists( 'subject', $args ) ) {
+            $args['subject'] = $this->translate_page(
+                trp_do_these_shortcodes( $args['subject'], $whitelisted_shortcodes )
+            );
+        }
+
+        if ( array_key_exists( 'message', $args ) ) {
+            $args['message'] = $this->translate_page(
+                trp_do_these_shortcodes( $args['message'], $whitelisted_shortcodes )
+            );
+        }
+
+        // Switch back to the language used initially
+        $TRP_LANGUAGE = $initial_language;
 
         return $args;
     }

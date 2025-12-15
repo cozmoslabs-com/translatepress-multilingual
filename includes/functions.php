@@ -273,7 +273,9 @@ function trp_remove_accents( $string ){
     if ( !preg_match('/[\x80-\xff]/', $string) )
         return $string;
 
-    if (seems_utf8($string)) {
+    $seems_utf = ( function_exists( 'wp_is_valid_utf8' ) ) ? wp_is_valid_utf8( $string ) : seems_utf8( $string );
+
+    if ( $seems_utf ) {
         $chars = array(
             // Decompositions for Latin-1 Supplement
             'ª' => 'a', 'º' => 'o',
@@ -817,6 +819,75 @@ function trp_switch_language($language){
 
     switch_to_locale($language);
     add_filter( 'plugin_locale', 'trp_get_locale', 99999999);
+}
+
+/**
+ * Switch to a user's preferred language based on the recipient email.
+ *
+ * For managerial users (admin-like roles), prefer user->locale with fallback
+ * to WPLANG, then trp_language.
+ *
+ * For non-managerial users, prefer trp_language, with fallback to locale, then WPLANG.
+ *
+ * @param string $email
+ * @return void
+ */
+function trp_switch_to_preffered_language( $email ) {
+    $email = trim( (string) $email );
+
+    if ( $email === '' )
+        return;
+
+    $user = get_user_by( 'email', $email );
+
+    if ( ! ( $user instanceof WP_User ) )
+        return;
+
+    $user_roles = is_array( $user->roles ) ? $user->roles : array();
+
+    $trp_settings = TRP_Translate_Press::get_trp_instance()->get_component( 'settings' );
+    $settings     = $trp_settings->get_settings();
+
+    $default_language = $settings["default-language"];
+
+    /**
+     * Roles considered "managerial" for email language purposes.
+     *
+     * @param string[] $roles
+     */
+    $managerial_roles = apply_filters(
+        'trp_managerial_roles_for_email_language',
+        [ 'administrator', 'editor', 'shop_manager' ]
+    );
+
+    $is_managerial = !empty( array_intersect( $managerial_roles, $user_roles ) );
+
+    if ( $is_managerial ) {
+        // Managerial: prefer locale, then WPLANG, then default_language
+        if ( !empty( $user->locale ) ) {
+            $language = $user->locale;
+        } else {
+            $wplang = get_option( 'WPLANG' );
+            $language = !empty( $wplang ) ? $wplang : $default_language;
+        }
+    } else {
+        // Non-managerial: prefer trp_language.
+        $language = get_user_meta( $user->ID, 'trp_language', true );
+
+        if ( empty( $language ) ) {
+            if ( !empty( $user->locale ) ) {
+                $language = $user->locale;
+            } else {
+                $wplang = get_option( 'WPLANG' );
+                $language = !empty( $wplang ) ? $wplang : $default_language;
+            }
+        }
+    }
+
+    if ( empty( $language ) )
+        return;
+
+    trp_switch_language( $language );
 }
 
 /**

@@ -67,11 +67,16 @@ class TRP_Translate_Press{
      * TRP_Translate_Press constructor.
      */
     public function __construct() {
+        // Early bind to break recursion loop caused by calling get_trp_instance during construction
+        if ( self::$translate_press === null ) {
+            self::$translate_press = $this;
+        }
+
         define( 'TRP_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
         define( 'TRP_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
         define( 'TRP_PLUGIN_BASE', plugin_basename( __DIR__ . '/index.php' ) );
         define( 'TRP_PLUGIN_SLUG', 'translatepress-multilingual' );
-        define( 'TRP_PLUGIN_VERSION', '3.0.5' );
+        define( 'TRP_PLUGIN_VERSION', '3.0.6' );
 
 	    wp_cache_add_non_persistent_groups(array('trp'));
 
@@ -102,7 +107,6 @@ class TRP_Translate_Press{
         require_once TRP_PLUGIN_DIR . 'includes/class-translation-manager.php';
         require_once TRP_PLUGIN_DIR . 'includes/class-editor-api-regular-strings.php';
         require_once TRP_PLUGIN_DIR . 'includes/class-editor-api-gettext-strings.php';
-        require_once TRP_PLUGIN_DIR . 'includes/class-translation-manager.php';
         require_once TRP_PLUGIN_DIR . 'includes/class-hooks-loader.php';
         require_once TRP_PLUGIN_DIR . 'includes/class-languages.php';
         require_once TRP_PLUGIN_DIR . 'includes/class-translation-render.php';
@@ -179,6 +183,7 @@ class TRP_Translate_Press{
         $this->url_converter              = new TRP_Url_Converter( $this->settings->get_settings() );
         $this->query                      = new TRP_Query( $this->settings->get_settings() );
         $this->machine_translator_logger  = new TRP_Machine_Translator_Logger( $this->settings->get_settings() );
+        $this->machine_translator         = new TRP_Machine_Translator( $this->settings->get_settings() ); // Will be overwritten in init_machine_translation with the actual machine translator class. Use this as replacement until then.
         $this->translation_manager        = new TRP_Translation_Manager( $this->settings->get_settings() );
         $this->editor_api_regular_strings = new TRP_Editor_Api_Regular_Strings( $this->settings->get_settings() );
         $this->editor_api_gettext_strings = new TRP_Editor_Api_Gettext_Strings( $this->settings->get_settings() );

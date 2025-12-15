@@ -186,6 +186,11 @@ class TRP_Woocommerce_Emails{
             $order = wc_get_order( $TRP_EMAIL_ORDER );
         }
 
+        $trp_settings = TRP_Translate_Press::get_trp_instance()->get_component( 'settings' );
+        $settings     = $trp_settings->get_settings();
+
+        $default_language = $settings["default-language"];
+
         /**
          * At this point in the execution, $wc_email->get_recipient() returns null and throws a PHP warning inside WooCommerce /woocommerce/includes/emails/class-wc-email.php
          * This is why we use $wc_email->get_option( 'recipient' ). It properly returns the recipient in the case of admin emails.
@@ -223,11 +228,12 @@ class TRP_Woocommerce_Emails{
             if( ! empty( $recipients ) && count( $recipients ) == 1 ){
                 $registered_user = get_user_by( 'email', $recipients[0] );
                 if( $registered_user ){
-                    // If language is set to site default, user object won't have a locale set. Fallback to WPLANG. In case WPLANG is not set either, fallback to trp_language
+                    // If language is set to site default, user object won't have a locale set. Fallback to WPLANG. In case WPLANG is not set either, fallback to default language
                     if ( !empty( $registered_user->locale ) ){
                         $language = $registered_user->locale;
                     } else {
-                        $language = get_option( 'WPLANG' ) ?? get_user_meta( $registered_user->ID, 'trp_language', true );
+                        $wplang = get_option( 'WPLANG' );
+                        $language = !empty( $wplang ) ? $wplang : $default_language;
                     }
                 } else {
                     $language = trp_woo_hpos_get_post_meta( $TRP_EMAIL_ORDER, 'trp_language', true );
@@ -242,9 +248,11 @@ class TRP_Woocommerce_Emails{
 
         trp_switch_language( $language );
 
-        WC()->load_plugin_textdomain();
+        add_filter( 'trp_allow_gettext_write', '__return_true' );
 
-        $this->bootstrap_trp_gettext_for_email_language( $language );
+        $this->reload_woocommerce_textdomain();
+
+        $this->bootstrap_trp_gettext_for_emails();
 
         // calls necessary because the default additional_content field of an email is localized before this point and stored in a variable in the previous locale
         $wc_email->init_form_fields();
@@ -263,7 +271,7 @@ class TRP_Woocommerce_Emails{
     public function trp_woo_restore_locale( $bool, $wc_email ) {
 
         trp_restore_language();
-        WC()->load_plugin_textdomain();
+        $this->reload_woocommerce_textdomain();
 
         return false;
 
@@ -288,7 +296,7 @@ class TRP_Woocommerce_Emails{
      * This way, even when emails are sent outside a normal page render, the
      * gettext translations stored in TranslatePress are applied correctly.
      */
-    private function bootstrap_trp_gettext_for_email_language( $language ) {
+    private function bootstrap_trp_gettext_for_emails() {
         $trp             = TRP_Translate_Press::get_trp_instance();
         $gettext_manager = $trp->get_component( 'gettext_manager' );
         $pg              = $gettext_manager->get_gettext_component( 'process_gettext' );
@@ -305,6 +313,41 @@ class TRP_Woocommerce_Emails{
 
         $gettext_manager->create_gettext_translated_global();
         $gettext_manager->call_gettext_filters( 'woocommerce_' );
+    }
+
+    function reload_woocommerce_textdomain() {
+        $domain = 'woocommerce';
+
+        $locale = apply_filters( 'plugin_locale', get_locale(), $domain );
+
+        $custom_translation_path  = WP_LANG_DIR . '/woocommerce/woocommerce-' . $locale . '.mo';
+        $global_translation_path  = WP_LANG_DIR . '/plugins/woocommerce-' . $locale . '.mo';
+        $bundled_translation_path = trailingslashit( WC()->plugin_path() ) . 'i18n/languages/woocommerce-' . $locale . '.mo';
+
+        unload_textdomain( $domain );
+
+        // Custom file present: mimic WC
+        if ( is_readable( $custom_translation_path ) ) {
+            load_textdomain( $domain, $custom_translation_path );
+
+            if ( is_readable( $global_translation_path ) ) {
+                load_textdomain( $domain, $global_translation_path );
+            }
+
+            return true;
+        }
+
+        if ( is_readable( $global_translation_path ) ) {
+            load_textdomain( $domain, $global_translation_path );
+            return true;
+        }
+
+        if ( is_readable( $bundled_translation_path ) ) {
+            load_textdomain( $domain, $bundled_translation_path );
+            return true;
+        }
+
+        return false;
     }
 
 }

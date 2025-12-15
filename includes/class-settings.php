@@ -329,6 +329,21 @@ class TRP_Settings{
 
         unset($settings['translation-languages-formality']);
 
+        $trp = TRP_Translate_Press::get_trp_instance();
+        $language_switcher_tab = $trp->get_component('language_switcher_tab');
+
+        if ( !$language_switcher_tab->is_legacy_enabled() && count( $settings['publish-languages'] ) > 2 ) {
+            $ls_settings     = $language_switcher_tab->get_initial_config();
+            $new_ls_settings = $ls_settings;
+
+            $new_ls_settings['floater']['oppositeLanguage']   = false;
+            $new_ls_settings['shortcode']['oppositeLanguage'] = false;
+
+            if ( $new_ls_settings !== $ls_settings ){
+                update_option( 'trp_language_switcher_settings', $new_ls_settings );
+            }
+        }
+
         // check for duplicates in url slugs
         $duplicate_exists = false;
         foreach( $settings['url-slugs'] as $urlslug ) {

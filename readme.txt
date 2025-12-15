@@ -3,9 +3,9 @@ Contributors: cozmoslabs, razvan.mo, madalin.ungureanu, sareiodata, cristophor
 Donate link: https://www.translatepress.com/
 Tags: translate, translation, multilingual, automatic translation, bilingual, front-end translation, google translate, language
 Requires at least: 3.1.0
-Tested up to: 6.8.3
+Tested up to: 6.9
 Requires PHP: 7.4
-Stable tag: 3.0.5
+Stable tag: 3.0.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -142,25 +142,19 @@ For more information please check out our [documentation](https://translatepress
 
 
 == Changelog ==
-= 3.0.5 =
-* Fixed CSS for Black Friday offer from admin notice
-
-= 3.0.4 =
-* Added 39 more languages including Irish, Maltese and Sicilian
-* Added support for Latin American Spanish automatic translation in TranslatePress AI
-* Added support for Divi search in secondary language
-* Added support for exact match search in String Translation by placing the string in quotes: "example"
-* Allow schema.org data to be translated
-* Fixed Regular String Translation search so filtered languages also match terms appearing in the middle of translated strings, not only at the start
-* Prevent automatic translation of strings that are 0 or 1 characters long or strings that are punctuation only
-* Change background hover color for transparent preset in order to improve contrast of language switcher
-* Fixed two missing spaces in floating switcher HTML markup
-* Fix PHP warning with empty domain for gettext with context
-* Fixed edge case error "call to a member function is_available() on null"
-* Moved the "Automatically Translate Slug" setting to be first in line
-* Extended the license message for item_name_mismatch to provide more context
-* Improved text information next to the default language
-
+= 3.0.6 =
+* Extended support for Divi search in secondary languages
+* Fixed redirect loop bug with excluded paths from translation
+* Fixed incorrect gettext resolution in string translation when the site locale differed from the default TranslatePress language, which caused untranslated gettext entries to be populated using translations from the wrong locale
+* Fixed edge case of retranslating the same text multiple times
+* Fixed not detecting texts containing only certain special characters
+* Fixed bug where mini cart menu widget doesn't respect language change
+* Fixed edge case error "Call to a member function is_available() on null"
+* Send emails in recipient's preferred language, in case the recipient is a user
+* Improved INP by deferring dynamic translation detection when original content can be shown first
+* Fixed a bug where the floating language switcher was not displaying all languages (if more than 10 were added and animations disabled)
+* Disable language switcher show opposite language settings in case more than 2 languages are active
+* Fixed deprecated notice for seems_utf8 function on WP 6.9
 
 = Older versions =
 [Click Here](https://translatepress.com/docs/translatepress-free-changelog/?utm_source=wp.org&utm_medium=tp-description-page&utm_campaign=TPFree) to view the full changelog, or you can find it in the changelog.txt file in the plugin folder.

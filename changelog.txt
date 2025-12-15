@@ -1,3 +1,22 @@
+= 3.0.5 =
+* Fixed CSS for Black Friday offer from admin notice
+
+= 3.0.4 =
+* Added 39 more languages including Irish, Maltese and Sicilian
+* Added support for Latin American Spanish automatic translation in TranslatePress AI
+* Added support for Divi search in secondary language
+* Added support for exact match search in String Translation by placing the string in quotes: "example"
+* Allow schema.org data to be translated
+* Fixed Regular String Translation search so filtered languages also match terms appearing in the middle of translated strings, not only at the start
+* Prevent automatic translation of strings that are 0 or 1 characters long or strings that are punctuation only
+* Change background hover color for transparent preset in order to improve contrast of language switcher
+* Fixed two missing spaces in floating switcher HTML markup
+* Fix PHP warning with empty domain for gettext with context
+* Fixed edge case error "call to a member function is_available() on null"
+* Moved the "Automatically Translate Slug" setting to be first in line
+* Extended the license message for item_name_mismatch to provide more context
+* Improved text information next to the default language
+
 = 3.0.3 =
 * Fixed an issue introduced in the previous update that occurred when using Google Translate as the translation engine
 

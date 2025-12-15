@@ -6,7 +6,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-11-26 15:19+0000\n"
+"POT-Creation-Date: 2025-12-15 11:13+0000\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
 "X-Poedit-SearchPath-0: .\n"
@@ -318,7 +318,7 @@ msgstr ""
 msgid "Language Switcher"
 msgstr ""
 
-#: includes/class-language-switcher-v2.php:718
+#: includes/class-language-switcher-v2.php:720
 msgid "Change language to %s"
 msgstr ""
 
@@ -346,11 +346,11 @@ msgstr ""
 msgid "API key verification was successful."
 msgstr ""
 
-#: includes/class-machine-translator.php:154, includes/google-translate/class-google-translate-v2-machine-translator.php:200
+#: includes/class-machine-translator.php:157, includes/google-translate/class-google-translate-v2-machine-translator.php:200
 msgid "Please enter your Google Translate key."
 msgstr ""
 
-#: includes/class-machine-translator.php:169, add-ons-pro/deepl/includes/class-deepl-machine-translator.php:365
+#: includes/class-machine-translator.php:172, add-ons-pro/deepl/includes/class-deepl-machine-translator.php:365
 msgid "Please enter your DeepL API key."
 msgstr ""
 
@@ -566,55 +566,55 @@ msgstr ""
 msgid "Invalid language code. Please try again."
 msgstr ""
 
-#: includes/class-settings.php:471
+#: includes/class-settings.php:486
 msgid "Language codes can contain only A-Z a-z 0-9 - _ characters. Check your language codes in TranslatePress General Settings."
 msgstr ""
 
-#: includes/class-settings.php:534
+#: includes/class-settings.php:549
 msgid "Error! Duplicate URL slug values."
 msgstr ""
 
-#: includes/class-settings.php:535
+#: includes/class-settings.php:550
 msgid "You cannot select two languages that have the same <a href=\"https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes\" target=\"_blank\">iso code</a> but different formalities because doing so will lead to duplicate <a href=\"https://developers.google.com/search/docs/specialty/international/localized-versions\" target=\"_blank\">hreflang tags</a>."
 msgstr ""
 
-#: includes/class-settings.php:536
+#: includes/class-settings.php:551
 msgid "Duplicate language detected.<br>Each language can only be added once to ensure accurate translation management.<br> Please change the duplicate language entry and try again. "
 msgstr ""
 
-#: includes/class-settings.php:593
+#: includes/class-settings.php:608
 msgid "Current Language"
 msgstr ""
 
-#: includes/class-settings.php:599
+#: includes/class-settings.php:614
 msgid "Opposite Language"
 msgstr ""
 
-#: includes/class-settings.php:639
+#: includes/class-settings.php:654
 msgid "General"
 msgstr ""
 
-#: includes/class-settings.php:644, includes/class-translation-manager.php:540, add-ons-pro/translator-accounts/includes/class-translator-accounts.php:156
+#: includes/class-settings.php:659, includes/class-translation-manager.php:540, add-ons-pro/translator-accounts/includes/class-translator-accounts.php:156
 msgid "Translate Site"
 msgstr ""
 
-#: includes/class-settings.php:649
+#: includes/class-settings.php:664
 msgid "Addons"
 msgstr ""
 
-#: includes/class-settings.php:657
+#: includes/class-settings.php:672
 msgid "License"
 msgstr ""
 
-#: includes/class-settings.php:701, includes/class-translation-manager.php:572
+#: includes/class-settings.php:716, includes/class-translation-manager.php:572
 msgid "Settings"
 msgstr ""
 
-#: includes/class-settings.php:715, partials/license-settings-page.php:29, includes/onboarding/class-autotranslation.php:169, includes/onboarding/class-license.php:131
+#: includes/class-settings.php:730, partials/license-settings-page.php:29, includes/onboarding/class-autotranslation.php:169, includes/onboarding/class-license.php:131
 msgid "Activate License"
 msgstr ""
 
-#: includes/class-settings.php:707
+#: includes/class-settings.php:722
 msgid "Pro Features"
 msgstr ""
 

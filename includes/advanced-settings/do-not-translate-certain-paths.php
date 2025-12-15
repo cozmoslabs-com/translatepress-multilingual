@@ -489,3 +489,78 @@ function trp_dntcp_exclude_links_from_automatic_translation( $excluded, $url_ver
 
     return $excluded;
 }
+
+/**
+ * Check if the current URL is excluded from translation based on the
+ * "Do not translate certain paths" / "Translate only certain paths" setting.
+ *
+ * Takes into account:
+ *  - site installed in subdirectory
+ *  - "Use a subdirectory for the default language"
+ *  - {{home}} mapping
+ *  - both "exclude" and "include" modes
+ *
+ * @return bool True if the current URL should be treated as excluded from translation.
+ */
+function trp_dntcp_is_current_url_excluded() {
+    if ( is_admin() ) {
+        return false;
+    }
+
+    $settings          = get_option( 'trp_settings', false );
+    $advanced_settings = get_option( 'trp_advanced_settings', false );
+
+    // No configuration -> nothing is excluded.
+    if ( empty( $advanced_settings )
+        || ! isset( $advanced_settings['translateable_content'] )
+        || empty( $advanced_settings['translateable_content']['paths'] )
+        || empty( $advanced_settings['translateable_content']['option'] ) ) {
+        return false;
+    }
+
+    $mode  = $advanced_settings['translateable_content']['option']; // 'exclude' or 'include'
+    $paths = trp_dntcp_get_paths();
+
+    // Build current slug in the same way as trp_exclude_include_paths_to_run_on()
+    $trp           = TRP_Translate_Press::get_trp_instance();
+    $url_converter = $trp->get_component( 'url_converter' );
+
+    $current_lang = $url_converter->get_lang_from_url_string( $url_converter->cur_page_url() );
+    if ( empty( $current_lang ) && isset( $settings['default-language'] ) ) {
+        $current_lang = $settings['default-language'];
+    }
+
+    $site_url_components = parse_url( get_home_url() );
+    $current_slug        = isset( $_SERVER['REQUEST_URI'] ) ? esc_url_raw( $_SERVER['REQUEST_URI'] ) : '';
+
+    // Remove site_url path for installs in subdirectories (e.g. http://localhost/wordpress)
+    if ( isset( $site_url_components['path'] ) && $site_url_components['path'] !== '' ) {
+        $current_slug = str_replace( trim( $site_url_components['path'] ), '', $current_slug );
+    }
+
+    // Take into account subdirectory for the default language or other languages.
+    // This mirrors the logic used in trp_exclude_include_paths_to_run_on().
+    if ( isset( $settings['add-subdirectory-to-default-language'] )
+        && $settings['add-subdirectory-to-default-language'] === 'yes'
+        && ! empty( $current_lang )
+        && isset( $settings['url-slugs'][ $current_lang ] ) ) {
+
+        $replace      = '\/' . $settings['url-slugs'][ $current_lang ];
+        $current_slug = preg_replace( "/$replace/i", '', ltrim( $current_slug, '/' ), 1 );
+    }
+
+    $array_slugs = array();
+    trp_test_current_slug( $current_slug, $array_slugs );
+
+    $matched = trp_return_exclude_include_url( $paths, $current_slug, $array_slugs );
+
+    // In "exclude" mode: listed paths are excluded.
+    if ( $mode === 'exclude' )
+        return (bool) $matched;
+
+    // In "include" mode: ONLY listed paths are translatable; all others are excluded
+    if ( $mode === 'include' )
+        return !$matched;
+
+    return false;
+}
