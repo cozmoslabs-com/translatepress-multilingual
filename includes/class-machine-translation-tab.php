@@ -241,6 +241,9 @@ class TRP_Machine_Translation_Tab {
 
     public function test_api_key(){
         check_ajax_referer( 'trp_test_api_nonce', 'security' );
+        if ( ! current_user_can( apply_filters( 'trp_settings_capability', 'manage_options' ) ) ) {
+            wp_die( -1, 403 );
+        }
 
         $trp                = TRP_Translate_Press::get_trp_instance();
         $machine_translator = $trp->get_component( 'machine_translator' );

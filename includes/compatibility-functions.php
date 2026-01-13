@@ -193,7 +193,7 @@ add_filter( 'trp_skip_gettext_processing', 'trp_dk_pdf_strip_gettext_from_pdf' )
 
 function trp_dk_pdf_strip_gettext_from_pdf( $bool ){
 
-    if ( isset( $_GET['pdf'] ) && class_exists( 'DKPDF' ) ){
+    if ( isset( $_GET['pdf'] ) && ( class_exists( 'DKPDF' ) || defined( 'DKPDF_VERSION' ) ) ){
         return true;
     }
 
@@ -204,7 +204,7 @@ function trp_dk_pdf_strip_gettext_from_pdf( $bool ){
 add_filter('trp_stop_translating_page', 'trp_do_not_translate_dk_pdf', 10, 2);
 function trp_do_not_translate_dk_pdf($translate, $output){
 
-    if ( isset( $_GET['pdf'] ) && class_exists( 'DKPDF' ) ){
+    if ( isset( $_GET['pdf'] ) && ( class_exists( 'DKPDF' ) || defined( 'DKPDF_VERSION' ) ) ){
         return true;
     }
 

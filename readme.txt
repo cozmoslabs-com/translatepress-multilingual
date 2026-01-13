@@ -5,7 +5,7 @@ Tags: translate, translation, multilingual, automatic translation, bilingual, fr
 Requires at least: 3.1.0
 Tested up to: 6.9
 Requires PHP: 7.4
-Stable tag: 3.0.6
+Stable tag: 3.0.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -142,19 +142,14 @@ For more information please check out our [documentation](https://translatepress
 
 
 == Changelog ==
-= 3.0.6 =
-* Extended support for Divi search in secondary languages
-* Fixed redirect loop bug with excluded paths from translation
-* Fixed incorrect gettext resolution in string translation when the site locale differed from the default TranslatePress language, which caused untranslated gettext entries to be populated using translations from the wrong locale
-* Fixed edge case of retranslating the same text multiple times
-* Fixed not detecting texts containing only certain special characters
-* Fixed bug where mini cart menu widget doesn't respect language change
-* Fixed edge case error "Call to a member function is_available() on null"
-* Send emails in recipient's preferred language, in case the recipient is a user
-* Improved INP by deferring dynamic translation detection when original content can be shown first
-* Fixed a bug where the floating language switcher was not displaying all languages (if more than 10 were added and animations disabled)
-* Disable language switcher show opposite language settings in case more than 2 languages are active
-* Fixed deprecated notice for seems_utf8 function on WP 6.9
+= 3.0.7 =
+* Improved security by adding nonces and capability checks to various ajax calls that lacked them
+* Fixed issue with breaking urls containing % when manually adding translations in Translation Editor
+* Fixed compatibility with DK PDF plugin
+* Fixed legacy language switcher inserted via Elementor shortcode widget having a fixed 300px width
+* In the language switcher configurator page, invert border radius values on vertical position change
+* Hide user inserted labels in the context of language switcher menu items if only flags option is selected
+* Make Powered by in language switcher less prominent
 
 = Older versions =
 [Click Here](https://translatepress.com/docs/translatepress-free-changelog/?utm_source=wp.org&utm_medium=tp-description-page&utm_campaign=TPFree) to view the full changelog, or you can find it in the changelog.txt file in the plugin folder.

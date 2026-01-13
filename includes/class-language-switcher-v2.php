@@ -388,7 +388,7 @@ class TRP_Language_Switcher_V2 {
                 $real_current_indexes[] = $i;
             }
 
-            $label_html = $user_labels[ $orig ] ?? null;
+            $label_html = !empty( $user_labels[ $orig ] ) && $has_label ? $user_labels[ $orig ] : null;
             if ( $label_html === null ) {
                 $label_html = $this->build_menu_item_label_viewport(
                     $code,
