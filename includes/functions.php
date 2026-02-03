@@ -200,7 +200,8 @@ function trp_add_affiliate_id_to_link( $link ){
  * Do not confuse with trim.
  */
 function trp_sanitize_string( $filtered, $execute_wp_kses = true ){
-    if (!is_string($filtered)) return '';
+    // Numbers and strings are ok. Unexpected arrays, objects or null are not ok.
+    if (!is_scalar($filtered)) return '';
 
 	$filtered = preg_replace( '/<script\b[^>]*>(.*?)<\/script>/is', '', $filtered );
 

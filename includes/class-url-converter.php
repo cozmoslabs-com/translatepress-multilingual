@@ -963,7 +963,7 @@ class TRP_Url_Converter {
      */
     public function get_path_no_lang_slug_from_url( $url ) {
         $language      = $this->get_lang_from_url_string( $url );
-        $url_lang_slug = $this->get_url_slug( $language );
+        $url_lang_slug = $language !== null ? $this->get_url_slug( $language ) : '';
         $url_object    = trp_cache_get( 'url_obj_' . hash( 'md4', $url ), 'trp' );
 
         if ( $url_object === false ) {

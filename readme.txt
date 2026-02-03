@@ -5,7 +5,7 @@ Tags: translate, translation, multilingual, automatic translation, bilingual, fr
 Requires at least: 3.1.0
 Tested up to: 6.9
 Requires PHP: 7.4
-Stable tag: 3.0.7
+Stable tag: 3.0.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -142,14 +142,14 @@ For more information please check out our [documentation](https://translatepress
 
 
 == Changelog ==
-= 3.0.7 =
-* Improved security by adding nonces and capability checks to various ajax calls that lacked them
-* Fixed issue with breaking urls containing % when manually adding translations in Translation Editor
-* Fixed compatibility with DK PDF plugin
-* Fixed legacy language switcher inserted via Elementor shortcode widget having a fixed 300px width
-* In the language switcher configurator page, invert border radius values on vertical position change
-* Hide user inserted labels in the context of language switcher menu items if only flags option is selected
-* Make Powered by in language switcher less prominent
+= 3.0.8 =
+* Add admin bar notifications for adding new language, expired license and lack of AI words
+* Fix bug where [language-switcher] text appears on pages excluded from translation
+* Prevent numbers, emails and base64 images from being automatically translated when Advanced option Translate numerals is active
+* Fix language switcher configurator strings localized in JS not being picked up by parsers
+* Remove API keys from translation editor object exposed in JS
+* Regular Strings tab in Translation Editor is enabled by default
+* PHP notice Using null as an array offset is deprecated
 
 = Older versions =
 [Click Here](https://translatepress.com/docs/translatepress-free-changelog/?utm_source=wp.org&utm_medium=tp-description-page&utm_campaign=TPFree) to view the full changelog, or you can find it in the changelog.txt file in the plugin folder.

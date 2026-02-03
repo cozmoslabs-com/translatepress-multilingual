@@ -844,6 +844,10 @@ class TRP_Translation_Render{
                 $string_count = array_push( $translateable_strings, $trimmed_string );
                 array_push( $nodes, array('node' => $row, 'type' => 'block'));
 
+                if ( ! apply_filters( 'trp_allow_machine_translation_for_string', true, $trimmed_string, null, null, $row ) ){
+                    array_push( $skip_machine_translating_strings, $trimmed_string );
+                }
+
                 //add data-trp-post-id attribute if needed
                 $nodes = $this->maybe_add_post_id_in_node( $nodes, $row, $string_count );
             }
@@ -1376,6 +1380,61 @@ class TRP_Translation_Render{
         return $allow;
     }
 
+    /*
+     * Do not automatically translate numbers, emails and base64 images
+     *
+     * Hooked to trp_allow_machine_translation_for_string
+     */
+    public function skip_strings_that_cannot_be_auto_translated( $allow, $entity_decoded_trimmed_string, $current_node_accessor_selector, $node_accessor, $row ) {
+        if ( is_numeric( $entity_decoded_trimmed_string ) ||
+            $this->looks_like_email( $entity_decoded_trimmed_string ) ||
+            ( strncmp( $entity_decoded_trimmed_string, 'data:image/', 11 ) === 0 && strpos( $entity_decoded_trimmed_string, ';base64,', 11 ) !== false )
+        ) {
+            $allow = false;
+        }
+        return $allow;
+    }
+
+    /**
+     * Very fast is_email function. Not 100% strict, but good enough for deciding to not auto translate it
+     *
+     * @param $s
+     * @return bool
+     */
+    public function looks_like_email( $s ) {
+        $len = strlen( $s );
+
+        // Length sanity (fast integer checks)
+        if ( $len < 6 || $len > 254 ) {
+            return false;
+        }
+
+        // Single @ check (cheaper than regex)
+        if ( substr_count( $s, '@' ) !== 1 ) {
+            return false;
+        }
+
+        $at = strpos( $s, '@' );
+
+        // @ cannot be first or last
+        if ( $at === 0 || $at === $len - 1 ) {
+            return false;
+        }
+
+        // No spaces
+        if ( strpos( $s, ' ' ) !== false ) {
+            return false;
+        }
+
+        // Dot must exist after @ with at least one char in between
+        $lastDot = strrpos( $s, '.' );
+        if ( $lastDot === false || $lastDot < $at + 2 || $lastDot === $len - 1 ) {
+            return false;
+        }
+
+        // Regex only for plausible candidates
+        return preg_match( '/^[^\s@]+@[^\s@]+\.[^\s@]+$/', $s ) === 1;
+    }
 
     /**
      * function that removes any unwanted leftover <trp-gettext> tags

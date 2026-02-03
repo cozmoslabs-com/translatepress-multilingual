@@ -6,7 +6,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-01-13 07:34+0000\n"
+"POT-Creation-Date: 2026-02-03 07:06+0000\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
 "X-Poedit-SearchPath-0: .\n"
@@ -38,7 +38,7 @@ msgstr ""
 msgid "Update Now"
 msgstr ""
 
-#: index-dev.php:324
+#: index-dev.php:326
 msgid "This TranslatePress add-on has been migrated to the main plugin and is no longer used. You can delete it."
 msgstr ""
 
@@ -54,19 +54,19 @@ msgstr ""
 msgid "Settings saved."
 msgstr ""
 
-#: includes/class-advanced-tab.php:644, includes/class-advanced-tab.php:706, includes/class-advanced-tab.php:780
+#: includes/class-advanced-tab.php:643, includes/class-advanced-tab.php:705, includes/class-advanced-tab.php:779
 msgid "Are you sure you want to remove this item?"
 msgstr ""
 
-#: includes/class-advanced-tab.php:644, includes/class-advanced-tab.php:706, includes/class-advanced-tab.php:780, partials/main-settings-language-selector.php:76, includes/onboarding/class-languages.php:119, includes/onboarding/class-languages.php:146, add-ons-advanced/extra-languages/partials/language-selector-pro.php:112
+#: includes/class-advanced-tab.php:643, includes/class-advanced-tab.php:705, includes/class-advanced-tab.php:779, partials/main-settings-language-selector.php:76, includes/onboarding/class-languages.php:119, includes/onboarding/class-languages.php:146, add-ons-advanced/extra-languages/partials/language-selector-pro.php:112
 msgid "Remove"
 msgstr ""
 
-#: includes/class-advanced-tab.php:685, includes/class-advanced-tab.php:750, includes/class-advanced-tab.php:895, partials/main-settings-language-selector.php:124, add-ons-advanced/extra-languages/partials/language-selector-pro.php:159
+#: includes/class-advanced-tab.php:684, includes/class-advanced-tab.php:749, includes/class-advanced-tab.php:894, partials/main-settings-language-selector.php:124, add-ons-advanced/extra-languages/partials/language-selector-pro.php:159
 msgid "Add"
 msgstr ""
 
-#: includes/class-advanced-tab.php:834, includes/class-advanced-tab.php:878
+#: includes/class-advanced-tab.php:833, includes/class-advanced-tab.php:877
 msgid "Select..."
 msgstr ""
 
@@ -318,7 +318,7 @@ msgstr ""
 msgid "Language Switcher"
 msgstr ""
 
-#: includes/class-language-switcher-v2.php:720
+#: includes/class-language-switcher-v2.php:730
 msgid "Change language to %s"
 msgstr ""
 
@@ -594,7 +594,7 @@ msgstr ""
 msgid "General"
 msgstr ""
 
-#: includes/class-settings.php:659, includes/class-translation-manager.php:540, add-ons-pro/translator-accounts/includes/class-translator-accounts.php:156
+#: includes/class-settings.php:659, includes/class-translation-manager.php:544, add-ons-pro/translator-accounts/includes/class-translator-accounts.php:156
 msgid "Translate Site"
 msgstr ""
 
@@ -606,7 +606,7 @@ msgstr ""
 msgid "License"
 msgstr ""
 
-#: includes/class-settings.php:716, includes/class-translation-manager.php:572
+#: includes/class-settings.php:716, includes/class-translation-manager.php:700
 msgid "Settings"
 msgstr ""
 
@@ -1012,83 +1012,104 @@ msgstr ""
 msgid "Logged Out"
 msgstr ""
 
-#: includes/class-translation-manager.php:553, includes/class-translation-manager.php:615
+#: includes/class-translation-manager.php:557, includes/class-translation-manager.php:743
 msgid "Translate Page"
 msgstr ""
 
-#: includes/class-translation-manager.php:613
+#: includes/class-translation-manager.php:628
+msgid "Complete Setup"
+msgstr ""
+
+#: includes/class-translation-manager.php:640
+msgid "Add a New Language"
+msgstr ""
+
+#: includes/class-translation-manager.php:655
+msgid "Get a Free AI License"
+msgstr ""
+
+#: includes/class-translation-manager.php:670
+msgid "Your License is Invalid"
+msgstr ""
+
+#. translators: %d is the number of AI words remaining
+#: includes/class-translation-manager.php:683
+msgid "Get More AI Words (%d left)"
+msgstr ""
+
+#: includes/class-translation-manager.php:741
 msgid "Opens post in the translation editor. Post must be saved as draft or published beforehand."
 msgstr ""
 
-#: includes/class-translation-manager.php:727
+#: includes/class-translation-manager.php:899
 msgid "Security check"
 msgstr ""
 
-#: includes/class-translation-manager.php:799
+#: includes/class-translation-manager.php:971
 msgid "<strong>Warning:</strong> Some strings have possibly incorrectly encoded characters. This may result in breaking the queries, rendering the page untranslated in live mode. Consider revising the following strings or their method of outputting."
 msgstr ""
 
-#: includes/class-translation-manager.php:824, includes/class-translation-manager.php:843, includes/class-upgrade.php:374
+#: includes/class-translation-manager.php:996, includes/class-translation-manager.php:1015, includes/class-upgrade.php:374
 msgid "TranslatePress data update"
 msgstr ""
 
-#: includes/class-translation-manager.php:824, includes/class-translation-manager.php:843, includes/class-upgrade.php:374
+#: includes/class-translation-manager.php:996, includes/class-translation-manager.php:1015, includes/class-upgrade.php:374
 msgid "We need to update your translations database to the latest version."
 msgstr ""
 
-#: includes/class-translation-manager.php:825
+#: includes/class-translation-manager.php:997
 msgid "Updating will allow editing translations of localized text from plugins and theme. Existing translation will still work as expected."
 msgstr ""
 
-#: includes/class-translation-manager.php:827, includes/class-translation-manager.php:846, includes/class-upgrade.php:375
+#: includes/class-translation-manager.php:999, includes/class-translation-manager.php:1018, includes/class-upgrade.php:375
 msgid "IMPORTANT: It is strongly recommended to first backup the database!\nAre you sure you want to continue?"
 msgstr ""
 
-#: includes/class-translation-manager.php:827, includes/class-translation-manager.php:846, includes/class-upgrade.php:375
+#: includes/class-translation-manager.php:999, includes/class-translation-manager.php:1018, includes/class-upgrade.php:375
 msgid "Run the updater"
 msgstr ""
 
-#: includes/class-translation-manager.php:844
+#: includes/class-translation-manager.php:1016
 msgid "Updating will allow editing translations of slugs. Existing translation will still work as expected."
 msgstr ""
 
-#: includes/class-translation-manager.php:899
+#: includes/class-translation-manager.php:1071
 msgid "Please activate the SEO Addon from <br/>WordPress -> Settings -> TranslatePress -> Addons section"
 msgstr ""
 
-#: includes/class-translation-manager.php:902
+#: includes/class-translation-manager.php:1074
 msgid "Go to Addons"
 msgstr ""
 
-#: includes/class-translation-manager.php:918
+#: includes/class-translation-manager.php:1090
 msgid "The SEO Pack add-on allows translation of all the URL slugs:"
 msgstr ""
 
-#: includes/class-translation-manager.php:921
+#: includes/class-translation-manager.php:1093
 msgid "Taxonomy slugs"
 msgstr ""
 
-#: includes/class-translation-manager.php:924
+#: includes/class-translation-manager.php:1096
 msgid "Term slugs"
 msgstr ""
 
-#: includes/class-translation-manager.php:927
+#: includes/class-translation-manager.php:1099
 msgid "Post slugs (this includes pages and custom post types)"
 msgstr ""
 
-#: includes/class-translation-manager.php:930
+#: includes/class-translation-manager.php:1102
 msgid "Post type base slugs"
 msgstr ""
 
-#: includes/class-translation-manager.php:933
+#: includes/class-translation-manager.php:1105
 msgid "WooCommerce slugs"
 msgstr ""
 
-#: includes/class-translation-manager.php:938
+#: includes/class-translation-manager.php:1110
 msgid "The SEO Pack add-on is available with ALL premium versions of the plugin."
 msgstr ""
 
-#: includes/class-translation-manager.php:941
+#: includes/class-translation-manager.php:1113
 msgid "Upgrade to Pro"
 msgstr ""
 
@@ -2346,14 +2367,6 @@ msgstr ""
 
 #: includes/advanced-settings/opposite-flag-shortcode.php:13
 msgid "Transforms the language switcher into a button showing the other available language, not the current one.<br> Only works when there are exactly two languages, the default one and a translation one.<br>This will affect the shortcode language switcher and floating language switcher as well.<br> To achieve this in menu language switcher go to Appearance->Menus->Language Switcher and select Opposite Language."
-msgstr ""
-
-#: includes/advanced-settings/regular-tab-string-translation.php:12
-msgid "Show regular strings tab in String Translation"
-msgstr ""
-
-#: includes/advanced-settings/regular-tab-string-translation.php:13
-msgid "Adds an additional tab on the String Translation interface that allows editing translations of user-inputted strings."
 msgstr ""
 
 #: includes/advanced-settings/remove-duplicates-from-db.php:12

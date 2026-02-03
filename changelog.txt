@@ -1,3 +1,12 @@
+= 3.0.7 =
+* Improved security by adding nonces and capability checks to various ajax calls that lacked them
+* Fixed issue with breaking urls containing % when manually adding translations in Translation Editor
+* Fixed compatibility with DK PDF plugin
+* Fixed legacy language switcher inserted via Elementor shortcode widget having a fixed 300px width
+* In the language switcher configurator page, invert border radius values on vertical position change
+* Hide user inserted labels in the context of language switcher menu items if only flags option is selected
+* Make Powered by in language switcher less prominent
+
 = 3.0.6 =
 * Extended support for Divi search in secondary languages
 * Fixed redirect loop bug with excluded paths from translation

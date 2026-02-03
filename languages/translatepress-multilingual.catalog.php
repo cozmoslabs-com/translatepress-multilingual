@@ -249,6 +249,11 @@
 <?php __("Current User", "translatepress-multilingual"); ?>
 <?php __("Logged Out", "translatepress-multilingual"); ?>
 <?php __("Translate Page", "translatepress-multilingual"); ?>
+<?php __("Complete Setup", "translatepress-multilingual"); ?>
+<?php __("Add a New Language", "translatepress-multilingual"); ?>
+<?php __("Get a Free AI License", "translatepress-multilingual"); ?>
+<?php __("Your License is Invalid", "translatepress-multilingual"); ?>
+<?php __("Get More AI Words (%d left)", "translatepress-multilingual"); ?>
 <?php __("Opens post in the translation editor. Post must be saved as draft or published beforehand.", "translatepress-multilingual"); ?>
 <?php __("Security check", "translatepress-multilingual"); ?>
 <?php __("<strong>Warning:</strong> Some strings have possibly incorrectly encoded characters. This may result in breaking the queries, rendering the page untranslated in live mode. Consider revising the following strings or their method of outputting.", "translatepress-multilingual"); ?>
@@ -579,8 +584,6 @@
 <?php __("Open the language switcher shortcode by clicking on it instead of hovering.<br> Close it by clicking on it, anywhere else on the screen or by pressing the escape key. This will affect only the shortcode language switcher.", "translatepress-multilingual"); ?>
 <?php __("Show opposite language in the language switcher", "translatepress-multilingual"); ?>
 <?php __("Transforms the language switcher into a button showing the other available language, not the current one.<br> Only works when there are exactly two languages, the default one and a translation one.<br>This will affect the shortcode language switcher and floating language switcher as well.<br> To achieve this in menu language switcher go to Appearance->Menus->Language Switcher and select Opposite Language.", "translatepress-multilingual"); ?>
-<?php __("Show regular strings tab in String Translation", "translatepress-multilingual"); ?>
-<?php __("Adds an additional tab on the String Translation interface that allows editing translations of user-inputted strings.", "translatepress-multilingual"); ?>
 <?php __("<a href=\"%s\">Click here</a> to access the database optimization tool.", "translatepress-multilingual"); ?>
 <?php __("It helps remove possible duplicate translations, clear unnecessary data and repair possible metadata issues.", "translatepress-multilingual"); ?>
 <?php __("<a href=\"%s\" target=\"_blank\">Here</a> you can observe the last 5 SQL errors relevant to TranslatePress if they exist.", "translatepress-multilingual"); ?>

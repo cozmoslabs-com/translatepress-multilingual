@@ -58,7 +58,14 @@ class TRP_Language_Switcher_V2 {
         $this->trp      = $trp;
         $this->viewport = wp_is_mobile() ? 'mobile' : 'desktop';
 
-        $this->config = $this->language_switcher_tab->get_initial_config(); // In case it's not yet initialized, we initialize it here
+        // In case it's not yet initialized, we initialize it here
+        $this->config = $this->language_switcher_tab->get_initial_config();
+
+        /**
+         * Add the shortcode here instead of init, so we can run the render_shortcode function on pages excluded from translation
+         * Needed because otherwise the shortcode wouldn't be processed at all and [language-switcher] text would appear on excluded pages
+         */
+        add_shortcode( 'language-switcher', [ $this, 'render_shortcode' ] );
 
         $this->resolve_language_context();
     }
@@ -73,7 +80,6 @@ class TRP_Language_Switcher_V2 {
     public function init() {
         add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_assets' ] );
         add_action( 'wp_footer', [ $this, 'render_floater' ], 99 );
-        add_shortcode( 'language-switcher', [ $this, 'render_shortcode' ] );
         add_filter( 'wp_get_nav_menu_items', [ $this, 'filter_menu_items' ], 10, 3 );
 
         $this->register_ls_menu_switcher();
@@ -264,6 +270,10 @@ class TRP_Language_Switcher_V2 {
      * @return string
      */
     public function render_shortcode( $atts = [] ): string {
+        $loader = $this->trp->get_component( 'loader' );
+        if ( apply_filters( 'trp_allow_tp_to_run', true, $loader ) === false )
+            return '';
+
         $atts = shortcode_atts( [
             'is_editor' => 'false',
         ], $atts, 'language-switcher' );
