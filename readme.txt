@@ -3,9 +3,9 @@ Contributors: cozmoslabs, razvan.mo, madalin.ungureanu, sareiodata, cristophor
 Donate link: https://www.translatepress.com/
 Tags: translate, translation, multilingual, automatic translation, bilingual, front-end translation, google translate, language
 Requires at least: 3.1.0
-Tested up to: 6.9
+Tested up to: 6.9.1
 Requires PHP: 7.4
-Stable tag: 3.0.8
+Stable tag: 3.0.9
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -142,14 +142,10 @@ For more information please check out our [documentation](https://translatepress
 
 
 == Changelog ==
-= 3.0.8 =
-* Add admin bar notifications for adding new language, expired license and lack of AI words
-* Fix bug where [language-switcher] text appears on pages excluded from translation
-* Prevent numbers, emails and base64 images from being automatically translated when Advanced option Translate numerals is active
-* Fix language switcher configurator strings localized in JS not being picked up by parsers
-* Remove API keys from translation editor object exposed in JS
-* Regular Strings tab in Translation Editor is enabled by default
-* PHP notice Using null as an array offset is deprecated
+= 3.0.9 =
+* Encourage users to engage and ask questions or offer suggestions on wordpress.org forums from TranslatePress Settings
+* Skip shortcode translation inside REST API
+* Fix bug where Manual Translation Only broke translation block saving
 
 = Older versions =
 [Click Here](https://translatepress.com/docs/translatepress-free-changelog/?utm_source=wp.org&utm_medium=tp-description-page&utm_campaign=TPFree) to view the full changelog, or you can find it in the changelog.txt file in the plugin folder.

@@ -454,14 +454,23 @@ class TRP_Translation_Render{
 			return $data;
 		}
 
+        $skip_shortcode_translation = apply_filters( 'trp_rest_api_skip_shortcode_translation', true, $data );
+
 		foreach ( $translatable_keys as $field ) {
 			// Check for direct field first
 			if ( isset( $data[$field] ) && is_string( $data[$field] ) ) {
+                // Skip shortcodes due to MT quota consumption
+				if ( $this->rest_value_has_shortcode( $data[$field] ) && $skip_shortcode_translation ) {
+					continue;
+				}
 				$data[$field] = $this->translate_page( $data[$field] );
 			}
 			// For title, content, excerpt - also check .rendered subfield
 			elseif ( in_array( $field, array( 'title', 'content', 'excerpt' ) ) ) {
 				if ( isset( $data[$field]['rendered'] ) && is_string( $data[$field]['rendered'] ) ) {
+					if ( $this->rest_value_has_shortcode( $data[ $field]['rendered'] ) && $skip_shortcode_translation ) {
+						continue;
+					}
 					$data[$field]['rendered'] = $this->translate_page( $data[$field]['rendered'] );
 				}
 			}
@@ -486,6 +495,25 @@ class TRP_Translation_Render{
 		}
 
 		return $data;
+	}
+
+	/**
+	 * Check if a value contains shortcodes.
+	 *
+	 * @param string $value
+	 * @return bool
+	 */
+	private function rest_value_has_shortcode( $value ) {
+		if ( ! is_string( $value ) || strpos( $value, '[' ) === false ) {
+			return false;
+		}
+
+		$pattern = get_shortcode_regex();
+		if ( ! empty( $pattern ) && preg_match( '/' . $pattern . '/s', $value ) ) {
+			return true;
+		}
+
+		return preg_match( '/\\[[^\\]]+\\]/', $value ) === 1;
 	}
 
     /**

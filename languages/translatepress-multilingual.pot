@@ -6,7 +6,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-02-03 07:06+0000\n"
+"POT-Creation-Date: 2026-02-10 14:59+0000\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
 "X-Poedit-SearchPath-0: .\n"
@@ -618,6 +618,88 @@ msgstr ""
 msgid "Pro Features"
 msgstr ""
 
+#: includes/class-support-chat.php:190, includes/class-support-chat.php:231
+msgid "Need Help?"
+msgstr ""
+
+#: includes/class-support-chat.php:191
+msgid "Recent community discussions"
+msgstr ""
+
+#: includes/class-support-chat.php:192
+msgid "Loading..."
+msgstr ""
+
+#: includes/class-support-chat.php:193
+msgid "Unable to load forum posts"
+msgstr ""
+
+#: includes/class-support-chat.php:194
+msgid "Ask a Question"
+msgstr ""
+
+#: includes/class-support-chat.php:195
+msgid "View All Topics"
+msgstr ""
+
+#: includes/class-support-chat.php:196
+msgid "by"
+msgstr ""
+
+#: includes/class-support-chat.php:197
+msgid "Have a question?"
+msgstr ""
+
+#: includes/class-support-chat.php:198
+msgid "Get help directly from the plugin developers, suggest improvements, or share your feedback!"
+msgstr ""
+
+#: includes/class-support-chat.php:199
+msgid "Tip for faster help:"
+msgstr ""
+
+#: includes/class-support-chat.php:200
+msgid "Include what you tried, what you expected, and what happened. Screenshots help!"
+msgstr ""
+
+#: includes/class-support-chat.php:215
+msgid "Toggle support chat"
+msgstr ""
+
+#: includes/class-support-chat.php:232
+msgid "Ask the community"
+msgstr ""
+
+#: includes/class-support-chat.php:251
+msgid "Close"
+msgstr ""
+
+#: includes/class-support-chat.php:365
+msgid "Empty feed response"
+msgstr ""
+
+#: includes/class-support-chat.php:373
+msgid "Unable to parse feed"
+msgstr ""
+
+#: includes/class-support-chat.php:431
+msgid "Just now"
+msgstr ""
+
+#. translators: %d: number of hours
+#: includes/class-support-chat.php:434
+msgid "%d hour ago"
+msgid_plural "%d hours ago"
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: %d: number of days
+#: includes/class-support-chat.php:441
+msgid "%d day ago"
+msgid_plural "%d days ago"
+msgstr[0] ""
+msgstr[1] ""
+
 #: includes/class-translation-manager.php:102
 msgid "Source"
 msgstr ""
@@ -1012,23 +1094,19 @@ msgstr ""
 msgid "Logged Out"
 msgstr ""
 
-#: includes/class-translation-manager.php:557, includes/class-translation-manager.php:743
+#: includes/class-translation-manager.php:557, includes/class-translation-manager.php:769
 msgid "Translate Page"
 msgstr ""
 
-#: includes/class-translation-manager.php:628
-msgid "Complete Setup"
-msgstr ""
-
-#: includes/class-translation-manager.php:640
+#: includes/class-translation-manager.php:638
 msgid "Add a New Language"
 msgstr ""
 
-#: includes/class-translation-manager.php:655
+#: includes/class-translation-manager.php:654
 msgid "Get a Free AI License"
 msgstr ""
 
-#: includes/class-translation-manager.php:670
+#: includes/class-translation-manager.php:669
 msgid "Your License is Invalid"
 msgstr ""
 
@@ -1037,79 +1115,79 @@ msgstr ""
 msgid "Get More AI Words (%d left)"
 msgstr ""
 
-#: includes/class-translation-manager.php:741
+#: includes/class-translation-manager.php:767
 msgid "Opens post in the translation editor. Post must be saved as draft or published beforehand."
 msgstr ""
 
-#: includes/class-translation-manager.php:899
+#: includes/class-translation-manager.php:916
 msgid "Security check"
 msgstr ""
 
-#: includes/class-translation-manager.php:971
+#: includes/class-translation-manager.php:988
 msgid "<strong>Warning:</strong> Some strings have possibly incorrectly encoded characters. This may result in breaking the queries, rendering the page untranslated in live mode. Consider revising the following strings or their method of outputting."
 msgstr ""
 
-#: includes/class-translation-manager.php:996, includes/class-translation-manager.php:1015, includes/class-upgrade.php:374
+#: includes/class-translation-manager.php:1013, includes/class-translation-manager.php:1032, includes/class-upgrade.php:374
 msgid "TranslatePress data update"
 msgstr ""
 
-#: includes/class-translation-manager.php:996, includes/class-translation-manager.php:1015, includes/class-upgrade.php:374
+#: includes/class-translation-manager.php:1013, includes/class-translation-manager.php:1032, includes/class-upgrade.php:374
 msgid "We need to update your translations database to the latest version."
 msgstr ""
 
-#: includes/class-translation-manager.php:997
+#: includes/class-translation-manager.php:1014
 msgid "Updating will allow editing translations of localized text from plugins and theme. Existing translation will still work as expected."
 msgstr ""
 
-#: includes/class-translation-manager.php:999, includes/class-translation-manager.php:1018, includes/class-upgrade.php:375
+#: includes/class-translation-manager.php:1016, includes/class-translation-manager.php:1035, includes/class-upgrade.php:375
 msgid "IMPORTANT: It is strongly recommended to first backup the database!\nAre you sure you want to continue?"
 msgstr ""
 
-#: includes/class-translation-manager.php:999, includes/class-translation-manager.php:1018, includes/class-upgrade.php:375
+#: includes/class-translation-manager.php:1016, includes/class-translation-manager.php:1035, includes/class-upgrade.php:375
 msgid "Run the updater"
 msgstr ""
 
-#: includes/class-translation-manager.php:1016
+#: includes/class-translation-manager.php:1033
 msgid "Updating will allow editing translations of slugs. Existing translation will still work as expected."
 msgstr ""
 
-#: includes/class-translation-manager.php:1071
+#: includes/class-translation-manager.php:1088
 msgid "Please activate the SEO Addon from <br/>WordPress -> Settings -> TranslatePress -> Addons section"
 msgstr ""
 
-#: includes/class-translation-manager.php:1074
+#: includes/class-translation-manager.php:1091
 msgid "Go to Addons"
 msgstr ""
 
-#: includes/class-translation-manager.php:1090
+#: includes/class-translation-manager.php:1107
 msgid "The SEO Pack add-on allows translation of all the URL slugs:"
 msgstr ""
 
-#: includes/class-translation-manager.php:1093
+#: includes/class-translation-manager.php:1110
 msgid "Taxonomy slugs"
 msgstr ""
 
-#: includes/class-translation-manager.php:1096
+#: includes/class-translation-manager.php:1113
 msgid "Term slugs"
 msgstr ""
 
-#: includes/class-translation-manager.php:1099
+#: includes/class-translation-manager.php:1116
 msgid "Post slugs (this includes pages and custom post types)"
 msgstr ""
 
-#: includes/class-translation-manager.php:1102
+#: includes/class-translation-manager.php:1119
 msgid "Post type base slugs"
 msgstr ""
 
-#: includes/class-translation-manager.php:1105
+#: includes/class-translation-manager.php:1122
 msgid "WooCommerce slugs"
 msgstr ""
 
-#: includes/class-translation-manager.php:1110
+#: includes/class-translation-manager.php:1127
 msgid "The SEO Pack add-on is available with ALL premium versions of the plugin."
 msgstr ""
 
-#: includes/class-translation-manager.php:1113
+#: includes/class-translation-manager.php:1130
 msgid "Upgrade to Pro"
 msgstr ""
 
@@ -1688,7 +1766,7 @@ msgstr ""
 msgid "Requires <a href=\"%s\" title=\"TranslatePress Add-on SEO Pack documentation\" target=\"_blank\">SEO Pack Add-on</a> to be installed and activated."
 msgstr ""
 
-#: partials/machine-translation-settings-page.php:235, partials/main-settings-language-selector.php:140, partials/settings-header.php:27, includes/mtapi/functions.php:87, includes/mtapi/functions.php:188
+#: partials/machine-translation-settings-page.php:235, partials/main-settings-language-selector.php:140, partials/settings-header.php:34, includes/mtapi/functions.php:87, includes/mtapi/functions.php:188
 msgid "Upgrade now"
 msgstr ""
 
@@ -1984,11 +2062,11 @@ msgstr ""
 msgid "Terms of Service"
 msgstr ""
 
-#: partials/settings-header.php:19
+#: partials/settings-header.php:26
 msgid "Support"
 msgstr ""
 
-#: partials/settings-header.php:25
+#: partials/settings-header.php:32
 msgid "Documentation"
 msgstr ""
 

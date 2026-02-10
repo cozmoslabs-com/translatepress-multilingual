@@ -1,3 +1,12 @@
+= 3.0.8 =
+* Add admin bar notifications for adding new language, expired license and lack of AI words
+* Fix bug where [language-switcher] text appears on pages excluded from translation
+* Prevent numbers, emails and base64 images from being automatically translated when Advanced option Translate numerals is active
+* Fix language switcher configurator strings localized in JS not being picked up by parsers
+* Remove API keys from translation editor object exposed in JS
+* Regular Strings tab in Translation Editor is enabled by default
+* PHP notice Using null as an array offset is deprecated
+
 = 3.0.7 =
 * Improved security by adding nonces and capability checks to various ajax calls that lacked them
 * Fixed issue with breaking urls containing % when manually adding translations in Translation Editor

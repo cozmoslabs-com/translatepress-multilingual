@@ -150,6 +150,25 @@
 <?php __("Settings", "translatepress-multilingual"); ?>
 <?php __("Activate License", "translatepress-multilingual"); ?>
 <?php __("Pro Features", "translatepress-multilingual"); ?>
+<?php __("Need Help?", "translatepress-multilingual"); ?>
+<?php __("Recent community discussions", "translatepress-multilingual"); ?>
+<?php __("Loading...", "translatepress-multilingual"); ?>
+<?php __("Unable to load forum posts", "translatepress-multilingual"); ?>
+<?php __("Ask a Question", "translatepress-multilingual"); ?>
+<?php __("View All Topics", "translatepress-multilingual"); ?>
+<?php __("by", "translatepress-multilingual"); ?>
+<?php __("Have a question?", "translatepress-multilingual"); ?>
+<?php __("Get help directly from the plugin developers, suggest improvements, or share your feedback!", "translatepress-multilingual"); ?>
+<?php __("Tip for faster help:", "translatepress-multilingual"); ?>
+<?php __("Include what you tried, what you expected, and what happened. Screenshots help!", "translatepress-multilingual"); ?>
+<?php __("Toggle support chat", "translatepress-multilingual"); ?>
+<?php __("Ask the community", "translatepress-multilingual"); ?>
+<?php __("Close", "translatepress-multilingual"); ?>
+<?php __("Empty feed response", "translatepress-multilingual"); ?>
+<?php __("Unable to parse feed", "translatepress-multilingual"); ?>
+<?php __("Just now", "translatepress-multilingual"); ?>
+<?php __("%d hour ago"msgid_plural "%d hours ago", "translatepress-multilingual"); ?>
+<?php __("%d day ago"msgid_plural "%d days ago", "translatepress-multilingual"); ?>
 <?php __("Source", "translatepress-multilingual"); ?>
 <?php __("Srcset", "translatepress-multilingual"); ?>
 <?php __("Alt attribute", "translatepress-multilingual"); ?>
@@ -249,7 +268,6 @@
 <?php __("Current User", "translatepress-multilingual"); ?>
 <?php __("Logged Out", "translatepress-multilingual"); ?>
 <?php __("Translate Page", "translatepress-multilingual"); ?>
-<?php __("Complete Setup", "translatepress-multilingual"); ?>
 <?php __("Add a New Language", "translatepress-multilingual"); ?>
 <?php __("Get a Free AI License", "translatepress-multilingual"); ?>
 <?php __("Your License is Invalid", "translatepress-multilingual"); ?>
