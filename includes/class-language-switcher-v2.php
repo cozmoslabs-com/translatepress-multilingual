@@ -67,7 +67,7 @@ class TRP_Language_Switcher_V2 {
          */
         add_shortcode( 'language-switcher', [ $this, 'render_shortcode' ] );
 
-        $this->resolve_language_context();
+        add_action( 'plugins_loaded', array( $this, 'resolve_language_context' ), 3 ); // Trigger on plugins loaded with higher priority for compat with Multiple Domains
     }
 
     /**
@@ -125,7 +125,7 @@ class TRP_Language_Switcher_V2 {
      *
      * @return void
      */
-    private function resolve_language_context(): void {
+    public function resolve_language_context(): void {
         $lang_from_url = $this->url_converter->get_lang_from_url_string(); // may be null
         $needed_lang = $this->determine_needed_language($lang_from_url, $this->trp);
 

@@ -1598,16 +1598,16 @@ class TRP_Translation_Render{
         $link_url = parse_url( $url );
         if( empty( $home_url ) )
             $home_url = home_url();
-        $home_url = parse_url( $home_url );
+        $home_url_parsed = parse_url( $home_url );
 
         // Decide on target
-        if( !isset ($link_url['host'] ) || $link_url['host'] == $home_url['host'] ) {
+        if( !isset ($link_url['host'] ) || $link_url['host'] == $home_url_parsed['host'] ) {
             // Is an internal link
             return false;
 
         } else {
-            // Is an external link
-            return true;
+            // Allow addons (like Multiple Domains) to recognize additional domains as internal
+            return apply_filters( 'trp_is_external_link', true, $url, $home_url );
         }
     }
     /**

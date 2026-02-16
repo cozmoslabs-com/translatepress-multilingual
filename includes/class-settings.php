@@ -521,6 +521,8 @@ class TRP_Settings{
         }
 
         if( in_array( $hook, array( 'settings_page_translate-press', 'admin_page_trp_advanced_page', 'admin_page_trp_machine_translation' ) ) ) {
+            // Base script now handles both free and pro functionality via hooks/filters.
+            // However, we keep loading trp-back-end-script-pro.js for backwords compatibility when TP Free is newer then the Pro Addon.
             $back_end_script_url = TRP_PLUGIN_URL . 'assets/js/trp-back-end-script.js';
             if( defined( 'TRP_IN_EL_PLUGIN_URL' ) && file_exists( TRP_IN_EL_PLUGIN_DIR . 'assets/js/trp-back-end-script-pro.js' ) ) {
                 $license_status = get_option( 'trp_license_status' );
@@ -529,7 +531,6 @@ class TRP_Settings{
                     $back_end_script_url = TRP_IN_EL_PLUGIN_URL . 'assets/js/trp-back-end-script-pro.js';
                 }
             }
-
             wp_enqueue_script( 'trp-settings-script', $back_end_script_url, array( 'jquery', 'jquery-ui-sortable' ), TRP_PLUGIN_VERSION );
 
             if ( ! $this->trp_languages ){
@@ -546,6 +547,7 @@ class TRP_Settings{
             wp_localize_script( 'trp-settings-script', 'trp_url_slugs_info',
                 array( 'iso_codes'                         => $iso_codes,
                        'languages_that_support_formality'  => $languages_that_support_formality,
+                       'max_secondary_languages'           => apply_filters( 'trp_secondary_languages', 1 ),
                        'error_message_duplicate_slugs'     => __( 'Error! Duplicate URL slug values.', 'translatepress-multilingual' ),
                        'error_message_formality'           => wp_kses( __( 'You cannot select two languages that have the same <a href="https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes" target="_blank">iso code</a> but different formalities because doing so will lead to duplicate <a href="https://developers.google.com/search/docs/specialty/international/localized-versions" target="_blank">hreflang tags</a>.', 'translatepress-multilingual' ), [ 'a' => [ 'href' => [], 'class' => [], 'rel' => [], 'target' => [] ] ] ),
                        'error_message_duplicate_languages' => wp_kses( __( 'Duplicate language detected.<br>Each language can only be added once to ensure accurate translation management.<br> Please change the duplicate language entry and try again. ', 'translatepress-multilingual' ), [ 'br' => [] ] ),

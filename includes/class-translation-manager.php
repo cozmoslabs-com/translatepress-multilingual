@@ -187,7 +187,7 @@ class TRP_Translation_Manager {
                     'tooltip_text_general' => esc_html__( '%1$s% of text on this page is translated into %2$s.', 'translatepress-multilingual'),
                     'minibar_text'         => esc_html__('This page is %1$s% translated into %2$s.', 'translatepress-multilingual')
                 ),
-                'multiple_types_alert'              => esc_html__( "The slug that you are trying to edit is present in other slug types:%s%.\nEditing it will replace each occurrence, regardless of the current type.", 'translatepress-multilingual')
+                'multiple_types_alert'              => esc_html__( "The slug that you are trying to edit is present in other slug types:%s%. Editing it will replace each occurrence, regardless of the current type.", 'translatepress-multilingual')
             );
     }
 

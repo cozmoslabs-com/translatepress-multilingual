@@ -237,7 +237,7 @@ class TRP_Machine_Translator {
 			$this->referer = $this->url_converter->get_abs_home();
 		}
 
-		return $this->referer;
+		return apply_filters( 'trp_machine_translator_referer', $this->referer );
 	}
 
     /**

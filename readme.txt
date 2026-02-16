@@ -5,7 +5,7 @@ Tags: translate, translation, multilingual, automatic translation, bilingual, fr
 Requires at least: 3.1.0
 Tested up to: 6.9.1
 Requires PHP: 7.4
-Stable tag: 3.0.9
+Stable tag: 3.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -142,10 +142,9 @@ For more information please check out our [documentation](https://translatepress
 
 
 == Changelog ==
-= 3.0.9 =
-* Encourage users to engage and ask questions or offer suggestions on wordpress.org forums from TranslatePress Settings
-* Skip shortcode translation inside REST API
-* Fix bug where Manual Translation Only broke translation block saving
+= 3.1 =
+* Add a new add-on: Different Domain for Language
+* Fixed a few incorrect entries in the .pot file
 
 = Older versions =
 [Click Here](https://translatepress.com/docs/translatepress-free-changelog/?utm_source=wp.org&utm_medium=tp-description-page&utm_campaign=TPFree) to view the full changelog, or you can find it in the changelog.txt file in the plugin folder.

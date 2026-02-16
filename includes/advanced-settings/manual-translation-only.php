@@ -9,11 +9,7 @@ function trp_register_manual_translation_only( $settings_array ){
         'name'          => 'manual_translation_only',
         'type'          => 'checkbox',
         'label'         => esc_html__( 'Manual Translation Only', 'translatepress-multilingual' ),
-        'description'   => nl2br(esc_html__( "TranslatePress pro-actively scans and saves strings in the database when users access translated pages.
-        
-                                             This setting disables this functionality and only allows translation and string saving when inside the Translation Editor. 
-                                             
-                                             Also disables machine translation outside the Translation Editor, giving you better control over character spending, by translating only the pages you visit in the Translation Editor.", 'translatepress-multilingual' )),
+        'description'   => wp_kses( __( "TranslatePress pro-actively scans and saves strings in the database when users access translated pages. <br>This setting disables this functionality and only allows translation and string saving when inside the Translation Editor. <br>Also disables machine translation outside the Translation Editor, giving you better control over character spending, by translating only the pages you visit in the Translation Editor.", 'translatepress-multilingual' ), array( 'br' => array() ) ),
         'id'            => 'miscellaneous_options',
         'container'     => 'miscellaneous_options'
     );

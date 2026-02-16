@@ -1,3 +1,8 @@
+= 3.0.9 =
+* Encourage users to engage and ask questions or offer suggestions on wordpress.org forums from TranslatePress Settings
+* Skip shortcode translation inside REST API
+* Fix bug where Manual Translation Only broke translation block saving
+
 = 3.0.8 =
 * Add admin bar notifications for adding new language, expired license and lack of AI words
 * Fix bug where [language-switcher] text appears on pages excluded from translation
