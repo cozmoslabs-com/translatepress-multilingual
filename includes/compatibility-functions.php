@@ -348,6 +348,142 @@ function trp_woo_data_strip_trpst( $data ){
     return TRP_Translation_Manager::strip_gettext_tags( $data );
 }
 
+/*
+ * Always-on write-time stripping of TRP gettext markers from database writes.
+ *
+ * Prevents #!trpst#trp-gettext...#!trpen# markers from being persisted when
+ * plugins pass __() results into data that gets saved (e.g. order item meta keys,
+ * payment method titles, comments, options).
+ *
+ * @since 2.8.5
+ */
+
+// 1. WooCommerce Order Pre-Save — clean payment_method_title and customer_note before DB write
+add_action( 'woocommerce_before_order_object_save', 'trp_woo_order_pre_save_strip_trpst', 10, 2 );
+function trp_woo_order_pre_save_strip_trpst( $order, $data_store ) {
+    if ( ! $order instanceof WC_Order ) {
+        return;
+    }
+
+    $payment_method_title = $order->get_payment_method_title( 'edit' );
+    if ( is_string( $payment_method_title ) && strpos( $payment_method_title, 'data-trpgettextoriginal=' ) !== false ) {
+        $order->set_payment_method_title( TRP_Translation_Manager::strip_gettext_tags( $payment_method_title ) );
+    }
+
+    $customer_note = $order->get_customer_note( 'edit' );
+    if ( is_string( $customer_note ) && strpos( $customer_note, 'data-trpgettextoriginal=' ) !== false ) {
+        $order->set_customer_note( TRP_Translation_Manager::strip_gettext_tags( $customer_note ) );
+    }
+}
+
+// 2. WooCommerce Order Item Pre-Save — clean item name, shipping method title, and all queued meta
+add_action( 'woocommerce_before_order_item_object_save', 'trp_woo_order_item_pre_save_strip_trpst', 10, 2 );
+function trp_woo_order_item_pre_save_strip_trpst( $item, $data_store ) {
+    // Strip item name
+    $name = $item->get_name( 'edit' );
+    if ( is_string( $name ) && strpos( $name, 'data-trpgettextoriginal=' ) !== false ) {
+        $item->set_name( TRP_Translation_Manager::strip_gettext_tags( $name ) );
+    }
+
+    // Strip shipping method title
+    if ( $item instanceof WC_Order_Item_Shipping ) {
+        $method_title = $item->get_method_title( 'edit' );
+        if ( is_string( $method_title ) && strpos( $method_title, 'data-trpgettextoriginal=' ) !== false ) {
+            $item->set_method_title( TRP_Translation_Manager::strip_gettext_tags( $method_title ) );
+        }
+    }
+
+    // Strip queued meta data (not yet persisted — clean in memory before save_meta_data runs)
+    $meta_data = $item->get_meta_data();
+    foreach ( $meta_data as $meta ) {
+        $changed = false;
+
+        if ( is_string( $meta->key ) && strpos( $meta->key, 'data-trpgettextoriginal=' ) !== false ) {
+            $meta->key = TRP_Translation_Manager::strip_gettext_tags( $meta->key );
+            $changed = true;
+        }
+
+        if ( is_string( $meta->value ) && strpos( $meta->value, 'data-trpgettextoriginal=' ) !== false ) {
+            $meta->value = TRP_Translation_Manager::strip_gettext_tags( $meta->value );
+            $changed = true;
+        }
+
+        if ( is_array( $meta->value ) ) {
+            $serialized = serialize( $meta->value );
+            if ( strpos( $serialized, 'data-trpgettextoriginal=' ) !== false ) {
+                array_walk_recursive( $meta->value, 'trp_array_walk_recursive_strip_gettext_tags' );
+            }
+        }
+    }
+}
+
+// 3. Order Item Meta Post-Save Safety Net — catch direct add_metadata/update_metadata calls
+add_action( 'added_order_item_meta', 'trp_woo_order_item_meta_post_save_strip_trpst', 10, 4 );
+add_action( 'updated_order_item_meta', 'trp_woo_order_item_meta_post_save_strip_trpst', 10, 4 );
+function trp_woo_order_item_meta_post_save_strip_trpst( $meta_id, $object_id, $meta_key, $meta_value ) {
+    $key_contaminated   = is_string( $meta_key ) && strpos( $meta_key, 'data-trpgettextoriginal=' ) !== false;
+    $value_contaminated = is_string( $meta_value ) && strpos( $meta_value, 'data-trpgettextoriginal=' ) !== false;
+
+    if ( ! $key_contaminated && ! $value_contaminated ) {
+        return;
+    }
+
+    global $wpdb;
+
+    if ( $key_contaminated ) {
+        $clean_key = TRP_Translation_Manager::strip_gettext_tags( $meta_key );
+        $wpdb->update(
+            $wpdb->prefix . 'woocommerce_order_itemmeta',
+            array( 'meta_key' => $clean_key ),
+            array( 'meta_id' => $meta_id ),
+            array( '%s' ),
+            array( '%d' )
+        );
+    }
+
+    if ( $value_contaminated ) {
+        $clean_value = TRP_Translation_Manager::strip_gettext_tags( $meta_value );
+        // Remove our own hook to prevent recursion, then re-add
+        remove_action( current_action(), 'trp_woo_order_item_meta_post_save_strip_trpst', 10 );
+        update_metadata_by_mid( 'order_item', $meta_id, $clean_value );
+        add_action( current_action(), 'trp_woo_order_item_meta_post_save_strip_trpst', 10, 4 );
+    }
+}
+
+// 4. WordPress Comments Pre-Save — clean comment_content and comment_author
+add_filter( 'preprocess_comment', 'trp_comment_pre_save_strip_trpst' );
+function trp_comment_pre_save_strip_trpst( $commentdata ) {
+    $fields = array( 'comment_content', 'comment_author' );
+    foreach ( $fields as $field ) {
+        if ( isset( $commentdata[ $field ] ) && is_string( $commentdata[ $field ] ) && strpos( $commentdata[ $field ], 'data-trpgettextoriginal=' ) !== false ) {
+            $commentdata[ $field ] = TRP_Translation_Manager::strip_gettext_tags( $commentdata[ $field ] );
+        }
+    }
+    return $commentdata;
+}
+
+// 5. WordPress Options Pre-Save — clean option values (skip TRP's own options)
+add_filter( 'pre_update_option', 'trp_option_pre_save_strip_trpst', 10, 3 );
+function trp_option_pre_save_strip_trpst( $value, $option, $old_value ) {
+    // Skip TRP's own options
+    if ( strpos( $option, 'trp_' ) === 0 ) {
+        return $value;
+    }
+
+    if ( is_string( $value ) ) {
+        if ( strpos( $value, 'data-trpgettextoriginal=' ) !== false ) {
+            $value = TRP_Translation_Manager::strip_gettext_tags( $value );
+        }
+    } elseif ( is_array( $value ) ) {
+        $serialized = serialize( $value );
+        if ( strpos( $serialized, 'data-trpgettextoriginal=' ) !== false ) {
+            array_walk_recursive( $value, 'trp_array_walk_recursive_strip_gettext_tags' );
+        }
+    }
+
+    return $value;
+}
+
 /**
  * Compatibility with WooCommerce country list on checkout.
  *
@@ -1963,9 +2099,6 @@ add_action( 'before_woocommerce_init', function() {
 } );
 
 
-/**
- * Compatibility with RankMath
- */
 add_filter( 'rank_math/analytics/get_translated_objects', 'trp_rank_math_get_translated_items', 10, 1 );
 function trp_rank_math_get_translated_items( $post_id ) {
     if ( ! class_exists( 'TRP_Translate_Press' ) || !function_exists('trp_translate')) {
@@ -2815,3 +2948,58 @@ function trp_divi_wrap_module_with_post_id($output, $render_slug, $module) {
 
     return $output;
 }
+
+/**
+ * Compatibility with redirect plugins when SEO Pack rewrites REQUEST_URI for translated slugs.
+ */
+add_filter( 'rank_math/redirection/pre_search', 'trp_rank_math_use_original_request_uri_for_redirections', 9, 3 );
+function trp_rank_math_use_original_request_uri_for_redirections( $check, $uri, $full_uri ) {
+    if ( ! is_null( $check ) ) {
+        return $check;
+    }
+
+    $request_uri = trp_get_original_request_uri();
+    if ( empty( $request_uri ) ) {
+        return $check;
+    }
+
+    if ( ! class_exists( '\RankMath\Redirections\DB' ) || ! class_exists( '\RankMath\Redirections\Redirection' ) ) {
+        return $check;
+    }
+
+    $full_uri    = str_replace( home_url( '/' ), '', $request_uri );
+    $full_uri    = urldecode( $full_uri );
+    $full_uri    = trim( \RankMath\Redirections\Redirection::strip_subdirectory( $full_uri ), '/' );
+
+    if ( empty( $full_uri ) ) {
+        return $check;
+    }
+
+    $uri_parts = explode( '?', $full_uri, 2 );
+    $uri       = trim( $uri_parts[0], '/' );
+
+    $redirection = \RankMath\Redirections\DB::match_redirections( $uri );
+    if ( ! $redirection && $uri !== $full_uri ) {
+        $redirection = \RankMath\Redirections\DB::match_redirections( $full_uri );
+    }
+
+    return $redirection ?: $check;
+}
+
+/**
+ * Register request URL filters for the Redirection plugin only when it is active.
+ *
+ * TP rewrites REQUEST_URI for translated slugs, while Redirection matches against request URL.
+ * We provide the original request URI captured before TP rewrites it.
+ */
+function trp_register_redirection_original_request_uri_filters() {
+    if ( ! class_exists( 'Redirection_Request' ) || ! function_exists( 'trp_get_original_request_uri' ) ) {
+        return;
+    }
+
+    // Redirection_Request::get_request_url() uses this filter for the current request URI.
+    add_filter( 'redirection_request_url', 'trp_get_original_request_uri', 1 );
+    // Red_Url_Request applies this to source URL before decode/match.
+    add_filter( 'redirection_url_source', 'trp_get_original_request_uri', 1 );
+}
+add_action( 'plugins_loaded', 'trp_register_redirection_original_request_uri_filters', 20 );

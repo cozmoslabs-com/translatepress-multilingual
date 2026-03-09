@@ -1,3 +1,7 @@
+= 3.1 =
+* Add a new add-on: Different Domain for Language
+* Fixed a few incorrect entries in the .pot file
+
 = 3.0.9 =
 * Encourage users to engage and ask questions or offer suggestions on wordpress.org forums from TranslatePress Settings
 * Skip shortcode translation inside REST API

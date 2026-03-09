@@ -1053,3 +1053,18 @@ function trp_obfuscate_sensitive_data_in_json_response( $string ) {
     }
     return $string;
 }
+
+/**
+ * Get the original request URI before SEO Pack rewrites translated slugs.
+ *
+ * @param string|null $fallback Used as the filtered value when we hook this function to redirection_request_url and redirection_url_source
+ * @return string
+ */
+function trp_get_original_request_uri( $fallback = null ) {
+    global $TRP_ORIGINAL_REQUEST_URI;
+
+    if ( empty( $TRP_ORIGINAL_REQUEST_URI ) )
+        return $fallback; // Can happen if something goes wrong in translate_request_uri or SEO Pack is not updated
+
+    return $TRP_ORIGINAL_REQUEST_URI;
+}

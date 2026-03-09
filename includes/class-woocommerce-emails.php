@@ -252,7 +252,12 @@ class TRP_Woocommerce_Emails{
 
         $this->reload_woocommerce_textdomain();
 
-        $this->bootstrap_trp_gettext_for_emails();
+        // Skip gettext bootstrap for en_US as secondary language due to WooCommerce not providing a .mo file for en_US.
+        // This causes TP to load the default language gettext.
+        $skip_bootstrap_for_en_us_fallback = ( $language === 'en_US' && $default_language !== 'en_US' );
+        if ( ! $skip_bootstrap_for_en_us_fallback ) {
+            $this->bootstrap_trp_gettext_for_emails();
+        }
 
         // calls necessary because the default additional_content field of an email is localized before this point and stored in a variable in the previous locale
         $wc_email->init_form_fields();
