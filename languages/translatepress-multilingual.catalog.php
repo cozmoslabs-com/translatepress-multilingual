@@ -12,6 +12,14 @@
 <?php __("Remove", "translatepress-multilingual"); ?>
 <?php __("Add", "translatepress-multilingual"); ?>
 <?php __("Select...", "translatepress-multilingual"); ?>
+<?php __("[%s] Low TranslatePress AI Words", "translatepress-multilingual"); ?>
+<?php __("upgrade your plan or get extra AI Words", "translatepress-multilingual"); ?>
+<?php __("upgrade your plan", "translatepress-multilingual"); ?>
+<?php __("TranslatePress AI words are running low on your site.", "translatepress-multilingual"); ?>
+<?php __("Current status: %s words remaining", "translatepress-multilingual"); ?>
+<?php __("Once the remaining AI words run out, automatic translation through TranslatePress AI will be paused.", "translatepress-multilingual"); ?>
+<?php __("To continue translating your content, please %1$s over at %2$s", "translatepress-multilingual"); ?>
+<?php __("Manage Notification: %s", "translatepress-multilingual"); ?>
 <?php __("There is a new version of %1$s available. %2$sView version %3$s details%4$s or %5$supdate now%6$s.", "translatepress-multilingual"); ?>
 <?php __("There is a new version of %1$s available. %2$sView version %3$s details%4$s.", "translatepress-multilingual"); ?>
 <?php __("To enable updates, please %1$senter your license key%2$s. Need a license key? %3$sPurchase one now%4$s.", "translatepress-multilingual"); ?>
@@ -431,6 +439,14 @@
 <?php __("More info", "translatepress-multilingual"); ?>
 <?php __("Choose which engine you want to use in order to %1$s automatically translate your website.", "translatepress-multilingual"); ?>
 <?php __("Automatic Translation Settings", "translatepress-multilingual"); ?>
+<?php __("AI Words Low Notification", "translatepress-multilingual"); ?>
+<?php __("Receive an email notification when your TranslatePress AI word count drops below the specified threshold.", "translatepress-multilingual"); ?>
+<?php __("This feature is only available when using the TranslatePress AI translation engine.", "translatepress-multilingual"); ?>
+<?php __("Notification Email", "translatepress-multilingual"); ?>
+<?php __("The email address where the low AI words notification will be sent.", "translatepress-multilingual"); ?>
+<?php __("Word Threshold", "translatepress-multilingual"); ?>
+<?php __("words", "translatepress-multilingual"); ?>
+<?php __("You will be notified when remaining AI words drop below this number.", "translatepress-multilingual"); ?>
 <?php __("Automatically Translate Slugs", "translatepress-multilingual"); ?>
 <?php __("Generate automatic translations of slugs for posts, pages and Custom Post Types.<br/>The slugs will be automatically translated starting with the second refresh of each page.", "translatepress-multilingual"); ?>
 <?php __("This feature is only available in the paid version. Upgrade TranslatePress and unlock more premium features.", "translatepress-multilingual"); ?>
@@ -666,7 +682,7 @@
 <?php __("Enter your license key", "translatepress-multilingual"); ?>
 <?php __(" Or %1$spurchase one here%2$s", "translatepress-multilingual"); ?>
 <?php __("Your free account includes: ", "translatepress-multilingual"); ?>
-<?php __("Get more AI Tokens and unlock all AI features with TranslatePress Pro.", "translatepress-multilingual"); ?>
+<?php __("Get more AI Words and unlock all AI features with TranslatePress Pro.", "translatepress-multilingual"); ?>
 <?php __("You have a valid %s <strong>license</strong>.", "translatepress-multilingual"); ?>
 <?php __(" words remaining. ", "translatepress-multilingual"); ?>
 <?php __("Recheck", "translatepress-multilingual"); ?>
@@ -701,7 +717,7 @@
 <?php __("You're ready to start translating!", "translatepress-multilingual"); ?>
 <?php __("You have successfully set up TranslatePress for your website.", "translatepress-multilingual"); ?>
 <?php __("Receive ", "translatepress-multilingual"); ?>
-<?php __("Sign me up to the Newsletter", "translatepress-multilingual"); ?>
+<?php __("Yes, send me multilingual growth tips.", "translatepress-multilingual"); ?>
 <?php __("Start translating", "translatepress-multilingual"); ?>
 <?php __("Sign Up and Start translating", "translatepress-multilingual"); ?>
 <?php __("Please upload a TranslatePress Pro plugin file.", "translatepress-multilingual"); ?>

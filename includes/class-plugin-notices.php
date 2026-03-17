@@ -251,8 +251,11 @@ Class TRP_Plugin_Notifications {
         $count = 0;
 
         foreach( $this->notifications as $notification ) {
-            if( ! empty( $notification['count_in_menu'] ) )
+            if( ! empty( $notification['count_in_menu'] ) ) {
+                if( get_user_meta( get_current_user_id(), $notification['id'] . '_dismiss_notification', true ) )
+                    continue;
                 $count++;
+            }
         }
 
         return $count;
@@ -278,6 +281,9 @@ Class TRP_Plugin_Notifications {
                 continue;
 
             if( ! in_array( $submenu, $notification['count_in_submenu'] ) )
+                continue;
+
+            if( get_user_meta( get_current_user_id(), $notification['id'] . '_dismiss_notification', true ) )
                 continue;
 
             $count++;

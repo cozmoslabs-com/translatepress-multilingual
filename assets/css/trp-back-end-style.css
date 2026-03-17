@@ -39,7 +39,7 @@
     --trp-settings-warning-bg-color:#FBEDE7;
     --trp-settings-success-text-color: #369323;
     --trp-settings-success-bg-color: #dbeada;
-    --trp-settings-upgrade-text-color: #8A6412;
+    --trp-settings-upgrade-text-color: #85641c;
     --trp-settings-upgrade-bg-color: #FCF2DD;
     --trp-settings-upgrade-border-color: #F9E2B2;
     --trp-settings-light-gray-border-color: #E2E2E4;
@@ -281,6 +281,11 @@ div.trp-switch .trp-switch-input {
     position: relative;
     margin: 0;
     flex-shrink: 0;
+}
+
+.trp-settings-checkbox input[type="checkbox"]:checked{
+    background: #fff;
+    border-color: var(--trp-settings-medium-gray-border-color);
 }
 
 .trp-settings-checkbox input[type="checkbox"]:checked::before {
@@ -702,6 +707,11 @@ tr.trp-language td{
     position: relative;
 }
 
+#trp-settings__wrap input[type="radio"]:checked {
+    background: #fff;
+    border-color: var(--trp-settings-medium-gray-border-color);
+}
+
 #trp-settings__wrap input[type="radio"]:hover{
     border-color: var(--trp-settings-accent-color);
 }
@@ -711,6 +721,7 @@ tr.trp-language td{
 }
 
 #trp-settings__wrap input[type="radio"]:checked:before {
+    content: "";
     position: absolute;
     width: 10px;
     height: 10px;
@@ -718,6 +729,8 @@ tr.trp-language td{
     left: 50%;
     transform: translate(-50%, -50%);
     margin: 0;
+    background-color: var(--trp-settings-accent-color);
+    border-radius: 50%;
 }
 
 #trp-settings__wrap input[type="text"]::placeholder{

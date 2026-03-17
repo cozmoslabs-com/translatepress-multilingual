@@ -1,3 +1,9 @@
+= 3.1.1 =
+* Fixed WooCommerce emails being sent in the default language instead of the secondary language (en_US)
+* Prevent gettext marker contamination in DB writes for WooCommerce orders, comments, and options #!trpst#
+* Match language switcher tab width with the rest of the TranslatePress Settings pages
+* Added announcement about Different Domain per Language add-on
+
 = 3.1 =
 * Add a new add-on: Different Domain for Language
 * Fixed a few incorrect entries in the .pot file

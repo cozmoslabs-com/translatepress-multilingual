@@ -496,7 +496,10 @@ class TRP_Settings{
             'automatically-translate-slug'      => 'yes',
             'machine_translation_counter_date'  => date ("Y-m-d" ),
             'machine_translation_limit_enabled' => 'no',
-            'machine_translation_limit'         => 1000000
+            'machine_translation_limit'         => 1000000,
+            'ai_words_notification_enabled'     => 'yes',
+            'ai_words_notification_email'       => '',
+            'ai_words_notification_threshold'   => TRP_AI_Words_Notification::get_default_threshold()
             /*
              * These settings are merged into the saved DB option.
              * Be sure to set any checkbox options to 'no' in sanitize_settings.

@@ -3,9 +3,9 @@ Contributors: cozmoslabs, razvan.mo, madalin.ungureanu, sareiodata, cristophor
 Donate link: https://www.translatepress.com/
 Tags: translate, translation, multilingual, automatic translation, bilingual, front-end translation, google translate, language
 Requires at least: 3.1.0
-Tested up to: 6.9.1
+Tested up to: 6.9.4
 Requires PHP: 7.4
-Stable tag: 3.1.1
+Stable tag: 3.1.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -143,11 +143,12 @@ For more information please check out our [documentation](https://translatepress
 
 
 == Changelog ==
-= 3.1.1 =
-* Fixed WooCommerce emails being sent in the default language instead of the secondary language (en_US)
-* Prevent gettext marker contamination in DB writes for WooCommerce orders, comments, and options #!trpst#
-* Match language switcher tab width with the rest of the TranslatePress Settings pages
-* Added announcement about Different Domain per Language add-on
+= 3.1.2 =
+* Added AI Words low quota email notification feature
+* Fixed test API key popup not appearing on WP Error
+* Fixed checkbox and radio button styling for WordPress 7.0 compatibility
+* Fixed persistent notification badge in admin sidebar
+* CSS Fixes for WP 7.0 and enable automatic translation on successful license activation in onboarding
 
 = Older versions =
 [Click Here](https://translatepress.com/docs/translatepress-free-changelog/?utm_source=wp.org&utm_medium=tp-description-page&utm_campaign=TPFree) to view the full changelog, or you can find it in the changelog.txt file in the plugin folder.

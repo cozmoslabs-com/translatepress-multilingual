@@ -6,7 +6,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-03-09 12:33+0000\n"
+"POT-Creation-Date: 2026-03-17 11:54+0000\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
 "X-Poedit-SearchPath-0: .\n"
@@ -70,6 +70,42 @@ msgstr ""
 msgid "Select..."
 msgstr ""
 
+#. translators: %s: site name
+#: includes/class-ai-words-notification.php:119, includes/class-ai-words-notification.php:186
+msgid "[%s] Low TranslatePress AI Words"
+msgstr ""
+
+#: includes/class-ai-words-notification.php:207
+msgid "upgrade your plan or get extra AI Words"
+msgstr ""
+
+#: includes/class-ai-words-notification.php:205
+msgid "upgrade your plan"
+msgstr ""
+
+#: includes/class-ai-words-notification.php:211
+msgid "TranslatePress AI words are running low on your site."
+msgstr ""
+
+#. translators: %s: formatted number of words remaining
+#: includes/class-ai-words-notification.php:213
+msgid "Current status: %s words remaining"
+msgstr ""
+
+#: includes/class-ai-words-notification.php:214
+msgid "Once the remaining AI words run out, automatic translation through TranslatePress AI will be paused."
+msgstr ""
+
+#. translators: 1: upgrade action text, 2: account URL
+#: includes/class-ai-words-notification.php:216
+msgid "To continue translating your content, please %1$s over at %2$s"
+msgstr ""
+
+#. translators: %s: notification settings URL
+#: includes/class-ai-words-notification.php:218
+msgid "Manage Notification: %s"
+msgstr ""
+
 #: includes/class-edd-sl-plugin-updater.php:260
 msgid "There is a new version of %1$s available. %2$sView version %3$s details%4$s or %5$supdate now%6$s."
 msgstr ""
@@ -98,15 +134,15 @@ msgstr ""
 msgid "Error"
 msgstr ""
 
-#: includes/class-edd-sl-plugin-updater.php:817, includes/onboarding/class-autotranslation.php:90, includes/onboarding/class-license.php:61
+#: includes/class-edd-sl-plugin-updater.php:817, includes/onboarding/class-autotranslation.php:100, includes/onboarding/class-license.php:61
 msgid "Your license key expired on %s."
 msgstr ""
 
-#: includes/class-edd-sl-plugin-updater.php:822, includes/onboarding/class-autotranslation.php:95, includes/onboarding/class-license.php:66
+#: includes/class-edd-sl-plugin-updater.php:822, includes/onboarding/class-autotranslation.php:105, includes/onboarding/class-license.php:66
 msgid "Your license key has been disabled."
 msgstr ""
 
-#: includes/class-edd-sl-plugin-updater.php:825, includes/onboarding/class-autotranslation.php:98, includes/onboarding/class-license.php:33, includes/onboarding/class-license.php:69
+#: includes/class-edd-sl-plugin-updater.php:825, includes/onboarding/class-autotranslation.php:108, includes/onboarding/class-license.php:33, includes/onboarding/class-license.php:69
 msgid "Your TranslatePress license key is invalid or missing."
 msgstr ""
 
@@ -122,7 +158,7 @@ msgstr ""
 msgid "If you have only the free plugin installed but added a paid license, please install the paid plugin from your TranslatePress account."
 msgstr ""
 
-#: includes/class-edd-sl-plugin-updater.php:842, includes/onboarding/class-autotranslation.php:108, includes/onboarding/class-license.php:79
+#: includes/class-edd-sl-plugin-updater.php:842, includes/onboarding/class-autotranslation.php:118, includes/onboarding/class-license.php:79
 msgid "Your license key has reached its activation limit."
 msgstr ""
 
@@ -130,11 +166,11 @@ msgstr ""
 msgid "Upgrade your plan to add more sites. %1$sUpgrade now%2$s"
 msgstr ""
 
-#: includes/class-edd-sl-plugin-updater.php:848, includes/onboarding/class-autotranslation.php:111, includes/onboarding/class-license.php:82
+#: includes/class-edd-sl-plugin-updater.php:848, includes/onboarding/class-autotranslation.php:121, includes/onboarding/class-license.php:82
 msgid "This website is already activated under a free license. Each website can only use one free license."
 msgstr ""
 
-#: includes/class-edd-sl-plugin-updater.php:851, includes/class-edd-sl-plugin-updater.php:806, includes/class-edd-sl-plugin-updater.php:925, includes/onboarding/class-autotranslation.php:114, includes/onboarding/class-license.php:85
+#: includes/class-edd-sl-plugin-updater.php:851, includes/class-edd-sl-plugin-updater.php:806, includes/class-edd-sl-plugin-updater.php:925, includes/onboarding/class-autotranslation.php:124, includes/onboarding/class-license.php:85
 msgid "An error occurred, please try again."
 msgstr ""
 
@@ -210,7 +246,7 @@ msgstr ""
 msgid "Automatic translation has been disabled."
 msgstr ""
 
-#: includes/class-error-manager.php:170, includes/class-plugin-notices.php:347, includes/class-plugin-notices.php:425, includes/class-plugin-notices.php:400, includes/class-plugin-notices.php:485, includes/class-plugin-notices.php:463, includes/class-plugin-notices.php:514, includes/class-plugin-notices.php:570, includes/class-plugin-notices.php:626, includes/class-plugin-notices.php:615, includes/class-plugin-notices.php:651, includes/class-plugin-notices.php:703, includes/class-plugin-notices.php:686, includes/class-reviews.php:123, includes/class-reviews.php:126, includes/class-upgrade.php:1040, includes/class-upgrade.php:1749, add-ons-advanced/extra-languages/class-extra-languages.php:167, add-ons-advanced/seo-pack/class-seo-pack.php:840, add-ons-pro/multiple-domains/class-multiple-domains.php:527
+#: includes/class-error-manager.php:170, includes/class-plugin-notices.php:353, includes/class-plugin-notices.php:431, includes/class-plugin-notices.php:406, includes/class-plugin-notices.php:491, includes/class-plugin-notices.php:469, includes/class-plugin-notices.php:520, includes/class-plugin-notices.php:576, includes/class-plugin-notices.php:632, includes/class-plugin-notices.php:621, includes/class-plugin-notices.php:657, includes/class-plugin-notices.php:709, includes/class-plugin-notices.php:692, includes/class-reviews.php:123, includes/class-reviews.php:126, includes/class-upgrade.php:1040, includes/class-upgrade.php:1749, add-ons-advanced/extra-languages/class-extra-languages.php:167, add-ons-advanced/seo-pack/class-seo-pack.php:840, add-ons-pro/multiple-domains/class-multiple-domains.php:546
 msgid "Dismiss this notice."
 msgstr ""
 
@@ -298,7 +334,7 @@ msgstr ""
 msgid "Active"
 msgstr ""
 
-#: includes/class-language-switcher-tab.php:169, includes/class-language-switcher-tab.php:213, add-ons-pro/multiple-domains/class-multiple-domains.php:718
+#: includes/class-language-switcher-tab.php:169, includes/class-language-switcher-tab.php:213, add-ons-pro/multiple-domains/class-multiple-domains.php:737
 msgid "Permission denied."
 msgstr ""
 
@@ -326,23 +362,23 @@ msgstr ""
 msgid "Automatic Translation"
 msgstr ""
 
-#: includes/class-machine-translation-tab.php:186, add-ons-pro/deepl/includes/class-deepl.php:33
+#: includes/class-machine-translation-tab.php:211, add-ons-pro/deepl/includes/class-deepl.php:33
 msgid "DeepL"
 msgstr ""
 
-#: includes/class-machine-translation-tab.php:219
+#: includes/class-machine-translation-tab.php:244
 msgid "Unsupported languages"
 msgstr ""
 
-#: includes/class-machine-translation-tab.php:233
+#: includes/class-machine-translation-tab.php:258
 msgid "The selected automatic translation engine does not provide support for these languages.<br>You can still manually translate pages in these languages using the Translation Editor."
 msgstr ""
 
-#: includes/class-machine-translation-tab.php:255
+#: includes/class-machine-translation-tab.php:284
 msgid "API key validation failed."
 msgstr ""
 
-#: includes/class-machine-translation-tab.php:265
+#: includes/class-machine-translation-tab.php:302
 msgid "API key verification was successful."
 msgstr ""
 
@@ -390,75 +426,75 @@ msgstr ""
 msgid "Nothing here"
 msgstr ""
 
-#: includes/class-plugin-notices.php:344, includes/class-plugin-notices.php:374
+#: includes/class-plugin-notices.php:350, includes/class-plugin-notices.php:380
 msgid "Your <strong>TranslatePress</strong> license is missing or invalid. <br/>Please %1$sregister your copy%2$s to enable automatic website translation via TranslatePress AI, premium addons, automatic updates and support. Need a license key? %3$sPurchase one now%4$s"
 msgstr ""
 
-#: includes/class-plugin-notices.php:421
+#: includes/class-plugin-notices.php:427
 msgid "Your <strong>TranslatePress</strong> license will expire on %1$s. Please %2$sRenew Your Licence%3$s to continue receiving access to automatic translations via TP AI, premium addons, product downloads and automatic updates. %4$sRenew Now%5$s"
 msgstr ""
 
-#: includes/class-plugin-notices.php:392
+#: includes/class-plugin-notices.php:398
 msgid "Error: "
 msgstr ""
 
-#: includes/class-plugin-notices.php:396, includes/class-plugin-notices.php:566
+#: includes/class-plugin-notices.php:402, includes/class-plugin-notices.php:572
 msgid "Something went wrong, please try again."
 msgstr ""
 
-#: includes/class-plugin-notices.php:390, includes/class-plugin-notices.php:560
+#: includes/class-plugin-notices.php:396, includes/class-plugin-notices.php:566
 msgid "Your <strong>TranslatePress</strong> license has expired. <br/>Please %1$sRenew Your Licence%2$s to continue receiving access to automatic translations via TranslatePress AI, premium addons, product downloads, and automatic updates. %3$sRenew now %4$s"
 msgstr ""
 
-#: includes/class-plugin-notices.php:383, includes/class-plugin-notices.php:550
+#: includes/class-plugin-notices.php:389, includes/class-plugin-notices.php:556
 msgid "License key mismatch. The license you entered doesn’t match the <strong>%1$s</strong> version you have installed. <br/>Please check that you’ve installed the correct version for your license from your %2$sTranslatePress account%3$s."
 msgstr ""
 
-#: includes/class-plugin-notices.php:385, includes/class-plugin-notices.php:552
+#: includes/class-plugin-notices.php:391, includes/class-plugin-notices.php:558
 msgid "<br/>If you have only the free plugin installed but added a paid license, please install the paid plugin from your TranslatePress account."
 msgstr ""
 
-#: includes/class-plugin-notices.php:380, includes/class-plugin-notices.php:547
+#: includes/class-plugin-notices.php:386, includes/class-plugin-notices.php:553
 msgid "You have reached the activation limit for your <strong>%1$s</strong> license. <br/>Manage your active sites from %2$s your account %3$s."
 msgstr ""
 
-#: includes/class-plugin-notices.php:377, includes/class-plugin-notices.php:544
+#: includes/class-plugin-notices.php:383, includes/class-plugin-notices.php:550
 msgid "Your license is disabled for this URL. Re-enable it from <a target=\"_blank\" href=\"https://translatepress.com/account/?utm_source=wp-dashboard&utm_medium=client-site&utm_campaign=license-deactivated\">https://translatepress.com/account</a> -> Manage Sites."
 msgstr ""
 
-#: includes/class-plugin-notices.php:475
+#: includes/class-plugin-notices.php:481
 msgid "%1$s automatic translation requires an active license. Please %2$srenew%3$s your license or purchase a new one %4$shere%5$s."
 msgstr ""
 
-#: includes/class-plugin-notices.php:455
+#: includes/class-plugin-notices.php:461
 msgid "Please %1$senter%2$s your license key to enable %3$s automatic translation."
 msgstr ""
 
-#: includes/class-plugin-notices.php:510
+#: includes/class-plugin-notices.php:516
 msgid "You have less than 5,000 TranslatePress AI words remaining. To continue automatically translating your website, please %spurchase additional AI words at a discount from your account%s."
 msgstr ""
 
-#: includes/class-plugin-notices.php:562
+#: includes/class-plugin-notices.php:568
 msgid " Error: "
 msgstr ""
 
-#: includes/class-plugin-notices.php:557
+#: includes/class-plugin-notices.php:563
 msgid "This website is already activated under a free license. Each website can only use one free license. Please upgrade to a premium plan for more TranslatePress AI words from %1$s your account %2$s."
 msgstr ""
 
-#: includes/class-plugin-notices.php:541
+#: includes/class-plugin-notices.php:547
 msgid "You do not have a valid license for <strong>TranslatePress</strong>. %1$sGet one for free%2$s to get access to TranslatePress AI."
 msgstr ""
 
-#: includes/class-plugin-notices.php:624
+#: includes/class-plugin-notices.php:630
 msgid "<strong>NEW:</strong> The <strong>Different Domain per Language</strong> add-on is here! Boost your global SEO and create a local experience with country-specific domains like .de or .fr. Upgrade to <a href=\"https://translatepress.com/pricing/?utm_source=wp-dashboard&utm_medium=client-site&utm_campaign=new-addon-ddpl-upsell\" target=\"_blank\">TranslatePress Business or Developer</a> to access it + more premium perks!"
 msgstr ""
 
-#: includes/class-plugin-notices.php:613
+#: includes/class-plugin-notices.php:619
 msgid "<strong>NEW:</strong> The <strong>Different Domain per Language</strong> add-on is here! Boost your global SEO and create a local experience with country-specific domains like .de or .fr. <a href=\"https://translatepress.com/docs/addons/different-domain-per-language/?utm_source=wp-dashboard&utm_medium=client-site&utm_campaign=new-addon-ddpl\" target=\"_blank\">Learn more</a>."
 msgstr ""
 
-#: includes/class-plugin-notices.php:648
+#: includes/class-plugin-notices.php:654
 msgid "The daily quota for machine translation characters exceeded. Please check the <strong>TranslatePress -> <a href=\"%s\">Automatic Translation</a></strong> page for more information."
 msgstr ""
 
@@ -578,51 +614,51 @@ msgstr ""
 msgid "Language codes can contain only A-Z a-z 0-9 - _ characters. Check your language codes in TranslatePress General Settings."
 msgstr ""
 
-#: includes/class-settings.php:551
+#: includes/class-settings.php:554
 msgid "Error! Duplicate URL slug values."
 msgstr ""
 
-#: includes/class-settings.php:552
+#: includes/class-settings.php:555
 msgid "You cannot select two languages that have the same <a href=\"https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes\" target=\"_blank\">iso code</a> but different formalities because doing so will lead to duplicate <a href=\"https://developers.google.com/search/docs/specialty/international/localized-versions\" target=\"_blank\">hreflang tags</a>."
 msgstr ""
 
-#: includes/class-settings.php:553
+#: includes/class-settings.php:556
 msgid "Duplicate language detected.<br>Each language can only be added once to ensure accurate translation management.<br> Please change the duplicate language entry and try again. "
 msgstr ""
 
-#: includes/class-settings.php:610
+#: includes/class-settings.php:613
 msgid "Current Language"
 msgstr ""
 
-#: includes/class-settings.php:616
+#: includes/class-settings.php:619
 msgid "Opposite Language"
 msgstr ""
 
-#: includes/class-settings.php:656
+#: includes/class-settings.php:659
 msgid "General"
 msgstr ""
 
-#: includes/class-settings.php:661, includes/class-translation-manager.php:544, add-ons-pro/translator-accounts/includes/class-translator-accounts.php:156
+#: includes/class-settings.php:664, includes/class-translation-manager.php:544, add-ons-pro/translator-accounts/includes/class-translator-accounts.php:156
 msgid "Translate Site"
 msgstr ""
 
-#: includes/class-settings.php:666
+#: includes/class-settings.php:669
 msgid "Addons"
 msgstr ""
 
-#: includes/class-settings.php:674
+#: includes/class-settings.php:677
 msgid "License"
 msgstr ""
 
-#: includes/class-settings.php:718, includes/class-translation-manager.php:700
+#: includes/class-settings.php:721, includes/class-translation-manager.php:700
 msgid "Settings"
 msgstr ""
 
-#: includes/class-settings.php:732, partials/license-settings-page.php:29, includes/onboarding/class-autotranslation.php:169, includes/onboarding/class-license.php:131
+#: includes/class-settings.php:735, partials/license-settings-page.php:29, includes/onboarding/class-autotranslation.php:179, includes/onboarding/class-license.php:131
 msgid "Activate License"
 msgstr ""
 
-#: includes/class-settings.php:724
+#: includes/class-settings.php:727
 msgid "Pro Features"
 msgstr ""
 
@@ -1509,7 +1545,7 @@ msgstr ""
 msgid "Configure different menu items for different languages."
 msgstr ""
 
-#: partials/addons-settings-page.php:113, add-ons-pro/multiple-domains/class-multiple-domains.php:326, includes/onboarding/class-addons.php:101
+#: partials/addons-settings-page.php:113, add-ons-pro/multiple-domains/class-multiple-domains.php:345, includes/onboarding/class-addons.php:101
 msgid "Different Domain per Language"
 msgstr ""
 
@@ -1549,7 +1585,7 @@ msgstr ""
 msgid "Create no-code automations and workflows on your WordPress site. Easily connect your plugins, sites and apps together."
 msgstr ""
 
-#: partials/advanced-settings-page.php:18, partials/machine-translation-settings-page.php:352, partials/main-settings-page.php:227
+#: partials/advanced-settings-page.php:18, partials/machine-translation-settings-page.php:429, partials/main-settings-page.php:227
 msgid "Save Changes"
 msgstr ""
 
@@ -1638,11 +1674,11 @@ msgstr ""
 msgid "You can get one for %1$sfree%2$s, by creating a free account. It includes:"
 msgstr ""
 
-#: partials/license-settings-page.php:125, includes/mtapi/functions.php:74, includes/onboarding/class-autotranslation.php:212
+#: partials/license-settings-page.php:125, includes/mtapi/functions.php:74, includes/onboarding/class-autotranslation.php:222
 msgid "Access to TranslatePress AI for instant automatic translations"
 msgstr ""
 
-#: partials/license-settings-page.php:130, includes/mtapi/functions.php:79, includes/onboarding/class-autotranslation.php:217
+#: partials/license-settings-page.php:130, includes/mtapi/functions.php:79, includes/onboarding/class-autotranslation.php:227
 msgid "2000 AI words to translate automatically"
 msgstr ""
 
@@ -1690,7 +1726,7 @@ msgstr ""
 msgid "Learn More"
 msgstr ""
 
-#: partials/machine-translation-settings-page.php:29, includes/onboarding/class-autotranslation.php:126, includes/onboarding/class-autotranslation.php:157
+#: partials/machine-translation-settings-page.php:29, includes/onboarding/class-autotranslation.php:136, includes/onboarding/class-autotranslation.php:167
 msgid "Enable Automatic Translation"
 msgstr ""
 
@@ -1758,55 +1794,87 @@ msgstr ""
 msgid "Automatic Translation Settings"
 msgstr ""
 
-#: partials/machine-translation-settings-page.php:198
+#: partials/machine-translation-settings-page.php:205
+msgid "AI Words Low Notification"
+msgstr ""
+
+#: partials/machine-translation-settings-page.php:207
+msgid "Receive an email notification when your TranslatePress AI word count drops below the specified threshold."
+msgstr ""
+
+#: partials/machine-translation-settings-page.php:214
+msgid "This feature is only available when using the TranslatePress AI translation engine."
+msgstr ""
+
+#: partials/machine-translation-settings-page.php:227
+msgid "Notification Email"
+msgstr ""
+
+#: partials/machine-translation-settings-page.php:236
+msgid "The email address where the low AI words notification will be sent."
+msgstr ""
+
+#: partials/machine-translation-settings-page.php:241
+msgid "Word Threshold"
+msgstr ""
+
+#: partials/machine-translation-settings-page.php:249
+msgid "words"
+msgstr ""
+
+#: partials/machine-translation-settings-page.php:251
+msgid "You will be notified when remaining AI words drop below this number."
+msgstr ""
+
+#: partials/machine-translation-settings-page.php:275
 msgid "Automatically Translate Slugs"
 msgstr ""
 
-#: partials/machine-translation-settings-page.php:202
+#: partials/machine-translation-settings-page.php:279
 msgid "Generate automatic translations of slugs for posts, pages and Custom Post Types.<br/>The slugs will be automatically translated starting with the second refresh of each page."
 msgstr ""
 
-#: partials/machine-translation-settings-page.php:216
+#: partials/machine-translation-settings-page.php:293
 msgid "This feature is only available in the paid version. Upgrade TranslatePress and unlock more premium features."
 msgstr ""
 
-#: partials/machine-translation-settings-page.php:218
+#: partials/machine-translation-settings-page.php:295
 msgid "Requires <a href=\"%s\" title=\"TranslatePress Add-on SEO Pack documentation\" target=\"_blank\">SEO Pack Add-on</a> to be installed and activated."
 msgstr ""
 
-#: partials/machine-translation-settings-page.php:235, partials/main-settings-language-selector.php:204, partials/settings-header.php:34, includes/mtapi/functions.php:87, includes/mtapi/functions.php:188
+#: partials/machine-translation-settings-page.php:312, partials/main-settings-language-selector.php:204, partials/settings-header.php:34, includes/mtapi/functions.php:87, includes/mtapi/functions.php:188
 msgid "Upgrade now"
 msgstr ""
 
-#: partials/machine-translation-settings-page.php:259
+#: partials/machine-translation-settings-page.php:336
 msgid "Block Crawlers"
 msgstr ""
 
-#: partials/machine-translation-settings-page.php:262
+#: partials/machine-translation-settings-page.php:339
 msgid "Block crawlers from triggering automatic translations on your website.<br>This will not prevent crawlers from accessing this site's pages."
 msgstr ""
 
-#: partials/machine-translation-settings-page.php:281
+#: partials/machine-translation-settings-page.php:358
 msgid "Limit machine translation / characters per day"
 msgstr ""
 
-#: partials/machine-translation-settings-page.php:284
+#: partials/machine-translation-settings-page.php:361
 msgid "Add a limit to the number of automatically translated characters so you can better budget your project."
 msgstr ""
 
-#: partials/machine-translation-settings-page.php:307
+#: partials/machine-translation-settings-page.php:384
 msgid "characters per day"
 msgstr ""
 
-#: partials/machine-translation-settings-page.php:310
+#: partials/machine-translation-settings-page.php:387
 msgid "Today's Character Count: "
 msgstr ""
 
-#: partials/machine-translation-settings-page.php:330
+#: partials/machine-translation-settings-page.php:407
 msgid "Log machine translation queries."
 msgstr ""
 
-#: partials/machine-translation-settings-page.php:334
+#: partials/machine-translation-settings-page.php:411
 msgid "Only enable for testing purposes. Can impact performance.<br>All records are stored in the wp_trp_machine_translation_log database table. Use a plugin like <a href=\"https://wordpress.org/plugins/wp-data-access/\" target=\"_blank\">WP Data Access</a> to browse the logs or directly from your database manager (PHPMyAdmin, etc.)"
 msgstr ""
 
@@ -2166,7 +2234,7 @@ msgstr ""
 msgid "The inactive languages will still be visible and active for the admin. For other users they won't be visible in the language switchers and won't be accessible either."
 msgstr ""
 
-#: add-ons-advanced/extra-languages/class-extra-languages.php:155, add-ons-pro/multiple-domains/class-multiple-domains.php:515
+#: add-ons-advanced/extra-languages/class-extra-languages.php:155, add-ons-pro/multiple-domains/class-multiple-domains.php:534
 msgid "unknown"
 msgstr ""
 
@@ -2182,102 +2250,102 @@ msgstr ""
 msgid "If you absolutely need them, the removed translations can be found in tables trp_slug_original_obsolete and trp_slug_translation_obsolete."
 msgstr ""
 
-#: add-ons-pro/multiple-domains/class-multiple-domains.php:329
+#: add-ons-pro/multiple-domains/class-multiple-domains.php:348
 msgid "View Docs"
 msgstr ""
 
-#: add-ons-pro/multiple-domains/class-multiple-domains.php:336
+#: add-ons-pro/multiple-domains/class-multiple-domains.php:355
 msgid "Assign different domains or subdomains to each language. When visitors access these domains, TranslatePress loads the appropriate language translation directly without redirecting."
 msgstr ""
 
 #. translators: %1$s, %2$s, %3$s are example domains
-#: add-ons-pro/multiple-domains/class-multiple-domains.php:342
+#: add-ons-pro/multiple-domains/class-multiple-domains.php:361
 msgid "Example: %1$s for English, %2$s for Spanish, %3$s for French."
 msgstr ""
 
-#: add-ons-pro/multiple-domains/class-multiple-domains.php:350
+#: add-ons-pro/multiple-domains/class-multiple-domains.php:369
 msgid "Before enabling:"
 msgstr ""
 
-#: add-ons-pro/multiple-domains/class-multiple-domains.php:351
+#: add-ons-pro/multiple-domains/class-multiple-domains.php:370
 msgid "Ensure your domains are registered, pointed to your server, and have SSL certificates configured."
 msgstr ""
 
-#: add-ons-pro/multiple-domains/class-multiple-domains.php:364, add-ons-pro/multiple-domains/class-multiple-domains.php:384, includes/advanced-settings/exclude-gettext-strings.php:14, includes/string-translation/class-string-translation.php:294, includes/string-translation/class-string-translation.php:324
+#: add-ons-pro/multiple-domains/class-multiple-domains.php:383, add-ons-pro/multiple-domains/class-multiple-domains.php:403, includes/advanced-settings/exclude-gettext-strings.php:14, includes/string-translation/class-string-translation.php:294, includes/string-translation/class-string-translation.php:324
 msgid "Domain"
 msgstr ""
 
-#: add-ons-pro/multiple-domains/class-multiple-domains.php:365
+#: add-ons-pro/multiple-domains/class-multiple-domains.php:384
 msgid "Map this language to a different domain or sub-domain."
 msgstr ""
 
-#: add-ons-pro/multiple-domains/class-multiple-domains.php:419
+#: add-ons-pro/multiple-domains/class-multiple-domains.php:438
 msgid "https://example.com"
 msgstr ""
 
-#: add-ons-pro/multiple-domains/class-multiple-domains.php:426
+#: add-ons-pro/multiple-domains/class-multiple-domains.php:445
 msgid "Prefill with current domain"
 msgstr ""
 
-#: add-ons-pro/multiple-domains/class-multiple-domains.php:434
+#: add-ons-pro/multiple-domains/class-multiple-domains.php:453
 msgid "Check DNS"
 msgstr ""
 
-#: add-ons-pro/multiple-domains/class-multiple-domains.php:499
+#: add-ons-pro/multiple-domains/class-multiple-domains.php:518
 msgid "Checking DNS..."
 msgstr ""
 
-#: add-ons-pro/multiple-domains/class-multiple-domains.php:500
+#: add-ons-pro/multiple-domains/class-multiple-domains.php:519
 msgid "DNS is correctly configured!"
 msgstr ""
 
-#: add-ons-pro/multiple-domains/class-multiple-domains.php:501
+#: add-ons-pro/multiple-domains/class-multiple-domains.php:520
 msgid "DNS check failed. Please verify your domain configuration."
 msgstr ""
 
-#: add-ons-pro/multiple-domains/class-multiple-domains.php:502
+#: add-ons-pro/multiple-domains/class-multiple-domains.php:521
 msgid "This domain is already assigned to another language."
 msgstr ""
 
-#: add-ons-pro/multiple-domains/class-multiple-domains.php:519
+#: add-ons-pro/multiple-domains/class-multiple-domains.php:538
 msgid "<strong>Different Domain per Language add-on</strong> requires TranslatePress version %1$s or higher. You are currently using version %2$s. Please update TranslatePress to enable this feature."
 msgstr ""
 
-#: add-ons-pro/multiple-domains/class-multiple-domains.php:652
+#: add-ons-pro/multiple-domains/class-multiple-domains.php:671
 msgid "Note: This option is disabled when Different Domain for Language addon is active."
 msgstr ""
 
-#: add-ons-pro/multiple-domains/class-multiple-domains.php:677
+#: add-ons-pro/multiple-domains/class-multiple-domains.php:696
 msgid "Different Domain per Language: Domain is required when domain mapping is enabled. The toggle has been disabled for languages with empty domains."
 msgstr ""
 
-#: add-ons-pro/multiple-domains/class-multiple-domains.php:691
+#: add-ons-pro/multiple-domains/class-multiple-domains.php:710
 msgid "Different Domain per Language: The same domain cannot be assigned to multiple languages. The toggle has been disabled for duplicate domains."
 msgstr ""
 
-#: add-ons-pro/multiple-domains/class-multiple-domains.php:705
+#: add-ons-pro/multiple-domains/class-multiple-domains.php:724
 msgid "Different Domain per Language: A language domain cannot be the same as the main site URL. The toggle has been disabled for the matching domain."
 msgstr ""
 
-#: add-ons-pro/multiple-domains/class-multiple-domains.php:724
+#: add-ons-pro/multiple-domains/class-multiple-domains.php:743
 msgid "Please enter a domain."
 msgstr ""
 
-#: add-ons-pro/multiple-domains/class-multiple-domains.php:731
+#: add-ons-pro/multiple-domains/class-multiple-domains.php:750
 msgid "Invalid domain format."
 msgstr ""
 
 #. translators: %s is the error message
-#: add-ons-pro/multiple-domains/class-multiple-domains.php:745
+#: add-ons-pro/multiple-domains/class-multiple-domains.php:764
 msgid "Could not reach domain: %s"
 msgstr ""
 
 #. translators: %d is the HTTP status code
-#: add-ons-pro/multiple-domains/class-multiple-domains.php:761
+#: add-ons-pro/multiple-domains/class-multiple-domains.php:780
 msgid "Domain returned HTTP status %d."
 msgstr ""
 
-#: add-ons-pro/multiple-domains/class-multiple-domains.php:755
+#: add-ons-pro/multiple-domains/class-multiple-domains.php:774
 msgid "Domain is reachable!"
 msgstr ""
 
@@ -2673,7 +2741,7 @@ msgstr ""
 msgid "TranslatePress AI"
 msgstr ""
 
-#: includes/mtapi/functions.php:40, includes/onboarding/class-autotranslation.php:181, add-ons-pro/deepl/includes/class-deepl.php:195
+#: includes/mtapi/functions.php:40, includes/onboarding/class-autotranslation.php:191, add-ons-pro/deepl/includes/class-deepl.php:195
 msgid "No Active License Detected for this website."
 msgstr ""
 
@@ -2702,14 +2770,14 @@ msgid "Your free account includes: "
 msgstr ""
 
 #: includes/mtapi/functions.php:84, includes/mtapi/functions.php:185
-msgid "Get more AI Tokens and unlock all AI features with TranslatePress Pro."
+msgid "Get more AI Words and unlock all AI features with TranslatePress Pro."
 msgstr ""
 
-#: includes/mtapi/functions.php:143, includes/onboarding/class-autotranslation.php:289
+#: includes/mtapi/functions.php:143, includes/onboarding/class-autotranslation.php:299
 msgid "You have a valid %s <strong>license</strong>."
 msgstr ""
 
-#: includes/mtapi/functions.php:150, includes/onboarding/class-autotranslation.php:296
+#: includes/mtapi/functions.php:150, includes/onboarding/class-autotranslation.php:306
 msgid " words remaining. "
 msgstr ""
 
@@ -2725,11 +2793,11 @@ msgstr ""
 msgid "Done."
 msgstr ""
 
-#: includes/mtapi/functions.php:175, includes/onboarding/class-autotranslation.php:306
+#: includes/mtapi/functions.php:175, includes/onboarding/class-autotranslation.php:316
 msgid "Manage your license & quota on the %s"
 msgstr ""
 
-#: includes/mtapi/functions.php:177, includes/onboarding/class-autotranslation.php:307
+#: includes/mtapi/functions.php:177, includes/onboarding/class-autotranslation.php:317
 msgid "TranslatePress.com Account Page"
 msgstr ""
 
@@ -2761,7 +2829,7 @@ msgstr ""
 msgid "This add-on is not available on your current plan."
 msgstr ""
 
-#: includes/onboarding/class-addons.php:228, includes/onboarding/class-autotranslation.php:189, includes/onboarding/class-autotranslation.php:313, includes/onboarding/class-languages.php:125, includes/onboarding/class-switcher.php:322, includes/onboarding/class-welcome.php:43
+#: includes/onboarding/class-addons.php:228, includes/onboarding/class-autotranslation.php:199, includes/onboarding/class-autotranslation.php:323, includes/onboarding/class-languages.php:125, includes/onboarding/class-switcher.php:322, includes/onboarding/class-welcome.php:43
 msgid "Continue"
 msgstr ""
 
@@ -2773,51 +2841,51 @@ msgstr ""
 msgid "A valid license is required to enable Automatic Translation."
 msgstr ""
 
-#: includes/onboarding/class-autotranslation.php:102
+#: includes/onboarding/class-autotranslation.php:112
 msgid "Your license key is disabled for this URL. Re-enable it from <a target=\"_blank\" href=\"https://translatepress.com/account/?utm_source=tp-onboarding&utm_medium=client-site&utm_campaign=tp-ai\">https://translatepress.com/account</a> -> Manage Sites."
 msgstr ""
 
-#: includes/onboarding/class-autotranslation.php:105, includes/onboarding/class-license.php:76
+#: includes/onboarding/class-autotranslation.php:115, includes/onboarding/class-license.php:76
 msgid "<p><strong>License key mismatch.</strong> The license you entered doesn't match the TranslatePress version you have installed.</p><p>Please check that you've installed the correct version for your license from your TranslatePress account.</p>"
 msgstr ""
 
-#: includes/onboarding/class-autotranslation.php:127
+#: includes/onboarding/class-autotranslation.php:137
 msgid "Automatically translate your website using TranslatePress AI."
 msgstr ""
 
-#: includes/onboarding/class-autotranslation.php:164
+#: includes/onboarding/class-autotranslation.php:174
 msgid "In order to enable Automatic Translation using TranslatePress AI, please enter your license key from"
 msgstr ""
 
-#: includes/onboarding/class-autotranslation.php:164
+#: includes/onboarding/class-autotranslation.php:174
 msgid "your account."
 msgstr ""
 
-#: includes/onboarding/class-autotranslation.php:192, includes/onboarding/class-autotranslation.php:225
+#: includes/onboarding/class-autotranslation.php:202, includes/onboarding/class-autotranslation.php:235
 msgid "Skip and continue with manual translation »"
 msgstr ""
 
-#: includes/onboarding/class-autotranslation.php:200
+#: includes/onboarding/class-autotranslation.php:210
 msgid "Get Your Free TranslatePress AI License"
 msgstr ""
 
-#: includes/onboarding/class-autotranslation.php:204
+#: includes/onboarding/class-autotranslation.php:214
 msgid "Generate License"
 msgstr ""
 
-#: includes/onboarding/class-autotranslation.php:209
+#: includes/onboarding/class-autotranslation.php:219
 msgid "Creating a free account includes: "
 msgstr ""
 
-#: includes/onboarding/class-autotranslation.php:221
+#: includes/onboarding/class-autotranslation.php:231
 msgid "Are you a TranslatePress PRO user?"
 msgstr ""
 
-#: includes/onboarding/class-autotranslation.php:221
+#: includes/onboarding/class-autotranslation.php:231
 msgid "Install & Activate your pro plugin."
 msgstr ""
 
-#: includes/onboarding/class-autotranslation.php:316
+#: includes/onboarding/class-autotranslation.php:326
 msgid "Skip this step"
 msgstr ""
 
@@ -2842,7 +2910,7 @@ msgid "Receive "
 msgstr ""
 
 #: includes/onboarding/class-finish.php:55
-msgid "Sign me up to the Newsletter"
+msgid "Yes, send me multilingual growth tips."
 msgstr ""
 
 #: includes/onboarding/class-finish.php:66

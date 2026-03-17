@@ -505,11 +505,12 @@ jQuery( function() {
                         security: document.querySelector('#trp_test_api_nonce_field').value
                     },
                     success: function (response) {
-                        if (response.success) {
+                        if ( response && response.data ) {
                             testPopup.style.visibility = 'visible';
+                            populatePopup( response.data );
+                        }
 
-                            populatePopup(response.data);
-                        } else {
+                        if ( response && !response.success ) {
                             console.error("Error:", response.data.message);
                         }
                     },
@@ -524,12 +525,17 @@ jQuery( function() {
         }
 
         function populatePopup( response ){
+            const popupReferrer = testPopup.querySelector('.trp-referrer-name');
             const popupResponse = testPopup.querySelector('.trp-test-api-key-response .trp-settings-container');
             const popupResponseBody = testPopup.querySelector('.trp-test-api-key-response-body .trp-settings-container');
             const popupResponseFull = testPopup.querySelector('.trp-test-api-key-response-full .trp-settings-container');
+            const responseBody = typeof response.response.body === 'string'
+                ? response.response.body
+                : JSON.stringify( response.response.body );
 
+            popupReferrer.textContent     = response.referrer || '';
             popupResponse.textContent     = JSON.stringify( response.response.response );
-            popupResponseBody.textContent = response.response.body;
+            popupResponseBody.textContent = responseBody || '';
             popupResponseFull.textContent = response.raw_response;
         }
     }
