@@ -488,6 +488,11 @@ class TRP_Settings{
     }
 
     public function get_default_trp_machine_translation_settings(){
+        /* class doesn't exist only if a third party (ex. CTX Feed Pro) incorrectly includes our files by hand and instantiates TRP_Settings() instead of using $trp = TRP_Translate_Press::get_trp_instance();  
+         * When this happens, the ai_words_* options are never used anyway, and is never stored in DB either
+         */
+        $threshold = class_exists('TRP_AI_Words_Notification' ) ? TRP_AI_Words_Notification::get_default_threshold() : 200;
+
         return apply_filters( 'trp_get_default_trp_machine_translation_settings', array(
             // default settings for trp_machine_translation_settings
             'machine-translation'               => 'no',
@@ -499,7 +504,7 @@ class TRP_Settings{
             'machine_translation_limit'         => 1000000,
             'ai_words_notification_enabled'     => 'yes',
             'ai_words_notification_email'       => '',
-            'ai_words_notification_threshold'   => TRP_AI_Words_Notification::get_default_threshold()
+            'ai_words_notification_threshold'   => $threshold
             /*
              * These settings are merged into the saved DB option.
              * Be sure to set any checkbox options to 'no' in sanitize_settings.

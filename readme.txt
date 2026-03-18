@@ -5,7 +5,7 @@ Tags: translate, translation, multilingual, automatic translation, bilingual, fr
 Requires at least: 3.1.0
 Tested up to: 6.9.4
 Requires PHP: 7.4
-Stable tag: 3.1.2
+Stable tag: 3.1.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -143,6 +143,9 @@ For more information please check out our [documentation](https://translatepress
 
 
 == Changelog ==
+= 3.1.3 =
+* Fixed fatal error when CTX Feed Pro was active
+
 = 3.1.2 =
 * Added AI Words low quota email notification feature
 * Fixed test API key popup not appearing on WP Error
