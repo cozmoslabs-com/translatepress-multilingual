@@ -5,7 +5,7 @@ Tags: translate, translation, multilingual, automatic translation, bilingual, fr
 Requires at least: 3.1.0
 Tested up to: 6.9.4
 Requires PHP: 7.4
-Stable tag: 3.1.3
+Stable tag: 3.1.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -143,15 +143,10 @@ For more information please check out our [documentation](https://translatepress
 
 
 == Changelog ==
-= 3.1.3 =
-* Fixed fatal error when CTX Feed Pro was active
-
-= 3.1.2 =
-* Added AI Words low quota email notification feature
-* Fixed test API key popup not appearing on WP Error
-* Fixed checkbox and radio button styling for WordPress 7.0 compatibility
-* Fixed persistent notification badge in admin sidebar
-* CSS Fixes for WP 7.0 and enable automatic translation on successful license activation in onboarding
+= 3.1.4 =
+* Fixed some cases where recent translations generated using TranslatePress AI have been incorrectly set to __OPENROUTER_FAILED__
+* Fixed WooCommerce Layered Nav dropdown "Any %s" label untranslatable in visual editor
+* Added extra machine translation data to license check requests
 
 = Older versions =
 [Click Here](https://translatepress.com/docs/translatepress-free-changelog/?utm_source=wp.org&utm_medium=tp-description-page&utm_campaign=TPFree) to view the full changelog, or you can find it in the changelog.txt file in the plugin folder.

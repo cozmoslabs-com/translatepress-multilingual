@@ -1,3 +1,13 @@
+= 3.1.3 =
+* Fixed fatal error when CTX Feed Pro was active
+
+= 3.1.2 =
+* Added AI Words low quota email notification feature
+* Fixed test API key popup not appearing on WP Error
+* Fixed checkbox and radio button styling for WordPress 7.0 compatibility
+* Fixed persistent notification badge in admin sidebar
+* CSS Fixes for WP 7.0 and enable automatic translation on successful license activation in onboarding
+
 = 3.1.1 =
 * Fixed WooCommerce emails being sent in the default language instead of the secondary language (en_US)
 * Prevent gettext marker contamination in DB writes for WooCommerce orders, comments, and options #!trpst#

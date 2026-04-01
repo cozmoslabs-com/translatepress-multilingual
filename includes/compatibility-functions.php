@@ -525,6 +525,57 @@ function trp_woo_wrap_variation($name, $product, $title_base, $title_suffix){
     return $title_suffix ? $title_base . $separator . $title_suffix : $title_base;
 }
 
+/**
+ * Compatibility with WooCommerce Layered Nav widget (Filter Products by Attribute) in dropdown mode.
+ *
+ * The "Any %s" gettext wraps a dynamic taxonomy label. On secondary languages TRP switches the
+ * locale, so the target .mo is active (e.g. French translates "Any %s" → "%s", Spanish →
+ * "Cualquier %s"), producing a mixed-language label. The trp-gettext wrapper also causes
+ * data-no-translation on the <option>, blocking visual editor translation.
+ *
+ * Fix: rebuild the label by reading "Any %s" directly from the default-language .mo file,
+ * bypassing TRP's gettext filter and the switched locale. The result is a static, non-gettext
+ * string in the default language (e.g. "Orice Color") that TRP can translate via the visual editor.
+ */
+add_filter( 'woocommerce_layered_nav_any_label', 'trp_woo_rebuild_layered_nav_any_label', 10, 3 );
+function trp_woo_rebuild_layered_nav_any_label( $any_label, $taxonomy_label, $taxonomy ) {
+    if ( ! class_exists( 'TRP_Translation_Manager' ) ) {
+        return $any_label;
+    }
+
+    $taxonomy_label = TRP_Translation_Manager::strip_gettext_tags( $taxonomy_label );
+
+    // Read "Any %s" from the default-language .mo file directly, reusing the same
+    // MO-loading infrastructure as trp_x() but without the context separator (chr(4)).
+    static $any_format = null;
+    if ( $any_format === null ) {
+        $any_format = 'Any %s'; // English fallback
+
+        $trp          = TRP_Translate_Press::get_trp_instance();
+        $trp_settings = $trp->get_component( 'settings' );
+        $settings     = $trp_settings->get_settings();
+        $default_lang = $settings['default-language'];
+
+        $path = trp_find_translation_location_for_domain( 'woocommerce', $default_lang );
+        if ( ! empty( $path ) ) {
+            $cache_key = 'trp_x_woocommerce_' . $default_lang;
+            $mo_file   = trp_cache_get( $cache_key );
+
+            if ( false === $mo_file ) {
+                $mo_file = new MO();
+                $mo_file->import_from_file( $path );
+                wp_cache_set( $cache_key, $mo_file );
+            }
+
+            if ( $mo_file && ! empty( $mo_file->entries['Any %s'] ) ) {
+                $any_format = $mo_file->entries['Any %s']->translations[0];
+            }
+        }
+    }
+
+    return sprintf( $any_format, $taxonomy_label );
+}
+
 // trpgettext tags don't get escaped because they add <small> tags through a regex.
 add_filter( 'qm/output/title', 'trp_qm_strip_gettext', 100);
 function trp_qm_strip_gettext( $data ){

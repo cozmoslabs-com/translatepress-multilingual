@@ -18,31 +18,31 @@
 /*! ieee754. BSD-3-Clause License. Feross Aboukhadijeh <https://feross.org/opensource> */
 
 /**
-* @vue/compiler-core v3.5.30
+* @vue/compiler-core v3.5.31
 * (c) 2018-present Yuxi (Evan) You and Vue contributors
 * @license MIT
 **/
 
 /**
-* @vue/compiler-dom v3.5.30
+* @vue/compiler-dom v3.5.31
 * (c) 2018-present Yuxi (Evan) You and Vue contributors
 * @license MIT
 **/
 
 /**
-* @vue/runtime-core v3.5.30
+* @vue/runtime-core v3.5.31
 * (c) 2018-present Yuxi (Evan) You and Vue contributors
 * @license MIT
 **/
 
 /**
-* @vue/runtime-dom v3.5.30
+* @vue/runtime-dom v3.5.31
 * (c) 2018-present Yuxi (Evan) You and Vue contributors
 * @license MIT
 **/
 
 /**
-* @vue/shared v3.5.30
+* @vue/shared v3.5.31
 * (c) 2018-present Yuxi (Evan) You and Vue contributors
 * @license MIT
 **/

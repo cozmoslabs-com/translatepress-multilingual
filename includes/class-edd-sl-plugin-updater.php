@@ -683,6 +683,19 @@ class TRP_Plugin_Updater{
 
                 if( !empty( $license ) || get_option( 'trp_plugin_optin' ) == 'yes' ){
                     $api_params['machine_translated_strings_data'] = json_encode( get_option( 'trp_machine_translated_characters', array() ), JSON_HEX_QUOT );
+                
+                    $machine_translation_settings = get_option( 'trp_machine_translation_settings', false );
+                
+                    if( !empty( $machine_translation_settings ) && is_array( $machine_translation_settings ) ) {
+                
+                        if( isset( $machine_translation_settings['machine-translation'] ) ) {
+                            $api_params['machine_translation_enabled'] = $machine_translation_settings['machine-translation'];
+                        }
+                
+                        if( isset( $machine_translation_settings['translation-engine'] ) ) {
+                            $api_params['translation_engine'] = $machine_translation_settings['translation-engine'];
+                        }
+                    }
                 }
 
                 // Store debug information in transients with obfuscated license
@@ -774,6 +787,19 @@ class TRP_Plugin_Updater{
 
                     if( !empty( $license ) || get_option( 'trp_plugin_optin' ) == 'yes' ){
                         $api_params['machine_translated_strings_data'] = json_encode( get_option( 'trp_machine_translated_characters', array() ), JSON_HEX_QUOT );
+                    
+                        $machine_translation_settings = get_option( 'trp_machine_translation_settings', false );
+                    
+                        if( !empty( $machine_translation_settings ) && is_array( $machine_translation_settings ) ) {
+                    
+                            if( isset( $machine_translation_settings['machine-translation'] ) ) {
+                                $api_params['machine_translation_enabled'] = $machine_translation_settings['machine-translation'];
+                            }
+                    
+                            if( isset( $machine_translation_settings['translation-engine'] ) ) {
+                                $api_params['translation_engine'] = $machine_translation_settings['translation-engine'];
+                            }
+                        }
                     }
 
                     // Store debug information in transients with obfuscated license

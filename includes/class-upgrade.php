@@ -120,6 +120,12 @@ class TRP_Upgrade {
                 $this->migrate_to_language_switcher_v2();
             }
 
+            if ( version_compare( $stored_database_version, '3.1.3', '<=' ) ) {
+                add_option( 'trp_failed_translations_cleanup', 'no' );
+                $trp = TRP_Translate_Press::get_trp_instance();
+                $trp->get_component( 'batch_processor' )->schedule();
+            }
+
             /**
              * Write an upgrading function above this comment to be executed only once: while updating plugin to a higher version.
              * Use example condition: version_compare( $stored_database_version, '2.9.9', '<=')
