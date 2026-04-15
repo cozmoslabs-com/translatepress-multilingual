@@ -31,7 +31,11 @@
             </svg>
             <span class="trp-header-item-text trp-primary-text"><?php esc_html_e( 'Documentation','translatepress-multilingual'); /* [utm73] */?></span>
         </a>
-        <a id="trp-upgrade-now-button" class="trp-header-link" href="https://translatepress.com/pricing/?utm_source=tp-settings&utm_medium=client-site&utm_campaign=header-upsell"><?php esc_html_e( 'Upgrade now','translatepress-multilingual'); /* [utm74] */?></a>
+        <?php if ( trp_can_show_upgrade_now_button() ) : ?>
+            <a id="trp-upgrade-now-button" class="trp-header-link" href="https://translatepress.com/pricing/?utm_source=tp-settings&utm_medium=client-site&utm_campaign=header-upsell"><?php esc_html_e( 'Upgrade now','translatepress-multilingual'); /* [utm74] */?></a>
+        <?php elseif ( $tp_product_name === 'TranslatePress Developer' ) : ?>
+            <a id="trp-upgrade-now-button" class="trp-header-link" href="https://translatepress.com/account/?utm_source=tp-settings&utm_medium=client-site&utm_campaign=settings-header-ai-words"><?php esc_html_e( 'Add Extra AI Words','translatepress-multilingual'); ?></a>
+        <?php endif; ?>
     </div>
 </div>
 <h1></h1> <!-- Needed for error placement. WordPress positions them relative to the h1 -->

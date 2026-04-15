@@ -6,7 +6,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-04-01 08:02+0000\n"
+"POT-Creation-Date: 2026-04-15 08:07+0000\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
 "X-Poedit-SearchPath-0: .\n"
@@ -134,47 +134,47 @@ msgstr ""
 msgid "Error"
 msgstr ""
 
-#: includes/class-edd-sl-plugin-updater.php:843, includes/onboarding/class-autotranslation.php:100, includes/onboarding/class-license.php:61
-msgid "Your license key expired on %s."
-msgstr ""
-
-#: includes/class-edd-sl-plugin-updater.php:848, includes/onboarding/class-autotranslation.php:105, includes/onboarding/class-license.php:66
-msgid "Your license key has been disabled."
-msgstr ""
-
-#: includes/class-edd-sl-plugin-updater.php:851, includes/onboarding/class-autotranslation.php:108, includes/onboarding/class-license.php:33, includes/onboarding/class-license.php:69
+#: includes/class-edd-sl-plugin-updater.php:776, includes/class-edd-sl-plugin-updater.php:860, includes/onboarding/class-autotranslation.php:108, includes/onboarding/class-license.php:33, includes/onboarding/class-license.php:69
 msgid "Your TranslatePress license key is invalid or missing."
 msgstr ""
 
-#: includes/class-edd-sl-plugin-updater.php:856
+#: includes/class-edd-sl-plugin-updater.php:852, includes/onboarding/class-autotranslation.php:100, includes/onboarding/class-license.php:61
+msgid "Your license key expired on %s."
+msgstr ""
+
+#: includes/class-edd-sl-plugin-updater.php:857, includes/onboarding/class-autotranslation.php:105, includes/onboarding/class-license.php:66
+msgid "Your license key has been disabled."
+msgstr ""
+
+#: includes/class-edd-sl-plugin-updater.php:865
 msgid "Your license key is disabled for this URL. Re-enable it from <a target=\"_blank\" href=\"https://translatepress.com/account/?utm_source=wp-dashboard&utm_medium=client-site&utm_campaign=license-deactivated\">https://translatepress.com/account</a> -> Manage Sites."
 msgstr ""
 
-#: includes/class-edd-sl-plugin-updater.php:859
+#: includes/class-edd-sl-plugin-updater.php:868
 msgid "<p><strong>License key mismatch.</strong> The license you entered doesn’t match the TranslatePress version you have installed.</p><p>Please check that you’ve installed the correct version for your license from your TranslatePress account.</p>"
 msgstr ""
 
-#: includes/class-edd-sl-plugin-updater.php:862
+#: includes/class-edd-sl-plugin-updater.php:871
 msgid "If you have only the free plugin installed but added a paid license, please install the paid plugin from your TranslatePress account."
 msgstr ""
 
-#: includes/class-edd-sl-plugin-updater.php:868, includes/onboarding/class-autotranslation.php:118, includes/onboarding/class-license.php:79
+#: includes/class-edd-sl-plugin-updater.php:877, includes/onboarding/class-autotranslation.php:118, includes/onboarding/class-license.php:79
 msgid "Your license key has reached its activation limit."
 msgstr ""
 
-#: includes/class-edd-sl-plugin-updater.php:871
+#: includes/class-edd-sl-plugin-updater.php:880
 msgid "Upgrade your plan to add more sites. %1$sUpgrade now%2$s"
 msgstr ""
 
-#: includes/class-edd-sl-plugin-updater.php:874, includes/onboarding/class-autotranslation.php:121, includes/onboarding/class-license.php:82
+#: includes/class-edd-sl-plugin-updater.php:883, includes/onboarding/class-autotranslation.php:121, includes/onboarding/class-license.php:82
 msgid "This website is already activated under a free license. Each website can only use one free license."
 msgstr ""
 
-#: includes/class-edd-sl-plugin-updater.php:877, includes/class-edd-sl-plugin-updater.php:832, includes/class-edd-sl-plugin-updater.php:951, includes/onboarding/class-autotranslation.php:124, includes/onboarding/class-license.php:85
+#: includes/class-edd-sl-plugin-updater.php:886, includes/class-edd-sl-plugin-updater.php:841, includes/class-edd-sl-plugin-updater.php:960, includes/onboarding/class-autotranslation.php:124, includes/onboarding/class-license.php:85
 msgid "An error occurred, please try again."
 msgstr ""
 
-#: includes/class-edd-sl-plugin-updater.php:910
+#: includes/class-edd-sl-plugin-updater.php:919
 msgid "You have successfully activated your license"
 msgstr ""
 
@@ -246,7 +246,7 @@ msgstr ""
 msgid "Automatic translation has been disabled."
 msgstr ""
 
-#: includes/class-error-manager.php:170, includes/class-plugin-notices.php:353, includes/class-plugin-notices.php:431, includes/class-plugin-notices.php:406, includes/class-plugin-notices.php:491, includes/class-plugin-notices.php:469, includes/class-plugin-notices.php:520, includes/class-plugin-notices.php:576, includes/class-plugin-notices.php:632, includes/class-plugin-notices.php:621, includes/class-plugin-notices.php:657, includes/class-plugin-notices.php:709, includes/class-plugin-notices.php:692, includes/class-reviews.php:123, includes/class-reviews.php:126, includes/class-upgrade.php:1046, includes/class-upgrade.php:1755, add-ons-advanced/extra-languages/class-extra-languages.php:167, add-ons-advanced/seo-pack/class-seo-pack.php:840, add-ons-pro/multiple-domains/class-multiple-domains.php:546, includes/upgrade/class-batch-processor.php:173
+#: includes/class-error-manager.php:170, includes/class-plugin-notices.php:353, includes/class-plugin-notices.php:431, includes/class-plugin-notices.php:406, includes/class-plugin-notices.php:491, includes/class-plugin-notices.php:469, includes/class-plugin-notices.php:520, includes/class-plugin-notices.php:576, includes/class-plugin-notices.php:632, includes/class-plugin-notices.php:621, includes/class-plugin-notices.php:657, includes/class-plugin-notices.php:709, includes/class-plugin-notices.php:692, includes/class-reviews.php:123, includes/class-reviews.php:126, includes/class-upgrade.php:1046, includes/class-upgrade.php:1755, add-ons-advanced/extra-languages/class-extra-languages.php:157, add-ons-advanced/seo-pack/class-seo-pack.php:840, add-ons-pro/multiple-domains/class-multiple-domains.php:546, includes/upgrade/class-batch-processor.php:173
 msgid "Dismiss this notice."
 msgstr ""
 
@@ -330,7 +330,7 @@ msgstr ""
 msgid "Could not install. Try again from <a href=\"%s\" >Plugins Dashboard.</a>"
 msgstr ""
 
-#: includes/class-install-plugins.php:47, add-ons-advanced/extra-languages/class-extra-languages.php:89, add-ons-advanced/extra-languages/class-extra-languages.php:110
+#: includes/class-install-plugins.php:47, add-ons-advanced/extra-languages/class-extra-languages.php:86, add-ons-advanced/extra-languages/class-extra-languages.php:107
 msgid "Active"
 msgstr ""
 
@@ -418,11 +418,11 @@ msgstr ""
 msgid "Exit Setup"
 msgstr ""
 
-#: includes/class-onboarding.php:127
+#: includes/class-onboarding.php:128
 msgid "Upgrade"
 msgstr ""
 
-#: includes/class-onboarding.php:154
+#: includes/class-onboarding.php:156
 msgid "Nothing here"
 msgstr ""
 
@@ -1437,7 +1437,7 @@ msgstr ""
 msgid "<strong>TranslatePress</strong> requires <strong><a href=\"http://php.net/manual/en/book.mbstring.php\">Multibyte String PHP library</a></strong>. Please contact your server administrator to install it on your server."
 msgstr ""
 
-#: includes/compatibility-functions.php:1899
+#: includes/compatibility-functions.php:1918
 msgid "Detected long query limitation on WPEngine hosting. Some large pages may appear untranslated. You can remove limitation by adding the following to your site’s wp-config.php: define( 'WPE_GOVERNOR', false ); "
 msgstr ""
 
@@ -1698,31 +1698,31 @@ msgstr ""
 msgid "Debug Data for License Activation"
 msgstr ""
 
-#: partials/license-settings-page.php:222
+#: partials/license-settings-page.php:223
 msgid "Get more AI words and unlock all features with TranslatePress Pro."
 msgstr ""
 
-#: partials/license-settings-page.php:223, includes/onboarding/class-addons.php:154, includes/onboarding/class-languages.php:153
+#: partials/license-settings-page.php:224, includes/onboarding/class-addons.php:154, includes/onboarding/class-languages.php:153
 msgid "Upgrade now ↗"
 msgstr ""
 
-#: partials/license-settings-page.php:227
+#: partials/license-settings-page.php:228
 msgid "Already purchased a Premium version?"
 msgstr ""
 
-#: partials/license-settings-page.php:236
+#: partials/license-settings-page.php:237
 msgid "Go to your %1$s"
 msgstr ""
 
-#: partials/license-settings-page.php:238
+#: partials/license-settings-page.php:239
 msgid "TranslatePress.com Account"
 msgstr ""
 
-#: partials/license-settings-page.php:246
+#: partials/license-settings-page.php:247
 msgid "Download & Install the Pro plugin"
 msgstr ""
 
-#: partials/license-settings-page.php:251, partials/machine-translation-settings-page.php:132
+#: partials/license-settings-page.php:252, partials/machine-translation-settings-page.php:132
 msgid "Learn More"
 msgstr ""
 
@@ -1842,7 +1842,7 @@ msgstr ""
 msgid "Requires <a href=\"%s\" title=\"TranslatePress Add-on SEO Pack documentation\" target=\"_blank\">SEO Pack Add-on</a> to be installed and activated."
 msgstr ""
 
-#: partials/machine-translation-settings-page.php:312, partials/main-settings-language-selector.php:204, partials/settings-header.php:34, includes/mtapi/functions.php:87, includes/mtapi/functions.php:188
+#: partials/machine-translation-settings-page.php:312, partials/main-settings-language-selector.php:204, partials/settings-header.php:35, includes/mtapi/functions.php:87, includes/mtapi/functions.php:188
 msgid "Upgrade now"
 msgstr ""
 
@@ -2154,6 +2154,10 @@ msgstr ""
 msgid "Documentation"
 msgstr ""
 
+#: partials/settings-header.php:37
+msgid "Add Extra AI Words"
+msgstr ""
+
 #: partials/trp-remove-duplicate-rows.php:11, includes/advanced-settings/remove-duplicates-from-db.php:11
 msgid "Optimize TranslatePress database tables"
 msgstr ""
@@ -2230,15 +2234,15 @@ msgstr ""
 msgid "Updating TranslatePress tables. Please leave this window open."
 msgstr ""
 
-#: add-ons-advanced/extra-languages/class-extra-languages.php:90
+#: add-ons-advanced/extra-languages/class-extra-languages.php:87
 msgid "The inactive languages will still be visible and active for the admin. For other users they won't be visible in the language switchers and won't be accessible either."
 msgstr ""
 
-#: add-ons-advanced/extra-languages/class-extra-languages.php:155, add-ons-pro/multiple-domains/class-multiple-domains.php:534
+#: add-ons-advanced/extra-languages/class-extra-languages.php:145, add-ons-pro/multiple-domains/class-multiple-domains.php:534
 msgid "unknown"
 msgstr ""
 
-#: add-ons-advanced/extra-languages/class-extra-languages.php:159
+#: add-ons-advanced/extra-languages/class-extra-languages.php:149
 msgid "<strong>Extra Languages add-on</strong> requires TranslatePress version %1$s or higher. You are currently using version %2$s. Please update TranslatePress to enable this feature."
 msgstr ""
 

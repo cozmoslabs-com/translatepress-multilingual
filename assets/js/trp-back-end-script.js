@@ -254,7 +254,9 @@ jQuery( function() {
             duplicate_url_error_message = trp_url_slugs_info['error_message_duplicate_slugs'];
             iso_codes = trp_url_slugs_info['iso_codes'];
 
-            // Sortable functionality is loaded by the extra-languages addon (pro feature)
+            jQuery( '#trp-sortable-languages' ).sortable({
+                handle: '.trp-sortable-handle'
+            });
             jQuery( '#trp-add-language' ).click( _this.add_language );
             jQuery('.trp-remove-language__container:not(.trp-adst-remove-element)').click(_this.remove_language);
             jQuery( '#trp-default-language' ).on( 'change', _this.update_default_language );

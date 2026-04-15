@@ -604,6 +604,48 @@ function trp_is_paid_version() {
 }
 
 /**
+ * Whether the current TranslatePress installation can still upgrade to a higher plan.
+ *
+ * Free, Personal, and Business can still upgrade. Developer is the top tier and
+ * should not show plan-upgrade CTAs in the settings UI.
+ *
+ * @return bool
+ */
+function trp_can_show_upgrade_now_button() {
+    if ( defined( 'TRANSLATE_PRESS' ) ) {
+        return in_array(
+            TRANSLATE_PRESS,
+            array(
+                'TranslatePress',
+                'TranslatePress - Personal',
+                'TranslatePress - Business',
+            ),
+            true
+        );
+    }
+
+    if ( class_exists( 'TRP_Translate_Press' ) ) {
+        $trp = TRP_Translate_Press::get_trp_instance();
+
+        if ( ! empty( $trp->tp_product_name ) && is_array( $trp->tp_product_name ) ) {
+            $product_slug = key( $trp->tp_product_name );
+
+            return in_array(
+                $product_slug,
+                array(
+                    'translatepress-multilingual',
+                    'translatepress-personal',
+                    'translatepress-business',
+                ),
+                true
+            );
+        }
+    }
+
+    return true;
+}
+
+/**
  * Execute do_shortcode with a specific list of tags
  *
  * @param $content          string      String to execute do_shortcode on

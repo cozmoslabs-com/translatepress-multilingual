@@ -27,9 +27,9 @@
 <?php __("To enable updates, your licence needs to be renewed. Please go to the %1$sTranslatePress Account%2$s page and login to renew.", "translatepress-multilingual"); ?>
 <?php __("You do not have permission to install plugin updates", "translatepress-multilingual"); ?>
 <?php __("Error", "translatepress-multilingual"); ?>
+<?php __("Your TranslatePress license key is invalid or missing.", "translatepress-multilingual"); ?>
 <?php __("Your license key expired on %s.", "translatepress-multilingual"); ?>
 <?php __("Your license key has been disabled.", "translatepress-multilingual"); ?>
-<?php __("Your TranslatePress license key is invalid or missing.", "translatepress-multilingual"); ?>
 <?php __("Your license key is disabled for this URL. Re-enable it from <a target=\"_blank\" href=\"https://translatepress.com/account/?utm_source=wp-dashboard&utm_medium=client-site&utm_campaign=license-deactivated\">https://translatepress.com/account</a> -> Manage Sites.", "translatepress-multilingual"); ?>
 <?php __("<p><strong>License key mismatch.</strong> The license you entered doesn’t match the TranslatePress version you have installed.</p><p>Please check that you’ve installed the correct version for your license from your TranslatePress account.</p>", "translatepress-multilingual"); ?>
 <?php __("If you have only the free plugin installed but added a paid license, please install the paid plugin from your TranslatePress account.", "translatepress-multilingual"); ?>
@@ -529,6 +529,7 @@
 <?php __("Terms of Service", "translatepress-multilingual"); ?>
 <?php __("Support", "translatepress-multilingual"); ?>
 <?php __("Documentation", "translatepress-multilingual"); ?>
+<?php __("Add Extra AI Words", "translatepress-multilingual"); ?>
 <?php __("Optimize TranslatePress database tables", "translatepress-multilingual"); ?>
 <?php __("<strong>IMPORTANT NOTE:</strong> Before performing this action it is strongly recommended to first backup the database.", "translatepress-multilingual"); ?>
 <?php __("IMPORTANT: It is strongly recommended to first backup the database!! Are you sure you want to continue?", "translatepress-multilingual"); ?>

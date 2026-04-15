@@ -665,6 +665,13 @@ class TRP_Plugin_Updater{
         $license_information_for_all_addons = array();
         $license_status = 'invalid'; // by default this is invalid.
 
+        if( empty( $license ) ){
+            $license_information_for_all_addons['invalid'][] = (object) array( 'error' => 'missing' );
+            $this->update_option('trp_license_details', $license_information_for_all_addons);
+            $this->update_option( 'trp_license_status', $license_status );
+            return;
+        }
+
         $trp = TRP_Translate_Press::get_trp_instance();
 
         if (!empty($trp->tp_product_name)) {
@@ -738,11 +745,6 @@ class TRP_Plugin_Updater{
         // $license_data->license will be either "valid" or "invalid"
         $this->update_option( 'trp_license_status', $license_status );
 
-        if( !$license ){
-            //we need to throw a notice if we have a pro addon active and no license entered
-            $license_information_for_all_addons['invalid'][] = (object) array( 'error' => 'missing' );
-            $this->update_option('trp_license_details', $license_information_for_all_addons);
-        }
     }
 
     /*
@@ -770,6 +772,13 @@ class TRP_Plugin_Updater{
                 $license = $this->edd_sanitize_license( trim( $_POST['trp_license_key'] ) );//phpcs:ignore
                 $this->update_option( 'trp_license_key', $license );
             }
+            if( empty( $license ) ){
+                $message = __( 'Your TranslatePress license key is invalid or missing.', 'translatepress-multilingual' );
+                $redirect = add_query_arg( array( 'trp_sl_activation' => 'false', 'message' => urlencode( $message ), 'trp_license_nonce' => wp_create_nonce('trp_license_display_message') ), $this->license_page_url() );
+                wp_redirect( $redirect );
+                exit();
+            }
+
             $message = array();//we will check the license for each addon and we will sotre the messages in an array
             $license_information_for_all_addons = array();
 
