@@ -64,11 +64,13 @@ class TRP_AI_Words_Notification {
             return;
         }
 
-        // Below threshold - check if we already sent
-        if ( get_option( 'trp_ai_words_notification_sent' ) ) {
+        // Below threshold - check if we already sent or is pending. Possible options: 'not_set', 'pending', true
+        $notification_sent = get_option( 'trp_ai_words_notification_sent', 'not_set' );
+        if ( $notification_sent !== 'not_set' ) {
             return;
         }
 
+        update_option( 'trp_ai_words_notification_sent', 'pending' );
         // Determine free vs paid
         if ( $this->is_free_user() ) {
             $this->schedule_delayed_email( $words_remaining );
@@ -161,8 +163,9 @@ class TRP_AI_Words_Notification {
             return;
         }
 
-        // Re-check if already sent
-        if ( get_option( 'trp_ai_words_notification_sent' ) ) {
+        // Re-check if already sent. Possible options: 'not_set', 'pending', true
+        $notification_sent = get_option( 'trp_ai_words_notification_sent', 'not_set' );
+        if ( $notification_sent === true ) {
             return;
         }
 

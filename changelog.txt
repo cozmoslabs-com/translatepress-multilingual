@@ -1,3 +1,9 @@
+= 3.1.5 =
+* Do not query translatepress.com for valid licenses if the license is empty
+* Skip pdf translation by detecting pdf magic characters at the beginning of every pdf file
+* Do not show Upgrade button for Developer license
+* Make languages sortable in free version as well
+
 = 3.1.4 =
 * Fixed some cases where recent translations generated using TranslatePress AI have been incorrectly set to __OPENROUTER_FAILED__
 * Fixed WooCommerce Layered Nav dropdown "Any %s" label untranslatable in visual editor

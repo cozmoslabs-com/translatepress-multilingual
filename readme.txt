@@ -5,7 +5,7 @@ Tags: translate, translation, multilingual, automatic translation, bilingual, fr
 Requires at least: 3.1.0
 Tested up to: 6.9.4
 Requires PHP: 7.4
-Stable tag: 3.1.5
+Stable tag: 3.1.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -143,11 +143,9 @@ For more information please check out our [documentation](https://translatepress
 
 
 == Changelog ==
-= 3.1.5 =
-* Do not query translatepress.com for valid licenses if the license is empty
-* Skip pdf translation by detecting pdf magic characters at the beginning of every pdf file
-* Do not show Upgrade button for Developer license
-* Make languages sortable in free version as well
+= 3.1.6 =
+* Fixed sending lots of emails notifications to admin regarding Low TranslatePress AI Words when default language was not English
+* Clean up additional failed translations missed by the 3.1.4 version
 
 = Older versions =
 [Click Here](https://translatepress.com/docs/translatepress-free-changelog/?utm_source=wp.org&utm_medium=tp-description-page&utm_campaign=TPFree) to view the full changelog, or you can find it in the changelog.txt file in the plugin folder.

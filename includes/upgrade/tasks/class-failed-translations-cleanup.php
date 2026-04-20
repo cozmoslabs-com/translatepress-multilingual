@@ -135,7 +135,7 @@ class TRP_Failed_Translations_Cleanup {
             $query_result = $wpdb->query(
                 $wpdb->prepare(
                     "DELETE FROM `{$table}` WHERE `translated` LIKE %s LIMIT %d",
-                    $wpdb->esc_like( strtolower( self::FAILED_STRING ) ) . '%',
+                    '%' . $wpdb->esc_like( strtolower( self::FAILED_STRING ) ) . '%',
                     self::BATCH_SIZE
                 )
             );
@@ -144,8 +144,8 @@ class TRP_Failed_Translations_Cleanup {
             // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
             $query_result = $wpdb->query(
                 $wpdb->prepare(
-                    "DELETE FROM `{$table}` WHERE `translated` = %s LIMIT %d",
-                    self::FAILED_STRING,
+                    "DELETE FROM `{$table}` WHERE `translated` LIKE %s LIMIT %d",
+                    '%' . $wpdb->esc_like( self::FAILED_STRING ) . '%',
                     self::BATCH_SIZE
                 )
             );

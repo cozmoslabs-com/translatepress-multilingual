@@ -120,8 +120,8 @@ class TRP_Upgrade {
                 $this->migrate_to_language_switcher_v2();
             }
 
-            if ( version_compare( $stored_database_version, '3.1.3', '<=' ) ) {
-                add_option( 'trp_failed_translations_cleanup', 'no' );
+            if ( version_compare( $stored_database_version, '3.1.5', '<=' ) ) {
+                add_option( 'trp_failed_translations_cleanup_315', 'no' );
                 $trp = TRP_Translate_Press::get_trp_instance();
                 $trp->get_component( 'batch_processor' )->schedule();
             }

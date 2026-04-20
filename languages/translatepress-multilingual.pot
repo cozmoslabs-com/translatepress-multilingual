@@ -6,7 +6,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-04-15 08:07+0000\n"
+"POT-Creation-Date: 2026-04-20 11:27+0000\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
 "X-Poedit-SearchPath-0: .\n"
@@ -71,38 +71,38 @@ msgid "Select..."
 msgstr ""
 
 #. translators: %s: site name
-#: includes/class-ai-words-notification.php:119, includes/class-ai-words-notification.php:186
+#: includes/class-ai-words-notification.php:121, includes/class-ai-words-notification.php:189
 msgid "[%s] Low TranslatePress AI Words"
 msgstr ""
 
-#: includes/class-ai-words-notification.php:207
+#: includes/class-ai-words-notification.php:210
 msgid "upgrade your plan or get extra AI Words"
 msgstr ""
 
-#: includes/class-ai-words-notification.php:205
+#: includes/class-ai-words-notification.php:208
 msgid "upgrade your plan"
 msgstr ""
 
-#: includes/class-ai-words-notification.php:211
+#: includes/class-ai-words-notification.php:214
 msgid "TranslatePress AI words are running low on your site."
 msgstr ""
 
 #. translators: %s: formatted number of words remaining
-#: includes/class-ai-words-notification.php:213
+#: includes/class-ai-words-notification.php:216
 msgid "Current status: %s words remaining"
 msgstr ""
 
-#: includes/class-ai-words-notification.php:214
+#: includes/class-ai-words-notification.php:217
 msgid "Once the remaining AI words run out, automatic translation through TranslatePress AI will be paused."
 msgstr ""
 
 #. translators: 1: upgrade action text, 2: account URL
-#: includes/class-ai-words-notification.php:216
+#: includes/class-ai-words-notification.php:219
 msgid "To continue translating your content, please %1$s over at %2$s"
 msgstr ""
 
 #. translators: %s: notification settings URL
-#: includes/class-ai-words-notification.php:218
+#: includes/class-ai-words-notification.php:221
 msgid "Manage Notification: %s"
 msgstr ""
 
@@ -2737,7 +2737,7 @@ msgstr ""
 msgid "There was an error with your Google Translate key."
 msgstr ""
 
-#: includes/mtapi/class-mtapi-machine-translator.php:239
+#: includes/mtapi/class-mtapi-machine-translator.php:244
 msgid "Please check your TranslatePress license key."
 msgstr ""
 
