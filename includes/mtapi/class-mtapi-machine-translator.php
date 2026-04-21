@@ -119,7 +119,7 @@ class TRP_MTAPI_Machine_Translator extends TRP_Machine_Translator {
                     }
                 }
 
-                if ($transient_quota != $quota){
+                if ($transient_quota !== $quota){
                     set_transient("trp_mtapi_cached_quota", $transient_quota, 5*60);
                 }
             }

@@ -5,7 +5,7 @@ Tags: translate, translation, multilingual, automatic translation, bilingual, fr
 Requires at least: 3.1.0
 Tested up to: 6.9.4
 Requires PHP: 7.4
-Stable tag: 3.1.6
+Stable tag: 3.1.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -143,6 +143,9 @@ For more information please check out our [documentation](https://translatepress
 
 
 == Changelog ==
+= 3.1.7 =
+* Fixed bug where sites with insufficient quota unnecessarily requested TP AI translations
+
 = 3.1.6 =
 * Fixed sending lots of emails notifications to admin regarding Low TranslatePress AI Words when default language was not English
 * Clean up additional failed translations missed by the 3.1.4 version
