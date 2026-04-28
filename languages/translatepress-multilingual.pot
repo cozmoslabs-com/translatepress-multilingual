@@ -6,7 +6,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-04-21 13:36+0000\n"
+"POT-Creation-Date: 2026-04-28 10:07+0000\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
 "X-Poedit-SearchPath-0: .\n"
@@ -246,7 +246,7 @@ msgstr ""
 msgid "Automatic translation has been disabled."
 msgstr ""
 
-#: includes/class-error-manager.php:170, includes/class-plugin-notices.php:353, includes/class-plugin-notices.php:431, includes/class-plugin-notices.php:406, includes/class-plugin-notices.php:491, includes/class-plugin-notices.php:469, includes/class-plugin-notices.php:520, includes/class-plugin-notices.php:576, includes/class-plugin-notices.php:632, includes/class-plugin-notices.php:621, includes/class-plugin-notices.php:657, includes/class-plugin-notices.php:709, includes/class-plugin-notices.php:692, includes/class-reviews.php:123, includes/class-reviews.php:126, includes/class-upgrade.php:1046, includes/class-upgrade.php:1755, add-ons-advanced/extra-languages/class-extra-languages.php:157, add-ons-advanced/seo-pack/class-seo-pack.php:840, add-ons-pro/multiple-domains/class-multiple-domains.php:546, includes/upgrade/class-batch-processor.php:173
+#: includes/class-error-manager.php:170, includes/class-plugin-notices.php:353, includes/class-plugin-notices.php:431, includes/class-plugin-notices.php:406, includes/class-plugin-notices.php:491, includes/class-plugin-notices.php:469, includes/class-plugin-notices.php:520, includes/class-plugin-notices.php:576, includes/class-plugin-notices.php:632, includes/class-plugin-notices.php:621, includes/class-plugin-notices.php:657, includes/class-plugin-notices.php:709, includes/class-plugin-notices.php:692, includes/class-reviews.php:123, includes/class-reviews.php:126, includes/class-upgrade.php:1046, includes/class-upgrade.php:1755, add-ons-advanced/extra-languages/class-extra-languages.php:157, add-ons-advanced/seo-pack/class-seo-pack.php:840, add-ons-pro/multiple-domains/class-multiple-domains.php:552, includes/upgrade/class-batch-processor.php:173
 msgid "Dismiss this notice."
 msgstr ""
 
@@ -334,7 +334,7 @@ msgstr ""
 msgid "Active"
 msgstr ""
 
-#: includes/class-language-switcher-tab.php:169, includes/class-language-switcher-tab.php:213, add-ons-pro/multiple-domains/class-multiple-domains.php:737
+#: includes/class-language-switcher-tab.php:169, includes/class-language-switcher-tab.php:213, add-ons-pro/multiple-domains/class-multiple-domains.php:743
 msgid "Permission denied."
 msgstr ""
 
@@ -1545,7 +1545,7 @@ msgstr ""
 msgid "Configure different menu items for different languages."
 msgstr ""
 
-#: partials/addons-settings-page.php:113, add-ons-pro/multiple-domains/class-multiple-domains.php:345, includes/onboarding/class-addons.php:101
+#: partials/addons-settings-page.php:113, add-ons-pro/multiple-domains/class-multiple-domains.php:351, includes/onboarding/class-addons.php:101
 msgid "Different Domain per Language"
 msgstr ""
 
@@ -2238,7 +2238,7 @@ msgstr ""
 msgid "The inactive languages will still be visible and active for the admin. For other users they won't be visible in the language switchers and won't be accessible either."
 msgstr ""
 
-#: add-ons-advanced/extra-languages/class-extra-languages.php:145, add-ons-pro/multiple-domains/class-multiple-domains.php:534
+#: add-ons-advanced/extra-languages/class-extra-languages.php:145, add-ons-pro/multiple-domains/class-multiple-domains.php:540
 msgid "unknown"
 msgstr ""
 
@@ -2254,102 +2254,102 @@ msgstr ""
 msgid "If you absolutely need them, the removed translations can be found in tables trp_slug_original_obsolete and trp_slug_translation_obsolete."
 msgstr ""
 
-#: add-ons-pro/multiple-domains/class-multiple-domains.php:348
+#: add-ons-pro/multiple-domains/class-multiple-domains.php:354
 msgid "View Docs"
 msgstr ""
 
-#: add-ons-pro/multiple-domains/class-multiple-domains.php:355
+#: add-ons-pro/multiple-domains/class-multiple-domains.php:361
 msgid "Assign different domains or subdomains to each language. When visitors access these domains, TranslatePress loads the appropriate language translation directly without redirecting."
 msgstr ""
 
 #. translators: %1$s, %2$s, %3$s are example domains
-#: add-ons-pro/multiple-domains/class-multiple-domains.php:361
+#: add-ons-pro/multiple-domains/class-multiple-domains.php:367
 msgid "Example: %1$s for English, %2$s for Spanish, %3$s for French."
 msgstr ""
 
-#: add-ons-pro/multiple-domains/class-multiple-domains.php:369
+#: add-ons-pro/multiple-domains/class-multiple-domains.php:375
 msgid "Before enabling:"
 msgstr ""
 
-#: add-ons-pro/multiple-domains/class-multiple-domains.php:370
+#: add-ons-pro/multiple-domains/class-multiple-domains.php:376
 msgid "Ensure your domains are registered, pointed to your server, and have SSL certificates configured."
 msgstr ""
 
-#: add-ons-pro/multiple-domains/class-multiple-domains.php:383, add-ons-pro/multiple-domains/class-multiple-domains.php:403, includes/advanced-settings/exclude-gettext-strings.php:14, includes/string-translation/class-string-translation.php:294, includes/string-translation/class-string-translation.php:324
+#: add-ons-pro/multiple-domains/class-multiple-domains.php:389, add-ons-pro/multiple-domains/class-multiple-domains.php:409, includes/advanced-settings/exclude-gettext-strings.php:14, includes/string-translation/class-string-translation.php:294, includes/string-translation/class-string-translation.php:324
 msgid "Domain"
 msgstr ""
 
-#: add-ons-pro/multiple-domains/class-multiple-domains.php:384
+#: add-ons-pro/multiple-domains/class-multiple-domains.php:390
 msgid "Map this language to a different domain or sub-domain."
 msgstr ""
 
-#: add-ons-pro/multiple-domains/class-multiple-domains.php:438
+#: add-ons-pro/multiple-domains/class-multiple-domains.php:444
 msgid "https://example.com"
 msgstr ""
 
-#: add-ons-pro/multiple-domains/class-multiple-domains.php:445
+#: add-ons-pro/multiple-domains/class-multiple-domains.php:451
 msgid "Prefill with current domain"
 msgstr ""
 
-#: add-ons-pro/multiple-domains/class-multiple-domains.php:453
+#: add-ons-pro/multiple-domains/class-multiple-domains.php:459
 msgid "Check DNS"
 msgstr ""
 
-#: add-ons-pro/multiple-domains/class-multiple-domains.php:518
+#: add-ons-pro/multiple-domains/class-multiple-domains.php:524
 msgid "Checking DNS..."
 msgstr ""
 
-#: add-ons-pro/multiple-domains/class-multiple-domains.php:519
+#: add-ons-pro/multiple-domains/class-multiple-domains.php:525
 msgid "DNS is correctly configured!"
 msgstr ""
 
-#: add-ons-pro/multiple-domains/class-multiple-domains.php:520
+#: add-ons-pro/multiple-domains/class-multiple-domains.php:526
 msgid "DNS check failed. Please verify your domain configuration."
 msgstr ""
 
-#: add-ons-pro/multiple-domains/class-multiple-domains.php:521
+#: add-ons-pro/multiple-domains/class-multiple-domains.php:527
 msgid "This domain is already assigned to another language."
 msgstr ""
 
-#: add-ons-pro/multiple-domains/class-multiple-domains.php:538
+#: add-ons-pro/multiple-domains/class-multiple-domains.php:544
 msgid "<strong>Different Domain per Language add-on</strong> requires TranslatePress version %1$s or higher. You are currently using version %2$s. Please update TranslatePress to enable this feature."
 msgstr ""
 
-#: add-ons-pro/multiple-domains/class-multiple-domains.php:671
+#: add-ons-pro/multiple-domains/class-multiple-domains.php:677
 msgid "Note: This option is disabled when Different Domain for Language addon is active."
 msgstr ""
 
-#: add-ons-pro/multiple-domains/class-multiple-domains.php:696
+#: add-ons-pro/multiple-domains/class-multiple-domains.php:702
 msgid "Different Domain per Language: Domain is required when domain mapping is enabled. The toggle has been disabled for languages with empty domains."
 msgstr ""
 
-#: add-ons-pro/multiple-domains/class-multiple-domains.php:710
+#: add-ons-pro/multiple-domains/class-multiple-domains.php:716
 msgid "Different Domain per Language: The same domain cannot be assigned to multiple languages. The toggle has been disabled for duplicate domains."
 msgstr ""
 
-#: add-ons-pro/multiple-domains/class-multiple-domains.php:724
+#: add-ons-pro/multiple-domains/class-multiple-domains.php:730
 msgid "Different Domain per Language: A language domain cannot be the same as the main site URL. The toggle has been disabled for the matching domain."
 msgstr ""
 
-#: add-ons-pro/multiple-domains/class-multiple-domains.php:743
+#: add-ons-pro/multiple-domains/class-multiple-domains.php:749
 msgid "Please enter a domain."
 msgstr ""
 
-#: add-ons-pro/multiple-domains/class-multiple-domains.php:750
+#: add-ons-pro/multiple-domains/class-multiple-domains.php:756
 msgid "Invalid domain format."
 msgstr ""
 
 #. translators: %s is the error message
-#: add-ons-pro/multiple-domains/class-multiple-domains.php:764
+#: add-ons-pro/multiple-domains/class-multiple-domains.php:770
 msgid "Could not reach domain: %s"
 msgstr ""
 
 #. translators: %d is the HTTP status code
-#: add-ons-pro/multiple-domains/class-multiple-domains.php:780
+#: add-ons-pro/multiple-domains/class-multiple-domains.php:786
 msgid "Domain returned HTTP status %d."
 msgstr ""
 
-#: add-ons-pro/multiple-domains/class-multiple-domains.php:774
+#: add-ons-pro/multiple-domains/class-multiple-domains.php:780
 msgid "Domain is reachable!"
 msgstr ""
 
@@ -3551,7 +3551,7 @@ msgstr ""
 msgid "Allow this user to translate the website."
 msgstr ""
 
-#: add-ons-advanced/seo-pack/includes/string-translation/class-option-based-strings.php:97, add-ons-advanced/seo-pack/includes/string-translation/class-string-translation-api-postslug.php:108, add-ons-advanced/seo-pack/includes/string-translation/class-string-translation-api-term.php:98
+#: add-ons-advanced/seo-pack/includes/string-translation/class-option-based-strings.php:125, add-ons-advanced/seo-pack/includes/string-translation/class-string-translation-api-postslug.php:108, add-ons-advanced/seo-pack/includes/string-translation/class-string-translation-api-term.php:98
 msgid "(inactive)"
 msgstr ""
 

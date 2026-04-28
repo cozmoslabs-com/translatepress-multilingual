@@ -1,3 +1,10 @@
+= 3.1.7 =
+* Fixed bug where sites with insufficient quota unnecessarily requested TP AI translations
+
+= 3.1.6 =
+* Fixed sending lots of emails notifications to admin regarding Low TranslatePress AI Words when default language was not English
+* Clean up additional failed translations missed by the 3.1.4 version
+
 = 3.1.5 =
 * Do not query translatepress.com for valid licenses if the license is empty
 * Skip pdf translation by detecting pdf magic characters at the beginning of every pdf file

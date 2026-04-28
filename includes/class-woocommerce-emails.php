@@ -205,40 +205,17 @@ class TRP_Woocommerce_Emails{
         if ( $is_customer_email && is_a( $order, 'WC_Order' ) && empty( $recipients ) )
             $recipients = $order->get_billing_email();
 
-        if ( empty( $recipients ) ) {
-            $recipients = [];
-        } elseif ( !is_array($recipients) ) {
-            $recipients = explode( ',', $recipients );
-        }
+        $recipients = $this->normalize_email_recipients( $recipients );
 
-        $language = $TRP_LANGUAGE;
         $user_id  = 0;
 
         if( $is_customer_email ){
-            if ( $order ) {
-                $user_id = $order->get_user_id();
-                if ( $user_id > 0 ) {
-                    $language = get_user_meta( $user_id, 'trp_language', true );
-                } else {
-                    $language = trp_woo_hpos_get_post_meta( $TRP_EMAIL_ORDER, 'trp_language', true );
-                }
-            }
+            $customer_email_data = $this->get_customer_email_data( $order );
+            $language            = $customer_email_data['language'];
+            $user_id             = $customer_email_data['user_id'];
         }
         else{
-            if( ! empty( $recipients ) && count( $recipients ) == 1 ){
-                $registered_user = get_user_by( 'email', $recipients[0] );
-                if( $registered_user ){
-                    // If language is set to site default, user object won't have a locale set. Fallback to WPLANG. In case WPLANG is not set either, fallback to default language
-                    if ( !empty( $registered_user->locale ) ){
-                        $language = $registered_user->locale;
-                    } else {
-                        $wplang = get_option( 'WPLANG' );
-                        $language = !empty( $wplang ) ? $wplang : $default_language;
-                    }
-                } else {
-                    $language = trp_woo_hpos_get_post_meta( $TRP_EMAIL_ORDER, 'trp_language', true );
-                }
-            }
+            $language = $this->get_admin_email_language( $recipients, $default_language );
         }
 
         $language = apply_filters( 'trp_woo_email_language', $language, $is_customer_email, $recipients, $user_id );
@@ -264,6 +241,111 @@ class TRP_Woocommerce_Emails{
         $wc_email->init_settings();
 
         return false;
+    }
+
+    /**
+     * Normalize a WooCommerce recipient list to trimmed email strings.
+     *
+     * @param string|array $recipients
+     * @return array
+     */
+    private function normalize_email_recipients( $recipients ) {
+        if ( empty( $recipients ) ) {
+            return array();
+        }
+
+        if ( ! is_array( $recipients ) ) {
+            $recipients = explode( ',', $recipients );
+        }
+
+        return array_values( array_filter( array_map( 'trim', $recipients ) ) );
+    }
+
+    /**
+     * Resolve the language used for admin emails.
+     *
+     * Multiple admin recipients receive the same email body, so we use the first
+     * configured recipient as the source of truth for the email language.
+     *
+     * @param array  $recipients
+     * @param string $default_language
+     * @return string
+     */
+    private function get_admin_email_language( $recipients, $default_language ) {
+        if ( empty( $recipients ) ) {
+            return $this->get_order_email_language();
+        }
+
+        $registered_user = get_user_by( 'email', $recipients[0] );
+
+        if ( $registered_user ) {
+            return $this->get_registered_user_email_language( $registered_user, $default_language );
+        }
+
+        return $this->get_order_email_language();
+    }
+
+    /**
+     * Resolve the locale used for an admin recipient.
+     *
+     * @param WP_User $registered_user
+     * @param string  $default_language
+     * @return string
+     */
+    private function get_registered_user_email_language( $registered_user, $default_language ) {
+        if ( ! empty( $registered_user->locale ) ) {
+            return $registered_user->locale;
+        }
+
+        $wplang = get_option( 'WPLANG' );
+
+        return ! empty( $wplang ) ? $wplang : $default_language;
+    }
+
+    /**
+     * Resolve the language stored on the order tied to the current WooCommerce email.
+     *
+     * @return string
+     */
+    private function get_order_email_language() {
+        global $TRP_EMAIL_ORDER, $TRP_LANGUAGE;
+
+        if ( empty( $TRP_EMAIL_ORDER ) ) {
+            return $TRP_LANGUAGE;
+        }
+
+        $order_language = trp_woo_hpos_get_post_meta( $TRP_EMAIL_ORDER, 'trp_language', true );
+
+        return ! empty( $order_language ) ? $order_language : $TRP_LANGUAGE;
+    }
+
+    /**
+     * Resolve the language and user id used for customer emails.
+     *
+     * @param WC_Order|false $order
+     * @return array
+     */
+    private function get_customer_email_data( $order ) {
+        global $TRP_LANGUAGE;
+
+        $customer_email_data = array(
+            'language' => $TRP_LANGUAGE,
+            'user_id'  => 0,
+        );
+
+        if ( ! $order ) {
+            return $customer_email_data;
+        }
+
+        $customer_email_data['user_id'] = $order->get_user_id();
+
+        if ( $customer_email_data['user_id'] > 0 ) {
+            $customer_email_data['language'] = get_user_meta( $customer_email_data['user_id'], 'trp_language', true );
+        } else {
+            $customer_email_data['language'] = $this->get_order_email_language();
+        }
+
+        return $customer_email_data;
     }
 
     /**

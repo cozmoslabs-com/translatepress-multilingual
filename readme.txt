@@ -5,7 +5,7 @@ Tags: translate, translation, multilingual, automatic translation, bilingual, fr
 Requires at least: 3.1.0
 Tested up to: 6.9.4
 Requires PHP: 7.4
-Stable tag: 3.1.7
+Stable tag: 3.1.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -143,12 +143,10 @@ For more information please check out our [documentation](https://translatepress
 
 
 == Changelog ==
-= 3.1.7 =
-* Fixed bug where sites with insufficient quota unnecessarily requested TP AI translations
-
-= 3.1.6 =
-* Fixed sending lots of emails notifications to admin regarding Low TranslatePress AI Words when default language was not English
-* Clean up additional failed translations missed by the 3.1.4 version
+= 3.1.8 =
+ * Fix gettext translations saved as regular default strings when "Disable translation of gettext strings" is enabled
+ * Prevent edge case fatal error from occurring in class-check-invalid-text.php
+ * Send WooCommerce emails in admin language instead of order language when there are multiple recipients
 
 = Older versions =
 [Click Here](https://translatepress.com/docs/translatepress-free-changelog/?utm_source=wp.org&utm_medium=tp-description-page&utm_campaign=TPFree) to view the full changelog, or you can find it in the changelog.txt file in the plugin folder.
