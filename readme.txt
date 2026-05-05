@@ -1,7 +1,7 @@
-﻿=== Translate Multilingual sites - TranslatePress ===
+﻿=== TranslatePress - Translate Multilingual sites with AI Translation ===
 Contributors: cozmoslabs, razvan.mo, madalin.ungureanu, sareiodata, cristophor
 Donate link: https://www.translatepress.com/
-Tags: translate, translation, multilingual, automatic translation, bilingual, front-end translation, google translate, language
+Tags: translate, translation, multilingual, automatic translation, ai translation, front-end translation, google translate, language
 Requires at least: 3.1.0
 Tested up to: 6.9.4
 Requires PHP: 7.4
@@ -9,11 +9,11 @@ Stable tag: 3.1.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Translate your entire site directly from the front-end and go multilingual. Full support for WooCommerce, page builders + Google Translate integration
+Translate your site visually, directly from the front-end. Go multilingual in minutes using automatic AI translation. Works with any theme or plugin.
 
 == Description ==
 
-**Experience a better way to translate your WordPress site and go multilingual, directly from the front-end using a visual translation interface.**
+**Experience a better way to translate your WordPress site and go multilingual, directly from the front-end using a visual translation interface. The built-in AI translation lets you translate automatically, then refine anything visually.**
 
 TranslatePress is a [WordPress translation plugin](https://translatepress.com/?utm_source=wp.org&utm_medium=tp-description-page&utm_campaign=TPFree) that anyone can use.
 
@@ -28,7 +28,7 @@ https://www.youtube.com/watch?v=EMBdXuyrZUA
 * Translate all your website content directly from the front-end, in a friendly user interface (translations are displayed in real-time).
 * Fully compatible with all themes and plugins
 * Live preview of your translated pages, as you edit them.
-* Automatic translation support through [TranslatePress AI Free](https://translatepress.com/ai-free/?utm_source=wp.org&utm_medium=tp-description-page&utm_campaign=TPFree), with a 2.000 AI words limit.
+* Automatic AI translation support through [TranslatePress AI Free](https://translatepress.com/ai-free/?utm_source=wp.org&utm_medium=tp-description-page&utm_campaign=TPFree), with a 2.000 AI words limit.
 * Integrates with Google Translate, allowing you to set up unlimited automatic translations using your own Google API key.
 * Fully customizable language switcher that you can display as a menu item, a floating dropdown, or place anywhere else using the Language Switcher block, or the **[language-switcher]** shortcode.
 * [Image translation](https://translatepress.com/docs/image-translation/?utm_source=wp.org&utm_medium=tp-description-page&utm_campaign=TPFree) support, for [translating images, sliders and other media](https://translatepress.com/translate-images-in-wordpress/?utm_source=wp.org&utm_medium=tp-description-page&utm_campaign=TPFree).
@@ -116,7 +116,11 @@ TranslatePress is easier to use and more intuitive altogether. No more switching
 
 = How do I start to translate my WordPress site? =
 
-After installing the plugin, select your secondary language and click "Translate Site" to start translating your entire site exactly as it looks in the front-end.
+After installing the plugin, select your secondary language and click "Translate Site" to start translating your entire site exactly as it looks in the front-end. To speed things up, use TranslatePress AI for automatic AI translation.
+
+= How does AI translation using TranslatePress AI work? 
+
+[TranslatePress AI](https://translatepress.com/ai/?utm_source=wp.org&utm_medium=tp-description-page&utm_campaign=TPFree) combines the best LLMs (like Gemini and GPT) and Neural Machine Translation (NMT) engines (like DeepL and Google Translate) into one integrated solution, to automatically translate your website. The system intelligently selects the most suitable engine for any given language pair and context, to ensure maximum accuracy. 
 
 = Will it slow down my website? =
 
