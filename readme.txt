@@ -11,7 +11,7 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 Translate your site visually, directly from the front-end. Go multilingual in minutes using automatic AI translation. Works with any theme or plugin.
 
-== Description ==
+== Description =
 
 **Experience a better way to translate your WordPress site and go multilingual, directly from the front-end using a visual translation interface. The built-in AI translation lets you translate automatically, then refine anything visually.**
 
@@ -28,7 +28,7 @@ https://www.youtube.com/watch?v=EMBdXuyrZUA
 * Translate all your website content directly from the front-end, in a friendly user interface (translations are displayed in real-time).
 * Fully compatible with all themes and plugins
 * Live preview of your translated pages, as you edit them.
-* Automatic AI translation support through [TranslatePress AI Free](https://translatepress.com/ai-free/?utm_source=wp.org&utm_medium=tp-description-page&utm_campaign=TPFree), with a 2.000 AI words limit.
+* Automatic AI translation support through [TranslatePress AI Free](https://translatepress.com/ai-free/?utm_source=wp.org&utm_medium=tp-description-page&utm_campaign=TPFree), with a 2,000 AI words limit. Use our free [Website Word Count](https://translatepress.com/website-word-count/?utm_source=wp.org&utm_medium=tp-description-page&utm_campaign=TPFree) to find how many words your website contains. 
 * Integrates with Google Translate, allowing you to set up unlimited automatic translations using your own Google API key.
 * Fully customizable language switcher that you can display as a menu item, a floating dropdown, or place anywhere else using the Language Switcher block, or the **[language-switcher]** shortcode.
 * [Image translation](https://translatepress.com/docs/image-translation/?utm_source=wp.org&utm_medium=tp-description-page&utm_campaign=TPFree) support, for [translating images, sliders and other media](https://translatepress.com/translate-images-in-wordpress/?utm_source=wp.org&utm_medium=tp-description-page&utm_campaign=TPFree).
