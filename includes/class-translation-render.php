@@ -592,6 +592,11 @@ class TRP_Translation_Render{
         if ($language_code === false) {
             /* add back the excluded tags like script and style to the html */
             $output = $this->add_excluded_tags_after_translation( $output, $output_with_excluded_tags_removed['excluded_tags'] );
+            /* strip leftover trp-gettext markers. Direct callers (wp_mail_filter, oembed,
+               REST) hit this path when $TRP_LANGUAGE is the default language; the regular
+               frontend output buffer handles default-language stripping via
+               render_default_language() instead. */
+            $output = $this->remove_trp_html_tags( $output );
             return $output;
         }
         if ( $language_code == $this->settings['default-language'] ){
@@ -2203,8 +2208,10 @@ class TRP_Translation_Render{
         // Keep only the first comma-separated entry if multiple are present in the string
         $recipient = trim( strtok( $recipient, ',' ) );
 
+        $did_switch_language = false;
+
         if ( $recipient !== '' ) {
-            trp_switch_to_preffered_language( $recipient );
+            $did_switch_language = trp_switch_to_preffered_language( $recipient );
         }
 
         $whitelisted_shortcodes = apply_filters(
@@ -2224,8 +2231,12 @@ class TRP_Translation_Render{
             );
         }
 
-        // Switch back to the language used initially
-        $TRP_LANGUAGE = $initial_language;
+        if ( $did_switch_language ) {
+            trp_restore_language();
+        } else {
+            // No preferred-language switch happened, so restore only the request language.
+            $TRP_LANGUAGE = $initial_language;
+        }
 
         return $args;
     }

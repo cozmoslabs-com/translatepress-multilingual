@@ -6,7 +6,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-04-28 10:07+0000\n"
+"POT-Creation-Date: 2026-05-12 07:23+0000\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
 "X-Poedit-SearchPath-0: .\n"
@@ -246,7 +246,7 @@ msgstr ""
 msgid "Automatic translation has been disabled."
 msgstr ""
 
-#: includes/class-error-manager.php:170, includes/class-plugin-notices.php:353, includes/class-plugin-notices.php:431, includes/class-plugin-notices.php:406, includes/class-plugin-notices.php:491, includes/class-plugin-notices.php:469, includes/class-plugin-notices.php:520, includes/class-plugin-notices.php:576, includes/class-plugin-notices.php:632, includes/class-plugin-notices.php:621, includes/class-plugin-notices.php:657, includes/class-plugin-notices.php:709, includes/class-plugin-notices.php:692, includes/class-reviews.php:123, includes/class-reviews.php:126, includes/class-upgrade.php:1046, includes/class-upgrade.php:1755, add-ons-advanced/extra-languages/class-extra-languages.php:157, add-ons-advanced/seo-pack/class-seo-pack.php:840, add-ons-pro/multiple-domains/class-multiple-domains.php:552, includes/upgrade/class-batch-processor.php:173
+#: includes/class-error-manager.php:170, includes/class-plugin-notices.php:353, includes/class-plugin-notices.php:431, includes/class-plugin-notices.php:406, includes/class-plugin-notices.php:491, includes/class-plugin-notices.php:469, includes/class-plugin-notices.php:520, includes/class-plugin-notices.php:576, includes/class-plugin-notices.php:632, includes/class-plugin-notices.php:621, includes/class-plugin-notices.php:657, includes/class-plugin-notices.php:709, includes/class-plugin-notices.php:692, includes/class-reviews.php:123, includes/class-reviews.php:126, includes/class-upgrade.php:1046, includes/class-upgrade.php:1755, add-ons-advanced/extra-languages/class-extra-languages.php:157, add-ons-advanced/seo-pack/class-seo-pack.php:840, add-ons-pro/multiple-domains/class-multiple-domains.php:573, includes/upgrade/class-batch-processor.php:173
 msgid "Dismiss this notice."
 msgstr ""
 
@@ -334,7 +334,7 @@ msgstr ""
 msgid "Active"
 msgstr ""
 
-#: includes/class-language-switcher-tab.php:169, includes/class-language-switcher-tab.php:213, add-ons-pro/multiple-domains/class-multiple-domains.php:743
+#: includes/class-language-switcher-tab.php:169, includes/class-language-switcher-tab.php:213, add-ons-pro/multiple-domains/class-multiple-domains.php:764
 msgid "Permission denied."
 msgstr ""
 
@@ -358,7 +358,7 @@ msgstr ""
 msgid "Change language to %s"
 msgstr ""
 
-#: includes/class-machine-translation-tab.php:26, includes/class-onboarding.php:119, includes/class-onboarding.php:119, partials/machine-translation-settings-page.php:24
+#: includes/class-machine-translation-tab.php:26, includes/class-onboarding.php:119, includes/class-onboarding.php:119, partials/machine-translation-settings-page.php:36
 msgid "Automatic Translation"
 msgstr ""
 
@@ -1437,7 +1437,7 @@ msgstr ""
 msgid "<strong>TranslatePress</strong> requires <strong><a href=\"http://php.net/manual/en/book.mbstring.php\">Multibyte String PHP library</a></strong>. Please contact your server administrator to install it on your server."
 msgstr ""
 
-#: includes/compatibility-functions.php:1918
+#: includes/compatibility-functions.php:1965
 msgid "Detected long query limitation on WPEngine hosting. Some large pages may appear untranslated. You can remove limitation by adding the following to your site’s wp-config.php: define( 'WPE_GOVERNOR', false ); "
 msgstr ""
 
@@ -1545,7 +1545,7 @@ msgstr ""
 msgid "Configure different menu items for different languages."
 msgstr ""
 
-#: partials/addons-settings-page.php:113, add-ons-pro/multiple-domains/class-multiple-domains.php:351, includes/onboarding/class-addons.php:101
+#: partials/addons-settings-page.php:113, add-ons-pro/multiple-domains/class-multiple-domains.php:372, includes/onboarding/class-addons.php:101
 msgid "Different Domain per Language"
 msgstr ""
 
@@ -1585,7 +1585,7 @@ msgstr ""
 msgid "Create no-code automations and workflows on your WordPress site. Easily connect your plugins, sites and apps together."
 msgstr ""
 
-#: partials/advanced-settings-page.php:18, partials/machine-translation-settings-page.php:429, partials/main-settings-page.php:227
+#: partials/advanced-settings-page.php:18, partials/machine-translation-settings-page.php:444, partials/main-settings-page.php:227
 msgid "Save Changes"
 msgstr ""
 
@@ -1722,159 +1722,167 @@ msgstr ""
 msgid "Download & Install the Pro plugin"
 msgstr ""
 
-#: partials/license-settings-page.php:252, partials/machine-translation-settings-page.php:132
+#: partials/license-settings-page.php:252, partials/machine-translation-settings-page.php:147
 msgid "Learn More"
 msgstr ""
 
-#: partials/machine-translation-settings-page.php:29, includes/onboarding/class-autotranslation.php:136, includes/onboarding/class-autotranslation.php:167
+#: partials/machine-translation-settings-page.php:37
+msgid "Get a translation volume estimate with a detailed breakdown per page"
+msgstr ""
+
+#: partials/machine-translation-settings-page.php:37
+msgid "Find how many translatable words are on your website"
+msgstr ""
+
+#: partials/machine-translation-settings-page.php:44, includes/onboarding/class-autotranslation.php:136, includes/onboarding/class-autotranslation.php:167
 msgid "Enable Automatic Translation"
 msgstr ""
 
-#: partials/machine-translation-settings-page.php:61
+#: partials/machine-translation-settings-page.php:76
 msgid "To use <strong>DeepL</strong> for automatic translation, activate this Pro add-on from the <a href=\"%1$s\" target=\"_self\" title=\"%2$s\">%2$s</a>."
 msgstr ""
 
-#: partials/machine-translation-settings-page.php:54
+#: partials/machine-translation-settings-page.php:69
 msgid "<strong>DeepL</strong> automatic translation is available as a <a href=\"%1$s\" target=\"_blank\" title=\"%2$s\">%2$s</a>."
 msgstr ""
 
-#: partials/machine-translation-settings-page.php:55
+#: partials/machine-translation-settings-page.php:70
 msgid "By upgrading you'll get access to all paid add-ons, premium support and help fund the future development of TranslatePress."
 msgstr ""
 
 #. translators: %1$s is the URL to the DeepL add-on. %2$s is the name of the Pro offerings.
-#: partials/machine-translation-settings-page.php:76
+#: partials/machine-translation-settings-page.php:91
 msgctxt "Verbiage for the DeepL Pro Add-on"
 msgid "TranslatePress Pro Add-on"
 msgstr ""
 
-#: partials/machine-translation-settings-page.php:70
+#: partials/machine-translation-settings-page.php:85
 msgctxt "Verbiage for the DeepL Pro Add-on"
 msgid "Addons tab"
 msgstr ""
 
-#: partials/machine-translation-settings-page.php:83
+#: partials/machine-translation-settings-page.php:98
 msgid "Please note that DeepL API usage is paid separately. See <a href=\"https://www.deepl.com/pro.html#developer\">DeepL pricing information</a>."
 msgstr ""
 
-#: partials/machine-translation-settings-page.php:88
+#: partials/machine-translation-settings-page.php:103
 msgid "TranslatePress Pro Add-ons"
 msgstr ""
 
-#: partials/machine-translation-settings-page.php:101
+#: partials/machine-translation-settings-page.php:116
 msgid "Test API credentials"
 msgstr ""
 
-#: partials/machine-translation-settings-page.php:105
+#: partials/machine-translation-settings-page.php:120
 msgid "Check if the selected translation engine is configured correctly."
 msgstr ""
 
-#: partials/machine-translation-settings-page.php:111
+#: partials/machine-translation-settings-page.php:126
 msgid "Alternative Engines"
 msgstr ""
 
-#: partials/machine-translation-settings-page.php:126
+#: partials/machine-translation-settings-page.php:141
 msgid "Switch to TranslatePress AI"
 msgstr ""
 
-#: partials/machine-translation-settings-page.php:129
+#: partials/machine-translation-settings-page.php:144
 msgid "Integrate machine translation directly with your WordPress website."
 msgstr ""
 
-#: partials/machine-translation-settings-page.php:119
+#: partials/machine-translation-settings-page.php:134
 msgid "More info"
 msgstr ""
 
 #. translators: The <br> ensures a line break after "order to"
-#: partials/machine-translation-settings-page.php:160
+#: partials/machine-translation-settings-page.php:175
 msgid "Choose which engine you want to use in order to %1$s automatically translate your website."
 msgstr ""
 
-#: partials/machine-translation-settings-page.php:176
+#: partials/machine-translation-settings-page.php:191
 msgid "Automatic Translation Settings"
 msgstr ""
 
-#: partials/machine-translation-settings-page.php:205
+#: partials/machine-translation-settings-page.php:220
 msgid "AI Words Low Notification"
 msgstr ""
 
-#: partials/machine-translation-settings-page.php:207
+#: partials/machine-translation-settings-page.php:222
 msgid "Receive an email notification when your TranslatePress AI word count drops below the specified threshold."
 msgstr ""
 
-#: partials/machine-translation-settings-page.php:214
+#: partials/machine-translation-settings-page.php:229
 msgid "This feature is only available when using the TranslatePress AI translation engine."
 msgstr ""
 
-#: partials/machine-translation-settings-page.php:227
+#: partials/machine-translation-settings-page.php:242
 msgid "Notification Email"
 msgstr ""
 
-#: partials/machine-translation-settings-page.php:236
+#: partials/machine-translation-settings-page.php:251
 msgid "The email address where the low AI words notification will be sent."
 msgstr ""
 
-#: partials/machine-translation-settings-page.php:241
+#: partials/machine-translation-settings-page.php:256
 msgid "Word Threshold"
 msgstr ""
 
-#: partials/machine-translation-settings-page.php:249
+#: partials/machine-translation-settings-page.php:264
 msgid "words"
 msgstr ""
 
-#: partials/machine-translation-settings-page.php:251
+#: partials/machine-translation-settings-page.php:266
 msgid "You will be notified when remaining AI words drop below this number."
 msgstr ""
 
-#: partials/machine-translation-settings-page.php:275
+#: partials/machine-translation-settings-page.php:290
 msgid "Automatically Translate Slugs"
 msgstr ""
 
-#: partials/machine-translation-settings-page.php:279
+#: partials/machine-translation-settings-page.php:294
 msgid "Generate automatic translations of slugs for posts, pages and Custom Post Types.<br/>The slugs will be automatically translated starting with the second refresh of each page."
 msgstr ""
 
-#: partials/machine-translation-settings-page.php:293
+#: partials/machine-translation-settings-page.php:308
 msgid "This feature is only available in the paid version. Upgrade TranslatePress and unlock more premium features."
 msgstr ""
 
-#: partials/machine-translation-settings-page.php:295
+#: partials/machine-translation-settings-page.php:310
 msgid "Requires <a href=\"%s\" title=\"TranslatePress Add-on SEO Pack documentation\" target=\"_blank\">SEO Pack Add-on</a> to be installed and activated."
 msgstr ""
 
-#: partials/machine-translation-settings-page.php:312, partials/main-settings-language-selector.php:204, partials/settings-header.php:35, includes/mtapi/functions.php:87, includes/mtapi/functions.php:188
+#: partials/machine-translation-settings-page.php:327, partials/main-settings-language-selector.php:204, partials/settings-header.php:35, includes/mtapi/functions.php:87, includes/mtapi/functions.php:188
 msgid "Upgrade now"
 msgstr ""
 
-#: partials/machine-translation-settings-page.php:336
+#: partials/machine-translation-settings-page.php:351
 msgid "Block Crawlers"
 msgstr ""
 
-#: partials/machine-translation-settings-page.php:339
+#: partials/machine-translation-settings-page.php:354
 msgid "Block crawlers from triggering automatic translations on your website.<br>This will not prevent crawlers from accessing this site's pages."
 msgstr ""
 
-#: partials/machine-translation-settings-page.php:358
+#: partials/machine-translation-settings-page.php:373
 msgid "Limit machine translation / characters per day"
 msgstr ""
 
-#: partials/machine-translation-settings-page.php:361
+#: partials/machine-translation-settings-page.php:376
 msgid "Add a limit to the number of automatically translated characters so you can better budget your project."
 msgstr ""
 
-#: partials/machine-translation-settings-page.php:384
+#: partials/machine-translation-settings-page.php:399
 msgid "characters per day"
 msgstr ""
 
-#: partials/machine-translation-settings-page.php:387
+#: partials/machine-translation-settings-page.php:402
 msgid "Today's Character Count: "
 msgstr ""
 
-#: partials/machine-translation-settings-page.php:407
+#: partials/machine-translation-settings-page.php:422
 msgid "Log machine translation queries."
 msgstr ""
 
-#: partials/machine-translation-settings-page.php:411
+#: partials/machine-translation-settings-page.php:426
 msgid "Only enable for testing purposes. Can impact performance.<br>All records are stored in the wp_trp_machine_translation_log database table. Use a plugin like <a href=\"https://wordpress.org/plugins/wp-data-access/\" target=\"_blank\">WP Data Access</a> to browse the logs or directly from your database manager (PHPMyAdmin, etc.)"
 msgstr ""
 
@@ -2238,7 +2246,7 @@ msgstr ""
 msgid "The inactive languages will still be visible and active for the admin. For other users they won't be visible in the language switchers and won't be accessible either."
 msgstr ""
 
-#: add-ons-advanced/extra-languages/class-extra-languages.php:145, add-ons-pro/multiple-domains/class-multiple-domains.php:540
+#: add-ons-advanced/extra-languages/class-extra-languages.php:145, add-ons-pro/multiple-domains/class-multiple-domains.php:561
 msgid "unknown"
 msgstr ""
 
@@ -2254,102 +2262,102 @@ msgstr ""
 msgid "If you absolutely need them, the removed translations can be found in tables trp_slug_original_obsolete and trp_slug_translation_obsolete."
 msgstr ""
 
-#: add-ons-pro/multiple-domains/class-multiple-domains.php:354
+#: add-ons-pro/multiple-domains/class-multiple-domains.php:375
 msgid "View Docs"
 msgstr ""
 
-#: add-ons-pro/multiple-domains/class-multiple-domains.php:361
+#: add-ons-pro/multiple-domains/class-multiple-domains.php:382
 msgid "Assign different domains or subdomains to each language. When visitors access these domains, TranslatePress loads the appropriate language translation directly without redirecting."
 msgstr ""
 
 #. translators: %1$s, %2$s, %3$s are example domains
-#: add-ons-pro/multiple-domains/class-multiple-domains.php:367
+#: add-ons-pro/multiple-domains/class-multiple-domains.php:388
 msgid "Example: %1$s for English, %2$s for Spanish, %3$s for French."
 msgstr ""
 
-#: add-ons-pro/multiple-domains/class-multiple-domains.php:375
+#: add-ons-pro/multiple-domains/class-multiple-domains.php:396
 msgid "Before enabling:"
 msgstr ""
 
-#: add-ons-pro/multiple-domains/class-multiple-domains.php:376
+#: add-ons-pro/multiple-domains/class-multiple-domains.php:397
 msgid "Ensure your domains are registered, pointed to your server, and have SSL certificates configured."
 msgstr ""
 
-#: add-ons-pro/multiple-domains/class-multiple-domains.php:389, add-ons-pro/multiple-domains/class-multiple-domains.php:409, includes/advanced-settings/exclude-gettext-strings.php:14, includes/string-translation/class-string-translation.php:294, includes/string-translation/class-string-translation.php:324
+#: add-ons-pro/multiple-domains/class-multiple-domains.php:410, add-ons-pro/multiple-domains/class-multiple-domains.php:430, includes/advanced-settings/exclude-gettext-strings.php:14, includes/string-translation/class-string-translation.php:294, includes/string-translation/class-string-translation.php:324
 msgid "Domain"
 msgstr ""
 
-#: add-ons-pro/multiple-domains/class-multiple-domains.php:390
+#: add-ons-pro/multiple-domains/class-multiple-domains.php:411
 msgid "Map this language to a different domain or sub-domain."
 msgstr ""
 
-#: add-ons-pro/multiple-domains/class-multiple-domains.php:444
+#: add-ons-pro/multiple-domains/class-multiple-domains.php:465
 msgid "https://example.com"
 msgstr ""
 
-#: add-ons-pro/multiple-domains/class-multiple-domains.php:451
+#: add-ons-pro/multiple-domains/class-multiple-domains.php:472
 msgid "Prefill with current domain"
 msgstr ""
 
-#: add-ons-pro/multiple-domains/class-multiple-domains.php:459
+#: add-ons-pro/multiple-domains/class-multiple-domains.php:480
 msgid "Check DNS"
 msgstr ""
 
-#: add-ons-pro/multiple-domains/class-multiple-domains.php:524
+#: add-ons-pro/multiple-domains/class-multiple-domains.php:545
 msgid "Checking DNS..."
 msgstr ""
 
-#: add-ons-pro/multiple-domains/class-multiple-domains.php:525
+#: add-ons-pro/multiple-domains/class-multiple-domains.php:546
 msgid "DNS is correctly configured!"
 msgstr ""
 
-#: add-ons-pro/multiple-domains/class-multiple-domains.php:526
+#: add-ons-pro/multiple-domains/class-multiple-domains.php:547
 msgid "DNS check failed. Please verify your domain configuration."
 msgstr ""
 
-#: add-ons-pro/multiple-domains/class-multiple-domains.php:527
+#: add-ons-pro/multiple-domains/class-multiple-domains.php:548
 msgid "This domain is already assigned to another language."
 msgstr ""
 
-#: add-ons-pro/multiple-domains/class-multiple-domains.php:544
+#: add-ons-pro/multiple-domains/class-multiple-domains.php:565
 msgid "<strong>Different Domain per Language add-on</strong> requires TranslatePress version %1$s or higher. You are currently using version %2$s. Please update TranslatePress to enable this feature."
 msgstr ""
 
-#: add-ons-pro/multiple-domains/class-multiple-domains.php:677
+#: add-ons-pro/multiple-domains/class-multiple-domains.php:698
 msgid "Note: This option is disabled when Different Domain for Language addon is active."
 msgstr ""
 
-#: add-ons-pro/multiple-domains/class-multiple-domains.php:702
+#: add-ons-pro/multiple-domains/class-multiple-domains.php:723
 msgid "Different Domain per Language: Domain is required when domain mapping is enabled. The toggle has been disabled for languages with empty domains."
 msgstr ""
 
-#: add-ons-pro/multiple-domains/class-multiple-domains.php:716
+#: add-ons-pro/multiple-domains/class-multiple-domains.php:737
 msgid "Different Domain per Language: The same domain cannot be assigned to multiple languages. The toggle has been disabled for duplicate domains."
 msgstr ""
 
-#: add-ons-pro/multiple-domains/class-multiple-domains.php:730
+#: add-ons-pro/multiple-domains/class-multiple-domains.php:751
 msgid "Different Domain per Language: A language domain cannot be the same as the main site URL. The toggle has been disabled for the matching domain."
 msgstr ""
 
-#: add-ons-pro/multiple-domains/class-multiple-domains.php:749
+#: add-ons-pro/multiple-domains/class-multiple-domains.php:770
 msgid "Please enter a domain."
 msgstr ""
 
-#: add-ons-pro/multiple-domains/class-multiple-domains.php:756
+#: add-ons-pro/multiple-domains/class-multiple-domains.php:777
 msgid "Invalid domain format."
 msgstr ""
 
 #. translators: %s is the error message
-#: add-ons-pro/multiple-domains/class-multiple-domains.php:770
+#: add-ons-pro/multiple-domains/class-multiple-domains.php:791
 msgid "Could not reach domain: %s"
 msgstr ""
 
 #. translators: %d is the HTTP status code
-#: add-ons-pro/multiple-domains/class-multiple-domains.php:786
+#: add-ons-pro/multiple-domains/class-multiple-domains.php:807
 msgid "Domain returned HTTP status %d."
 msgstr ""
 
-#: add-ons-pro/multiple-domains/class-multiple-domains.php:780
+#: add-ons-pro/multiple-domains/class-multiple-domains.php:801
 msgid "Domain is reachable!"
 msgstr ""
 

@@ -5,13 +5,13 @@ Tags: translate, translation, multilingual, automatic translation, ai translatio
 Requires at least: 3.1.0
 Tested up to: 6.9.4
 Requires PHP: 7.4
-Stable tag: 3.1.8
+Stable tag: 3.1.9
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 Translate your site visually, directly from the front-end. Go multilingual in minutes using automatic AI translation. Works with any theme or plugin.
 
-== Description =
+== Description ==
 
 **Experience a better way to translate your WordPress site and go multilingual, directly from the front-end using a visual translation interface. The built-in AI translation lets you translate automatically, then refine anything visually.**
 
@@ -147,10 +147,12 @@ For more information please check out our [documentation](https://translatepress
 
 
 == Changelog ==
-= 3.1.8 =
- * Fix gettext translations saved as regular default strings when "Disable translation of gettext strings" is enabled
- * Prevent edge case fatal error from occurring in class-check-invalid-text.php
- * Send WooCommerce emails in admin language instead of order language when there are multiple recipients
+= 3.1.9 =
+* Added Woodmart Layouts compatibility for the Translation Editor
+* Added MEC compatibility for price selectors and contaminated post meta
+* Fixed bug where a second mail sent in the same request was not getting translated
+* Strip leftover trp-gettext markers when translate_page returns early on default language
+* Added link to Website Word Counter tool in Automatic Translation tab
 
 = Older versions =
 [Click Here](https://translatepress.com/docs/translatepress-free-changelog/?utm_source=wp.org&utm_medium=tp-description-page&utm_campaign=TPFree) to view the full changelog, or you can find it in the changelog.txt file in the plugin folder.

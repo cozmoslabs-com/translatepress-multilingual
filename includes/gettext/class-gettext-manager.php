@@ -461,9 +461,12 @@ class TRP_Gettext_Manager {
 	 */
 	static function strip_gettext_tags( $string ) {
 		if ( is_string( $string ) && strpos( $string, 'data-trpgettextoriginal=' ) !== false ) {
+			// \d* (not \d+) so the empty-id case (#!trpst#trp-gettext data-trpgettextoriginal=#!trpen#)
+			// emitted when $db_id is empty in process_gettext_strings is also stripped — otherwise the
+			// "data-trpgettextoriginal=" substring leaks into the cleaned output and gets persisted.
 			// final 'i' is for case insensitive. same for the 'i' in  str_ireplace
-			$string = preg_replace( '/ data-trpgettextoriginal=\d+#!trpen#/i', '', $string );
-			$string = preg_replace( '/data-trpgettextoriginal=\d+#!trpen#/i', '', $string );//sometimes it can be without space
+			$string = preg_replace( '/ data-trpgettextoriginal=\d*#!trpen#/i', '', $string );
+			$string = preg_replace( '/data-trpgettextoriginal=\d*#!trpen#/i', '', $string );//sometimes it can be without space
 			$string = str_ireplace( '#!trpst#trp-gettext', '', $string );
 			$string = str_ireplace( '#!trpst#/trp-gettext', '', $string );
 			$string = str_ireplace( '#!trpst#\/trp-gettext', '', $string );

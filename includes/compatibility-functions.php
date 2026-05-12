@@ -504,6 +504,53 @@ function trp_option_pre_save_strip_trpst( $value, $option, $old_value ) {
 }
 
 /**
+ * Compatibility with Modern Events Calendar (MEC).
+ *
+ * MEC reads price/total values out of DOM nodes and posts them back via AJAX,
+ * which causes TRP gettext markers wrapping the rendered labels to end up in
+ * post meta (e.g. mec_total_price = "85.00 #!trpst#trp-gettext...#!trpen#").
+ * That breaks external integrations expecting numeric values.
+ *
+ * Exclude the MEC price/total selectors from frontend translation so the
+ * markers don't reach AJAX submissions, and strip any markers that still slip
+ * through into the affected post meta keys.
+ */
+add_filter( 'trp_no_translate_selectors', 'trp_mec_no_translate_selectors' );
+function trp_mec_no_translate_selectors( $skip_selectors ) {
+    $skip_selectors[] = '.mec-total-cost';
+    $skip_selectors[] = '.mec-book-price-total';
+    $skip_selectors[] = '#mec_total_price';
+    return $skip_selectors;
+}
+
+add_action( 'added_post_meta', 'trp_mec_post_meta_strip_trpst', 10, 4 );
+add_action( 'updated_postmeta', 'trp_mec_post_meta_strip_trpst', 10, 4 );
+function trp_mec_post_meta_strip_trpst( $meta_id, $object_id, $meta_key, $meta_value ) {
+    $mec_meta_keys = array( 'mec_total_price', 'mec_paid_amount', 'mec_gateway_label' );
+
+    if ( ! in_array( $meta_key, $mec_meta_keys, true ) ) {
+        return;
+    }
+
+    if ( ! is_string( $meta_value ) || strpos( $meta_value, 'data-trpgettextoriginal=' ) === false ) {
+        return;
+    }
+
+    if ( ! class_exists( 'TRP_Translation_Manager' ) ) {
+        return;
+    }
+
+    $clean_value = TRP_Translation_Manager::strip_gettext_tags( $meta_value );
+
+    // Remove our own hooks to prevent recursion, then re-add
+    remove_action( 'added_post_meta', 'trp_mec_post_meta_strip_trpst', 10 );
+    remove_action( 'updated_postmeta', 'trp_mec_post_meta_strip_trpst', 10 );
+    update_metadata_by_mid( 'post', $meta_id, $clean_value );
+    add_action( 'added_post_meta', 'trp_mec_post_meta_strip_trpst', 10, 4 );
+    add_action( 'updated_postmeta', 'trp_mec_post_meta_strip_trpst', 10, 4 );
+}
+
+/**
  * Compatibility with WooCommerce country list on checkout.
  *
  * Skip detection by translate-dom-changes of the list of countries
@@ -2940,6 +2987,49 @@ function trp_breakdance_compat__remove_filter() {
         remove_filter( 'template_include', 'Breakdance\\ActionsFilters\\template_include', 1000000 );
 }
 add_action( 'plugins_loaded', 'trp_breakdance_compat__remove_filter', 20 );
+
+/**
+ * Remove Woodmart Layouts' template overrides when TranslatePress editors are active.
+ *
+ * Woodmart's Layouts module (woodmart_layout CPT) hooks `template_include` at
+ * priority 20 via subclasses of XTS\Modules\Layouts\Layout_Type. Their override
+ * echoes the entire page output and returns false from the filter. When TP's
+ * own `template_include` filter (priority 99999) then returns the editor
+ * partial, WordPress includes that partial too — producing two complete HTML
+ * documents in the response and breaking the Translation Editor on any page
+ * type with an assigned Woodmart Layout (single product, shop archive, etc.).
+ *
+ * Hooked on `init` priority 999, after Woodmart's `include_files` (priority 10)
+ * has loaded the layout classes and registered their filters.
+ *
+ * @return void
+ */
+function trp_woodmart_compat__remove_layout_filters() {
+    $is_editor  = isset( $_GET['trp-edit-translation'] ) && 'true' === sanitize_text_field( wp_unslash( $_GET['trp-edit-translation'] ) );
+    $is_strings = isset( $_GET['trp-string-translation'] ) && 'true' === sanitize_text_field( wp_unslash( $_GET['trp-string-translation'] ) );
+
+    if ( ! ( $is_editor || $is_strings ) )
+        return;
+
+    $layout_classes = array(
+        'XTS\\Modules\\Layouts\\Single_Product',
+        'XTS\\Modules\\Layouts\\Shop_Archive',
+        'XTS\\Modules\\Layouts\\Single_Post',
+        'XTS\\Modules\\Layouts\\Posts_Archive',
+        'XTS\\Modules\\Layouts\\Checkout',
+        'XTS\\Modules\\Layouts\\Cart',
+        'XTS\\Modules\\Layouts\\My_Account',
+        'XTS\\Modules\\Layouts\\Thank_You_Page',
+    );
+
+    foreach ( $layout_classes as $class ) {
+        if ( class_exists( $class ) ) {
+            $instance = $class::get_instance();
+            remove_filter( 'template_include', array( $instance, 'override_template' ), 20 );
+        }
+    }
+}
+add_action( 'init', 'trp_woodmart_compat__remove_layout_filters', 999 );
 
 /*
  * Add support for Simple Download Manager on certain hosts (not replicated locally)

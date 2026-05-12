@@ -873,18 +873,18 @@ function trp_switch_language($language){
  * For non-managerial users, prefer trp_language, with fallback to locale, then WPLANG.
  *
  * @param string $email
- * @return void
+ * @return bool True when a preferred-language switch was applied.
  */
 function trp_switch_to_preffered_language( $email ) {
     $email = trim( (string) $email );
 
     if ( $email === '' )
-        return;
+        return false;
 
     $user = get_user_by( 'email', $email );
 
     if ( ! ( $user instanceof WP_User ) )
-        return;
+        return false;
 
     $user_roles = is_array( $user->roles ) ? $user->roles : array();
 
@@ -928,9 +928,11 @@ function trp_switch_to_preffered_language( $email ) {
     }
 
     if ( empty( $language ) )
-        return;
+        return false;
 
     trp_switch_language( $language );
+
+    return true;
 }
 
 /**
@@ -977,10 +979,10 @@ function trp_validate_language( $language ){
  */
 function trp_restore_language(){
     global $TRP_LANGUAGE, $TRP_LANGUAGE_ORIGINAL;
-    remove_filter( 'trp_before_translate_content', 'trp_reset_language' );
+    remove_filter( 'trp_before_translate_content', 'trp_reset_language', 99999999 );
 
     restore_previous_locale();
-    remove_filter( 'plugin_locale', 'trp_get_locale' );
+    remove_filter( 'plugin_locale', 'trp_get_locale', 99999999 );
     $TRP_LANGUAGE = $TRP_LANGUAGE_ORIGINAL;
 }
 

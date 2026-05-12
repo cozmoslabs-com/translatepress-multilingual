@@ -21,7 +21,22 @@
 
         <div id="trp-settings__wrap">
             <div class="trp-settings-container">
-                <h3 class="trp-settings-primary-heading"><?php esc_html_e( 'Automatic Translation', 'translatepress-multilingual' ); ?></h3>
+                <?php
+                $trp           = TRP_Translate_Press::get_trp_instance();
+                $url_converter = $trp->get_component( "url_converter" );
+                $abs_home = $url_converter->get_abs_home();
+                // strip http(s):// and slashes
+                $abs_home = preg_replace( '#^https?://#i', '', $abs_home );
+                $abs_home = trim( $abs_home, '/' );
+                $abs_home = rawurlencode( $abs_home );
+
+                $word_counter_link = 'https://translatepress.com/website-word-count/?site=' . $abs_home . '&utm_source=tp-automatic-translation&utm_medium=client-site&utm_campaign=word-counter';
+                ?>
+                <div class="trp-settings-header-row">
+                    <h3 class="trp-settings-primary-heading"><?php esc_html_e( 'Automatic Translation', 'translatepress-multilingual' ); ?></h3>
+                    <div id="trp-next-to-header-link"><a href="<?php echo esc_url( $word_counter_link ); ?>" title="<?php esc_attr_e('Get a translation volume estimate with a detailed breakdown per page','translatepress-multilingual'); ?>" target="_blank" rel="noopener noreferrer"><?php esc_html_e('Find how many translatable words are on your website','translatepress-multilingual');?></a></div>
+                </div>
+
                 <div class="trp-settings-separator"></div>
 
                 <div class="trp-settings-options__wrapper">

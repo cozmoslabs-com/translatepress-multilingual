@@ -759,6 +759,6 @@ function trp_bf_promotion_is_active(){
     if( $current_date > strtotime( $black_friday['start_date'] ) && $current_date < strtotime( $black_friday['end_date'] ) )
         return true;
 
-    return false;
+    return apply_filters( 'trp_bf_promotion_is_active', false );
 
 }

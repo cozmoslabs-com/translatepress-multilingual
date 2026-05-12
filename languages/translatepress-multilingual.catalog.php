@@ -423,6 +423,8 @@
 <?php __("TranslatePress.com Account", "translatepress-multilingual"); ?>
 <?php __("Download & Install the Pro plugin", "translatepress-multilingual"); ?>
 <?php __("Learn More", "translatepress-multilingual"); ?>
+<?php __("Get a translation volume estimate with a detailed breakdown per page", "translatepress-multilingual"); ?>
+<?php __("Find how many translatable words are on your website", "translatepress-multilingual"); ?>
 <?php __("Enable Automatic Translation", "translatepress-multilingual"); ?>
 <?php __("To use <strong>DeepL</strong> for automatic translation, activate this Pro add-on from the <a href=\"%1$s\" target=\"_self\" title=\"%2$s\">%2$s</a>.", "translatepress-multilingual"); ?>
 <?php __("<strong>DeepL</strong> automatic translation is available as a <a href=\"%1$s\" target=\"_blank\" title=\"%2$s\">%2$s</a>.", "translatepress-multilingual"); ?>

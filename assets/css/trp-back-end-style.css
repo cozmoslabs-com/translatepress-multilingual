@@ -471,6 +471,15 @@ div.trp-switch .trp-switch-input {
     margin-right: 4px;
 }
 
+.trp-settings-header-row{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    column-gap: 24px;
+    row-gap: 4px;
+}
+
 #trp-upgrade-now-button{
     color: var(--trp-settings-upgrade-text-color);
     background-color: var(--trp-settings-upgrade-bg-color);
