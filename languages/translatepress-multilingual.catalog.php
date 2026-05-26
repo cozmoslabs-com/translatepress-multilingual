@@ -592,6 +592,8 @@
 <?php __("Flag URL", "translatepress-multilingual"); ?>
 <?php __("Text RTL", "translatepress-multilingual"); ?>
 <?php __("Custom language", "translatepress-multilingual"); ?>
+<?php __("Disable bundled plugin translations", "translatepress-multilingual"); ?>
+<?php __("By default, TranslatePress ships its own translation files in <code>wp-content/plugins/translatepress/languages/</code> and forces WordPress to use them instead of the language packs installed automatically from translate.wordpress.org.<br/>Enable this option to disable that override. WordPress will then load the community language pack from <code>wp-content/languages/plugins/</code> (if present) and fall back to the bundled files only when no pack is available.", "translatepress-multilingual"); ?>
 <?php __("Disable dynamic translation", "translatepress-multilingual"); ?>
 <?php __("It disables detection of strings displayed dynamically using JavaScript. <br/>Strings loaded via a server side AJAX call will still be translated.", "translatepress-multilingual"); ?>
 <?php __("Disable translation for gettext strings", "translatepress-multilingual"); ?>
@@ -816,13 +818,14 @@
 <?php __("Removes selected filters", "translatepress-multilingual"); ?>
 <?php __("See options for selecting all strings", "translatepress-multilingual"); ?>
 <?php __("Click to sort strings by this column", "translatepress-multilingual"); ?>
+<?php __("The ID of the WordPress post where this string was detected. Empty if the string is not associated with a specific post.", "translatepress-multilingual"); ?>
 <?php __("Language in which the translation status filter applies. Leave unselected for the translation status to apply to ANY language", "translatepress-multilingual"); ?>
 <?php __("Search", "translatepress-multilingual"); ?>
 <?php __("Slugs that are not found in either one of the other categories.", "translatepress-multilingual"); ?>
 <?php __("Plugins and Theme String Translation", "translatepress-multilingual"); ?>
 <?php __("Gettext", "translatepress-multilingual"); ?>
 <?php __("Search Gettext Strings", "translatepress-multilingual"); ?>
-<?php __("ID", "translatepress-multilingual"); ?>
+<?php __("Post ID", "translatepress-multilingual"); ?>
 <?php __("Original String", "translatepress-multilingual"); ?>
 <?php __("Translation", "translatepress-multilingual"); ?>
 <?php __("Filter by domain", "translatepress-multilingual"); ?>
@@ -890,7 +893,6 @@
 <?php __("Filter by Taxonomy", "translatepress-multilingual"); ?>
 <?php __("Post Slugs", "translatepress-multilingual"); ?>
 <?php __("Search Post Slugs", "translatepress-multilingual"); ?>
-<?php __("Post ID", "translatepress-multilingual"); ?>
 <?php __("Post Type", "translatepress-multilingual"); ?>
 <?php __("Filter by Post Type", "translatepress-multilingual"); ?>
 <?php __("Published", "translatepress-multilingual"); ?>

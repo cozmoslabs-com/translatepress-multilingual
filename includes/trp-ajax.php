@@ -105,10 +105,17 @@ class TRP_Ajax{
         }
 
 
-        $this->connection = mysqli_connect( $credentials['db_host'], $credentials['db_user'], $credentials['db_password'], $credentials['db_name'] );
+        // Parse DB_HOST to support host:port and UNIX socket configurations (e.g. localhost:/var/run/mysqld/mysqld.sock or :/path/to/socket).
+        $db_host_parsed = $this->parse_db_host( $credentials['db_host'] );
+        if ( false === $db_host_parsed ) {
+            return false;
+        }
+        list( $db_host, $db_port, $db_socket ) = $db_host_parsed;
+
+        $this->connection = @mysqli_connect( $db_host, $credentials['db_user'], $credentials['db_password'], $credentials['db_name'], $db_port, $db_socket );
 
         // Check connection
-        if ( mysqli_connect_errno() ) {
+        if ( mysqli_connect_errno() || ! $this->connection ) {
             //Failed to connect to MySQL.
             return false;
         }
@@ -124,6 +131,46 @@ class TRP_Ajax{
         }
 
         return true;
+    }
+
+    /**
+     * Parse the DB_HOST string into host, port and socket components.
+     *
+     * Mirrors the parsing logic from WordPress core wpdb so that configurations
+     * relying solely on UNIX socket connections (e.g. ":/var/run/mysqld/mysqld.sock"
+     * or "localhost:/var/run/mysqld/mysqld.sock") are connected to correctly.
+     *
+     * @param string $db_host Raw DB_HOST value from wp-config.php.
+     * @return array|false    [ host, port|null, socket|null ] or false on parse failure.
+     */
+    protected function parse_db_host( $db_host ) {
+        $host   = $db_host;
+        $port   = null;
+        $socket = null;
+
+        // First peel off the socket parameter from the right, if it exists.
+        $socket_pos = strpos( $host, ':/' );
+        if ( false !== $socket_pos ) {
+            $socket = substr( $host, $socket_pos + 1 );
+            $host   = substr( $host, 0, $socket_pos );
+        }
+
+        // IPv6 host: contains more than one colon and may be wrapped in [].
+        if ( substr_count( $host, ':' ) > 1 ) {
+            $pattern = '#^(?:\[)?(?P<host>[0-9a-fA-F:]+)(?:\]:(?P<port>[\d]+))?#';
+        } else {
+            $pattern = '#^(?P<host>[^:/]*)(?::(?P<port>[\d]+))?#';
+        }
+
+        $matches = array();
+        if ( 1 !== preg_match( $pattern, $host, $matches ) ) {
+            return false;
+        }
+
+        $host = isset( $matches['host'] ) ? $matches['host'] : '';
+        $port = ! empty( $matches['port'] ) ? (int) $matches['port'] : null;
+
+        return array( $host, $port, $socket );
     }
 
     /**

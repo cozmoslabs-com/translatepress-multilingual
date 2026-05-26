@@ -131,12 +131,12 @@ class TRP_Gettext_Insert_Update extends TRP_Query {
 		$originals_table                            = $this->get_table_name_for_gettext_original_strings();
 
 		$possible_new_strings = array();
-		foreach ( $new_strings as $string ) {
-			$possible_new_strings[] = $this->db->prepare( "%s", $string['original'] );
-		}
+			foreach ( $new_strings as $string ) {
+				$possible_new_strings[] = 'CAST(' . $this->db->prepare( "%s", $string['original'] ) . ' AS BINARY)';
+			}
 
-		// query for originals disregarding domain. Later, only the ones matching the domain too get selected.
-		$existing_strings = $this->db->get_results( "SELECT id, original, domain, context FROM `$originals_table` WHERE BINARY $originals_table.original IN (" . implode( ',', $possible_new_strings ) . ")", ARRAY_A );
+			// query for originals disregarding domain. Later, only the ones matching the domain too get selected.
+			$existing_strings = $this->db->get_results( "SELECT id, original, domain, context FROM `$originals_table` WHERE $originals_table.original IN (" . implode( ',', $possible_new_strings ) . ")", ARRAY_A );
 
 		// filtering queried strings to match exact domain and context. If not found in db, prepare for inserting. At the same time, prepare ids for return
 		if ( ! empty( $existing_strings ) ) {
@@ -173,7 +173,7 @@ class TRP_Gettext_Insert_Update extends TRP_Query {
 			$this->db->query( "INSERT INTO `$originals_table` (original, domain, context, original_plural) VALUES " . implode( ',', $insert_strings ) );
 
 			//get the ids for inserted the new strings (new in dictionary)
-			$new_strings_inserted = $this->db->get_results( "SELECT id, original, domain, context FROM `$originals_table` WHERE BINARY $originals_table.original IN (" . implode( ',', $possible_new_strings ) . ")", OBJECT_K );
+				$new_strings_inserted = $this->db->get_results( "SELECT id, original, domain, context FROM `$originals_table` WHERE $originals_table.original IN (" . implode( ',', $possible_new_strings ) . ")", OBJECT_K );
 
 			// filtering queried strings to match exact domain and context
 			foreach ( $new_strings as $key => $new_string ) {

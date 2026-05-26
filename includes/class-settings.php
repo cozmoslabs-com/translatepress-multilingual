@@ -659,6 +659,10 @@ class TRP_Settings{
      *
      */
     public function add_navigation_tabs(){
+        add_filter( 'trp_add_language_to_home_url_check_for_admin', '__return_false' );
+        $translate_site_url = add_query_arg( 'trp-edit-translation', 'true', home_url() );
+        remove_filter( 'trp_add_language_to_home_url_check_for_admin', '__return_false' );
+
         $tabs = array(
             array(
                 'name'  => __( 'General', 'translatepress-multilingual' ),
@@ -667,7 +671,7 @@ class TRP_Settings{
             ),
             array(
                 'name'  => __( 'Translate Site', 'translatepress-multilingual' ),
-                'url'   => add_query_arg( 'trp-edit-translation', 'true', home_url() ),
+                'url'   => $translate_site_url,
                 'page'  => 'trp_translation_editor'
             ),
 	        array(

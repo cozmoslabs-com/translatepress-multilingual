@@ -42,6 +42,11 @@ namespace TranslatePress;
  * In function load(), added edge case where it considered this group of symbols <!---> as an opening comment but not a closed one.
  * Browsers seem to be forgiving about this. For more details: issue #85zrvd20k
  *
+ * $token_attr was changed from ' >' to " \t\n\r\f>" so unquoted attribute values are terminated by any ASCII whitespace
+ * (per the HTML5 / Infra spec), not just U+0020 SPACE. Without this, markup like Elementor's atomic form widget — which
+ * uses tab-indented, newline-separated unquoted attributes — gets merged into one corrupted attribute when
+ * re-serialized for secondary languages. Issue #CU-869de6159.
+ *
  */
 
 define('TRP_HDOM_TYPE_ELEMENT', 1);
@@ -1432,7 +1437,17 @@ class simple_html_dom
 	protected $token_blank = " \t\r\n";
 	protected $token_equal = ' =/>';
 	protected $token_slash = " />\r\n\t";
-	protected $token_attr = ' >';
+	/*
+	 * TranslatePress modifications
+	 * Added \t, \n, \r, \f to the unquoted-attribute-value terminator set so it
+	 * matches the HTML5 spec's "ASCII whitespace" (Infra: U+0009 TAB, U+000A LF,
+	 * U+000C FF, U+000D CR, U+0020 SPACE). Upstream value was ' >', which only
+	 * terminated unquoted values at literal space or '>'. That caused tab- or
+	 * newline-separated unquoted attributes (e.g. Elementor's atomic form
+	 * widget) to be merged into one corrupted attribute when re-serialized for
+	 * secondary languages. Issue #CU-869de6159.
+	 */
+	protected $token_attr = " \t\n\r\f>";
 
 	public $_charset = '';
 	public $_target_charset = '';

@@ -1,0 +1,4214 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: TranslatePress Multilingual\n"
+"Language: fa_IR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: TranslatePress build (community + OpenRouter), 2026-05-25\n"
+"Last-Translator: WordPress.org community contributors + TranslatePress AI\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Project-Id-Version: TranslatePress Multilingual\n"
+"Language: fa_IR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: TranslatePress build (community + OpenRouter), 2026-05-25\n"
+"Last-Translator: WordPress.org community contributors + TranslatePress AI\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#, tp-glo-ee8b4f9f
+msgid ""
+"Please update the TranslatePress - Multilingual plugin to version %1$s or "
+"higher to ensure %2$s functions correctly."
+msgstr ""
+"لطفاً افزونه TranslatePress - Multilingual را به نسخه %1$s یا بالاتر "
+"به‌روزرسانی کنید تا %2$s به درستی کار کند."
+
+#, tp-glo-ee8b4f9f
+msgid "Please install and activate the TranslatePress - Multilingual plugin"
+msgstr "لطفاً افزونه TranslatePress - Multilingual را نصب و فعال کنید"
+
+msgid "Install & Activate"
+msgstr "نصب و فعال‌سازی"
+
+#, tp-glo-ee8b4f9f
+msgid ""
+"Please update TranslatePress - Multilingual to version %2$s or newer. Your "
+"currently installed version of TranslatePress - Multilingual is no longer "
+"compatible with the current version of %1$s."
+msgstr ""
+"لطفاً TranslatePress - Multilingual را به نسخه %2$s یا جدیدتر به‌روزرسانی "
+"کنید. نسخه فعلی نصب‌شده TranslatePress - Multilingual دیگر با نسخه فعلی "
+"%1$s سازگار نیست."
+
+#, tp-glo-ee8b4f9f
+msgid "All TranslatePress functionalities are disabled until then."
+msgstr "تا آن زمان، تمام قابلیت‌های TranslatePress غیرفعال هستند."
+
+msgid "Update Now"
+msgstr "اکنون به‌روزرسانی کنید"
+
+#, tp-glo-ee8b4f9f
+msgid ""
+"This TranslatePress add-on has been migrated to the main plugin and is no "
+"longer used. You can delete it."
+msgstr ""
+"این افزودنی TranslatePress به افزونه اصلی منتقل شده و دیگر استفاده نمی‌شود. "
+"می‌توانید آن را حذف کنید."
+
+#, tp-glo-5e752340, tp-glo-8896ebe8, tp-glo-ee8b4f9f
+msgid ""
+"<strong>TranslatePress</strong> requires at least PHP version 5.6.20+ to "
+"run. It is the <a href=\"%s\">minimum requirement of the latest WordPress "
+"version</a>. Please contact your server administrator to update your PHP "
+"version."
+msgstr ""
+"<strong>TranslatePress</strong> برای اجرا به حداقل نسخه PHP 5.6.20+ نیاز "
+"دارد. این <a href=\"%s\">حداقل نیازمندی آخرین نسخه WordPress</a> است. لطفاً "
+"با مدیر سرور خود تماس بگیرید تا نسخه PHP خود را به‌روزرسانی کنید."
+
+#, tp-ai, tp-ctx-a6928204
+msgid "Advanced"
+msgstr "پیشرفته"
+
+msgid "Settings saved."
+msgstr "تنظیمات ذخیره شد."
+
+msgid "Are you sure you want to remove this item?"
+msgstr "آیا مطمئن هستید که می‌خواهید این مورد را حذف کنید؟"
+
+msgid "Remove"
+msgstr "حذف"
+
+msgid "Add"
+msgstr "افزودن"
+
+msgid "Select..."
+msgstr "انتخاب..."
+
+#, tp-glo-ee8b4f9f, tp-glo-f7c8926f
+msgid "[%s] Low TranslatePress AI Words"
+msgstr "[%s] کلمات TranslatePress AI رو به اتمام"
+
+msgid "upgrade your plan or get extra AI Words"
+msgstr "طرح خود را ارتقا دهید یا کلمات AI اضافی دریافت کنید"
+
+msgid "upgrade your plan"
+msgstr "طرح خود را ارتقا دهید"
+
+#, tp-glo-ee8b4f9f, tp-glo-f7c8926f
+msgid "TranslatePress AI words are running low on your site."
+msgstr "کلمات TranslatePress AI در سایت شما رو به اتمام هستند."
+
+msgid "Current status: %s words remaining"
+msgstr "وضعیت فعلی: %s کلمه باقی‌مانده"
+
+#, tp-glo-ee8b4f9f, tp-glo-f7c8926f
+msgid ""
+"Once the remaining AI words run out, automatic translation through "
+"TranslatePress AI will be paused."
+msgstr ""
+"پس از اتمام کلمات AI باقی‌مانده، ترجمه خودکار از طریق TranslatePress AI "
+"متوقف خواهد شد."
+
+msgid "To continue translating your content, please %1$s over at %2$s"
+msgstr "برای ادامه ترجمه محتوای خود، لطفاً %1$s را در %2$s انجام دهید."
+
+msgid "Manage Notification: %s"
+msgstr "مدیریت اعلان: %s"
+
+msgid ""
+"There is a new version of %1$s available. %2$sView version %3$s details%4$s "
+"or %5$supdate now%6$s."
+msgstr ""
+"نسخه جدیدی از %1$s موجود است. %2$sمشاهده جزئیات نسخه %3$s%4$s یا "
+"%5$sهم‌اکنون به‌روزرسانی کنید%6$s."
+
+msgid "There is a new version of %1$s available. %2$sView version %3$s details%4$s."
+msgstr "نسخه جدیدی از %1$s موجود است. %2$sمشاهده جزئیات نسخه %3$s%4$s."
+
+msgid ""
+"To enable updates, please %1$senter your license key%2$s. Need a license "
+"key? %3$sPurchase one now%4$s."
+msgstr ""
+"برای فعال‌سازی به‌روزرسانی‌ها، لطفاً %1$sکلید مجوز خود را وارد کنید%2$s. "
+"نیاز به کلید مجوز دارید؟ %3$sهم‌اکنون یکی خریداری کنید%4$s."
+
+msgid ""
+"To enable updates, please go to the %1$slicense page%2$s and check that you "
+"have a valid license."
+msgstr ""
+"برای فعال‌سازی به‌روزرسانی‌ها، لطفاً به %1$sصفحه مجوز%2$s بروید و بررسی "
+"کنید که مجوز معتبری دارید."
+
+msgid ""
+"To enable updates, your licence needs to be renewed. Please go to the "
+"%1$sTranslatePress Account%2$s page and login to renew."
+msgstr ""
+"برای فعال‌سازی به‌روزرسانی‌ها، مجوز شما نیاز به تمدید دارد. لطفاً به صفحه "
+"%1$sTranslatePress Account%2$s بروید و برای تمدید وارد شوید."
+
+msgid "You do not have permission to install plugin updates"
+msgstr "شما اجازه نصب به‌روزرسانی‌های افزونه را ندارید."
+
+msgid "Error"
+msgstr "خطا"
+
+#, tp-glo-ee8b4f9f
+msgid "Your TranslatePress license key is invalid or missing."
+msgstr "کلید مجوز TranslatePress شما نامعتبر است یا وجود ندارد."
+
+msgid "Your license key expired on %s."
+msgstr "کلید مجوز شما در تاریخ %s منقضی شده است."
+
+msgid "Your license key has been disabled."
+msgstr "کلید مجوز شما غیرفعال شده است."
+
+#, tp-glo-9fa92a70, tp-glo-ee8b4f9f
+msgid ""
+"Your license key is disabled for this URL. Re-enable it from <a "
+"target=\"_blank\" "
+"href=\"https://translatepress.com/account/?utm_source=wp-dashboard&utm_"
+"medium=client-site&utm_campaign=license-deactivated\">https://"
+"translatepress.com/account</a> -> Manage Sites."
+msgstr ""
+"کلید مجوز شما برای این URL غیرفعال شده است. آن را از <a target=\"_blank\" "
+"href=\"https://translatepress.com/account/?utm_source=wp-dashboard&utm_"
+"medium=client-site&utm_campaign=license-deactivated\">https://"
+"translatepress.com/account</a> -> مدیریت سایت‌ها دوباره فعال کنید."
+
+#, tp-glo-666af81f, tp-glo-ee8b4f9f
+msgid ""
+"<p><strong>License key mismatch.</strong> The license you entered doesn’t "
+"match the TranslatePress version you have installed.</p><p>Please check "
+"that you’ve installed the correct version for your license from your "
+"TranslatePress account.</p>"
+msgstr ""
+"<p><strong>عدم تطابق کلید مجوز.</strong> مجوز وارد شده با نسخه "
+"TranslatePress نصب‌شده شما مطابقت ندارد.</p><p>لطفاً بررسی کنید که نسخه "
+"صحیح متناسب با مجوز خود را از حساب TranslatePress خود نصب کرده‌اید.</p>"
+
+#, tp-glo-666af81f, tp-glo-ee8b4f9f
+msgid ""
+"If you have only the free plugin installed but added a paid license, please "
+"install the paid plugin from your TranslatePress account."
+msgstr ""
+"اگر تنها افزونه رایگان را نصب کرده‌اید اما یک مجوز پولی اضافه کرده‌اید، "
+"لطفاً افزونه پولی را از حساب TranslatePress خود نصب کنید."
+
+msgid "Your license key has reached its activation limit."
+msgstr "کلید مجوز شما به محدودیت فعال‌سازی رسیده است."
+
+msgid "Upgrade your plan to add more sites. %1$sUpgrade now%2$s"
+msgstr ""
+"برای افزودن سایت‌های بیشتر، طرح خود را ارتقا دهید. %1$sهم‌اکنون ارتقا "
+"دهید%2$s"
+
+msgid ""
+"This website is already activated under a free license. Each website can "
+"only use one free license."
+msgstr ""
+"این وب‌سایت قبلاً با یک مجوز رایگان فعال شده است. هر وب‌سایت تنها می‌تواند "
+"از یک مجوز رایگان استفاده کند."
+
+msgid "An error occurred, please try again."
+msgstr "خطایی رخ داد، لطفاً دوباره تلاش کنید."
+
+msgid "You have successfully activated your license"
+msgstr "مجوز شما با موفقیت فعال شد."
+
+msgid "Others"
+msgstr "سایر"
+
+msgid "Restrict by Language"
+msgstr "محدود کردن بر اساس زبان"
+
+msgid "Exclude from Language"
+msgstr "مستثنی کردن از زبان"
+
+msgid "Restrict element to language"
+msgstr "محدود کردن عنصر به زبان"
+
+msgid "Show this element only in one language."
+msgstr "نمایش این عنصر تنها در یک زبان."
+
+msgid "Enable translation"
+msgstr "فعال کردن ترجمه"
+
+msgid ""
+"Allow translation to the corresponding language only if the content is "
+"written in the default language."
+msgstr ""
+"اجازه ترجمه به زبان متناظر تنها در صورتی که محتوا به زبان پیش‌فرض نوشته شده "
+"باشد."
+
+msgid "Select language"
+msgstr "انتخاب زبان"
+
+msgid "Choose in which language to show this element."
+msgstr "زبان نمایش این عنصر را انتخاب کنید."
+
+msgid "Exclude element from language"
+msgstr "مستثنی کردن عنصر از زبان"
+
+msgid "Exclude this element from specific languages."
+msgstr "مستثنی کردن این عنصر از زبان‌های خاص."
+
+msgid "Select languages"
+msgstr "انتخاب زبان‌ها"
+
+msgid "Choose from which languages to exclude this element."
+msgstr "زبان‌هایی را که این عنصر از آن‌ها مستثنی می‌شود، انتخاب کنید."
+
+msgid ""
+"This element will still be visible when you are translating your website "
+"through the Translation Editor."
+msgstr ""
+"این عنصر همچنان در هنگام ترجمه وب‌سایت از طریق ویرایشگر ترجمه قابل مشاهده "
+"است."
+
+msgid "The content of this element should be written in the default language."
+msgstr "محتوای این عنصر باید به زبان پیش‌فرض نوشته شده باشد."
+
+#, tp-glo-ee8b4f9f
+msgid ""
+"<strong>TranslatePress</strong> encountered SQL errors. <a href=\"%s\" "
+"title=\"View TranslatePress SQL Errors\">Check out the errors</a>."
+msgstr ""
+"<strong>TranslatePress</strong> با خطاهای SQL مواجه شد. <a href=\"%s\" "
+"title=\"View TranslatePress SQL Errors\">مشاهده خطاها</a>."
+
+msgid "Automatic translation has been disabled."
+msgstr "ترجمه خودکار غیرفعال شده است."
+
+msgid "Dismiss this notice."
+msgstr "بستن این اطلاعیه."
+
+msgid "Logged errors"
+msgstr "خطاهای ثبت‌شده"
+
+#, tp-glo-ee8b4f9f
+msgid "These are the most recent 5 errors logged by TranslatePress:"
+msgstr "این‌ها ۵ خطای اخیر ثبت‌شده توسط TranslatePress هستند:"
+
+msgid "Yes"
+msgstr "بله"
+
+msgid "Why are these errors occuring"
+msgstr "چرا این خطاها رخ می‌دهند"
+
+#, tp-glo-c6709f3f, tp-glo-ee8b4f9f
+msgid ""
+"If TranslatePress detects something wrong when executing queries on your "
+"database, it may disable the Automatic Translation feature in order to "
+"avoid any extra charging by Google/DeepL. Automatic Translation needs to be "
+"manually turned on, after you solve the issues."
+msgstr ""
+"اگر TranslatePress هنگام اجرای پرس‌وجوها در پایگاه داده شما مشکلی را تشخیص "
+"دهد، ممکن است ویژگی ترجمه خودکار را برای جلوگیری از هرگونه هزینه اضافی توسط "
+"Google/DeepL غیرفعال کند. پس از رفع مشکلات، باید ترجمه خودکار را به صورت "
+"دستی فعال کنید."
+
+msgid ""
+"The SQL errors detected can occur for various reasons including missing "
+"tables, missing permissions for the SQL user to create tables or perform "
+"other operations, problems after site migration or changes to SQL server "
+"configuration."
+msgstr ""
+"خطاهای SQL شناسایی‌شده می‌توانند به دلایل مختلفی رخ دهند، از جمله عدم وجود "
+"جداول، مجوزهای ناکافی کاربر SQL برای ایجاد جداول یا انجام سایر عملیات، "
+"مشکلات پس از مهاجرت سایت یا تغییرات در پیکربندی سرور SQL."
+
+msgid "What you can do in this situation"
+msgstr "آنچه می‌توانید در این وضعیت انجام دهید"
+
+msgid "Plan A."
+msgstr "طرح A."
+
+#, tp-glo-ee8b4f9f
+msgid ""
+"Go to Settings -> TranslatePress -> General tab and Save Settings. This "
+"will regenerate the tables using your current SQL settings. Check if no "
+"more errors occur while browsing your website in a translated language. "
+"Look at the timestamps of the errors to make sure you are not seeing the "
+"old errors. Only the most recent 5 errors are displayed."
+msgstr ""
+"به تنظیمات -> TranslatePress -> برگه عمومی بروید و تنظیمات را ذخیره کنید. "
+"این کار جداول را با استفاده از تنظیمات SQL فعلی شما بازتولید می‌کند. بررسی "
+"کنید که هنگام مرور وب‌سایت خود به زبان ترجمه‌شده، خطای دیگری رخ ندهد. به "
+"مهرهای زمانی خطاها نگاه کنید تا مطمئن شوید خطاهای قدیمی را نمی‌بینید. تنها "
+"۵ خطای اخیر نمایش داده می‌شوند."
+
+msgid "Plan B."
+msgstr "طرح B."
+
+msgid "If your problem isn't solved, try the following steps:"
+msgstr "اگر مشکل شما حل نشد، مراحل زیر را امتحان کنید:"
+
+msgid "Create a backup of your database"
+msgstr "از پایگاه داده خود نسخه پشتیبان تهیه کنید"
+
+msgid ""
+"Create a copy of each translation table where you encounter errors. You can "
+"copy the table within the same database (trp_dictionary_en_us_es_es_COPY "
+"for example) -- perform this step only if you want to keep the current "
+"translations"
+msgstr ""
+"از هر جدول ترجمه‌ای که در آن با خطا مواجه می‌شوید، یک کپی تهیه کنید. "
+"می‌توانید جدول را در همان پایگاه داده کپی کنید (برای مثال "
+"trp_dictionary_en_us_es_es_COPY) -- این مرحله را تنها در صورتی انجام دهید "
+"که می‌خواهید ترجمه‌های فعلی را حفظ کنید"
+
+msgid "Remove the trouble tables by executing the DROP function on them"
+msgstr "جدول‌های مشکل‌دار را با اجرای عملیات DROP روی آن‌ها حذف کنید"
+
+#, tp-glo-ee8b4f9f
+msgid ""
+"Go to Settings -> TranslatePress -> General tab and Save Settings. This "
+"will regenerate the tables using your current SQL server."
+msgstr ""
+"به تنظیمات -> TranslatePress -> برگه عمومی بروید و تنظیمات را ذخیره کنید. "
+"این کار جداول را با استفاده از سرور SQL فعلی شما بازتولید می‌کند."
+
+msgid ""
+"Copy the relevant content from the duplicated tables "
+"(trp_dictionary_en_us_es_es_COPY for example) in the newly generated table "
+"(trp_dictionary_en_us_es_es) -- perform this step only if you want to keep "
+"the current translations"
+msgstr ""
+"محتوای مرتبط را از جداول کپی‌شده (برای مثال "
+"trp_dictionary_en_us_es_es_COPY) در جدول تازه تولیدشده "
+"(trp_dictionary_en_us_es_es) کپی کنید -- این مرحله را تنها در صورتی انجام "
+"دهید که می‌خواهید ترجمه‌های فعلی را حفظ کنید"
+
+msgid ""
+"Test it to see if everything is working. If something went wrong, you can "
+"restore the backup that you've made at the first step. Check if no more "
+"errors occur while browsing your website in a translated language. Look at "
+"the timestamps of the errors to make sure you are not seeing the old "
+"errors. Only the most recent 5 errors are displayed."
+msgstr ""
+"آن را آزمایش کنید تا ببینید همه چیز کار می‌کند. اگر مشکلی پیش آمد، "
+"می‌توانید نسخه پشتیبان را که در اولین مرحله تهیه کرده‌اید، بازیابی کنید. "
+"بررسی کنید که هنگام مرور وب‌سایت خود به زبان ترجمه‌شده، خطای دیگری رخ ندهد. "
+"به مهرهای زمانی خطاها نگاه کنید تا مطمئن شوید خطاهای قدیمی را نمی‌بینید. "
+"تنها ۵ خطای اخیر نمایش داده می‌شوند."
+
+msgid "Plan C."
+msgstr "طرح C."
+
+msgid ""
+"If your problem still isn't solved, try asking your hosting about your "
+"errors. The most common issue is missing permissions for the SQL user, such "
+"as the Create Tables permission."
+msgstr ""
+"اگر مشکل شما هنوز حل نشده است، سعی کنید از میزبان خود درباره خطاهایتان سوال "
+"کنید. رایج‌ترین مشکل، نبود مجوزهای لازم برای کاربر SQL است، مانند مجوز "
+"ایجاد جداول (Create Tables)."
+
+msgid "Could not install. Try again from <a href=\"%s\" >Plugins Dashboard.</a>"
+msgstr "نصب انجام نشد. دوباره از <a href=\"%s\" >داشبورد افزونه‌ها</a> امتحان کنید."
+
+msgid "Active"
+msgstr "فعال"
+
+msgid "Permission denied."
+msgstr "دسترسی رد شد."
+
+#, tp-glo-b357fc3e
+msgid "Invalid nonce."
+msgstr "nonce نامعتبر است."
+
+msgid "Settings scope unknown."
+msgstr "محدوده تنظیمات نامشخص است."
+
+msgid "Legacy disabled."
+msgstr "حالت قدیمی غیرفعال است."
+
+msgid "Language Switcher"
+msgstr "انتخابگر زبان"
+
+msgid "Change language to %s"
+msgstr "تغییر زبان به %s"
+
+msgid "Automatic Translation"
+msgstr "ترجمه خودکار"
+
+#, tp-glo-c6709f3f
+msgid "DeepL"
+msgstr "DeepL"
+
+msgid "Unsupported languages"
+msgstr "زبان‌های پشتیبانی‌نشده"
+
+msgid ""
+"The selected automatic translation engine does not provide support for "
+"these languages.<br>You can still manually translate pages in these "
+"languages using the Translation Editor."
+msgstr ""
+"موتور ترجمه خودکار انتخاب‌شده از این زبان‌ها پشتیبانی نمی‌کند.<br>شما "
+"همچنان می‌توانید صفحات را به‌صورت دستی در این زبان‌ها با استفاده از "
+"ویرایشگر ترجمه ترجمه کنید."
+
+#, tp-glo-91460d88
+msgid "API key validation failed."
+msgstr "اعتبارسنجی کلید API ناموفق بود."
+
+#, tp-glo-91460d88
+msgid "API key verification was successful."
+msgstr "تأیید کلید API با موفقیت انجام شد."
+
+#, tp-glo-d6a22d74
+msgid "Please enter your Google Translate key."
+msgstr "لطفاً کلید Google Translate خود را وارد کنید."
+
+#, tp-glo-91460d88, tp-glo-c6709f3f
+msgid "Please enter your DeepL API key."
+msgstr "لطفاً کلید API DeepL خود را وارد کنید."
+
+#, tp-glo-ee8b4f9f
+msgid "Not TranslatePress onboarding page."
+msgstr "صفحه راه‌اندازی TranslatePress نیست."
+
+msgid "Step %s does not exist"
+msgstr "مرحله %s وجود ندارد"
+
+msgid "Welcome"
+msgstr "خوش آمدید"
+
+msgid "Add Languages"
+msgstr "افزودن زبان‌ها"
+
+msgid "Enable Addons"
+msgstr "فعال‌سازی افزودنی‌ها"
+
+msgid "Finalize"
+msgstr "نهایی‌سازی"
+
+msgid "Exit Setup"
+msgstr "خروج از راه‌اندازی"
+
+msgid "Upgrade"
+msgstr "ارتقا"
+
+msgid "Nothing here"
+msgstr "موردی یافت نشد"
+
+#, tp-glo-ee8b4f9f, tp-glo-f7c8926f
+msgid ""
+"Your <strong>TranslatePress</strong> license is missing or invalid. "
+"<br/>Please %1$sregister your copy%2$s to enable automatic website "
+"translation via TranslatePress AI, premium addons, automatic updates and "
+"support. Need a license key? %3$sPurchase one now%4$s"
+msgstr ""
+"مجوز <strong>TranslatePress</strong> شما وجود ندارد یا نامعتبر است. "
+"<br/>لطفاً %1$sنسخه خود را ثبت کنید%2$s تا ترجمه خودکار وب‌سایت از طریق "
+"TranslatePress AI، افزونه‌های پریمیوم، به‌روزرسانی‌های خودکار و پشتیبانی "
+"فعال شود. نیاز به کلید مجوز دارید؟ %3$sهمین حالا یکی بخرید%4$s"
+
+#, tp-glo-ee8b4f9f
+msgid ""
+"Your <strong>TranslatePress</strong> license will expire on %1$s. Please "
+"%2$sRenew Your Licence%3$s to continue receiving access to automatic "
+"translations via TP AI, premium addons, product downloads and automatic "
+"updates. %4$sRenew Now%5$s"
+msgstr ""
+"مجوز <strong>TranslatePress</strong> شما در %1$s منقضی می‌شود. لطفاً "
+"%2$sمجوز خود را تمدید کنید%3$s تا به ترجمه‌های خودکار از طریق TP AI، "
+"افزونه‌های پریمیوم، دانلود محصولات و به‌روزرسانی‌های خودکار دسترسی داشته "
+"باشید. %4$sهمین حالا تمدید کنید%5$s"
+
+msgid "Error: "
+msgstr "خطا: "
+
+msgid "Something went wrong, please try again."
+msgstr "خطایی رخ داد، لطفاً دوباره تلاش کنید."
+
+#, tp-glo-ee8b4f9f, tp-glo-f7c8926f
+msgid ""
+"Your <strong>TranslatePress</strong> license has expired. <br/>Please "
+"%1$sRenew Your Licence%2$s to continue receiving access to automatic "
+"translations via TranslatePress AI, premium addons, product downloads, and "
+"automatic updates. %3$sRenew now %4$s"
+msgstr ""
+"مجوز <strong>TranslatePress</strong> شما منقضی شده است. <br/>لطفاً %1$sمجوز "
+"خود را تمدید کنید%2$s تا به ترجمه‌های خودکار از طریق TranslatePress AI، "
+"افزونه‌های پریمیوم، دانلود محصولات و به‌روزرسانی‌های خودکار دسترسی داشته "
+"باشید. %3$sهمین حالا تمدید کنید %4$s"
+
+msgid ""
+"License key mismatch. The license you entered doesn’t match the "
+"<strong>%1$s</strong> version you have installed. <br/>Please check that "
+"you’ve installed the correct version for your license from your "
+"%2$sTranslatePress account%3$s."
+msgstr ""
+"عدم تطابق کلید مجوز. مجوز وارد شده با نسخه <strong>%1$s</strong> نصب‌شده "
+"شما مطابقت ندارد. <br/>لطفاً بررسی کنید که نسخه صحیح را برای مجوز خود از "
+"%2$sTranslatePress Account%3$s نصب کرده‌اید."
+
+#, tp-glo-666af81f, tp-glo-ee8b4f9f
+msgid ""
+"<br/>If you have only the free plugin installed but added a paid license, "
+"please install the paid plugin from your TranslatePress account."
+msgstr ""
+"<br/>اگر تنها افزونه رایگان را نصب کرده‌اید اما یک مجوز غیررایگان اضافه "
+"کرده‌اید، لطفاً افزونه غیررایگان را از TranslatePress Account خود نصب کنید."
+
+msgid ""
+"You have reached the activation limit for your <strong>%1$s</strong> "
+"license. <br/>Manage your active sites from %2$s your account %3$s."
+msgstr ""
+"شما به حد مجاز فعال‌سازی برای مجوز <strong>%1$s</strong> خود رسیده‌اید. "
+"<br/>سایت‌های فعال خود را از %2$s حساب شما %3$s مدیریت کنید."
+
+#, tp-glo-9fa92a70, tp-glo-ee8b4f9f
+msgid ""
+"Your license is disabled for this URL. Re-enable it from <a "
+"target=\"_blank\" "
+"href=\"https://translatepress.com/account/?utm_source=wp-dashboard&utm_"
+"medium=client-site&utm_campaign=license-deactivated\">https://"
+"translatepress.com/account</a> -> Manage Sites."
+msgstr ""
+"مجوز شما برای این URL غیرفعال شده است. آن را از <a target=\"_blank\" "
+"href=\"https://translatepress.com/account/?utm_source=wp-dashboard&utm_"
+"medium=client-site&utm_campaign=license-deactivated\">https://"
+"translatepress.com/account</a> -> مدیریت سایت‌ها دوباره فعال کنید."
+
+msgid ""
+"%1$s automatic translation requires an active license. Please %2$srenew%3$s "
+"your license or purchase a new one %4$shere%5$s."
+msgstr ""
+"ترجمه خودکار %1$s نیازمند یک مجوز فعال است. لطفاً مجوز خود را %2$sتمدید%3$s "
+"کنید یا یک مجوز جدید %4$sاز اینجا%5$s بخرید."
+
+msgid "Please %1$senter%2$s your license key to enable %3$s automatic translation."
+msgstr "لطفاً کلید مجوز خود را %1$sوارد%2$s کنید تا ترجمه خودکار %3$s فعال شود."
+
+#, tp-glo-ee8b4f9f, tp-glo-f7c8926f
+msgid ""
+"You have less than 5,000 TranslatePress AI words remaining. To continue "
+"automatically translating your website, please %spurchase additional AI "
+"words at a discount from your account%s."
+msgstr ""
+"کمتر از ۵۰۰۰ کلمه TranslatePress AI برای شما باقی مانده است. برای ادامه "
+"ترجمه خودکار وب‌سایت خود، لطفاً %sکلمات AI اضافی را با تخفیف از حساب خود "
+"بخرید%s."
+
+msgid " Error: "
+msgstr " خطا: "
+
+#, tp-glo-ee8b4f9f, tp-glo-f7c8926f
+msgid ""
+"This website is already activated under a free license. Each website can "
+"only use one free license. Please upgrade to a premium plan for more "
+"TranslatePress AI words from %1$s your account %2$s."
+msgstr ""
+"این وب‌سایت قبلاً با یک مجوز رایگان فعال شده است. هر وب‌سایت تنها می‌تواند "
+"از یک مجوز رایگان استفاده کند. لطفاً برای کلمات TranslatePress AI بیشتر، از "
+"%1$s حساب خود %2$s به یک طرح پریمیوم ارتقا دهید."
+
+#, tp-glo-ee8b4f9f, tp-glo-f7c8926f
+msgid ""
+"You do not have a valid license for <strong>TranslatePress</strong>. "
+"%1$sGet one for free%2$s to get access to TranslatePress AI."
+msgstr ""
+"شما مجوز معتبری برای <strong>TranslatePress</strong> ندارید. %1$sیکی را "
+"رایگان دریافت کنید%2$s تا به TranslatePress AI دسترسی داشته باشید."
+
+#, tp-glo-47180abf, tp-glo-ee8b4f9f
+msgid ""
+"<strong>NEW:</strong> The <strong>Different Domain per Language</strong> "
+"add-on is here! Boost your global SEO and create a local experience with "
+"country-specific domains like .de or .fr. Upgrade to <a "
+"href=\"https://translatepress.com/pricing/?utm_source=wp-dashboard&utm_"
+"medium=client-site&utm_campaign=new-addon-ddpl-upsell\" "
+"target=\"_blank\">TranslatePress Business or Developer</a> to access it + "
+"more premium perks!"
+msgstr ""
+"<strong>جدید:</strong> افزونه <strong>دامنه متفاوت برای هر زبان</strong> "
+"اینجاست! SEO جهانی خود را تقویت کنید و با دامنه‌های مختص کشور مانند .de یا "
+".fr یک تجربه محلی ایجاد کنید. برای دسترسی به آن + مزایای پریمیوم بیشتر، به "
+"<a "
+"href=\"https://translatepress.com/pricing/?utm_source=wp-dashboard&utm_"
+"medium=client-site&utm_campaign=new-addon-ddpl-upsell\" "
+"target=\"_blank\">TranslatePress Business یا Developer</a> ارتقا دهید!"
+
+#, tp-glo-47180abf, tp-glo-ee8b4f9f
+msgid ""
+"<strong>NEW:</strong> The <strong>Different Domain per Language</strong> "
+"add-on is here! Boost your global SEO and create a local experience with "
+"country-specific domains like .de or .fr. <a "
+"href=\"https://translatepress.com/docs/addons/different-domain-per-language/"
+"?utm_source=wp-dashboard&utm_medium=client-site&utm_campaign=new-addon-ddpl\""
+" target=\"_blank\">Learn more</a>."
+msgstr ""
+"<strong>جدید:</strong> افزونه <strong>دامنه متفاوت برای هر زبان</strong> "
+"اینجاست! SEO جهانی خود را تقویت کنید و با دامنه‌های مختص کشور مانند .de یا "
+".fr یک تجربه محلی ایجاد کنید. <a "
+"href=\"https://translatepress.com/docs/addons/different-domain-per-language/"
+"?utm_source=wp-dashboard&utm_medium=client-site&utm_campaign=new-addon-ddpl\""
+" target=\"_blank\">بیشتر بدانید</a>."
+
+#, tp-glo-ee8b4f9f
+msgid ""
+"The daily quota for machine translation characters exceeded. Please check "
+"the <strong>TranslatePress -> <a href=\"%s\">Automatic "
+"Translation</a></strong> page for more information."
+msgstr ""
+"سهمیه روزانه کاراکترهای ترجمه ماشینی به پایان رسیده است. لطفاً برای اطلاعات "
+"بیشتر صفحه <strong>TranslatePress -> <a href=\"%s\">ترجمه "
+"خودکار</a></strong> را بررسی کنید."
+
+msgid "Marketing optin"
+msgstr "عضویت در بازاریابی"
+
+msgid ""
+"Opt in to our security and feature updates notifications, and non-sensitive "
+"diagnostic tracking."
+msgstr ""
+"در اعلان‌های به‌روزرسانی‌های امنیتی و ویژگی‌ها، و همچنین ردیابی تشخیصی "
+"غیرحساس، مشترک شوید."
+
+#, tp-glo-ee8b4f9f
+msgid "TranslatePress Preferred User Language"
+msgstr "زبان ترجیحی کاربر TranslatePress"
+
+msgid "Preferred language to navigate the site"
+msgstr "زبان ترجیحی برای مرور سایت"
+
+msgid ""
+"The language is automatically set based by the last visited language by the "
+"user."
+msgstr ""
+"زبان به‌طور خودکار بر اساس آخرین زبانی که کاربر بازدید کرده است، تنظیم "
+"می‌شود."
+
+msgid "Always use this language"
+msgstr "همیشه از این زبان استفاده شود"
+
+msgid ""
+"By checking this setting the preferred language will remain the one "
+"selected above, without the possibility of being changed in the "
+"frontend.<br>This language will be used in different operations such as "
+"sending email to the user."
+msgstr ""
+"با فعال کردن این تنظیم، زبان ترجیحی همان موردی خواهد بود که در بالا انتخاب "
+"شده است و امکان تغییر آن در نمای سایت وجود نخواهد داشت.<br>این زبان در "
+"عملیات‌های مختلفی مانند ارسال ایمیل به کاربر استفاده خواهد شد."
+
+#, tp-glo-ee8b4f9f
+msgid ""
+"Hello! Seems like you've been using <strong>TranslatePress</strong> for a "
+"while now to translate your website. That's awesome! "
+msgstr ""
+"سلام! به نظر می‌رسد مدتی است که از <strong>TranslatePress</strong> برای "
+"ترجمه وب‌سایت خود استفاده می‌کنید. عالی است! "
+
+#, tp-glo-8896ebe8
+msgid ""
+"If you can spare a few moments to rate it on WordPress.org it would help us "
+"a lot (and boost my motivation)."
+msgstr ""
+"اگر بتوانید چند لحظه‌ای وقت بگذارید و آن را در WordPress.org امتیاز دهید، "
+"به ما کمک زیادی می‌کند (و انگیزه‌ام را افزایش می‌دهد)."
+
+#, tp-glo-ee8b4f9f
+msgid "~ Razvan, developer of TranslatePress"
+msgstr "~ Razvan، توسعه‌دهنده TranslatePress"
+
+#, tp-glo-8896ebe8, tp-glo-ee8b4f9f
+msgid "Rate TranslatePress on WordPress.org plugin page"
+msgstr "امتیازدهی به TranslatePress در صفحه افزونه WordPress.org"
+
+msgid "Ok, I will gladly help!"
+msgstr "بسیار خوب، با کمال میل کمک می‌کنم!"
+
+msgid "No, thanks."
+msgstr "نه، ممنون."
+
+msgid "Full Language Names"
+msgstr "نام کامل زبان‌ها"
+
+msgid "Short Language Names"
+msgstr "نام کوتاه زبان‌ها"
+
+msgid "Flags with Full Language Names"
+msgstr "پرچم‌ها با نام کامل زبان‌ها"
+
+msgid "Flags with Short Language Names"
+msgstr "پرچم‌ها با نام کوتاه زبان‌ها"
+
+msgid "Only Flags"
+msgstr "فقط پرچم‌ها"
+
+#, tp-glo-d311355a
+msgid "Full Language Names No HTML"
+msgstr "نام کامل زبان‌ها بدون HTML"
+
+msgid "Bottom Right"
+msgstr "پایین راست"
+
+msgid "Bottom Left"
+msgstr "پایین چپ"
+
+msgid "Top Right"
+msgstr "بالا راست"
+
+msgid "Top Left"
+msgstr "بالا چپ"
+
+msgid "Dark"
+msgstr "تیره"
+
+msgid "Light"
+msgstr "روشن"
+
+msgid "Deactivate"
+msgstr "غیرفعال‌سازی"
+
+msgid "Activate"
+msgstr "فعال‌سازی"
+
+msgid "Invalid language code. Please try again."
+msgstr "کد زبان نامعتبر است. لطفاً دوباره تلاش کنید."
+
+#, tp-glo-ee8b4f9f
+msgid ""
+"Language codes can contain only A-Z a-z 0-9 - _ characters. Check your "
+"language codes in TranslatePress General Settings."
+msgstr ""
+"کدهای زبان تنها می‌توانند شامل نویسه‌های A-Z a-z 0-9 - _ باشند. کدهای زبان "
+"خود را در تنظیمات عمومی TranslatePress بررسی کنید."
+
+#, tp-ctx-07893e52, tp-glo-67834fcb, tp-glo-9fa92a70
+msgid "Error! Duplicate URL slug values."
+msgstr "خطا! مقادیر تکراری slug URL."
+
+#, tp-glo-d1526d97
+msgid ""
+"You cannot select two languages that have the same <a "
+"href=\"https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes\" "
+"target=\"_blank\">iso code</a> but different formalities because doing so "
+"will lead to duplicate <a "
+"href=\"https://developers.google.com/search/docs/specialty/international/"
+"localized-versions\" target=\"_blank\">hreflang tags</a>."
+msgstr ""
+"شما نمی‌توانید دو زبانی را انتخاب کنید که <a "
+"href=\"https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes\" "
+"target=\"_blank\">کد iso</a> یکسان اما رسمیت متفاوتی دارند، زیرا این کار "
+"منجر به <a "
+"href=\"https://developers.google.com/search/docs/specialty/international/"
+"localized-versions\" target=\"_blank\">تگ‌های hreflang</a> تکراری می‌شود."
+
+msgid ""
+"Duplicate language detected.<br>Each language can only be added once to "
+"ensure accurate translation management.<br> Please change the duplicate "
+"language entry and try again. "
+msgstr ""
+"زبان تکراری شناسایی شد.<br>هر زبان فقط یک بار می‌تواند افزوده شود تا مدیریت "
+"ترجمه دقیق تضمین شود.<br> لطفاً ورودی زبان تکراری را تغییر دهید و دوباره "
+"تلاش کنید. "
+
+msgid "Current Language"
+msgstr "زبان فعلی"
+
+msgid "Opposite Language"
+msgstr "زبان مقابل"
+
+msgid "General"
+msgstr "عمومی"
+
+msgid "Translate Site"
+msgstr "ترجمه سایت"
+
+msgid "Addons"
+msgstr "افزودنی‌ها"
+
+msgid "License"
+msgstr "مجوز"
+
+msgid "Settings"
+msgstr "تنظیمات"
+
+msgid "Activate License"
+msgstr "فعال‌سازی مجوز"
+
+msgid "Pro Features"
+msgstr "ویژگی‌های حرفه‌ای"
+
+msgid "Need Help?"
+msgstr "نیاز به کمک دارید؟"
+
+msgid "Recent community discussions"
+msgstr "گفتگوهای اخیر جامعه"
+
+msgid "Loading..."
+msgstr "در حال بارگذاری..."
+
+#, tp-ctx-7832384c
+msgid "Unable to load forum posts"
+msgstr "امکان بارگذاری نوشته‌های انجمن وجود ندارد"
+
+msgid "Ask a Question"
+msgstr "یک سوال بپرسید"
+
+msgid "View All Topics"
+msgstr "مشاهده همه موضوعات"
+
+msgid "by"
+msgstr "توسط"
+
+msgid "Have a question?"
+msgstr "سوالی دارید؟"
+
+msgid ""
+"Get help directly from the plugin developers, suggest improvements, or "
+"share your feedback!"
+msgstr ""
+"مستقیماً از توسعه‌دهندگان افزونه کمک بگیرید، پیشنهاد بهبود دهید یا بازخورد "
+"خود را به اشتراک بگذارید!"
+
+msgid "Tip for faster help:"
+msgstr "نکته برای کمک سریع‌تر:"
+
+msgid ""
+"Include what you tried, what you expected, and what happened. Screenshots "
+"help!"
+msgstr ""
+"توضیح دهید که چه کاری انجام دادید، چه انتظاری داشتید و چه اتفاقی افتاد. "
+"تصاویر صفحه کمک می‌کنند!"
+
+msgid "Toggle support chat"
+msgstr "تغییر وضعیت چت پشتیبانی"
+
+msgid "Ask the community"
+msgstr "از جامعه بپرسید"
+
+msgid "Close"
+msgstr "بستن"
+
+msgid "Empty feed response"
+msgstr "پاسخ خوراک خالی"
+
+msgid "Unable to parse feed"
+msgstr "تجزیه خوراک ممکن نیست"
+
+msgid "Just now"
+msgstr "همین الان"
+
+msgid "%d hour ago"
+msgid_plural "%d hours ago"
+msgstr[0] "%d ساعت پیش"
+msgstr[1] "%d ساعت پیش"
+
+msgid "%d day ago"
+msgid_plural "%d days ago"
+msgstr[0] "%d روز پیش"
+msgstr[1] "%d روز پیش"
+
+msgid "Source"
+msgstr "منبع"
+
+msgid "Srcset"
+msgstr "Srcset"
+
+msgid "Alt attribute"
+msgstr "ویژگی alt"
+
+msgid "Title attribute"
+msgstr "ویژگی title"
+
+msgid "Anchor link"
+msgstr "پیوند لنگر"
+
+msgid "Placeholder attribute"
+msgstr "ویژگی placeholder"
+
+msgid "Submit attribute"
+msgstr "ویژگی submit"
+
+msgid "Text"
+msgstr "متن"
+
+msgid "Video Poster"
+msgstr "پوستر ویدیو"
+
+msgid "plural form"
+msgstr "صورت جمع"
+
+msgid "one"
+msgstr "یک"
+
+msgid "few"
+msgstr "چند"
+
+msgid "many"
+msgstr "بسیار"
+
+msgid "other"
+msgstr "سایر"
+
+msgid "Saved"
+msgstr "ذخیره شد"
+
+msgid "Save"
+msgstr "ذخیره"
+
+msgid "Saving translation..."
+msgstr "در حال ذخیرهٔ ترجمه..."
+
+msgid "You have unsaved changes!"
+msgstr "تغییرات ذخیره‌نشده‌ای دارید!"
+
+msgid "Discard changes"
+msgstr "نادیده گرفتن تغییرات"
+
+msgid "Discard All"
+msgstr "نادیده گرفتن همه"
+
+#, tp-ctx-2edc90df
+msgid "Loading Strings..."
+msgstr "در حال بارگذاری رشته‌ها..."
+
+#, tp-ctx-8a82cc9e
+msgid "Select string to translate..."
+msgstr "رشته‌ای را برای ترجمه انتخاب کنید..."
+
+msgid "Close Editor"
+msgstr "بستن ویرایشگر"
+
+msgid "From"
+msgstr "از"
+
+msgid "To"
+msgstr "به"
+
+msgid "Add Media"
+msgstr "افزودن رسانه"
+
+msgid "Other languages"
+msgstr "سایر زبان‌ها"
+
+msgid "Context"
+msgstr "زمینه"
+
+msgid "View Website As"
+msgstr "مشاهده وب‌سایت به عنوان"
+
+msgid "Available in our Pro Versions"
+msgstr "در نسخه‌های حرفه‌ای ما موجود است"
+
+msgid "Select or Upload Media"
+msgstr "انتخاب یا بارگذاری رسانه"
+
+msgid "Use this media"
+msgstr "استفاده از این رسانه"
+
+msgid "Translate"
+msgstr "ترجمه"
+
+msgid "Translate entire block element"
+msgstr "ترجمه کل عنصر بلوک"
+
+#, tp-ctx-2edc90df
+msgid "Split block to translate strings individually"
+msgstr "تقسیم بلوک برای ترجمه تک‌تک رشته‌ها"
+
+#, tp-glo-e780391b
+msgid "Save changes to translation. Shortcut: CTRL(⌘) + S"
+msgstr "ذخیره تغییرات ترجمه. میانبر: CTRL(⌘) + S"
+
+#, tp-ctx-8a82cc9e, tp-glo-e780391b
+msgid ""
+"Navigate to next string in dropdown list. Shortcut: CTRL(⌘) + ALT + Right "
+"Arrow"
+msgstr "رفتن به رشته بعدی در فهرست کشویی. میانبر: CTRL(⌘) + ALT + فلش راست"
+
+#, tp-ctx-8a82cc9e, tp-glo-e780391b
+msgid ""
+"Navigate to previous string in dropdown list. Shortcut: CTRL(⌘) + ALT + "
+"Left Arrow"
+msgstr "رفتن به رشته قبلی در فهرست کشویی. میانبر: CTRL(⌘) + ALT + فلش چپ"
+
+#, tp-glo-e780391b
+msgid "Discard all changes. Shortcut: CTRL(⌘) + ALT + Z"
+msgstr "لغو همه تغییرات. میانبر: CTRL(⌘) + ALT + Z"
+
+#, tp-glo-e780391b
+msgid ""
+"Discard changes to this text box. To discard changes to all text boxes use "
+"shortcut: CTRL(⌘) + ALT + Z"
+msgstr ""
+"لغو تغییرات این کادر متن. برای لغو تغییرات همه کادرهای متن از میانبر "
+"CTRL(⌘) + ALT + Z استفاده کنید"
+
+msgid "Dismiss tooltip"
+msgstr "بستن راهنمای ابزار"
+
+msgid "Quick Intro"
+msgstr "معرفی سریع"
+
+msgid "Are you sure you want to split this phrase into smaller parts?"
+msgstr "آیا مطمئن هستید که می‌خواهید این عبارت را به بخش‌های کوچک‌تر تقسیم کنید؟"
+
+#, tp-ctx-8a82cc9e
+msgid "This string is not ready for translation yet. <br>Try again in a moment..."
+msgstr ""
+"این رشته هنوز برای ترجمه آماده نیست. <br>لطفاً چند لحظه دیگر دوباره تلاش "
+"کنید..."
+
+msgid ""
+"For this option to work, please update the Browse as other role add-on to "
+"the latest version."
+msgstr ""
+"برای کار کردن این گزینه، لطفاً افزونه «مرور به عنوان نقش دیگر» را به آخرین "
+"نسخه به‌روزرسانی کنید."
+
+#, tp-ctx-742ebaa7, tp-glo-47180abf, tp-glo-b7a08771
+msgid "To translate slugs, please update the SEO Pack add-on to the latest version."
+msgstr "برای ترجمه slugها، لطفاً افزودنی SEO Pack را به آخرین نسخه به‌روزرسانی کنید."
+
+#, tp-glo-ee8b4f9f
+msgid "You can add a new language from <a href=\"%s\">Settings->TranslatePress</a>"
+msgstr ""
+"می‌توانید از <a href=\"%s\">تنظیمات->TranslatePress</a> زبان جدیدی اضافه "
+"کنید."
+
+#, tp-ctx-2edc90df, tp-glo-64dbb752, tp-glo-ee8b4f9f
+msgid ""
+"However, you can still use TranslatePress to <strong style=\"background: "
+"#f5fb9d;\">modify gettext strings</strong> available in your page."
+msgstr ""
+"با این حال، همچنان می‌توانید از TranslatePress برای <strong "
+"style=\"background: #f5fb9d;\">ویرایش رشته‌های gettext</strong> موجود در "
+"صفحهٔ خود استفاده کنید."
+
+#, tp-ctx-2edc90df
+msgid ""
+"Strings that are user-created cannot be modified, only those from themes "
+"and plugins."
+msgstr ""
+"رشته‌های ایجادشده توسط کاربر قابل ویرایش نیستند، تنها آن‌هایی که مربوط به "
+"قالب‌ها و افزونه‌ها هستند."
+
+msgid "Extra Translation Features"
+msgstr "ویژگی‌های اضافی ترجمه"
+
+msgid "Support for 130+ Extra Languages"
+msgstr "پشتیبانی از بیش از ۱۳۰ زبان اضافی"
+
+#, tp-glo-ee8b4f9f, tp-glo-f7c8926f
+msgid "Access to TranslatePress AI"
+msgstr "دسترسی به TranslatePress AI"
+
+#, tp-ctx-07893e52, tp-glo-47180abf, tp-glo-67834fcb
+msgid "Translate SEO Title, Description, Slug"
+msgstr "ترجمه عنوان SEO، توضیحات و slug"
+
+msgid "Publish only when translation is complete"
+msgstr "تنها در صورت تکمیل بودن ترجمه منتشر شود"
+
+msgid "Translate by Browsing as User Role"
+msgstr "ترجمه با مرور به عنوان نقش کاربری"
+
+msgid "Different Menu Items for each Language"
+msgstr "گزینه‌های منوی متفاوت برای هر زبان"
+
+msgid "Automatic User Language Detection"
+msgstr "تشخیص خودکار زبان کاربر"
+
+msgid "Upgrade to PRO"
+msgstr "ارتقا به PRO"
+
+msgid "Upgrade to PRO with our biggest discount of the year!"
+msgstr "با بزرگ‌ترین تخفیف سال به PRO ارتقا دهید!"
+
+msgid ""
+"This Black Friday, get access to these features and more at a fraction of "
+"the costs:"
+msgstr ""
+"در این جمعهٔ سیاه، با کسری از هزینه به این ویژگی‌ها و موارد بیشتر دسترسی "
+"پیدا کنید:"
+
+msgid "No available suggestions"
+msgstr "پیشنهادی در دسترس نیست"
+
+msgid "Suggestions from translation memory"
+msgstr "پیشنهادهای حافظهٔ ترجمه"
+
+msgid "Click to Copy"
+msgstr "برای کپی کردن کلیک کنید"
+
+msgid "Human Translation"
+msgstr "ترجمهٔ انسانی"
+
+msgid "Machine Translation"
+msgstr "ترجمهٔ ماشینی"
+
+msgid "Text on this page is %s% translated into all languages."
+msgstr "متن این صفحه %s% به همهٔ زبان‌ها ترجمه شده است."
+
+msgid "%1$s% of text on this page is translated into %2$s."
+msgstr "%1$s% از متن این صفحه به %2$s ترجمه شده است."
+
+msgid "This page is %1$s% translated into %2$s."
+msgstr "این صفحه %1$s% به %2$s ترجمه شده است."
+
+#, tp-ctx-07893e52, tp-glo-67834fcb
+msgid ""
+"The slug that you are trying to edit is present in other slug types:%s%. "
+"Editing it will replace each occurrence, regardless of the current type."
+msgstr ""
+"slug‌ای که در تلاش برای ویرایش آن هستید در سایر انواع slug موجود است: %s. "
+"ویرایش آن باعث جایگزینی هر مورد خواهد شد، صرف‌نظر از نوع فعلی."
+
+msgid ""
+"Hover any text on the page, click %s,<br> then modify the translation in "
+"the sidebar."
+msgstr ""
+"روی هر متنی در صفحه هاور کنید، روی %s کلیک کنید،<br> سپس ترجمه را در نوار "
+"کناری ویرایش کنید."
+
+#, tp-glo-e780391b
+msgid "Don't forget to Save Translation. Use keyboard shortcut CTRL(⌘) + S"
+msgstr ""
+"فراموش نکنید که ترجمه را ذخیره کنید. از میان‌بر صفحه‌کلید CTRL(⌘) + S "
+"استفاده کنید."
+
+msgid "Switch language to see the translation changes directly on the page."
+msgstr "زبان را تغییر دهید تا تغییرات ترجمه را مستقیماً در صفحه ببینید."
+
+msgid "Search for any text in this page in the dropdown."
+msgstr "هر متنی را در این صفحه در فهرست کشویی جستجو کنید."
+
+msgid ""
+"Your %s license has <span "
+"class=\"trp-license-status-emphasized\">expired</span>."
+msgstr ""
+"مجوز %s شما <span class=\"trp-license-status-emphasized\">منقضی شده</span> "
+"است."
+
+#, tp-glo-ee8b4f9f, tp-glo-f7c8926f
+msgid ""
+"Please renew your license to continue receiving access to TranslatePress "
+"AI, premium addons, automatic updates and support."
+msgstr ""
+"لطفاً مجوز خود را تمدید کنید تا به دریافت دسترسی به TranslatePress AI، "
+"افزونه‌های پریمیوم، به‌روزرسانی‌های خودکار و پشتیبانی ادامه دهید."
+
+msgid "Renew Now"
+msgstr "اکنون تمدید کنید"
+
+msgid ""
+"<strong>This Black Friday, renew your license at a special price</strong> "
+"to continue receiving access to product downloads, automatic updates, and "
+"support."
+msgstr ""
+"<strong>این جمعهٔ سیاه، مجوز خود را با قیمت ویژه تمدید کنید</strong> تا به "
+"دریافت دسترسی به دانلود محصولات، به‌روزرسانی‌های خودکار و پشتیبانی ادامه "
+"دهید."
+
+msgid "Get Deal"
+msgstr "دریافت تخفیف"
+
+msgid ""
+"Your %s license was <span "
+"class=\"trp-license-status-emphasized\">refunded</span>."
+msgstr ""
+"مجوز %s شما <span class=\"trp-license-status-emphasized\">بازپرداخت "
+"شده</span> است."
+
+#, tp-glo-ee8b4f9f, tp-glo-f7c8926f
+msgid ""
+"Please purchase a new license to continue receiving access to "
+"TranslatePress AI, premium addons, automatic updates and support."
+msgstr ""
+"لطفاً یک مجوز جدید خریداری کنید تا به دریافت دسترسی به TranslatePress AI، "
+"افزونه‌های پریمیوم، به‌روزرسانی‌های خودکار و پشتیبانی ادامه دهید."
+
+msgid "Purchase a new license"
+msgstr "خرید مجوز جدید"
+
+msgid ""
+"Your %s license is <span class=\"trp-license-status-emphasized\">missing or "
+"invalid</span>."
+msgstr ""
+"مجوز %s شما <span class=\"trp-license-status-emphasized\">گم‌شده یا "
+"نامعتبر</span> است."
+
+#, tp-glo-ee8b4f9f, tp-glo-f7c8926f
+msgid ""
+"Please enter a valid license to get access to TranslatePress AI, premium "
+"addons, automatic updates and support. Need a license key? %1$sPurchase one "
+"now%2$s"
+msgstr ""
+"لطفاً یک مجوز معتبر وارد کنید تا به TranslatePress AI، افزونه‌های پریمیوم، "
+"به‌روزرسانی‌های خودکار و پشتیبانی دسترسی پیدا کنید. نیاز به کلید مجوز "
+"دارید؟ %1$sهمین حالا خریداری کنید%2$s"
+
+msgid "Enter a valid license"
+msgstr "وارد کردن مجوز معتبر"
+
+#, tp-ctx-742ebaa7
+msgid "Slugs"
+msgstr "slugها"
+
+msgid "Meta Information"
+msgstr "اطلاعات متا"
+
+#, tp-ctx-8a82cc9e
+msgid "String List"
+msgstr "فهرست رشته‌ها"
+
+#, tp-ctx-2edc90df, tp-glo-64dbb752
+msgid "Gettext Strings"
+msgstr "رشته‌های Gettext"
+
+msgid "Images"
+msgstr "تصاویر"
+
+msgid "Videos"
+msgstr "ویدیوها"
+
+msgid "Audios"
+msgstr "صداها"
+
+#, tp-ctx-2edc90df
+msgid "Dynamically Added Strings"
+msgstr "رشته‌های افزوده‌شده به‌صورت پویا"
+
+msgid "Translation Editor"
+msgstr "ویرایشگر ترجمه"
+
+msgid "Edit translations by visually selecting them on each site page"
+msgstr "ویرایش ترجمه‌ها با انتخاب بصری آن‌ها در هر صفحه از سایت"
+
+#, tp-ctx-8a82cc9e
+msgid "String Translation"
+msgstr "ترجمه رشته"
+
+#, tp-ctx-07893e52, tp-glo-67834fcb, tp-glo-9fa92a70
+msgid ""
+"Edit url slug translations, plugins and theme translation (emails, forms "
+"etc.)"
+msgstr "ویرایش ترجمه‌های slug URL، ترجمه افزونه‌ها و قالب (ایمیل‌ها، فرم‌ها و غیره)"
+
+msgid "Current User"
+msgstr "کاربر فعلی"
+
+msgid "Logged Out"
+msgstr "خارج از سیستم"
+
+msgid "Translate Page"
+msgstr "ترجمه صفحه"
+
+msgid "Add a New Language"
+msgstr "افزودن زبان جدید"
+
+msgid "Get a Free AI License"
+msgstr "دریافت لایسنس رایگان هوش مصنوعی"
+
+msgid "Your License is Invalid"
+msgstr "لایسنس شما نامعتبر است"
+
+msgid "Get More AI Words (%d left)"
+msgstr "دریافت کلمات بیشتر هوش مصنوعی (%d باقی‌مانده)"
+
+#, tp-ctx-e9944eb3
+msgid ""
+"Opens post in the translation editor. Post must be saved as draft or "
+"published beforehand."
+msgstr ""
+"نوشته را در ویرایشگر ترجمه باز می‌کند. نوشته باید از قبل به‌صورت پیش‌نویس "
+"ذخیره یا منتشر شده باشد."
+
+msgid "Security check"
+msgstr "بررسی امنیتی"
+
+#, tp-ctx-2edc90df
+msgid ""
+"<strong>Warning:</strong> Some strings have possibly incorrectly encoded "
+"characters. This may result in breaking the queries, rendering the page "
+"untranslated in live mode. Consider revising the following strings or their "
+"method of outputting."
+msgstr ""
+"<strong>هشدار:</strong> برخی از رشته‌ها ممکن است دارای نویسه‌های با کدگذاری "
+"نادرست باشند. این ممکن است منجر به خرابی کوئری‌ها و ترجمه‌نشدن صفحه در حالت "
+"زنده شود. بازبینی رشته‌های زیر یا روش خروجی‌دهی آن‌ها را در نظر بگیرید."
+
+#, tp-glo-ee8b4f9f
+msgid "TranslatePress data update"
+msgstr "بروزرسانی داده‌های TranslatePress"
+
+msgid "We need to update your translations database to the latest version."
+msgstr "باید پایگاه داده ترجمه‌های شما را به آخرین نسخه بروزرسانی کنیم."
+
+msgid ""
+"Updating will allow editing translations of localized text from plugins and "
+"theme. Existing translation will still work as expected."
+msgstr ""
+"بروزرسانی امکان ویرایش ترجمه‌های متن بومی‌سازی‌شده از افزونه‌ها و پوسته را "
+"فراهم می‌کند. ترجمه‌های موجود همچنان مطابق انتظار کار خواهند کرد."
+
+msgid ""
+"IMPORTANT: It is strongly recommended to first backup the database!\n"
+"Are you sure you want to continue?"
+msgstr ""
+"مهم: اکیداً توصیه می‌شود ابتدا از پایگاه داده نسخه پشتیبان تهیه کنید!\n"
+"آیا مطمئن هستید که می‌خواهید ادامه دهید؟"
+
+msgid "Run the updater"
+msgstr "اجرای بروزرسان"
+
+#, tp-ctx-742ebaa7
+msgid ""
+"Updating will allow editing translations of slugs. Existing translation "
+"will still work as expected."
+msgstr ""
+"به‌روزرسانی امکان ویرایش ترجمه‌های اسلاگ‌ها را فراهم می‌کند. ترجمهٔ موجود "
+"همچنان مطابق انتظار کار خواهد کرد."
+
+#, tp-glo-47180abf, tp-glo-8896ebe8, tp-glo-ee8b4f9f
+msgid ""
+"Please activate the SEO Addon from <br/>WordPress -> Settings -> "
+"TranslatePress -> Addons section"
+msgstr ""
+"لطفاً افزونه SEO را از بخش Addons در مسیر <br/>WordPress -> Settings -> "
+"TranslatePress فعال کنید."
+
+msgid "Go to Addons"
+msgstr "رفتن به افزونه‌ها"
+
+#, tp-ctx-742ebaa7, tp-glo-47180abf, tp-glo-9fa92a70, tp-glo-b7a08771
+msgid "The SEO Pack add-on allows translation of all the URL slugs:"
+msgstr "افزونهٔ SEO Pack امکان ترجمهٔ تمام اسلاگ‌های URL را فراهم می‌کند:"
+
+#, tp-ctx-742ebaa7
+msgid "Taxonomy slugs"
+msgstr "اسلاگ‌های تاکسونومی"
+
+#, tp-ctx-742ebaa7
+msgid "Term slugs"
+msgstr "اسلاگ‌های ترم"
+
+#, tp-ctx-742ebaa7, tp-ctx-e9944eb3
+msgid "Post slugs (this includes pages and custom post types)"
+msgstr "اسلاگ‌های نوشته (شامل برگه‌ها و انواع نوشتهٔ سفارشی)"
+
+#, tp-ctx-742ebaa7, tp-ctx-e9944eb3
+msgid "Post type base slugs"
+msgstr "اسلاگ‌های پایهٔ نوع نوشته"
+
+#, tp-ctx-742ebaa7, tp-glo-cd79cda5
+msgid "WooCommerce slugs"
+msgstr "اسلاگ‌های WooCommerce"
+
+#, tp-glo-47180abf, tp-glo-b7a08771
+msgid "The SEO Pack add-on is available with ALL premium versions of the plugin."
+msgstr "افزونه SEO Pack با تمام نسخه‌های پرمیوم افزونه در دسترس است."
+
+msgid "Upgrade to Pro"
+msgstr "ارتقا به نسخه حرفه‌ای"
+
+msgid "Description"
+msgstr "توضیحات"
+
+msgid "Article Section"
+msgstr "بخش مقاله"
+
+msgid "Article Tag"
+msgstr "برچسب مقاله"
+
+msgid "OG Title"
+msgstr "عنوان OG"
+
+msgid "OG Site Name"
+msgstr "نام سایت OG"
+
+msgid "OG Description"
+msgstr "توضیحات OG"
+
+msgid "OG Image Alt"
+msgstr "متن جایگزین تصویر OG"
+
+msgid "Twitter Title"
+msgstr "عنوان توییتر"
+
+msgid "Twitter Description"
+msgstr "توضیحات توییتر"
+
+msgid "Twitter Image Alt"
+msgstr "متن جایگزین تصویر توییتر"
+
+msgid "Page Title"
+msgstr "عنوان صفحه"
+
+msgid "Dublin Core Title"
+msgstr "عنوان Dublin Core"
+
+msgid "Dublin Core Description"
+msgstr "توضیحات Dublin Core"
+
+msgid "OG Image"
+msgstr "تصویر OG"
+
+#, tp-glo-9fa92a70
+msgid "OG Image Secure URL"
+msgstr "URL ایمن تصویر OG"
+
+msgid "Twitter Image"
+msgstr "تصویر توییتر"
+
+#, tp-ctx-2edc90df
+msgid "Removing cdata dictionary strings for language %s..."
+msgstr "در حال حذف رشته‌های دیکشنری CDATA برای زبان %s..."
+
+msgid "Removing untranslated dictionary links for language %s..."
+msgstr "در حال حذف پیوندهای دیکشنری ترجمه‌نشده برای زبان %s..."
+
+#, tp-ctx-2edc90df, tp-glo-64dbb752
+msgid "Removing duplicated gettext strings for language %s..."
+msgstr "در حال حذف رشته‌های تکراری Gettext برای زبان %s..."
+
+#, tp-ctx-2edc90df
+msgid "Removing duplicated dictionary strings for language %s..."
+msgstr "در حال حذف رشته‌های تکراری دیکشنری برای زبان %s..."
+
+#, tp-ctx-2edc90df
+msgid ""
+"Removing untranslated dictionary strings where translation is available for "
+"language %s..."
+msgstr "در حال حذف رشته‌های دیکشنری ترجمه‌نشده‌ای که ترجمه برای زبان %s موجود است..."
+
+#, tp-ctx-2edc90df
+msgid "Inserting original strings for language %s..."
+msgstr "در حال درج رشته‌های اصلی برای زبان %s..."
+
+#, tp-ctx-2edc90df
+msgid "Cleaning original strings table for language %s..."
+msgstr "در حال پاکسازی جدول رشته‌های اصلی برای زبان %s..."
+
+#, tp-ctx-8a82cc9e
+msgid "Updating original string ids for language %s..."
+msgstr "در حال به‌روزرسانی شناسه‌های رشتهٔ اصلی برای زبان %s..."
+
+msgid "Regenerating original meta table for language %s..."
+msgstr "در حال بازسازی جدول متا اصلی برای زبان %s..."
+
+msgid "Cleaning original meta table for language %s..."
+msgstr "در حال پاکسازی جدول متا اصلی برای زبان %s..."
+
+msgid "Replacing original id NULL with value for language %s..."
+msgstr "در حال جایگزینی شناسهٔ اصلی NULL با مقدار برای زبان %s..."
+
+#, tp-ctx-2edc90df, tp-glo-64dbb752
+msgid "Inserting gettext original strings for language %s..."
+msgstr "در حال درج رشته‌های اصلی Gettext برای زبان %s..."
+
+#, tp-ctx-2edc90df, tp-glo-64dbb752
+msgid "Cleaning gettext original strings table for language %s..."
+msgstr "در حال پاکسازی جدول رشته‌های اصلی Gettext برای زبان %s..."
+
+#, tp-ctx-8a82cc9e, tp-glo-64dbb752
+msgid "Updating gettext original string ids for language %s..."
+msgstr "در حال به‌روزرسانی شناسه‌های رشتهٔ اصلی Gettext برای زبان %s..."
+
+#, tp-ctx-742ebaa7, tp-ctx-e9944eb3
+msgid "Migrating taxonomy and post type base slugs to new table structure..."
+msgstr "در حال انتقال اسلاگ‌های تاکسونومی و پایهٔ نوع نوشته به ساختار جدول جدید..."
+
+#, tp-ctx-742ebaa7, tp-ctx-e9944eb3
+msgid "Migrating post slugs to new table structure for language %s..."
+msgstr "در حال انتقال اسلاگ‌های نوشته به ساختار جدول جدید برای زبان %s..."
+
+#, tp-ctx-742ebaa7
+msgid "Migrating term slugs to new table structure for language %s..."
+msgstr "در حال انتقال slugهای واژه به ساختار جدید جدول برای زبان %s..."
+
+msgid "Finishing up..."
+msgstr "در حال پایان دادن..."
+
+msgid ""
+"Database optimization did not complete successfully. We recommend restoring "
+"the original database or <a href=\"%s\" >trying again.</a>"
+msgstr ""
+"بهینه‌سازی پایگاه داده با موفقیت تکمیل نشد. توصیه می‌کنیم پایگاه دادهٔ اصلی "
+"را بازیابی کنید یا <a href=\"%s\" >دوباره تلاش کنید.</a>"
+
+msgid ""
+"Update aborted! Your user account doesn't have the capability to perform "
+"database updates."
+msgstr ""
+"به‌روزرسانی متوقف شد! حساب کاربری شما دارای قابلیت انجام به‌روزرسانی‌های "
+"پایگاه داده نیست."
+
+#, tp-glo-b357fc3e
+msgid "Update aborted! Invalid nonce."
+msgstr "به‌روزرسانی متوقف شد! nonce نامعتبر است."
+
+msgid "Update aborted! Incorrect action."
+msgstr "به‌روزرسانی متوقف شد! عملیات نادرست است."
+
+msgid "Update aborted! Incorrect language code."
+msgstr "به‌روزرسانی متوقف شد! کد زبان نادرست است."
+
+msgid "Updating database to version %s+"
+msgstr "در حال به‌روزرسانی پایگاه داده به نسخه %s+"
+
+msgid "Processing table for language %s..."
+msgstr "در حال پردازش جدول برای زبان %s..."
+
+#, tp-glo-ee8b4f9f
+msgid "Back to TranslatePress Settings"
+msgstr "بازگشت به تنظیمات TranslatePress"
+
+msgid "Successfully updated database!"
+msgstr "پایگاه داده با موفقیت به‌روزرسانی شد!"
+
+msgid " done."
+msgstr " انجام شد."
+
+#, tp-glo-ee8b4f9f
+msgid ""
+"All individual TranslatePress add-on plugins <a href=\"%1$s\" "
+"target=\"_blank\">have been discontinued</a> and are now included in the "
+"premium Personal, Business and Developer versions of TranslatePress. Please "
+"log into your <a href=\"%2$s\" target=\"_blank\">account page</a>, download "
+"the new premium version and install it. Your individual addons settings "
+"will be ported over."
+msgstr ""
+"تمامی افزونه‌های جانبی TranslatePress <a href=\"%1$s\" "
+"target=\"_blank\">توقف یافته‌اند</a> و اکنون در نسخه‌های پریمیوم Personal، "
+"Business و Developer TranslatePress گنجانده شده‌اند. لطفاً به <a "
+"href=\"%2$s\" target=\"_blank\">صفحه حساب کاربری</a> خود وارد شوید، نسخه "
+"پریمیوم جدید را دانلود و نصب کنید. تنظیمات افزونه‌های جانبی شما منتقل خواهد "
+"شد."
+
+msgid "Brand-new Language Switcher Settings are here!"
+msgstr "تنظیمات جدید تعویض‌کننده زبان اینجاست!"
+
+msgid ""
+"Explore pre-made templates, switch colors, flag styles, spacing, layouts & "
+"more. Use the live preview to perfect your switcher in seconds."
+msgstr ""
+"قالب‌های آماده، رنگ‌ها، استایل پرچم‌ها، فاصله‌گذاری، چیدمان و موارد بیشتر "
+"را بررسی کنید. از پیش‌نمایش زنده برای بهبود تعویض‌کننده خود در چند ثانیه "
+"استفاده کنید."
+
+msgid "Start customizing"
+msgstr "شروع سفارشی‌سازی"
+
+msgid "Read documentation"
+msgstr "مطالعه مستندات"
+
+#, tp-glo-ee8b4f9f
+msgid "TranslatePress"
+msgstr "TranslatePress"
+
+#, tp-ctx-8a82cc9e, tp-glo-1aabb38a, tp-glo-5e752340, tp-glo-ee8b4f9f
+msgid ""
+"<strong>TranslatePress</strong> requires <strong><a "
+"href=\"http://php.net/manual/en/book.mbstring.php\">Multibyte String PHP "
+"library</a></strong>. Please contact your server administrator to install "
+"it on your server."
+msgstr ""
+"<strong>TranslatePress</strong> به <strong><a "
+"href=\"http://php.net/manual/en/book.mbstring.php\">کتابخانه رشته چندبایتی "
+"PHP</a></strong> نیاز دارد. لطفاً با مدیر سرور خود تماس بگیرید تا آن را روی "
+"سرور شما نصب کند."
+
+#, tp-glo-5e752340
+msgid ""
+"Detected long query limitation on WPEngine hosting. Some large pages may "
+"appear untranslated. You can remove limitation by adding the following to "
+"your site’s wp-config.php: define( 'WPE_GOVERNOR', false ); "
+msgstr ""
+"محدودیت کوئری طولانی در میزبانی WPEngine شناسایی شد. برخی صفحات بزرگ ممکن "
+"است ترجمه نشده به نظر برسند. می‌توانید با افزودن کد زیر به فایل "
+"wp-config.php سایت خود این محدودیت را حذف کنید: define( 'WPE_GOVERNOR', "
+"false ); "
+
+msgid "Custom Language Flag"
+msgstr "پرچم زبان سفارشی"
+
+msgid "The Language code of the added custom language cannot be empty."
+msgstr "کد زبان زبان سفارشی افزوده‌شده نمی‌تواند خالی باشد."
+
+msgid "The Language code of the added custom language is invalid."
+msgstr "کد زبان زبان سفارشی افزوده‌شده نامعتبر است."
+
+msgid "The Automatic Translation Code of the added custom language is invalid."
+msgstr "کد ترجمه خودکار زبان سفارشی افزوده‌شده نامعتبر است."
+
+#, tp-glo-ee8b4f9f
+msgid "TranslatePress Add-ons"
+msgstr "افزونه‌های جانبی TranslatePress"
+
+msgid ""
+"You must first purchase this version to have access to the addon "
+"%1$shere%2$s"
+msgstr ""
+"ابتدا باید این نسخه را خریداری کنید تا به افزونه دسترسی داشته باشید "
+"%1$sاینجا%2$s"
+
+msgid "Please %1$senter your license%2$s key first, to activate this addon."
+msgstr "لطفاً ابتدا %1$sکلید لایسنس%2$s خود را وارد کنید تا این افزونه فعال شود."
+
+msgid ""
+"You need an active license to have access to the addon. Renew or purchase a "
+"new one %1$shere%2$s."
+msgstr ""
+"برای دسترسی به این افزونه به لایسنس فعال نیاز دارید. برای تمدید یا خرید "
+"لایسنس جدید %1$sاینجا%2$s کلیک کنید."
+
+#, tp-ai, tp-ctx-a6928204
+msgid "Advanced Add-ons"
+msgstr "افزونه‌های پیشرفته"
+
+msgid ""
+"These addons extend your translation plugin and are available in the "
+"Developer, Business and Personal plans."
+msgstr ""
+"این افزونه‌ها قابلیت‌های افزونه ترجمه شما را گسترش می‌دهند و در طرح‌های "
+"توسعه‌دهنده، تجاری و شخصی در دسترس هستند."
+
+#, tp-glo-47180abf, tp-glo-b7a08771
+msgid "SEO Pack"
+msgstr "SEO Pack"
+
+#, tp-glo-47180abf, tp-glo-b7a08771
+msgid "SEO Pack (Legacy)"
+msgstr "SEO Pack (قدیمی)"
+
+#, tp-ctx-07893e52, tp-glo-47180abf, tp-glo-67834fcb, tp-glo-d311355a
+msgid ""
+"SEO support for page slug, page title, description and facebook and twitter "
+"social graph information. The HTML lang attribute is properly set."
+msgstr ""
+"پشتیبانی از SEO برای slug صفحه، عنوان صفحه، توضیحات و اطلاعات گراف اجتماعی "
+"فیس‌بوک و توییتر. ویژگی lang HTML به درستی تنظیم شده است."
+
+msgid "Multiple Languages"
+msgstr "چند زبانه"
+
+msgid ""
+"Add as many languages as you need for your project to go global. Publish "
+"your language only when all your translations are done."
+msgstr ""
+"به اندازه نیاز خود برای جهانی شدن پروژه‌تان زبان اضافه کنید. زبان خود را "
+"تنها زمانی منتشر کنید که همه ترجمه‌ها انجام شده باشند."
+
+msgid "Pro Add-ons"
+msgstr "افزونه‌های حرفه‌ای"
+
+msgid ""
+"These addons extend your translation plugin and are available in the "
+"Business and Developer plans."
+msgstr ""
+"این افزونه‌ها قابلیت‌های افزونه ترجمه شما را گسترش می‌دهند و در طرح‌های "
+"تجاری و توسعه‌دهنده در دسترس هستند."
+
+#, tp-glo-c6709f3f
+msgid "DeepL Automatic Translation"
+msgstr "ترجمه خودکار DeepL"
+
+#, tp-glo-91460d88, tp-glo-c6709f3f
+msgid "Automatically translate your website through the DeepL API."
+msgstr "وب‌سایت خود را به صورت خودکار از طریق API DeepL ترجمه کنید."
+
+msgid ""
+"Prompts visitors to switch to their preferred language based on their "
+"browser settings or IP address and remembers the last visited language."
+msgstr ""
+"بازدیدکنندگان را ترغیب می‌کند تا بر اساس تنظیمات مرورگر یا نشانی IP خود به "
+"زبان ترجیحی خود تغییر دهند و آخرین زبان بازدید شده را به خاطر می‌سپارد."
+
+msgid "Translator Accounts"
+msgstr "حساب‌های مترجم"
+
+msgid ""
+"Create translator accounts for new users or allow existing users that are "
+"not administrators to translate your website."
+msgstr ""
+"برای کاربران جدید حساب مترجم ایجاد کنید یا به کاربران موجودی که مدیر نیستند "
+"اجازه دهید وب‌سایت شما را ترجمه کنند."
+
+msgid "Browse As User Role"
+msgstr "مرور به عنوان نقش کاربری"
+
+msgid ""
+"Navigate your website just like a particular user role would. Really useful "
+"for dynamic content or hidden content that appears for particular users."
+msgstr ""
+"وب‌سایت خود را دقیقاً مانند نقش کاربری خاصی مرور کنید. برای محتوای پویا یا "
+"محتوای مخفی که برای کاربران خاص نمایش داده می‌شود بسیار مفید است."
+
+msgid "Navigation Based on Language"
+msgstr "ناوبری بر اساس زبان"
+
+msgid "Configure different menu items for different languages."
+msgstr "آیتم‌های منوی مختلف را برای زبان‌های مختلف پیکربندی کنید."
+
+msgid "Different Domain per Language"
+msgstr "دامنه مجزا برای هر زبان"
+
+#, tp-glo-47180abf
+msgid ""
+"Connect separate domains or subdomains to each of your translated versions. "
+"Strengthen your brand’s local identity and boost SEO performance for every "
+"language you support."
+msgstr ""
+"دامنه‌ها یا زیردامنه‌های مجزا را به هر یک از نسخه‌های ترجمه‌شده خود متصل "
+"کنید. هویت محلی نام تجاری خود را تقویت کرده و عملکرد SEO را برای هر زبانی "
+"که پشتیبانی می‌کنید، افزایش دهید."
+
+msgid "Recommended Plugins"
+msgstr "افزونه‌های پیشنهادی"
+
+msgid "A short list of plugins you can use to extend your website."
+msgstr ""
+"فهرستی کوتاه از افزونه‌هایی که می‌توانید برای گسترش وب‌سایت خود از آن‌ها "
+"استفاده کنید."
+
+#, tp-glo-35089c1a
+msgid "Profile Builder"
+msgstr "Profile Builder"
+
+#, tp-glo-35089c1a
+msgid ""
+"Capture more user information on the registration form with the help of "
+"Profile Builder's custom user profile fields and/or add an Email "
+"Confirmation process to verify your customers accounts."
+msgstr ""
+"با کمک فیلدهای سفارشی پروفایل کاربری Profile Builder، اطلاعات بیشتری از "
+"کاربران را در فرم ثبت‌نام دریافت کنید و/یا فرآیند تأیید ایمیل را برای تأیید "
+"حساب‌های مشتریان خود اضافه کنید."
+
+msgid "Paid Member Subscriptions"
+msgstr "اشتراک‌های پولی اعضا"
+
+msgid ""
+"Accept user payments, create subscription plans and restrict content on "
+"your membership site."
+msgstr ""
+"پرداخت‌های کاربران را بپذیرید، طرح‌های اشتراک ایجاد کنید و محتوا را در "
+"وب‌سایت عضویت خود محدود کنید."
+
+msgid "WP Webhooks Automator"
+msgstr "خودکارساز WP Webhooks"
+
+#, tp-glo-8896ebe8
+msgid ""
+"Create no-code automations and workflows on your WordPress site. Easily "
+"connect your plugins, sites and apps together."
+msgstr ""
+"خودکارسازی‌ها و گردش‌های کاری بدون کد را در سایت WordPress خود ایجاد کنید. "
+"به‌راحتی افزونه‌ها، سایت‌ها و اپلیکیشن‌های خود را به یکدیگر متصل کنید."
+
+msgid "Save Changes"
+msgstr "ذخیره تغییرات"
+
+#, tp-glo-ee8b4f9f
+msgid "TranslatePress Errors"
+msgstr "خطاهای TranslatePress"
+
+msgid "There are no logged errors."
+msgstr "هیچ خطای ثبت‌شده‌ای وجود ندارد."
+
+msgid "Change language"
+msgstr "تغییر زبان"
+
+msgid "Website language selector"
+msgstr "انتخاب‌گر زبان وب‌سایت"
+
+#, tp-glo-8896ebe8
+msgid "WordPress Translation Plugin"
+msgstr "افزونه ترجمه WordPress"
+
+msgid "Available languages"
+msgstr "زبان‌های موجود"
+
+msgid "Language Switcher update notice"
+msgstr "اطلاعیه به‌روزرسانی جابجاگر زبان"
+
+msgid "Legacy language switcher is currently enabled"
+msgstr "جابجاگر زبان قدیمی در حال حاضر فعال است"
+
+msgid ""
+"We’ve upgraded the switcher for richer customization and a better user "
+"experience.<br>In order to use the new configurator, turn off <strong>Load "
+"legacy language switcher</strong>."
+msgstr ""
+"ما جابجاگر را برای سفارشی‌سازی غنی‌تر و تجربه کاربری بهتر ارتقا "
+"داده‌ایم.<br>برای استفاده از پیکربندی جدید، <strong>بارگذاری جابجاگر زبان "
+"قدیمی</strong> را خاموش کنید."
+
+#, tp-ai, tp-ctx-a6928204
+msgid ""
+"Note: You can switch back anytime from <strong>Advanced Settings → <a "
+"href=\"%s\">Troubleshooting</a></strong>."
+msgstr ""
+"نکته: می‌توانید در هر زمان از <strong>تنظیمات پیشرفته → <a href=\"%s\">رفع "
+"اشکال</a></strong> به حالت قبل بازگردید."
+
+msgid "Enable the new switcher"
+msgstr "فعال‌سازی سوئیچر جدید"
+
+msgid "Your License Key is valid."
+msgstr "کلید مجوز شما معتبر است."
+
+msgid "Your License Key is invalid."
+msgstr "کلید مجوز شما نامعتبر است."
+
+msgid "Your License has expired."
+msgstr "مجوز شما منقضی شده است."
+
+msgid "Deactivate License"
+msgstr "غیرفعال‌سازی مجوز"
+
+msgid "Add a license key"
+msgstr "افزودن کلید مجوز"
+
+msgid "License Key"
+msgstr "کلید مجوز"
+
+msgid "Manage your license in your %1$s."
+msgstr "مجوز خود را در %1$s خود مدیریت کنید."
+
+msgid "Account Page"
+msgstr "صفحه حساب کاربری"
+
+#, tp-glo-ee8b4f9f, tp-glo-f7c8926f
+msgid "Don’t have a TranslatePress AI License Key?"
+msgstr "کلید مجوز TranslatePress AI ندارید؟"
+
+msgid "You can get one for %1$sfree%2$s, by creating a free account. It includes:"
+msgstr ""
+"با ایجاد یک حساب رایگان، می‌توانید یکی را %1$sرایگان%2$s دریافت کنید. شامل "
+"موارد زیر است:"
+
+#, tp-glo-ee8b4f9f, tp-glo-f7c8926f
+msgid "Access to TranslatePress AI for instant automatic translations"
+msgstr "دسترسی به TranslatePress AI برای ترجمه‌های خودکار آنی"
+
+msgid "2000 AI words to translate automatically"
+msgstr "۲۰۰۰ کلمه AI برای ترجمه خودکار"
+
+msgid "Get a free License Today"
+msgstr "امروز مجوز رایگان دریافت کنید"
+
+msgid "Debug Information"
+msgstr "اطلاعات اشکال‌زدایی"
+
+msgid "Debug Data for License Checking"
+msgstr "داده‌های اشکال‌زدایی برای بررسی مجوز"
+
+msgid "Debug Data for License Activation"
+msgstr "داده‌های اشکال‌زدایی برای فعال‌سازی مجوز"
+
+#, tp-glo-77a09a79, tp-glo-ee8b4f9f
+msgid "Get more AI words and unlock all features with TranslatePress Pro."
+msgstr ""
+"کلمه‌های AI بیشتری دریافت کنید و با TranslatePress Pro تمام ویژگی‌ها را باز "
+"کنید."
+
+msgid "Upgrade now ↗"
+msgstr "اکنون ارتقا دهید ↗"
+
+msgid "Already purchased a Premium version?"
+msgstr "آیا قبلاً نسخهٔ پرمیوم را خریداری کرده‌اید؟"
+
+msgid "Go to your %1$s"
+msgstr "به %1$s خود بروید"
+
+#, tp-glo-ee8b4f9f
+msgid "TranslatePress.com Account"
+msgstr "حساب TranslatePress.com"
+
+msgid "Download & Install the Pro plugin"
+msgstr "دانلود و نصب افزونهٔ Pro"
+
+msgid "Learn More"
+msgstr "بیشتر بدانید"
+
+msgid "Get a translation volume estimate with a detailed breakdown per page"
+msgstr "دریافت برآورد حجم ترجمه با تفکیک جزئی به ازای هر صفحه"
+
+msgid "Find how many translatable words are on your website"
+msgstr "تعداد کلمات قابل ترجمه در وب‌سایت خود را بیابید"
+
+msgid "Enable Automatic Translation"
+msgstr "فعال‌سازی ترجمهٔ خودکار"
+
+#, tp-glo-c6709f3f
+msgid ""
+"To use <strong>DeepL</strong> for automatic translation, activate this Pro "
+"add-on from the <a href=\"%1$s\" target=\"_self\" title=\"%2$s\">%2$s</a>."
+msgstr ""
+"برای استفاده از <strong>DeepL</strong> در ترجمهٔ خودکار، این افزونهٔ Pro را "
+"از <a href=\"%1$s\" target=\"_self\" title=\"%2$s\">%2$s</a> فعال کنید."
+
+#, tp-glo-c6709f3f
+msgid ""
+"<strong>DeepL</strong> automatic translation is available as a <a "
+"href=\"%1$s\" target=\"_blank\" title=\"%2$s\">%2$s</a>."
+msgstr ""
+"ترجمهٔ خودکار <strong>DeepL</strong> به صورت <a href=\"%1$s\" "
+"target=\"_blank\" title=\"%2$s\">%2$s</a> در دسترس است."
+
+#, tp-glo-ee8b4f9f
+msgid ""
+"By upgrading you'll get access to all paid add-ons, premium support and "
+"help fund the future development of TranslatePress."
+msgstr ""
+"با ارتقا به تمام افزونه‌های پولی و پشتیبانی ویژه دسترسی پیدا می‌کنید و به "
+"تأمین مالی توسعهٔ آیندهٔ TranslatePress کمک می‌کنید."
+
+#, tp-glo-91460d88, tp-glo-c6709f3f, tp-glo-d311355a
+msgid ""
+"Please note that DeepL API usage is paid separately. See <a "
+"href=\"https://www.deepl.com/pro.html#developer\">DeepL pricing "
+"information</a>."
+msgstr ""
+"لطفاً توجه داشته باشید که استفاده از API DeepL جداگانه هزینه دارد. <a "
+"href=\"https://www.deepl.com/pro.html#developer\">اطلاعات قیمت‌گذاری "
+"DeepL</a> را مشاهده کنید."
+
+#, tp-glo-77a09a79, tp-glo-ee8b4f9f
+msgid "TranslatePress Pro Add-ons"
+msgstr "افزونه‌های TranslatePress Pro"
+
+#, tp-glo-91460d88
+msgid "Test API credentials"
+msgstr "آزمایش اعتبارنامه‌های API"
+
+msgid "Check if the selected translation engine is configured correctly."
+msgstr "بررسی می‌کند آیا موتور ترجمهٔ انتخاب‌شده به درستی پیکربندی شده است."
+
+msgid "Alternative Engines"
+msgstr "موتورهای جایگزین"
+
+#, tp-glo-ee8b4f9f, tp-glo-f7c8926f
+msgid "Switch to TranslatePress AI"
+msgstr "تغییر به TranslatePress AI"
+
+#, tp-glo-8896ebe8
+msgid "Integrate machine translation directly with your WordPress website."
+msgstr "ترجمهٔ ماشینی را مستقیماً با وب‌سایت WordPress خود یکپارچه کنید."
+
+msgid "More info"
+msgstr "اطلاعات بیشتر"
+
+msgid ""
+"Choose which engine you want to use in order to %1$s automatically "
+"translate your website."
+msgstr ""
+"موتوری را که می‌خواهید برای %1$s ترجمهٔ خودکار وب‌سایت خود استفاده کنید، "
+"انتخاب کنید."
+
+msgid "Automatic Translation Settings"
+msgstr "تنظیمات ترجمه خودکار"
+
+msgid "AI Words Low Notification"
+msgstr "اعلان کمبود کلمات هوش مصنوعی"
+
+#, tp-glo-ee8b4f9f, tp-glo-f7c8926f
+msgid ""
+"Receive an email notification when your TranslatePress AI word count drops "
+"below the specified threshold."
+msgstr ""
+"وقتی تعداد کلمات TranslatePress AI شما از آستانه مشخص‌شده پایین‌تر رفت، یک "
+"اعلان ایمیلی دریافت کنید."
+
+#, tp-glo-ee8b4f9f, tp-glo-f7c8926f
+msgid ""
+"This feature is only available when using the TranslatePress AI translation "
+"engine."
+msgstr ""
+"این قابلیت تنها در هنگام استفاده از موتور ترجمه TranslatePress AI در دسترس "
+"است."
+
+msgid "Notification Email"
+msgstr "ایمیل اعلان"
+
+msgid "The email address where the low AI words notification will be sent."
+msgstr "آدرس ایمیلی که اعلان کمبود کلمات هوش مصنوعی به آن ارسال می‌شود."
+
+msgid "Word Threshold"
+msgstr "آستانه کلمه"
+
+msgid "words"
+msgstr "کلمه"
+
+msgid "You will be notified when remaining AI words drop below this number."
+msgstr ""
+"وقتی تعداد کلمات هوش مصنوعی باقی‌مانده از این عدد کمتر شد، به شما اطلاع "
+"داده می‌شود."
+
+#, tp-ctx-742ebaa7
+msgid "Automatically Translate Slugs"
+msgstr "ترجمه خودکار slugها"
+
+#, tp-ctx-742ebaa7, tp-ctx-7832384c, tp-ctx-e9944eb3
+msgid ""
+"Generate automatic translations of slugs for posts, pages and Custom Post "
+"Types.<br/>The slugs will be automatically translated starting with the "
+"second refresh of each page."
+msgstr ""
+"ایجاد ترجمه خودکار slugها برای نوشته‌ها، برگه‌ها و انواع نوشته "
+"سفارشی.<br/>slugها از دومین بار بازخوانی هر صفحه به‌صورت خودکار ترجمه "
+"می‌شوند."
+
+#, tp-glo-ee8b4f9f
+msgid ""
+"This feature is only available in the paid version. Upgrade TranslatePress "
+"and unlock more premium features."
+msgstr ""
+"این قابلیت تنها در نسخه پولی در دسترس است. TranslatePress را ارتقا دهید و "
+"قابلیت‌های پرمیوم بیشتری را باز کنید."
+
+#, tp-glo-47180abf, tp-glo-b7a08771, tp-glo-ee8b4f9f
+msgid ""
+"Requires <a href=\"%s\" title=\"TranslatePress Add-on SEO Pack "
+"documentation\" target=\"_blank\">SEO Pack Add-on</a> to be installed and "
+"activated."
+msgstr ""
+"نیازمند نصب و فعال‌سازی <a href=\"%s\" title=\"TranslatePress Add-on SEO "
+"Pack documentation\" target=\"_blank\">افزودنی SEO Pack</a> است."
+
+msgid "Upgrade now"
+msgstr "اکنون ارتقا دهید"
+
+msgid "Block Crawlers"
+msgstr "مسدودسازی خزنده‌ها"
+
+msgid ""
+"Block crawlers from triggering automatic translations on your "
+"website.<br>This will not prevent crawlers from accessing this site's pages."
+msgstr ""
+"از فعال شدن ترجمه خودکار توسط خزنده‌ها در وب‌سایت خود جلوگیری کنید.<br>این "
+"کار از دسترسی خزنده‌ها به صفحات این سایت جلوگیری نمی‌کند."
+
+msgid "Limit machine translation / characters per day"
+msgstr "محدود کردن ترجمه ماشینی / نویسه در روز"
+
+msgid ""
+"Add a limit to the number of automatically translated characters so you can "
+"better budget your project."
+msgstr ""
+"با افزودن محدودیت به تعداد نویسه‌های ترجمه‌شده خودکار، می‌توانید بودجه "
+"پروژه خود را بهتر مدیریت کنید."
+
+msgid "characters per day"
+msgstr "نویسه در روز"
+
+msgid "Today's Character Count: "
+msgstr "تعداد نویسه‌های امروز: "
+
+msgid "Log machine translation queries."
+msgstr "ثبت پرس‌وجوهای ترجمه ماشینی."
+
+#, tp-glo-8896ebe8
+msgid ""
+"Only enable for testing purposes. Can impact performance.<br>All records "
+"are stored in the wp_trp_machine_translation_log database table. Use a "
+"plugin like <a href=\"https://wordpress.org/plugins/wp-data-access/\" "
+"target=\"_blank\">WP Data Access</a> to browse the logs or directly from "
+"your database manager (PHPMyAdmin, etc.)"
+msgstr ""
+"فقط برای اهداف آزمایشی فعال کنید. ممکن است بر عملکرد تأثیر بگذارد.<br>تمام "
+"رکوردها در جدول پایگاه داده wp_trp_machine_translation_log ذخیره می‌شوند. "
+"از افزونه‌ای مانند <a "
+"href=\"https://wordpress.org/plugins/wp-data-access/\" target=\"_blank\">WP "
+"Data Access</a> برای مرور گزارش‌ها یا مستقیماً از مدیر پایگاه داده خود "
+"(PHPMyAdmin و غیره) استفاده کنید."
+
+#, tp-glo-91460d88
+msgid "Test API Credentials"
+msgstr "آزمایش اعتبارنامه‌های API"
+
+#, tp-glo-1aabb38a
+msgid "HTTP Referrer: "
+msgstr "ارجاع‌دهنده HTTP: "
+
+#, tp-glo-1aabb38a, tp-glo-91460d88
+msgid ""
+"Use this HTTP Referrer if the API lets you restrict key usage from its "
+"Dashboard."
+msgstr ""
+"در صورتی که API امکان محدود کردن استفاده از کلید را از داشبورد خود می‌دهد، "
+"از این ارجاع‌دهنده HTTP استفاده کنید."
+
+msgid "Response"
+msgstr "پاسخ"
+
+msgid "Response Body"
+msgstr "بدنه پاسخ"
+
+msgid "Entire Response From wp_remote_get():"
+msgstr "پاسخ کامل از wp_remote_get():"
+
+msgid "All Languages"
+msgstr "همه زبان‌ها"
+
+msgid "Select the languages you wish to make your website available in."
+msgstr "زبان‌هایی را که می‌خواهید وب‌سایت شما به آن‌ها در دسترس باشد، انتخاب کنید."
+
+msgid "Formality"
+msgstr "رسمیت"
+
+msgid "Code"
+msgstr "کد"
+
+#, tp-ctx-07893e52, tp-glo-67834fcb
+msgid "Slug"
+msgstr "slug"
+
+msgid "Default"
+msgstr "پیش‌فرض"
+
+msgid "Formal"
+msgstr "رسمی"
+
+msgid "Informal"
+msgstr "غیررسمی"
+
+msgid "Language"
+msgstr "زبان"
+
+msgid "This language does not support formality. "
+msgstr "این زبان از رسمیت پشتیبانی نمی‌کند. "
+
+msgid "Are you sure you want to remove this language?"
+msgstr "آیا مطمئن هستید که می‌خواهید این زبان را حذف کنید؟"
+
+msgid "Custom Languages"
+msgstr "زبان‌های سفارشی"
+
+msgid "To Add more languages activate the Multiple Languages Addon"
+msgstr "برای افزودن زبان‌های بیشتر، افزونه چندزبانگی را فعال کنید"
+
+msgid ""
+"You need an active license to add more languages. Verify in your "
+"%1$saccount%2$s that your license is valid"
+msgstr ""
+"برای افزودن زبان‌های بیشتر به لایسنس فعال نیاز دارید. در %1$sحساب "
+"کاربری%2$s خود بررسی کنید که لایسنس شما معتبر است."
+
+msgid "Please %1$senter your license%2$s key first to add more languages."
+msgstr ""
+"لطفاً ابتدا %1$sکلید لایسنس خود را وارد کنید%2$s تا بتوانید زبان‌های بیشتری "
+"اضافه کنید."
+
+#, tp-glo-ee8b4f9f
+msgid ""
+"Adding more than two languages is a paid feature. Upgrade TranslatePress "
+"and unlock more premium features."
+msgstr ""
+"افزودن بیش از دو زبان یک قابلیت پولی است. TranslatePress را ارتقا دهید و "
+"قابلیت‌های ویژه بیشتری را باز کنید."
+
+msgid "Website Languages"
+msgstr "زبان‌های وب‌سایت"
+
+msgid "Default Language"
+msgstr "زبان پیش‌فرض"
+
+msgid "Select the language your content is written in."
+msgstr "زبانی که محتوای شما به آن نوشته شده است را انتخاب کنید."
+
+msgid ""
+"WARNING. Changing the default language will invalidate existing "
+"translations."
+msgstr "هشدار. تغییر زبان پیش‌فرض، ترجمه‌های موجود را باطل می‌کند."
+
+msgid ""
+"Even changing from en_US to en_GB, because they are treated as two "
+"different languages."
+msgstr ""
+"حتی تغییر از en_US به en_GB، زیرا آن‌ها به عنوان دو زبان متفاوت در نظر "
+"گرفته می‌شوند."
+
+msgid "In most cases changing the default flag is all it is needed: "
+msgstr "در بیشتر موارد، تغییر پرچم پیش‌فرض تنها چیزی است که نیاز است: "
+
+msgid "replace the default flag"
+msgstr "جایگزینی پرچم پیش‌فرض"
+
+msgid "Re-run Setup Wizard"
+msgstr "اجرای مجدد جادوگر راه‌اندازی"
+
+#, tp-glo-ee8b4f9f
+msgid ""
+"The Setup wizard allows you to quickly setup TranslatePress. You can "
+"initiate it at any time."
+msgstr ""
+"جادوگر راه‌اندازی به شما امکان می‌دهد TranslatePress را به سرعت راه‌اندازی "
+"کنید. می‌توانید آن را در هر زمانی شروع کنید."
+
+msgid "Language Settings"
+msgstr "تنظیمات زبان"
+
+msgid "Use Native language name"
+msgstr "استفاده از نام بومی زبان"
+
+msgid ""
+"Check if you want to display languages in their native names. Otherwise, "
+"languages will be displayed in English."
+msgstr ""
+"اگر می‌خواهید زبان‌ها را با نام‌های بومی آن‌ها نمایش دهید، این گزینه را "
+"علامت بزنید. در غیر این صورت، زبان‌ها به انگلیسی نمایش داده می‌شوند."
+
+msgid "Use a subdirectory for the default language"
+msgstr "استفاده از زیرپوشه برای زبان پیش‌فرض"
+
+#, tp-glo-9fa92a70
+msgid ""
+"Check if you want to add the subdirectory in the URL for the default "
+"language.</br>By checking this option, the default language seen by website "
+"visitors will become the first one in the \"All Languages\" list."
+msgstr ""
+"اگر می‌خواهید زیرپوشه را در URL برای زبان پیش‌فرض اضافه کنید، این گزینه را "
+"علامت بزنید.</br>با علامت زدن این گزینه، زبان پیش‌فرضی که بازدیدکنندگان "
+"وب‌سایت می‌بینند، اولین مورد در فهرست «همه زبان‌ها» خواهد شد."
+
+msgid "Force language in custom links"
+msgstr "اعمال زبان در پیوندهای سفارشی"
+
+msgid ""
+"Select Yes if you want to force custom links without language encoding to "
+"keep the currently selected language."
+msgstr ""
+"اگر می‌خواهید پیوندهای سفارشی بدون کدگذاری زبان، زبان انتخاب‌شده فعلی را "
+"حفظ کنند، بله را انتخاب کنید."
+
+#, tp-glo-da70db08
+msgid "Shortcode "
+msgstr "shortcode "
+
+#, tp-glo-da70db08
+msgid "Use shortcode on any page or widget."
+msgstr "از shortcode در هر برگه یا ابزارک استفاده کنید."
+
+#, tp-glo-8339568d
+msgid ""
+"You can also add the <a href=\"%s\" title=\"Language Switcher Block "
+"Documentation\">Language Switcher Block</a> in the WP Gutenberg Editor."
+msgstr ""
+"همچنین می‌توانید <a href=\"%s\" title=\"مستندات بلوک تغییر زبان\">بلوک "
+"تغییر زبان</a> را در ویرایشگر Gutenberg وردپرس اضافه کنید."
+
+msgid "Menu item"
+msgstr "آیتم منو"
+
+msgid ""
+"Go to  %1$s Appearance -> Menus%2$s to add languages to the Language "
+"Switcher in any menu."
+msgstr ""
+"به  %1$s نمایش -> فهرست‌ها%2$s بروید تا زبان‌ها را به تغییر زبان در هر "
+"منویی اضافه کنید."
+
+msgid "Learn more in our documentation."
+msgstr "در مستندات ما بیشتر بدانید."
+
+msgid "Floating language selection"
+msgstr "انتخاب زبان شناور"
+
+msgid "Add a floating dropdown that follows the user on every page."
+msgstr "افزودن یک کشوی شناور که کاربر را در هر برگه‌ای دنبال می‌کند."
+
+#, tp-glo-ee8b4f9f
+msgid "Show \"Powered by TranslatePress\""
+msgstr "نمایش «Powered by TranslatePress»"
+
+#, tp-glo-ee8b4f9f
+msgid ""
+"Show the small \"Powered by TranslatePress\" label in the floater language "
+"switcher."
+msgstr "نمایش برچسب کوچک «Powered by TranslatePress» در تغییر زبان شناور."
+
+msgid "5 Days to Better Multilingual Websites"
+msgstr "۵ روز تا وب‌سایت‌های چندزبانه بهتر"
+
+#, tp-glo-ee8b4f9f
+msgid ""
+"%sJoin our FREE & EXCLUSIVE onboarding course%s and learn how to grow your "
+"multilingual traffic, reach international markets, and save time & money "
+"while getting the most out of TranslatePress!"
+msgstr ""
+"%sدر دوره راه‌اندازی رایگان و اختصاصی ما شرکت کنید%s و بیاموزید که چگونه "
+"ترافیک چندزبانه خود را افزایش دهید، به بازارهای بین‌المللی دست یابید و در "
+"زمان و هزینه صرفه‌جویی کنید و در عین حال بیشترین بهره را از TranslatePress "
+"ببرید!"
+
+msgid "Invalid email address"
+msgstr "رایانامه نامعتبر"
+
+msgid "Your email"
+msgstr "رایانامه شما"
+
+msgid "Sign me up!"
+msgstr "ثبت‌نام می‌کنم!"
+
+#, tp-glo-ee8b4f9f
+msgid ""
+"Sign up with your email address and receive a 5-part email guide to help "
+"you maximize the power of TranslatePress."
+msgstr ""
+"با نشانی رایانامه خود ثبت‌نام کنید و یک راهنمای ۵ قسمتی دریافت کنید تا به "
+"شما در بهره‌برداری کامل از قدرت TranslatePress کمک کند."
+
+msgid "Dismiss email course notification"
+msgstr "بستن اعلان دوره رایانامه‌ای"
+
+msgid ""
+"Hey %s,<br>Never miss an important update - opt in to our security and "
+"feature updates notifications, and non-sensitive diagnostic tracking."
+msgstr ""
+"سلام %s،<br>هرگز یک به‌روزرسانی مهم را از دست ندهید - در اعلان‌های "
+"به‌روزرسانی امنیتی و ویژگی و همچنین ردیابی تشخیصی غیرحساس مشترک شوید."
+
+msgid "Allow & Continue"
+msgstr "اجازه و ادامه"
+
+msgid "Skip"
+msgstr "رد کردن"
+
+#, tp-glo-ee8b4f9f
+msgid "This will allow TranslatePress to:"
+msgstr "این به TranslatePress اجازه می‌دهد:"
+
+msgid "Your profile overview"
+msgstr "نمای کلی پروفایل شما"
+
+msgid "Name and email address"
+msgstr "نام و نشانی رایانامه"
+
+msgid "Admin Notices"
+msgstr "اعلان‌های مدیر"
+
+msgid "Updates, announcements, marketing, no spam"
+msgstr "به‌روزرسانی‌ها، اطلاعیه‌ها، بازاریابی، بدون هرزنامه"
+
+msgid "Plugin status & settings"
+msgstr "وضعیت و تنظیمات افزونه"
+
+msgid "Active, Deactivated, installed version and settings"
+msgstr "فعال، غیرفعال، نسخه نصب‌شده و تنظیمات"
+
+msgid "Privacy Policy"
+msgstr "سیاست حریم خصوصی"
+
+msgid "Terms of Service"
+msgstr "شرایط خدمات"
+
+msgid "Support"
+msgstr "پشتیبانی"
+
+msgid "Documentation"
+msgstr "مستندات"
+
+msgid "Add Extra AI Words"
+msgstr "افزودن کلمات AI اضافی"
+
+#, tp-glo-ee8b4f9f
+msgid "Optimize TranslatePress database tables"
+msgstr "بهینه‌سازی جداول پایگاه داده TranslatePress"
+
+msgid ""
+"<strong>IMPORTANT NOTE:</strong> Before performing this action it is "
+"strongly recommended to first backup the database."
+msgstr ""
+"<strong>نکته مهم:</strong> قبل از انجام این عمل، اکیداً توصیه می‌شود ابتدا "
+"از پایگاه داده نسخه پشتیبان تهیه کنید."
+
+msgid ""
+"IMPORTANT: It is strongly recommended to first backup the database!! Are "
+"you sure you want to continue?"
+msgstr ""
+"مهم: اکیداً توصیه می‌شود ابتدا از پایگاه داده نسخه پشتیبان تهیه کنید!! آیا "
+"مطمئن هستید که می‌خواهید ادامه دهید؟"
+
+msgid "Operations to perform"
+msgstr "عملیات‌های قابل انجام"
+
+#, tp-ctx-2edc90df
+msgid "Remove CDATA for original and dictionary strings"
+msgstr "حذف CDATA برای رشته‌های اصلی و دیکشنری"
+
+#, tp-glo-ee8b4f9f
+msgid ""
+"Removes CDATA from trp_original_strings and trp_dictionary_* "
+"tables.<br>This type of content should not be detected by TranslatePress. "
+"It might have been introduced in the database in older versions of the "
+"plugin."
+msgstr ""
+"CDATA را از جداول trp_original_strings و trp_dictionary_* حذف "
+"می‌کند.<br>این نوع محتوا نباید توسط TranslatePress شناسایی شود. ممکن است در "
+"نسخه‌های قدیمی‌تر افزونه در پایگاه داده ایجاد شده باشد."
+
+msgid "Remove untranslated links from dictionary tables"
+msgstr "حذف پیوندهای ترجمه‌نشده از جداول دیکشنری"
+
+#, tp-ctx-2edc90df, tp-ctx-e9944eb3
+msgid ""
+"Removes untranslated links and images from all trp_dictionary_* tables. "
+"These tables contain translations for user-inputted strings such as post "
+"content, post title, menus etc."
+msgstr ""
+"پیوندها و تصاویر ترجمه‌نشده را از تمام جدول‌های trp_dictionary_* حذف "
+"می‌کند. این جدول‌ها ترجمه‌هایی برای رشته‌های ورودی کاربر مانند محتوای "
+"نوشته، عنوان نوشته، فهرست‌ها و غیره دارند."
+
+#, tp-ctx-2edc90df, tp-glo-64dbb752
+msgid "Remove duplicate rows for gettext strings"
+msgstr "حذف ردیف‌های تکراری برای رشته‌های gettext"
+
+#, tp-ctx-2edc90df
+msgid ""
+"Cleans up all trp_gettext_* tables of duplicate rows. These tables contain "
+"translations for themes and plugin strings."
+msgstr ""
+"تمام جدول‌های trp_gettext_* را از ردیف‌های تکراری پاک‌سازی می‌کند. این "
+"جدول‌ها ترجمه‌هایی برای رشته‌های پوسته و افزونه دارند."
+
+#, tp-ctx-2edc90df
+msgid "Remove duplicate rows for dictionary strings"
+msgstr "حذف ردیف‌های تکراری برای رشته‌های دیکشنری"
+
+#, tp-ctx-2edc90df, tp-ctx-e9944eb3
+msgid ""
+"Cleans up all trp_dictionary_* tables of duplicate rows. These tables "
+"contain translations for user-inputted strings such as post content, post "
+"title, menus etc."
+msgstr ""
+"تمام جدول‌های trp_dictionary_* را از ردیف‌های تکراری پاک‌سازی می‌کند. این "
+"جدول‌ها ترجمه‌هایی برای رشته‌های ورودی کاربر مانند محتوای نوشته، عنوان "
+"نوشته، فهرست‌ها و غیره دارند."
+
+#, tp-ctx-2edc90df
+msgid "Remove duplicate rows for original dictionary strings"
+msgstr "حذف ردیف‌های تکراری برای رشته‌های اصلی دیکشنری"
+
+#, tp-ctx-2edc90df, tp-ctx-e9944eb3
+msgid ""
+"Cleans up all trp_original_strings table of duplicate rows. This table "
+"contains strings in the default language, without any translation.<br>The "
+"trp_original_meta table, which contains meta information that refers to the "
+"post parent’s ID, is also regenerated.<br>Such duplicates can appear in "
+"exceptional situations of unexpected behavior."
+msgstr ""
+"تمام جدول trp_original_strings را از ردیف‌های تکراری پاک‌سازی می‌کند. این "
+"جدول شامل رشته‌هایی به زبان پیش‌فرض، بدون هیچ ترجمه‌ای است.<br>جدول "
+"trp_original_meta که شامل اطلاعات فراداده‌ای است که به شناسه والد نوشته "
+"اشاره دارد، نیز بازتولید می‌شود.<br>چنین تکرارهایی می‌توانند در شرایط "
+"استثنایی ناشی از رفتار غیرمنتظره پدیدار شوند."
+
+#, tp-ctx-2edc90df, tp-glo-64dbb752
+msgid ""
+"Replace gettext strings that have original ID NULL with the correct "
+"original IDs"
+msgstr "جایگزینی رشته‌های gettext که شناسه اصلی NULL دارند با شناسه‌های اصلی صحیح"
+
+#, tp-ctx-2edc90df, tp-ctx-8a82cc9e, tp-glo-64dbb752
+msgid ""
+"Fixes an edge case issue where some gettext strings have the original ID "
+"incorrectly set to NULL, causing problems in the Translation "
+"Editor.<br>This operation corrects the original IDs in the trp_gettext_* "
+"tables.<br>Only check this option if you encountered an issue in the "
+"Translation Editor where clicking the green pencil did not bring up the "
+"gettext string for translation in the left sidebar.<br>Otherwise, please "
+"leave this option unchecked because it's an intensive operation."
+msgstr ""
+"یک مشکل حالت مرزی را برطرف می‌کند که در آن برخی رشته‌های gettext شناسه اصلی "
+"را به‌اشتباه بر روی NULL تنظیم کرده‌اند و باعث بروز مشکل در ویرایشگر ترجمه "
+"می‌شود.<br>این عملیات شناسه‌های اصلی را در جدول‌های trp_gettext_* تصحیح "
+"می‌کند.<br>این گزینه را تنها در صورتی علامت بزنید که با مشکلی در ویرایشگر "
+"ترجمه مواجه شده‌اید که در آن با کلیک روی مداد سبز، رشته gettext برای ترجمه "
+"در نوار کناری چپ ظاهر نشد.<br>در غیر این صورت، لطفاً این گزینه را "
+"علامت‌گذاری نکنید زیرا یک عملیات سنگین است."
+
+msgid "Optimize Database"
+msgstr "بهینه‌سازی پایگاه داده"
+
+#, tp-glo-34f425d9, tp-glo-ee8b4f9f
+msgid "TranslatePress Database Updater"
+msgstr "TranslatePress Database Updater"
+
+#, tp-glo-ee8b4f9f
+msgid "Updating TranslatePress tables. Please leave this window open."
+msgstr ""
+"در حال به‌روزرسانی جدول‌های TranslatePress. لطفاً این پنجره را باز نگه "
+"دارید."
+
+msgid ""
+"The inactive languages will still be visible and active for the admin. For "
+"other users they won't be visible in the language switchers and won't be "
+"accessible either."
+msgstr ""
+"زبان‌های غیرفعال همچنان برای مدیر قابل مشاهده و فعال خواهند بود. برای سایر "
+"کاربران در تعویض‌کننده‌های زبان قابل مشاهده نخواهند بود و همچنین در دسترس "
+"نخواهند بود."
+
+msgid "unknown"
+msgstr "نامشخص"
+
+#, tp-glo-ee8b4f9f
+msgid ""
+"<strong>Extra Languages add-on</strong> requires TranslatePress version "
+"%1$s or higher. You are currently using version %2$s. Please update "
+"TranslatePress to enable this feature."
+msgstr ""
+"<strong>افزودنی Extra Languages</strong> به نسخه %1$s یا بالاتر از "
+"TranslatePress نیاز دارد. شما در حال حاضر از نسخه %2$s استفاده می‌کنید. "
+"لطفاً برای فعال‌سازی این قابلیت، TranslatePress را به‌روزرسانی کنید."
+
+#, tp-ctx-07893e52, tp-glo-67834fcb, tp-glo-ee8b4f9f
+msgid ""
+"Automatic and manual slug translation changes performed when "
+"<strong>TranslatePress - Multilingual</strong> 2.8.4 was active had to be "
+"removed because of some issues with that version. All slug translations "
+"from before that version are now in use. Thank you for understanding!"
+msgstr ""
+"تغییرات ترجمه خودکار و دستی slug که هنگام فعال بودن <strong>TranslatePress "
+"- Multilingual</strong> 2.8.4 انجام شده بودند، به‌دلیل برخی مشکلات آن نسخه "
+"باید حذف می‌شدند. تمام ترجمه‌های slug قبل از آن نسخه اکنون در حال استفاده "
+"هستند. از درک شما سپاسگزاریم!"
+
+msgid ""
+"If you absolutely need them, the removed translations can be found in "
+"tables trp_slug_original_obsolete and trp_slug_translation_obsolete."
+msgstr ""
+"اگر حتماً به آن‌ها نیاز دارید، ترجمه‌های حذف‌شده را می‌توانید در جدول‌های "
+"trp_slug_original_obsolete و trp_slug_translation_obsolete بیابید."
+
+msgid "View Docs"
+msgstr "مشاهده مستندات"
+
+#, tp-glo-ee8b4f9f
+msgid ""
+"Assign different domains or subdomains to each language. When visitors "
+"access these domains, TranslatePress loads the appropriate language "
+"translation directly without redirecting."
+msgstr ""
+"اختصاص دامنه‌ها یا زیردامنه‌های مختلف به هر زبان. هنگامی که بازدیدکنندگان "
+"به این دامنه‌ها دسترسی پیدا می‌کنند، TranslatePress ترجمه زبان مناسب را "
+"مستقیماً بدون تغییر مسیر بارگذاری می‌کند."
+
+msgid "Example: %1$s for English, %2$s for Spanish, %3$s for French."
+msgstr "مثال: %1$s برای انگلیسی، %2$s برای اسپانیایی، %3$s برای فرانسوی."
+
+msgid "Before enabling:"
+msgstr "پیش از فعال‌سازی:"
+
+#, tp-glo-1edf89cb
+msgid ""
+"Ensure your domains are registered, pointed to your server, and have SSL "
+"certificates configured."
+msgstr ""
+"مطمئن شوید دامنه‌های شما ثبت شده‌اند، به سرور شما اشاره دارند و گواهی‌های "
+"SSL برای آن‌ها پیکربندی شده‌اند."
+
+msgid "Domain"
+msgstr "دامنه"
+
+msgid "Map this language to a different domain or sub-domain."
+msgstr "این زبان را به یک دامنه یا زیردامنه دیگر نگاشت کنید."
+
+msgid "https://example.com"
+msgstr "https://example.com"
+
+msgid "Prefill with current domain"
+msgstr "پرکردن خودکار با دامنه فعلی"
+
+#, tp-glo-e765e8ba
+msgid "Check DNS"
+msgstr "بررسی DNS"
+
+#, tp-glo-e765e8ba
+msgid "Checking DNS..."
+msgstr "در حال بررسی DNS..."
+
+#, tp-glo-e765e8ba
+msgid "DNS is correctly configured!"
+msgstr "DNS به درستی پیکربندی شده است!"
+
+#, tp-glo-e765e8ba
+msgid "DNS check failed. Please verify your domain configuration."
+msgstr "بررسی DNS ناموفق بود. لطفاً پیکربندی دامنه خود را بررسی کنید."
+
+msgid "This domain is already assigned to another language."
+msgstr "این دامنه قبلاً به زبان دیگری اختصاص داده شده است."
+
+#, tp-glo-ee8b4f9f
+msgid ""
+"<strong>Different Domain per Language add-on</strong> requires "
+"TranslatePress version %1$s or higher. You are currently using version "
+"%2$s. Please update TranslatePress to enable this feature."
+msgstr ""
+"<strong>افزودنی دامنه متفاوت برای هر زبان</strong> به نسخه %1$s "
+"TranslatePress یا بالاتر نیاز دارد. شما در حال حاضر از نسخه %2$s استفاده "
+"می‌کنید. لطفاً TranslatePress را به‌روزرسانی کنید تا این قابلیت فعال شود."
+
+msgid ""
+"Note: This option is disabled when Different Domain for Language addon is "
+"active."
+msgstr ""
+"توجه: این گزینه هنگامی که افزودنی دامنه متفاوت برای زبان فعال است، غیرفعال "
+"می‌شود."
+
+msgid ""
+"Different Domain per Language: Domain is required when domain mapping is "
+"enabled. The toggle has been disabled for languages with empty domains."
+msgstr ""
+"دامنه متفاوت برای هر زبان: وقتی نگاشت دامنه فعال است، دامنه الزامی است. "
+"گزینه برای زبان‌هایی که دامنه خالی دارند غیرفعال شده است."
+
+msgid ""
+"Different Domain per Language: The same domain cannot be assigned to "
+"multiple languages. The toggle has been disabled for duplicate domains."
+msgstr ""
+"دامنه متفاوت برای هر زبان: نمی‌توان یک دامنه را به چند زبان اختصاص داد. "
+"گزینه برای دامنه‌های تکراری غیرفعال شده است."
+
+#, tp-glo-9fa92a70
+msgid ""
+"Different Domain per Language: A language domain cannot be the same as the "
+"main site URL. The toggle has been disabled for the matching domain."
+msgstr ""
+"دامنه متفاوت برای هر زبان: دامنه زبان نمی‌تواند با URL اصلی سایت یکسان "
+"باشد. گزینه برای دامنه مطابق غیرفعال شده است."
+
+msgid "Please enter a domain."
+msgstr "لطفاً یک دامنه وارد کنید."
+
+msgid "Invalid domain format."
+msgstr "قالب دامنه نامعتبر است."
+
+msgid "Could not reach domain: %s"
+msgstr "امکان دسترسی به دامنه وجود ندارد: %s"
+
+#, tp-glo-1aabb38a
+msgid "Domain returned HTTP status %d."
+msgstr "دامنه وضعیت HTTP %d را بازگرداند."
+
+msgid "Domain is reachable!"
+msgstr "دامنه در دسترس است!"
+
+msgid "Limit this menu item to the following languages"
+msgstr "محدود کردن این آیتم منو به زبان‌های زیر"
+
+msgid "Date format"
+msgstr "قالب تاریخ"
+
+#, tp-glo-8896ebe8
+msgid ""
+"Customize the date formatting per each translated language.<br/>Leave empty "
+"for default WP setting or see more information <a "
+"href=\"https://wordpress.org/support/article/formatting-date-and-time/\" "
+"title=\"Formatting Date and Time\" target=\"_blank\">here</a>"
+msgstr ""
+"قالب‌بندی تاریخ را برای هر زبان ترجمه‌شده سفارشی کنید.<br/>برای استفاده از "
+"تنظیم پیش‌فرض WP خالی بگذارید یا اطلاعات بیشتر را <a "
+"href=\"https://wordpress.org/support/article/formatting-date-and-time/\" "
+"title=\"Formatting Date and Time\" target=\"_blank\">اینجا</a> ببینید"
+
+#, tp-ctx-07893e52, tp-glo-67834fcb, tp-glo-9fa92a70, tp-glo-ee8b4f9f
+msgid ""
+"To edit an existing TranslatePress language, input the language code and "
+"fill in only the columns you want to overwrite (e.g. Language name, "
+"Flag).<br>You can also add new custom languages. They will be available "
+"under General settings, All Languages list, where the URL slug can be "
+"edited."
+msgstr ""
+"برای ویرایش یک زبان موجود TranslatePress، کد زبان را وارد کنید و تنها "
+"ستون‌هایی را که می‌خواهید بازنویسی کنید پر کنید (مثلاً نام زبان، "
+"پرچم).<br>همچنین می‌توانید زبان‌های سفارشی جدیدی اضافه کنید. آن‌ها در بخش "
+"تنظیمات عمومی، فهرست همه زبان‌ها در دسترس خواهند بود، جایی که می‌توان URL "
+"slug را ویرایش کرد."
+
+#, tp-glo-91460d88, tp-glo-9fa92a70, tp-glo-c6709f3f
+msgid ""
+"For custom flag, first upload the image in media library then paste the "
+"URL.<br>Changing or deleting a custom language will impact translations and "
+"site URL's.<br>The Language code and the ISO Code should contain only "
+"alphabetical values, numerical values, \"-\" and \"_\".<br>The ISO Codes "
+"can be found on <a href = "
+"\"https://cloud.google.com/translate/docs/languages\" target = "
+"\"_blank\">Google ISO Codes</a> and <a href = "
+"\"https://www.deepl.com/docs-api/translating-text/\" target = "
+"\"_blank\">DeepL Target Codes</a>."
+msgstr ""
+"برای پرچم سفارشی، ابتدا تصویر را در کتابخانهٔ رسانه بارگذاری کنید و سپس URL "
+"را جای‌گذاری کنید.<br>تغییر یا حذف یک زبان سفارشی بر ترجمه‌ها و URL‌های "
+"سایت تأثیر خواهد گذاشت.<br>کد زبان و کد ISO باید فقط شامل مقادیر حروفی، "
+"مقادیر عددی، «-» و «_» باشند.<br>کدهای ISO را می‌توانید در <a href = "
+"\"https://cloud.google.com/translate/docs/languages\" target = "
+"\"_blank\">Google ISO Codes</a> و <a href = "
+"\"https://www.deepl.com/docs-api/translating-text/\" target = "
+"\"_blank\">DeepL Target Codes</a> پیدا کنید."
+
+msgid "Language code"
+msgstr "کد زبان"
+
+msgid "Language name"
+msgstr "نام زبان"
+
+msgid "Native name"
+msgstr "نام بومی"
+
+msgid "ISO Code"
+msgstr "کد ISO"
+
+#, tp-glo-9fa92a70
+msgid "Flag URL"
+msgstr "URL پرچم"
+
+msgid "Text RTL"
+msgstr "متن راست‌به‌چپ"
+
+msgid "Custom language"
+msgstr "زبان سفارشی"
+
+msgid "Disable dynamic translation"
+msgstr "غیرفعال کردن ترجمهٔ پویا"
+
+#, tp-ctx-2edc90df, tp-glo-7f2a0b8c
+msgid ""
+"It disables detection of strings displayed dynamically using JavaScript. "
+"<br/>Strings loaded via a server side AJAX call will still be translated."
+msgstr ""
+"تشخیص رشته‌هایی که با استفاده از JavaScript به‌صورت پویا نمایش داده می‌شوند "
+"را غیرفعال می‌کند. <br/>رشته‌هایی که از طریق فراخوانی AJAX سمت سرور "
+"بارگذاری می‌شوند همچنان ترجمه خواهند شد."
+
+#, tp-ctx-2edc90df, tp-glo-64dbb752
+msgid "Disable translation for gettext strings"
+msgstr "غیرفعال کردن ترجمه برای رشته‌های gettext"
+
+#, tp-ctx-2edc90df, tp-glo-64dbb752, tp-glo-ee8b4f9f
+msgid ""
+"Gettext Strings are strings outputted by themes and plugins. <br> "
+"Translating these types of strings through TranslatePress can be "
+"unnecessary if they are already translated using the .po/.mo translation "
+"file system.<br>Enabling this option can improve the page load performance "
+"of your site in certain cases. The disadvantage is that you can no longer "
+"edit gettext translations using TranslatePress, nor benefit from automatic "
+"translation on these strings."
+msgstr ""
+"رشته‌های Gettext رشته‌هایی هستند که توسط پوسته‌ها و افزونه‌ها خروجی "
+"می‌شوند. <br> ترجمه این نوع رشته‌ها از طریق TranslatePress می‌تواند "
+"غیرضروری باشد اگر قبلاً با استفاده از سیستم فایل ترجمه .po/.mo ترجمه شده "
+"باشند.<br>فعال‌سازی این گزینه می‌تواند در موارد خاصی عملکرد بارگذاری صفحه "
+"سایت شما را بهبود بخشد. عیب آن این است که دیگر نمی‌توانید ترجمه‌های Gettext "
+"را با استفاده از TranslatePress ویرایش کنید و از ترجمه خودکار این رشته‌ها "
+"بهره‌مند نخواهید شد."
+
+#, tp-ctx-2edc90df, tp-glo-64dbb752
+msgid "Gettext Strings translation is disabled"
+msgstr "ترجمه رشته‌های Gettext غیرفعال است"
+
+msgid "To enable it go to "
+msgstr "برای فعال کردن آن به "
+
+#, tp-ai, tp-ctx-2edc90df, tp-ctx-a6928204, tp-glo-64dbb752, tp-glo-ee8b4f9f
+msgid ""
+"TranslatePress->Advanced Settings->Debug->Disable translation for gettext "
+"strings"
+msgstr ""
+"TranslatePress->تنظیمات پیشرفته->اشکال‌زدایی->غیرفعال کردن ترجمه برای "
+"رشته‌های Gettext"
+
+msgid " and uncheck the Checkbox."
+msgstr " و کادر تأیید را بردارید."
+
+msgid "Dismiss"
+msgstr "بستن"
+
+#, tp-glo-8778869a
+msgid "Exclude translated links from sitemap"
+msgstr "حذف پیوندهای ترجمه‌شده از sitemap"
+
+#, tp-ai, tp-ctx-a6928204, tp-glo-09a90ed1, tp-glo-47180abf, tp-glo-b7a08771, tp-glo-ee8b4f9f
+msgid ""
+"Do not include translated links in sitemaps generated by SEO "
+"plugins.<br/>Requires <a "
+"href=\"https://translatepress.com/docs/addons/seo-pack/?utm_source=tp-"
+"advanced&utm_medium=client-site&utm_campaign=miscellaneous\" "
+"title=\"TranslatePress Add-on SEO Pack documentation\" target=\"_blank\"> "
+"SEO Pack Add-on</a> to be installed and activated."
+msgstr ""
+"پیوندهای ترجمه‌شده را در sitemaps تولیدشده توسط افزونه‌های SEO قرار "
+"ندهید.<br/>نیازمند نصب و فعال‌سازی <a "
+"href=\"https://translatepress.com/docs/addons/seo-pack/?utm_source=tp-"
+"advanced&utm_medium=client-site&utm_campaign=miscellaneous\" "
+"title=\"TranslatePress Add-on SEO Pack documentation\" "
+"target=\"_blank\">افزونهٔ SEO Pack</a> است."
+
+#, tp-ctx-e9944eb3
+msgid "Disable post container tags for post title"
+msgstr "غیرفعال‌سازی تگ‌های نگهدارنده نوشته برای عنوان نوشته"
+
+#, tp-ctx-e9944eb3, tp-glo-d311355a
+msgid ""
+"It disables search indexing the post title in translated "
+"languages.<br/>Useful when the title of the post doesn't allow HTML thus "
+"breaking the page."
+msgstr ""
+"این گزینه نمایه‌سازی جستجوی عنوان نوشته را در زبان‌های ترجمه‌شده غیرفعال "
+"می‌کند.<br/>هنگامی که عنوان نوشته اجازه استفاده از HTML را نمی‌دهد و باعث "
+"خرابی صفحه می‌شود، مفید است."
+
+#, tp-ctx-e9944eb3
+msgid "Disable post container tags for post content"
+msgstr "غیرفعال‌سازی تگ‌های نگهدارنده نوشته برای محتوای نوشته"
+
+#, tp-ctx-e9944eb3, tp-glo-d311355a
+msgid ""
+"It disables search indexing the post content in translated "
+"languages.<br/>Useful when the content of the post doesn't allow HTML thus "
+"breaking the page."
+msgstr ""
+"این گزینه نمایه‌سازی جستجوی محتوای نوشته را در زبان‌های ترجمه‌شده غیرفعال "
+"می‌کند.<br/>هنگامی که محتوای نوشته اجازه استفاده از HTML را نمی‌دهد و باعث "
+"خرابی صفحه می‌شود، مفید است."
+
+msgid "Do not translate certain paths"
+msgstr "ترجمه نکردن مسیرهای خاص"
+
+msgid ""
+"Choose what paths can be translated. Supports wildcard at the end of the "
+"path.<br>For example, to exclude https://example.com/some/path you can "
+"either use the rule /some/path/ or /some/*.<br>Enter each rule on it's own "
+"line. To exclude the home page use {{home}}."
+msgstr ""
+"انتخاب کنید چه مسیرهایی می‌توانند ترجمه شوند. از کاراکتر عام در انتهای مسیر "
+"پشتیبانی می‌کند.<br>برای مثال، برای حذف https://example.com/some/path "
+"می‌توانید از قاعده /some/path/ یا /some/* استفاده کنید.<br>هر قاعده را در "
+"خط خود وارد کنید. برای حذف صفحه اصلی از {home} استفاده کنید."
+
+msgid "Exclude Paths From Translation"
+msgstr "حذف مسیرها از ترجمه"
+
+msgid "Translate Only Certain Paths"
+msgstr "ترجمه تنها مسیرهای خاص"
+
+#, tp-glo-d1526d97
+msgid "Enable the hreflang x-default tag for language:"
+msgstr "فعال کردن برچسب hreflang x-default برای زبان:"
+
+#, tp-glo-d1526d97
+msgid ""
+"Enables the hreflang=\"x-default\" for an entire language. See "
+"documentation for more details."
+msgstr ""
+"hreflang=\"x-default\" را برای یک زبان کامل فعال می‌کند. برای جزئیات بیشتر "
+"مستندات را ببینید."
+
+msgid "Translate numbers and numerals"
+msgstr "ترجمه اعداد و ارقام"
+
+msgid "Enable translation of numbers ( e.g. phone numbers)"
+msgstr "فعال کردن ترجمه اعداد ( مثلاً شماره تلفن‌ها)"
+
+msgid "Selector"
+msgstr "انتخاب‌گر"
+
+msgid "Exclude from dynamic translation"
+msgstr "حذف از ترجمه پویا"
+
+#, tp-ctx-2edc90df, tp-glo-7f2a0b8c, tp-glo-d311355a
+msgid ""
+"Do not dynamically translate strings that are found in html nodes matching "
+"these selectors.<br>Excludes all the children of HTML nodes matching these "
+"selectors from being translated using JavaScript.<br/>These strings will "
+"still be translated on the server side if possible."
+msgstr ""
+"رشته‌های موجود در گره‌های html مطابق با این انتخاب‌گرها را به صورت پویا "
+"ترجمه نکنید.<br>تمام فرزندان گره‌های HTML مطابق با این انتخاب‌گرها از ترجمه "
+"با استفاده از JavaScript مستثنی می‌شوند.<br/>در صورت امکان، این رشته‌ها "
+"همچنان در سمت سرور ترجمه خواهند شد."
+
+#, tp-ctx-8a82cc9e, tp-glo-64dbb752
+msgid "Gettext String"
+msgstr "رشته Gettext"
+
+#, tp-ctx-2edc90df, tp-glo-64dbb752
+msgid "Exclude Gettext Strings"
+msgstr "مستثنی کردن رشته‌های Gettext"
+
+#, tp-ctx-2edc90df, tp-ctx-8a82cc9e, tp-glo-64dbb752, tp-glo-ee8b4f9f
+msgid ""
+"Exclude these strings from being translated as Gettext strings by "
+"TranslatePress. Leave the domain empty to take into account any Gettext "
+"string.<br/>Can still be translated through po/mo files."
+msgstr ""
+"این رشته‌ها را از ترجمه به عنوان رشته‌های Gettext توسط TranslatePress "
+"مستثنی کنید. دامنه را خالی بگذارید تا هر رشته Gettext در نظر گرفته "
+"شود.<br/>همچنان از طریق فایل‌های po/mo قابل ترجمه هستند."
+
+msgid "Exclude selectors only from automatic translation"
+msgstr "مستثنی کردن انتخاب‌گرها فقط از ترجمهٔ خودکار"
+
+#, tp-ctx-2edc90df, tp-glo-d311355a
+msgid ""
+"Do not automatically translate strings that are found in html nodes "
+"matching these selectors.<br>Excludes all the children of HTML nodes "
+"matching these selectors from being automatically translated.<br>Manual "
+"translation of these strings is still possible."
+msgstr ""
+"رشته‌های موجود در گره‌های html مطابق با این انتخاب‌گرها را به صورت خودکار "
+"ترجمه نکنید.<br>تمام فرزندان گره‌های HTML مطابق با این انتخاب‌گرها از ترجمه "
+"خودکار مستثنی می‌شوند.<br>ترجمه دستی این رشته‌ها همچنان امکان‌پذیر است."
+
+msgid "Exclude selectors from translation"
+msgstr "مستثنی کردن انتخاب‌گرها از ترجمه"
+
+#, tp-ctx-2edc90df, tp-glo-d311355a
+msgid ""
+"Do not translate strings that are found in html nodes matching these "
+"selectors.<br>Excludes all the children of HTML nodes matching these "
+"selectors from being translated.<br>These strings cannot be translated "
+"manually nor automatically."
+msgstr ""
+"رشته‌های موجود در گره‌های html مطابق با این انتخاب‌گرها را ترجمه "
+"نکنید.<br>تمام فرزندان گره‌های HTML مطابق با این انتخاب‌گرها از ترجمه "
+"مستثنی می‌شوند.<br>این رشته‌ها نه به صورت دستی و نه خودکار قابل ترجمه "
+"نیستند."
+
+#, tp-ctx-8a82cc9e
+msgid "String"
+msgstr "رشته"
+
+#, tp-ctx-2edc90df
+msgid "Exclude strings from automatic translation"
+msgstr "مستثنی کردن رشته‌ها از ترجمه خودکار"
+
+#, tp-ctx-2edc90df
+msgid ""
+"Do not automatically translate these strings (ex. names, technical "
+"words...)<br>Paragraphs containing these strings will still be translated "
+"except for the specified part."
+msgstr ""
+"این رشته‌ها را به صورت خودکار ترجمه نکنید (مثلاً نام‌ها، واژگان "
+"فنی...)<br>پاراگراف‌های حاوی این رشته‌ها همچنان ترجمه خواهند شد، به جز بخش "
+"مشخص‌شده."
+
+#, tp-glo-d311355a
+msgid "Fix broken HTML"
+msgstr "رفع HTML خراب"
+
+#, tp-glo-d311355a
+msgid "General attempt to fix broken or missing HTML on translated pages.<br/>"
+msgstr "تلاش کلی برای رفع HTML خراب یا ناموجود در صفحات ترجمه‌شده.<br/>"
+
+#, tp-glo-9fa92a70
+msgid "Force slash at end of home url:"
+msgstr "اجبار به اسلش در انتهای URL خانه:"
+
+msgid "Ads a slash at the end of the home_url() function"
+msgstr "یک اسلش در انتهای تابع home_url() اضافه می‌کند"
+
+msgid "Show Both (recommended)"
+msgstr "نمایش هر دو (توصیه‌شده)"
+
+msgid "Remove Country Locale"
+msgstr "حذف Locale کشور"
+
+msgid "Remove Region Independent Locale"
+msgstr "حذف Locale مستقل از منطقه"
+
+#, tp-glo-d1526d97
+msgid "Remove duplicate hreflang"
+msgstr "حذف hreflang تکراری"
+
+#, tp-ai, tp-ctx-a6928204, tp-glo-d1526d97
+msgid ""
+"Choose which hreflang tags will appear on your website.<br/>We recommend "
+"showing both types of hreflang tags as indicated by <a "
+"href=\"https://developers.google.com/search/docs/advanced/crawling/"
+"localized-versions\" title=\"Google Crawling\" target=\"_blank\">Google "
+"documentation</a>.<br/>Removing Country Locale when having multiple Country "
+"Locales of the same language (ex. English UK and English US) will result in "
+"showing one hreflang tag with link to just one of the region locales for "
+"that language."
+msgstr ""
+"انتخاب کنید کدام برچسب‌های hreflang در وب‌سایت شما نمایش داده شوند.<br/>ما "
+"نمایش هر دو نوع برچسب hreflang را همان‌طور که در <a "
+"href=\"https://developers.google.com/search/docs/advanced/crawling/"
+"localized-versions\" title=\"Google Crawling\" target=\"_blank\">مستندات "
+"Google</a> اشاره شده توصیه می‌کنیم.<br/>حذف منطقهٔ کشوری هنگامی که چندین "
+"منطقهٔ کشوری از یک زبان دارید (مثلاً English UK و English US) منجر به نمایش "
+"یک برچسب hreflang با پیوند به تنها یکی از منطقه‌های آن زبان می‌شود."
+
+msgid "Default (example: en-US, fr-CA, etc.)"
+msgstr "پیش‌فرض (مثال: en-US، fr-CA و غیره)"
+
+msgid "Regional (example: en, fr, es, etc.)"
+msgstr "منطقه‌ای (مثال: en، fr، es و غیره)"
+
+#, tp-glo-d311355a
+msgid "HTML Lang Attribute Format"
+msgstr "قالب ویژگی lang HTML"
+
+#, tp-glo-d311355a
+msgid ""
+"Change lang attribute of the html tag to a format that includes country "
+"regional or not. <br>In HTML, the lang attribute (<html lang=\"en-US\">)  "
+"should be used to  specify the language of text content so that the  "
+"browser can correctly display or process  your content (eg. for  "
+"hyphenation, styling, spell checking, etc)."
+msgstr ""
+"تغییر ویژگی lang برچسب html به قالبی که شامل منطقه کشور باشد یا نباشد. "
+"<br>در HTML، ویژگی lang (<html lang=\"en-US\">) باید برای مشخص کردن زبان "
+"محتوای متنی استفاده شود تا مرورگر بتواند محتوای شما را به درستی نمایش دهد "
+"یا پردازش کند (مثلاً برای هیفن‌گذاری، استایل‌دهی، بررسی املا و غیره)."
+
+msgid "Load legacy Language Switcher"
+msgstr "بارگذاری انتخاب‌گر زبان قدیمی"
+
+#, tp-glo-da70db08
+msgid ""
+"Applies to all types of language switchers (floating, shortcode, and menu). "
+"When enabled, the site will revert to using the original Language Switcher "
+"configured in the General Settings tab, replacing the new customizable "
+"version. Your existing switcher settings will remain saved, but they will "
+"be ignored while this option is active."
+msgstr ""
+"برای همه انواع انتخاب‌گر زبان (شناور، shortcode و منو) اعمال می‌شود. هنگام "
+"فعال بودن، سایت به استفاده از انتخاب‌گر زبان اصلی پیکربندی‌شده در برگه "
+"تنظیمات عمومی بازمی‌گردد و نسخه جدید قابل سفارشی‌سازی را جایگزین می‌کند. "
+"تنظیمات موجود انتخاب‌گر شما همچنان ذخیره می‌ماند، اما تا زمانی که این گزینه "
+"فعال است نادیده گرفته می‌شود."
+
+#, tp-glo-47180abf, tp-glo-b7a08771
+msgid "Load legacy SEO Pack Add-On"
+msgstr "بارگذاری افزونه قدیمی SEO Pack"
+
+#, tp-ai, tp-ctx-07893e52, tp-ctx-a6928204, tp-glo-67834fcb, tp-glo-ee8b4f9f
+msgid ""
+"In case the recent migration to the new slug rewrite is causing trouble, "
+"set this to Yes to use the old method <br> Please <a "
+"href=\"https://translatepress.com/support/open-ticket/?utm_source=tp-"
+"advanced&utm_medium=client-site&utm_campaign=troubleshooting\" "
+"target=\"_blank\">open a support ticket</a> letting us know of the issues "
+"you are having."
+msgstr ""
+"در صورتی که مهاجرت اخیر به بازنویسی slug جدید مشکل ایجاد می‌کند، این گزینه "
+"را روی بله قرار دهید تا از روش قدیمی استفاده کنید.<br> لطفاً <a "
+"href=\"https://translatepress.com/support/open-ticket/?utm_source=tp-"
+"advanced&utm_medium=client-site&utm_campaign=troubleshooting\" "
+"target=\"_blank\">یک تیکت پشتیبانی باز کنید</a> و ما را از مشکلاتی که دارید "
+"مطلع کنید."
+
+msgid "Manual Translation Only"
+msgstr "فقط ترجمه دستی"
+
+#, tp-ctx-2edc90df, tp-ctx-8a82cc9e, tp-glo-77a09a79, tp-glo-ee8b4f9f
+msgid ""
+"TranslatePress pro-actively scans and saves strings in the database when "
+"users access translated pages. <br>This setting disables this functionality "
+"and only allows translation and string saving when inside the Translation "
+"Editor. <br>Also disables machine translation outside the Translation "
+"Editor, giving you better control over character spending, by translating "
+"only the pages you visit in the Translation Editor."
+msgstr ""
+"TranslatePress هنگام دسترسی کاربران به صفحات ترجمه‌شده، رشته‌ها را به صورت "
+"فعالانه در پایگاه داده پویش و ذخیره می‌کند. <br>این تنظیم این قابلیت را "
+"غیرفعال می‌کند و تنها درون ویرایشگر ترجمه اجازه ترجمه و ذخیره رشته‌ها "
+"می‌دهد. <br>همچنین ترجمه ماشینی را خارج از ویرایشگر ترجمه غیرفعال می‌کند و "
+"با ترجمه تنها صفحاتی که در ویرایشگر ترجمه بازدید می‌کنید، کنترل بهتری بر "
+"مصرف نویسه‌ها به شما می‌دهد."
+
+msgid "Open language switcher only on click"
+msgstr "باز کردن انتخاب‌گر زبان فقط با کلیک"
+
+#, tp-glo-da70db08
+msgid ""
+"Open the language switcher shortcode by clicking on it instead of "
+"hovering.<br> Close it by clicking on it, anywhere else on the screen or by "
+"pressing the escape key. This will affect only the shortcode language "
+"switcher."
+msgstr ""
+"انتخاب‌گر زبان shortcode را با کلیک بر روی آن به جای حرکت ماوس باز "
+"کنید.<br>با کلیک بر روی آن، در هر جای دیگری از صفحه نمایش یا با فشردن کلید "
+"escape آن را ببندید. این تنظیم تنها بر انتخاب‌گر زبان shortcode تأثیر "
+"می‌گذارد."
+
+msgid "Show opposite language in the language switcher"
+msgstr "نمایش زبان مخالف در انتخاب‌گر زبان"
+
+#, tp-glo-da70db08
+msgid ""
+"Transforms the language switcher into a button showing the other available "
+"language, not the current one.<br> Only works when there are exactly two "
+"languages, the default one and a translation one.<br>This will affect the "
+"shortcode language switcher and floating language switcher as well.<br> To "
+"achieve this in menu language switcher go to Appearance->Menus->Language "
+"Switcher and select Opposite Language."
+msgstr ""
+"انتخاب‌گر زبان را به دکمه‌ای تبدیل می‌کند که زبان دیگر موجود را نمایش "
+"می‌دهد، نه زبان فعلی را.<br>تنها زمانی کار می‌کند که دقیقاً دو زبان وجود "
+"داشته باشد، یکی پیش‌فرض و یکی ترجمه.<br>این مورد بر انتخاب‌گر زبان "
+"shortcode و انتخاب‌گر زبان شناور نیز تأثیر می‌گذارد.<br>برای دستیابی به این "
+"مورد در انتخاب‌گر زبان منو، به نمایش->فهرست‌ها->انتخاب‌گر زبان بروید و زبان "
+"مخالف را انتخاب کنید."
+
+msgid "<a href=\"%s\">Click here</a> to access the database optimization tool."
+msgstr ""
+"<a href=\"%s\">اینجا کلیک کنید</a> تا به ابزار بهینه‌سازی پایگاه داده "
+"دسترسی پیدا کنید."
+
+msgid ""
+"It helps remove possible duplicate translations, clear unnecessary data and "
+"repair possible metadata issues."
+msgstr ""
+"به حذف ترجمه‌های تکراری احتمالی، پاک کردن داده‌های غیرضروری و رفع مشکلات "
+"احتمالی فراداده کمک می‌کند."
+
+#, tp-glo-ee8b4f9f
+msgid ""
+"<a href=\"%s\" target=\"_blank\">Here</a> you can observe the last 5 SQL "
+"errors relevant to TranslatePress if they exist."
+msgstr ""
+"<a href=\"%s\" target=\"_blank\">اینجا</a> می‌توانید آخرین ۵ خطای SQL مرتبط "
+"با TranslatePress را در صورت وجود مشاهده کنید."
+
+msgid "Troubleshooting"
+msgstr "عیب‌یابی"
+
+#, tp-ctx-2edc90df, tp-glo-64dbb752
+msgid "Exclude Gettext strings"
+msgstr "مستثنی کردن رشته‌های Gettext"
+
+msgid "Debug"
+msgstr "اشکال‌زدایی"
+
+msgid "Custom languages"
+msgstr "زبان‌های سفارشی"
+
+msgid "Miscellaneous options"
+msgstr "گزینه‌های متفرقه"
+
+#, tp-ctx-2edc90df
+msgid "Exclude strings & pages"
+msgstr "مستثنی کردن رشته‌ها و صفحات"
+
+msgid "Automatic Translation Memory"
+msgstr "حافظه ترجمه خودکار"
+
+#, tp-ctx-2edc90df, tp-ctx-8a82cc9e
+msgid ""
+"Serve same translation for similar text. The strings need to have a "
+"percentage of 95% similarity.<br>Helps prevent losing existing translation "
+"when correcting typos or making minor adjustments to the original text. "
+"<br>If a translation already exists for a very similar original string, it "
+"will automatically be used for the current original string.<br>Does not "
+"work when making changes to a text that is part of a translation block "
+"unless the new text is manually merged again in a translation "
+"block.<br>Each string needs to have a minimum of 50 characters."
+msgstr ""
+"ارائه ترجمه یکسان برای متن مشابه. رشته‌ها باید ۹۵٪ شباهت داشته باشند.<br>از "
+"دست دادن ترجمه موجود هنگام اصلاح اشتباهات تایپی یا ایجاد تغییرات جزئی در "
+"متن اصلی جلوگیری می‌کند. <br>اگر ترجمه‌ای برای رشته اصلی بسیار مشابه از قبل "
+"وجود داشته باشد، به‌طور خودکار برای رشته اصلی فعلی استفاده خواهد "
+"شد.<br>هنگام ایجاد تغییر در متنی که بخشی از یک بلوک ترجمه است کار نمی‌کند، "
+"مگر اینکه متن جدید دوباره به‌صورت دستی در یک بلوک ترجمه ادغام شود.<br>هر "
+"رشته باید حداقل ۵۰ کاراکتر داشته باشد."
+
+msgid ""
+"WARNING: This feature can negatively impact page loading times in secondary "
+"languages, particularly with large databases (for example websites with a "
+"lot of pages or products). If you experience slow loading times, disable "
+"this and try again."
+msgstr ""
+"هشدار: این ویژگی می‌تواند زمان بارگذاری صفحه را در زبان‌های ثانویه به‌طور "
+"منفی تأثیر بگذارد، به‌ویژه با پایگاه‌داده‌های بزرگ (برای مثال وب‌سایت‌هایی "
+"با تعداد زیادی صفحه یا محصول). اگر زمان بارگذاری کندی را تجربه می‌کنید، این "
+"گزینه را غیرفعال کنید و دوباره امتحان کنید."
+
+msgid "Fix missing dynamic content"
+msgstr "رفع محتوای پویا گمشده"
+
+#, tp-glo-7f2a0b8c
+msgid ""
+"May help fix missing content inserted using JavaScript. <br> It shows "
+"dynamically inserted content in original language for a moment before the "
+"translation request is finished."
+msgstr ""
+"ممکن است در رفع محتوای گمشده که با JavaScript درج شده است کمک کند. <br> قبل "
+"از تکمیل درخواست ترجمه، محتوای درج‌شده به‌صورت پویا را برای لحظه‌ای به زبان "
+"اصلی نمایش می‌دهد."
+
+#, tp-ctx-e9944eb3, tp-glo-64dbb752
+msgid "Filter Gettext wrapping from post content and title"
+msgstr "فیلتر کردن پوشش Gettext از محتوا و عنوان نوشته"
+
+#, tp-ctx-e9944eb3, tp-glo-64dbb752
+msgid ""
+"Filters gettext wrapping such as #!trpst#trp-gettext from all updated post "
+"content and post title. Does not affect previous post content. "
+"<br/><strong>Database backup is recommended before switching on.</strong>"
+msgstr ""
+"پوشش Gettext مانند #!trpst#trp-gettext را از تمام محتوا و عنوان نوشته‌های "
+"به‌روزرسانی‌شده فیلتر می‌کند. بر محتوای نوشته‌های قبلی تأثیری نمی‌گذارد. "
+"<br/><strong>پیش از فعال‌سازی، پشتیبان‌گیری از پایگاه داده توصیه "
+"می‌شود.</strong>"
+
+#, tp-ctx-e9944eb3, tp-glo-64dbb752
+msgid "Filter Gettext wrapping from post meta"
+msgstr "فیلتر کردن پوشش Gettext از متا نوشته"
+
+#, tp-ctx-e9944eb3, tp-glo-64dbb752
+msgid ""
+"Filters gettext wrapping such as #!trpst#trp-gettext from all updated post "
+"meta. Does not affect previous post meta. <br/><strong>Database backup is "
+"recommended before switching on.</strong>"
+msgstr ""
+"پوشش Gettext مانند #!trpst#trp-gettext را از تمام متا نوشته‌های "
+"به‌روزرسانی‌شده فیلتر می‌کند. بر متا نوشته‌های قبلی تأثیری نمی‌گذارد. "
+"<br/><strong>پیش از فعال‌سازی، پشتیبان‌گیری از پایگاه داده توصیه "
+"می‌شود.</strong>"
+
+#, tp-glo-c773bca5, tp-glo-d6a22d74
+msgid "Google Translate v2"
+msgstr "Google Translate v2"
+
+#, tp-glo-91460d88, tp-glo-d6a22d74
+msgid "Google Translate API Key"
+msgstr "کلید API Google Translate"
+
+#, tp-glo-91460d88
+msgid "Add your API Key here..."
+msgstr "کلید API خود را اینجا وارد کنید..."
+
+#, tp-glo-1aabb38a, tp-glo-91460d88
+msgid ""
+"Visit <a href=\"https://cloud.google.com/docs/authentication/api-keys\" "
+"target=\"_blank\">this link</a> to see how you can set up an API key, "
+"<strong>control API costs</strong> and set HTTP referrer restrictions."
+msgstr ""
+"برای مشاهده نحوه تنظیم کلید API، <strong>کنترل هزینه‌های API</strong> و "
+"تنظیم محدودیت‌های ارجاع‌دهنده HTTP، از <a "
+"href=\"https://cloud.google.com/docs/authentication/api-keys\" "
+"target=\"_blank\">این پیوند</a> بازدید کنید."
+
+#, tp-glo-1aabb38a
+msgid "Your HTTP referrer is: %s"
+msgstr "ارجاع‌دهنده HTTP شما: %s"
+
+#, tp-glo-d6a22d74
+msgid "There was an error on the server processing your Google Translate key."
+msgstr "خطایی در سرور هنگام پردازش کلید Google Translate شما رخ داد."
+
+#, tp-glo-d6a22d74
+msgid "There was an error with your Google Translate key."
+msgstr "خطایی در کلید Google Translate شما وجود داشت."
+
+#, tp-glo-ee8b4f9f
+msgid "Please check your TranslatePress license key."
+msgstr "لطفاً کلید مجوز TranslatePress خود را بررسی کنید."
+
+#, tp-glo-ee8b4f9f, tp-glo-f7c8926f
+msgid "TranslatePress AI"
+msgstr "TranslatePress AI"
+
+msgid "No Active License Detected for this website."
+msgstr "هیچ مجوز فعالی برای این وب‌سایت شناسایی نشد."
+
+#, tp-glo-ee8b4f9f, tp-glo-f7c8926f
+msgid ""
+"In order to enable Automatic Translation using TranslatePress AI, you need "
+"a license key by creating a free account."
+msgstr ""
+"برای فعال‌سازی ترجمه خودکار با استفاده از TranslatePress AI، باید با ایجاد "
+"یک حساب کاربری رایگان یک کلید مجوز دریافت کنید."
+
+msgid "Create your Free Account"
+msgstr "حساب رایگان خود را ایجاد کنید"
+
+msgid " or "
+msgstr " یا "
+
+msgid "Enter your license key"
+msgstr "کلید لایسنس خود را وارد کنید"
+
+msgid " Or %1$spurchase one here%2$s"
+msgstr " یا %1$sاز اینجا خریداری کنید%2$s"
+
+msgid "Your free account includes: "
+msgstr "حساب رایگان شما شامل موارد زیر است: "
+
+#, tp-glo-77a09a79, tp-glo-ee8b4f9f
+msgid "Get more AI Words and unlock all AI features with TranslatePress Pro."
+msgstr ""
+"با TranslatePress Pro کلمات بیشتر هوش مصنوعی دریافت کنید و تمام ویژگی‌های "
+"هوش مصنوعی را باز کنید."
+
+msgid "You have a valid %s <strong>license</strong>."
+msgstr "شما یک %s <strong>لایسنس</strong> معتبر دارید."
+
+msgid " words remaining. "
+msgstr " کلمه باقی‌مانده. "
+
+msgid "Recheck"
+msgstr "بررسی مجدد"
+
+msgid "Rechecking..."
+msgstr "در حال بررسی مجدد..."
+
+msgid "Done."
+msgstr "انجام شد."
+
+msgid "Manage your license & quota on the %s"
+msgstr "لایسنس و سهمیه خود را در %s مدیریت کنید"
+
+#, tp-glo-ee8b4f9f
+msgid "TranslatePress.com Account Page"
+msgstr "صفحه حساب TranslatePress.com"
+
+#, tp-ctx-07893e52, tp-glo-47180abf, tp-glo-67834fcb, tp-glo-d311355a
+msgid ""
+"SEO support for page slug, page title, description and Facebook and Twitter "
+"social graph information. The HTML lang attribute is properly set."
+msgstr ""
+"پشتیبانی SEO برای slug صفحه، عنوان صفحه، توضیحات و اطلاعات گراف اجتماعی "
+"فیسبوک و توییتر. ویژگی lang HTML به درستی تنظیم شده است."
+
+msgid "Enable Modules"
+msgstr "فعال‌سازی ماژول‌ها"
+
+#, tp-glo-ee8b4f9f
+msgid ""
+"Enable Add-on modules to extend TranslatePress and enhance the "
+"functionality of your translated site."
+msgstr ""
+"ماژول‌های افزودنی را فعال کنید تا TranslatePress را گسترش دهید و عملکرد "
+"سایت ترجمه‌شده خود را بهبود بخشید."
+
+#, tp-glo-77a09a79, tp-glo-ee8b4f9f
+msgid "More functionality with TranslatePress Pro."
+msgstr "عملکرد بیشتر با TranslatePress Pro."
+
+msgid "Already a Pro User?"
+msgstr "قبلاً کاربر Pro هستید؟"
+
+msgid "Activate License Key"
+msgstr "فعال‌سازی کلید لایسنس"
+
+msgid "This add-on is not available on your current plan."
+msgstr "این افزودنی در طرح فعلی شما در دسترس نیست."
+
+msgid "Continue"
+msgstr "ادامه"
+
+msgid "The link you followed has expired. Please reload the page and try again."
+msgstr ""
+"پیوندی که دنبال کردید منقضی شده است. لطفاً صفحه را بارگیری مجدد کنید و "
+"دوباره امتحان کنید."
+
+msgid "A valid license is required to enable Automatic Translation."
+msgstr "برای فعال‌سازی ترجمه خودکار، یک مجوز معتبر لازم است."
+
+#, tp-glo-9fa92a70, tp-glo-ee8b4f9f
+msgid ""
+"Your license key is disabled for this URL. Re-enable it from <a "
+"target=\"_blank\" "
+"href=\"https://translatepress.com/account/?utm_source=tp-onboarding&utm_"
+"medium=client-site&utm_campaign=tp-ai\">https://translatepress.com/account</"
+"a> -> Manage Sites."
+msgstr ""
+"کلید مجوز شما برای این URL غیرفعال شده است. آن را از <a target=\"_blank\" "
+"href=\"https://translatepress.com/account/?utm_source=tp-onboarding&utm_"
+"medium=client-site&utm_campaign=tp-ai\">https://translatepress.com/account</"
+"a> -> مدیریت سایت‌ها دوباره فعال کنید."
+
+#, tp-glo-666af81f, tp-glo-ee8b4f9f
+msgid ""
+"<p><strong>License key mismatch.</strong> The license you entered doesn't "
+"match the TranslatePress version you have installed.</p><p>Please check "
+"that you've installed the correct version for your license from your "
+"TranslatePress account.</p>"
+msgstr ""
+"<p><strong>عدم تطابق کلید مجوز.</strong> مجوزی که وارد کردید با نسخه "
+"TranslatePress نصب‌شده مطابقت ندارد.</p><p>لطفاً بررسی کنید که نسخه صحیح را "
+"برای مجوز خود از حساب TranslatePress خود نصب کرده‌اید.</p>"
+
+#, tp-glo-ee8b4f9f, tp-glo-f7c8926f
+msgid "Automatically translate your website using TranslatePress AI."
+msgstr "وب‌سایت خود را به‌صورت خودکار با استفاده از TranslatePress AI ترجمه کنید."
+
+#, tp-glo-ee8b4f9f, tp-glo-f7c8926f
+msgid ""
+"In order to enable Automatic Translation using TranslatePress AI, please "
+"enter your license key from"
+msgstr ""
+"برای فعال‌سازی ترجمه خودکار با استفاده از TranslatePress AI، لطفاً کلید "
+"مجوز خود را از"
+
+msgid "your account."
+msgstr "حساب کاربری خود."
+
+msgid "Skip and continue with manual translation »"
+msgstr "رد کردن و ادامه با ترجمه دستی »"
+
+#, tp-glo-ee8b4f9f, tp-glo-f7c8926f
+msgid "Get Your Free TranslatePress AI License"
+msgstr "دریافت مجوز رایگان TranslatePress AI"
+
+msgid "Generate License"
+msgstr "ایجاد مجوز"
+
+msgid "Creating a free account includes: "
+msgstr "ایجاد یک حساب رایگان شامل موارد زیر است: "
+
+#, tp-glo-77a09a79, tp-glo-ee8b4f9f
+msgid "Are you a TranslatePress PRO user?"
+msgstr "آیا کاربر TranslatePress PRO هستید؟"
+
+msgid "Install & Activate your pro plugin."
+msgstr "افزونه حرفه‌ای خود را نصب و فعال کنید."
+
+msgid "Skip this step"
+msgstr "رد کردن این مرحله"
+
+msgid "The email address you added is incorrect."
+msgstr "نشانی ایمیلی که وارد کردید نادرست است."
+
+msgid "Setup Complete"
+msgstr "راه‌اندازی کامل شد"
+
+msgid "You're ready to start translating!"
+msgstr "آماده شروع ترجمه هستید!"
+
+#, tp-glo-ee8b4f9f
+msgid "You have successfully set up TranslatePress for your website."
+msgstr "شما با موفقیت TranslatePress را برای وب‌سایت خود راه‌اندازی کردید."
+
+msgid "Receive "
+msgstr "دریافت "
+
+msgid "Yes, send me multilingual growth tips."
+msgstr "بله، نکات رشد چندزبانه را برایم ارسال کنید."
+
+msgid "Start translating"
+msgstr "شروع ترجمه"
+
+msgid "Sign Up and Start translating"
+msgstr "ثبت‌نام و شروع ترجمه"
+
+#, tp-glo-77a09a79, tp-glo-ee8b4f9f
+msgid "Please upload a TranslatePress Pro plugin file."
+msgstr "لطفاً فایل افزونه TranslatePress Pro را بارگذاری کنید."
+
+msgid "Upload error: "
+msgstr "خطای بارگذاری: "
+
+msgid "Install failed: "
+msgstr "نصب ناموفق بود: "
+
+msgid "Plugin installed, but entry file not found. "
+msgstr "افزونه نصب شد، اما فایل ورودی یافت نشد. "
+
+msgid "Activation error: "
+msgstr "خطای فعال‌سازی: "
+
+msgid "Invalid plugin specified."
+msgstr "افزونه نامعتبر مشخص شده است."
+
+msgid "Invalid action specified."
+msgstr "عملیات نامعتبر مشخص شده است."
+
+msgid "Plugin deactivation failed."
+msgstr "غیرفعال‌سازی افزونه ناموفق بود."
+
+msgid "Plugin activation failed: "
+msgstr "فعال‌سازی افزونه ناموفق بود: "
+
+#, tp-glo-77a09a79, tp-glo-ee8b4f9f
+msgid "First, install and activate TranslatePress Pro"
+msgstr "ابتدا TranslatePress Pro را نصب و فعال کنید"
+
+#, tp-glo-77a09a79, tp-glo-ee8b4f9f
+msgid "Please upload the TranslatePress PRO zip archive from your"
+msgstr "لطفاً فایل فشرده zip TranslatePress Pro را از"
+
+#, tp-glo-666af81f, tp-glo-ee8b4f9f
+msgid "TranslatePress Account"
+msgstr "TranslatePress Account"
+
+msgid "Install and Activate"
+msgstr "نصب و فعال‌سازی"
+
+msgid "Installed Pro versions"
+msgstr "نسخه‌های Pro نصب‌شده"
+
+msgid "« Go back"
+msgstr "« بازگشت"
+
+msgid "Activate License »"
+msgstr "فعال‌سازی مجوز »"
+
+msgid ""
+"You are trying to add an invalid additional language. Please select a valid "
+"option."
+msgstr ""
+"شما در حال افزودن یک زبان اضافی نامعتبر هستید. لطفاً یک گزینه معتبر انتخاب "
+"کنید."
+
+msgid "Please add an additional language."
+msgstr "لطفاً یک زبان اضافی اضافه کنید."
+
+msgid ""
+"You are trying to add an invalid default language. Please select a valid "
+"option."
+msgstr ""
+"شما در حال افزودن یک زبان پیش‌فرض نامعتبر هستید. لطفاً یک گزینهٔ معتبر "
+"انتخاب کنید."
+
+msgid "You need to select a default language."
+msgstr "باید یک زبان پیش‌فرض انتخاب کنید."
+
+msgid "Configure Site Languages"
+msgstr "پیکربندی زبان‌های سایت"
+
+msgid "Select the default and additional languages for your website."
+msgstr "زبان پیش‌فرض و زبان‌های اضافی وب‌سایت خود را انتخاب کنید."
+
+msgid "You can edit your site languages at any point."
+msgstr "می‌توانید زبان‌های سایت خود را در هر زمانی ویرایش کنید."
+
+msgid "Additional Language"
+msgstr "زبان اضافی"
+
+msgid "Choose a secondary language..."
+msgstr "انتخاب یک زبان ثانویه..."
+
+msgid "Add Language"
+msgstr "افزودن زبان"
+
+msgid "Choose a language..."
+msgstr "انتخاب زبان..."
+
+#, tp-glo-77a09a79, tp-glo-ee8b4f9f
+msgid "Add more than two languages with TranslatePress Pro."
+msgstr "با TranslatePress Pro بیش از دو زبان اضافه کنید."
+
+#, tp-glo-9fa92a70, tp-glo-ee8b4f9f
+msgid ""
+"Your license key is disabled for this URL. Re-enable it from <a "
+"target=\"_blank\" "
+"href=\"https://translatepress.com/account/?utm_source=tp-onboarding&utm_"
+"medium=client-site&utm_campaign=activate-license\">https://translatepress."
+"com/account</a> -> Manage Sites."
+msgstr ""
+"کلید مجوز شما برای این URL غیرفعال است. آن را از <a target=\"_blank\" "
+"href=\"https://translatepress.com/account/?utm_source=tp-onboarding&utm_"
+"medium=client-site&utm_campaign=activate-license\">https://translatepress."
+"com/account</a> -> مدیریت سایت‌ها دوباره فعال کنید."
+
+msgid "Add your License Key"
+msgstr "کلید مجوز خود را وارد کنید"
+
+msgid ""
+"Add your License Key to unlock all premium features. Find the License Key "
+"in your"
+msgstr ""
+"کلید مجوز خود را برای باز کردن همهٔ قابلیت‌های پرمیوم وارد کنید. کلید مجوز "
+"را در "
+
+msgid "Your license is valid and active."
+msgstr "مجوز شما معتبر و فعال است."
+
+msgid "« Go Back"
+msgstr "« بازگشت"
+
+msgid "Set up Language Switcher"
+msgstr "راه‌اندازی تغییردهندهٔ زبان"
+
+msgid ""
+"Select the style of the language switcher. You will find more ways to "
+"display it, in plugin settings."
+msgstr ""
+"سبک تغییردهندهٔ زبان را انتخاب کنید. راه‌های بیشتری برای نمایش آن در "
+"تنظیمات افزونه خواهید یافت."
+
+msgid ""
+"Displays a small language drop-down across your website, in a corner of "
+"your choosing."
+msgstr ""
+"یک فهرست کشویی زبان کوچک را در سراسر وب‌سایت شما، در گوشه‌ای که انتخاب "
+"می‌کنید نمایش می‌دهد."
+
+msgid "Switcher Location"
+msgstr "مکان تغییردهندهٔ زبان"
+
+msgid "Apply a Template"
+msgstr "اعمال قالب"
+
+msgid "You can customize the design later"
+msgstr "می‌توانید بعداً طراحی را سفارشی کنید"
+
+msgid "Default Template"
+msgstr "قالب پیش‌فرض"
+
+msgid "Dark Template"
+msgstr "قالب تیره"
+
+msgid "Border Template"
+msgstr "قالب حاشیه‌دار"
+
+msgid "Border"
+msgstr "حاشیه"
+
+msgid "Transparent Template"
+msgstr "قالب شفاف"
+
+msgid "Transparent"
+msgstr "شفاف"
+
+#, tp-glo-ee8b4f9f
+msgid "Welcome to TranslatePress"
+msgstr "به TranslatePress خوش آمدید"
+
+#, tp-glo-ee8b4f9f
+msgid "Quick guided setup to configure TranslatePress in no time!"
+msgstr "راه‌اندازی سریع همراه با راهنما برای پیکربندی TranslatePress در چند لحظه!"
+
+msgid "It takes less than a minute."
+msgstr "کمتر از یک دقیقه طول می‌کشد."
+
+msgid "Scanning item %1$d of %2$d..."
+msgstr "در حال اسکن مورد %1$d از %2$d..."
+
+msgid "Manually translated"
+msgstr "ترجمه دستی"
+
+msgid "Automatically translated"
+msgstr "ترجمه خودکار"
+
+msgid "Not translated"
+msgstr "ترجمه نشده"
+
+msgid "Bulk Actions"
+msgstr "عملیات انبوه"
+
+msgid "Delete entries"
+msgstr "حذف ورودی‌ها"
+
+msgid "Edit"
+msgstr "ویرایش"
+
+msgid "Delete"
+msgstr "حذف"
+
+msgid "Filter"
+msgstr "فیلتر"
+
+msgid "Clear filters"
+msgstr "پاک‌سازی فیلترها"
+
+msgid "Add New"
+msgstr "افزودن"
+
+#, tp-ctx-2edc90df
+msgid "Rescan plugins and theme for strings"
+msgstr "اسکن مجدد افزونه‌ها و پوسته برای رشته‌ها"
+
+#, tp-ctx-2edc90df
+msgid "Scanning plugins and theme for strings..."
+msgstr "در حال اسکن افزونه‌ها و پوسته برای رشته‌ها..."
+
+msgid "Plugins and theme scan is complete"
+msgstr "اسکن افزونه‌ها و پوسته کامل شد"
+
+msgid "Plugins and theme scan did not finish due to an error"
+msgstr "اسکن افزونه‌ها و پوسته به دلیل خطا به پایان نرسید"
+
+msgid "Import / Export"
+msgstr "درون‌ریزی / برون‌بری"
+
+msgid "items"
+msgstr "مورد"
+
+msgid "See More"
+msgstr "مشاهده بیشتر"
+
+msgid "See Less"
+msgstr "مشاهده کمتر"
+
+msgid "Apply"
+msgstr "اعمال"
+
+#, tp-ctx-2edc90df
+msgid "No strings match your query."
+msgstr "هیچ رشته‌ای با جستجوی شما مطابقت ندارد."
+
+#, tp-ctx-2edc90df
+msgid "Try to rescan plugins and theme for strings."
+msgstr "تلاش برای اسکن مجدد افزونه‌ها و پوسته برای رشته‌ها."
+
+msgid ""
+"An error occurred while loading results. Most likely you were logged out. "
+"Reload page?"
+msgstr ""
+"خطایی در بارگذاری نتایج رخ داد. به احتمال زیاد از سیستم خارج شده‌اید. صفحه "
+"مجدداً بارگذاری شود؟"
+
+msgid "found in translation"
+msgstr "در ترجمه یافت شد"
+
+msgid "Select All"
+msgstr "انتخاب همه"
+
+msgid "Select Visible"
+msgstr "انتخاب موارد قابل مشاهده"
+
+#, tp-ctx-2edc90df
+msgid ""
+"You are about to perform this action on all the strings matching your "
+"filter, not just the visibly checked. To perform the action only to the "
+"visible strings click \"Select Visible\" from the table header dropdown."
+msgstr ""
+"شما در حال انجام این عمل روی تمام رشته‌هایی هستید که با فیلتر شما مطابقت "
+"دارند، نه فقط موارد انتخاب‌شده در نمای فعلی. برای انجام این عمل فقط روی "
+"رشته‌های قابل مشاهده، \"انتخاب موارد قابل مشاهده\" را از فهرست کشویی سرستون "
+"جدول کلیک کنید."
+
+#, tp-ctx-2edc90df
+msgid ""
+"You are about to perform this action only on the visible strings. To "
+"perform the action on all the strings matching the filter click \"Select "
+"All\" from the table header dropdown."
+msgstr ""
+"شما در حال انجام این عمل فقط روی رشته‌های قابل مشاهده هستید. برای انجام این "
+"عمل روی تمام رشته‌هایی که با فیلتر مطابقت دارند، \"انتخاب همه\" را از فهرست "
+"کشویی سرستون جدول کلیک کنید."
+
+msgid "To continue please type the word:"
+msgstr "برای ادامه، لطفاً کلمه را تایپ کنید:"
+
+msgid "The word typed was incorrect. Action was cancelled."
+msgstr "کلمهٔ واردشده نادرست بود. عملیات لغو شد."
+
+#, tp-ctx-8a82cc9e, tp-glo-ee8b4f9f
+msgid ""
+"Warning: This action cannot be undone. Deleting a string will remove its "
+"current translation. The original string will appear again in this "
+"interface after TranslatePress detects it. This action is NOT equivalent to "
+"excluding the string from being translated again."
+msgstr ""
+"هشدار: این عمل قابل بازگشت نیست. حذف یک رشته، ترجمه فعلی آن را حذف خواهد "
+"کرد. رشته اصلی پس از اینکه TranslatePress آن را شناسایی کرد، دوباره در این "
+"رابط کاربری ظاهر خواهد شد. این عمل معادل مستثنی کردن رشته از ترجمه مجدد "
+"نیست."
+
+msgid "%d original entries and their translations were deleted."
+msgstr "%d ورودی اصلی و ترجمه‌های آن‌ها حذف شدند."
+
+msgid "Navigate to next page"
+msgstr "رفتن به صفحهٔ بعد"
+
+msgid "Navigate to previous page"
+msgstr "رفتن به صفحهٔ قبل"
+
+msgid "Navigate to first page"
+msgstr "رفتن به صفحهٔ اول"
+
+msgid "Navigate to last page"
+msgstr "رفتن به صفحهٔ آخر"
+
+msgid "Type a page number to navigate to"
+msgstr "شمارهٔ صفحه‌ای را برای رفتن به آن وارد کنید"
+
+msgid ""
+"Incorrect page number. Type a page number between 1 and total number of "
+"pages"
+msgstr "شمارهٔ صفحه نادرست است. شماره‌ای بین ۱ و تعداد کل صفحات وارد کنید"
+
+#, tp-ctx-2edc90df, tp-ctx-8a82cc9e
+msgid ""
+"Search original and translated strings containing typed keywords while also "
+"matching selected filters. Place string in quotes for exact match: \"string\""
+msgstr ""
+"جستجوی رشته‌های اصلی و ترجمه‌شده حاوی کلمات کلیدی تایپ‌شده با تطبیق "
+"فیلترهای انتخاب‌شده. برای تطابق دقیق، رشته را درون نقل‌قول قرار دهید: "
+"\"رشته\""
+
+#, tp-ctx-2edc90df
+msgid ""
+"Filter strings according to selected translation status, filters and "
+"keywords and selected filters"
+msgstr ""
+"فیلتر کردن رشته‌ها بر اساس وضعیت ترجمه انتخاب‌شده، فیلترها و کلمات کلیدی و "
+"فیلترهای انتخاب‌شده"
+
+msgid "Removes selected filters"
+msgstr "فیلترهای انتخاب‌شده را حذف می‌کند"
+
+#, tp-ctx-2edc90df
+msgid "See options for selecting all strings"
+msgstr "مشاهده گزینه‌های انتخاب همهٔ رشته‌ها"
+
+#, tp-ctx-2edc90df
+msgid "Click to sort strings by this column"
+msgstr "برای مرتب‌سازی رشته‌ها بر اساس این ستون کلیک کنید"
+
+msgid ""
+"Language in which the translation status filter applies. Leave unselected "
+"for the translation status to apply to ANY language"
+msgstr ""
+"زبانی که فیلتر وضعیت ترجمه برای آن اعمال می‌شود. برای اعمال وضعیت ترجمه به "
+"هر زبانی، انتخاب نکنید"
+
+msgid "Search"
+msgstr "جستجو"
+
+#, tp-ctx-742ebaa7
+msgid "Slugs that are not found in either one of the other categories."
+msgstr "slugهایی که در هیچ‌یک از دسته‌های دیگر یافت نمی‌شوند."
+
+#, tp-ctx-8a82cc9e
+msgid "Plugins and Theme String Translation"
+msgstr "ترجمه رشته‌های افزونه‌ها و پوسته"
+
+#, tp-glo-64dbb752
+msgid "Gettext"
+msgstr "Gettext"
+
+#, tp-ctx-2edc90df, tp-glo-64dbb752
+msgid "Search Gettext Strings"
+msgstr "جستجوی رشته‌های Gettext"
+
+msgid "ID"
+msgstr "شناسه"
+
+#, tp-ctx-8a82cc9e
+msgid "Original String"
+msgstr "رشتهٔ اصلی"
+
+msgid "Translation"
+msgstr "ترجمه"
+
+msgid "Filter by domain"
+msgstr "فیلتر بر اساس دامنه"
+
+msgid "Filter by type"
+msgstr "فیلتر بر اساس نوع"
+
+msgid "Email text"
+msgstr "متن ایمیل"
+
+#, tp-ctx-8a82cc9e
+msgid "Emails String Translation"
+msgstr "ترجمهٔ رشته‌های ایمیل"
+
+msgid "Emails"
+msgstr "ایمیل‌ها"
+
+#, tp-ctx-2edc90df
+msgid "Search Email Strings"
+msgstr "جستجوی رشته‌های ایمیل"
+
+#, tp-ctx-8a82cc9e
+msgid "User Inputted String Translation"
+msgstr "ترجمهٔ رشتهٔ ورودی کاربر"
+
+#, tp-ctx-5211e47b
+msgid "Regular"
+msgstr "عادی"
+
+#, tp-ctx-2edc90df, tp-ctx-5211e47b
+msgid "Search Regular Strings"
+msgstr "جستجوی رشته‌های عادی"
+
+msgid "Filter by Translation Block"
+msgstr "فیلتر بر اساس بلوک ترجمه"
+
+#, tp-ctx-742ebaa7, tp-glo-9fa92a70
+msgid "URL Slugs Translation"
+msgstr "ترجمهٔ slugهای URL"
+
+#, tp-ctx-8a82cc9e
+msgid "String Translation Editor"
+msgstr "ویرایشگر ترجمهٔ رشته"
+
+#, tp-glo-ee8b4f9f
+msgid ""
+"TranslatePress has detected and cleaned up some failed translation entries "
+"in your database following %1$san isolated incident%2$s. No further action "
+"is required."
+msgstr ""
+"TranslatePress برخی ورودی‌های ترجمه ناموفق در پایگاه داده شما را پس از "
+"%1$sیک رخداد منفرد%2$s شناسایی و پاک‌سازی کرد. نیازی به اقدام بیشتر نیست."
+
+#, tp-ctx-07893e52, tp-ctx-e9944eb3, tp-glo-67834fcb
+msgid "Post Slug"
+msgstr "slug نوشته"
+
+msgid "Invalid language code"
+msgstr "کد زبان نامعتبر"
+
+msgid "First by browser language, then IP address (recommended)"
+msgstr "ابتدا بر اساس زبان مرورگر، سپس آدرس IP (توصیه‌شده)"
+
+msgid "First by IP address, then by browser language"
+msgstr "ابتدا بر اساس آدرس IP، سپس بر اساس زبان مرورگر"
+
+msgid "Only by browser language"
+msgstr "تنها بر اساس زبان مرورگر"
+
+msgid "Only by IP address"
+msgstr "تنها بر اساس آدرس IP"
+
+msgid "A popup appears asking the user if they want to be redirected"
+msgstr "پنجره‌ای باز می‌شود که از کاربر می‌پرسد آیا می‌خواهد بازنشانی شود"
+
+msgid "Redirect directly (*not recommended)"
+msgstr "بازنشانی مستقیم (*توصیه نمی‌شود)"
+
+msgid "Pop-up window over the content"
+msgstr "پنجره بازشو روی محتوا"
+
+msgid "Hello bar before the content"
+msgstr "نوار سلام قبل از محتوا"
+
+msgid ""
+"WARNING. Cannot determine your language preference based on your current "
+"IP.<br>This is most likely because the website is on a local environment."
+msgstr ""
+"هشدار. نمی‌توان ترجیح زبان شما را بر اساس IP فعلی‌تان تشخیص داد.<br>این "
+"احتمالاً به این دلیل است که وب‌سایت در یک محیط محلی است."
+
+#, tp-ai, tp-ctx-a6928204
+msgid ""
+"Go to <a href=\"%s\" target=\"_self\">Advanced</a> tab to change this "
+"feature's settings"
+msgstr ""
+"برای تغییر تنظیمات این قابلیت، به برگهٔ <a href=\"%s\" "
+"target=\"_self\">پیشرفته</a> بروید"
+
+msgid "User Language Detection Method"
+msgstr "روش تشخیص زبان کاربر"
+
+msgid ""
+"Select how the language should be detected for first time visitors.<br>The "
+"visitor's last displayed language will be remembered through cookies."
+msgstr ""
+"انتخاب کنید که زبان برای بازدیدکنندگان اولیه چگونه تشخیص داده شود.<br>آخرین "
+"زبانی که بازدیدکننده مشاهده کرده است از طریق کوکی‌ها به خاطر سپرده خواهد شد."
+
+msgid "User Notification Popup"
+msgstr "پنجره بازشوی اعلان کاربر"
+
+msgid "A popup appears asking the user if they want to be redirected."
+msgstr "پنجره‌ای باز می‌شود که از کاربر می‌پرسد آیا می‌خواهد بازنشانی شود."
+
+msgid "Popup Type"
+msgstr "نوع پنجره بازشو"
+
+msgid "Popup Text"
+msgstr "متن پنجره بازشو"
+
+msgid ""
+"The same text is displayed in all languages. <br>A selecting language "
+"switcher will be appended to the pop-up. The detected language is "
+"pre-selected."
+msgstr ""
+"متن یکسان در همهٔ زبان‌ها نمایش داده می‌شود. <br>یک تغییردهنده زبان انتخابی "
+"به پنجره بازشو اضافه خواهد شد. زبان تشخیص‌داده‌شده از پیش انتخاب شده است."
+
+msgid "Button Text"
+msgstr "متن دکمه"
+
+msgid "Write the text you wish to appear on the button.."
+msgstr "متنی را که می‌خواهید روی دکمه نمایش داده شود بنویسید.."
+
+msgid "Close Button Text"
+msgstr "متن دکمه بستن"
+
+msgid ""
+"Write the text you wish to appear on the close button. Leave empty for just "
+"the close button."
+msgstr ""
+"متنی را که می‌خواهید روی دکمه بستن نمایش داده شود بنویسید. برای دکمه بستن "
+"ساده، خالی بگذارید."
+
+#, tp-glo-91460d88, tp-glo-c6709f3f
+msgid "Bad request. There was an error accessing the DeepL API."
+msgstr "درخواست نامعتبر. هنگام دسترسی به API DeepL خطایی رخ داد."
+
+#, tp-glo-91460d88
+msgid "The API key entered is invalid."
+msgstr "کلید API واردشده نامعتبر است."
+
+#, tp-glo-91460d88
+msgid "The API resource could not be found."
+msgstr "منبع API یافت نشد."
+
+msgid "The request size is too large."
+msgstr "اندازه درخواست بیش از حد بزرگ است."
+
+msgid "The request is too long."
+msgstr "درخواست بیش از حد طولانی است."
+
+msgid "Too many requests. Please try again later."
+msgstr "درخواست‌ها بیش از حد مجاز است. لطفاً بعداً دوباره تلاش کنید."
+
+msgid "Your translation quota has been reached."
+msgstr "سهمیه ترجمه شما به پایان رسیده است."
+
+msgid "We could not process your request. Please try again later."
+msgstr "ما نتوانستیم درخواست شما را پردازش کنیم. لطفاً بعداً دوباره تلاش کنید."
+
+#, tp-glo-c6709f3f
+msgid ""
+"There is an error on the DeepL service and your request could not be "
+"processed."
+msgstr "خطایی در سرویس DeepL وجود دارد و درخواست شما نمی‌تواند پردازش شود."
+
+#, tp-glo-91460d88, tp-glo-c6709f3f
+msgid "DeepL API Type"
+msgstr "نوع API DeepL"
+
+msgid "Pro"
+msgstr "حرفه‌ای"
+
+msgid "Free"
+msgstr "رایگان"
+
+#, tp-glo-91460d88, tp-glo-c6709f3f
+msgid "Select the type of DeepL API you want to use."
+msgstr "نوع API DeepL مورد نظر خود را انتخاب کنید."
+
+#, tp-glo-91460d88, tp-glo-c6709f3f
+msgid "DeepL API Key"
+msgstr "کلید API DeepL"
+
+#, tp-glo-91460d88
+msgid ""
+"Visit <a href=\"%s\" target=\"_blank\">this link</a> to see how you can set "
+"up an API key and control API costs."
+msgstr ""
+"<a href=\"%s\" target=\"_blank\">این پیوند</a> را برای مشاهده نحوه تنظیم "
+"کلید API و کنترل هزینه‌های API ببینید."
+
+msgid "Translator"
+msgstr "مترجم"
+
+#, tp-glo-ee8b4f9f
+msgid " TranslatePress Settings"
+msgstr " تنظیمات TranslatePress"
+
+msgid "Allow this user to translate the website."
+msgstr "به این کاربر اجازه دهید وب‌سایت را ترجمه کند."
+
+msgid "(inactive)"
+msgstr "(غیرفعال)"
+
+#, tp-ctx-742ebaa7
+msgid "Taxonomy Slugs"
+msgstr "slugهای رده‌بندی"
+
+#, tp-ctx-742ebaa7
+msgid "Search Taxonomy Slugs"
+msgstr "جستجوی slugهای رده‌بندی"
+
+#, tp-ctx-07893e52, tp-glo-67834fcb
+msgid "Taxonomy Slug"
+msgstr "slug رده‌بندی"
+
+#, tp-ctx-742ebaa7
+msgid "Term Slugs"
+msgstr "slugهای اصطلاح"
+
+#, tp-ctx-742ebaa7
+msgid "Search Term Slugs"
+msgstr "جستجوی slugهای اصطلاح"
+
+#, tp-ctx-07893e52, tp-glo-67834fcb
+msgid "Term Slug"
+msgstr "slug اصطلاح"
+
+msgid "Taxonomy"
+msgstr "طبقه‌بندی"
+
+msgid "Filter by Taxonomy"
+msgstr "فیلتر بر اساس طبقه‌بندی"
+
+#, tp-ctx-742ebaa7, tp-ctx-e9944eb3
+msgid "Post Slugs"
+msgstr "slugهای نوشته"
+
+#, tp-ctx-742ebaa7, tp-ctx-e9944eb3
+msgid "Search Post Slugs"
+msgstr "جستجوی slugهای نوشته"
+
+#, tp-ctx-e9944eb3
+msgid "Post ID"
+msgstr "شناسهٔ نوشته"
+
+#, tp-ctx-e9944eb3
+msgid "Post Type"
+msgstr "نوع نوشته"
+
+#, tp-ctx-e9944eb3
+msgid "Filter by Post Type"
+msgstr "فیلتر بر اساس نوع نوشته"
+
+msgid "Published"
+msgstr "منتشر شده"
+
+#, tp-ctx-e9944eb3
+msgid "Any Post Status"
+msgstr "هر وضعیت نوشته"
+
+#, tp-ctx-742ebaa7, tp-ctx-e9944eb3
+msgid "Post Type Base Slugs"
+msgstr "slugهای پایه نوع نوشته"
+
+#, tp-ctx-07893e52, tp-ctx-e9944eb3, tp-glo-67834fcb
+msgid "Post Type Base Slug"
+msgstr "slug پایه نوع نوشته"
+
+#, tp-ctx-742ebaa7, tp-ctx-e9944eb3
+msgid "Search Post Type Base Slugs"
+msgstr "جستجوی slugهای پایه نوع نوشته"
+
+#, tp-ctx-742ebaa7, tp-glo-cd79cda5
+msgid "WooCommerce Slugs"
+msgstr "slugهای WooCommerce"
+
+#, tp-ctx-07893e52, tp-glo-67834fcb, tp-glo-cd79cda5
+msgid "WooCommerce Slug"
+msgstr "slug WooCommerce"
+
+#, tp-ctx-742ebaa7, tp-glo-cd79cda5
+msgid "Search WooCommerce Slugs"
+msgstr "جستجوی slugهای WooCommerce"
+
+#, tp-ctx-742ebaa7
+msgid "Other Slugs"
+msgstr "slugهای دیگر"
+
+#, tp-ctx-742ebaa7
+msgid "Search Other Slugs"
+msgstr "جستجوی slugهای دیگر"
+
+#, tp-glo-77a09a79, tp-glo-b83ea26c, tp-glo-ee8b4f9f
+msgctxt "Verbiage for the DeepL Pro Add-on"
+msgid "TranslatePress Pro Add-on"
+msgstr "TranslatePress Pro Add-on"
+
+msgctxt "Verbiage for the DeepL Pro Add-on"
+msgid "Addons tab"
+msgstr "زبانه افزودنی‌ها"
+
+msgctxt "page 1 of 3"
+msgid "of"
+msgstr "/"
+
+msgctxt "Untranslated in this language"
+msgid "in"
+msgstr "در"

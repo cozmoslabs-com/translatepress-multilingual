@@ -222,7 +222,7 @@ class TRP_Language_Switcher_V2 {
             ? 'top'
             : 'bottom' );
 
-        $is_opposite = (bool) $config['oppositeLanguage'];
+        $is_opposite = (bool) ( $config['oppositeLanguage'] ?? false );
 
         $list = $this->get_language_items( $name_type, $is_opposite );
 
@@ -295,7 +295,7 @@ class TRP_Language_Switcher_V2 {
         $open_on_click = ! empty( $config['clickLanguage'] );
         $flag_ratio    = ( $flag_shape === 'square' ) ? 'square' : 'rect';
 
-        $is_opposite = (bool) $config['oppositeLanguage'];
+        $is_opposite = (bool) ( $config['oppositeLanguage'] ?? false );
 
         $list = $this->get_language_items( $name_type, $is_opposite );
 
@@ -343,7 +343,7 @@ class TRP_Language_Switcher_V2 {
      * @return array
      */
     public function filter_menu_items( array $items, $menu, $args ): array {
-        if ( empty( $this->config['menu'] ) || !is_array( $this->config['menu'] ) ) {
+        if ( empty( $this->config['menu'] ) || !is_array( $this->config['menu'] ) || is_admin() ) {
             return $items;
         }
 

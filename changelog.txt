@@ -1,3 +1,10 @@
+= 3.1.9 =
+* Added Woodmart Layouts compatibility for the Translation Editor
+* Added MEC compatibility for price selectors and contaminated post meta
+* Fixed bug where a second mail sent in the same request was not getting translated
+* Strip leftover trp-gettext markers when translate_page returns early on default language
+* Added link to Website Word Counter tool in Automatic Translation tab
+
 = 3.1.8 =
  * Fix gettext translations saved as regular default strings when "Disable translation of gettext strings" is enabled
  * Prevent edge case fatal error from occurring in class-check-invalid-text.php

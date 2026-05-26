@@ -281,6 +281,7 @@ class TRP_Advanced_Tab {
 	 */
 
 	public function include_custom_codes(){
+        include_once(TRP_PLUGIN_DIR . 'includes/advanced-settings/disable-bundled-translations.php');
         include_once(TRP_PLUGIN_DIR . 'includes/advanced-settings/disable-dynamic-translation.php');
         include_once(TRP_PLUGIN_DIR . 'includes/advanced-settings/force-slash-at-end-of-links.php');
         include_once(TRP_PLUGIN_DIR . 'includes/advanced-settings/enable-numerals-translation.php');

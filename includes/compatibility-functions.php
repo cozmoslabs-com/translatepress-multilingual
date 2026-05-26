@@ -1340,6 +1340,20 @@ if( defined( 'BRIZY_PRO_VERSION' ) || defined( 'BRIZY_VERSION' ) ){
 
 
 /**
+ * Compatibility with Bricks Builder
+ * Hide Floating Language Switcher (both v1 and v2) inside the Bricks builder editor.
+ */
+function trp_bricks_suppress_floater_in_builder( $html ) {
+    if ( function_exists( 'bricks_is_builder_main' ) && bricks_is_builder_main() ) {
+        return '';
+    }
+    return $html;
+}
+add_filter( 'trp_floater_ls_html_v2', 'trp_bricks_suppress_floater_in_builder' );
+add_filter( 'trp_floating_ls_html',   'trp_bricks_suppress_floater_in_builder' );
+
+
+/**
  * Compatibility with woocommerce-pdf-vouchers plugin, removed language from download link of the vouchers
  */
 if( defined( 'WOO_VOU_PLUGIN_VERSION' ) ){
@@ -1402,6 +1416,99 @@ function trp_aws_current_language( $lang ) {
     }
     return $lang;
 }
+/**
+ * Compatibility with Ivory Search plugin.
+ *
+ * Ivory Search registers pre_get_posts at priority 9999999 to inject `_is_includes`
+ * (title/content/excerpt/custom_field/SKU/etc.) and a posts_search/posts_join pair
+ * that builds the WHERE/JOIN clauses for those fields. TranslatePress's own
+ * trp_search_filter runs at priority 99999999 and overwrites `post__in` with
+ * translated content matches, which excludes everything Ivory's SQL would have
+ * matched (e.g. SKU matches in WooCommerce).
+ *
+ * To keep both sets of matches, after TP has finished we run a sub WP_Query with
+ * Ivory's `_is_includes` config plus `_is_settings[search_engine] = index`. The
+ * 'index' flag lets Ivory's posts_search/posts_join filters process a non-main
+ * query (see IS_Public::posts_search line check on $is_index_search). The IDs
+ * returned by that sub-query are merged into the current `post__in`.
+ */
+add_action( 'pre_get_posts', 'trp_ivory_search_merge_results', 99999999 + 1 );
+function trp_ivory_search_merge_results( $query ) {
+    if ( ! class_exists( 'IS_Public' ) ) {
+        return;
+    }
+    if ( ! empty( $GLOBALS['trp_ivory_compat_running'] ) ) {
+        return;
+    }
+    if ( is_admin() || ! $query->is_main_query() || ! $query->is_search() ) {
+        return;
+    }
+    if ( empty( $query->query_vars['_is_includes'] ) ) {
+        return;
+    }
+
+    global $TRP_LANGUAGE;
+    $trp          = TRP_Translate_Press::get_trp_instance();
+    $trp_settings = $trp->get_component( 'settings' );
+    $settings     = $trp_settings->get_settings();
+    if ( $TRP_LANGUAGE === $settings['default-language'] ) {
+        return;
+    }
+
+    $search_term = $query->get( 's' );
+    if ( $search_term === '' && ! empty( $_GET['s'] ) ) {
+        $search_term = sanitize_text_field( wp_unslash( $_GET['s'] ) );
+    }
+    if ( $search_term === '' ) {
+        return;
+    }
+
+    $is_settings = (array) $query->get( '_is_settings' );
+    $is_settings['search_engine'] = 'index';
+
+    $sub_args = array(
+        's'              => $search_term,
+        'fields'         => 'ids',
+        'posts_per_page' => 200,
+        'no_found_rows'  => true,
+        '_is_includes'   => $query->get( '_is_includes' ),
+        '_is_settings'   => $is_settings,
+    );
+    $is_excludes = $query->get( '_is_excludes' );
+    if ( ! empty( $is_excludes ) ) {
+        $sub_args['_is_excludes'] = $is_excludes;
+    }
+    $post_type = $query->get( 'post_type' );
+    if ( ! empty( $post_type ) ) {
+        $sub_args['post_type'] = $post_type;
+    }
+    $post_status = $query->get( 'post_status' );
+    if ( ! empty( $post_status ) ) {
+        $sub_args['post_status'] = $post_status;
+    }
+
+    $GLOBALS['trp_ivory_compat_running'] = true;
+    $sub_query = new WP_Query( $sub_args );
+    $ivory_ids = $sub_query->posts;
+    unset( $GLOBALS['trp_ivory_compat_running'] );
+
+    if ( empty( $ivory_ids ) ) {
+        return;
+    }
+
+    $current_post_in = (array) $query->get( 'post__in' );
+    $current_post_in = array_filter( $current_post_in, 'is_numeric' );
+
+    $merged = array_values( array_unique( array_merge(
+        array_map( 'absint', $current_post_in ),
+        array_map( 'absint', $ivory_ids )
+    ) ) );
+
+    if ( ! empty( $merged ) ) {
+        $query->set( 'post__in', $merged );
+    }
+}
+
 /**
  * Compatibility with thrive Arhitect plugin which does a "nice" little trick with remove_all_filters( 'template_include' ); so we need to stop that or else it will not load our translation editor
  */
@@ -3164,3 +3271,116 @@ function trp_register_redirection_original_request_uri_filters() {
     add_filter( 'redirection_url_source', 'trp_get_original_request_uri', 1 );
 }
 add_action( 'plugins_loaded', 'trp_register_redirection_original_request_uri_filters', 20 );
+
+/**
+ * Exclude TranslatePress secondary-language URLs from WP Rocket's Preload Links feature.
+ *
+ * WP Rocket's `<link rel="prefetch">` on hover otherwise warms the browser cache with the
+ * alternate-language version of the page being hovered, and a single accidental click can
+ * leave the visitor stuck on that other language (every internal link on that page is in
+ * the new language too).
+ *
+ * Languages served from a separate domain (Multiple Domains add-on) are already skipped
+ * by WP Rocket's same-origin check, so they're not included in the patterns.
+ *
+ * Pattern shape `/<slug>(?:/|$)` matches `/he`, `/he/`, `/he/anything` but not `/help` or
+ * other slugs that share a prefix. Patterns are joined with `|` and used as a JS RegExp
+ * (case-insensitive) inside preload-links.js.
+ */
+add_filter( 'rocket_preload_links_exclusions', 'trp_exclude_language_slugs_from_wp_rocket_preload_links' );
+function trp_exclude_language_slugs_from_wp_rocket_preload_links( $excluded ) {
+    if ( ! is_array( $excluded ) ) {
+        $excluded = (array) $excluded;
+    }
+
+    if ( ! class_exists( 'TRP_Translate_Press' ) ) {
+        return $excluded;
+    }
+
+    $trp           = TRP_Translate_Press::get_trp_instance();
+    $settings_comp = $trp->get_component( 'settings' );
+    if ( ! $settings_comp ) {
+        return $excluded;
+    }
+
+    $settings = $settings_comp->get_settings();
+    if ( empty( $settings['publish-languages'] ) || empty( $settings['url-slugs'] ) ) {
+        return $excluded;
+    }
+
+    $default_language          = isset( $settings['default-language'] ) ? $settings['default-language'] : '';
+    $default_uses_subdirectory = isset( $settings['add-subdirectory-to-default-language'] ) && $settings['add-subdirectory-to-default-language'] === 'yes';
+    $multiple_domains          = isset( $settings['trp-multiple-domains'] ) && is_array( $settings['trp-multiple-domains'] ) ? $settings['trp-multiple-domains'] : array();
+
+    foreach ( $settings['publish-languages'] as $language_code ) {
+        if ( $language_code === $default_language && ! $default_uses_subdirectory ) {
+            continue;
+        }
+
+        if ( ! empty( $multiple_domains[ $language_code ]['enabled'] ) ) {
+            continue;
+        }
+
+        if ( empty( $settings['url-slugs'][ $language_code ] ) ) {
+            continue;
+        }
+
+        $slug = trim( $settings['url-slugs'][ $language_code ], '/' );
+        if ( $slug === '' ) {
+            continue;
+        }
+
+        $excluded[] = '/' . preg_quote( $slug, '/' ) . '(?:/|$)';
+    }
+
+    return $excluded;
+}
+
+/**
+ * Skip TranslatePress language prefixing on home_url() / get_permalink() while a
+ * WP Rocket preload job is executing.
+ *
+ * WP Rocket's preload runs via Action Scheduler. When LoadInitialSitemap and
+ * CrawlHomepage seed their URL list from home_url(), $TRP_LANGUAGE may still be
+ * set to a secondary language (left over from an earlier render sharing the
+ * runner process, or set by a referer-driven mutation in the AJAX/init path).
+ * Without this skip the preload bot warms the wrong-language URLs.
+ *
+ * The receiving side of each preload fetch is intentionally not handled here —
+ * resolve_language_context() picks the correct language from the URL itself, so
+ * secondary-language pages preload with their proper `/<slug>/...` internal links.
+ *
+ * @param bool   $skip Whether to skip prefixing already requested by another filter.
+ * @param string $url  Original URL passed to the home_url filter.
+ * @param string $path Path component passed to the home_url filter.
+ * @return bool
+ */
+add_filter( 'trp_skip_add_language_to_home_url', 'trp_skip_language_during_wp_rocket_preload', 10, 3 );
+function trp_skip_language_during_wp_rocket_preload( $skip, $url, $path ) {
+    if ( $skip ) {
+        return $skip;
+    }
+
+    if ( ! defined( 'WP_ROCKET_VERSION' ) ) {
+        return $skip;
+    }
+
+    if ( ! function_exists( 'doing_action' ) ) {
+        return $skip;
+    }
+
+    $preload_hooks = array(
+        'rocket_preload_job_load_initial_sitemap',
+        'rocket_preload_job_parse_sitemap',
+        'rocket_preload_job_preload_url',
+        'rocket_preload_job_check_finished',
+    );
+
+    foreach ( $preload_hooks as $hook ) {
+        if ( doing_action( $hook ) ) {
+            return true;
+        }
+    }
+
+    return $skip;
+}

@@ -125,7 +125,7 @@ class TRP_Process_Gettext {
                     if ( isset( $trp_translated_gettext_texts[ $context . '::' . $plural_form . '::' . $domain . '::' . $text ] ) ) {
                         $trp_translated_gettext_text = $trp_translated_gettext_texts[ $context . '::' . $plural_form  . '::' . $domain . '::' . $text ];
 
-                        if (!empty($trp_translated_gettext_text['translated']) && $translation != $trp_translated_gettext_text['translated'] && $this->is_sprintf_compatible( $trp_translated_gettext_text['translated'] ) ) {
+                        if (!empty($trp_translated_gettext_text['translated']) && $translation != $trp_translated_gettext_text['translated'] && $this->is_sprintf_compatible( $trp_translated_gettext_text['translated'], $text ) ) {
                             $translation = str_replace(trim($text), trp_sanitize_string($trp_translated_gettext_text['translated']), $text);
                         }
                         $db_id       = $trp_translated_gettext_text['id'];
@@ -419,7 +419,7 @@ class TRP_Process_Gettext {
 
         if ( isset( $trp_translated_gettext_texts[ 'trp_context' . '::' . 0 . '::' . $domain . '::' . $text ] ) &&
             !empty($trp_translated_gettext_texts[ 'trp_context' . '::' . 0 . '::' . $domain . '::' . $text ]['translated']) &&
-            $this->is_sprintf_compatible( $trp_translated_gettext_texts[ 'trp_context' . '::' . 0 . '::' . $domain . '::' . $text ]['translated'] )
+            $this->is_sprintf_compatible( $trp_translated_gettext_texts[ 'trp_context' . '::' . 0 . '::' . $domain . '::' . $text ]['translated'], $text )
         ){
             $translation = str_replace(trim($text), trp_sanitize_string($trp_translated_gettext_texts[ 'trp_context' . '::' . 0 . '::' . $domain . '::' . $text ]['translated']), $text);
         }
@@ -427,12 +427,34 @@ class TRP_Process_Gettext {
         return $translation;
     }
 
-    public function is_sprintf_compatible($string){
+    public function is_sprintf_compatible($string, $original_text = null){
 
         if (! apply_filters('trp_check_sprintf_compatibility', true ) ){
             return true;
         }
-        // 200 arguments should be enough. If a string has more than 200 placeholders then it might cause "Warning: sprintf(): Too few arguments" on certain php versions
+
+        if ( $original_text !== null ) {
+            // Fast path: no '%' in either string means no placeholders to compare.
+            if ( strpos( $original_text, '%' ) === false && strpos( $string, '%' ) === false ) {
+                return true;
+            }
+            // sprintf placeholder grammar: %[argnum$][flags][width][.precision]specifier
+            $pattern = "/%(?:\d+\\\$)?[-+0 #]*(?:'.)?\d*(?:\.\d+)?[bcdeEfFgGhHosuxX%]/";
+
+            preg_match_all( $pattern, $original_text, $original_matches );
+            preg_match_all( $pattern, $string, $translated_matches );
+
+            // %% is a literal percent, not an argument consumer.
+            $original_placeholders   = array_values( array_filter( $original_matches[0],   function( $p ) { return $p !== '%%'; } ) );
+            $translated_placeholders = array_values( array_filter( $translated_matches[0], function( $p ) { return $p !== '%%'; } ) );
+
+            sort( $original_placeholders );
+            sort( $translated_placeholders );
+            return $original_placeholders === $translated_placeholders;
+        }
+
+        // Fallback when the original is unavailable: only catches malformed format
+        // specifiers and translations with >200 placeholders.
         $arr = array(1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1);
         $is_compatible = true;
         try{

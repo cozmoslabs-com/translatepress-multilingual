@@ -25,6 +25,9 @@ class TRP_Reviews{
      */
     public function maybe_set_date_of_install(){
         $trp_db_stored_data = get_option( 'trp_db_stored_data', array() );
+        if ( !is_array( $trp_db_stored_data ) ){
+            $trp_db_stored_data = array();
+        }
         if ( !isset( $trp_db_stored_data['install_timestamp'] ) ){
             $trp_db_stored_data['install_timestamp'] = time();
             update_option('trp_db_stored_data', $trp_db_stored_data );
@@ -45,6 +48,9 @@ class TRP_Reviews{
 
 
         $trp_db_stored_data = get_option( 'trp_db_stored_data', array() );
+        if ( !is_array( $trp_db_stored_data ) ){
+            $trp_db_stored_data = array();
+        }
         $notification_dismissed = isset( $trp_db_stored_data['trp_review_notification_dismiss_notification'] ) && $trp_db_stored_data['trp_review_notification_dismiss_notification'] === true;
         $site_meets_conditions_for_review = isset( $trp_db_stored_data['trp_site_meets_conditions_for_review'] ) && $trp_db_stored_data['trp_site_meets_conditions_for_review'] === true;
 
@@ -143,6 +149,9 @@ class TRP_Reviews{
     public function dismiss_notification($notification_id, $current_user){
         if ( $notification_id === 'trp_review_notification' ) {
             $trp_db_stored_data = get_option( 'trp_db_stored_data', array() );
+            if ( !is_array( $trp_db_stored_data ) ){
+                $trp_db_stored_data = array();
+            }
             $trp_db_stored_data['trp_review_notification_dismiss_notification'] = true;
             update_option('trp_db_stored_data', $trp_db_stored_data );
         }

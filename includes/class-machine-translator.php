@@ -331,6 +331,11 @@ class TRP_Machine_Translator {
      * @return bool True if the string should be translated, false otherwise
      */
     private function should_translate_string( $string ) {
+        // Reject single strings that exceed the smallest engine body limit
+        if ( strlen( $string ) > 99400 ) {
+            return false;
+        }
+
         // Trim whitespace for accurate length check
         $trimmed = trim( $string );
 
@@ -351,6 +356,99 @@ class TRP_Machine_Translator {
         // Check if string is only punctuation/special characters (optional, can be disabled via filter)
         $skip_punctuation_only = apply_filters( 'trp_skip_punctuation_only_strings', true );
         if ( $skip_punctuation_only && preg_match( '/^[[:punct:][:space:]]+$/u', $trimmed ) ) {
+            return false;
+        }
+
+        // Base64-encoded strings — require at least one digit or `=` padding so letter-only words
+        // separated by `/` (e.g. "Certifikater/Batchstyring", "TCP/IP-style paths") aren't matched.
+        if ( preg_match( '/^[A-Za-z0-9+\/]{20,}={0,2}$/', $trimmed ) && preg_match( '/[0-9=]/', $trimmed ) ) {
+            return false;
+        }
+
+        // Pure numbers, dates, dimensions (no letters at all)
+        if ( preg_match( '/^[\d\s.,;:x×\-–—+\/()%°\'\"]+$/', $trimmed ) ) {
+            return false;
+        }
+
+        // ISO 8601 datetimes (e.g. 2026-01-06T16:50:29+00:00, ...Z, with optional fractional seconds)
+        if ( preg_match( '/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d+)?([+-]\d{2}:?\d{2}|Z)?$/', $trimmed ) ) {
+            return false;
+        }
+
+        // Standalone email addresses
+        if ( preg_match( '/^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$/', $trimmed ) ) {
+            return false;
+        }
+
+        // Bare URLs or srcset-style URL lists (https://... 300w, https://... 1024w)
+        if ( preg_match( '/^https?:\/\//', $trimmed ) && ! preg_match( '/[a-zA-ZÀ-ž]{2,}\s+[a-zA-ZÀ-ž]{2,}/', preg_replace( '/https?:\/\/\S+/', '', $trimmed ) ) ) {
+            return false;
+        }
+
+        // HTML media/void tags that are purely markup (no meaningful translatable text outside attributes)
+        if ( preg_match( '/^<(img|source|video|picture|input|br|hr|meta|link)\s/i', $trimmed ) && ! preg_match( '/>([^<]{10,})</', $trimmed ) ) {
+            return false;
+        }
+
+        // Self-closing HTML tags only (multiple img/source tags with no text between them)
+        if ( preg_match( '/^(<[a-z]+\s[^>]*\/>\s*)+$/i', $trimmed ) && ! preg_match( '/>([^<]{10,})</', $trimmed ) ) {
+            return false;
+        }
+
+        // HTML-only strings — at least one tag and no letters remaining once tags/comments are stripped
+        if ( preg_match( '/<[a-z!\/][^>]*>/i', $trimmed ) && ! preg_match( '/[a-zA-ZÀ-ž]/', preg_replace( '/<[^>]+>/', '', $trimmed ) ) ) {
+            return false;
+        }
+
+        // WordPress plugin/theme file paths (wp-content/plugins/...:123)
+        if ( preg_match( '/^wp-content\/(plugins|themes)\/\S+\.(php|js|css)(:\d+)?$/', $trimmed ) ) {
+            return false;
+        }
+
+        // Divi/shortcode builder markup (starts with [ shortcode tag and is mostly attributes)
+        if ( preg_match( '/^\[?\/?et_pb_/', $trimmed ) || preg_match( '/^\[\/et_pb_/', $trimmed ) ) {
+            return false;
+        }
+
+        // JavaScript code blocks
+        if ( preg_match( '/^\(\s*function\s*\(/', $trimmed ) || preg_match( '/^(var|let|const|function)\s+\w+\s*[=(]/', $trimmed ) ) {
+            return false;
+        }
+
+        // PDF internals
+        if ( preg_match( '/endobj\s*\n?\s*xref/', $trimmed ) ) {
+            return false;
+        }
+
+        // XML declarations and SVG markup
+        if ( preg_match( '/^<\?xml\s/', $trimmed ) || preg_match( '/^<svg[\s>]/i', $trimmed ) ) {
+            return false;
+        }
+
+        // Data URIs (base64-encoded images, fonts, SVG+XML, etc.)
+        if ( preg_match( '/^data:[a-z]+\/[a-z0-9+.\-]+(;[a-z0-9=\-]+)*,/i', $trimmed ) ) {
+            return false;
+        }
+
+        // Mustache/Handlebars/Vue template tags with no translatable text outside the tags
+        if ( preg_match( '/\{\{[^{}]*\}\}/', $trimmed ) && ! preg_match( '/[a-zA-ZÀ-ž]/', preg_replace( '/\{\{+[^{}]*\}+\}/', '', $trimmed ) ) ) {
+            return false;
+        }
+
+        // CSS fragments — custom property declarations, at-rules, or url(data:...) constructs.
+        // Loose by design, but guarded: only skip if the string doesn't contain real HTML content
+        // tags (so HTML pages with inline `style="--foo: ..."` attributes aren't rejected).
+        if ( ( preg_match( '/--[a-zA-Z][a-zA-Z0-9_-]*\s*:\s*\S/', $trimmed )
+            || preg_match( '/^\s*@(media|import|font-face|keyframes|supports|charset|page|namespace|layer)\b/i', $trimmed )
+            || preg_match( '/\burl\s*\(\s*[\'"]?data:/i', $trimmed ) )
+            && ! preg_match( '/<(p|div|span|a|h[1-6]|article|section|ul|ol|li|main|header|footer|nav|figure|figcaption|blockquote|table|tr|td|th|trp-post-container)\b/i', $trimmed ) ) {
+            return false;
+        }
+
+        // Binary/mojibake data — three or more clusters of 2+ consecutive '?' or U+FFFD
+        // characters. Real prose almost never repeats '?' or replacement chars; binary
+        // data captured as text (PDF/font/image bytes, broken encodings) does so heavily.
+        if ( preg_match_all( '/[?\x{FFFD}]{2,}/u', $trimmed ) >= 3 ) {
             return false;
         }
 

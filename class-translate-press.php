@@ -79,7 +79,7 @@ class TRP_Translate_Press{
         define( 'TRP_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
         define( 'TRP_PLUGIN_BASE', plugin_basename( __DIR__ . '/index.php' ) );
         define( 'TRP_PLUGIN_SLUG', 'translatepress-multilingual' );
-        define( 'TRP_PLUGIN_VERSION', '3.1.9' );
+        define( 'TRP_PLUGIN_VERSION', '3.2' );
 
 	    wp_cache_add_non_persistent_groups(array('trp'));
 
@@ -561,7 +561,44 @@ class TRP_Translate_Press{
      * Load plugin textdomain
      */
     public function init_translation(){
-        load_plugin_textdomain( 'translatepress-multilingual', false, basename(dirname(__FILE__)) . '/languages/' );
+        if ( apply_filters( 'trp_use_bundled_translations', true ) ) {
+            // OVERRIDE: hijack the load filters so WP uses the merged community+AI files
+            // bundled in this plugin's /languages/ over anything WordPress.org installs into
+            // wp-content/languages/plugins/. The third arg to load_plugin_textdomain still
+            // points at our /languages/ as a belt-and-suspenders fallback in case the filter
+            // somehow doesn't fire (e.g. another plugin removed it).
+            add_filter( 'load_textdomain_mofile',       array( $this, 'prefer_bundled_translation_file' ), 10, 2 );
+            add_filter( 'load_translation_file',        array( $this, 'prefer_bundled_translation_file' ), 10, 2 );
+            add_filter( 'load_script_translation_file', array( $this, 'prefer_bundled_script_translation_file' ), 10, 3 );
+
+            load_plugin_textdomain( 'translatepress-multilingual', false, basename(dirname(__FILE__)) . '/languages/' );
+        } else {
+            // DISABLED (toggle on, or `trp_use_bundled_translations` filter returned false):
+            // omit the plugin-folder path so WordPress only consults wp-content/languages/plugins/
+            // (the WP.org pack location). If a community pack is installed there it loads; if
+            // not, gettext falls back to the English source.
+            //
+            // JS script translations are already in this "WP.org-only" mode by default because
+            // the wp_set_script_translations() call elsewhere in the plugin doesn't pass a
+            // $path argument either — no further wiring needed for the JSON side.
+            load_plugin_textdomain( 'translatepress-multilingual' );
+        }
+    }
+
+    public function prefer_bundled_translation_file( $file, $domain ) {
+        if ( 'translatepress-multilingual' !== $domain ) {
+            return $file;
+        }
+        $bundled = TRP_PLUGIN_DIR . 'languages/' . basename( $file );
+        return file_exists( $bundled ) ? $bundled : $file;
+    }
+
+    public function prefer_bundled_script_translation_file( $file, $handle, $domain ) {
+        if ( 'translatepress-multilingual' !== $domain ) {
+            return $file;
+        }
+        $bundled = TRP_PLUGIN_DIR . 'languages/' . basename( $file );
+        return file_exists( $bundled ) ? $bundled : $file;
     }
 
     public function init_machine_translation(){

@@ -48,7 +48,7 @@ class TRP_Url_Converter {
         }
 
         if( apply_filters( 'trp_add_language_to_home_url_check_for_admin', true, $url, $path ) &&
-            ( is_customize_preview() || $this->is_admin_request()  || $this->is_sitemap_path( $path ) || $this->url_is_file( $path ) ) )
+            ( is_customize_preview() || $this->is_admin_request()  || $this->is_sitemap_path( $path ) || $this->url_is_file( $path ) || apply_filters( 'trp_skip_add_language_to_home_url', false, $url, $path ) ) )
             return $url;
 
         $url_slug = $this->get_url_slug( $TRP_LANGUAGE );
@@ -742,7 +742,19 @@ class TRP_Url_Converter {
             return $req_uri;
         }
 
-        $req_uri = isset( $_SERVER['REQUEST_URI'] ) ? esc_url_raw( $_SERVER['REQUEST_URI'] ) : '';
+        // Pre-encode characters that esc_url_raw() would strip (e.g., when the request URI
+        // contains literal { } " < > from JSON-encoded query parameters such as
+        // ?jet_ajax_search_settings={"search_source":"product"}). Already percent-encoded
+        // sequences (%7B, %7D, %22, ...) are unaffected, so this is a no-op for correctly
+        // encoded URLs. The result is then sanitized by esc_url_raw().
+        // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- sanitized via esc_url_raw() on the same statement, after pre-encoding.
+        $req_uri = isset( $_SERVER['REQUEST_URI'] ) ? esc_url_raw( strtr( wp_unslash( $_SERVER['REQUEST_URI'] ), array(
+            '{' => '%7B',
+            '}' => '%7D',
+            '"' => '%22',
+            '<' => '%3C',
+            '>' => '%3E',
+        ) ) ) : '';
 
         // strval converts null to empty string. $this->get_abs_home() can be null and this causes a PHP 8 notice.
         $abs_home = strval( $this->get_abs_home() );

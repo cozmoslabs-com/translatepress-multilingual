@@ -466,10 +466,10 @@ class TRP_Query{
 
             $possible_new_strings = array();
             foreach ( $new_strings as $string ) {
-                $possible_new_strings[] = $this->db->prepare( "%s",  $string );
+                $possible_new_strings[] = 'CAST(' . $this->db->prepare( "%s",  $string ) . ' AS BINARY)';
             }
 
-            $existing_strings = $this->db->get_results( "SELECT original FROM `$originals_table` WHERE BINARY $originals_table.original IN (".implode( ',', $possible_new_strings ).")", OBJECT_K );
+            $existing_strings = $this->db->get_results( "SELECT original FROM `$originals_table` WHERE $originals_table.original IN (".implode( ',', $possible_new_strings ).")", OBJECT_K );
 
             if( !empty( $existing_strings ) ){
                 $existing_strings = array_keys($existing_strings);
@@ -489,7 +489,7 @@ class TRP_Query{
             }
 
             //get the ids for all the new strings (new in dictionary)
-            $new_strings_in_dictionary_with_original_id = $this->db->get_results( "SELECT original,id FROM `$originals_table` WHERE BINARY $originals_table.original IN (".implode( ',', $possible_new_strings ).")", OBJECT_K );
+            $new_strings_in_dictionary_with_original_id = $this->db->get_results( "SELECT original,id FROM `$originals_table` WHERE $originals_table.original IN (".implode( ',', $possible_new_strings ).")", OBJECT_K );
 
             if( count( $new_strings_in_dictionary_with_original_id ) === count( $new_strings ) ){
                 return $new_strings_in_dictionary_with_original_id;
@@ -788,7 +788,7 @@ class TRP_Query{
         $placeholders = array();
         $values = array();
         foreach( $original_strings as $string ){
-            $placeholders[] = '%s';
+            $placeholders[] = 'CAST(%s AS BINARY)';
             $values[] = $string;
         }
 
@@ -809,12 +809,12 @@ class TRP_Query{
         if ( !is_array( $original_strings ) || count ( $original_strings ) == 0 ){
             return array();
         }
-        $query = "SELECT original,id FROM `" . $this->get_table_name_for_original_strings() . "` WHERE BINARY original IN ";
+        $query = "SELECT original,id FROM `" . $this->get_table_name_for_original_strings() . "` WHERE original IN ";
 
         $placeholders = array();
         $values = array();
         foreach( $original_strings as $string ){
-            $placeholders[] = '%s';
+            $placeholders[] = 'BINARY %s';
             $values[] = $string;
         }
 

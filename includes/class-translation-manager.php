@@ -539,7 +539,9 @@ class TRP_Translation_Manager {
         }
 
         if ( is_admin() ) {
+            add_filter( 'trp_add_language_to_home_url_check_for_admin', '__return_false' );
             $url = add_query_arg( 'trp-edit-translation', 'true', trailingslashit( home_url() ) );
+            remove_filter( 'trp_add_language_to_home_url_check_for_admin', '__return_false' );
 
             $title      = __( 'Translate Site', 'translatepress-multilingual' );
             $url_target = '_blank';
