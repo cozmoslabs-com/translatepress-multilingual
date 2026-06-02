@@ -279,10 +279,24 @@ class TRP_Gettext_Manager {
 		global $TRP_LANGUAGE;
 		$trp           = TRP_Translate_Press::get_trp_instance();
 		$url_converter = $trp->get_component( 'url_converter' );
-		$TRP_LANGUAGE  = $url_converter->get_lang_from_url_string( $referer );
-		if ( empty( $TRP_LANGUAGE ) ) {
-			$settings_obj = new TRP_Settings();
-			$settings     = $settings_obj->get_settings();
+		$settings_obj  = new TRP_Settings();
+		$settings      = $settings_obj->get_settings();
+
+		if ( isset( $_REQUEST['trp-form-language'] ) && ! empty( $_REQUEST['trp-form-language'] ) ) {
+			$form_language_slug = sanitize_text_field( wp_unslash( $_REQUEST['trp-form-language'] ) );
+			$form_language      = array_search( $form_language_slug, $settings['url-slugs'], true );
+
+			if ( ! empty( $form_language ) ) {
+				$TRP_LANGUAGE = $form_language;
+				return;
+			}
+		}
+
+		$referer_language = $url_converter->get_lang_from_url_string( $referer );
+
+		if ( ! empty( $referer_language ) ) {
+			$TRP_LANGUAGE = $referer_language;
+		} elseif ( empty( $TRP_LANGUAGE ) ) {
 			$TRP_LANGUAGE = $settings["default-language"];
 		}
 	}

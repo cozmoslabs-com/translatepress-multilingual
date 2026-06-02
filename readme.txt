@@ -5,7 +5,7 @@ Tags: translate, translation, multilingual, automatic translation, ai translatio
 Requires at least: 3.1.0
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 3.2
+Stable tag: 3.2.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -147,24 +147,12 @@ For more information please check out our [documentation](https://translatepress
 
 
 == Changelog ==
-= 3.2 =
-* Localize TranslatePress user interface in the most popular languages WordPress is being used in
-* Reduce automatic translation costs by improving the filtering of translatable text
-* Improve original string lookup performance for large translation tables
-* Added Ivory Search compatibility for secondary-language search
-* Added Bricks compatibility for language switcher
-* Support UNIX socket DB connections in trp-ajax.php
-* Preserve JSON query params in language switcher URLs
-* Fixed edge case JS error: invalid assignment to const 'i'
-* Fixed illegal string offset warning in class-reviews.php
-* Fixed PHP warning for undefined oppositeLanguage key in language switcher v2
-* Fixed an issue where the menu language switcher could incorrectly save and reuse the current-language-menu-item class for the default language, causing it to appear active alongside the actual current language
-* Fixed WPRocket Preloading that was causing preloaded pages to serve a different language
-* Fixed edge case error when gettext translation has incorrect number of placeholders
-* Fixed simple_html_dom mangling unquoted attributes followed by tab/newline
-* Fixed Translate Site button URL not adding language slug for subdirectory default language
-* Fixed undefined ID column in Gettext/Regular String Translation tables
-* Fixed Vue.js error in Regular tab strings table in some edge cases
+= 3.2.1 =
+* Added WordPress Abilities API integration
+* Improve filtering of translatable text to avoid JS code detection
+* Preserve pubDate/lastBuildDate camelCase in translated RSS feeds
+* Fix WooCommerce emails sent in default language while Different Domain per Language is enabled
+* Fix PHP 8.2 dynamic property deprecation on TRP_Search
 
 = Older versions =
 [Click Here](https://translatepress.com/docs/translatepress-free-changelog/?utm_source=wp.org&utm_medium=tp-description-page&utm_campaign=TPFree) to view the full changelog, or you can find it in the changelog.txt file in the plugin folder.

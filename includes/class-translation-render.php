@@ -1216,6 +1216,32 @@ class TRP_Translation_Render{
 	    return apply_filters( 'trp_translated_html', $final_html, $TRP_LANGUAGE, $language_code, $preview_mode );
     }
 
+    /**
+     * Restore camelCase XML element names in syndication feeds.
+     *
+     * The HTML DOM parser used by translate_page() lowercases tag names. RSS 2.0
+     * defines <pubDate> and <lastBuildDate> in camelCase, so the lowercased output
+     * is not valid per the syndication spec and is rejected by some readers.
+     */
+    public function restore_feed_camelcase_tags( $final_html, $TRP_LANGUAGE = null, $language_code = null, $preview_mode = false ) {
+        if ( ! is_feed() || ! is_string( $final_html ) ) {
+            return $final_html;
+        }
+
+        $camelcase_tags = apply_filters( 'trp_feed_camelcase_tags', array( 'pubDate', 'lastBuildDate' ) );
+
+        foreach ( $camelcase_tags as $tag ) {
+            $lowercase = strtolower( $tag );
+            $final_html = str_replace(
+                array( '<' . $lowercase . '>', '</' . $lowercase . '>' ),
+                array( '<' . $tag . '>',       '</' . $tag . '>' ),
+                $final_html
+            );
+        }
+
+        return $final_html;
+    }
+
 
     public function handle_custom_links_and_forms( $html ){
         global $TRP_LANGUAGE;

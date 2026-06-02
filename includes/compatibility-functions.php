@@ -3384,3 +3384,18 @@ function trp_skip_language_during_wp_rocket_preload( $skip, $url, $path ) {
 
     return $skip;
 }
+
+/**
+ * Compatibility with plugins that serve a local Google Analytics file (e.g. CAOS / Host Analytics Locally).
+ *
+ * Those requests use the 'local_ga_js' GET parameter to output the analytics JS file. We must not run
+ * TranslatePress translation on these responses, so stop translating the page when the parameter is present.
+ * Particularly important because automatic translation got triggered.
+ */
+add_filter( 'trp_stop_translating_page', 'trp_local_ga_js_stop_translating_page' );
+function trp_local_ga_js_stop_translating_page( $stop ){
+    if ( isset( $_REQUEST['local_ga_js'] ) ){
+        return true;
+    }
+    return $stop;
+}

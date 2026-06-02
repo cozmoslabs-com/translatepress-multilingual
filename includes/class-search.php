@@ -14,6 +14,7 @@ class TRP_Search extends WP_Query{
 
     protected $settings;
     protected $db;
+    protected $trp_query;
 
 
     /**

@@ -6,7 +6,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-05-26 07:21+0000\n"
+"POT-Creation-Date: 2026-06-02 07:32+0000\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
 "X-Poedit-SearchPath-0: .\n"
@@ -44,6 +44,197 @@ msgstr ""
 
 #: index.php:68
 msgid "<strong>TranslatePress</strong> requires at least PHP version 5.6.20+ to run. It is the <a href=\"%s\">minimum requirement of the latest WordPress version</a>. Please contact your server administrator to update your PHP version."
+msgstr ""
+
+#: includes/class-abilities.php:58, includes/class-wp-bakery-language-for-blocks.php:179
+msgid "TranslatePress"
+msgstr ""
+
+#: includes/class-abilities.php:59
+msgid "Abilities for managing TranslatePress configuration."
+msgstr ""
+
+#: includes/class-abilities.php:66
+msgid "Add a translation language"
+msgstr ""
+
+#: includes/class-abilities.php:67
+msgid "Adds a translation language to TranslatePress. Enforces the same per-license limit as the settings UI."
+msgstr ""
+
+#: includes/class-abilities.php:74
+msgid "WordPress locale code (e.g. fr_FR, de_DE)."
+msgstr ""
+
+#: includes/class-abilities.php:79
+msgid "Optional URL slug. Defaults to the ISO language code if omitted."
+msgstr ""
+
+#: includes/class-abilities.php:101
+msgid "Set TranslatePress license key"
+msgstr ""
+
+#: includes/class-abilities.php:102
+msgid "Saves a TranslatePress license key and triggers a remote license check, mirroring the onboarding flow."
+msgstr ""
+
+#: includes/class-abilities.php:109
+msgid "The license key to activate."
+msgstr ""
+
+#: includes/class-abilities.php:128
+msgid "List configured languages"
+msgstr ""
+
+#: includes/class-abilities.php:129
+msgid "Returns the languages currently configured in TranslatePress, including the default language and per-language slug/publish state."
+msgstr ""
+
+#: includes/class-abilities.php:168
+msgid "List available language codes"
+msgstr ""
+
+#: includes/class-abilities.php:169
+msgid "Returns the full catalog of language codes TranslatePress recognizes, with their English names."
+msgstr ""
+
+#: includes/class-abilities.php:201
+msgid "Remove a translation language"
+msgstr ""
+
+#: includes/class-abilities.php:202
+msgid "Removes a configured translation language. The default language cannot be removed without first reassigning the default."
+msgstr ""
+
+#: includes/class-abilities.php:209
+msgid "Locale code of the language to remove."
+msgstr ""
+
+#: includes/class-abilities.php:239
+msgid "Update a translation language"
+msgstr ""
+
+#: includes/class-abilities.php:240
+msgid "Replaces the slug and publish status of an already-configured translation language."
+msgstr ""
+
+#: includes/class-abilities.php:247
+msgid "Locale code of the language to update."
+msgstr ""
+
+#: includes/class-abilities.php:252
+msgid "URL slug for this language."
+msgstr ""
+
+#: includes/class-abilities.php:257
+msgid "Whether this language is published on the front end."
+msgstr ""
+
+#: includes/class-abilities.php:277
+msgid "Set the default language"
+msgstr ""
+
+#: includes/class-abilities.php:278
+msgid "Promotes an already-configured language to be the site default. The previous default remains in the translation languages list."
+msgstr ""
+
+#: includes/class-abilities.php:285
+msgid "Locale code to promote to default. Must already be a configured translation language."
+msgstr ""
+
+#: includes/class-abilities.php:309
+msgid "You do not have permission to manage TranslatePress settings."
+msgstr ""
+
+#: includes/class-abilities.php:329, includes/class-abilities.php:520, includes/class-abilities.php:572, includes/class-abilities.php:652
+msgid "Invalid language code. Allowed characters: A-Z, a-z, 0-9, hyphen, underscore."
+msgstr ""
+
+#. translators: %s: language code
+#: includes/class-abilities.php:342
+msgid "Language code \"%s\" is not recognized by TranslatePress."
+msgstr ""
+
+#. translators: %s: language code
+#: includes/class-abilities.php:359
+msgid "Language \"%s\" is already configured."
+msgstr ""
+
+#. translators: %d: maximum number of secondary languages
+#: includes/class-abilities.php:373
+msgid "Your current license allows up to %d additional language(s). Upgrade or activate a Pro license to add more."
+msgstr ""
+
+#: includes/class-abilities.php:400
+msgid "TranslatePress rejected the new language during settings sanitization."
+msgstr ""
+
+#. translators: %s: license expiration date
+#: includes/class-abilities.php:453, includes/class-edd-sl-plugin-updater.php:852, includes/onboarding/class-autotranslation.php:100, includes/onboarding/class-license.php:61
+msgid "Your license key expired on %s."
+msgstr ""
+
+#: includes/class-abilities.php:457
+msgid "Your license key has expired."
+msgstr ""
+
+#: includes/class-abilities.php:459, includes/class-edd-sl-plugin-updater.php:857, includes/onboarding/class-autotranslation.php:105, includes/onboarding/class-license.php:66
+msgid "Your license key has been disabled."
+msgstr ""
+
+#: includes/class-abilities.php:461, includes/class-edd-sl-plugin-updater.php:776, includes/class-edd-sl-plugin-updater.php:860, includes/onboarding/class-autotranslation.php:108, includes/onboarding/class-license.php:33, includes/onboarding/class-license.php:69
+msgid "Your TranslatePress license key is invalid or missing."
+msgstr ""
+
+#: includes/class-abilities.php:464
+msgid "Your license key is disabled for this URL. Re-enable it from your TranslatePress account."
+msgstr ""
+
+#: includes/class-abilities.php:466
+msgid "License key mismatch. The license you entered does not match the TranslatePress version you have installed."
+msgstr ""
+
+#: includes/class-abilities.php:468, includes/class-edd-sl-plugin-updater.php:877, includes/onboarding/class-autotranslation.php:118, includes/onboarding/class-license.php:79
+msgid "Your license key has reached its activation limit."
+msgstr ""
+
+#: includes/class-abilities.php:470, includes/class-edd-sl-plugin-updater.php:883, includes/onboarding/class-autotranslation.php:121, includes/onboarding/class-license.php:82
+msgid "This website is already activated under a free license. Each website can only use one free license."
+msgstr ""
+
+#: includes/class-abilities.php:472
+msgid "An error occurred while activating the license, please try again."
+msgstr ""
+
+#. translators: %s: language code
+#: includes/class-abilities.php:535
+msgid "Language \"%s\" is not currently configured."
+msgstr ""
+
+#: includes/class-abilities.php:544
+msgid "The default language cannot be removed. Set another language as default first."
+msgstr ""
+
+#: includes/class-abilities.php:579
+msgid "Slug is empty after sanitization. Use only URL-safe characters."
+msgstr ""
+
+#. translators: %s: language code
+#: includes/class-abilities.php:594, includes/class-abilities.php:672
+msgid "Language \"%s\" is not currently configured. Add it first with translatepress/add-language."
+msgstr ""
+
+#: includes/class-abilities.php:604
+msgid "The default language is always published and cannot be unpublished."
+msgstr ""
+
+#. translators: 1: slug, 2: language code
+#: includes/class-abilities.php:615
+msgid "Slug \"%1$s\" is already in use by language \"%2$s\"."
+msgstr ""
+
+#: includes/class-abilities.php:703
+msgid "TranslatePress rejected the new settings during sanitization."
 msgstr ""
 
 #: includes/class-advanced-tab.php:23
@@ -134,18 +325,6 @@ msgstr ""
 msgid "Error"
 msgstr ""
 
-#: includes/class-edd-sl-plugin-updater.php:776, includes/class-edd-sl-plugin-updater.php:860, includes/onboarding/class-autotranslation.php:108, includes/onboarding/class-license.php:33, includes/onboarding/class-license.php:69
-msgid "Your TranslatePress license key is invalid or missing."
-msgstr ""
-
-#: includes/class-edd-sl-plugin-updater.php:852, includes/onboarding/class-autotranslation.php:100, includes/onboarding/class-license.php:61
-msgid "Your license key expired on %s."
-msgstr ""
-
-#: includes/class-edd-sl-plugin-updater.php:857, includes/onboarding/class-autotranslation.php:105, includes/onboarding/class-license.php:66
-msgid "Your license key has been disabled."
-msgstr ""
-
 #: includes/class-edd-sl-plugin-updater.php:865
 msgid "Your license key is disabled for this URL. Re-enable it from <a target=\"_blank\" href=\"https://translatepress.com/account/?utm_source=wp-dashboard&utm_medium=client-site&utm_campaign=license-deactivated\">https://translatepress.com/account</a> -> Manage Sites."
 msgstr ""
@@ -158,16 +337,8 @@ msgstr ""
 msgid "If you have only the free plugin installed but added a paid license, please install the paid plugin from your TranslatePress account."
 msgstr ""
 
-#: includes/class-edd-sl-plugin-updater.php:877, includes/onboarding/class-autotranslation.php:118, includes/onboarding/class-license.php:79
-msgid "Your license key has reached its activation limit."
-msgstr ""
-
 #: includes/class-edd-sl-plugin-updater.php:880
 msgid "Upgrade your plan to add more sites. %1$sUpgrade now%2$s"
-msgstr ""
-
-#: includes/class-edd-sl-plugin-updater.php:883, includes/onboarding/class-autotranslation.php:121, includes/onboarding/class-license.php:82
-msgid "This website is already activated under a free license. Each website can only use one free license."
 msgstr ""
 
 #: includes/class-edd-sl-plugin-updater.php:886, includes/class-edd-sl-plugin-updater.php:841, includes/class-edd-sl-plugin-updater.php:960, includes/onboarding/class-autotranslation.php:124, includes/onboarding/class-license.php:85
@@ -246,7 +417,7 @@ msgstr ""
 msgid "Automatic translation has been disabled."
 msgstr ""
 
-#: includes/class-error-manager.php:170, includes/class-plugin-notices.php:353, includes/class-plugin-notices.php:431, includes/class-plugin-notices.php:406, includes/class-plugin-notices.php:491, includes/class-plugin-notices.php:469, includes/class-plugin-notices.php:520, includes/class-plugin-notices.php:576, includes/class-plugin-notices.php:632, includes/class-plugin-notices.php:621, includes/class-plugin-notices.php:657, includes/class-plugin-notices.php:709, includes/class-plugin-notices.php:692, includes/class-reviews.php:129, includes/class-reviews.php:132, includes/class-upgrade.php:1077, includes/class-upgrade.php:1786, add-ons-advanced/extra-languages/class-extra-languages.php:157, add-ons-advanced/seo-pack/class-seo-pack.php:840, add-ons-pro/multiple-domains/class-multiple-domains.php:573, includes/upgrade/class-batch-processor.php:173
+#: includes/class-error-manager.php:170, includes/class-plugin-notices.php:353, includes/class-plugin-notices.php:431, includes/class-plugin-notices.php:406, includes/class-plugin-notices.php:491, includes/class-plugin-notices.php:469, includes/class-plugin-notices.php:520, includes/class-plugin-notices.php:576, includes/class-plugin-notices.php:632, includes/class-plugin-notices.php:621, includes/class-plugin-notices.php:657, includes/class-plugin-notices.php:709, includes/class-plugin-notices.php:692, includes/class-reviews.php:129, includes/class-reviews.php:132, includes/class-upgrade.php:1077, includes/class-upgrade.php:1786, add-ons-advanced/extra-languages/class-extra-languages.php:157, add-ons-advanced/seo-pack/class-seo-pack.php:845, add-ons-pro/multiple-domains/class-multiple-domains.php:573, includes/upgrade/class-batch-processor.php:173
 msgid "Dismiss this notice."
 msgstr ""
 
@@ -386,7 +557,7 @@ msgstr ""
 msgid "Please enter your Google Translate key."
 msgstr ""
 
-#: includes/class-machine-translator.php:172, add-ons-pro/deepl/includes/class-deepl-machine-translator.php:365
+#: includes/class-machine-translator.php:172, add-ons-pro/deepl/includes/class-deepl-machine-translator.php:371
 msgid "Please enter your DeepL API key."
 msgstr ""
 
@@ -1429,10 +1600,6 @@ msgstr ""
 msgid "Read documentation"
 msgstr ""
 
-#: includes/class-wp-bakery-language-for-blocks.php:179
-msgid "TranslatePress"
-msgstr ""
-
 #: includes/compatibility-functions.php:32
 msgid "<strong>TranslatePress</strong> requires <strong><a href=\"http://php.net/manual/en/book.mbstring.php\">Multibyte String PHP library</a></strong>. Please contact your server administrator to install it on your server."
 msgstr ""
@@ -2254,11 +2421,11 @@ msgstr ""
 msgid "<strong>Extra Languages add-on</strong> requires TranslatePress version %1$s or higher. You are currently using version %2$s. Please update TranslatePress to enable this feature."
 msgstr ""
 
-#: add-ons-advanced/seo-pack/class-seo-pack.php:835
+#: add-ons-advanced/seo-pack/class-seo-pack.php:840
 msgid "Automatic and manual slug translation changes performed when <strong>TranslatePress - Multilingual</strong> 2.8.4 was active had to be removed because of some issues with that version. All slug translations from before that version are now in use. Thank you for understanding!"
 msgstr ""
 
-#: add-ons-advanced/seo-pack/class-seo-pack.php:836
+#: add-ons-advanced/seo-pack/class-seo-pack.php:841
 msgid "If you absolutely need them, the removed translations can be found in tables trp_slug_original_obsolete and trp_slug_translation_obsolete."
 msgstr ""
 

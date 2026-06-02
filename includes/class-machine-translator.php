@@ -410,8 +410,63 @@ class TRP_Machine_Translator {
             return false;
         }
 
-        // JavaScript code blocks
-        if ( preg_match( '/^\(\s*function\s*\(/', $trimmed ) || preg_match( '/^(var|let|const|function)\s+\w+\s*[=(]/', $trimmed ) ) {
+        // JavaScript code blocks.
+        // Inline/minified scripts (GTM, gtag, analytics, etc.) sometimes reach this point, often
+        // split into arbitrary ~2KB chunks that start mid-statement. The patterns below are loose
+        // on purpose and matched anywhere in the string (not anchored to the start) so a chunk that
+        // begins in the middle of an expression is still recognised. They look for syntax that does
+        // not occur in natural-language content. Designed against real machine_translation_log data.
+
+        // A "prose run" = 3+ consecutive natural-language words (3+ letters each, separated only by
+        // spaces/common punctuation). Minified JS has no such runs; help text and UI labels do. It
+        // is used below to exempt only the loosest JS signals from matching genuine content.
+        $has_prose_run = preg_match( '/(?:\b\p{L}{3,}\b[\s,.\'’]+){2,}\b\p{L}{3,}\b/u', $trimmed );
+
+        // Structural keywords: anchored function/var declarations, function expressions, for/var
+        // declarations, `new Foo(`, control flow and operator keywords. These never occur in prose.
+        if ( preg_match( '/^\(\s*function\s*\(/', $trimmed )
+            || preg_match( '/=\s*function\s*\(/', $trimmed )
+            || preg_match( '/^(var|let|const|function)\s+\w+\s*[=(]/', $trimmed )
+            || preg_match( '/\bfor\s*\(\s*var\s/', $trimmed )
+            || preg_match( '/;\s*var\s+[\w$]/', $trimmed )
+            || preg_match( '/=\s*new\s+[A-Z]\w*\(/', $trimmed )
+            || preg_match( '/\belse\s+if\s*\(/', $trimmed )
+            || preg_match( '/;\s*case\s/', $trimmed )
+            || preg_match( '/\b(typeof|instanceof)\b/', $trimmed ) ) {
+            return false;
+        }
+
+        // Object/member idioms: prototype chains, the `void 0` minifier idiom, BigInt(), and the
+        // common built-in method calls minifiers emit (e.g. `.push(`, `.charCodeAt(`).
+        if ( preg_match( '/\.prototype\./', $trimmed )
+            || preg_match( '/\bvoid 0\b/', $trimmed )
+            || preg_match( '/\bBigInt\s*\(/', $trimmed )
+            || preg_match( '/\.(push|pop|shift|unshift|charCodeAt|charAt|substring|substr|indexOf|lastIndexOf|slice|splice|concat|toString|hasOwnProperty|call|apply|replace|split|join|sort|filter|map|forEach)\s*\(/', $trimmed ) ) {
+            return false;
+        }
+
+        // Minified operator "soup" (strict members): `.length` access, pre/post increment inside a
+        // loop, ternaries like `)?1:0` and array indexing like `=a[b`.
+        if ( preg_match( '/\b\w+\.length\b/', $trimmed )
+            || preg_match( '/\+\+[a-z]\)|[a-z]\+\+\)/', $trimmed )
+            || preg_match( '/\)\?[\w\'"]+:/', $trimmed )
+            || preg_match( '/=\w+\[\w/', $trimmed ) ) {
+            return false;
+        }
+
+        // Base64/URL-safe charset table emitted by consent-string builders (e.g. GTM). The full
+        // ordered alphabet run never appears in natural language.
+        if ( preg_match( '/0123456789abcdefghijklmnopqrstuvwxyz/i', $trimmed ) ) {
+            return false;
+        }
+
+        // Loose JS signals: a minified `function x(a,b){`, bitwise shifts (`<<x`/`x>>`), and logical
+        // operators (`&&`/`||`). These can appear in genuine content (CTAs ending in `>>`, help text
+        // quoting code, URLs/search titles with `||`), so they only fire when there is NO prose run.
+        if ( ! $has_prose_run && (
+               preg_match( '/\bfunction\s*[\w$]*\s*\([\w$,\s]*\)\s*\{/', $trimmed )
+            || preg_match( '/<<\w|\w>>>?/', $trimmed )
+            || preg_match( '/&&|\|\|/', $trimmed ) ) ) {
             return false;
         }
 
