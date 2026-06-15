@@ -93,6 +93,10 @@ TranslatePress - Multilingual has a range of [premium Add-ons](https://translate
 
 You can test out TranslatePress - Multilingual plugin by [visiting our demo site](https://demo.translatepress.com/?utm_source=wp.org&utm_medium=tp-description-page&utm_campaign=TPFree)
 
+= External Services =
+
+This plugin connects to the TranslatePress AI translation service to perform automatic translations. Data sent includes page text, license key, site URL, and language settings. This may be triggered by front-end page visits, not just admin actions. For more information see our [Terms & Conditions](https://translatepress.com/terms-conditions/?utm_source=wp.org&utm_medium=tp-description-page&utm_campaign=TPFree) and [Privacy Policy](https://translatepress.com/privacy-policy/?utm_source=wp.org&utm_medium=tp-description-page&utm_campaign=TPFree).
+
 == Installation ==
 
 1. Upload the translatepress folder to the '/wp-content/plugins/' directory
