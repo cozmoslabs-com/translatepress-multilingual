@@ -329,25 +329,63 @@ class TRP_Gettext_Manager {
 					$new_strings[] = ( $trp_gettext_string_for_machine_translation['original_plural'] && (int)$trp_gettext_string_for_machine_translation['plural_form'] > 0 ) ? $trp_gettext_string_for_machine_translation['original_plural'] : $trp_gettext_string_for_machine_translation['original'];
 				}
 
-				if ( apply_filters( 'trp_gettext_allow_machine_translation', true, $source_language, $TRP_LANGUAGE, $new_strings, $trp_gettext_strings_for_machine_translation ) ) {
-					$machine_strings = $this->machine_translator->translate( $new_strings, $TRP_LANGUAGE, $source_language );
-				} else {
-					$machine_strings = apply_filters( 'trp_gettext_machine_translate_strings', array(), $new_strings, $TRP_LANGUAGE, $trp_gettext_strings_for_machine_translation );
+				if ( ! $this->trp_query ) {
+					$trp             = TRP_Translate_Press::get_trp_instance();
+					$this->trp_query = $trp->get_component( 'query' );
 				}
+				$gettext_insert_update = $this->trp_query->get_query_component( 'gettext_insert_update' );
 
-				if ( ! empty( $machine_strings ) ) {
-					foreach ( $new_strings as $key => $new_string ) {
-						if ( isset( $machine_strings[ $new_string ] ) ) {
-							$trp_gettext_strings_for_machine_translation[ $key ]['translated'] = $machine_strings[ $new_string ];
+				if ( apply_filters( 'trp_gettext_allow_machine_translation', true, $source_language, $TRP_LANGUAGE, $new_strings, $trp_gettext_strings_for_machine_translation ) ) {
+
+					// Translate in chunks and save each chunk to the gettext table before requesting the
+					// next one, so an aborted or overlapping page load never re-sends (and re-bills) a
+					// chunk that was already translated and saved.
+					//
+					// Request-wide time budget shared with the regular/DOM path through the same global:
+					// regular strings (translated while the page renders) use up the budget before
+					// gettext strings (translated here, on shutdown), so regular strings are prioritised.
+					// Whatever is left is translated on future page loads.
+					global $trp_machine_translation_deadline;
+					if ( ! isset( $trp_machine_translation_deadline ) ) {
+						$trp_machine_translation_deadline = microtime( true ) + apply_filters( 'trp_machine_translation_time_budget', 10 );
+					}
+
+					// Deduplicate before chunking so a repeated string is sent to the engine, and billed,
+					// only once.
+					foreach ( array_chunk( array_unique( $new_strings ), $this->machine_translator->get_chunk_size(), true ) as $strings_chunk ) {
+						if ( microtime( true ) > $trp_machine_translation_deadline ) {
+							break;
+						}
+
+						$chunk_machine_strings = $this->machine_translator->translate( $strings_chunk, $TRP_LANGUAGE, $source_language );
+						if ( empty( $chunk_machine_strings ) ) {
+							continue;
+						}
+
+						// map this chunk's translations back onto the gettext strings and save them
+						$strings_to_save = array();
+						foreach ( $strings_chunk as $key => $new_string ) {
+							if ( isset( $chunk_machine_strings[ $new_string ] ) && isset( $trp_gettext_strings_for_machine_translation[ $key ] ) ) {
+								$trp_gettext_strings_for_machine_translation[ $key ]['translated'] = $chunk_machine_strings[ $new_string ];
+								$strings_to_save[] = $trp_gettext_strings_for_machine_translation[ $key ];
+							}
+						}
+						if ( ! empty( $strings_to_save ) ) {
+							$gettext_insert_update->update_gettext_strings( $strings_to_save, $TRP_LANGUAGE );
 						}
 					}
 
-					if ( ! $this->trp_query ) {
-						$trp             = TRP_Translate_Press::get_trp_instance();
-						$this->trp_query = $trp->get_component( 'query' );
+				} else {
+					// Custom engine via filter: not chunked here, so save once.
+					$machine_strings = apply_filters( 'trp_gettext_machine_translate_strings', array(), $new_strings, $TRP_LANGUAGE, $trp_gettext_strings_for_machine_translation );
+					if ( ! empty( $machine_strings ) ) {
+						foreach ( $new_strings as $key => $new_string ) {
+							if ( isset( $machine_strings[ $new_string ] ) && isset( $trp_gettext_strings_for_machine_translation[ $key ] ) ) {
+								$trp_gettext_strings_for_machine_translation[ $key ]['translated'] = $machine_strings[ $new_string ];
+							}
+						}
+						$gettext_insert_update->update_gettext_strings( $trp_gettext_strings_for_machine_translation, $TRP_LANGUAGE );
 					}
-					$gettext_insert_update = $this->trp_query->get_query_component( 'gettext_insert_update' );
-					$gettext_insert_update->update_gettext_strings( $trp_gettext_strings_for_machine_translation, $TRP_LANGUAGE );
 				}
 			}
 		}

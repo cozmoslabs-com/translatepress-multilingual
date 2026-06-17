@@ -635,7 +635,7 @@ class TRP_Url_Converter {
 
         if ( apply_filters('trp_adjust_absolute_home_https_based_on_server_variable', true) ) {
             // always return absolute_home based on the http or https version of the current page request. This means no more redirects.
-            if ( !empty( $_SERVER['HTTPS'] ) && strtolower( sanitize_text_field( $_SERVER['HTTPS'] ) ) != 'off' ) {
+            if ( $this->is_https_request() ) {
                 $this->absolute_home = str_replace( 'http://', 'https://', $this->absolute_home );
             } else {
                 $this->absolute_home = str_replace( 'https://', 'http://', $this->absolute_home );
@@ -647,6 +647,38 @@ class TRP_Url_Converter {
         wp_cache_set( 'get_abs_home', $this->absolute_home, 'trp' );
 
         return $this->absolute_home;
+    }
+
+    /**
+     * Determine whether the current request is served over HTTPS.
+     *
+     * Besides the usual $_SERVER['HTTPS'] check, this also honors the scheme
+     * forwarded by an SSL-terminating reverse proxy / load balancer (a common
+     * managed-hosting setup, e.g. SpinWP). On those setups $_SERVER['HTTPS'] is
+     * empty on the PHP backend even though the visitor is on https, and the real
+     * scheme is passed through the HTTP_X_FORWARDED_PROTO / HTTP_X_FORWARDED_SSL
+     * headers. Relying only on $_SERVER['HTTPS'] there made get_abs_home() force
+     * the home url to http:// while WordPress home/siteurl were https://, which
+     * resulted in an ERR_TOO_MANY_REDIRECTS loop.
+     *
+     * Mirrors the proxy-aware precedence already used in the Multiple Domains
+     * add-on (forwarded headers first, then $_SERVER['HTTPS']).
+     *
+     * @return bool
+     */
+    private function is_https_request() {
+        // A reverse proxy / load balancer reports the visitor-facing scheme here; it is authoritative when present.
+        if ( ! empty( $_SERVER['HTTP_X_FORWARDED_PROTO'] ) ) {
+            // Can be a comma-separated list with multiple proxies; the first value is the client-facing one.
+            $forwarded_proto = explode( ',', sanitize_text_field( wp_unslash( $_SERVER['HTTP_X_FORWARDED_PROTO'] ) ) );
+            return strtolower( trim( $forwarded_proto[0] ) ) === 'https';
+        }
+
+        if ( ! empty( $_SERVER['HTTP_X_FORWARDED_SSL'] ) ) {
+            return strtolower( sanitize_text_field( wp_unslash( $_SERVER['HTTP_X_FORWARDED_SSL'] ) ) ) === 'on';
+        }
+
+        return ( ! empty( $_SERVER['HTTPS'] ) && strtolower( sanitize_text_field( wp_unslash( $_SERVER['HTTPS'] ) ) ) !== 'off' );
     }
 
     /**

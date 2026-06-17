@@ -80,7 +80,7 @@ class TRP_Translate_Press{
         define( 'TRP_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
         define( 'TRP_PLUGIN_BASE', plugin_basename( __DIR__ . '/index.php' ) );
         define( 'TRP_PLUGIN_SLUG', 'translatepress-multilingual' );
-        define( 'TRP_PLUGIN_VERSION', '3.2.1' );
+        define( 'TRP_PLUGIN_VERSION', '3.2.2' );
 
 	    wp_cache_add_non_persistent_groups(array('trp'));
 
@@ -198,8 +198,8 @@ class TRP_Translate_Press{
         $this->editor_api_gettext_strings = new TRP_Editor_Api_Gettext_Strings( $this->settings->get_settings() );
         $this->notifications              = new TRP_Trigger_Plugin_Notifications( $this->settings->get_settings() );
         $this->upgrade                    = new TRP_Upgrade( $this->settings->get_settings() );
-        $this->plugin_updater             = new TRP_Plugin_Updater();
-        $this->license_page               = new TRP_LICENSE_PAGE();
+        $this->plugin_updater             = new TRP_AI_API_Key_Check();
+        $this->license_page               = new TRP_AI_API_KEY();
         $this->translation_memory         = new TRP_Translation_Memory( $this->settings->get_settings() );
         $this->error_manager              = new TRP_Error_Manager( $this->settings->get_settings() );
         $this->string_translation         = new TRP_String_Translation( $this->settings->get_settings(), $this->loader );
@@ -368,20 +368,16 @@ class TRP_Translate_Press{
 
         /* add hooks for license operations  */
         if( !empty( $this->tp_product_name ) ) {
-            $this->loader->add_action('admin_init', $this->plugin_updater, 'activate_license');
-            if(!array_key_exists('translatepress-multilingual', $this->tp_product_name)){
-                // check for license updates for paid licenses only. Accessing the License tab directly does the same thing.
-                $this->loader->add_filter('pre_set_site_transient_update_plugins', $this->plugin_updater, 'check_license');
-            }
-            $this->loader->add_action('admin_init', $this->plugin_updater, 'deactivate_license');
+            $this->loader->add_action('admin_init', $this->plugin_updater, 'activate_tp_api_key');
+            $this->loader->add_action('admin_init', $this->plugin_updater, 'deactivate_tp_api_key');
         }
 
         /* add license page */
         global $trp_license_page;//this global was used in the addons, so we need to use it here also so we don't initialize the license page multiple times (backward compatibility)
         if( !isset( $trp_license_page )  ) {
             $trp_license_page = $this->license_page;
-            $this->loader->add_action('admin_menu', $this->license_page, 'license_menu');
-            $this->loader->add_action('admin_init', $this->license_page, 'register_license_setting');
+            $this->loader->add_action('admin_menu', $this->license_page, 'tp_api_key_menu');
+            $this->loader->add_action('admin_init', $this->license_page, 'register_tp_api_key_setting');
         }
 
         $this->loader->add_action( 'admin_init', $this->reviews, 'display_review_notice' );

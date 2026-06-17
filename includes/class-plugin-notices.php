@@ -83,7 +83,7 @@ Class TRP_Plugin_Notifications {
     private static $_instance = null;
     private $prefix = 'trp';
     private $menu_slug = 'options-general.php';
-    public $pluginPages = array( 'translate-press', 'trp_addons_page', 'trp_license_key', 'trp_advanced_page', 'trp_machine_translation', 'trp_test_machine_api', 'trp_language_switcher' );
+    public $pluginPages = array( 'translate-press', 'trp_addons_page', 'trp_ai_api_key', 'trp_advanced_page', 'trp_machine_translation', 'trp_test_machine_api', 'trp_language_switcher' );
 
     protected function __construct() {
         add_action( 'admin_init', array( $this, 'dismiss_admin_notifications' ), 200 );
@@ -347,7 +347,7 @@ class TRP_Trigger_Plugin_Notifications{
             $notification_id = 'trp_invalid_license';
             $message = '<p style="padding-right:30px;">';
             // [utm10]
-            $message .= sprintf( __('Your <strong>TranslatePress</strong> license is missing or invalid. <br/>Please %1$sregister your copy%2$s to enable automatic website translation via TranslatePress AI, premium addons, automatic updates and support. Need a license key? %3$sPurchase one now%4$s' , 'translatepress-multilingual' ), "<a href='". admin_url('/admin.php?page=trp_license_key') ."'>", "</a>", "<a href='https://translatepress.com/pricing/?utm_source=wp-dashboard&utm_medium=client-site&utm_campaign=pro-no-active-license' target='_blank' class='button-primary'>", "</a>" );
+            $message .= sprintf( __('Your <strong>TranslatePress</strong> license is missing or invalid. <br/>Please %1$sregister your copy%2$s to enable automatic website translation via TranslatePress AI, premium addons, automatic updates and support. Need a license key? %3$sPurchase one now%4$s' , 'translatepress-multilingual' ), "<a href='". admin_url('/admin.php?page=trp_ai_api_key') ."'>", "</a>", "<a href='https://translatepress.com/pricing/?utm_source=wp-dashboard&utm_medium=client-site&utm_campaign=pro-no-active-license' target='_blank' class='button-primary'>", "</a>" );
             if ( !$notifications->is_plugin_page() ) {
                 //make sure to use the trp_dismiss_admin_notification arg
                 $message .= '<a style="text-decoration: none;z-index:100;" href="' . add_query_arg( array( 'trp_dismiss_admin_notification' => $notification_id ) ) . '" type="button" class="notice-dismiss"><span class="screen-reader-text">' . esc_html__( 'Dismiss this notice.', 'translatepress-multilingual' ) . '</span></a>';
@@ -377,7 +377,7 @@ class TRP_Trigger_Plugin_Notifications{
                     $license_detail->error == 'key_mismatch'
                 )
                     //[utm11]
-                    $message .= sprintf( __('Your <strong>TranslatePress</strong> license is missing or invalid. <br/>Please %1$sregister your copy%2$s to enable automatic website translation via TranslatePress AI, premium addons, automatic updates and support. Need a license key? %3$sPurchase one now%4$s' , 'translatepress-multilingual' ), "<a href='". admin_url('/admin.php?page=trp_license_key') ."'>", "</a>", "<a href='https://translatepress.com/pricing/?utm_source=wp-dashboard&utm_medium=client-site&utm_campaign=pro-no-active-license' target='_blank' class='button-primary'>", "</a>" );
+                    $message .= sprintf( __('Your <strong>TranslatePress</strong> license is missing or invalid. <br/>Please %1$sregister your copy%2$s to enable automatic website translation via TranslatePress AI, premium addons, automatic updates and support. Need a license key? %3$sPurchase one now%4$s' , 'translatepress-multilingual' ), "<a href='". admin_url('/admin.php?page=trp_ai_api_key') ."'>", "</a>", "<a href='https://translatepress.com/pricing/?utm_source=wp-dashboard&utm_medium=client-site&utm_campaign=pro-no-active-license' target='_blank' class='button-primary'>", "</a>" );
                 elseif( $license_detail->error == 'site_inactive' )
                     //[utm12]
                     $message .= __( 'Your license is disabled for this URL. Re-enable it from <a target="_blank" href="https://translatepress.com/account/?utm_source=wp-dashboard&utm_medium=client-site&utm_campaign=license-deactivated">https://translatepress.com/account</a> -> Manage Sites.', 'translatepress-multilingual' );
@@ -459,7 +459,7 @@ class TRP_Trigger_Plugin_Notifications{
                         $message = '<p style="padding-right:30px;">';
                         $message .= sprintf(
                             __('Please %1$senter%2$s your license key to enable %3$s automatic translation.', 'translatepress-multilingual'),
-                            '<a href="' . admin_url('/admin.php?page=trp_license_key') . '">',
+                            '<a href="' . admin_url('/admin.php?page=trp_ai_api_key') . '">',
                             '</a>',
                             $engine_name
                         );
@@ -560,7 +560,7 @@ class TRP_Trigger_Plugin_Notifications{
                 }
                 elseif( $license_detail->error == 'website_already_on_free_license' )
                     //[utm23]
-                    $message .= sprintf( __('This website is already activated under a free license. Each website can only use one free license. Please upgrade to a premium plan for more TranslatePress AI words from %1$s your account %2$s.' , 'translatepress-multilingual' ),  "<a href='https://translatepress.com/account/?utm_source=wp-dashboard&utm_medium=client-site&utm_campaign=tp-ai-free-used-key' target='_blank' class='button-primary' >", "</a>" );
+                    $message .= sprintf( trp_get_tp_ai_api_key_labels( 'already_on_free_upgrade' ),  "<a href='https://translatepress.com/account/?utm_source=wp-dashboard&utm_medium=client-site&utm_campaign=tp-ai-free-used-key' target='_blank' class='button-primary' >", "</a>" );
                 elseif( $license_detail->error == 'expired' )
                     //[utm24]
                     $message .= sprintf( __('Your <strong>TranslatePress</strong> license has expired. <br/>Please %1$sRenew Your Licence%2$s to continue receiving access to automatic translations via TranslatePress AI, premium addons, product downloads, and automatic updates. %3$sRenew now %4$s' , 'translatepress-multilingual' ), "<a href='https://translatepress.com/account/?utm_source=wp-dashboard&utm_medium=client-site&utm_campaign=expired-license' target='_blank'>", "</a>", "<a href='https://translatepress.com/account/?utm_source=wp-dashboard&utm_medium=client-site&utm_campaign=expired-license' target='_blank' class='button-primary'>", "</a>" );

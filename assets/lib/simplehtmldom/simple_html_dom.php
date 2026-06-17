@@ -73,51 +73,14 @@ defined('TRP_DEFAULT_SPAN_TEXT') || define('TRP_DEFAULT_SPAN_TEXT', ' ');
 defined('TRP_MAX_FILE_SIZE') || define('TRP_MAX_FILE_SIZE', 100000000);
 define('TRP_HDOM_SMARTY_AS_TEXT', 1);
 
-function file_get_html(
-	$url,
-	$use_include_path = false,
-	$context = null,
-	$offset = 0,
-	$maxLen = -1,
-	$lowercase = true,
-	$forceTagsClosed = true,
-	$target_charset = TRP_DEFAULT_TARGET_CHARSET,
-	$stripRN = true,
-	$defaultBRText = TRP_DEFAULT_BR_TEXT,
-	$defaultSpanText = TRP_DEFAULT_SPAN_TEXT)
-{
-	if($maxLen <= 0) { $maxLen = TRP_MAX_FILE_SIZE; }
-
-	$dom = new simple_html_dom(
-		null,
-		$lowercase,
-		$forceTagsClosed,
-		$target_charset,
-		$stripRN,
-		$defaultBRText,
-		$defaultSpanText
-	);
-
-	/**
-	 * For sourceforge users: uncomment the next line and comment the
-	 * retrieve_url_contents line 2 lines down if it is not already done.
-	 */
-	$contents = file_get_contents(
-		$url,
-		$use_include_path,
-		$context,
-		$offset,
-		$maxLen
-	);
-	// $contents = retrieve_url_contents($url);
-
-	if (empty($contents) || strlen($contents) > $maxLen) {
-		$dom->clear();
-		return false;
-	}
-
-	return $dom->load($contents, $lowercase, $stripRN);
-}
+/*
+ * TranslatePress modifications
+ *
+ * -- Removed function file_get_html -- see https://simplehtmldom.sourceforge.io/docs/1.9/api/file_get_html/
+ * It internally uses file_get_contents and got flagged during a WordPress plugin scan with: Avoiding the use of certain PHP functions on remote files.
+ *
+ * Issue CU-869dmp6aw.
+ */
 
 function str_get_html(
 	$str,

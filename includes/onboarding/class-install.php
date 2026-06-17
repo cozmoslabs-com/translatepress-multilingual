@@ -12,7 +12,7 @@ class TRP_Step_Install implements TRP_Onboarding_Step_Interface {
         // Redirect to License if we detect a version other then the free version.
         $trp = TRP_Translate_Press::get_trp_instance();
         if(!in_array( 'TranslatePress', $trp->tp_product_name )){
-            wp_redirect(add_query_arg(['step' => 'license']));
+            wp_redirect(add_query_arg(['step' => 'ai-api-key']));
         }
     }
 
@@ -79,7 +79,7 @@ class TRP_Step_Install implements TRP_Onboarding_Step_Interface {
 
         if (!$this->errors->has_errors()) {
             // If no errors, we save our data and redirect to next step
-            wp_redirect(add_query_arg(['step' => 'license']));
+            wp_redirect(add_query_arg(['step' => 'ai-api-key']));
             exit;
         }
     }
@@ -190,7 +190,7 @@ class TRP_Step_Install implements TRP_Onboarding_Step_Interface {
             <a href="<?php echo esc_url(add_query_arg(['step' => $back_step])); ?>"><?php esc_html_e('« Go back', 'translatepress-multilingual'); ?></a>
 
             <?php if ($this->is_pro_installed()) :?>
-            <a href="<?php echo esc_url(add_query_arg(['step' => 'license'])); ?>" style="margin-left: 2rem;"><?php esc_html_e('Activate License »', 'translatepress-multilingual'); ?></a>
+            <a href="<?php echo esc_url(add_query_arg(['step' => 'ai-api-key'])); ?>" style="margin-left: 2rem;"><?php esc_html_e('Activate License »', 'translatepress-multilingual'); ?></a>
             <?php endif; ?>
         </div>
         <?php

@@ -1,3 +1,10 @@
+= 3.2.1 =
+* Added WordPress Abilities API integration
+* Improve filtering of translatable text to avoid JS code detection
+* Preserve pubDate/lastBuildDate camelCase in translated RSS feeds
+* Fix WooCommerce emails sent in default language while Different Domain per Language is enabled
+* Fix PHP 8.2 dynamic property deprecation on TRP_Search
+
 = 3.2 =
 * Localize TranslatePress user interface in the most popular languages WordPress is being used in
 * Reduce automatic translation costs by improving the filtering of translatable text

@@ -1,5 +1,5 @@
 <?php
-class TRP_Step_License implements TRP_Onboarding_Step_Interface {
+class TRP_Step_AI_API_Key implements TRP_Onboarding_Step_Interface {
     protected array $settings;
     protected WP_Error $errors;
 
@@ -11,7 +11,7 @@ class TRP_Step_License implements TRP_Onboarding_Step_Interface {
     public function handle($data) {
 
         // Handle license activation
-        $nonce = isset($data['_wpnonce_trp_onboarding_license']) ? $data['_wpnonce_trp_onboarding_license'] : '';
+        $nonce = isset($data['_wpnonce_trp_onboarding_ai_api_key']) ? $data['_wpnonce_trp_onboarding_ai_api_key'] : '';
         $license = isset($data['trp_license']) ? $data['trp_license'] : '';
 
         if(!empty($license)){
@@ -24,10 +24,10 @@ class TRP_Step_License implements TRP_Onboarding_Step_Interface {
              * We'll use these options to show different error messages.
              */
             $trp = TRP_Translate_Press::get_trp_instance();
-            $trp->get_component('plugin_updater')->force_check_license('true');
+            $trp->get_component('plugin_updater')->force_check_tp_api_key('true');
         }
 
-        if (!wp_verify_nonce($nonce, 'trp_onboarding_license')) {
+        if (!wp_verify_nonce($nonce, 'trp_onboarding_ai_api_key')) {
             $this->errors->add('nonce_fail_license', __('The link you followed has expired. Please reload the page and try again.', 'translatepress-multilingual'));
         } elseif(empty($license)) {
             $this->errors->add('empty_license', __('Your TranslatePress license key is invalid or missing.', 'translatepress-multilingual'));
@@ -79,7 +79,7 @@ class TRP_Step_License implements TRP_Onboarding_Step_Interface {
                     $this->errors->add('no_activations_left', __('Your license key has reached its activation limit.', 'translatepress-multilingual'));
                     break;
                 case 'website_already_on_free_license':
-                    $this->errors->add('website_already_on_free_license', __('This website is already activated under a free license. Each website can only use one free license.', 'translatepress-multilingual'));
+                    $this->errors->add('website_already_on_free_license', trp_get_tp_ai_api_key_labels( 'already_on_free' ));
                     break;
                 default:
                     $this->errors->add('license_error', __('An error occurred, please try again.', 'translatepress-multilingual'));
@@ -96,10 +96,11 @@ class TRP_Step_License implements TRP_Onboarding_Step_Interface {
             $back_link = add_query_arg(['step' => 'languages']); // we have a pro version
         }
 
+        $license_labels = trp_get_tp_ai_api_key_labels();
         ?>
-        <h1><?php esc_html_e('Add your License Key', 'translatepress-multilingual'); ?></h1>
+        <h1><?php echo esc_html( $license_labels['onboarding_heading'] ); ?></h1>
         <h3>
-            <?php esc_html_e('Add your License Key to unlock all premium features. Find the License Key in your', 'translatepress-multilingual'); ?>
+            <?php echo esc_html( $license_labels['onboarding_subheading'] ); ?>
             <a href="https://translatepress.com/account/?utm_source=tp-onboarding&utm_medium=client-site&utm_campaign=activate-license" target="_blank"> <?php esc_html_e('TranslatePress Account', 'translatepress-multilingual'); ?></a>
         </h3>
 
@@ -108,13 +109,13 @@ class TRP_Step_License implements TRP_Onboarding_Step_Interface {
             // Check license status first time we access the page.
             // We first do a force license check, or we might get cached results otherwise.
             $trp = TRP_Translate_Press::get_trp_instance();
-            $trp->get_component('plugin_updater')->force_check_license('true');
+            $trp->get_component('plugin_updater')->force_check_tp_api_key('true');
             $this->check_license_validation_results();
         }
 
         $license_status = get_option('trp_license_status', '');
         if ($license_status === 'valid') {
-            echo '<div class="ob-notice ob-notice-success">' . esc_html__('Your license is valid and active.', 'translatepress-multilingual') . '</div>';
+            echo '<div class="ob-notice ob-notice-success">' . esc_html( $license_labels['onboarding_valid'] ) . '</div>';
         }
         
         foreach ($this->errors->get_error_messages() as $message) {
@@ -123,12 +124,12 @@ class TRP_Step_License implements TRP_Onboarding_Step_Interface {
         ?>
 
         <form method="post" enctype="multipart/form-data">
-            <?php wp_nonce_field('trp_onboarding_license', '_wpnonce_trp_onboarding_license'); ?>
+            <?php wp_nonce_field('trp_onboarding_ai_api_key', '_wpnonce_trp_onboarding_ai_api_key'); ?>
             <div class="trp-onboarding-license">
-                <label for="license-field">License Key</label>
+                <label for="license-field"><?php echo esc_html( $license_labels['onboarding_field_label'] ); ?></label>
                 <div class="license-field-wrap">
                     <input id="license-field" type="password" name="trp_license" value="<?php echo esc_attr(get_option('trp_license_key', '')); ?>" required />
-                    <button class="trp-submit-btn" type="submit"><?php esc_html_e('Activate License', 'translatepress-multilingual');?></button>
+                    <button class="trp-submit-btn" type="submit"><?php echo esc_html( $license_labels['onboarding_activate_button'] );?></button>
                 </div>
             </div>
 

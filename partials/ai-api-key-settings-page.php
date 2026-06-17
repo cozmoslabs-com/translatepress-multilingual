@@ -3,10 +3,12 @@
 if ( !defined('ABSPATH' ) )
     exit();
 
+$license_labels = trp_get_tp_ai_api_key_labels();
+
 $license_message = [
-    'valid'   => __( 'Your License Key is valid.', 'translatepress-multilingual' ),
-    'invalid' => __( 'Your License Key is invalid.', 'translatepress-multilingual' ),
-    'expired' => __( 'Your License has expired.', 'translatepress-multilingual' ),
+    'valid'   => $license_labels['status_valid'],
+    'invalid' => $license_labels['status_invalid'],
+    'expired' => $license_labels['status_expired'],
 ];
 
 if ( !empty( $details['invalid'] ) ){
@@ -18,15 +20,15 @@ if ( !empty( $details['invalid'] ) ){
     $license_status = 'valid';
 }
 
-$license_activation_message = $this->license_activation_message();
+$license_activation_message = $this->tp_api_key_activation_message();
 
 if ( $license_status == 'valid' ) {
     $button_name  = 'trp_edd_license_deactivate';
-    $button_value = __( 'Deactivate License', 'translatepress-multilingual' );
+    $button_value = $license_labels['deactivate_button'];
     $button_class = 'trp-button-secondary';
 } else {
     $button_name  = 'trp_edd_license_activate';
-    $button_value = __( 'Activate License', 'translatepress-multilingual' );
+    $button_value = $license_labels['activate_button'];
     $button_class = 'trp-submit-btn';
 }
     ?>
@@ -44,13 +46,13 @@ if ( $license_status == 'valid' ) {
                         <div class="trp-settings-container">
                             <h3 class="trp-settings-primary-heading">
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align: middle"><path d="M15 21H6C5.20435 21 4.44129 20.6839 3.87868 20.1213C3.31607 19.5587 3 18.7957 3 18V17H13V19C13 19.5304 13.2107 20.0391 13.5858 20.4142C13.9609 20.7893 14.4696 21 15 21ZM15 21C15.5304 21 16.0391 20.7893 16.4142 20.4142C16.7893 20.0391 17 19.5304 17 19V5C17 4.60444 17.1173 4.21776 17.3371 3.88886C17.5568 3.55996 17.8692 3.30362 18.2346 3.15224C18.6001 3.00087 19.0022 2.96126 19.3902 3.03843C19.7781 3.1156 20.1345 3.30608 20.4142 3.58579C20.6939 3.86549 20.8844 4.22186 20.9616 4.60982C21.0387 4.99778 20.9991 5.39992 20.8478 5.76537C20.6964 6.13082 20.44 6.44318 20.1111 6.66294C19.7822 6.8827 19.3956 7 19 7H17M19 3H8C7.20435 3 6.44129 3.31607 5.87868 3.87868C5.31607 4.44129 5 5.20435 5 6V17M9 7H13M9 11H13" stroke="#354052" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                                <?php esc_html_e( 'Add a license key', 'translatepress-multilingual' ); ?></h3>
+                                <?php echo esc_html( $license_labels['add_heading'] ); ?></h3>
                             <div class="trp-settings-separator"></div>
 
                             <div class="trp-license__wrapper">
                                 <div class="trp-license-left-row">
                                 <span class="trp-secondary-text-bold">
-                                    <?php esc_html_e('License Key', 'translatepress-multilingual'); ?>
+                                    <?php echo esc_html( $license_labels['field_label'] ); ?>
                                 </span>
                                 </div>
 
@@ -83,7 +85,7 @@ if ( $license_status == 'valid' ) {
                                     <p class="trp-description-text">
                                         <?php
                                         printf(
-                                            esc_html__( 'Manage your license in your %1$s.', 'translatepress-multilingual' ),
+                                            esc_html( $license_labels['manage'] ),
                                             //[utm56]
                                             '<a href="' . esc_url( 'https://translatepress.com/account/?utm_source=tp-license&utm_medium=client-site&utm_campaign=license-account' ) . '" target="_blank">' . esc_html__( 'Account Page', 'translatepress-multilingual' ) . '</a>'
                                         );
@@ -110,7 +112,7 @@ if ( $license_status == 'valid' ) {
                                         </linearGradient>
                                     </defs>
                                 </svg>
-                                <?php esc_html_e( 'Don’t have a TranslatePress AI License Key?', 'translatepress-multilingual' ); ?>
+                                <?php echo esc_html( $license_labels['dont_have_heading'] ); ?>
                             </h3>
                             <div class="trp-settings-separator"></div>
 
@@ -132,7 +134,7 @@ if ( $license_status == 'valid' ) {
                                 </div>
 
                                 <div>
-                                    <a href="https://translatepress.com/ai-free/?utm_source=tp-license&utm_medium=client-site&utm_campaign=tp-ai-free" class="trp-submit-btn" target="_blank"><?php esc_html_e("Get a free License Today", 'translatepress-multilingual') /* [utm57] */ ?></a>
+                                    <a href="https://translatepress.com/ai-free/?utm_source=tp-license&utm_medium=client-site&utm_campaign=tp-ai-free" class="trp-submit-btn" target="_blank"><?php echo esc_html( $license_labels['get_free_button'] ) /* [utm57] */ ?></a>
                                 </div>
                             </div>
                         </div>
@@ -159,7 +161,7 @@ if ( $license_status == 'valid' ) {
                             
                             <?php if ($force_check_request || $force_check_response) : ?>
                             <details>
-                                <summary><?php esc_html_e( 'Debug Data for License Checking', 'translatepress-multilingual' ); ?></summary>
+                                <summary><?php echo esc_html( $license_labels['debug_checking'] ); ?></summary>
                                 
                                 <code>
 <?php if ($force_check_request) : ?>
@@ -187,7 +189,7 @@ Response Body:
 
                             <?php if ($activate_request || $activate_response) : ?>
                             <details>
-                                <summary><?php esc_html_e( 'Debug Data for License Activation', 'translatepress-multilingual' ); ?></summary>
+                                <summary><?php echo esc_html( $license_labels['debug_activation'] ); ?></summary>
                                 
                                 <code>
 <?php if ($activate_request) : ?>

@@ -1145,8 +1145,22 @@ details .trp-description-text{
     z-index: 101;
 }
 
+.trp-test-api-key-popup-body{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    overflow-y: auto;
+    flex: 1 1 auto;
+    padding-right: 4px;
+}
+
 .trp-test-api-key-popup .trp-settings-container{
     padding: 10px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    font-size: 12px;
+    line-height: 1.5;
+    white-space: pre-wrap;
+    word-break: break-word;
 }
 
 .trp-test-api-key__header{
@@ -1155,12 +1169,24 @@ details .trp-description-text{
     justify-content: space-between;
 }
 
+.trp-test-api-key-request-url .trp-settings-container{
+    min-height: 40px;
+}
+
+.trp-test-api-key-request-headers .trp-settings-container,
+.trp-test-api-key-request-body .trp-settings-container{
+    max-height: 160px;
+    overflow-y: auto;
+}
+
 .trp-test-api-key-response .trp-settings-container{
     min-height: 115px;
 }
 
 .trp-test-api-key-response-body .trp-settings-container{
     min-height: 100px;
+    max-height: 240px;
+    overflow-y: auto;
 }
 
 .trp-test-api-key-response-full .trp-settings-container{

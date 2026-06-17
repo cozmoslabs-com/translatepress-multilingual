@@ -13,7 +13,7 @@ class TRP_Onboarding {
     protected $steps = [
         'welcome'           => TRP_Step_Welcome::class,
         'install'           => TRP_Step_Install::class,
-        'license'           => TRP_Step_License::class,
+        'ai-api-key'        => TRP_Step_AI_API_Key::class,
         'languages'         => TRP_Step_Languages::class,
         'switcher'          => TRP_Step_Switcher::class,
         'autotranslation'   => TRP_Step_AutoTranslation::class,

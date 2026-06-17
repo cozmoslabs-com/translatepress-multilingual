@@ -519,7 +519,7 @@ class TRP_Settings{
      * @param string $hook          Admin page.
      */
     public function enqueue_scripts_and_styles( $hook ) {
-        if( in_array( $hook, [ 'settings_page_translate-press', 'admin_page_trp_license_key', 'admin_page_trp_addons_page', 'admin_page_trp_advanced_page', 'admin_page_trp_machine_translation', 'admin_page_trp_test_machine_api', 'admin_page_trp_optin_page', 'admin_page_trp_remove_duplicate_rows', 'admin_page_trp_update_database', 'admin_page_trp_language_switcher', 'admin_page_trp-onboarding' ] ) ){
+        if( in_array( $hook, [ 'settings_page_translate-press', 'admin_page_trp_ai_api_key', 'admin_page_trp_addons_page', 'admin_page_trp_advanced_page', 'admin_page_trp_machine_translation', 'admin_page_trp_test_machine_api', 'admin_page_trp_optin_page', 'admin_page_trp_remove_duplicate_rows', 'admin_page_trp_update_database', 'admin_page_trp_language_switcher', 'admin_page_trp-onboarding' ] ) ){
             wp_enqueue_style(
                 'trp-settings-style',
                 TRP_PLUGIN_URL . 'assets/css/trp-back-end-style.css',
@@ -681,11 +681,11 @@ class TRP_Settings{
 	        ),
         );
 
-        if( class_exists( 'TRP_LICENSE_PAGE' ) ) {
+        if( class_exists( 'TRP_AI_API_KEY' ) ) {
             $tabs[] = array(
-                'name'  => __( 'License', 'translatepress-multilingual' ),
-                'url'   => admin_url( 'admin.php?page=trp_license_key' ),
-                'page'  => 'trp_license_key'
+                'name'  => trp_get_tp_ai_api_key_labels( 'tab' ),
+                'url'   => admin_url( 'admin.php?page=trp_ai_api_key' ),
+                'page'  => 'trp_ai_api_key'
             );
         }
 
@@ -741,7 +741,7 @@ class TRP_Settings{
                 if ( !empty( $license_details['invalid'] ) ) {
                     $license_detail = $license_details['invalid'][0];
                     if ( isset( $license_detail->error ) && $license_detail->error == 'missing' ) {
-                        $links['license'] = sprintf( '<a href="%1$s" target="_blank" style="color: #e76054; font-weight: bold;">%2$s</a>', esc_url(trp_add_affiliate_id_to_link( admin_url( '/admin.php?page=trp_license_key' ) ) ), esc_html__( 'Activate License', 'translatepress-multilingual' ) );
+                        $links['license'] = sprintf( '<a href="%1$s" target="_blank" style="color: #e76054; font-weight: bold;">%2$s</a>', esc_url(trp_add_affiliate_id_to_link( admin_url( '/admin.php?page=trp_ai_api_key' ) ) ), esc_html__( 'Activate License', 'translatepress-multilingual' ) );
                     }
                 }
             }

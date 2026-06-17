@@ -559,15 +559,6 @@ class TRP_Machine_Translator {
                 $strings[$key] = trp_do_these_shortcodes( $strings[$key], $shortcode_tags_to_execute );
             }
 
-            if ( $this->settings['trp_machine_translation_settings']['translation-engine'] === 'deepl' ) {
-
-                // if we don't have a valid license, return an empty array
-                $license_status = get_option( 'trp_license_status' );
-                if( $license_status !== 'valid' ){
-                    return array();
-                }
-            }
-
             $machine_strings = $this->translate_array($strings, $target_language_code, $source_language_code);
 
             $machine_strings_return_array = array();
@@ -595,6 +586,19 @@ class TRP_Machine_Translator {
         }else {
             return array();
         }
+    }
+
+    /**
+     * Maximum number of strings the engine sends to the API in a single request.
+     *
+     * Frontend callers (regular DOM + gettext) chunk by this size and save each chunk to the
+     * database before requesting the next one, so an aborted/overlapping page load never re-sends
+     * (and re-bills) an already-saved chunk. Engines override this with their own API limit.
+     *
+     * @return int
+     */
+    public function get_chunk_size() {
+        return 50;
     }
 
     /**

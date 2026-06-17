@@ -5,7 +5,7 @@ Tags: translate, translation, multilingual, automatic translation, ai translatio
 Requires at least: 3.1.0
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 3.2.1
+Stable tag: 3.2.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -93,9 +93,24 @@ TranslatePress - Multilingual has a range of [premium Add-ons](https://translate
 
 You can test out TranslatePress - Multilingual plugin by [visiting our demo site](https://demo.translatepress.com/?utm_source=wp.org&utm_medium=tp-description-page&utm_campaign=TPFree)
 
-= External Services =
+== External Services ==
 
-This plugin connects to the TranslatePress AI translation service to perform automatic translations. Data sent includes page text, license key, site URL, and language settings. This may be triggered by front-end page visits, not just admin actions. For more information see our [Terms & Conditions](https://translatepress.com/terms-conditions/?utm_source=wp.org&utm_medium=tp-description-page&utm_campaign=TPFree) and [Privacy Policy](https://translatepress.com/privacy-policy/?utm_source=wp.org&utm_medium=tp-description-page&utm_campaign=TPFree).
+This plugin connects to the TranslatePress AI translation service to perform automatic translations. Data sent includes page text, license key, site URL, and language settings. This may be triggered by front-end page visits, not just admin actions.
+If you opt in, the plugin sends limited diagnostic and configuration data to Cozmoslabs.com to help improve the  product.
+
+Terms & Conditions: https://translatepress.com/terms-conditions/
+Privacy Policy: https://translatepress.com/privacy-policy/
+
+If you choose to use Google Translate or DeepL as your translation engine and provide your own API key, content from your site will be sent to those services for translation. This may also be triggered by front-end page visits.
+
+Google Translate Terms of Service: https://cloud.google.com/terms/
+Google Privacy Policy: https://policies.google.com/privacy
+
+DeepL Terms of Service: https://www.deepl.com/en/pro-license
+DeepL Privacy Policy: https://www.deepl.com/en/privacy
+
+The plugin requests translation files of other plugins hosted on WordPress.org.
+Select2: [https://github.com/select2/select2](https://github.com/select2/select2)
 
 == Installation ==
 
@@ -151,12 +166,15 @@ For more information please check out our [documentation](https://translatepress
 
 
 == Changelog ==
-= 3.2.1 =
-* Added WordPress Abilities API integration
-* Improve filtering of translatable text to avoid JS code detection
-* Preserve pubDate/lastBuildDate camelCase in translated RSS feeds
-* Fix WooCommerce emails sent in default language while Different Domain per Language is enabled
-* Fix PHP 8.2 dynamic property deprecation on TRP_Search
+= 3.2.2 =
+* Improved automatic translation handling by saving progress as it goes, so large pages keep their translation even if a page load is interrupted, and the same text is no longer sent for translation (or billed) more than once
+* Fixed issue with automatically translating gettext strings that are intentionally left the same in a plugin or theme's own translation files
+* Improved UI to clarify that TranslatePress AI is available via an API key
+* Extended the Test API Credentials popup to surface the outbound HTTP request (URL, method, headers, body) alongside the response, with pretty-printed JSON
+* Fixed ERR_TOO_MANY_REDIRECTS behind SSL-terminating reverse proxy
+* Fixed broken date format gettext output in date_i18n / wp_date
+* Fixed minor CSS issue on String translation editor when opening it in languages other than English
+* Removed pro plugin updater code
 
 = Older versions =
 [Click Here](https://translatepress.com/docs/translatepress-free-changelog/?utm_source=wp.org&utm_medium=tp-description-page&utm_campaign=TPFree) to view the full changelog, or you can find it in the changelog.txt file in the plugin folder.

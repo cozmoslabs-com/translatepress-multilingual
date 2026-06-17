@@ -109,7 +109,7 @@ class TRP_Reviews{
         $notifications = TRP_Plugin_Notifications::get_instance();
         /* this must be unique */
         $notification_id = 'trp_review_notification';
-        $url = 'https://wordpress.org/support/plugin/translatepress-multilingual/reviews/?filter=5#new-post';
+        $url = 'https://wordpress.org/support/plugin/translatepress-multilingual/reviews/#new-post';
 
         $message = '<p style="margin-top: 16px;font-size: 14px;padding-right:20px">';
         $message .= wp_kses( __( "Hello! Seems like you've been using <strong>TranslatePress</strong> for a while now to translate your website. That's awesome! ", 'translatepress-multilingual' ), array('strong' => array() ) );

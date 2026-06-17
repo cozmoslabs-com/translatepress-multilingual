@@ -50,7 +50,7 @@ class TRP_Plugin_Optin {
 
         $trp_settings_pages[] = 'translate-press';
         $trp_settings_pages[] = 'trp_addons_page';
-        $trp_settings_pages[] = 'trp_license_key';
+        $trp_settings_pages[] = 'trp_ai_api_key';
 
         if( !in_array( $_GET['page'], $trp_settings_pages ) )
             return;

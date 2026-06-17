@@ -268,7 +268,7 @@ class TRP_Translation_Manager {
                             //[utm35]
                             $instructions = sprintf( esc_html__( 'Please enter a valid license to get access to TranslatePress AI, premium addons, automatic updates and support. Need a license key? %1$sPurchase one now%2$s', 'translatepress-multilingual' ), '<a href="https://translatepress.com/pricing/?utm_source=tp-editor&utm_medium=client-site&utm_campaign=pro-no-active-license" target="_blank">', '</a>' );
                             $button       = esc_html__( 'Enter a valid license', 'translatepress-multilingual' );
-                            $link         = admin_url( 'admin.php?page=trp_license_key' );
+                            $link         = admin_url( 'admin.php?page=trp_ai_api_key' );
                             break;
                         }
                 }
@@ -653,7 +653,7 @@ class TRP_Translation_Manager {
             $wp_admin_bar->add_node(
                 array(
                     'id'     => 'trp_auto_translate_setup',
-                    'title'  => __( 'Get a Free AI License', 'translatepress-multilingual' ) . $no_free_license_badge,
+                    'title'  => trp_get_tp_ai_api_key_labels( 'get_free_ai_button' ) . $no_free_license_badge,
                     'href'   => add_query_arg( 'trp-dismiss-notif', 'no_free_license', admin_url( 'admin.php?page=trp_machine_translation' ) ),
                     'parent' => 'trp_edit_translation',
                     'meta'   => array(
@@ -669,7 +669,7 @@ class TRP_Translation_Manager {
                 array(
                     'id'     => 'trp_renew_license',
                     'title'  => __( 'Your License is Invalid', 'translatepress-multilingual' ) . '<span class="trp-notification-badge">1</span>',
-                    'href'   => admin_url( 'admin.php?page=trp_license_key' ),
+                    'href'   => admin_url( 'admin.php?page=trp_ai_api_key' ),
                     'parent' => 'trp_edit_translation',
                     'meta'   => array(
                         'class' => 'trp-renew-license'

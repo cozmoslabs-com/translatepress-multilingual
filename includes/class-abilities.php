@@ -411,7 +411,7 @@ class TRP_Abilities {
 
     /**
      * Saves the license key and triggers a live check by reusing
-     * TRP_Plugin_Updater::force_check_license(). Mirrors TRP_Step_License::handle().
+     * TRP_AI_API_Key_Check::force_check_tp_api_key(). Mirrors TRP_Step_AI_API_Key::handle().
      */
     public function execute_set_license_key( $input ) {
         // Input schema's minLength gate already rejects empty values before we get here.
@@ -419,7 +419,7 @@ class TRP_Abilities {
         update_option( 'trp_license_key', $license );
 
         $trp = TRP_Translate_Press::get_trp_instance();
-        $trp->get_component( 'plugin_updater' )->force_check_license( 'true' );
+        $trp->get_component( 'plugin_updater' )->force_check_tp_api_key( 'true' );
 
         $license_details = get_option( 'trp_license_details' );
         if ( ! empty( $license_details['invalid'][0] ) ) {
@@ -441,7 +441,7 @@ class TRP_Abilities {
     }
 
     /**
-     * Mirrors the error strings used in TRP_Step_License::check_license_validation_results().
+     * Mirrors the error strings used in TRP_Step_AI_API_Key::check_license_validation_results().
      */
     private function license_error_message( string $error, $detail ): string {
         switch ( $error ) {
@@ -467,7 +467,7 @@ class TRP_Abilities {
             case 'no_activations_left':
                 return __( 'Your license key has reached its activation limit.', 'translatepress-multilingual' );
             case 'website_already_on_free_license':
-                return __( 'This website is already activated under a free license. Each website can only use one free license.', 'translatepress-multilingual' );
+                return trp_get_tp_ai_api_key_labels( 'already_on_free' );
             default:
                 return __( 'An error occurred while activating the license, please try again.', 'translatepress-multilingual' );
         }
