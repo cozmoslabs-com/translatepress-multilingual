@@ -180,9 +180,19 @@
 
                 this.$parent.mergeData      = []
 
-                this.$parent.selectedString = this.$parent.getStringIndex( this.hoveredStringSelector, this.hoveredStringId )
+                let hoveredStringIndex = this.$parent.getStringIndex( this.hoveredStringSelector, this.hoveredStringId )
 
-                this.$parent.translationNotLoadedYet  = ( this.$parent.selectedString === null )
+                this.$parent.selectedStringNode = this.hoveredTarget
+                if ( this.$parent.selectedString === hoveredStringIndex ) {
+                    this.$parent.selectedString = null
+                    this.$nextTick( () => {
+                        this.$parent.selectedString = hoveredStringIndex
+                    })
+                } else {
+                    this.$parent.selectedString = hoveredStringIndex
+                }
+
+                this.$parent.translationNotLoadedYet  = ( hoveredStringIndex === null )
 
                 jQuery( '#trp-string-categories' ).select2( 'close' )
             },

@@ -772,7 +772,13 @@
 <?php __("Enable Add-on modules to extend TranslatePress and enhance the functionality of your translated site.", "translatepress-multilingual"); ?>
 <?php __("More functionality with TranslatePress Pro.", "translatepress-multilingual"); ?>
 <?php __("Already a Pro User?", "translatepress-multilingual"); ?>
-<?php __("Activate License Key", "translatepress-multilingual"); ?>
+<?php __("Opens the WordPress “Add Plugins” page in a new tab. Upload and activate the TranslatePress Pro plugin there, then return to this tab — it will update automatically.", "translatepress-multilingual"); ?>
+<?php __("Install TranslatePress Pro", "translatepress-multilingual"); ?>
+<?php __("TranslatePress Pro is installed but not activated yet.", "translatepress-multilingual"); ?>
+<?php __("Opens your Plugins page (filtered to TranslatePress) in a new tab. Activate the TranslatePress Pro plugin there, then return to this tab — it will update automatically.", "translatepress-multilingual"); ?>
+<?php __("Activate TranslatePress Pro ↗", "translatepress-multilingual"); ?>
+<?php __("TranslatePress Pro is active. Activate your license key to unlock the Pro add-ons below.", "translatepress-multilingual"); ?>
+<?php __("Activate license", "translatepress-multilingual"); ?>
 <?php __("This add-on is not available on your current plan.", "translatepress-multilingual"); ?>
 <?php __("Continue", "translatepress-multilingual"); ?>
 <?php __("The link you followed has expired. Please reload the page and try again.", "translatepress-multilingual"); ?>
@@ -786,7 +792,7 @@
 <?php __("Skip and continue with manual translation »", "translatepress-multilingual"); ?>
 <?php __("Creating a free account includes: ", "translatepress-multilingual"); ?>
 <?php __("Are you a TranslatePress PRO user?", "translatepress-multilingual"); ?>
-<?php __("Install & Activate your pro plugin.", "translatepress-multilingual"); ?>
+<?php __("Install TranslatePress Pro.", "translatepress-multilingual"); ?>
 <?php __("Skip this step", "translatepress-multilingual"); ?>
 <?php __("The email address you added is incorrect.", "translatepress-multilingual"); ?>
 <?php __("Setup Complete", "translatepress-multilingual"); ?>
@@ -796,21 +802,6 @@
 <?php __("Yes, send me multilingual growth tips.", "translatepress-multilingual"); ?>
 <?php __("Start translating", "translatepress-multilingual"); ?>
 <?php __("Sign Up and Start translating", "translatepress-multilingual"); ?>
-<?php __("Please upload a TranslatePress Pro plugin file.", "translatepress-multilingual"); ?>
-<?php __("Upload error: ", "translatepress-multilingual"); ?>
-<?php __("Install failed: ", "translatepress-multilingual"); ?>
-<?php __("Plugin installed, but entry file not found. ", "translatepress-multilingual"); ?>
-<?php __("Activation error: ", "translatepress-multilingual"); ?>
-<?php __("Invalid plugin specified.", "translatepress-multilingual"); ?>
-<?php __("Invalid action specified.", "translatepress-multilingual"); ?>
-<?php __("Plugin deactivation failed.", "translatepress-multilingual"); ?>
-<?php __("Plugin activation failed: ", "translatepress-multilingual"); ?>
-<?php __("First, install and activate TranslatePress Pro", "translatepress-multilingual"); ?>
-<?php __("Please upload the TranslatePress PRO zip archive from your", "translatepress-multilingual"); ?>
-<?php __("Install and Activate", "translatepress-multilingual"); ?>
-<?php __("Installed Pro versions", "translatepress-multilingual"); ?>
-<?php __("« Go back", "translatepress-multilingual"); ?>
-<?php __("Activate License »", "translatepress-multilingual"); ?>
 <?php __("You are trying to add an invalid additional language. Please select a valid option.", "translatepress-multilingual"); ?>
 <?php __("Please add an additional language.", "translatepress-multilingual"); ?>
 <?php __("You are trying to add an invalid default language. Please select a valid option.", "translatepress-multilingual"); ?>
@@ -823,6 +814,7 @@
 <?php __("Add Language", "translatepress-multilingual"); ?>
 <?php __("Choose a language...", "translatepress-multilingual"); ?>
 <?php __("Add more than two languages with TranslatePress Pro.", "translatepress-multilingual"); ?>
+<?php __("TranslatePress Pro is active. Activate your license key to add more languages.", "translatepress-multilingual"); ?>
 <?php __("Set up Language Switcher", "translatepress-multilingual"); ?>
 <?php __("Select the style of the language switcher. You will find more ways to display it, in plugin settings.", "translatepress-multilingual"); ?>
 <?php __("Displays a small language drop-down across your website, in a corner of your choosing.", "translatepress-multilingual"); ?>

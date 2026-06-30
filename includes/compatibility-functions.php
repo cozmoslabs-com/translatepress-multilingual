@@ -3096,6 +3096,45 @@ function trp_breakdance_compat__remove_filter() {
 add_action( 'plugins_loaded', 'trp_breakdance_compat__remove_filter', 20 );
 
 /**
+ * Detect whether the current request is loading the Breakdance Builder interface.
+ */
+function trp_is_breakdance_builder_request() {
+    $template = isset( $_GET['breakdance'] ) ? sanitize_text_field( wp_unslash( $_GET['breakdance'] ) ) : '';
+
+    $builder_templates = array( 'builder', 'templates', 'design_library', 'regenerate-cache', 'onboarding-app' );
+
+    if ( in_array( $template, $builder_templates, true ) ) {
+        return true;
+    }
+
+    if ( ! empty( $_GET['breakdance_iframe'] ) ) {
+        return true;
+    }
+
+    return false;
+}
+
+/**
+ * Make the Breakdance Builder follow the user profile language instead of the
+ * site default that change_locale() forces on frontend requests.
+ */
+function trp_breakdance_builder_respect_user_locale( $locale ) {
+    // is_user_logged_in() is not yet available on the early load_default_textdomain() locale call.
+    if ( ! function_exists( 'is_user_logged_in' ) || ! is_user_logged_in() ) {
+        return $locale;
+    }
+
+    if ( ! trp_is_breakdance_builder_request() ) {
+        return $locale;
+    }
+
+    return get_user_locale();
+}
+// Priority 100000 so this runs after TRP_Languages::change_locale() (99999).
+add_filter( 'locale', 'trp_breakdance_builder_respect_user_locale', 100000 );
+add_filter( 'plugin_locale', 'trp_breakdance_builder_respect_user_locale', 100000 );
+
+/**
  * Remove Woodmart Layouts' template overrides when TranslatePress editors are active.
  *
  * Woodmart's Layouts module (woodmart_layout CPT) hooks `template_include` at
@@ -3398,4 +3437,71 @@ function trp_local_ga_js_stop_translating_page( $stop ){
         return true;
     }
     return $stop;
+}
+
+/**
+ * Compatibility with WPS Hide Login.
+ *
+ * When "Use subdirectory for default language" is enabled, TranslatePress adds the language
+ * subdirectory (e.g. /en/) to every home_url() call. WPS Hide Login builds its custom login URL
+ * from home_url('/') and matches incoming requests against home_url( $login_slug, 'relative' ),
+ * so the prefixed URL (e.g. /en/login) no longer matches the real login slug (/login) and the
+ * login page returns a 404, locking users out. The login page is not a translatable frontend page
+ * (it is the equivalent of wp-login.php), so it must always be reachable without a language prefix.
+ *
+ * This keeps the login URL unprefixed in both directions:
+ *  - link generation: via the dedicated 'wps_hide_login_home_url' filter exposed by the plugin;
+ *  - request matching/redirect: by skipping the language subdirectory for the login slug path.
+ */
+function trp_wps_hide_login_get_slug() {
+    if ( ! defined( 'WPS_HIDE_LOGIN_VERSION' ) && ! class_exists( 'WPS\WPS_Hide_Login\Plugin' ) ) {
+        return '';
+    }
+    $slug = get_option( 'whl_page' );
+    if ( empty( $slug ) ) {
+        $slug = 'login';
+    }
+    return $slug;
+}
+
+/**
+ * Strip the TranslatePress language subdirectory from the home URL used to build the login URL.
+ * Hooked to WPS Hide Login's own filter, which receives the (possibly prefixed) home_url('/').
+ */
+add_filter( 'wps_hide_login_home_url', 'trp_wps_hide_login_unprefixed_home_url' );
+function trp_wps_hide_login_unprefixed_home_url( $url ) {
+    $trp           = TRP_Translate_Press::get_trp_instance();
+    $url_converter = $trp->get_component( 'url_converter' );
+    if ( ! $url_converter ) {
+        return $url;
+    }
+
+    $home = trailingslashit( $url_converter->get_abs_home() );
+
+    // Preserve the scheme of the URL the plugin computed (e.g. https when forcing SSL on login).
+    $scheme = wp_parse_url( $url, PHP_URL_SCHEME );
+    if ( ! empty( $scheme ) ) {
+        $home = set_url_scheme( $home, $scheme );
+    }
+
+    return $home;
+}
+
+/**
+ * Do not add the language subdirectory to home_url() calls that point to the WPS Hide Login slug.
+ * This keeps home_url( $login_slug, 'relative' ) === /login so the plugin still matches the request
+ * and serves the login page instead of letting it fall through to a 404 / language redirect.
+ */
+add_filter( 'trp_skip_add_language_to_home_url', 'trp_wps_hide_login_skip_language_for_slug', 10, 3 );
+function trp_wps_hide_login_skip_language_for_slug( $skip, $url, $path ) {
+    if ( $skip ) {
+        return $skip;
+    }
+
+    $slug = trp_wps_hide_login_get_slug();
+    if ( $slug !== '' && trim( (string) $path, '/' ) === $slug ) {
+        return true;
+    }
+
+    return $skip;
 }

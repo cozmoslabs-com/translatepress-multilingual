@@ -788,7 +788,7 @@ class TRP_Query{
         $placeholders = array();
         $values = array();
         foreach( $original_strings as $string ){
-            $placeholders[] = 'CAST(%s AS BINARY)';
+            $placeholders[] = '%s';
             $values[] = $string;
         }
 

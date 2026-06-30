@@ -5,7 +5,7 @@ Tags: translate, translation, multilingual, automatic translation, ai translatio
 Requires at least: 3.1.0
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 3.2.2
+Stable tag: 3.2.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -166,15 +166,12 @@ For more information please check out our [documentation](https://translatepress
 
 
 == Changelog ==
-= 3.2.2 =
-* Improved automatic translation handling by saving progress as it goes, so large pages keep their translation even if a page load is interrupted, and the same text is no longer sent for translation (or billed) more than once
-* Fixed issue with automatically translating gettext strings that are intentionally left the same in a plugin or theme's own translation files
-* Improved UI to clarify that TranslatePress AI is available via an API key
-* Extended the Test API Credentials popup to surface the outbound HTTP request (URL, method, headers, body) alongside the response, with pretty-printed JSON
-* Fixed ERR_TOO_MANY_REDIRECTS behind SSL-terminating reverse proxy
-* Fixed broken date format gettext output in date_i18n / wp_date
-* Fixed minor CSS issue on String translation editor when opening it in languages other than English
-* Removed pro plugin updater code
+= 3.2.3 =
+* Added compatibility with Breakdance Builder regarding user profile language
+* Fixed edge case where regular strings were not editable in translation editor
+* Fixed issue where media link appeared doubled in translation editor
+* Fixed WPS Hide Login page going 404 when having subdirectory for default language
+* Removed plugin install form from onboarding
 
 = Older versions =
 [Click Here](https://translatepress.com/docs/translatepress-free-changelog/?utm_source=wp.org&utm_medium=tp-description-page&utm_campaign=TPFree) to view the full changelog, or you can find it in the changelog.txt file in the plugin folder.

@@ -193,7 +193,7 @@ class TRP_Step_AutoTranslation implements TRP_Onboarding_Step_Interface {
                         </span>
                 </div>
                 <div class="trp-ob-wrap trp-ob-grey-bg trp-primary-text trp-ob-center">
-                    <?php esc_html_e('Are you a TranslatePress PRO user?', 'translatepress-multilingual'); ?> <a href="<?php echo esc_url(add_query_arg(['step' => 'install'])); ?>"><?php esc_html_e('Install & Activate your pro plugin.', 'translatepress-multilingual'); ?></a>
+                    <?php esc_html_e('Are you a TranslatePress PRO user?', 'translatepress-multilingual'); ?> <a class="trp-install-pro-link" href="<?php echo esc_url(self_admin_url('plugin-install.php?tab=upload')); ?>" target="_blank" rel="noopener" title="<?php echo esc_attr__('Opens the WordPress “Add Plugins” page in a new tab. Upload and activate the TranslatePress Pro plugin there, then return to this tab — it will update automatically.', 'translatepress-multilingual'); ?>"><?php esc_html_e('Install TranslatePress Pro.', 'translatepress-multilingual'); ?></a>
                 </div>
 
                 <div class="trp-ob-wrap trp-primary-text trp-ob-center">

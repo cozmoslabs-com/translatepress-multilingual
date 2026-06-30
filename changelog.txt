@@ -1,3 +1,13 @@
+= 3.2.2 =
+* Improved automatic translation handling by saving progress as it goes, so large pages keep their translation even if a page load is interrupted, and the same text is no longer sent for translation (or billed) more than once
+* Fixed issue with automatically translating gettext strings that are intentionally left the same in a plugin or theme's own translation files
+* Improved UI to clarify that TranslatePress AI is available via an API key
+* Extended the Test API Credentials popup to surface the outbound HTTP request (URL, method, headers, body) alongside the response, with pretty-printed JSON
+* Fixed ERR_TOO_MANY_REDIRECTS behind SSL-terminating reverse proxy
+* Fixed broken date format gettext output in date_i18n / wp_date
+* Fixed minor CSS issue on String translation editor when opening it in languages other than English
+* Removed pro plugin updater code
+
 = 3.2.1 =
 * Added WordPress Abilities API integration
 * Improve filtering of translatable text to avoid JS code detection

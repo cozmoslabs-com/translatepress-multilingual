@@ -89,12 +89,10 @@ class TRP_Step_AI_API_Key implements TRP_Onboarding_Step_Interface {
     }
 
     public function render() {
-        $trp = TRP_Translate_Press::get_trp_instance();
-        if(in_array( 'TranslatePress', $trp->tp_product_name )){
-            $back_link = add_query_arg(['step' => 'install']); // we have a free version
-        } else {
-            $back_link = add_query_arg(['step' => 'languages']); // we have a pro version
-        }
+        // Return to whichever onboarding step sent the user here (e.g. the Enable Modules step),
+        // so activating the license — or skipping via "Go Back" — brings them back where they were.
+        $previous_step = get_transient('trp_onboarding_previous_step');
+        $back_link     = add_query_arg(['step' => $previous_step ? $previous_step : 'languages']);
 
         $license_labels = trp_get_tp_ai_api_key_labels();
         ?>

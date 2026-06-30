@@ -232,6 +232,7 @@ import PercentageBarLogic from "./components/percentage-bar-logic"
                 iframe                    : '',
                 dictionary                : [],
                 selectedString            : null,
+                selectedStringNode        : null,
                 selectedIndexesArray      : [],
                 detectedSelectorAndId     : [],
                 stringGroups              : [],
@@ -365,7 +366,12 @@ import PercentageBarLogic from "./components/percentage-bar-logic"
             },
             selectedString: function ( selectedStringArrayIndex, oldString ){
 
-                if( this.hasUnsavedChanges() || ( !selectedStringArrayIndex && selectedStringArrayIndex !== 0 ) )
+                if( this.hasUnsavedChanges() ) {
+                    this.selectedStringNode = null
+                    return
+                }
+
+                if( !selectedStringArrayIndex && selectedStringArrayIndex !== 0 )
                     return
 
                 jQuery( '#trp-string-categories' ).val( selectedStringArrayIndex !== null ? selectedStringArrayIndex : '' ).trigger( 'change' )
@@ -375,7 +381,8 @@ import PercentageBarLogic from "./components/percentage-bar-logic"
                 if( !selectedString )
                     return
 
-                let currentNodes          = this.iframe.querySelectorAll( "[" + selectedString.selector + "='" + selectedString.dbID + "']")
+                let selectedStringNode    = this.getSelectedStringNode( selectedString )
+                let currentNodes          = selectedStringNode ? [ selectedStringNode ] : this.iframe.querySelectorAll( "[" + selectedString.selector + "='" + selectedString.dbID + "']")
                 let selectedIndexesArray = []
                 let self = this
 
@@ -491,6 +498,7 @@ import PercentageBarLogic from "./components/percentage-bar-logic"
 
 
                 this.selectedIndexesArray = selectedIndexesArray
+                this.selectedStringNode = null
             },
             helpPanelOpen : function(){
                 if ( this.userMeta.helpPanelOpened !== true ){
@@ -520,6 +528,36 @@ import PercentageBarLogic from "./components/percentage-bar-logic"
             }
         },
         methods: {
+            getSelectedStringNode( selectedString ){
+                if ( !this.selectedStringNode )
+                    return null
+
+                let selectedStringNode = this.selectedStringNode.nodeType === 1 ? this.selectedStringNode : this.selectedStringNode.parentElement
+
+                if ( !selectedStringNode )
+                    return null
+
+                let selector = "[" + selectedString.selector + "='" + selectedString.dbID + "']"
+
+                if ( typeof selectedStringNode.getAttribute === 'function' && selectedStringNode.getAttribute( selectedString.selector ) === selectedString.dbID )
+                    return selectedStringNode
+
+                if ( typeof selectedStringNode.closest === 'function' ) {
+                    let closestNode = selectedStringNode.closest( selector )
+
+                    if ( closestNode )
+                        return closestNode
+                }
+
+                if ( typeof selectedStringNode.querySelector === 'function' ) {
+                    let childNode = selectedStringNode.querySelector( selector )
+
+                    if ( childNode )
+                        return childNode
+                }
+
+                return null
+            },
             iFrameLoaded(){
                 let self = this
                 let iframeElement = document.querySelector('#trp-preview-iframe')
