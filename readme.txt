@@ -3,9 +3,9 @@ Contributors: cozmoslabs, razvan.mo, madalin.ungureanu, sareiodata, cristophor
 Donate link: https://www.translatepress.com/
 Tags: translate, translation, multilingual, automatic translation, ai translation, front-end translation, google translate, language
 Requires at least: 3.1.0
-Tested up to: 7.0
+Tested up to: 7.0.1
 Requires PHP: 7.4
-Stable tag: 3.2.3
+Stable tag: 3.2.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -166,12 +166,12 @@ For more information please check out our [documentation](https://translatepress
 
 
 == Changelog ==
-= 3.2.3 =
-* Added compatibility with Breakdance Builder regarding user profile language
-* Fixed edge case where regular strings were not editable in translation editor
-* Fixed issue where media link appeared doubled in translation editor
-* Fixed WPS Hide Login page going 404 when having subdirectory for default language
-* Removed plugin install form from onboarding
+= 3.2.4 =
+* New feature: Glossary for TranslatePress AI translation. Control terminology and brand translation consistently
+* Added search and replace tool for existing translations
+* Added enable automatic translation ability in WordPress Abilities API endpoint
+* Fixed https issue on translated pages for some environments
+* Fixed infinite recursion in Breakdance builder locale filter
 
 = Older versions =
 [Click Here](https://translatepress.com/docs/translatepress-free-changelog/?utm_source=wp.org&utm_medium=tp-description-page&utm_campaign=TPFree) to view the full changelog, or you can find it in the changelog.txt file in the plugin folder.

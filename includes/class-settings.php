@@ -519,7 +519,7 @@ class TRP_Settings{
      * @param string $hook          Admin page.
      */
     public function enqueue_scripts_and_styles( $hook ) {
-        if( in_array( $hook, [ 'settings_page_translate-press', 'admin_page_trp_ai_api_key', 'admin_page_trp_addons_page', 'admin_page_trp_advanced_page', 'admin_page_trp_machine_translation', 'admin_page_trp_test_machine_api', 'admin_page_trp_optin_page', 'admin_page_trp_remove_duplicate_rows', 'admin_page_trp_update_database', 'admin_page_trp_language_switcher', 'admin_page_trp-onboarding' ] ) ){
+        if( in_array( $hook, [ 'settings_page_translate-press', 'admin_page_trp_ai_api_key', 'admin_page_trp_addons_page', 'admin_page_trp_advanced_page', 'admin_page_trp_machine_translation', 'admin_page_trp_machine_translation_glossary', 'admin_page_trp_test_machine_api', 'admin_page_trp_optin_page', 'admin_page_trp_remove_duplicate_rows', 'admin_page_trp_update_database', 'admin_page_trp_language_switcher', 'admin_page_trp-onboarding' ] ) ){
             wp_enqueue_style(
                 'trp-settings-style',
                 TRP_PLUGIN_URL . 'assets/css/trp-back-end-style.css',
@@ -528,7 +528,7 @@ class TRP_Settings{
             );
         }
 
-        if( in_array( $hook, array( 'settings_page_translate-press', 'admin_page_trp_advanced_page', 'admin_page_trp_machine_translation' ) ) ) {
+        if( in_array( $hook, array( 'settings_page_translate-press', 'admin_page_trp_advanced_page', 'admin_page_trp_machine_translation', 'admin_page_trp_machine_translation_glossary' ) ) ) {
             // Base script now handles both free and pro functionality via hooks/filters.
             // However, we keep loading trp-back-end-script-pro.js for backwords compatibility when TP Free is newer then the Pro Addon.
             $back_end_script_url = TRP_PLUGIN_URL . 'assets/js/trp-back-end-script.js';
@@ -695,6 +695,8 @@ class TRP_Settings{
         if ( isset( $_GET['page'] ) ){
             $active_tab = sanitize_text_field( wp_unslash( $_GET['page'] ) );
         }
+
+        $active_tab = apply_filters( 'trp_settings_active_tab', $active_tab );
 
         require TRP_PLUGIN_DIR . 'partials/settings-navigation-tabs.php';
     }

@@ -3119,6 +3119,16 @@ function trp_is_breakdance_builder_request() {
  * site default that change_locale() forces on frontend requests.
  */
 function trp_breakdance_builder_respect_user_locale( $locale ) {
+    // Guard against infinite recursion: get_user_locale() falls back to
+    // get_locale() when the user has no profile language ("Site Default"),
+    // and get_locale() re-fires this very 'locale' filter. Without this guard
+    // that recurses until PHP exhausts memory / segfaults on the Breakdance
+    // builder endpoint.
+    static $in_progress = false;
+    if ( $in_progress ) {
+        return $locale;
+    }
+
     // is_user_logged_in() is not yet available on the early load_default_textdomain() locale call.
     if ( ! function_exists( 'is_user_logged_in' ) || ! is_user_logged_in() ) {
         return $locale;
@@ -3128,7 +3138,11 @@ function trp_breakdance_builder_respect_user_locale( $locale ) {
         return $locale;
     }
 
-    return get_user_locale();
+    $in_progress = true;
+    $user_locale = get_user_locale();
+    $in_progress = false;
+
+    return $user_locale;
 }
 // Priority 100000 so this runs after TRP_Languages::change_locale() (99999).
 add_filter( 'locale', 'trp_breakdance_builder_respect_user_locale', 100000 );

@@ -6,7 +6,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-06-30 06:34+0000\n"
+"POT-Creation-Date: 2026-07-13 10:56+0000\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
 "X-Poedit-SearchPath-0: .\n"
@@ -30,7 +30,7 @@ msgstr ""
 msgid "Your License has expired."
 msgstr ""
 
-#: index-dev.php:96, index-dev.php:107, index-dev.php:117, includes/class-settings.php:744
+#: index-dev.php:96, index-dev.php:107, index-dev.php:117, includes/class-settings.php:746
 msgid "Activate License"
 msgstr ""
 
@@ -158,194 +158,210 @@ msgstr ""
 msgid "<strong>TranslatePress</strong> requires at least PHP version 5.6.20+ to run. It is the <a href=\"%s\">minimum requirement of the latest WordPress version</a>. Please contact your server administrator to update your PHP version."
 msgstr ""
 
-#: includes/class-abilities.php:58, includes/class-wp-bakery-language-for-blocks.php:179
+#: includes/class-abilities.php:59, includes/class-wp-bakery-language-for-blocks.php:179
 msgid "TranslatePress"
 msgstr ""
 
-#: includes/class-abilities.php:59
+#: includes/class-abilities.php:60
 msgid "Abilities for managing TranslatePress configuration."
 msgstr ""
 
-#: includes/class-abilities.php:66
+#: includes/class-abilities.php:67
 msgid "Add a translation language"
 msgstr ""
 
-#: includes/class-abilities.php:67
+#: includes/class-abilities.php:68
 msgid "Adds a translation language to TranslatePress. Enforces the same per-license limit as the settings UI."
 msgstr ""
 
-#: includes/class-abilities.php:74
+#: includes/class-abilities.php:75
 msgid "WordPress locale code (e.g. fr_FR, de_DE)."
 msgstr ""
 
-#: includes/class-abilities.php:79
+#: includes/class-abilities.php:80
 msgid "Optional URL slug. Defaults to the ISO language code if omitted."
 msgstr ""
 
-#: includes/class-abilities.php:101
+#: includes/class-abilities.php:102
 msgid "Set TranslatePress license key"
 msgstr ""
 
-#: includes/class-abilities.php:102
+#: includes/class-abilities.php:103
 msgid "Saves a TranslatePress license key and triggers a remote license check, mirroring the onboarding flow."
 msgstr ""
 
-#: includes/class-abilities.php:109
+#: includes/class-abilities.php:110
 msgid "The license key to activate."
 msgstr ""
 
-#: includes/class-abilities.php:128
+#: includes/class-abilities.php:129, partials/machine-translation-settings-page.php:47, includes/onboarding/class-autotranslation.php:110
+msgid "Enable Automatic Translation"
+msgstr ""
+
+#: includes/class-abilities.php:130
+msgid "Turns on Automatic Translation. A valid TranslatePress license is required only when the resolved engine is TranslatePress AI (mtapi); Google Translate and DeepL do not require one. If no engine is passed and none is configured, defaults to mtapi."
+msgstr ""
+
+#: includes/class-abilities.php:137
+msgid "Optional translation-engine slug to select (e.g. \"mtapi\", \"google_translate_v2\", \"deepl\"). When omitted, keeps the already-configured engine, or defaults to \"mtapi\" if none is configured."
+msgstr ""
+
+#: includes/class-abilities.php:159
 msgid "List configured languages"
 msgstr ""
 
-#: includes/class-abilities.php:129
+#: includes/class-abilities.php:160
 msgid "Returns the languages currently configured in TranslatePress, including the default language and per-language slug/publish state."
 msgstr ""
 
-#: includes/class-abilities.php:168
+#: includes/class-abilities.php:199
 msgid "List available language codes"
 msgstr ""
 
-#: includes/class-abilities.php:169
+#: includes/class-abilities.php:200
 msgid "Returns the full catalog of language codes TranslatePress recognizes, with their English names."
 msgstr ""
 
-#: includes/class-abilities.php:201
+#: includes/class-abilities.php:232
 msgid "Remove a translation language"
 msgstr ""
 
-#: includes/class-abilities.php:202
+#: includes/class-abilities.php:233
 msgid "Removes a configured translation language. The default language cannot be removed without first reassigning the default."
 msgstr ""
 
-#: includes/class-abilities.php:209
+#: includes/class-abilities.php:240
 msgid "Locale code of the language to remove."
 msgstr ""
 
-#: includes/class-abilities.php:239
+#: includes/class-abilities.php:270
 msgid "Update a translation language"
 msgstr ""
 
-#: includes/class-abilities.php:240
+#: includes/class-abilities.php:271
 msgid "Replaces the slug and publish status of an already-configured translation language."
 msgstr ""
 
-#: includes/class-abilities.php:247
+#: includes/class-abilities.php:278
 msgid "Locale code of the language to update."
 msgstr ""
 
-#: includes/class-abilities.php:252
+#: includes/class-abilities.php:283
 msgid "URL slug for this language."
 msgstr ""
 
-#: includes/class-abilities.php:257
+#: includes/class-abilities.php:288
 msgid "Whether this language is published on the front end."
 msgstr ""
 
-#: includes/class-abilities.php:277
+#: includes/class-abilities.php:308
 msgid "Set the default language"
 msgstr ""
 
-#: includes/class-abilities.php:278
+#: includes/class-abilities.php:309
 msgid "Promotes an already-configured language to be the site default. The previous default remains in the translation languages list."
 msgstr ""
 
-#: includes/class-abilities.php:285
+#: includes/class-abilities.php:316
 msgid "Locale code to promote to default. Must already be a configured translation language."
 msgstr ""
 
-#: includes/class-abilities.php:309
+#: includes/class-abilities.php:340
 msgid "You do not have permission to manage TranslatePress settings."
 msgstr ""
 
-#: includes/class-abilities.php:329, includes/class-abilities.php:520, includes/class-abilities.php:572, includes/class-abilities.php:652
+#: includes/class-abilities.php:360, includes/class-abilities.php:606, includes/class-abilities.php:658, includes/class-abilities.php:738
 msgid "Invalid language code. Allowed characters: A-Z, a-z, 0-9, hyphen, underscore."
 msgstr ""
 
 #. translators: %s: language code
-#: includes/class-abilities.php:342
+#: includes/class-abilities.php:373
 msgid "Language code \"%s\" is not recognized by TranslatePress."
 msgstr ""
 
 #. translators: %s: language code
-#: includes/class-abilities.php:359
+#: includes/class-abilities.php:390
 msgid "Language \"%s\" is already configured."
 msgstr ""
 
 #. translators: %d: maximum number of secondary languages
-#: includes/class-abilities.php:373
+#: includes/class-abilities.php:404
 msgid "Your current license allows up to %d additional language(s). Upgrade or activate a Pro license to add more."
 msgstr ""
 
-#: includes/class-abilities.php:400
+#: includes/class-abilities.php:431
 msgid "TranslatePress rejected the new language during settings sanitization."
 msgstr ""
 
+#: includes/class-abilities.php:514
+msgid "Enabling Automatic Translation with the TranslatePress AI engine requires an active TranslatePress license. Activate a license first with translatepress/set-license-key, or pass a different engine (e.g. \"google_translate_v2\", \"deepl\")."
+msgstr ""
+
 #. translators: %s: license expiration date
-#: includes/class-abilities.php:453, includes/class-ai-api-key-check.php:252, includes/onboarding/class-ai-api-key.php:61, includes/onboarding/class-autotranslation.php:74
+#: includes/class-abilities.php:539, includes/class-ai-api-key-check.php:252, includes/onboarding/class-ai-api-key.php:61, includes/onboarding/class-autotranslation.php:74
 msgid "Your license key expired on %s."
 msgstr ""
 
-#: includes/class-abilities.php:457
+#: includes/class-abilities.php:543
 msgid "Your license key has expired."
 msgstr ""
 
-#: includes/class-abilities.php:459, includes/class-ai-api-key-check.php:257, includes/onboarding/class-ai-api-key.php:66, includes/onboarding/class-autotranslation.php:79
+#: includes/class-abilities.php:545, includes/class-ai-api-key-check.php:257, includes/onboarding/class-ai-api-key.php:66, includes/onboarding/class-autotranslation.php:79
 msgid "Your license key has been disabled."
 msgstr ""
 
-#: includes/class-abilities.php:461, includes/class-ai-api-key-check.php:176, includes/class-ai-api-key-check.php:260, includes/onboarding/class-ai-api-key.php:33, includes/onboarding/class-ai-api-key.php:69, includes/onboarding/class-autotranslation.php:82
+#: includes/class-abilities.php:547, includes/class-ai-api-key-check.php:176, includes/class-ai-api-key-check.php:260, includes/onboarding/class-ai-api-key.php:33, includes/onboarding/class-ai-api-key.php:69, includes/onboarding/class-autotranslation.php:82
 msgid "Your TranslatePress license key is invalid or missing."
 msgstr ""
 
-#: includes/class-abilities.php:464
+#: includes/class-abilities.php:550
 msgid "Your license key is disabled for this URL. Re-enable it from your TranslatePress account."
 msgstr ""
 
-#: includes/class-abilities.php:466
+#: includes/class-abilities.php:552
 msgid "License key mismatch. The license you entered does not match the TranslatePress version you have installed."
 msgstr ""
 
-#: includes/class-abilities.php:468, includes/class-ai-api-key-check.php:277, includes/onboarding/class-ai-api-key.php:79, includes/onboarding/class-autotranslation.php:92
+#: includes/class-abilities.php:554, includes/class-ai-api-key-check.php:277, includes/onboarding/class-ai-api-key.php:79, includes/onboarding/class-autotranslation.php:92
 msgid "Your license key has reached its activation limit."
 msgstr ""
 
-#: includes/class-abilities.php:472
+#: includes/class-abilities.php:558
 msgid "An error occurred while activating the license, please try again."
 msgstr ""
 
 #. translators: %s: language code
-#: includes/class-abilities.php:535
+#: includes/class-abilities.php:621
 msgid "Language \"%s\" is not currently configured."
 msgstr ""
 
-#: includes/class-abilities.php:544
+#: includes/class-abilities.php:630
 msgid "The default language cannot be removed. Set another language as default first."
 msgstr ""
 
-#: includes/class-abilities.php:579
+#: includes/class-abilities.php:665
 msgid "Slug is empty after sanitization. Use only URL-safe characters."
 msgstr ""
 
 #. translators: %s: language code
-#: includes/class-abilities.php:594, includes/class-abilities.php:672
+#: includes/class-abilities.php:680, includes/class-abilities.php:758
 msgid "Language \"%s\" is not currently configured. Add it first with translatepress/add-language."
 msgstr ""
 
-#: includes/class-abilities.php:604
+#: includes/class-abilities.php:690
 msgid "The default language is always published and cannot be unpublished."
 msgstr ""
 
 #. translators: 1: slug, 2: language code
-#: includes/class-abilities.php:615
+#: includes/class-abilities.php:701
 msgid "Slug \"%1$s\" is already in use by language \"%2$s\"."
 msgstr ""
 
-#: includes/class-abilities.php:703
+#: includes/class-abilities.php:789
 msgid "TranslatePress rejected the new settings during sanitization."
 msgstr ""
 
-#: includes/class-advanced-tab.php:23
+#: includes/class-advanced-tab.php:23, includes/class-machine-translation-tab.php:287
 msgid "Advanced"
 msgstr ""
 
@@ -497,7 +513,7 @@ msgstr ""
 msgid "Automatic translation has been disabled."
 msgstr ""
 
-#: includes/class-error-manager.php:170, includes/class-plugin-notices.php:353, includes/class-plugin-notices.php:431, includes/class-plugin-notices.php:406, includes/class-plugin-notices.php:491, includes/class-plugin-notices.php:469, includes/class-plugin-notices.php:520, includes/class-plugin-notices.php:576, includes/class-plugin-notices.php:632, includes/class-plugin-notices.php:621, includes/class-plugin-notices.php:657, includes/class-plugin-notices.php:709, includes/class-plugin-notices.php:692, includes/class-reviews.php:129, includes/class-reviews.php:132, includes/class-upgrade.php:1077, includes/class-upgrade.php:1786, add-ons-advanced/extra-languages/class-extra-languages.php:157, add-ons-advanced/seo-pack/class-seo-pack.php:845, add-ons-pro/multiple-domains/class-multiple-domains.php:577, includes/upgrade/class-batch-processor.php:173
+#: includes/class-error-manager.php:170, includes/class-plugin-notices.php:353, includes/class-plugin-notices.php:431, includes/class-plugin-notices.php:406, includes/class-plugin-notices.php:491, includes/class-plugin-notices.php:469, includes/class-plugin-notices.php:520, includes/class-plugin-notices.php:576, includes/class-plugin-notices.php:632, includes/class-plugin-notices.php:621, includes/class-plugin-notices.php:657, includes/class-plugin-notices.php:709, includes/class-plugin-notices.php:692, includes/class-reviews.php:129, includes/class-reviews.php:132, includes/class-upgrade.php:1077, includes/class-upgrade.php:1786, add-ons-advanced/extra-languages/class-extra-languages.php:157, add-ons-advanced/seo-pack/class-seo-pack.php:853, add-ons-pro/multiple-domains/class-multiple-domains.php:577, includes/upgrade/class-batch-processor.php:173
 msgid "Dismiss this notice."
 msgstr ""
 
@@ -609,27 +625,35 @@ msgstr ""
 msgid "Change language to %s"
 msgstr ""
 
-#: includes/class-machine-translation-tab.php:26, includes/class-onboarding.php:125, includes/class-onboarding.php:125, partials/machine-translation-settings-page.php:36
+#: includes/class-machine-translation-tab.php:26, includes/class-onboarding.php:125, includes/class-onboarding.php:125, partials/machine-translation-settings-page.php:39
 msgid "Automatic Translation"
 msgstr ""
 
-#: includes/class-machine-translation-tab.php:211, add-ons-pro/deepl/includes/class-deepl.php:33
+#: includes/class-machine-translation-tab.php:218, add-ons-pro/deepl/includes/class-deepl.php:33
 msgid "DeepL"
 msgstr ""
 
-#: includes/class-machine-translation-tab.php:244
+#: includes/class-machine-translation-tab.php:251
 msgid "Unsupported languages"
 msgstr ""
 
-#: includes/class-machine-translation-tab.php:258
+#: includes/class-machine-translation-tab.php:265
 msgid "The selected automatic translation engine does not provide support for these languages.<br>You can still manually translate pages in these languages using the Translation Editor."
 msgstr ""
 
-#: includes/class-machine-translation-tab.php:302
+#: includes/class-machine-translation-tab.php:285, includes/class-settings.php:668
+msgid "General"
+msgstr ""
+
+#: includes/class-machine-translation-tab.php:286, partials/glossary-settings-page.php:124
+msgid "Glossary"
+msgstr ""
+
+#: includes/class-machine-translation-tab.php:350
 msgid "API key validation failed."
 msgstr ""
 
-#: includes/class-machine-translation-tab.php:321
+#: includes/class-machine-translation-tab.php:369
 msgid "API key verification was successful."
 msgstr ""
 
@@ -881,10 +905,6 @@ msgstr ""
 msgid "Opposite Language"
 msgstr ""
 
-#: includes/class-settings.php:668
-msgid "General"
-msgstr ""
-
 #: includes/class-settings.php:673, includes/class-translation-manager.php:546, add-ons-pro/translator-accounts/includes/class-translator-accounts.php:159
 msgid "Translate Site"
 msgstr ""
@@ -893,11 +913,11 @@ msgstr ""
 msgid "Addons"
 msgstr ""
 
-#: includes/class-settings.php:730, includes/class-translation-manager.php:702
+#: includes/class-settings.php:732, includes/class-translation-manager.php:702
 msgid "Settings"
 msgstr ""
 
-#: includes/class-settings.php:736
+#: includes/class-settings.php:738
 msgid "Pro Features"
 msgstr ""
 
@@ -1359,7 +1379,7 @@ msgstr ""
 msgid "Edit translations by visually selecting them on each site page"
 msgstr ""
 
-#: includes/class-translation-manager.php:376
+#: includes/class-translation-manager.php:376, partials/glossary-replace-page.php:68
 msgid "String Translation"
 msgstr ""
 
@@ -1688,7 +1708,7 @@ msgstr ""
 msgid "The Automatic Translation Code of the added custom language is invalid."
 msgstr ""
 
-#: includes/functions.php:657, includes/functions.php:679, includes/mtapi/functions.php:8
+#: includes/functions.php:657, includes/functions.php:679, partials/glossary-settings-page.php:66, includes/mtapi/functions.php:8
 msgid "TranslatePress AI"
 msgstr ""
 
@@ -1936,7 +1956,7 @@ msgstr ""
 msgid "Create no-code automations and workflows on your WordPress site. Easily connect your plugins, sites and apps together."
 msgstr ""
 
-#: partials/advanced-settings-page.php:18, partials/machine-translation-settings-page.php:444, partials/main-settings-page.php:227
+#: partials/advanced-settings-page.php:18, partials/machine-translation-settings-page.php:447, partials/main-settings-page.php:227
 msgid "Save Changes"
 msgstr ""
 
@@ -1984,7 +2004,7 @@ msgstr ""
 msgid "Download & Install the Pro plugin"
 msgstr ""
 
-#: partials/ai-api-key-settings-page.php:254, partials/machine-translation-settings-page.php:147
+#: partials/ai-api-key-settings-page.php:254, partials/machine-translation-settings-page.php:150
 msgid "Learn More"
 msgstr ""
 
@@ -2012,6 +2032,134 @@ msgstr ""
 msgid "Available languages"
 msgstr ""
 
+#: partials/glossary-replace-page.php:49
+msgid "Back to Glossary"
+msgstr ""
+
+#: partials/glossary-replace-page.php:56
+msgid "Search Existing Translations"
+msgstr ""
+
+#: partials/glossary-replace-page.php:62
+msgid "Search the existing dictionary entries to see how a term is currently translated in each language."
+msgstr ""
+
+#. translators: %s is a link to the String Translation Regular tab.
+#: partials/glossary-replace-page.php:67
+msgid "To fully explore all the translations, use %s."
+msgstr ""
+
+#: partials/glossary-replace-page.php:74
+msgid "Search existing translations"
+msgstr ""
+
+#: partials/glossary-replace-page.php:76, includes/string-translation/class-string-translation.php:269
+msgid "Search"
+msgstr ""
+
+#: partials/glossary-replace-page.php:86
+msgid "Replace Existing Translations"
+msgstr ""
+
+#: partials/glossary-replace-page.php:101
+msgid "For each language, enter the current (existing) translation you want to find; every case-insensitive occurrence in the stored translations will be replaced with the new translation, keeping the original capitalization."
+msgstr ""
+
+#: partials/glossary-replace-page.php:104
+msgid "Leaving a language field empty will skip that language entirely (no changes will be made for it). Only one existing translation per language can be entered at a time. If you have multiple translations to replace for the same language, simply run the replacement again with the next value."
+msgstr ""
+
+#: partials/glossary-replace-page.php:106
+msgid "The \"Existing translation\" is not the term in the default language, but rather the already existing wrong translation you want to correct."
+msgstr ""
+
+#: partials/glossary-replace-page.php:115, partials/main-settings-language-selector.php:75, includes/string-translation/class-string-translation.php:225
+msgid "Language"
+msgstr ""
+
+#: partials/glossary-replace-page.php:116
+msgid "Existing translation"
+msgstr ""
+
+#: partials/glossary-replace-page.php:117
+msgid "New translation"
+msgstr ""
+
+#: partials/glossary-replace-page.php:144
+msgid "Replace in existing translations"
+msgstr ""
+
+#: partials/glossary-replace-page.php:146, includes/glossary/class-glossary-queries.php:157
+msgid "Cancel"
+msgstr ""
+
+#: partials/glossary-replace-page.php:93
+msgid "The requested glossary term could not be found. It may have been deleted."
+msgstr ""
+
+#: partials/glossary-replace-page.php:95
+msgid "&laquo; Back to Glossary"
+msgstr ""
+
+#: partials/glossary-settings-page.php:60
+msgid "Glossary is available only with the TranslatePress AI engine."
+msgstr ""
+
+#. translators: %s is a link labelled "TranslatePress AI".
+#: partials/glossary-settings-page.php:65
+msgid "Select the %s automatic translation engine to add and manage glossary terms. For other translation engines (such as DeepL or Google Translate), glossary functions are available in the translation provider’s dashboard."
+msgstr ""
+
+#: partials/glossary-settings-page.php:79
+msgid "Add Glossary Term"
+msgstr ""
+
+#: partials/glossary-settings-page.php:83
+msgid "Define words or phrases that should not be translated automatically, and optionally provide replacements per language."
+msgstr ""
+
+#. translators: %s is the default language name.
+#: partials/glossary-settings-page.php:92, partials/glossary-settings-page.php:130, includes/glossary/class-glossary-queries.php:142
+msgid "Term (%s)"
+msgstr ""
+
+#: partials/glossary-settings-page.php:96
+msgid "The original word or phrase in the default language."
+msgstr ""
+
+#: partials/glossary-settings-page.php:111
+msgid "Add Term"
+msgstr ""
+
+#: partials/glossary-settings-page.php:134
+msgid "Search glossary terms"
+msgstr ""
+
+#: partials/glossary-settings-page.php:135
+msgid "Search terms"
+msgstr ""
+
+#: partials/glossary-settings-page.php:136
+msgid "Search Glossary"
+msgstr ""
+
+#: partials/glossary-settings-page.php:147, partials/glossary-settings-page.php:163, includes/glossary/class-glossary-queries.php:143
+msgid "Translations"
+msgstr ""
+
+#: partials/glossary-settings-page.php:155
+msgid "Loading…"
+msgstr ""
+
+#. translators: %s is a link to the search & replace tool.
+#: partials/glossary-settings-page.php:182
+msgid "To edit existing translations, use the %s."
+msgstr ""
+
+#: partials/glossary-settings-page.php:183, includes/glossary/class-glossary-queries.php:169
+msgid "search & replace tool"
+msgstr ""
+
 #: partials/language-switcher-configurator-page.php:16
 msgid "Language Switcher update notice"
 msgstr ""
@@ -2033,163 +2181,159 @@ msgstr ""
 msgid "Enable the new switcher"
 msgstr ""
 
-#: partials/machine-translation-settings-page.php:37
+#: partials/machine-translation-settings-page.php:40
 msgid "Get a translation volume estimate with a detailed breakdown per page"
 msgstr ""
 
-#: partials/machine-translation-settings-page.php:37
+#: partials/machine-translation-settings-page.php:40
 msgid "Find how many translatable words are on your website"
 msgstr ""
 
-#: partials/machine-translation-settings-page.php:44, includes/onboarding/class-autotranslation.php:110
-msgid "Enable Automatic Translation"
-msgstr ""
-
-#: partials/machine-translation-settings-page.php:76
+#: partials/machine-translation-settings-page.php:79
 msgid "To use <strong>DeepL</strong> for automatic translation, activate this Pro add-on from the <a href=\"%1$s\" target=\"_self\" title=\"%2$s\">%2$s</a>."
 msgstr ""
 
-#: partials/machine-translation-settings-page.php:69
+#: partials/machine-translation-settings-page.php:72
 msgid "<strong>DeepL</strong> automatic translation is available as a <a href=\"%1$s\" target=\"_blank\" title=\"%2$s\">%2$s</a>."
 msgstr ""
 
-#: partials/machine-translation-settings-page.php:70
+#: partials/machine-translation-settings-page.php:73
 msgid "By upgrading you'll get access to all paid add-ons, premium support and help fund the future development of TranslatePress."
 msgstr ""
 
 #. translators: %1$s is the URL to the DeepL add-on. %2$s is the name of the Pro offerings.
-#: partials/machine-translation-settings-page.php:91
+#: partials/machine-translation-settings-page.php:94
 msgctxt "Verbiage for the DeepL Pro Add-on"
 msgid "TranslatePress Pro Add-on"
 msgstr ""
 
-#: partials/machine-translation-settings-page.php:85
+#: partials/machine-translation-settings-page.php:88
 msgctxt "Verbiage for the DeepL Pro Add-on"
 msgid "Addons tab"
 msgstr ""
 
-#: partials/machine-translation-settings-page.php:98
+#: partials/machine-translation-settings-page.php:101
 msgid "Please note that DeepL API usage is paid separately. See <a href=\"https://www.deepl.com/pro.html#developer\">DeepL pricing information</a>."
 msgstr ""
 
-#: partials/machine-translation-settings-page.php:103
+#: partials/machine-translation-settings-page.php:106
 msgid "TranslatePress Pro Add-ons"
 msgstr ""
 
-#: partials/machine-translation-settings-page.php:116
+#: partials/machine-translation-settings-page.php:119
 msgid "Test API credentials"
 msgstr ""
 
-#: partials/machine-translation-settings-page.php:120
+#: partials/machine-translation-settings-page.php:123
 msgid "Check if the selected translation engine is configured correctly."
 msgstr ""
 
-#: partials/machine-translation-settings-page.php:126
+#: partials/machine-translation-settings-page.php:129
 msgid "Alternative Engines"
 msgstr ""
 
-#: partials/machine-translation-settings-page.php:141
+#: partials/machine-translation-settings-page.php:144
 msgid "Switch to TranslatePress AI"
 msgstr ""
 
-#: partials/machine-translation-settings-page.php:144
+#: partials/machine-translation-settings-page.php:147
 msgid "Integrate machine translation directly with your WordPress website."
 msgstr ""
 
-#: partials/machine-translation-settings-page.php:134
+#: partials/machine-translation-settings-page.php:137
 msgid "More info"
 msgstr ""
 
 #. translators: The <br> ensures a line break after "order to"
-#: partials/machine-translation-settings-page.php:175
+#: partials/machine-translation-settings-page.php:178
 msgid "Choose which engine you want to use in order to %1$s automatically translate your website."
 msgstr ""
 
-#: partials/machine-translation-settings-page.php:191
-msgid "Automatic Translation Settings"
-msgstr ""
-
-#: partials/machine-translation-settings-page.php:220
-msgid "AI Words Low Notification"
-msgstr ""
-
-#: partials/machine-translation-settings-page.php:222
-msgid "Receive an email notification when your TranslatePress AI word count drops below the specified threshold."
-msgstr ""
-
-#: partials/machine-translation-settings-page.php:229
-msgid "This feature is only available when using the TranslatePress AI translation engine."
-msgstr ""
-
-#: partials/machine-translation-settings-page.php:242
-msgid "Notification Email"
-msgstr ""
-
-#: partials/machine-translation-settings-page.php:251
-msgid "The email address where the low AI words notification will be sent."
-msgstr ""
-
-#: partials/machine-translation-settings-page.php:256
-msgid "Word Threshold"
-msgstr ""
-
-#: partials/machine-translation-settings-page.php:264
-msgid "words"
-msgstr ""
-
-#: partials/machine-translation-settings-page.php:266
-msgid "You will be notified when remaining AI words drop below this number."
-msgstr ""
-
-#: partials/machine-translation-settings-page.php:290
+#: partials/machine-translation-settings-page.php:209
 msgid "Automatically Translate Slugs"
 msgstr ""
 
-#: partials/machine-translation-settings-page.php:294
+#: partials/machine-translation-settings-page.php:213
 msgid "Generate automatic translations of slugs for posts, pages and Custom Post Types.<br/>The slugs will be automatically translated starting with the second refresh of each page."
 msgstr ""
 
-#: partials/machine-translation-settings-page.php:308
+#: partials/machine-translation-settings-page.php:227
 msgid "This feature is only available in the paid version. Upgrade TranslatePress and unlock more premium features."
 msgstr ""
 
-#: partials/machine-translation-settings-page.php:310
+#: partials/machine-translation-settings-page.php:229
 msgid "Requires <a href=\"%s\" title=\"TranslatePress Add-on SEO Pack documentation\" target=\"_blank\">SEO Pack Add-on</a> to be installed and activated."
 msgstr ""
 
-#: partials/machine-translation-settings-page.php:327, partials/main-settings-language-selector.php:204, partials/settings-header.php:35, includes/mtapi/functions.php:87, includes/mtapi/functions.php:188
+#: partials/machine-translation-settings-page.php:246, partials/main-settings-language-selector.php:204, partials/settings-header.php:35, includes/mtapi/functions.php:87, includes/mtapi/functions.php:188
 msgid "Upgrade now"
 msgstr ""
 
-#: partials/machine-translation-settings-page.php:351
-msgid "Block Crawlers"
+#: partials/machine-translation-settings-page.php:263
+msgid "Automatic Translation Settings"
+msgstr ""
+
+#: partials/machine-translation-settings-page.php:292
+msgid "AI Words Low Notification"
+msgstr ""
+
+#: partials/machine-translation-settings-page.php:294
+msgid "Receive an email notification when your TranslatePress AI word count drops below the specified threshold."
+msgstr ""
+
+#: partials/machine-translation-settings-page.php:301
+msgid "This feature is only available when using the TranslatePress AI translation engine."
+msgstr ""
+
+#: partials/machine-translation-settings-page.php:314
+msgid "Notification Email"
+msgstr ""
+
+#: partials/machine-translation-settings-page.php:323
+msgid "The email address where the low AI words notification will be sent."
+msgstr ""
+
+#: partials/machine-translation-settings-page.php:328
+msgid "Word Threshold"
+msgstr ""
+
+#: partials/machine-translation-settings-page.php:336
+msgid "words"
+msgstr ""
+
+#: partials/machine-translation-settings-page.php:338
+msgid "You will be notified when remaining AI words drop below this number."
 msgstr ""
 
 #: partials/machine-translation-settings-page.php:354
+msgid "Block Crawlers"
+msgstr ""
+
+#: partials/machine-translation-settings-page.php:357
 msgid "Block crawlers from triggering automatic translations on your website.<br>This will not prevent crawlers from accessing this site's pages."
 msgstr ""
 
-#: partials/machine-translation-settings-page.php:373
+#: partials/machine-translation-settings-page.php:376
 msgid "Limit machine translation / characters per day"
 msgstr ""
 
-#: partials/machine-translation-settings-page.php:376
+#: partials/machine-translation-settings-page.php:379
 msgid "Add a limit to the number of automatically translated characters so you can better budget your project."
 msgstr ""
 
-#: partials/machine-translation-settings-page.php:399
+#: partials/machine-translation-settings-page.php:402
 msgid "characters per day"
 msgstr ""
 
-#: partials/machine-translation-settings-page.php:402
+#: partials/machine-translation-settings-page.php:405
 msgid "Today's Character Count: "
 msgstr ""
 
-#: partials/machine-translation-settings-page.php:422
+#: partials/machine-translation-settings-page.php:425
 msgid "Log machine translation queries."
 msgstr ""
 
-#: partials/machine-translation-settings-page.php:426
+#: partials/machine-translation-settings-page.php:429
 msgid "Only enable for testing purposes. Can impact performance.<br>All records are stored in the wp_trp_machine_translation_log database table. Use a plugin like <a href=\"https://wordpress.org/plugins/wp-data-access/\" target=\"_blank\">WP Data Access</a> to browse the logs or directly from your database manager (PHPMyAdmin, etc.)"
 msgstr ""
 
@@ -2259,10 +2403,6 @@ msgstr ""
 
 #: partials/main-settings-language-selector.php:52
 msgid "Informal"
-msgstr ""
-
-#: partials/main-settings-language-selector.php:75, includes/string-translation/class-string-translation.php:225
-msgid "Language"
 msgstr ""
 
 #: partials/main-settings-language-selector.php:100
@@ -2573,11 +2713,11 @@ msgstr ""
 msgid "<strong>Extra Languages add-on</strong> requires TranslatePress version %1$s or higher. You are currently using version %2$s. Please update TranslatePress to enable this feature."
 msgstr ""
 
-#: add-ons-advanced/seo-pack/class-seo-pack.php:840
+#: add-ons-advanced/seo-pack/class-seo-pack.php:848
 msgid "Automatic and manual slug translation changes performed when <strong>TranslatePress - Multilingual</strong> 2.8.4 was active had to be removed because of some issues with that version. All slug translations from before that version are now in use. Thank you for understanding!"
 msgstr ""
 
-#: add-ons-advanced/seo-pack/class-seo-pack.php:841
+#: add-ons-advanced/seo-pack/class-seo-pack.php:849
 msgid "If you absolutely need them, the removed translations can be found in tables trp_slug_original_obsolete and trp_slug_translation_obsolete."
 msgstr ""
 
@@ -3044,6 +3184,156 @@ msgstr ""
 msgid "Filters gettext wrapping such as #!trpst#trp-gettext from all updated post meta. Does not affect previous post meta. <br/><strong>Database backup is recommended before switching on.</strong>"
 msgstr ""
 
+#: includes/glossary/class-glossary-queries.php:85
+msgid "TranslatePress finished replacing the existing translations in your dictionary."
+msgstr ""
+
+#: includes/glossary/class-glossary-queries.php:148
+msgid "Term added. Glossary terms only affect new automatic translations."
+msgstr ""
+
+#: includes/glossary/class-glossary-queries.php:149
+msgid "Term updated."
+msgstr ""
+
+#: includes/glossary/class-glossary-queries.php:150
+msgid "Term deleted."
+msgstr ""
+
+#: includes/glossary/class-glossary-queries.php:151
+msgid "Are you sure you want to delete this term?"
+msgstr ""
+
+#: includes/glossary/class-glossary-queries.php:152, includes/glossary/class-glossary-queries.php:199, includes/glossary/class-glossary-queries.php:561
+msgid "Something went wrong. Please try again."
+msgstr ""
+
+#: includes/glossary/class-glossary-queries.php:153
+msgid "Quick Edit"
+msgstr ""
+
+#: includes/glossary/class-glossary-queries.php:154, includes/string-translation/class-string-translation.php:195
+msgid "Edit"
+msgstr ""
+
+#: includes/glossary/class-glossary-queries.php:155, includes/string-translation/class-string-translation.php:196
+msgid "Delete"
+msgstr ""
+
+#: includes/glossary/class-glossary-queries.php:156
+msgid "Update"
+msgstr ""
+
+#: includes/glossary/class-glossary-queries.php:158
+msgid "No glossary terms match your search."
+msgstr ""
+
+#: includes/glossary/class-glossary-queries.php:159
+msgid "No glossary terms found."
+msgstr ""
+
+#: includes/glossary/class-glossary-queries.php:160
+msgid "Could not load glossary terms. Please reload the page."
+msgstr ""
+
+#: includes/glossary/class-glossary-queries.php:161, includes/glossary/class-glossary-queries.php:206, includes/string-translation/class-string-translation.php:232
+msgid "items"
+msgstr ""
+
+#: includes/glossary/class-glossary-queries.php:162, includes/glossary/class-glossary-queries.php:207
+msgid "of"
+msgstr ""
+
+#: includes/glossary/class-glossary-queries.php:163, includes/glossary/class-glossary-queries.php:208
+msgid "First page"
+msgstr ""
+
+#: includes/glossary/class-glossary-queries.php:164, includes/glossary/class-glossary-queries.php:209
+msgid "Previous page"
+msgstr ""
+
+#: includes/glossary/class-glossary-queries.php:165, includes/glossary/class-glossary-queries.php:210
+msgid "Next page"
+msgstr ""
+
+#: includes/glossary/class-glossary-queries.php:166, includes/glossary/class-glossary-queries.php:211
+msgid "Last page"
+msgstr ""
+
+#. translators: %s is the "search & replace tool" link.
+#: includes/glossary/class-glossary-queries.php:168
+msgid "The inserted term was found in your existing translations, use the %s to make changes there."
+msgstr ""
+
+#: includes/glossary/class-glossary-queries.php:200, includes/glossary/class-glossary-queries.php:592
+msgid "Please provide at least one existing translation to replace."
+msgstr ""
+
+#: includes/glossary/class-glossary-queries.php:201
+msgid "You are about to bulk edit a potentially large amount of translations. This action cannot be undone. It is recommended to make a backup of the database before completing this action."
+msgstr ""
+
+#: includes/glossary/class-glossary-queries.php:202
+msgid "Continue with replacing existing translations?"
+msgstr ""
+
+#: includes/glossary/class-glossary-queries.php:203
+msgid "No entries found."
+msgstr ""
+
+#: includes/glossary/class-glossary-queries.php:204
+msgid "Original"
+msgstr ""
+
+#: includes/glossary/class-glossary-queries.php:205, includes/string-translation/class-string-translation.php:294, includes/string-translation/class-string-translation.php:324, includes/string-translation/class-string-translation.php:349, add-ons-advanced/seo-pack/includes/string-translation/class-string-translation-seo.php:29, add-ons-advanced/seo-pack/includes/string-translation/class-string-translation-seo.php:42, add-ons-advanced/seo-pack/includes/string-translation/class-string-translation-seo.php:62, add-ons-advanced/seo-pack/includes/string-translation/class-string-translation-seo.php:82, add-ons-advanced/seo-pack/includes/string-translation/class-string-translation-seo.php:100, add-ons-advanced/seo-pack/includes/string-translation/class-string-translation-seo.php:117, add-ons-advanced/seo-pack-legacy/includes/string-translation/class-string-translation-seo.php:28, add-ons-advanced/seo-pack-legacy/includes/string-translation/class-string-translation-seo.php:41, add-ons-advanced/seo-pack-legacy/includes/string-translation/class-string-translation-seo.php:61, add-ons-advanced/seo-pack-legacy/includes/string-translation/class-string-translation-seo.php:81, add-ons-advanced/seo-pack-legacy/includes/string-translation/class-string-translation-seo.php:99
+msgid "Translation"
+msgstr ""
+
+#: includes/glossary/class-glossary-queries.php:259
+msgid "Security check failed. Please reload the page and try again."
+msgstr ""
+
+#: includes/glossary/class-glossary-queries.php:263
+msgid "You do not have permission to do this."
+msgstr ""
+
+#: includes/glossary/class-glossary-queries.php:286
+msgid "Please enter the term in the default language."
+msgstr ""
+
+#: includes/glossary/class-glossary-queries.php:302
+msgid "Please provide at least one translation for the term."
+msgstr ""
+
+#. translators: %s is the glossary term.
+#: includes/glossary/class-glossary-queries.php:363, includes/glossary/class-glossary-queries.php:471
+msgid "The term “%s” already exists in the glossary."
+msgstr ""
+
+#: includes/glossary/class-glossary-queries.php:464
+msgid "The term you are trying to edit no longer exists. Please reload the page."
+msgstr ""
+
+#: includes/glossary/class-glossary-queries.php:508
+msgid "The term you are trying to delete no longer exists. Please reload the page."
+msgstr ""
+
+#. translators: 1: language name, 2: number of entries.
+#: includes/glossary/class-glossary-queries.php:638
+msgid "%1$s: %2$d entry updated"
+msgid_plural "%1$s: %2$d entries updated"
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/glossary/class-glossary-queries.php:645
+msgid "Replacement complete."
+msgstr ""
+
+#. translators: %d is the number of entries already updated.
+#: includes/glossary/class-glossary-queries.php:672
+msgid "This is a large replacement. %d entries were updated now and the rest will finish automatically in the background over the next few minutes."
+msgstr ""
+
 #: includes/google-translate/functions.php:9
 msgid "Google Translate v2"
 msgstr ""
@@ -3392,14 +3682,6 @@ msgstr ""
 msgid "Delete entries"
 msgstr ""
 
-#: includes/string-translation/class-string-translation.php:195
-msgid "Edit"
-msgstr ""
-
-#: includes/string-translation/class-string-translation.php:196
-msgid "Delete"
-msgstr ""
-
 #: includes/string-translation/class-string-translation.php:223
 msgid "Filter"
 msgstr ""
@@ -3430,10 +3712,6 @@ msgstr ""
 
 #: includes/string-translation/class-string-translation.php:231
 msgid "Import / Export"
-msgstr ""
-
-#: includes/string-translation/class-string-translation.php:232
-msgid "items"
 msgstr ""
 
 #: includes/string-translation/class-string-translation.php:233
@@ -3558,10 +3836,6 @@ msgstr ""
 msgid "Language in which the translation status filter applies. Leave unselected for the translation status to apply to ANY language"
 msgstr ""
 
-#: includes/string-translation/class-string-translation.php:269
-msgid "Search"
-msgstr ""
-
 #: includes/string-translation/class-string-translation.php:270
 msgid "Slugs that are not found in either one of the other categories."
 msgstr ""
@@ -3584,10 +3858,6 @@ msgstr ""
 
 #: includes/string-translation/class-string-translation.php:293, includes/string-translation/class-string-translation.php:323, includes/string-translation/class-string-translation.php:348
 msgid "Original String"
-msgstr ""
-
-#: includes/string-translation/class-string-translation.php:294, includes/string-translation/class-string-translation.php:324, includes/string-translation/class-string-translation.php:349, add-ons-advanced/seo-pack/includes/string-translation/class-string-translation-seo.php:29, add-ons-advanced/seo-pack/includes/string-translation/class-string-translation-seo.php:42, add-ons-advanced/seo-pack/includes/string-translation/class-string-translation-seo.php:62, add-ons-advanced/seo-pack/includes/string-translation/class-string-translation-seo.php:82, add-ons-advanced/seo-pack/includes/string-translation/class-string-translation-seo.php:100, add-ons-advanced/seo-pack/includes/string-translation/class-string-translation-seo.php:117, add-ons-advanced/seo-pack-legacy/includes/string-translation/class-string-translation-seo.php:28, add-ons-advanced/seo-pack-legacy/includes/string-translation/class-string-translation-seo.php:41, add-ons-advanced/seo-pack-legacy/includes/string-translation/class-string-translation-seo.php:61, add-ons-advanced/seo-pack-legacy/includes/string-translation/class-string-translation-seo.php:81, add-ons-advanced/seo-pack-legacy/includes/string-translation/class-string-translation-seo.php:99
-msgid "Translation"
 msgstr ""
 
 #: includes/string-translation/class-string-translation.php:301, includes/string-translation/class-string-translation.php:331

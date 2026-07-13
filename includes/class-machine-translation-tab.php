@@ -64,6 +64,13 @@ class TRP_Machine_Translation_Tab {
     */
     public function sanitize_settings($mt_settings ){
 
+        $array_possible_subtabs = apply_filters( 'trp_machine_translation_possible_subtabs', array( 'trp_mt_subtab_general', 'trp_mt_subtab_advanced' ) );
+        $requested_subtab       = isset( $_REQUEST['tab'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['tab'] ) ) : '';
+        if ( in_array( $requested_subtab, $array_possible_subtabs, true ) && isset( $_REQUEST['_wp_http_referer'] ) ) {
+            $referer = esc_url_raw( wp_unslash( $_REQUEST['_wp_http_referer'] ) );
+            $_REQUEST['_wp_http_referer'] = add_query_arg( 'tab', $requested_subtab, $referer );
+        }
+
         $free_version = !class_exists( 'TRP_Handle_Included_Addons' );
         $seo_pack_active = class_exists( 'TRP_IN_Seo_Pack');
 
@@ -240,7 +247,7 @@ class TRP_Machine_Translation_Tab {
             $language_names = $trp_languages->get_language_names( $this->settings['translation-languages'], 'english_name' );
 
             ?>
-            <div class="trp-settings-container" id="trp_unsupported_languages">
+            <div class="trp-settings-container trp-settings-container-trp_mt_subtab_advanced" id="trp_unsupported_languages">
                 <h3 class="trp-settings-primary-heading"><?php esc_html_e( 'Unsupported languages', 'translatepress-multilingual' ); ?></h3>
                 <div class="trp-settings-separator"></div>
 
@@ -262,6 +269,47 @@ class TRP_Machine_Translation_Tab {
 
             <?php
         }
+    }
+
+    /*
+     * Output subtabs content table for the Automatic Translation page
+     *
+     * Hooked to trp_before_output_machine_translation_settings_options
+     */
+    public function trp_machine_translation_content_table(){
+        $current_page = isset( $_GET['page'] ) ? sanitize_text_field( wp_unslash( $_GET['page'] ) ) : '';
+        $on_mt_page   = ( $current_page === 'trp_machine_translation' );
+        $mt_page_url  = admin_url( 'admin.php?page=trp_machine_translation' );
+
+        $subtabs = apply_filters( 'trp_machine_translation_subtabs', array(
+            'general'  => array( 'id' => 'trp_mt_subtab_general',  'label' => __( 'General',  'translatepress-multilingual' ), 'url' => $on_mt_page ? '' : add_query_arg( 'tab', 'trp_mt_subtab_general',  $mt_page_url ) ),
+            'glossary' => array( 'id' => 'trp_mt_subtab_glossary', 'label' => __( 'Glossary', 'translatepress-multilingual' ), 'url' => admin_url( 'admin.php?page=trp_machine_translation_glossary' ) ),
+            'advanced' => array( 'id' => 'trp_mt_subtab_advanced', 'label' => __( 'Advanced', 'translatepress-multilingual' ), 'url' => $on_mt_page ? '' : add_query_arg( 'tab', 'trp_mt_subtab_advanced', $mt_page_url ) ),
+        ) );
+
+        $html = '<div class="trp_advanced_tab_content_table__wrapper"><div id="trp_advanced_tab_content_table">';
+
+        foreach ( $subtabs as $subtab ) {
+            if ( !empty( $subtab['url'] ) ) {
+                // Real-URL subtab: wrap the anchor around the item span so the entire cell is clickable.
+                $html .= '<a href="' . esc_url( $subtab['url'] ) . '" class="' . esc_attr( $subtab['id'] ) . '">
+                            <span class="trp_advanced_tab_content_table_item">
+                                ' . esc_html( $subtab['label'] ) . '
+                            </span>
+                          </a>';
+            } else {
+                // Hash-anchor subtab: JS toggles containers in place; clicks bubble from the span.
+                $html .= '<span class="trp_advanced_tab_content_table_item">
+                            <a href="#' . esc_attr( $subtab['id'] ) . '" class="' . esc_attr( $subtab['id'] ) . '">
+                                ' . esc_html( $subtab['label'] ) . '
+                            </a>
+                          </span>';
+            }
+        }
+
+        $html .= '</div></div>';
+
+        echo $html;//phpcs:ignore
     }
 
     public function test_api_key(){

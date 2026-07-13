@@ -686,7 +686,8 @@ jQuery( function() {
 //Advanced Settings Tabs
 function TRP_Advanced_Settings_Tabs() {
     function init() {
-        if (!window.location.search.includes('trp_advanced_page')) return;
+        const page = new URLSearchParams(window.location.search).get('page');
+        if (page !== 'trp_advanced_page' && page !== 'trp_machine_translation' && page !== 'trp_machine_translation_glossary') return;
 
         jQuery('.trp-settings-container').hide();
 
@@ -698,7 +699,8 @@ function TRP_Advanced_Settings_Tabs() {
             document.querySelectorAll(".trp-settings-container") :
             [...document.querySelectorAll(".trp-settings-container"), aldSettingsContainer];
 
-        let settingsReferer = document.querySelector("#trp_advanced_settings_referer"); // Hidden input field
+        let settingsReferer = document.querySelector("#trp_advanced_settings_referer")
+            || document.querySelector("#trp_machine_translation_settings_referer"); // Hidden input field
 
         function getURLParameter(name) {
             const urlParams = new URLSearchParams(window.location.search);
@@ -726,17 +728,30 @@ function TRP_Advanced_Settings_Tabs() {
                 el.classList.remove("trp-nav-active");
             });
 
-            let activeNavItem = document.querySelector(`.trp_advanced_tab_content_table_item a.${targetClass}`);
-            if (activeNavItem) {
-                activeNavItem.closest(".trp_advanced_tab_content_table_item").classList.add("trp-nav-active");
+            // Anchor may be inside the span (hash-anchor layout) or wrap it (real-URL layout).
+            let activeAnchor = document.querySelector(`a.${targetClass}`);
+            if (activeAnchor) {
+                let itemSpan = activeAnchor.querySelector(".trp_advanced_tab_content_table_item")
+                    || activeAnchor.closest(".trp_advanced_tab_content_table_item");
+                if (itemSpan) itemSpan.classList.add("trp-nav-active");
             }
         }
 
         navItems.forEach(item => {
             item.addEventListener("click", function (event) {
+                const anchor = this.querySelector("a");
+
+                // Real-URL layout: span is inside the anchor; no descendant <a>. Let the browser navigate.
+                if (!anchor) return;
+
+                const href = anchor.getAttribute("href") || "";
+
+                // If it's a real URL (not a hash anchor) let the browser navigate.
+                if (href && !href.startsWith("#")) return;
+
                 event.preventDefault();
 
-                let targetClass = this.querySelector("a").classList[0];
+                let targetClass = anchor.classList[0];
 
                 updateURLParameter("tab", targetClass);
                 if (settingsReferer) settingsReferer.value = targetClass;

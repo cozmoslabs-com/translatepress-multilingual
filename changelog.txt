@@ -1,3 +1,10 @@
+= 3.2.3 =
+* Added compatibility with Breakdance Builder regarding user profile language
+* Fixed edge case where regular strings were not editable in translation editor
+* Fixed issue where media link appeared doubled in translation editor
+* Fixed WPS Hide Login page going 404 when having subdirectory for default language
+* Removed plugin install form from onboarding
+
 = 3.2.2 =
 * Improved automatic translation handling by saving progress as it goes, so large pages keep their translation even if a page load is interrupted, and the same text is no longer sent for translation (or billed) more than once
 * Fixed issue with automatically translating gettext strings that are intentionally left the same in a plugin or theme's own translation files

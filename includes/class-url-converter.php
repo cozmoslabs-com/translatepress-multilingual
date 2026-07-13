@@ -661,24 +661,35 @@ class TRP_Url_Converter {
      * the home url to http:// while WordPress home/siteurl were https://, which
      * resulted in an ERR_TOO_MANY_REDIRECTS loop.
      *
-     * Mirrors the proxy-aware precedence already used in the Multiple Domains
-     * add-on (forwarded headers first, then $_SERVER['HTTPS']).
+     * Detection is additive toward https and never downgrades a genuine HTTPS
+     * request: a real $_SERVER['HTTPS'] is authoritative, so a stray or
+     * misconfigured forwarded header (e.g. an inner proxy that sets
+     * X-Forwarded-Proto from the backend connection scheme) can no longer force
+     * the home url back to http:// on an https page. Only when no signal reports
+     * https do we treat the request as http.
      *
      * @return bool
      */
     private function is_https_request() {
-        // A reverse proxy / load balancer reports the visitor-facing scheme here; it is authoritative when present.
+        // A genuine HTTPS connection is authoritative and must never be downgraded by a stray/misconfigured forwarded header.
+        if ( ! empty( $_SERVER['HTTPS'] ) && strtolower( sanitize_text_field( wp_unslash( $_SERVER['HTTPS'] ) ) ) !== 'off' ) {
+            return true;
+        }
+
+        // SSL-terminating reverse proxy / load balancer reports the visitor-facing scheme here.
         if ( ! empty( $_SERVER['HTTP_X_FORWARDED_PROTO'] ) ) {
             // Can be a comma-separated list with multiple proxies; the first value is the client-facing one.
             $forwarded_proto = explode( ',', sanitize_text_field( wp_unslash( $_SERVER['HTTP_X_FORWARDED_PROTO'] ) ) );
-            return strtolower( trim( $forwarded_proto[0] ) ) === 'https';
+            if ( strtolower( trim( $forwarded_proto[0] ) ) === 'https' ) {
+                return true;
+            }
         }
 
         if ( ! empty( $_SERVER['HTTP_X_FORWARDED_SSL'] ) ) {
             return strtolower( sanitize_text_field( wp_unslash( $_SERVER['HTTP_X_FORWARDED_SSL'] ) ) ) === 'on';
         }
 
-        return ( ! empty( $_SERVER['HTTPS'] ) && strtolower( sanitize_text_field( wp_unslash( $_SERVER['HTTPS'] ) ) ) !== 'off' );
+        return false;
     }
 
     /**

@@ -48,6 +48,8 @@ class TRP_Translate_Press{
     protected $abilities;
     protected $language_switcher_tab;
     protected $ai_words_notification;
+    protected $glossary;
+    protected $glossary_queries;
 
     protected $batch_processor;
 
@@ -80,7 +82,7 @@ class TRP_Translate_Press{
         define( 'TRP_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
         define( 'TRP_PLUGIN_BASE', plugin_basename( __DIR__ . '/index.php' ) );
         define( 'TRP_PLUGIN_SLUG', 'translatepress-multilingual' );
-        define( 'TRP_PLUGIN_VERSION', '3.2.3' );
+        define( 'TRP_PLUGIN_VERSION', '3.2.4' );
 
 	    wp_cache_add_non_persistent_groups(array('trp'));
 
@@ -118,6 +120,8 @@ class TRP_Translate_Press{
         require_once TRP_PLUGIN_DIR . 'includes/class-language-switcher-v2.php';
         require_once TRP_PLUGIN_DIR . 'includes/class-machine-translator.php';
         require_once TRP_PLUGIN_DIR . 'includes/class-machine-translator-logger.php';
+        require_once TRP_PLUGIN_DIR . 'includes/glossary/class-glossary.php';
+        require_once TRP_PLUGIN_DIR . 'includes/glossary/class-glossary-queries.php';
         require_once TRP_PLUGIN_DIR . 'includes/queries/class-query.php';
         require_once TRP_PLUGIN_DIR . 'includes/queries/class-gettext-normalization.php';
         require_once TRP_PLUGIN_DIR . 'includes/queries/class-gettext-table-creation.php';
@@ -193,6 +197,8 @@ class TRP_Translate_Press{
         $this->query                      = new TRP_Query( $this->settings->get_settings() );
         $this->machine_translator_logger  = new TRP_Machine_Translator_Logger( $this->settings->get_settings() );
         $this->machine_translator         = new TRP_Machine_Translator( $this->settings->get_settings() ); // Will be overwritten in init_machine_translation with the actual machine translator class. Use this as replacement until then.
+        $this->glossary                   = new TRP_Glossary( $this->settings->get_settings() );
+        $this->glossary_queries           = new TRP_Glossary_Queries( $this->settings->get_settings() );
         $this->translation_manager        = new TRP_Translation_Manager( $this->settings->get_settings() );
         $this->editor_api_regular_strings = new TRP_Editor_Api_Regular_Strings( $this->settings->get_settings() );
         $this->editor_api_gettext_strings = new TRP_Editor_Api_Gettext_Strings( $this->settings->get_settings() );
@@ -320,9 +326,28 @@ class TRP_Translate_Press{
         $this->loader->add_action( 'admin_init',        $this->machine_translation_tab, 'register_setting' );
         $this->loader->add_action( 'admin_notices',     $this->machine_translation_tab, 'admin_notices' );
         $this->loader->add_action( 'trp_machine_translation_extra_settings_bottom',     $this->machine_translation_tab, 'display_unsupported_languages' );
+        $this->loader->add_action( 'trp_before_output_machine_translation_settings_options', $this->machine_translation_tab, 'trp_machine_translation_content_table' );
 
         //Machine Translation Logger defaults
         $this->loader->add_action( 'trp_machine_translation_sanitize_settings', $this->machine_translator_logger, 'sanitize_settings', 10, 1 );
+
+        //Glossary substitutions during machine translation
+        $this->loader->add_filter( 'trp_exclude_words_from_automatic_translation', $this->glossary, 'add_excluded_words', 10, 3 );
+        $this->loader->add_filter( 'trp_replace_placeholders_with', $this->glossary, 'apply_replacements', 10, 7 );
+
+        //Glossary settings page
+        $this->loader->add_action( 'admin_menu',    $this->glossary, 'add_submenu_page' );
+        $this->loader->add_action( 'admin_init',    $this->glossary, 'register_setting' );
+        $this->loader->add_action( 'admin_notices', $this->glossary, 'admin_notices' );
+
+        $this->loader->add_action( 'admin_menu',                             $this->glossary_queries, 'add_replace_submenu_page' );
+        $this->loader->add_action( 'admin_enqueue_scripts',                  $this->glossary_queries, 'enqueue_scripts' );
+        $this->loader->add_action( 'wp_ajax_trp_glossary_get_terms',         $this->glossary_queries, 'ajax_get_terms' );
+        $this->loader->add_action( 'wp_ajax_trp_glossary_add_term',          $this->glossary_queries, 'add_term' );
+        $this->loader->add_action( 'wp_ajax_trp_glossary_edit_term',         $this->glossary_queries, 'edit_term' );
+        $this->loader->add_action( 'wp_ajax_trp_glossary_delete_term',       $this->glossary_queries, 'delete_term' );
+        $this->loader->add_action( 'wp_ajax_trp_glossary_replace_in_dictionary', $this->glossary_queries, 'replace_in_dictionary' );
+        $this->loader->add_action( 'wp_ajax_trp_glossary_search_dictionary',     $this->glossary_queries, 'search_dictionary' );
 
         //Error manager hooks
         $this->loader->add_action( 'admin_init', $this->error_manager, 'show_notification_about_errors', 10 );

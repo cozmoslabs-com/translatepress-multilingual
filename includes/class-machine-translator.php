@@ -524,7 +524,7 @@ class TRP_Machine_Translator {
             /* google has a problem translating this characters ( '%', '$', '#' )...for some reasons it puts spaces after them so we need to 'encode' them and decode them back. hopefully it won't break anything important */
             /* we put '%s' before '%' because google seems to transform %s into % in strings for some languages which causes a 500 Fatal Error in PHP 8*/
             $imploded_strings = implode(" ", $strings);
-            $trp_exclude_words_from_automatic_translation = apply_filters('trp_exclude_words_from_automatic_translation', array('%s', '%d', '%', '$', '#'), $imploded_strings);
+            $trp_exclude_words_from_automatic_translation = apply_filters('trp_exclude_words_from_automatic_translation', array('%s', '%d', '%', '$', '#'), $imploded_strings, $target_language_code, $source_language_code);
             $placeholders = $this->get_placeholders(count($trp_exclude_words_from_automatic_translation));
             $shortcode_tags_to_execute = apply_filters( 'trp_do_these_shortcodes_before_automatic_translation', array('trp_language', 'language-include', 'language-exclude') );
 
@@ -564,8 +564,12 @@ class TRP_Machine_Translator {
             $machine_strings_return_array = array();
             if (!empty($machine_strings)) {
                 foreach ($machine_strings as $key => $machine_string) {
-                    // Restore placeholders to original excluded words
-                    $processed_string = str_ireplace( $placeholders, $trp_exclude_words_from_automatic_translation, $machine_string );
+                    // Restore placeholders to original excluded words (or to user-driven replacements via filter)
+                    $trp_replace_placeholders_with = apply_filters( 'trp_replace_placeholders_with', $trp_exclude_words_from_automatic_translation, $trp_exclude_words_from_automatic_translation, $placeholders, $machine_string, $original_strings[$key], $target_language_code, $source_language_code );
+                    if ( !is_array( $trp_replace_placeholders_with ) || count( $trp_replace_placeholders_with ) !== count( $placeholders ) ) {
+                        $trp_replace_placeholders_with = $trp_exclude_words_from_automatic_translation;
+                    }
+                    $processed_string = str_ireplace( $placeholders, $trp_replace_placeholders_with, $machine_string );
 
                     // Restore quote patterns (use $strings which is decoded, not $original_strings with HTML entities)
                     $processed_string = $this->restore_translation_quotes($strings[$key], $processed_string);

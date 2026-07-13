@@ -10,13 +10,14 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  * code paths instead of duplicating logic.
  *
  * Registered abilities (all require `manage_options`):
- *   translatepress/add-language               POST   add a translation language
- *   translatepress/remove-language            POST   remove a translation language
- *   translatepress/update-language            POST   change a language's slug / publish flag
- *   translatepress/set-default-language       POST   promote a configured language to default
- *   translatepress/list-languages             GET    list configured languages
- *   translatepress/list-available-languages   GET    list the full locale catalog
- *   translatepress/set-license-key            POST   save and validate a license key
+ *   translatepress/add-language                    POST   add a translation language
+ *   translatepress/remove-language                 POST   remove a translation language
+ *   translatepress/update-language                 POST   change a language's slug / publish flag
+ *   translatepress/set-default-language            POST   promote a configured language to default
+ *   translatepress/list-languages                  GET    list configured languages
+ *   translatepress/list-available-languages        GET    list the full locale catalog
+ *   translatepress/set-license-key                 POST   save and validate a license key
+ *   translatepress/enable-automatic-translation    POST   turn on Automatic Translation (requires valid license)
  *
  * Calling them from PHP:
  *
@@ -120,6 +121,36 @@ class TRP_Abilities {
                 ),
             ),
             'execute_callback'    => array( $this, 'execute_set_license_key' ),
+            'permission_callback' => array( $this, 'permission_manage_options' ),
+            'meta'                => array( 'show_in_rest' => true ),
+        ) );
+
+        wp_register_ability( 'translatepress/enable-automatic-translation', array(
+            'label'               => __( 'Enable Automatic Translation', 'translatepress-multilingual' ),
+            'description'         => __( 'Turns on Automatic Translation. A valid TranslatePress license is required only when the resolved engine is TranslatePress AI (mtapi); Google Translate and DeepL do not require one. If no engine is passed and none is configured, defaults to mtapi.', 'translatepress-multilingual' ),
+            'category'            => self::CATEGORY,
+            'input_schema'        => array(
+                'type'                 => 'object',
+                'properties'           => array(
+                    'engine' => array(
+                        'type'        => 'string',
+                        'description' => __( 'Optional translation-engine slug to select (e.g. "mtapi", "google_translate_v2", "deepl"). When omitted, keeps the already-configured engine, or defaults to "mtapi" if none is configured.', 'translatepress-multilingual' ),
+                        'minLength'   => 1,
+                    ),
+                ),
+                'additionalProperties' => false,
+                // Empty-object input; the same `default: stdClass` trick used by the
+                // GET abilities lets this be called with no `input` payload at all.
+                'default'              => new stdClass(),
+            ),
+            'output_schema'       => array(
+                'type'       => 'object',
+                'properties' => array(
+                    'machine_translation' => array( 'type' => 'string' ),
+                    'translation_engine'  => array( 'type' => 'string' ),
+                ),
+            ),
+            'execute_callback'    => array( $this, 'execute_enable_automatic_translation' ),
             'permission_callback' => array( $this, 'permission_manage_options' ),
             'meta'                => array( 'show_in_rest' => true ),
         ) );
@@ -437,6 +468,61 @@ class TRP_Abilities {
 
         return array(
             'status' => (string) get_option( 'trp_license_status', '' ),
+        );
+    }
+
+    /**
+     * Turns on Automatic Translation.
+     *
+     * License gating rule: only the TranslatePress AI (mtapi) engine relies on a
+     * TranslatePress license. Google Translate v2 and DeepL are third-party
+     * services with their own API keys, so we deliberately do NOT check
+     * `trp_license_status` when the resolved engine is one of those — enforcing
+     * a TP license on top would be against WP.org guidelines (locking
+     * unrelated third-party functionality behind our license check).
+     *
+     * Engine resolution, in order:
+     *   1. `$input['engine']` when provided, wins.
+     *   2. Existing `trp_machine_translation_settings['translation-engine']`.
+     *   3. Falls back to 'mtapi'.
+     */
+    public function execute_enable_automatic_translation( $input = array() ) {
+        // Normalize: REST delivers an assoc array; direct PHP callers may pass
+        // an stdClass (that's what the `default: new stdClass()` schema produces
+        // when no `input` payload is supplied).
+        $input = is_array( $input ) ? $input : (array) $input;
+
+        $settings = get_option( 'trp_machine_translation_settings', array() );
+        if ( ! is_array( $settings ) ) {
+            $settings = array();
+        }
+
+        $requested_engine = isset( $input['engine'] ) ? sanitize_text_field( (string) $input['engine'] ) : '';
+        $existing_engine  = isset( $settings['translation-engine'] ) ? (string) $settings['translation-engine'] : '';
+
+        if ( '' !== $requested_engine ) {
+            $engine = $requested_engine;
+        } elseif ( '' !== $existing_engine ) {
+            $engine = $existing_engine;
+        } else {
+            $engine = 'mtapi';
+        }
+
+        if ( 'mtapi' === $engine && 'valid' !== get_option( 'trp_license_status' ) ) {
+            return new WP_Error(
+                'trp_license_not_valid',
+                __( 'Enabling Automatic Translation with the TranslatePress AI engine requires an active TranslatePress license. Activate a license first with translatepress/set-license-key, or pass a different engine (e.g. "google_translate_v2", "deepl").', 'translatepress-multilingual' )
+            );
+        }
+
+        $settings['machine-translation'] = 'yes';
+        $settings['translation-engine']  = $engine;
+
+        update_option( 'trp_machine_translation_settings', $settings );
+
+        return array(
+            'machine_translation' => 'yes',
+            'translation_engine'  => $engine,
         );
     }
 
