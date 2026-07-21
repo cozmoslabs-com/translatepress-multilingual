@@ -959,6 +959,22 @@ class TRP_Translation_Render{
 	    $home_url = home_url();
 
 	    $node_accessors = $this->get_node_accessors();
+
+	    /*
+	     * Node types that carry a media URL (image/video/audio) rather than translatable text.
+	     * These are diverted to the manual path below so that, outside preview mode, they are
+	     * looked up but never inserted into the database on the front-end. This prevents DB bloat
+	     * from dynamic/responsive media URLs. We key on the node type instead of the accessor
+	     * because media URLs arrive through several accessors ('src', 'srcset', 'poster', and
+	     * 'content' for og:image/twitter:image meta tags registered by the SEO Pack add-on) while
+	     * the 'content' accessor is also shared with translatable text meta tags (meta_desc).
+	     */
+	    $media_url_node_types = apply_filters( 'trp_media_url_node_types', array(
+		    'image_src', 'picture_image_src', 'picture_source_srcset',
+		    'video_src', 'video_poster', 'video_source_src',
+		    'audio_src', 'audio_source_src', 'meta_desc_img',
+	    ) );
+
 	    foreach( $node_accessors as $node_accessor_key => $node_accessor ){
 	    	if ( isset( $node_accessor['selector'] ) ){
 			    foreach ( $html->find( $node_accessor['selector'] ) as $k => $row ){
@@ -980,8 +996,11 @@ class TRP_Translation_Render{
                         $trimmed_string = '';
                     }
 
-                    // outside preview mode we build the $translateable_strings_manual array for src
-                    if ( $current_node_accessor_selector === 'src' && !$preview_mode && $trimmed_string != ''){
+                    // outside preview mode we build the $translateable_strings_manual array for media URLs
+                    // (image/video/audio src, srcset, poster and og:image/twitter:image meta tags).
+                    // Keyed on node type rather than accessor since media URLs arrive via 'src', 'srcset',
+                    // 'poster' and 'content', while 'content' is also used by translatable text meta tags.
+                    if ( in_array( $node_accessor_key, $media_url_node_types, true ) && !$preview_mode && $trimmed_string != ''){
                         $translateable_strings_manual[] = html_entity_decode( $trimmed_string );
                         $nodes_manual[] = array('node' => $row, 'type' => $node_accessor_key);
                         // reset the string so it's excluded from $translateable_strings (no longer inserted in the database in front-end)
@@ -1073,7 +1092,7 @@ class TRP_Translation_Render{
                     do_action( 'trp_set_translation_for_attribute', $node_manual['node'], $accessor, $translated_strings_manual[$i] );
                 }else{
                     $translateable_string_manual = $this->maybe_correct_translatable_string( $translateable_strings_manual[$i], $node_manual['node']->$accessor );
-                    $nodes[$i]['node']->$accessor = str_replace( $translateable_string_manual, trp_sanitize_string($translated_strings_manual[$i]), $node_manual['node']->$accessor );
+                    $node_manual['node']->$accessor = str_replace( $translateable_string_manual, trp_sanitize_string($translated_strings_manual[$i]), $node_manual['node']->$accessor );
                 }
             }
             do_action('trp_translateable_information_manual', $translateable_information_manual, $translated_strings_manual, $language_code);

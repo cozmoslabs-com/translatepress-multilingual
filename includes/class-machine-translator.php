@@ -385,6 +385,18 @@ class TRP_Machine_Translator {
             return false;
         }
 
+        // Standalone media file references with no scheme: a bare filename ("photo.png"), a relative
+        // path ("wp-content/uploads/2026/06/img.webp"), a protocol-relative URL ("//cdn.com/a.jpg"),
+        // or a srcset-style comma list of these with width/density descriptors ("a.png 300w, b.png 600w").
+        // The https:// rule above misses these because they have no scheme, so image/media file names
+        // would otherwise be sent for machine translation. Anchored to the whole string so real prose
+        // that merely mentions a file (e.g. "Download report.pdf now") is left translatable.
+        $media_ext = 'png|jpe?g|gif|bmp|webp|avif|svg|ico|tiff?|mp4|m4v|webm|ogv|mov|avi|mp3|ogg|wav|m4a|flac|pdf';
+        $media_ref = '\S+\.(?:' . $media_ext . ')(?:\?\S*)?';
+        if ( preg_match( '/^' . $media_ref . '(?:\s+\d+(?:\.\d+)?[wx])?(?:\s*,\s*' . $media_ref . '(?:\s+\d+(?:\.\d+)?[wx])?)*$/i', $trimmed ) ) {
+            return false;
+        }
+
         // HTML media/void tags that are purely markup (no meaningful translatable text outside attributes)
         if ( preg_match( '/^<(img|source|video|picture|input|br|hr|meta|link)\s/i', $trimmed ) && ! preg_match( '/>([^<]{10,})</', $trimmed ) ) {
             return false;

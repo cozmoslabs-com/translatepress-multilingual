@@ -112,6 +112,10 @@ jQuery( function() {
 
             new_option = jQuery( '#trp-sortable-languages' ).append( new_option );
             new_option.find( '.trp-remove-language__container' ).last().click( _this.remove_language );
+            // Scope to the newly added language row only. `new_option` was reassigned to the
+            // whole list by the append() above, so an unscoped find() would overwrite the
+            // published value of every existing language (dropping active ones from publish-languages).
+            new_option.find( '.trp-language' ).last().find( '.trp-translation-published' ).val( new_language );
 
             // Check if we've reached the maximum number of languages
             var max_secondary = trp_url_slugs_info['max_secondary_languages'] || 1;

@@ -1,3 +1,10 @@
+= 3.2.4 =
+* New feature: Glossary for TranslatePress AI translation. Control terminology and brand translation consistently
+* Added search and replace tool for existing translations
+* Added enable automatic translation ability in WordPress Abilities API endpoint
+* Fixed https issue on translated pages for some environments
+* Fixed infinite recursion in Breakdance builder locale filter
+
 = 3.2.3 =
 * Added compatibility with Breakdance Builder regarding user profile language
 * Fixed edge case where regular strings were not editable in translation editor

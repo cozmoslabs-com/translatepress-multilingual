@@ -3,9 +3,9 @@ Contributors: cozmoslabs, razvan.mo, madalin.ungureanu, sareiodata, cristophor
 Donate link: https://www.translatepress.com/
 Tags: translate, translation, multilingual, automatic translation, ai translation, front-end translation, google translate, language
 Requires at least: 3.1.0
-Tested up to: 7.0.1
+Tested up to: 7.0.2
 Requires PHP: 7.4
-Stable tag: 3.2.4
+Stable tag: 3.2.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -166,12 +166,12 @@ For more information please check out our [documentation](https://translatepress
 
 
 == Changelog ==
-= 3.2.4 =
-* New feature: Glossary for TranslatePress AI translation. Control terminology and brand translation consistently
-* Added search and replace tool for existing translations
-* Added enable automatic translation ability in WordPress Abilities API endpoint
-* Fixed https issue on translated pages for some environments
-* Fixed infinite recursion in Breakdance builder locale filter
+= 3.2.5 =
+* Added Elementor language switcher widget
+* Fixed some cases where language switcher was not showing newly added languages to logged out users
+* Fixed accidental automatic translation of relative media file names
+* Fixed trp-ajax.php failures on certain hosting environments
+* Prevent some types of urls from flooding the database
 
 = Older versions =
 [Click Here](https://translatepress.com/docs/translatepress-free-changelog/?utm_source=wp.org&utm_medium=tp-description-page&utm_campaign=TPFree) to view the full changelog, or you can find it in the changelog.txt file in the plugin folder.

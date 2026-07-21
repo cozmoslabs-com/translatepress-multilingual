@@ -21,7 +21,13 @@ class TRP_Ajax{
             die();
         }
 
-        include './external-functions.php';
+        // Anchor to this file's directory. A cwd-relative include fails on PHP-FPM pools
+        // where the working directory of a directly-requested script is not the script's own directory.
+        include dirname( __FILE__ ) . '/external-functions.php';
+        if ( ! function_exists( 'trp_is_valid_language_code' ) ) {
+            // Include failed: degrade to the admin-ajax fallback instead of a fatal error.
+            $this->return_error();
+        }
         if ( !trp_is_valid_language_code( $_POST['language'] ) || !trp_is_valid_language_code( $_POST['original_language'] ) ) {//phpcs:ignore
             echo json_encode( 'TranslatePress Error: Invalid language code' );
             exit;
@@ -98,7 +104,10 @@ class TRP_Ajax{
 
         foreach ( $credentials as $credential => $constant_name ) {
             if ( preg_match_all( "/define\s*\(\s*['\"]" . $constant_name . "['\"]\s*,\s*['\"](.*?)['\"]\s*\)/", $content, $result ) ) {
-                $credentials[ $credential ] = $result[1][0];
+                // The WP installer writes these values through addslashes(), so backslashes and
+                // quotes are escaped in the raw file text. Mirror it, otherwise such credentials
+                // are passed to mysqli_connect() corrupted.
+                $credentials[ $credential ] = stripslashes( $result[1][0] );
             } else {
                 return false;
             }
@@ -111,6 +120,10 @@ class TRP_Ajax{
             return false;
         }
         list( $db_host, $db_port, $db_socket ) = $db_host_parsed;
+
+        // Since PHP 8.1 mysqli throws exceptions by default; silence them so a failed
+        // connection returns false and the admin-ajax fallback takes over instead of a fatal error.
+        mysqli_report( MYSQLI_REPORT_OFF );
 
         $this->connection = @mysqli_connect( $db_host, $credentials['db_user'], $credentials['db_password'], $credentials['db_name'], $db_port, $db_socket );
 

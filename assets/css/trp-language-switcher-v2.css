@@ -71,6 +71,18 @@ nav.trp-ls-inline .trp-language-switcher-inner {
     border: none;
 }
 
+.elementor-widget-trp_language_switcher {
+    width: fit-content;
+    max-width: 100%;
+}
+
+.elementor-widget-trp_language_switcher .elementor-widget-container,
+.trp-elementor-language-switcher,
+.trp-elementor-language-switcher .trp-shortcode-switcher__wrapper {
+    width: fit-content;
+    max-width: 100%;
+}
+
 .trp-shortcode-switcher {
     position: static;
     display: inline-block;

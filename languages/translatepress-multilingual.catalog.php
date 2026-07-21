@@ -783,6 +783,36 @@
 <?php __("Filters gettext wrapping such as #!trpst#trp-gettext from all updated post content and post title. Does not affect previous post content. <br/><strong>Database backup is recommended before switching on.</strong>", "translatepress-multilingual"); ?>
 <?php __("Filter Gettext wrapping from post meta", "translatepress-multilingual"); ?>
 <?php __("Filters gettext wrapping such as #!trpst#trp-gettext from all updated post meta. Does not affect previous post meta. <br/><strong>Database backup is recommended before switching on.</strong>", "translatepress-multilingual"); ?>
+<?php __("Style", "translatepress-multilingual"); ?>
+<?php __("Use shortcode settings", "translatepress-multilingual"); ?>
+<?php __("Custom", "translatepress-multilingual"); ?>
+<?php __("Language names", "translatepress-multilingual"); ?>
+<?php __("Full names", "translatepress-multilingual"); ?>
+<?php __("Short names", "translatepress-multilingual"); ?>
+<?php __("Hide names", "translatepress-multilingual"); ?>
+<?php __("Flag position", "translatepress-multilingual"); ?>
+<?php __("Before text", "translatepress-multilingual"); ?>
+<?php __("After text", "translatepress-multilingual"); ?>
+<?php __("Hide flags", "translatepress-multilingual"); ?>
+<?php __("Open on click", "translatepress-multilingual"); ?>
+<?php __("Show opposite language", "translatepress-multilingual"); ?>
+<?php __("Size", "translatepress-multilingual"); ?>
+<?php __("Normal", "translatepress-multilingual"); ?>
+<?php __("Large", "translatepress-multilingual"); ?>
+<?php __("Flag shape", "translatepress-multilingual"); ?>
+<?php __("Rectangle", "translatepress-multilingual"); ?>
+<?php __("Square", "translatepress-multilingual"); ?>
+<?php __("Rounded", "translatepress-multilingual"); ?>
+<?php __("Transitions", "translatepress-multilingual"); ?>
+<?php __("Background", "translatepress-multilingual"); ?>
+<?php __("Hover background", "translatepress-multilingual"); ?>
+<?php __("Hover text", "translatepress-multilingual"); ?>
+<?php __("Border color", "translatepress-multilingual"); ?>
+<?php __("Border width", "translatepress-multilingual"); ?>
+<?php __("Border radius", "translatepress-multilingual"); ?>
+<?php __("Flag radius", "translatepress-multilingual"); ?>
+<?php __("Disable the legacy TranslatePress language switcher to use the customizable Elementor widget. <a href=\"%s\" target=\"_blank\" rel=\"noopener noreferrer\">Open language switcher settings</a>.", "translatepress-multilingual"); ?>
+<?php __("The language switcher inherits styling options from shortcode. <a href=\"%s\" target=\"_blank\" rel=\"noopener noreferrer\">Open shortcode settings</a>.", "translatepress-multilingual"); ?>
 <?php __("TranslatePress finished replacing the existing translations in your dictionary.", "translatepress-multilingual"); ?>
 <?php __("Term added. Glossary terms only affect new automatic translations.", "translatepress-multilingual"); ?>
 <?php __("Term updated.", "translatepress-multilingual"); ?>
