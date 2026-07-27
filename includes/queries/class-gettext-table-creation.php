@@ -44,7 +44,7 @@ class TRP_Gettext_Table_Creation extends TRP_Query{
             // table not in database. Create new table
             $charset_collate = $this->db->get_charset_collate();
 
-            $sql = "CREATE TABLE `" . $table_name . "`(
+            $sql = "CREATE TABLE `" . $table_name . "` (
                                     id bigint(20) AUTO_INCREMENT NOT NULL PRIMARY KEY,
                                     original  longtext NOT NULL,
                                     translated  longtext,
@@ -82,7 +82,7 @@ class TRP_Gettext_Table_Creation extends TRP_Query{
             // table not in database. Create new table
             $charset_collate = $this->db->get_charset_collate();
 
-            $sql = "CREATE TABLE `" . $table_name . "`(
+            $sql = "CREATE TABLE `" . $table_name . "` (
                                     id bigint(20) AUTO_INCREMENT NOT NULL PRIMARY KEY,
                                     original TEXT NOT NULL,
                                     domain TEXT NOT NULL,
@@ -111,7 +111,7 @@ class TRP_Gettext_Table_Creation extends TRP_Query{
             // table not in database. Create new table
             $charset_collate = $this->db->get_charset_collate();
 
-            $sql = "CREATE TABLE `" . $table_name . "`(
+            $sql = "CREATE TABLE `" . $table_name . "` (
                                     meta_id bigint(20) AUTO_INCREMENT NOT NULL PRIMARY KEY,
                                     original_id bigint(20) NOT NULL,
                                     meta_key varchar(255),

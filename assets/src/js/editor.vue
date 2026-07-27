@@ -219,6 +219,7 @@ import PercentageBarLogic from "./components/percentage-bar-logic"
                 licenseNoticeContent      : trp_editor_data.license_notice_content,
                 //data
                 currentLanguage           : trp_editor_data.current_language,
+                interfaceLocale           : trp_editor_data.interface_locale,
                 onScreenLanguage          : trp_editor_data.on_screen_language,
                 currentURL                : trp_editor_data.url_to_load,
                 urlToLoad                 : trp_editor_data.url_to_load,
@@ -333,7 +334,12 @@ import PercentageBarLogic from "./components/percentage-bar-logic"
                 // Redirect the entire page to reload the Translation Editor for the new language
                 // This ensures proper functionality with Multiple Domains addon
                 if (newURL) {
-                    window.location.href = this.parentURL(newURL);
+                    // Carry the locale the interface is currently displayed in so the editor UI
+                    // stays in that language after the reload. A direct URL entry has no such
+                    // param and localizes normally. See change_locale() in class-languages.php.
+                    let target = this.parentURL(newURL);
+                    target = utils.updateUrlParameter(target, 'trp-editor-locale', this.interfaceLocale);
+                    window.location.href = target;
                     return;
                 }
             },

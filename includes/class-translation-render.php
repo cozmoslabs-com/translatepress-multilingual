@@ -535,8 +535,7 @@ class TRP_Translation_Render{
     	global $trp_editor_notices;
 
         /* replace our special tags so we have valid html */
-        $output = str_ireplace('#!trpst#', '<', $output);
-        $output = str_ireplace('#!trpen#', '>', $output);
+        $output = $this->replace_gettext_markers_with_html_tags( $output );
 
         $output = apply_filters('trp_before_translate_content', $output);
 
@@ -1512,6 +1511,55 @@ class TRP_Translation_Render{
 
         // Regex only for plausible candidates
         return preg_match( '/^[^\s@]+@[^\s@]+\.[^\s@]+$/', $s ) === 1;
+    }
+
+    /**
+     * Turn our internal gettext markers back into real html tags.
+     *
+     * Gettext strings are wrapped in #!trpst#trp-gettext ...#!trpen# instead of < and > so that the
+     * wrapper survives the escaping functions themes and plugins apply to translated strings
+     * ( esc_html, esc_attr, sanitize_text_field, ... ). Since the markers contain no html special
+     * characters they also survive the escaping applied to *user input*, so replacing them
+     * unconditionally allowed anyone to smuggle < and > into an already escaped page through a
+     * query parameter ( e.g. ?s=#!trpst#img src=x onerror=alert(1)#!trpen# ) and inject html.
+     *
+     * That's why we only convert marker pairs that form one of the wrappers we generate ourselves in
+     * TRP_Process_Gettext::process_gettext_strings(). Everything else stays harmless literal text.
+     *
+     * Both wrapper forms come out as "< + what was between the markers + >", so one pattern with one
+     * capture group handles both and the buffer is only scanned once. Every quantifier is bounded on
+     * purpose: an unbounded one here is reachable from ?s= and a PCRE failure would return null and
+     * blank the whole page.
+     *
+     * Opening wrapper: #!trpst#trp-gettext data-trpgettextoriginal=123#!trpen#
+     *   - the id is missing when the original was not in the database ( see strip_gettext_tags() ),
+     *     hence \d{0,20} and not \d{1,20}
+     *   - the separating space can be replaced by a literal backslash-u0020 escape by third party
+     *     code ( see the WooTour compatibility ), so accept that form too
+     * Closing wrapper: #!trpst#/trp-gettext#!trpen#
+     *   - the slash arrives backslash escaped when the string went through json encoding; keep the
+     *     escaping in the output so the json stays valid. remove_trp_html_tags() cleans up leftovers.
+     *
+     * @param string $string
+     * @return string
+     */
+    public function replace_gettext_markers_with_html_tags( $string ){
+        /* stripos and the 'i' modifier because the markers can be uppercased by code that normalizes
+           the html it outputs. str_ireplace was used here before for the same reason. */
+        if ( !is_string( $string ) || stripos( $string, '#!trpst#' ) === false ){
+            return $string;
+        }
+
+        $replaced = preg_replace(
+            '/#!trpst#(trp-gettext(?:(?:\s|\\\\{1,2}u0020){1,40}data-trpgettextoriginal=\d{0,20})?|\\\\{0,4}\/trp-gettext)#!trpen#/i',
+            '<$1>',
+            $string
+        );
+
+        /* preg_replace returns null when PCRE gives up ( backtrack or jit stack limit ). Never let that
+           through: translate_page() would bail on the non-string and serve an empty document. Leaving
+           the markers unconverted is the safe outcome, they render as inert text. */
+        return is_string( $replaced ) ? $replaced : $string;
     }
 
     /**

@@ -13,6 +13,7 @@ class TRP_Url_Converter {
     protected $absolute_home;
     protected $settings;
     protected $admin_url;
+    protected $blog_id;
 
     /**
      * TRP_Url_Converter constructor.
@@ -21,6 +22,7 @@ class TRP_Url_Converter {
      */
     public function __construct( $settings ){
         $this->settings = $settings;
+        $this->blog_id = get_current_blog_id();
         //$admin_url is declared here because it was causing a conflict with Ultimate Dashboard since there was an action hooked on site_url
         $this->admin_url = strtolower( admin_url() );
     }
@@ -38,6 +40,16 @@ class TRP_Url_Converter {
      */
     public function add_language_to_home_url( $url, $path, $orig_scheme, $blog_id ){
         global $TRP_LANGUAGE;
+
+        /*
+         * The converter and its settings belong to the site on which TranslatePress
+         * was initialized. Do not apply that state to another site requested through
+         * get_home_url( $blog_id ) or while switch_to_blog() is active.
+         */
+        $target_blog_id = empty( $blog_id ) ? get_current_blog_id() : (int) $blog_id;
+        if ( is_multisite() && $target_blog_id !== $this->blog_id ) {
+            return $url;
+        }
 
         //if this is not set then don't do anything as this is an exception/error and $TRP_LANGUAGE should always be set
         if( empty( $TRP_LANGUAGE ) )

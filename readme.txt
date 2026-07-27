@@ -5,7 +5,7 @@ Tags: translate, translation, multilingual, automatic translation, ai translatio
 Requires at least: 3.1.0
 Tested up to: 7.0.2
 Requires PHP: 7.4
-Stable tag: 3.2.5
+Stable tag: 3.2.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -166,12 +166,13 @@ For more information please check out our [documentation](https://translatepress
 
 
 == Changelog ==
-= 3.2.5 =
-* Added Elementor language switcher widget
-* Fixed some cases where language switcher was not showing newly added languages to logged out users
-* Fixed accidental automatic translation of relative media file names
-* Fixed trp-ajax.php failures on certain hosting environments
-* Prevent some types of urls from flooding the database
+= 3.2.6 =
+* Fixed XSS security vulnerability regarding gettext wrappers. Thanks to momopon1415 and the Wordfence team for the report
+* Fixed multisite add-on action security. Thanks to Jan Thiel for the report
+* Fixed plural gettext translations skipped by sprintf-compatibility check
+* Fixed edge cases of SQL syntax error in gettext table creation
+* Keep Translation Editor interface language unchanged while switching language of the site preview
+* Fixed CSS of Add Media button from Translation Editor
 
 = Older versions =
 [Click Here](https://translatepress.com/docs/translatepress-free-changelog/?utm_source=wp.org&utm_medium=tp-description-page&utm_campaign=TPFree) to view the full changelog, or you can find it in the changelog.txt file in the plugin folder.

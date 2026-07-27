@@ -6,7 +6,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-07-21 11:32+0000\n"
+"POT-Creation-Date: 2026-07-27 12:11+0000\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
 "X-Poedit-SearchPath-0: .\n"
@@ -905,7 +905,7 @@ msgstr ""
 msgid "Opposite Language"
 msgstr ""
 
-#: includes/class-settings.php:673, includes/class-translation-manager.php:546, add-ons-pro/translator-accounts/includes/class-translator-accounts.php:159
+#: includes/class-settings.php:673, includes/class-translation-manager.php:547, add-ons-pro/translator-accounts/includes/class-translator-accounts.php:159
 msgid "Translate Site"
 msgstr ""
 
@@ -913,7 +913,7 @@ msgstr ""
 msgid "Addons"
 msgstr ""
 
-#: includes/class-settings.php:732, includes/class-translation-manager.php:702, includes/elementor/class-language-switcher-widget.php:93
+#: includes/class-settings.php:732, includes/class-translation-manager.php:703, includes/elementor/class-language-switcher-widget.php:93
 msgid "Settings"
 msgstr ""
 
@@ -1395,96 +1395,96 @@ msgstr ""
 msgid "Logged Out"
 msgstr ""
 
-#: includes/class-translation-manager.php:559, includes/class-translation-manager.php:771
+#: includes/class-translation-manager.php:560, includes/class-translation-manager.php:772
 msgid "Translate Page"
 msgstr ""
 
-#: includes/class-translation-manager.php:640
+#: includes/class-translation-manager.php:641
 msgid "Add a New Language"
 msgstr ""
 
-#: includes/class-translation-manager.php:671
+#: includes/class-translation-manager.php:672
 msgid "Your License is Invalid"
 msgstr ""
 
 #. translators: %d is the number of AI words remaining
-#: includes/class-translation-manager.php:685
+#: includes/class-translation-manager.php:686
 msgid "Get More AI Words (%d left)"
 msgstr ""
 
-#: includes/class-translation-manager.php:769
+#: includes/class-translation-manager.php:770
 msgid "Opens post in the translation editor. Post must be saved as draft or published beforehand."
 msgstr ""
 
-#: includes/class-translation-manager.php:918
+#: includes/class-translation-manager.php:919
 msgid "Security check"
 msgstr ""
 
-#: includes/class-translation-manager.php:990
+#: includes/class-translation-manager.php:991
 msgid "<strong>Warning:</strong> Some strings have possibly incorrectly encoded characters. This may result in breaking the queries, rendering the page untranslated in live mode. Consider revising the following strings or their method of outputting."
 msgstr ""
 
-#: includes/class-translation-manager.php:1015, includes/class-translation-manager.php:1034, includes/class-upgrade.php:411
+#: includes/class-translation-manager.php:1016, includes/class-translation-manager.php:1035, includes/class-upgrade.php:411
 msgid "TranslatePress data update"
 msgstr ""
 
-#: includes/class-translation-manager.php:1015, includes/class-translation-manager.php:1034, includes/class-upgrade.php:411
+#: includes/class-translation-manager.php:1016, includes/class-translation-manager.php:1035, includes/class-upgrade.php:411
 msgid "We need to update your translations database to the latest version."
 msgstr ""
 
-#: includes/class-translation-manager.php:1016
+#: includes/class-translation-manager.php:1017
 msgid "Updating will allow editing translations of localized text from plugins and theme. Existing translation will still work as expected."
 msgstr ""
 
-#: includes/class-translation-manager.php:1018, includes/class-translation-manager.php:1037, includes/class-upgrade.php:412
+#: includes/class-translation-manager.php:1019, includes/class-translation-manager.php:1038, includes/class-upgrade.php:412
 msgid "IMPORTANT: It is strongly recommended to first backup the database!\nAre you sure you want to continue?"
 msgstr ""
 
-#: includes/class-translation-manager.php:1018, includes/class-translation-manager.php:1037, includes/class-upgrade.php:412
+#: includes/class-translation-manager.php:1019, includes/class-translation-manager.php:1038, includes/class-upgrade.php:412
 msgid "Run the updater"
 msgstr ""
 
-#: includes/class-translation-manager.php:1035
+#: includes/class-translation-manager.php:1036
 msgid "Updating will allow editing translations of slugs. Existing translation will still work as expected."
 msgstr ""
 
-#: includes/class-translation-manager.php:1090
+#: includes/class-translation-manager.php:1091
 msgid "Please activate the SEO Addon from <br/>WordPress -> Settings -> TranslatePress -> Addons section"
 msgstr ""
 
-#: includes/class-translation-manager.php:1093
+#: includes/class-translation-manager.php:1094
 msgid "Go to Addons"
 msgstr ""
 
-#: includes/class-translation-manager.php:1109
+#: includes/class-translation-manager.php:1110
 msgid "The SEO Pack add-on allows translation of all the URL slugs:"
 msgstr ""
 
-#: includes/class-translation-manager.php:1112
+#: includes/class-translation-manager.php:1113
 msgid "Taxonomy slugs"
 msgstr ""
 
-#: includes/class-translation-manager.php:1115
+#: includes/class-translation-manager.php:1116
 msgid "Term slugs"
 msgstr ""
 
-#: includes/class-translation-manager.php:1118
+#: includes/class-translation-manager.php:1119
 msgid "Post slugs (this includes pages and custom post types)"
 msgstr ""
 
-#: includes/class-translation-manager.php:1121
+#: includes/class-translation-manager.php:1122
 msgid "Post type base slugs"
 msgstr ""
 
-#: includes/class-translation-manager.php:1124
+#: includes/class-translation-manager.php:1125
 msgid "WooCommerce slugs"
 msgstr ""
 
-#: includes/class-translation-manager.php:1129
+#: includes/class-translation-manager.php:1130
 msgid "The SEO Pack add-on is available with ALL premium versions of the plugin."
 msgstr ""
 
-#: includes/class-translation-manager.php:1132
+#: includes/class-translation-manager.php:1133
 msgid "Upgrade to Pro"
 msgstr ""
 

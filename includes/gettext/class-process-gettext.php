@@ -197,7 +197,9 @@ class TRP_Process_Gettext {
                     if ( isset( $trp_translated_gettext_texts[ $context . '::' . $plural_form . '::' . $domain . '::' . $text ] ) ) {
                         $trp_translated_gettext_text = $trp_translated_gettext_texts[ $context . '::' . $plural_form  . '::' . $domain . '::' . $text ];
 
-                        if (!empty($trp_translated_gettext_text['translated']) && $translation != $trp_translated_gettext_text['translated'] && $this->is_sprintf_compatible( $trp_translated_gettext_text['translated'], $text ) ) {
+                        // plural-form rows are stored under the singular original, so compare placeholders against the plural source
+                        $sprintf_reference = ( $original_plural !== null && $plural_form != 0 ) ? $original_plural : $text;
+                        if (!empty($trp_translated_gettext_text['translated']) && $translation != $trp_translated_gettext_text['translated'] && $this->is_sprintf_compatible( $trp_translated_gettext_text['translated'], $sprintf_reference ) ) {
                             $translation = str_replace(trim($text), trp_sanitize_string($trp_translated_gettext_text['translated']), $text);
                         }
                         $db_id       = $trp_translated_gettext_text['id'];

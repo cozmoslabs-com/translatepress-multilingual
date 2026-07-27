@@ -50,6 +50,20 @@ class TRP_Languages{
             return $locale;
         }
 
+        // A language switch inside the Translation Editor reloads the shell carrying the locale
+        // it was already displayed in (trp-editor-locale), so the interface language stays put.
+        // A direct URL entry (e.g. /es/?trp-edit-translation=true) has no such param and
+        // localizes normally via $TRP_LANGUAGE below.
+        if ( isset( $_REQUEST['trp-edit-translation'] ) && $_REQUEST['trp-edit-translation'] === 'true'
+             && ! empty( $_REQUEST['trp-editor-locale'] ) ) {
+            $requested    = sanitize_text_field( wp_unslash( $_REQUEST['trp-editor-locale'] ) );
+            $trp_settings = get_option( 'trp_settings', array() );
+            $allowed      = isset( $trp_settings['translation-languages'] ) ? $trp_settings['translation-languages'] : array();
+            if ( in_array( $requested, $allowed, true ) ) { // membership check prevents arbitrary locale injection
+                return $requested;
+            }
+        }
+
         global $TRP_LANGUAGE;
         if( !empty($TRP_LANGUAGE) ){
             $locale = $TRP_LANGUAGE;

@@ -1,3 +1,10 @@
+= 3.2.5 =
+* Added Elementor language switcher widget
+* Fixed some cases where language switcher was not showing newly added languages to logged out users
+* Fixed accidental automatic translation of relative media file names
+* Fixed trp-ajax.php failures on certain hosting environments
+* Prevent some types of urls from flooding the database
+
 = 3.2.4 =
 * New feature: Glossary for TranslatePress AI translation. Control terminology and brand translation consistently
 * Added search and replace tool for existing translations

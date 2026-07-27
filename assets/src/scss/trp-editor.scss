@@ -1157,6 +1157,18 @@ Translation Input component
     float: right;
 }
 
+/* WP 7.0+ enlarged .wp-core-ui .button to min-height:40px, which made the
+   "Add Media" button taller than the URL input next to it and pushed the
+   "Discard changes" link out of alignment. Match the button height to the
+   input (28px) so both sit on the same line. */
+.trp-input-media-parent .trp-add-media.button{
+    min-height: 28px;
+    height: 28px;
+    line-height: 26px;
+    padding: 0 10px;
+    box-sizing: border-box;
+}
+
 .trp-translation-input-parent.trp-input-media-parent{
     padding-right: 0;
 }
