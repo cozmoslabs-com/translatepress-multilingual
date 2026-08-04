@@ -4,18 +4,9 @@
 	http://www.jacklmoore.com/autosize
 */
 
-/*!
- * The buffer module from node.js, for the browser.
- *
- * @author   Feross Aboukhadijeh <http://feross.org>
- * @license  MIT
- */
-
 /*! Select2 4.0.13 | https://github.com/select2/select2/blob/master/LICENSE.md */
 
 /*! https://mths.be/he v1.2.0 by @mathias | MIT license */
-
-/*! ieee754. BSD-3-Clause License. Feross Aboukhadijeh <https://feross.org/opensource> */
 
 /**
 * @vue/compiler-core v3.5.40

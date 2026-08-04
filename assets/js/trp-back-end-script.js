@@ -693,15 +693,18 @@ function TRP_Advanced_Settings_Tabs() {
         const page = new URLSearchParams(window.location.search).get('page');
         if (page !== 'trp_advanced_page' && page !== 'trp_machine_translation' && page !== 'trp_machine_translation_glossary') return;
 
-        jQuery('.trp-settings-container').hide();
+        const settingsContainers = [...document.querySelectorAll(".trp-settings-container")]
+            .filter(container => !container.closest(".trp-test-api-key-popup"));
+
+        jQuery(settingsContainers).hide();
 
         // Backwards compatibility for old Pro versions. We did not have trp-settings-containers then
         const aldSettingsContainer = document.querySelector('.advanced_settings_class.ald_settings');
 
         let navItems = document.querySelectorAll(".trp_advanced_tab_content_table_item");
         let containers = !aldSettingsContainer ?
-            document.querySelectorAll(".trp-settings-container") :
-            [...document.querySelectorAll(".trp-settings-container"), aldSettingsContainer];
+            settingsContainers :
+            [...settingsContainers, aldSettingsContainer];
 
         let settingsReferer = document.querySelector("#trp_advanced_settings_referer")
             || document.querySelector("#trp_machine_translation_settings_referer"); // Hidden input field

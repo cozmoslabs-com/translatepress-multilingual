@@ -5,7 +5,7 @@ Tags: translate, translation, multilingual, automatic translation, ai translatio
 Requires at least: 3.1.0
 Tested up to: 7.0.2
 Requires PHP: 7.4
-Stable tag: 3.2.6
+Stable tag: 3.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -166,13 +166,16 @@ For more information please check out our [documentation](https://translatepress
 
 
 == Changelog ==
-= 3.2.6 =
-* Fixed XSS security vulnerability regarding gettext wrappers. Thanks to momopon1415 and the Wordfence team for the report
-* Fixed multisite add-on action security. Thanks to Jan Thiel for the report
-* Fixed plural gettext translations skipped by sprintf-compatibility check
-* Fixed edge cases of SQL syntax error in gettext table creation
-* Keep Translation Editor interface language unchanged while switching language of the site preview
-* Fixed CSS of Add Media button from Translation Editor
+= 3.3 =
+* Fixed XSS vulnerability with gettext markers in comments. Thanks to Pham Duc Anh and the Wordfence team for the report
+* Fixed XSS vulnerability in Translation Editor strings dropdown. Thanks to momopon1415 and the Wordfence team for the report
+* Improved page loading time by better handling gettext translations
+* Fixed WooCommerce remove from cart product title not translated
+* Fixed Elementor homepage editor hanging when default-language subdirectory is enabled
+* Fixed conflict with Mailster plugin
+* Fixed hidden API credential test fields
+* Fixed trp-ajax issues when having escaped db credentials
+* Prevent interference with robots.txt
 
 = Older versions =
 [Click Here](https://translatepress.com/docs/translatepress-free-changelog/?utm_source=wp.org&utm_medium=tp-description-page&utm_campaign=TPFree) to view the full changelog, or you can find it in the changelog.txt file in the plugin folder.

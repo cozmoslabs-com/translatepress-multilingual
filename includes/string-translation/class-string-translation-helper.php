@@ -46,6 +46,9 @@ class TRP_String_Translation_Helper {
 
 		// translation status
 		$translation_status_filters = $this->string_translation->get_translation_status_filters();
+		if ( $string_type !== 'gettext' ) {
+			unset( $translation_status_filters['translation_status']['gettext_translated_in_language_file'] );
+		}
 		$query_args['status']       = array();
 		foreach ( $translation_status_filters['translation_status'] as $translation_status_key => $value ) {
 			if ( ! empty( $posted_query[ $translation_status_key ] ) && ( $posted_query[ $translation_status_key ] === true || $posted_query[ $translation_status_key ] === 'true' ) ) {
@@ -53,8 +56,8 @@ class TRP_String_Translation_Helper {
 				$query_args['status'][] = $this->trp_query->$constant_func_name();
 			}
 		}
-		if ( count( $query_args['status'] ) === 3 ) {
-			// if all 3 states are true then consider the query as if the no special translation status requirement was requested
+		if ( count( $query_args['status'] ) === count( $translation_status_filters['translation_status'] ) ) {
+			// if all states are true then consider the query as if no special translation status requirement was requested
 			$query_args['status'] = array();
 		}
 

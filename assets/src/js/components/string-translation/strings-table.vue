@@ -83,6 +83,7 @@
                                                 <span :class="{
                                                     'trp-human-reviewed-green': string.translationsArray?.[language]?.status === '2',
                                                     'trp-automatic-translated-blue': string.translationsArray?.[language]?.status === '1',
+                                                    'trp-language-file-purple': string.translationsArray?.[language]?.status === '4',
                                                     'trp-untranslated-red': !string.translationsArray?.[language] || string.translationsArray[language].status === '0'
                                                 }">
                                                   {{ translationStatusFilters.translation_status[statusName[string.translationsArray?.[language]?.status]] }}
@@ -140,6 +141,7 @@
                 statusName           : {
                     '2' : 'human_reviewed',
                     '1' : 'machine_translated',
+                    '4' : 'gettext_translated_in_language_file',
                     '0' : 'not_translated'
                 },
                 showLoadingScreen    : true

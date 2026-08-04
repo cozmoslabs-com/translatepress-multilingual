@@ -42,18 +42,10 @@ class TRP_Failed_Translations_Cleanup {
             );
         }
 
-        // Gettext tables (exclude original_strings and original_meta).
-        $gettext_tables = $wpdb->get_col(
-            $wpdb->prepare(
-                "SHOW TABLES LIKE %s",
-                $wpdb->esc_like( $prefix . 'gettext_' ) . '%'
-            )
-        );
+        $trp       = TRP_Translate_Press::get_trp_instance();
+        $trp_query = $trp->get_component( 'query' );
 
-        foreach ( $gettext_tables as $table ) {
-            if ( strpos( $table, '_original_strings' ) !== false || strpos( $table, '_original_meta' ) !== false ) {
-                continue;
-            }
+        foreach ( $trp_query->get_all_gettext_table_names() as $table ) {
             $todo[] = array(
                 'table'  => $table,
                 'type'   => 'gettext',

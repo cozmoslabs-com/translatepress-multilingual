@@ -179,7 +179,6 @@ import saveTranslations   from './components/save-translations.vue'
 import hoverActions       from './components/hover-actions.vue'
 import extraContent       from './components/extra-content.vue'
 import editorsNavigation  from './components/editors-navigation.vue'
-import he                 from 'he'
 import Tooltip            from "./components/tooltip"
 import HelpPanel          from "./components/help-panel"
 import LicenseNotice      from "./components/ai-api-key-notice"
@@ -906,12 +905,31 @@ import PercentageBarLogic from "./components/percentage-bar-logic"
                     jQuery( '#trp-string-categories' ).select2( 'destroy' )
 
                     jQuery( '#trp-string-categories' ).select2( { placeholder : self.editorStrings.select_string, templateResult: function(option){
-                        let original     = he.decode( option.text.substring(0, 90) ) + ( ( option.text.length <= 90) ? '' : '...' )
+                        let original     = option.text.substring(0, 90) + ( ( option.text.length <= 90) ? '' : '...' )
                         let description  = ( option.title ) ?  '(' + option.title + ')' : ''
                         let stringStatus = option.element ? option.element.getAttribute( 'data-string-status') : ''
                         let iconHtml     = utils.getIconBasedOnStatus( stringStatus );
 
-                        return jQuery( '<div>' + original + iconHtml + '</div><div class="string-selector-description">' + description + '</div>' );
+                        // Build the row with DOM APIs so the untrusted strings ( original, description )
+                        // are always inserted as text and can never be parsed as HTML. Only the status
+                        // icon, which is a trusted hard-coded SVG from utils.getIconBasedOnStatus(), is
+                        // inserted as markup.
+                        let firstRow = document.createElement( 'div' )
+                        firstRow.appendChild( document.createTextNode( original ) )
+
+                        if ( iconHtml ) {
+                            let iconWrapper = document.createElement( 'span' )
+                            iconWrapper.innerHTML = iconHtml
+                            while ( iconWrapper.firstChild ) {
+                                firstRow.appendChild( iconWrapper.firstChild )
+                            }
+                        }
+
+                        let secondRow = document.createElement( 'div' )
+                        secondRow.className = 'string-selector-description'
+                        secondRow.appendChild( document.createTextNode( description ) )
+
+                        return jQuery( [ firstRow, secondRow ] );
                     }, width : '100%' } ).prop( 'disabled', false )
 
                     jQuery( '#trp_select2_overlay' ).hide()
@@ -924,7 +942,10 @@ import PercentageBarLogic from "./components/percentage-bar-logic"
                 if ( type == 'Images' || type == 'Videos' || type == 'Audios' || ( utils.isURL( name ) && type == 'Meta Information' ) )
                     return utils.getFilename( name )
 
-                return utils.escapeHtml( name )
+                // Decode entities so the option shows the human-readable string. This value is bound
+                // through Vue's text interpolation and rendered as a text node in the dropdown
+                // ( see initStringsDropdown ), so it is never parsed as HTML.
+                return utils.decodeEntities( name )
             },
             isStringsDropdownOpen(){
                 return jQuery( '#trp-string-categories' ).select2( 'isOpen' )

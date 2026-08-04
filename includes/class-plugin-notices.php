@@ -48,7 +48,7 @@ class TRP_Add_General_Notices{
             // Check that the user hasn't already clicked to ignore the message
             if ( ! get_user_meta($user_id, $this->notificationId.'_dismiss_notification' ) || $this->force_show  ) {//ignore the dismissal if we have force_show
                 add_filter('safe_style_css', array( $this, 'allow_z_index_in_wp_kses'));
-                echo wp_kses( apply_filters($this->notificationId.'_notification_message','<div class="'. $this->notificationClass .'" style="position:relative;'  . ((strpos($this->notificationClass, 'trp-narrow')!==false ) ? 'max-width: 825px;' : '') . '" >'.$this->notificationMessage.'</div>', $this->notificationMessage), [ 'div' => [ 'class' => [],'style' => [] ], 'p' => ['style' => [], 'class' => []], 'a' => ['href' => [], 'type'=> [], 'class'=> [], 'style'=>[], 'title'=>[],'target'=>[]], 'span' => ['class'=> []], 'strong' => [], 'img' => [ 'src' => [], 'style' => [] ], 'br' => [] ]  );
+                echo wp_kses( apply_filters($this->notificationId.'_notification_message','<div class="'. $this->notificationClass .'" style="position:relative;'  . ((strpos($this->notificationClass, 'trp-narrow')!==false ) ? 'max-width: 825px;' : '') . '" >'.$this->notificationMessage.'</div>', $this->notificationMessage), [ 'div' => [ 'class' => [],'style' => [] ], 'p' => ['style' => [], 'class' => []], 'a' => ['href' => [], 'type'=> [], 'class'=> [], 'style'=>[], 'title'=>[],'target'=>[]], 'span' => ['class'=> [], 'style' => []], 'strong' => [], 'img' => [ 'src' => [], 'style' => [] ], 'br' => [] ]  );
                 remove_filter('safe_style_css', array( $this, 'allow_z_index_in_wp_kses'));
             }
             do_action( $this->notificationId.'_notification_displayed', $current_user, $pagenow );
@@ -59,6 +59,12 @@ class TRP_Add_General_Notices{
     function allow_z_index_in_wp_kses( $styles ) {
         $styles[] = 'z-index';
         $styles[] = 'position';
+        $styles[] = 'display';
+        $styles[] = 'align-items';
+        $styles[] = 'gap';
+        $styles[] = 'float';
+        $styles[] = 'margin';
+        $styles[] = 'visibility';
         return $styles;
     }
 

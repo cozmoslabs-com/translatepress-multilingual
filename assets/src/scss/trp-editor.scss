@@ -1550,6 +1550,9 @@ th.sortable a, th.sorted a{
 .trp-automatic-translated-blue{
     color: blue;
 }
+.trp-language-file-purple{
+    color: #7c3aed;
+}
 .trp-untranslated-red {
     color: red;
 }
@@ -2354,6 +2357,17 @@ a.trp-learn-more-upsale.button-primary{
     position: relative;
     top: 7px;
     left: 5px;
+}
+.trp-language-file-translation-icon{
+    font-family: dashicons !important;
+    font-size: 25px;
+    line-height: 25px;
+    width: 25px;
+    height: 25px;
+}
+
+.trp-language-file-translation-icon:before{
+    font-family: dashicons !important;
 }
 /* END - Percentage bar CSS */
 

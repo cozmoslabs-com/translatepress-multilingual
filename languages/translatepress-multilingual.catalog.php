@@ -306,6 +306,7 @@
 <?php __("Click to Copy", "translatepress-multilingual"); ?>
 <?php __("Human Translation", "translatepress-multilingual"); ?>
 <?php __("Machine Translation", "translatepress-multilingual"); ?>
+<?php __("Gettext File Translation", "translatepress-multilingual"); ?>
 <?php __("Text on this page is %s% translated into all languages.", "translatepress-multilingual"); ?>
 <?php __("%1$s% of text on this page is translated into %2$s.", "translatepress-multilingual"); ?>
 <?php __("This page is %1$s% translated into %2$s.", "translatepress-multilingual"); ?>
@@ -346,10 +347,11 @@
 <?php __("Opens post in the translation editor. Post must be saved as draft or published beforehand.", "translatepress-multilingual"); ?>
 <?php __("Security check", "translatepress-multilingual"); ?>
 <?php __("<strong>Warning:</strong> Some strings have possibly incorrectly encoded characters. This may result in breaking the queries, rendering the page untranslated in live mode. Consider revising the following strings or their method of outputting.", "translatepress-multilingual"); ?>
+<?php __("IMPORTANT: It is strongly recommended to first backup the database!", "translatepress-multilingual"); ?>
+<?php __("Are you sure you want to continue?", "translatepress-multilingual"); ?>
 <?php __("TranslatePress data update", "translatepress-multilingual"); ?>
 <?php __("We need to update your translations database to the latest version.", "translatepress-multilingual"); ?>
 <?php __("Updating will allow editing translations of localized text from plugins and theme. Existing translation will still work as expected.", "translatepress-multilingual"); ?>
-<?php __("IMPORTANT: It is strongly recommended to first backup the database!\nAre you sure you want to continue?", "translatepress-multilingual"); ?>
 <?php __("Run the updater", "translatepress-multilingual"); ?>
 <?php __("Updating will allow editing translations of slugs. Existing translation will still work as expected.", "translatepress-multilingual"); ?>
 <?php __("Please activate the SEO Addon from <br/>WordPress -> Settings -> TranslatePress -> Addons section", "translatepress-multilingual"); ?>
@@ -392,10 +394,15 @@
 <?php __("Inserting gettext original strings for language %s...", "translatepress-multilingual"); ?>
 <?php __("Cleaning gettext original strings table for language %s...", "translatepress-multilingual"); ?>
 <?php __("Updating gettext original string ids for language %s...", "translatepress-multilingual"); ?>
+<?php __("Starting gettext database optimization in the background...", "translatepress-multilingual"); ?>
 <?php __("Migrating taxonomy and post type base slugs to new table structure...", "translatepress-multilingual"); ?>
 <?php __("Migrating post slugs to new table structure for language %s...", "translatepress-multilingual"); ?>
 <?php __("Migrating term slugs to new table structure for language %s...", "translatepress-multilingual"); ?>
 <?php __("Finishing up...", "translatepress-multilingual"); ?>
+<?php __("TranslatePress needs to optimize gettext database tables. Translations continue to work while this runs in the background.", "translatepress-multilingual"); ?>
+<?php __("Before starting, we strongly recommend creating a database backup.", "translatepress-multilingual"); ?>
+<?php __("Start optimization", "translatepress-multilingual"); ?>
+<?php __("Update aborted! Could not schedule gettext database optimization.", "translatepress-multilingual"); ?>
 <?php __("Database optimization did not complete successfully. We recommend restoring the original database or <a href=\"%s\" >trying again.</a>", "translatepress-multilingual"); ?>
 <?php __("Update aborted! Your user account doesn't have the capability to perform database updates.", "translatepress-multilingual"); ?>
 <?php __("Update aborted! Invalid nonce.", "translatepress-multilingual"); ?>
@@ -765,6 +772,8 @@
 <?php __("Open the language switcher shortcode by clicking on it instead of hovering.<br> Close it by clicking on it, anywhere else on the screen or by pressing the escape key. This will affect only the shortcode language switcher.", "translatepress-multilingual"); ?>
 <?php __("Show opposite language in the language switcher", "translatepress-multilingual"); ?>
 <?php __("Transforms the language switcher into a button showing the other available language, not the current one.<br> Only works when there are exactly two languages, the default one and a translation one.<br>This will affect the shortcode language switcher and floating language switcher as well.<br> To achieve this in menu language switcher go to Appearance->Menus->Language Switcher and select Opposite Language.", "translatepress-multilingual"); ?>
+<?php __("Pending gettext database optimization", "translatepress-multilingual"); ?>
+<?php __("TranslatePress needs to optimize its gettext database tables. Back up the database, then <a href=\"%s\">start the optimization</a>.", "translatepress-multilingual"); ?>
 <?php __("<a href=\"%s\">Click here</a> to access the database optimization tool.", "translatepress-multilingual"); ?>
 <?php __("It helps remove possible duplicate translations, clear unnecessary data and repair possible metadata issues.", "translatepress-multilingual"); ?>
 <?php __("<a href=\"%s\" target=\"_blank\">Here</a> you can observe the last 5 SQL errors relevant to TranslatePress if they exist.", "translatepress-multilingual"); ?>
@@ -933,6 +942,7 @@
 <?php __("Scanning item %1$d of %2$d...", "translatepress-multilingual"); ?>
 <?php __("Manually translated", "translatepress-multilingual"); ?>
 <?php __("Automatically translated", "translatepress-multilingual"); ?>
+<?php __("Gettext file translation", "translatepress-multilingual"); ?>
 <?php __("Not translated", "translatepress-multilingual"); ?>
 <?php __("Bulk Actions", "translatepress-multilingual"); ?>
 <?php __("Delete entries", "translatepress-multilingual"); ?>
@@ -992,6 +1002,23 @@
 <?php __("Filter by Translation Block", "translatepress-multilingual"); ?>
 <?php __("URL Slugs Translation", "translatepress-multilingual"); ?>
 <?php __("String Translation Editor", "translatepress-multilingual"); ?>
+<?php __("Every minute", "translatepress-multilingual"); ?>
+<?php __("Waiting to start background processing...", "translatepress-multilingual"); ?>
+<?php __("Could not load the background task.", "translatepress-multilingual"); ?>
+<?php __("Background processing could not start.", "translatepress-multilingual"); ?>
+<?php __("Background processing completed.", "translatepress-multilingual"); ?>
+<?php __("A previous batch item failed.", "translatepress-multilingual"); ?>
+<?php __("TranslatePress background processing did not complete successfully.", "translatepress-multilingual"); ?>
+<?php __("Error: %s", "translatepress-multilingual"); ?>
+<?php __("Retry", "translatepress-multilingual"); ?>
+<?php __("You do not have permission to view this task status.", "translatepress-multilingual"); ?>
+<?php __("Invalid batch task.", "translatepress-multilingual"); ?>
+<?php __("TranslatePress background processing completed successfully.", "translatepress-multilingual"); ?>
+<?php __("TranslatePress is processing a background task.", "translatepress-multilingual"); ?>
+<?php __("Processing %s...", "translatepress-multilingual"); ?>
+<?php __("%s is optimizing gettext database tables in the background. Translations continue to work while this runs.", "translatepress-multilingual"); ?>
+<?php __("TranslatePress gettext database optimization completed successfully.", "translatepress-multilingual"); ?>
+<?php __("TranslatePress gettext database optimization failed.", "translatepress-multilingual"); ?>
 <?php __("TranslatePress has detected and cleaned up some failed translation entries in your database following %1$san isolated incident%2$s. No further action is required.", "translatepress-multilingual"); ?>
 <?php __("Post Slug", "translatepress-multilingual"); ?>
 <?php __("Invalid language code", "translatepress-multilingual"); ?>
@@ -1034,6 +1061,30 @@
 <?php __("Translator", "translatepress-multilingual"); ?>
 <?php __(" TranslatePress Settings", "translatepress-multilingual"); ?>
 <?php __("Allow this user to translate the website.", "translatepress-multilingual"); ?>
+<?php __("Update aborted! Unknown gettext lookup hash migration phase: %s.", "translatepress-multilingual"); ?>
+<?php __("Update aborted! Could not find an available gettext original_id index name for table %s.", "translatepress-multilingual"); ?>
+<?php __("Update aborted! Table %1$s still references %2$d duplicate gettext original ids.", "translatepress-multilingual"); ?>
+<?php __("Update aborted! Gettext original meta still references %d duplicate original ids.", "translatepress-multilingual"); ?>
+<?php __("Update aborted while %1$s. SQL error: %2$s", "translatepress-multilingual"); ?>
+<?php __("Gettext database optimization completed.", "translatepress-multilingual"); ?>
+<?php __("Deduplicating gettext translation tables...", "translatepress-multilingual"); ?>
+<?php __("Migrating gettext original lookup hashes...", "translatepress-multilingual"); ?>
+<?php __("Preparing the gettext originals lookup index...", "translatepress-multilingual"); ?>
+<?php __("Updating gettext runtime statuses...", "translatepress-multilingual"); ?>
+<?php __("Finishing gettext database optimization...", "translatepress-multilingual"); ?>
+<?php __("Updating gettext runtime statuses for language %s...", "translatepress-multilingual"); ?>
+<?php __("Resolving missing gettext original ids in %s...", "translatepress-multilingual"); ?>
+<?php __("Preparing gettext table %s...", "translatepress-multilingual"); ?>
+<?php __("Removing invalid gettext rows from %s...", "translatepress-multilingual"); ?>
+<?php __("Prepared gettext original ids in %s...", "translatepress-multilingual"); ?>
+<?php __("Normalizing plural forms in %s...", "translatepress-multilingual"); ?>
+<?php __("Processing duplicate gettext rows in %s...", "translatepress-multilingual"); ?>
+<?php __("Building duplicate gettext map for %s...", "translatepress-multilingual"); ?>
+<?php __("Verifying gettext table %s...", "translatepress-multilingual"); ?>
+<?php __("Deleting duplicate gettext rows from %s...", "translatepress-multilingual"); ?>
+<?php __("Rechecking duplicate gettext rows in %s...", "translatepress-multilingual"); ?>
+<?php __("Adding unique gettext index for %s...", "translatepress-multilingual"); ?>
+<?php __("Finished gettext table %s.", "translatepress-multilingual"); ?>
 <?php __("(inactive)", "translatepress-multilingual"); ?>
 <?php __("Taxonomy Slugs", "translatepress-multilingual"); ?>
 <?php __("Search Taxonomy Slugs", "translatepress-multilingual"); ?>

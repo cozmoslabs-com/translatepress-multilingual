@@ -33,11 +33,14 @@ class TRP_Gettext_Normalization extends TRP_Query {
 
 
 	/**
-	 * Add original_id, plural_form column to gettext tables, if it doesn't exist.
+	 * Add the gettext normalization columns to gettext tables when missing.
 	 *
-	 * Affects all existing tables, including deactivated languages
+	 * Affects all existing gettext tables, including deactivated languages, unless
+	 * a specific language code is provided.
 	 *
-	 * @param null $language_code
+	 * @param string|null $language_code Optional language code. When empty, all gettext tables are checked.
+	 *
+	 * @return void
 	 */
 	public function check_for_gettext_original_id_column($language_code = null){
 		if ( $language_code ){
@@ -56,6 +59,54 @@ class TRP_Gettext_Normalization extends TRP_Query {
 				$this->db->query("ALTER TABLE " . $table_name . " ADD plural_form INT(20) DEFAULT NULL" );
 			}
 		}
+	}
+
+	/**
+	 * Add the composite lookup index used to resolve gettext originals by
+	 * original, domain and context.
+	 *
+	 * The deferred runtime lookup starts from the shared gettext originals table.
+	 * Indexing the three lookup columns together avoids scanning rows that share
+	 * the same original prefix but belong to other domains or contexts.
+	 *
+	 * @return void
+	 */
+	public function check_for_gettext_original_lookup_index() {
+		$table_name = sanitize_text_field( $this->get_table_name_for_gettext_original_strings() );
+
+		if ( empty( $table_name ) || ! $this->table_exists( $table_name ) ) {
+			return;
+		}
+
+		if ( ! $this->table_index_exists( $table_name, 'gettext_lookup_original_domain_context' ) ) {
+			$this->db->query( "CREATE INDEX gettext_lookup_original_domain_context ON `" . $table_name . "` (original(100), domain(100), context(100))" );
+		}
+	}
+
+	/**
+	 * Check whether a database table index exists.
+	 *
+	 * @param string $table_name Database table name.
+	 * @param string $index_name Database index name.
+	 *
+	 * @return bool
+	 */
+	public function table_index_exists( $table_name, $index_name ) {
+		$table_name = sanitize_text_field( $table_name );
+		$index_name = sanitize_text_field( $index_name );
+
+		if ( empty( $table_name ) || empty( $index_name ) ) {
+			return false;
+		}
+
+		$index = $this->db->get_results(
+			$this->db->prepare(
+				"SHOW INDEX FROM `" . $table_name . "` WHERE Key_name = %s",
+				$index_name
+			)
+		);
+
+		return ! empty( $index );
 	}
 
     /**

@@ -182,6 +182,7 @@ class TRP_Translation_Manager {
                 //human or machine translation tooltips
                 'human_translation'                 => esc_html__('Human Translation', 'translatepress-multilingual'),
                 'machine_translation'               => esc_html__('Machine Translation', 'translatepress-multilingual'),
+                'language_file_translation'         => esc_html__('Gettext File Translation', 'translatepress-multilingual'),
                 'percentage_bar'                    => array(
                     'tooltip_text_default' => esc_html__( 'Text on this page is %s% translated into all languages.', 'translatepress-multilingual'),
                     'tooltip_text_general' => esc_html__( '%1$s% of text on this page is translated into %2$s.', 'translatepress-multilingual'),
@@ -1010,13 +1011,18 @@ class TRP_Translation_Manager {
 			$url = add_query_arg( array(
 				'page'                      => 'trp_update_database',
 			), site_url('wp-admin/admin.php') );
+			$database_update_confirmation_message = sprintf(
+				"%s\n%s",
+				__( 'IMPORTANT: It is strongly recommended to first backup the database!', 'translatepress-multilingual' ),
+				__( 'Are you sure you want to continue?', 'translatepress-multilingual' )
+			);
 
 			// maybe change notice color to blue #28B1FF
 			$html = "<div class='trp-notice trp-notice-warning'>";
 			$html .= '<p><strong>' . esc_html__( 'TranslatePress data update', 'translatepress-multilingual' ) . '</strong> &#8211; ' . esc_html__( 'We need to update your translations database to the latest version.', 'translatepress-multilingual' ) . '</p>';
 			$html .= '<p>' . esc_html__( 'Updating will allow editing translations of localized text from plugins and theme. Existing translation will still work as expected.', 'translatepress-multilingual' ) . '</p>';
 
-			$html .= '<p><a class="trp-button-primary" target="_blank" href="' . esc_url( $url ) . '" onclick="return confirm( \'' . __( 'IMPORTANT: It is strongly recommended to first backup the database!\nAre you sure you want to continue?', 'translatepress-multilingual' ) . '\');" class="button-primary">' . esc_html__( 'Run the updater', 'translatepress-multilingual' ) . '</a></p>';
+			$html .= '<p><a class="trp-button-primary" target="_blank" href="' . esc_url( $url ) . '" onclick="return confirm( ' . esc_attr( wp_json_encode( $database_update_confirmation_message ) ) . ' );" class="button-primary">' . esc_html__( 'Run the updater', 'translatepress-multilingual' ) . '</a></p>';
 			$html .= '</div>';
 
 			$trp_editor_notices = $html;
@@ -1030,12 +1036,17 @@ class TRP_Translation_Manager {
             $url = add_query_arg( array(
                 'page'                      => 'trp_update_database',
             ), site_url('wp-admin/admin.php') );
+            $database_update_confirmation_message = sprintf(
+                "%s\n%s",
+                __( 'IMPORTANT: It is strongly recommended to first backup the database!', 'translatepress-multilingual' ),
+                __( 'Are you sure you want to continue?', 'translatepress-multilingual' )
+            );
 
             $html = "<div class='trp-notice trp-notice-warning'>";
             $html .= '<p><strong>' . esc_html__( 'TranslatePress data update', 'translatepress-multilingual' ) . '</strong> &#8211; ' . esc_html__( 'We need to update your translations database to the latest version.', 'translatepress-multilingual' ) . '</p>';
             $html .= '<p>' . esc_html__( 'Updating will allow editing translations of slugs. Existing translation will still work as expected.', 'translatepress-multilingual' ) . '</p>';
 
-            $html .= '<p><a class="trp-button-primary" target="_blank" href="' . esc_url( $url ) . '" onclick="return confirm( \'' . __( 'IMPORTANT: It is strongly recommended to first backup the database!\nAre you sure you want to continue?', 'translatepress-multilingual' ) . '\');" class="button-primary">' . esc_html__( 'Run the updater', 'translatepress-multilingual' ) . '</a></p>';
+            $html .= '<p><a class="trp-button-primary" target="_blank" href="' . esc_url( $url ) . '" onclick="return confirm( ' . esc_attr( wp_json_encode( $database_update_confirmation_message ) ) . ' );" class="button-primary">' . esc_html__( 'Run the updater', 'translatepress-multilingual' ) . '</a></p>';
             $html .= '</div>';
 
             $trp_editor_notices = $html;

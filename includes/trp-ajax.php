@@ -103,11 +103,14 @@ class TRP_Ajax{
         );
 
         foreach ( $credentials as $credential => $constant_name ) {
-            if ( preg_match_all( "/define\s*\(\s*['\"]" . $constant_name . "['\"]\s*,\s*['\"](.*?)['\"]\s*\)/", $content, $result ) ) {
-                // The WP installer writes these values through addslashes(), so backslashes and
-                // quotes are escaped in the raw file text. Mirror it, otherwise such credentials
-                // are passed to mysqli_connect() corrupted.
-                $credentials[ $credential ] = stripslashes( $result[1][0] );
+            // Capture the quote character used ($result[1]) alongside the value ($result[2]) so we can
+            // reverse PHP's string-literal escaping below. We parse wp-config.php as plain text (without
+            // loading WordPress), so the raw match still contains source-level escapes: the WP installer
+            // writes these constants single-quoted through addcslashes( $value, "\\'" ), and a
+            // hand-edited password such as "xxx\$xxx" resolves to xxx$xxx at runtime. Left uncorrected,
+            // the credentials reach mysqli_connect() corrupted. See CU-7epz71.
+            if ( preg_match( "/define\s*\(\s*['\"]" . $constant_name . "['\"]\s*,\s*(['\"])(.*?)\\1\s*\)/", $content, $result ) ) {
+                $credentials[ $credential ] = $this->unescape_wp_config_value( $result[2], $result[1] );
             } else {
                 return false;
             }
@@ -144,6 +147,28 @@ class TRP_Ajax{
         }
 
         return true;
+    }
+
+    /**
+     * Reverse PHP's string-literal escaping for a value read textually from wp-config.php.
+     *
+     * connect_to_db() parses wp-config.php as plain text (without loading WordPress), so the
+     * captured value still contains source-level escape sequences. This restores the value that
+     * PHP would produce at runtime, so credentials such as a password defined as "xxx\$xxx" (which
+     * resolves to xxx$xxx) connect correctly. See CU-7epz71.
+     *
+     * @param string $value Raw value captured from between the quotes.
+     * @param string $quote The quote character used in the source ( ' or " ).
+     * @return string
+     */
+    protected function unescape_wp_config_value( $value, $quote ) {
+        if ( $quote === "'" ) {
+            // Single-quoted PHP strings only treat \' and \\ as escapes.
+            return preg_replace( '/\\\\([\\\\\'])/', '$1', $value );
+        }
+
+        // Double-quoted PHP strings interpret C-style escapes (\n, \t, \\, ...) plus \" and \$.
+        return stripcslashes( $value );
     }
 
     /**

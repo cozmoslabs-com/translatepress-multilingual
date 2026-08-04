@@ -22,6 +22,7 @@ class TRP_Query{
     protected $tables_exist = array();
     protected $db_sql_version = null;
     protected $gettext_normalized = null;
+    protected $gettext_original_lookup_hash_available = null;
 
     /* gettext query components */
     protected $gettext_table_creation;
@@ -31,6 +32,7 @@ class TRP_Query{
     const NOT_TRANSLATED = 0;
     const MACHINE_TRANSLATED = 1;
     const HUMAN_REVIEWED = 2;
+    const GETTEXT_TRANSLATED_IN_LANGUAGE_FILE = 4;
     const SIMILAR_TRANSLATED = 3;
     const BLOCK_TYPE_REGULAR_STRING = 0;
     const BLOCK_TYPE_ACTIVE = 1;
@@ -185,6 +187,15 @@ class TRP_Query{
      */
     public function get_constant_human_reviewed(){
         return self::HUMAN_REVIEWED;
+    }
+
+    /**
+     * Return constant used for gettext rows that mirror language-file translations.
+     *
+     * @return int
+     */
+    public function get_constant_gettext_translated_in_language_file(){
+        return self::GETTEXT_TRANSLATED_IN_LANGUAGE_FILE;
     }
 
     /**
@@ -666,6 +677,32 @@ class TRP_Query{
 	}
 
 	/**
+	 * Returns true if a database table index exists.
+	 *
+	 * @param string $table_name Database table name.
+	 * @param string $index_name Index name.
+	 *
+	 * @return bool
+	 */
+	public function table_index_exists( $table_name, $index_name ) {
+		$table_name = sanitize_text_field( $table_name );
+		$index_name = sanitize_text_field( $index_name );
+
+		if ( empty( $table_name ) || empty( $index_name ) ) {
+			return false;
+		}
+
+		$index = $this->db->get_results(
+			$this->db->prepare(
+				"SHOW INDEX FROM `" . $table_name . "` WHERE Key_name = %s",
+				$index_name
+			)
+		);
+
+		return ! empty( $index );
+	}
+
+	/**
 	 * Update regular (non-gettext) strings in DB
 	 *
 	 * @param array $update_strings                 Array of strings to update
@@ -898,6 +935,89 @@ class TRP_Query{
     }
 
     /**
+     * Return table name for temporary gettext originals deduplication map.
+     *
+     * @return string
+     */
+    public function get_table_name_for_gettext_originals_dedup_map() {
+        return sanitize_text_field( $this->db->prefix . 'trp_gettext_originals_dedup_map' );
+    }
+
+    /**
+     * Return the gettext originals lookup-hash column name.
+     *
+     * @return string
+     */
+    public function get_gettext_original_lookup_hash_column_name() {
+        return 'lookup_hash';
+    }
+
+    /**
+     * Normalize gettext context before hashing or exact matching.
+     *
+     * @param string|null $context Context value from runtime or DB.
+     *
+     * @return string
+     */
+    public function normalize_gettext_original_context( $context ) {
+        return ( $context === null || $context === '' ) ? 'trp_context' : $context;
+    }
+
+    /**
+     * Build the canonical lookup hash for a gettext original identity.
+     *
+     * @param string      $original Source original.
+     * @param string      $domain   Gettext domain.
+     * @param string|null $context  Optional gettext context.
+     *
+     * @return string
+     */
+    public function get_gettext_original_lookup_hash( $original, $domain, $context = null ) {
+        return md5( $original . "\x1F" . $domain . "\x1F" . $this->normalize_gettext_original_context( $context ) );
+    }
+
+    /**
+     * Return whether the gettext originals hash migration is complete and usable.
+     *
+     * Runtime code must not reference lookup_hash until this is true, otherwise
+     * existing sites without the column can hit SQL errors before migration.
+     *
+     * @return bool
+     */
+    public function gettext_original_lookup_hash_is_available() {
+        if ( $this->gettext_original_lookup_hash_available !== null ) {
+            return $this->gettext_original_lookup_hash_available;
+        }
+
+        $option_value = get_option( 'trp_updated_database_gettext_original_lookup_hash', 'is not set' );
+        $table_name   = $this->get_table_name_for_gettext_original_strings();
+
+        $this->gettext_original_lookup_hash_available = (
+            $this->table_column_exists( $table_name, $this->get_gettext_original_lookup_hash_column_name() ) &&
+            (
+                $option_value === 'yes' ||
+                ( $option_value === 'is not set' && $this->table_index_exists( $table_name, 'gettext_lookup_hash_unique' ) )
+            )
+        );
+
+        return $this->gettext_original_lookup_hash_available;
+    }
+
+    /**
+     * Build a request-local identity key for exact gettext row matching.
+     *
+     * @param string      $original    Source original.
+     * @param string      $domain      Gettext domain.
+     * @param string|null $context     Optional gettext context.
+     * @param int         $plural_form Plural form.
+     *
+     * @return string
+     */
+    public function get_gettext_original_identity_key( $original, $domain, $context, $plural_form ) {
+        return $original . "\x1F" . $domain . "\x1F" . $this->normalize_gettext_original_context( $context ) . "\x1F" . (int) $plural_form;
+    }
+
+    /**
      * Return table name for gettext original meta table
      *
      * @return string                       Table name.
@@ -929,9 +1049,149 @@ class TRP_Query{
         return $dictionary;
     }
 
+    /**
+     * Return gettext rows that are eligible to override gettext output at runtime.
+     *
+     * Runtime overrides are represented by human-reviewed gettext status 2.
+     * Machine translated rows continue to load by status 1. Language-file
+     * matches use status 4 and are intentionally left to WordPress gettext.
+     *
+     * @param string $language_code Target language code.
+     *
+     * @return array|null
+     */
+    public function get_runtime_gettext_strings( $language_code ) {
+        $gettext_table_name = sanitize_text_field($this->get_gettext_table_name($language_code));
+
+        $dictionary = $this->db->get_results(
+            "SELECT tt.id, CASE WHEN ot.original is NULL THEN tt.original ELSE NULL END as tt_original, tt.translated, tt.domain AS tt_domain, tt.plural_form, tt.original_id AS tt_original_id, ot.original, ot.domain, ot.context FROM `" . $gettext_table_name . "` AS tt LEFT JOIN `" . sanitize_text_field($this->get_table_name_for_gettext_original_strings()) . "` AS ot ON tt.original_id = ot.id WHERE tt.translated <> '' AND tt.status != " . self::NOT_TRANSLATED . " AND ( tt.status = " . self::HUMAN_REVIEWED . " OR tt.status = " . self::MACHINE_TRANSLATED . " )",
+            ARRAY_A
+        );
+        $this->maybe_record_automatic_translation_error(array( 'details' => 'Error running get_runtime_gettext_strings()' ) );
+        if ( is_array( $dictionary ) && count( $dictionary ) === 0 && !$this->table_exists($this->get_gettext_table_name( $language_code )) ){
+            $this->maybe_record_automatic_translation_error(array( 'details' => 'Missing table ' . $this->get_gettext_table_name( $language_code ). ' . To regenerate tables, try going to Settings->TranslatePress->General tab and Save Settings.'), true );
+        }
+        return $dictionary;
+    }
+
     public function get_all_gettext_translated_strings(  $language_code ){
         $dictionary = $this->db->get_results("SELECT id, original, translated, domain FROM `" . sanitize_text_field( $this->get_gettext_table_name( $language_code ) ) . "` WHERE translated <>'' AND status != " . self::NOT_TRANSLATED, ARRAY_A );
         $this->maybe_record_automatic_translation_error(array( 'details' => 'Error running get_all_gettext_translated_strings()' ) );
+        return $dictionary;
+    }
+
+    /**
+     * Return gettext DB rows matching exact observed gettext storage keys.
+     *
+     * This is used at shutdown to resolve all observed runtime misses in batches,
+     * so existing DB ids can be reused without inserting duplicate rows.
+     *
+     * @param string $language_code Target language code.
+     * @param array  $items         Observed gettext items with original, domain, context and plural_form.
+     *
+     * @return array|null
+     */
+    public function get_gettext_rows_by_composite_keys( $language_code, $items ) {
+        if ( !is_array( $items ) || count( $items ) === 0 ) {
+            return array();
+        }
+
+        $normalized_hashes        = array();
+        $normalized_plural_forms  = array();
+        $normalized_identity_keys = array();
+        $legacy_where_clauses     = array();
+        $legacy_values            = array();
+
+        foreach ( $items as $item ) {
+            if ( empty( $item['original'] ) || !isset( $item['domain'], $item['context'], $item['plural_form'] ) ) {
+                continue;
+            }
+
+            $context = $this->normalize_gettext_original_context( $item['context'] );
+            $normalized_hashes[ $this->get_gettext_original_lookup_hash( $item['original'], $item['domain'], $context ) ] = true;
+            $normalized_plural_forms[ (int) $item['plural_form'] ] = true;
+            $normalized_identity_keys[ $this->get_gettext_original_identity_key( $item['original'], $item['domain'], $context, $item['plural_form'] ) ] = true;
+
+            if ( $context === 'trp_context' ) {
+                $legacy_where_clauses[] = "( ( tt.original_id IS NULL OR tt.original_id = 0 ) AND tt.original = BINARY %s AND tt.domain = %s AND COALESCE( tt.plural_form, 0 ) = %d )";
+                array_push(
+                    $legacy_values,
+                    $item['original'],
+                    $item['domain'],
+                    (int) $item['plural_form']
+                );
+            }
+        }
+
+        if ( empty( $normalized_hashes ) && empty( $legacy_where_clauses ) ) {
+            return array();
+        }
+
+        $gettext_table   = sanitize_text_field( $this->get_gettext_table_name( $language_code ) );
+        $originals_table = sanitize_text_field( $this->get_table_name_for_gettext_original_strings() );
+        $dictionary      = array();
+
+        if ( ! empty( $normalized_hashes ) && $this->gettext_original_lookup_hash_is_available() ) {
+            $hash_placeholders   = implode( ', ', array_fill( 0, count( $normalized_hashes ), '%s' ) );
+            $plural_placeholders = implode( ', ', array_fill( 0, count( $normalized_plural_forms ), '%d' ) );
+            $normalized_values   = array_merge( array_keys( $normalized_hashes ), array_map( 'intval', array_keys( $normalized_plural_forms ) ) );
+
+            $normalized_query = "SELECT tt.id, tt.translated, tt.status, tt.original AS tt_original, tt.domain AS tt_domain, tt.plural_form, tt.original_id AS tt_original_id, ot.id AS ot_id, ot.original, ot.domain, ot.context, ot.original_plural, ot.lookup_hash FROM `$originals_table` AS ot INNER JOIN `$gettext_table` AS tt ON tt.original_id = ot.id WHERE ot.lookup_hash IN ( $hash_placeholders ) AND COALESCE( tt.plural_form, 0 ) IN ( $plural_placeholders )";
+            $normalized_rows  = $this->db->get_results( $this->db->prepare( $normalized_query, $normalized_values ), ARRAY_A );
+        } elseif ( ! empty( $normalized_identity_keys ) ) {
+            $legacy_normalized_clauses = array();
+            $legacy_normalized_values  = array();
+
+            foreach ( $items as $item ) {
+                if ( empty( $item['original'] ) || !isset( $item['domain'], $item['context'], $item['plural_form'] ) ) {
+                    continue;
+                }
+
+                $legacy_normalized_clauses[] = "( ot.original = BINARY %s AND ot.domain = %s AND COALESCE( NULLIF( ot.context, '' ), 'trp_context' ) = %s AND COALESCE( tt.plural_form, 0 ) = %d )";
+                array_push(
+                    $legacy_normalized_values,
+                    $item['original'],
+                    $item['domain'],
+                    $this->normalize_gettext_original_context( $item['context'] ),
+                    (int) $item['plural_form']
+                );
+            }
+
+            if ( ! empty( $legacy_normalized_clauses ) ) {
+                $normalized_query = "SELECT tt.id, tt.translated, tt.status, tt.original AS tt_original, tt.domain AS tt_domain, tt.plural_form, tt.original_id AS tt_original_id, ot.id AS ot_id, ot.original, ot.domain, ot.context, ot.original_plural FROM `$originals_table` AS ot INNER JOIN `$gettext_table` AS tt ON tt.original_id = ot.id WHERE " . implode( ' OR ', $legacy_normalized_clauses );
+                $normalized_rows  = $this->db->get_results( $this->db->prepare( $normalized_query, $legacy_normalized_values ), ARRAY_A );
+            } else {
+                $normalized_rows = array();
+            }
+        } else {
+            $normalized_rows = array();
+        }
+
+        if ( ! empty( $normalized_rows ) ) {
+            foreach ( $normalized_rows as $row ) {
+                $identity_key = $this->get_gettext_original_identity_key(
+                    $row['original'],
+                    $row['domain'],
+                    $row['context'],
+                    isset( $row['plural_form'] ) ? (int) $row['plural_form'] : 0
+                );
+
+                if ( isset( $normalized_identity_keys[ $identity_key ] ) ) {
+                    $dictionary[] = $row;
+                }
+            }
+        }
+
+        if ( ! empty( $legacy_where_clauses ) ) {
+            $legacy_query = "SELECT tt.id, tt.translated, tt.status, tt.original AS tt_original, tt.domain AS tt_domain, tt.plural_form, tt.original_id AS tt_original_id, NULL AS ot_id, NULL AS original, NULL AS domain, NULL AS context, NULL AS original_plural FROM `$gettext_table` AS tt WHERE " . implode( ' OR ', $legacy_where_clauses );
+            $legacy_rows  = $this->db->get_results( $this->db->prepare( $legacy_query, $legacy_values ), ARRAY_A );
+
+            if ( ! empty( $legacy_rows ) ) {
+                $dictionary = array_merge( $dictionary, $legacy_rows );
+            }
+        }
+
+        $this->maybe_record_automatic_translation_error(array( 'details' => 'Error running get_gettext_rows_by_composite_keys()' ) );
         return $dictionary;
     }
 
@@ -1105,7 +1365,9 @@ class TRP_Query{
         foreach ( $table_names as $table_name ){
             if ( isset( $table_name[0]) &&
                 strpos($table_name[0], 'trp_gettext_original_meta') === false &&
-                strpos($table_name[0], 'trp_gettext_original_strings') === false ) {
+                strpos($table_name[0], 'trp_gettext_original_strings') === false &&
+                strpos($table_name[0], 'trp_gettext_locale_dedup_map') === false &&
+                strpos($table_name[0], 'trp_gettext_originals_dedup_map') === false ) {
                 $return_tables[] = $table_name[0];
             }
         }
@@ -1245,7 +1507,7 @@ class TRP_Query{
 
         if ($this->table_exists($table_name)) {
             $query = $this->db->prepare(
-                "SELECT id, original, translated, plural_form domain FROM $table_name 
+                "SELECT id, original, translated, plural_form, domain FROM $table_name 
                         WHERE (original > %s OR (original = %s AND id > %d)) 
                         ORDER BY original, id 
                         LIMIT %d",

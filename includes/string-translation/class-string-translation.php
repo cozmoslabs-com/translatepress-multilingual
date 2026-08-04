@@ -175,6 +175,7 @@ class TRP_String_Translation {
             'translation_status' => array(
                 'human_reviewed'     => esc_html__( 'Manually translated', 'translatepress-multilingual' ),
                 'machine_translated' => esc_html__( 'Automatically translated', 'translatepress-multilingual' ),
+                'gettext_translated_in_language_file' => esc_html__( 'Gettext file translation', 'translatepress-multilingual' ),
                 'not_translated'     => esc_html__( 'Not translated', 'translatepress-multilingual' )
             )
 

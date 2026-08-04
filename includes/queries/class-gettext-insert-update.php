@@ -60,7 +60,10 @@ class TRP_Gettext_Insert_Update extends TRP_Query {
 				$status     = self::NOT_TRANSLATED;
 			} else {
 				$translated = $string['translated'];
+				$status     = isset( $string['status'] ) ? (int) $string['status'] : self::HUMAN_REVIEWED;
+				if ( $status === self::NOT_TRANSLATED ) {
 				$status     = self::HUMAN_REVIEWED;
+			}
 			}
 			// Skip if original_id doesn't exist for this key
 			if ( !isset( $original_ids[ $key ] ) ) {
@@ -74,6 +77,7 @@ class TRP_Gettext_Insert_Update extends TRP_Query {
             return null;
 
 		$query .= implode( ', ', $place_holders );
+		$query .= ' ON DUPLICATE KEY UPDATE id = LAST_INSERT_ID(id)';
 		$this->db->query( $this->db->prepare( $query . ' ', $values ) );
 
 		$this->maybe_record_automatic_translation_error( array( 'details' => 'Error running insert_gettext_strings()' ) );
@@ -126,61 +130,194 @@ class TRP_Gettext_Insert_Update extends TRP_Query {
 		if ( count( $new_strings ) === 0 ) {
 			return array();
 		}
+
+			$hash_available = $this->gettext_original_lookup_hash_is_available();
+
+			if ( ! $hash_available || ! $use_context ) {
+				return $this->legacy_gettext_original_strings_sync( $new_strings, $hash_available, $use_context );
+			}
+
 		$new_strings_in_dictionary_with_original_id = array();
 		$insert_strings                             = array();
 		$originals_table                            = $this->get_table_name_for_gettext_original_strings();
+			$lookup_hashes                              = array();
 
-		$possible_new_strings = array();
-			foreach ( $new_strings as $string ) {
-				$possible_new_strings[] = 'CAST(' . $this->db->prepare( "%s", $string['original'] ) . ' AS BINARY)';
+			foreach ( $new_strings as $key => $string ) {
+				if ( empty( $string['original'] ) || ! isset( $string['domain'] ) ) {
+					continue;
+				}
+
+				$context                                = $this->normalize_gettext_original_context( isset( $string['context'] ) ? $string['context'] : null );
+				$lookup_hash                            = $this->get_gettext_original_lookup_hash( $string['original'], $string['domain'], $context );
+				$lookup_hashes[ $lookup_hash ]          = true;
+				$new_strings[ $key ]['context']         = $context;
+				$new_strings[ $key ]['lookup_hash']     = $lookup_hash;
+				$new_strings[ $key ]['original_plural'] = isset( $string['original_plural'] ) ? $string['original_plural'] : '';
 			}
 
-			// query for originals disregarding domain. Later, only the ones matching the domain too get selected.
-			$existing_strings = $this->db->get_results( "SELECT id, original, domain, context FROM `$originals_table` WHERE $originals_table.original IN (" . implode( ',', $possible_new_strings ) . ")", ARRAY_A );
+			$existing_strings = array();
+			if ( ! empty( $lookup_hashes ) ) {
+				$placeholders    = implode( ', ', array_fill( 0, count( $lookup_hashes ), '%s' ) );
+				$existing_query  = "SELECT id, original, domain, context, lookup_hash FROM `$originals_table` WHERE lookup_hash IN ( $placeholders )";
+				$existing_strings = $this->db->get_results( $this->db->prepare( $existing_query, array_keys( $lookup_hashes ) ), ARRAY_A );
+			}
 
-		// filtering queried strings to match exact domain and context. If not found in db, prepare for inserting. At the same time, prepare ids for return
-		if ( ! empty( $existing_strings ) ) {
 			foreach ( $new_strings as $key => $new_string ) {
+				if ( empty( $new_string['lookup_hash'] ) ) {
+					continue;
+				}
+
 				foreach ( $existing_strings as $existing_string ) {
-					if ( $existing_string['original'] === $new_string['original'] &&
-                        $existing_string['domain'] === $new_string['domain']){
-                        if ($use_context) {
-                            if ($existing_string['context'] === $new_string['context']) {
+					if ( $existing_string['lookup_hash'] === $new_string['lookup_hash'] &&
+					     $existing_string['original'] === $new_string['original'] &&
+					     $existing_string['domain'] === $new_string['domain'] &&
+					     $this->normalize_gettext_original_context( $existing_string['context'] ) === $new_string['context']
+					) {
                                 $new_strings_in_dictionary_with_original_id[$key] = $existing_string['id'];
                                 break;
                             }
-                        }else {
-                            $new_strings_in_dictionary_with_original_id[$key] = $existing_string['id'];
+				}
+
+				if ( ! isset( $new_strings_in_dictionary_with_original_id[ $key ] ) ) {
+					$insert_strings[ $key ] = $new_string;
+				}
+			}
+
+			if ( ! empty( $insert_strings ) ) {
+				foreach ( $insert_strings as $k => $string ) {
+					$insert_strings[ $k ] = $this->db->prepare( "( '%s', '%s', '%s', '%s', '%s')", $string['original'], $string['domain'], $string['context'], $string['original_plural'], $string['lookup_hash'] );
+				}
+
+				// Rely on the unique lookup hash as the final guard. Conflicts are expected in concurrent flows.
+				$this->db->query( "INSERT IGNORE INTO `$originals_table` (original, domain, context, original_plural, lookup_hash) VALUES " . implode( ',', $insert_strings ) );
+
+				$insert_hashes = array();
+				foreach ( $insert_strings as $key => $prepared_string ) {
+					$insert_hashes[ $new_strings[ $key ]['lookup_hash'] ] = true;
+				}
+
+				$placeholders         = implode( ', ', array_fill( 0, count( $insert_hashes ), '%s' ) );
+				$new_strings_inserted = $this->db->get_results( $this->db->prepare( "SELECT id, original, domain, context, lookup_hash FROM `$originals_table` WHERE lookup_hash IN ( $placeholders )", array_keys( $insert_hashes ) ), ARRAY_A );
+
+				foreach ( $new_strings as $key => $new_string ) {
+					if ( empty( $new_string['lookup_hash'] ) ) {
+						continue;
+					}
+
+					foreach ( $new_strings_inserted as $new_string_inserted ) {
+						if ( $new_string_inserted['lookup_hash'] === $new_string['lookup_hash'] &&
+						     $new_string_inserted['original'] === $new_string['original'] &&
+						     $new_string_inserted['domain'] === $new_string['domain'] &&
+						     $this->normalize_gettext_original_context( $new_string_inserted['context'] ) === $new_string['context']
+						) {
+							$new_strings_in_dictionary_with_original_id[ $key ] = $new_string_inserted['id'];
                             break;
                         }
                     }
 				}
-				if ( ! isset( $new_strings_in_dictionary_with_original_id[ $key ] ) ) {
-					$insert_strings[] = $new_string;
 				}
 
+			return $new_strings_in_dictionary_with_original_id;
+
+		}
+
+		/**
+		 * Legacy lookup path used before the hash migration completes or when callers explicitly ignore context.
+		 *
+		 * @param array $new_strings Input gettext original rows.
+		 * @param bool  $hash_available Whether the lookup_hash column and unique index are usable.
+		 * @param bool  $use_context Whether context must be part of the identity.
+		 *
+		 * @return array<int, int>
+		 */
+		protected function legacy_gettext_original_strings_sync( $new_strings, $hash_available = false, $use_context = true ) {
+			$new_strings_in_dictionary_with_original_id = array();
+			$insert_strings                             = array();
+			$originals_table                            = $this->get_table_name_for_gettext_original_strings();
+
+			$possible_new_strings = array();
+			foreach ( $new_strings as $key => $string ) {
+				if ( empty( $string['original'] ) || ! isset( $string['domain'] ) ) {
+					continue;
+				}
+
+				$new_strings[ $key ]['context']         = $this->normalize_gettext_original_context( isset( $string['context'] ) ? $string['context'] : null );
+				$new_strings[ $key ]['original_plural'] = isset( $string['original_plural'] ) ? $string['original_plural'] : '';
+				$possible_new_strings[] = $this->db->prepare( "%s", $string['original'] );
+			}
+
+			if ( empty( $possible_new_strings ) ) {
+				return array();
+			}
+
+			$existing_strings = $this->db->get_results( "SELECT id, original, domain, context FROM `$originals_table` WHERE BINARY $originals_table.original IN (" . implode( ',', $possible_new_strings ) . ")", ARRAY_A );
+
+			if ( ! empty( $existing_strings ) ) {
+				foreach ( $new_strings as $key => $new_string ) {
+					if ( ! isset( $new_string['context'] ) ) {
+						continue;
+					}
+
+					foreach ( $existing_strings as $existing_string ) {
+						if ( $existing_string['original'] === $new_string['original'] &&
+						     $existing_string['domain'] === $new_string['domain'] &&
+						     ( ! $use_context || $this->normalize_gettext_original_context( $existing_string['context'] ) === $new_string['context'] )
+						) {
+							$new_strings_in_dictionary_with_original_id[ $key ] = $existing_string['id'];
+							break;
+						}
+					}
+					if ( ! isset( $new_strings_in_dictionary_with_original_id[ $key ] ) ) {
+						$insert_strings[ $key ] = $new_string;
+					}
 			}
 		} else {
-			$insert_strings = $new_strings;
+				foreach ( $new_strings as $key => $new_string ) {
+					if ( isset( $new_string['context'] ) ) {
+						$insert_strings[ $key ] = $new_string;
+					}
+				}
 		}
 
 		if ( ! empty( $insert_strings ) ) {
 			foreach ( $insert_strings as $k => $string ) {
-				$insert_strings[ $k ] = $this->db->prepare( "( '%s', '%s', '%s', '%s')", $string['original'], $string['domain'], $string['context'], $string['original_plural'] );
+					if ( $hash_available ) {
+						$insert_strings[ $k ] = $this->db->prepare(
+							"( '%s', '%s', '%s', '%s', '%s')",
+							$string['original'],
+							$string['domain'],
+							$string['context'],
+							$string['original_plural'],
+							$this->get_gettext_original_lookup_hash( $string['original'], $string['domain'], $string['context'] )
+						);
+					} else {
+						$insert_strings[ $k ] = $this->db->prepare(
+							"( '%s', '%s', '%s', '%s')",
+							$string['original'],
+							$string['domain'],
+							$string['context'],
+							$string['original_plural']
+						);
+					}
 			}
 
-			//insert the strings that are missing
+				if ( $hash_available ) {
+					$this->db->query( "INSERT IGNORE INTO `$originals_table` (original, domain, context, original_plural, lookup_hash) VALUES " . implode( ',', $insert_strings ) );
+				} else {
 			$this->db->query( "INSERT INTO `$originals_table` (original, domain, context, original_plural) VALUES " . implode( ',', $insert_strings ) );
+				}
 
-			//get the ids for inserted the new strings (new in dictionary)
-				$new_strings_inserted = $this->db->get_results( "SELECT id, original, domain, context FROM `$originals_table` WHERE $originals_table.original IN (" . implode( ',', $possible_new_strings ) . ")", OBJECT_K );
+				$new_strings_inserted = $this->db->get_results( "SELECT id, original, domain, context FROM `$originals_table` WHERE BINARY $originals_table.original IN (" . implode( ',', $possible_new_strings ) . ")", OBJECT_K );
 
-			// filtering queried strings to match exact domain and context
 			foreach ( $new_strings as $key => $new_string ) {
+					if ( ! isset( $new_string['context'] ) ) {
+						continue;
+					}
+
 				foreach ( $new_strings_inserted as $new_string_inserted ) {
 					if ( $new_string_inserted->original === $new_string['original'] &&
 					     $new_string_inserted->domain === $new_string['domain'] &&
-					     $new_string_inserted->context === $new_string['context']
+						     ( ! $use_context || $this->normalize_gettext_original_context( $new_string_inserted->context ) === $new_string['context'] )
 					) {
 						$new_strings_in_dictionary_with_original_id[ $key ] = $new_string_inserted->id;
 						break;
@@ -190,7 +327,6 @@ class TRP_Gettext_Insert_Update extends TRP_Query {
 		}
 
 		return $new_strings_in_dictionary_with_original_id;
-
 	}
 
 	/**
@@ -219,7 +355,6 @@ class TRP_Gettext_Insert_Update extends TRP_Query {
 		if ( count( $updated_strings ) == 0 ) {
 			return;
 		}
-
 		$placeholder_array_mapping = array(
 			'id'          => '%d',
 			'original'    => '%s',

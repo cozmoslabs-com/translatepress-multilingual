@@ -35,7 +35,7 @@
                 <div class="trp-filter" id="trp-filter-translation-status">
                     <label :for="'trp-filter-translation-status-' + status_key"
                            class="trp-translation-status-checkbox"
-                           v-for="(status, status_key) in translationStatusFilters.translation_status">
+                           v-for="(status, status_key) in visibleTranslationStatusFilters">
                         <input type="checkbox" :id="'trp-filter-translation-status-' + status_key"
                                v-model="filterValues[status_key]">
                         {{ status }}
@@ -246,6 +246,15 @@
                 }else {
                     return Math.ceil( this.totalItems / this.config.items_per_page )
                 }
+            },
+            visibleTranslationStatusFilters : function () {
+                let filters = Object.assign( {}, this.translationStatusFilters.translation_status )
+
+                if ( this.currentTab.type !== 'gettext' ) {
+                    delete filters.gettext_translated_in_language_file
+                }
+
+                return filters
             }
         },
         created() {
@@ -293,8 +302,8 @@
 
 
                 // check if all translation status values are the same (all checked, or all unchecked)
-                for ( let status_key in this.translationStatusFilters.translation_status ) {
-                    if ( this.translationStatusFilters.translation_status.hasOwnProperty( status_key ) ){
+                for ( let status_key in this.visibleTranslationStatusFilters ) {
+                    if ( this.visibleTranslationStatusFilters.hasOwnProperty( status_key ) ){
                         if ( statusValue === null ){
                             statusValue = filterValues[ status_key ]
                         }
@@ -306,7 +315,7 @@
 
                 // if translation status are different then include them in the query
                 if ( boolAddStatusToQuery ){
-                    query = Object.assign( query, this.buildQueryForFilter( this.translationStatusFilters.translation_status, filterValues ) )
+                    query = Object.assign( query, this.buildQueryForFilter( this.visibleTranslationStatusFilters, filterValues ) )
                 }
 
                 // rest of the filter are added only if different from trp_default
@@ -350,8 +359,8 @@
 
                 // translation status defaults
                 this.filterValues.translation_status = {}
-                for ( let status_key in this.translationStatusFilters.translation_status ) {
-                    if ( this.translationStatusFilters.translation_status.hasOwnProperty( status_key ) ){
+                for ( let status_key in this.visibleTranslationStatusFilters ) {
+                    if ( this.visibleTranslationStatusFilters.hasOwnProperty( status_key ) ){
 
                         if ( typeof this.$route.query[ status_key ] !== 'undefined' ){
                             /* If the url query parameter is written by the user in url then it's a string.

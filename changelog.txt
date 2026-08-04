@@ -1,3 +1,11 @@
+= 3.2.6 =
+* Fixed XSS security vulnerability regarding gettext wrappers. Thanks to momopon1415 and the Wordfence team for the report
+* Fixed multisite add-on action security. Thanks to Jan Thiel for the report
+* Fixed plural gettext translations skipped by sprintf-compatibility check
+* Fixed edge cases of SQL syntax error in gettext table creation
+* Keep Translation Editor interface language unchanged while switching language of the site preview
+* Fixed CSS of Add Media button from Translation Editor
+
 = 3.2.5 =
 * Added Elementor language switcher widget
 * Fixed some cases where language switcher was not showing newly added languages to logged out users
