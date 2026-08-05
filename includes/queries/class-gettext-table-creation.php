@@ -99,7 +99,8 @@ class TRP_Gettext_Table_Creation extends TRP_Query{
             $sql_index = "CREATE INDEX gettext_index_original ON `" . $table_name . "` (original(100));";
             $this->db->query( $sql_index );
 
-	            $sql_index = "CREATE INDEX gettext_lookup_original_domain_context ON `" . $table_name . "` (original(100), domain(100), context(100));";
+	            $prefix_length = $this->get_gettext_original_lookup_index_prefix_length( $table_name );
+	            $sql_index = "CREATE INDEX gettext_lookup_original_domain_context ON `" . $table_name . "` (original($prefix_length), domain($prefix_length), context($prefix_length));";
 	            $this->db->query( $sql_index );
 
 	            $sql_index = "CREATE UNIQUE INDEX gettext_lookup_hash_unique ON `" . $table_name . "` (lookup_hash);";

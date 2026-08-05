@@ -661,7 +661,7 @@ class TRP_Gettext_Originals_Lookup_Hash_Migration {
             $domain_mismatch_sql = '';
 
             if ( $this->trp_query->table_column_exists( $table_name, 'domain' ) ) {
-                $domain_mismatch_sql = " OR COALESCE(tt.domain, '') <> COALESCE(dup.domain, '')";
+                $domain_mismatch_sql = " OR BINARY COALESCE(tt.domain, '') <> BINARY COALESCE(dup.domain, '')";
             }
 
             $this->db->query(

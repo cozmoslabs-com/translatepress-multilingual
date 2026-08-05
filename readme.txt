@@ -5,7 +5,7 @@ Tags: translate, translation, multilingual, automatic translation, ai translatio
 Requires at least: 3.1.0
 Tested up to: 7.0.2
 Requires PHP: 7.4
-Stable tag: 3.3
+Stable tag: 3.3.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -169,6 +169,10 @@ Please report security bugs found in the source code of the TranslatePress plugi
 
 
 == Changelog ==
+= 3.3.1 =
+* Fixed cases of gettext database optimization failure due to index creation issues
+* Fixed cases of illegal mix of collation issues when running gettext database optimization
+
 = 3.3 =
 * Fixed XSS vulnerability with gettext markers in comments. Thanks to Pham Duc Anh and the Wordfence team for the report
 * Fixed XSS vulnerability in Translation Editor strings dropdown. Thanks to momopon1415 and the Wordfence team for the report

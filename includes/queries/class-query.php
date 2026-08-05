@@ -935,6 +935,29 @@ class TRP_Query{
     }
 
     /**
+     * Return a safe prefix length for the gettext originals composite lookup index.
+     *
+     * MyISAM limits indexes to 1000 bytes. Three 100-character utf8mb4 prefixes
+     * can require 1200 bytes, while three 83-character prefixes require at most
+     * 996 bytes. InnoDB can keep the more selective 100-character prefixes.
+     *
+     * @param string $table_name Gettext originals table name.
+     *
+     * @return int
+     */
+    public function get_gettext_original_lookup_index_prefix_length( $table_name ) {
+        $table_name = sanitize_text_field( $table_name );
+        $engine     = $this->db->get_var(
+            $this->db->prepare(
+                'SELECT ENGINE FROM information_schema.TABLES WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = %s',
+                $table_name
+            )
+        );
+
+        return strtoupper( (string) $engine ) === 'MYISAM' ? 83 : 100;
+    }
+
+    /**
      * Return table name for temporary gettext originals deduplication map.
      *
      * @return string

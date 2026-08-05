@@ -772,8 +772,10 @@
 <?php __("Open the language switcher shortcode by clicking on it instead of hovering.<br> Close it by clicking on it, anywhere else on the screen or by pressing the escape key. This will affect only the shortcode language switcher.", "translatepress-multilingual"); ?>
 <?php __("Show opposite language in the language switcher", "translatepress-multilingual"); ?>
 <?php __("Transforms the language switcher into a button showing the other available language, not the current one.<br> Only works when there are exactly two languages, the default one and a translation one.<br>This will affect the shortcode language switcher and floating language switcher as well.<br> To achieve this in menu language switcher go to Appearance->Menus->Language Switcher and select Opposite Language.", "translatepress-multilingual"); ?>
-<?php __("Pending gettext database optimization", "translatepress-multilingual"); ?>
 <?php __("TranslatePress needs to optimize its gettext database tables. Back up the database, then <a href=\"%s\">start the optimization</a>.", "translatepress-multilingual"); ?>
+<?php __("TranslatePress gettext database optimization failed.", "translatepress-multilingual"); ?>
+<?php __("Retry", "translatepress-multilingual"); ?>
+<?php __("Pending gettext database optimization", "translatepress-multilingual"); ?>
 <?php __("<a href=\"%s\">Click here</a> to access the database optimization tool.", "translatepress-multilingual"); ?>
 <?php __("It helps remove possible duplicate translations, clear unnecessary data and repair possible metadata issues.", "translatepress-multilingual"); ?>
 <?php __("<a href=\"%s\" target=\"_blank\">Here</a> you can observe the last 5 SQL errors relevant to TranslatePress if they exist.", "translatepress-multilingual"); ?>
@@ -1010,7 +1012,6 @@
 <?php __("A previous batch item failed.", "translatepress-multilingual"); ?>
 <?php __("TranslatePress background processing did not complete successfully.", "translatepress-multilingual"); ?>
 <?php __("Error: %s", "translatepress-multilingual"); ?>
-<?php __("Retry", "translatepress-multilingual"); ?>
 <?php __("You do not have permission to view this task status.", "translatepress-multilingual"); ?>
 <?php __("Invalid batch task.", "translatepress-multilingual"); ?>
 <?php __("TranslatePress background processing completed successfully.", "translatepress-multilingual"); ?>
@@ -1018,7 +1019,6 @@
 <?php __("Processing %s...", "translatepress-multilingual"); ?>
 <?php __("%s is optimizing gettext database tables in the background. Translations continue to work while this runs.", "translatepress-multilingual"); ?>
 <?php __("TranslatePress gettext database optimization completed successfully.", "translatepress-multilingual"); ?>
-<?php __("TranslatePress gettext database optimization failed.", "translatepress-multilingual"); ?>
 <?php __("TranslatePress has detected and cleaned up some failed translation entries in your database following %1$san isolated incident%2$s. No further action is required.", "translatepress-multilingual"); ?>
 <?php __("Post Slug", "translatepress-multilingual"); ?>
 <?php __("Invalid language code", "translatepress-multilingual"); ?>

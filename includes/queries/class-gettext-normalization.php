@@ -79,7 +79,8 @@ class TRP_Gettext_Normalization extends TRP_Query {
 		}
 
 		if ( ! $this->table_index_exists( $table_name, 'gettext_lookup_original_domain_context' ) ) {
-			$this->db->query( "CREATE INDEX gettext_lookup_original_domain_context ON `" . $table_name . "` (original(100), domain(100), context(100))" );
+			$prefix_length = $this->get_gettext_original_lookup_index_prefix_length( $table_name );
+			$this->db->query( "CREATE INDEX gettext_lookup_original_domain_context ON `" . $table_name . "` (original($prefix_length), domain($prefix_length), context($prefix_length))" );
 		}
 	}
 
