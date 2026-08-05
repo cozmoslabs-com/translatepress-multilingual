@@ -153,6 +153,9 @@ Yes, TranslatePress works out of the box with WooCommerce. You can use to build 
 
 For more information please check out our [documentation](https://translatepress.com/docs/translatepress/?utm_source=wp.org&utm_medium=tp-description-page&utm_campaign=TPFree).
 
+= Where do I report security bugs found in this plugin? =
+
+Please report security bugs found in the source code of the TranslatePress plugin through the [Patchstack Vulnerability Disclosure  Program](https://patchstack.com/database/vdp/55520b61-434d-4271-801d-b55f75b5cbe1). The Patchstack team will assist you with verification, CVE assignment, and notify the developers of this plugin.
 
 == Screenshots ==
 1. TranslatePress front-end visual translation editor in action
