@@ -17,7 +17,7 @@ class TRP_Ajax{
      */
     public function __construct( ){
 
-        if ( !isset( $_POST['action'] ) || $_POST['action'] !== 'trp_get_translations_regular' || empty( $_POST['originals'] ) || empty( $_POST['language'] ) || empty( $_POST['original_language'] ) ) {
+        if ( !isset( $_POST['action'] ) || $_POST['action'] !== 'trp_get_translations_domchanges' || empty( $_POST['originals'] ) || empty( $_POST['language'] ) || empty( $_POST['original_language'] ) ) {
             die();
         }
 

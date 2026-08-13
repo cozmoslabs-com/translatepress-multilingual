@@ -2349,6 +2349,27 @@ class TRP_Translation_Render{
             return $args;
         }
 
+        /* Skip email translation in request contexts where TranslatePress does not wrap
+           gettext strings (wp-login.php, wp-admin, xmlrpc, TP editor requests). There the
+           email body carries no trp-gettext markers, so translate_page() would treat every
+           line - including security URLs like the password-reset link - as a regular
+           dynamic string and persist it to the dictionary, from where it can be disclosed.
+           This mirrors the condition in TRP_Gettext_Manager::processing_gettext_is_needed(),
+           so processing here would never match a marker anyway. See CU-869ehfvac. */
+        global $pagenow;
+        if ( ! $this->url_converter ) {
+            $trp                 = TRP_Translate_Press::get_trp_instance();
+            $this->url_converter = $trp->get_component( 'url_converter' );
+        }
+        if (
+            $pagenow === 'wp-login.php'
+            || $pagenow === 'xmlrpc.php'
+            || ( is_admin() && ! TRP_Gettext_Manager::is_ajax_on_frontend() )
+            || $this->url_converter->is_admin_request()
+        ) {
+            return $args;
+        }
+
         global $TRP_LANGUAGE;
 
         $initial_language = $TRP_LANGUAGE;

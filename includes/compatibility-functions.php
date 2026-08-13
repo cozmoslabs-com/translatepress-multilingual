@@ -2248,11 +2248,84 @@ function trp_AIOSEO_remove_gettext_hooks($trp_loader){
 add_filter( 'trp_needed_language', 'trp_page_builders_compatibility_with_subdirectory_for_default_language', 10, 4 );
 function trp_page_builders_compatibility_with_subdirectory_for_default_language( $needed_language, $lang_from_url, $settings, $trp) {
     if ( ( ( isset( $_GET['action'] ) && $_GET['action'] === 'elementor' ) || isset( $_GET['elementor-preview'] ) ) //Elementor
-        || ( ( isset( $_GET['et_fb'] ) && $_GET['et_fb'] === '1' ) && ( isset( $_GET['PageSpeed'] ) && $_GET['PageSpeed'] === "off" ) ) //Divi
+        || trp_divi_is_builder_request() //Divi 4 & 5. Divi 4 appended PageSpeed=off to the builder URL, Divi 5 no longer does, so don't rely on it
         || ( ( isset( $_GET['vc_action'] ) && $_GET['vc_action'] === 'vc_inline' ) || ( isset( $_GET['vc_editable'] ) && $_GET['vc_editable'] === 'true' ) ) ) { //WPBakery
         $needed_language = $settings['default-language'];
     }
     return $needed_language;
+}
+
+/**
+ * Whether the current request is a Divi Builder session.
+ * et_fb=1  - Visual Builder (front-end)
+ * et_bfb=1 - Backend Builder iframe
+ */
+function trp_divi_is_builder_request() {
+    return ( isset( $_GET['et_fb'] ) && $_GET['et_fb'] === '1' ) || ( isset( $_GET['et_bfb'] ) && $_GET['et_bfb'] === '1' ); /* phpcs:ignore */
+}
+
+/**
+ * Redirect Divi Builder sessions opened on a secondary language URL to the default language.
+ *
+ * The Divi 5 Visual Builder loads its content over the REST API. On a secondary language URL
+ * the REST root advertised to the builder is language-prefixed and TranslatePress processes
+ * the page and the REST responses, so the builder fails to load the post content.
+ *
+ * Hooked before TRP_Language_Switcher::redirect_to_correct_language() so we don't redirect twice.
+ * The default language with "Use subdirectory for default language" enabled is left as is;
+ * trp_needed_language resolves it, and on the default language TranslatePress leaves both the
+ * page and the REST responses untouched.
+ */
+add_action( 'template_redirect', 'trp_divi_builder_redirect_to_default_language', 10 );
+function trp_divi_builder_redirect_to_default_language() {
+    if ( is_admin() || ! trp_divi_is_builder_request() || ! defined( 'ET_BUILDER_VERSION' ) ) {
+        return;
+    }
+
+    $trp           = TRP_Translate_Press::get_trp_instance();
+    $url_converter = $trp->get_component( 'url_converter' );
+    $settings      = ( new TRP_Settings() )->get_settings();
+
+    if ( ! $url_converter || empty( $settings['default-language'] ) ) {
+        return;
+    }
+
+    $current_url  = $url_converter->cur_page_url();
+    $current_lang = $url_converter->get_lang_from_url_string( $current_url );
+
+    if ( $current_lang != null && $current_lang != $settings['default-language'] ) {
+        $link_to_redirect = $url_converter->get_url_for_language( $settings['default-language'], null, '' );
+
+        if ( $link_to_redirect != $current_url ) {
+            wp_redirect( $link_to_redirect, 301 );
+            exit;
+        }
+    }
+}
+
+/**
+ * Disable the automatic language detection redirect script inside the Divi Builder.
+ * Otherwise it would redirect the builder page back to the visitor's preferred language,
+ * bouncing against the redirect to the default language above.
+ */
+add_filter( 'trp_ald_enqueue_redirecting_script', 'trp_divi_builder_disable_ald_redirect' );
+function trp_divi_builder_disable_ald_redirect( $enqueue_redirecting_script ) {
+    if ( trp_divi_is_builder_request() ) {
+        return false;
+    }
+    return $enqueue_redirecting_script;
+}
+
+/**
+ * Hide the floating language switcher inside the Divi Builder.
+ */
+add_filter( 'trp_floating_ls_html', 'trp_divi_builder_disable_language_switcher' );
+add_filter( 'trp_floater_ls_html_v2', 'trp_divi_builder_disable_language_switcher' );
+function trp_divi_builder_disable_language_switcher( $html ) {
+    if ( trp_divi_is_builder_request() ) {
+        return '';
+    }
+    return $html;
 }
 
 
@@ -3217,26 +3290,31 @@ function trp_is_breakdance_builder_request() {
  * site default that change_locale() forces on frontend requests.
  */
 function trp_breakdance_builder_respect_user_locale( $locale ) {
-    // Guard against infinite recursion: get_user_locale() falls back to
-    // get_locale() when the user has no profile language ("Site Default"),
-    // and get_locale() re-fires this very 'locale' filter. Without this guard
-    // that recurses until PHP exhausts memory / segfaults on the Breakdance
-    // builder endpoint.
+    // Guard against infinite recursion: both is_user_logged_in() (via
+    // wp_get_current_user() -> get_user_by() -> sanitize_user() ->
+    // remove_accents() on multibyte usernames) and get_user_locale() (falls
+    // back to get_locale() when the user has no profile language) re-fire
+    // this very 'locale' filter. Without this guard that recurses until PHP
+    // exhausts memory / segfaults.
     static $in_progress = false;
     if ( $in_progress ) {
         return $locale;
     }
 
-    // is_user_logged_in() is not yet available on the early load_default_textdomain() locale call.
-    if ( ! function_exists( 'is_user_logged_in' ) || ! is_user_logged_in() ) {
-        return $locale;
-    }
-
+    // Cheapest check first: on non-Breakdance-builder requests bail before
+    // touching any user functions that could re-enter this filter.
     if ( ! trp_is_breakdance_builder_request() ) {
         return $locale;
     }
 
     $in_progress = true;
+
+    // is_user_logged_in() is not yet available on the early load_default_textdomain() locale call.
+    if ( ! function_exists( 'is_user_logged_in' ) || ! is_user_logged_in() ) {
+        $in_progress = false;
+        return $locale;
+    }
+
     $user_locale = get_user_locale();
     $in_progress = false;
 

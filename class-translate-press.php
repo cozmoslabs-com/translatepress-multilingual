@@ -82,7 +82,7 @@ class TRP_Translate_Press{
         define( 'TRP_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
         define( 'TRP_PLUGIN_BASE', plugin_basename( __DIR__ . '/index.php' ) );
         define( 'TRP_PLUGIN_SLUG', 'translatepress-multilingual' );
-        define( 'TRP_PLUGIN_VERSION', '3.3.1' );
+        define( 'TRP_PLUGIN_VERSION', '3.3.2' );
 
 	    wp_cache_add_non_persistent_groups(array('trp'));
 
@@ -358,8 +358,11 @@ class TRP_Translate_Press{
         $this->loader->add_filter( 'trp_error_manager_page_output', $this->error_manager, 'output_db_errors', 10, 1 );
         $this->loader->add_action('load-admin_page_trp_error_manager', $this->error_manager, 'disable_error_after_click_link', 10);
 
-        $this->loader->add_action( 'wp_ajax_nopriv_trp_get_translations_regular', $this->editor_api_regular_strings, 'get_translations' );
+        // Front-end dynamic translation (DOM changes). Safe for logged-out visitors
+        $this->loader->add_action( 'wp_ajax_nopriv_trp_get_translations_domchanges', $this->editor_api_regular_strings, 'get_translations_domchanges' );
+        $this->loader->add_action( 'wp_ajax_trp_get_translations_domchanges', $this->editor_api_regular_strings, 'get_translations_domchanges' );
 
+        // Editor-only (authenticated + capability-gated inside get_translations).
 	    $this->loader->add_action( 'wp_ajax_trp_get_translations_regular', $this->editor_api_regular_strings, 'get_translations' );
         $this->loader->add_action( 'wp_ajax_trp_save_translations_regular', $this->editor_api_regular_strings, 'save_translations' );
         $this->loader->add_action( 'wp_ajax_trp_split_translation_block', $this->editor_api_regular_strings, 'split_translation_block' );

@@ -3,9 +3,9 @@ Contributors: cozmoslabs, razvan.mo, madalin.ungureanu, sareiodata, cristophor
 Donate link: https://www.translatepress.com/
 Tags: translate, translation, multilingual, automatic translation, ai translation, front-end translation, google translate, language
 Requires at least: 3.1.0
-Tested up to: 7.0.2
+Tested up to: 7.0.4
 Requires PHP: 7.4
-Stable tag: 3.3.1
+Stable tag: 3.3.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -169,6 +169,11 @@ Please report security bugs found in the source code of the TranslatePress plugi
 
 
 == Changelog ==
+= 3.3.2 =
+* Fixed security issue regarding sensitive information exposure. Thanks to momopon1415 and the Worfence team
+* Ensure Divi Builder always loads in the default language
+* Fixed infinite recursion on HTTPS REST requests with multibyte UTF-8 usernames
+
 = 3.3.1 =
 * Fixed cases of gettext database optimization failure due to index creation issues
 * Fixed cases of illegal mix of collation issues when running gettext database optimization
