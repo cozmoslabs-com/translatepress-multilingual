@@ -170,7 +170,7 @@ Please report security bugs found in the source code of the TranslatePress plugi
 
 == Changelog ==
 = 3.3.2 =
-* Fixed security issue regarding sensitive information exposure. Thanks to momopon1415 and the Worfence team
+* Fixed security issue regarding sensitive information exposure. Thanks to momopon1415 and the Wordfence team
 * Ensure Divi Builder always loads in the default language
 * Fixed infinite recursion on HTTPS REST requests with multibyte UTF-8 usernames
 
