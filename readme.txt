@@ -5,7 +5,7 @@ Tags: translate, translation, multilingual, automatic translation, ai translatio
 Requires at least: 3.1.0
 Tested up to: 7.0.4
 Requires PHP: 7.4
-Stable tag: 3.3.2
+Stable tag: 3.3.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -169,25 +169,9 @@ Please report security bugs found in the source code of the TranslatePress plugi
 
 
 == Changelog ==
-= 3.3.2 =
-* Fixed security issue regarding sensitive information exposure. Thanks to momopon1415 and the Wordfence team
-* Ensure Divi Builder always loads in the default language
-* Fixed infinite recursion on HTTPS REST requests with multibyte UTF-8 usernames
-
-= 3.3.1 =
-* Fixed cases of gettext database optimization failure due to index creation issues
-* Fixed cases of illegal mix of collation issues when running gettext database optimization
-
-= 3.3 =
-* Fixed XSS vulnerability with gettext markers in comments. Thanks to Pham Duc Anh and the Wordfence team for the report
-* Fixed XSS vulnerability in Translation Editor strings dropdown. Thanks to momopon1415 and the Wordfence team for the report
-* Improved page loading time by better handling gettext translations
-* Fixed WooCommerce remove from cart product title not translated
-* Fixed Elementor homepage editor hanging when default-language subdirectory is enabled
-* Fixed conflict with Mailster plugin
-* Fixed hidden API credential test fields
-* Fixed trp-ajax issues when having escaped db credentials
-* Prevent interference with robots.txt
+= 3.3.3 =
+* Fixed XSS vulnerability in Translation Editor with gettext markers in search query parameter. Thanks to Quentin Lamour and the Patchstack team for the report
+* Fixed Breakdance product title search indexing
 
 = Older versions =
 [Click Here](https://translatepress.com/docs/translatepress-free-changelog/?utm_source=wp.org&utm_medium=tp-description-page&utm_campaign=TPFree) to view the full changelog, or you can find it in the changelog.txt file in the plugin folder.

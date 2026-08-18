@@ -3267,6 +3267,82 @@ function trp_breakdance_compat__remove_filter() {
 add_action( 'plugins_loaded', 'trp_breakdance_compat__remove_filter', 20 );
 
 /**
+ * Prepare translated search indexing for Breakdance product title elements.
+ *
+ * Breakdance renders its Product Title and dynamic Post Title elements outside the
+ * WordPress main loop. TranslatePress normally avoids adding post container tags in
+ * that context because title filters can also run in SEO plugins and other places
+ * where HTML is not accepted. Without the container, however, the translated title
+ * is not associated with the product ID and cannot be found by translated search.
+ *
+ * Arm an override only for the title filter triggered immediately by the relevant
+ * Breakdance element. The override is removed at the end of that same filter call.
+ *
+ * @param object|string $element The Breakdance element being rendered.
+ *
+ * @return void
+ */
+function trp_breakdance_prepare_product_title_search_indexing( $element ) {
+    if ( is_object( $element ) ) {
+        $element_name = get_class( $element );
+    } elseif ( is_string( $element ) ) {
+        $element_name = $element;
+    } else {
+        return;
+    }
+
+    /**
+     * Filter the Breakdance elements that render the current product title.
+     *
+     * @param string[] $product_title_elements Breakdance element class names.
+     */
+    $product_title_elements = (array) apply_filters( 'trp_breakdance_product_title_elements', array(
+        'EssentialElements\\PostTitle',
+        'EssentialElements\\WooProductTitle',
+    ) );
+
+    if ( ! in_array( $element_name, $product_title_elements, true ) || ! function_exists( 'is_product' ) || ! is_product() ) {
+        return;
+    }
+
+    add_filter( 'trp_wrap_with_post_id_overrule', 'trp_breakdance_allow_current_product_title_wrapper', PHP_INT_MAX, 3 );
+    add_filter( 'the_title', 'trp_breakdance_remove_product_title_wrapper_override', PHP_INT_MAX, 2 );
+}
+add_action( 'breakdance_render_element_template', 'trp_breakdance_prepare_product_title_search_indexing', 10, 1 );
+
+/**
+ * Allow the current product title to receive TranslatePress post context.
+ *
+ * @param bool     $overrule Whether post container tags should be skipped.
+ * @param string   $content  The title being filtered.
+ * @param int|null $post_id  The post ID supplied by the_title.
+ *
+ * @return bool
+ */
+function trp_breakdance_allow_current_product_title_wrapper( $overrule, $content, $post_id ) {
+    if ( ! empty( $post_id ) && (int) $post_id === (int) get_queried_object_id() ) {
+        return false;
+    }
+
+    return $overrule;
+}
+
+/**
+ * Remove the one-use Breakdance product title indexing override.
+ *
+ * @param string   $title   The filtered title.
+ * @param int|null $post_id The post ID supplied by the_title.
+ *
+ * @return string
+ */
+function trp_breakdance_remove_product_title_wrapper_override( $title, $post_id ) {
+    remove_filter( 'trp_wrap_with_post_id_overrule', 'trp_breakdance_allow_current_product_title_wrapper', PHP_INT_MAX );
+    remove_filter( 'the_title', 'trp_breakdance_remove_product_title_wrapper_override', PHP_INT_MAX );
+
+    return $title;
+}
+
+/**
  * Detect whether the current request is loading the Breakdance Builder interface.
  */
 function trp_is_breakdance_builder_request() {
