@@ -1,3 +1,7 @@
+= 3.3.3 =
+* Fixed XSS vulnerability in Translation Editor with gettext markers in search query parameter. Thanks to Quentin Lamour and the Patchstack team for the report
+* Fixed Breakdance product title search indexing
+
 = 3.3.2 =
 * Fixed security issue regarding sensitive information exposure. Thanks to momopon1415 and the Wordfence team
 * Ensure Divi Builder always loads in the default language

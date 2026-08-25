@@ -2,20 +2,21 @@
 import { provide } from 'vue'
 import { onBeforeRouteLeave } from 'vue-router'
 
-import SettingsBox from '../components/SettingsBox.vue'
-import SettingsActions from '../components/SettingsActions.vue'
+import SettingsBox from '../../shared/components/SettingsBox.vue'
+import SettingsActions from '../../shared/components/SettingsActions.vue'
+import LayoutCustomizerField from '../components/fields/LayoutCustomizerField.vue'
 
 import { useSwitcherConfig } from '../composables/useSwitcherConfig'
 import { useSwitcherPersistence } from '../composables/useSwitcherPersistance'
 
 import { __ } from '@wordpress/i18n'
-import { sanitizeHtml }  from "../composables/utils/sanitizeHtml"
+import { sanitizeHtml }  from "../../shared/composables/utils/sanitizeHtml"
 
 const scope = 'menu'
 const cfg = useSwitcherConfig(scope)
 
 const persistence = useSwitcherPersistence(scope)
-provide('switcherPersistence', persistence)
+provide('settingsPersistence', persistence)
 
 const { isDirty, revert } = persistence
 
@@ -24,6 +25,10 @@ const T = {
     unsavedChangesAlert: __('You have unsaved changes. Leave anyway?', 'translatepress-multilingual'),
     //[utm4]
     descriptionText: sanitizeHtml( __('Go to <a href="/wp-admin/nav-menus.php">Appearance → Menus</a> to add languages to the Language Switcher in any menu.<br> <a href="https://translatepress.com/docs/settings/language-switcher/?utm_source=tp-language-switcher&utm_medium=client-site&utm_campaign=ls-menu-item#menu-switcher" target="_blank">Learn more in our documentation.</a>', 'translatepress-multilingual') )
+}
+
+const fieldComponents = {
+    lCustomizer: LayoutCustomizerField,
 }
 
 onBeforeRouteLeave((_to, _from, next) => {
@@ -46,13 +51,14 @@ onBeforeRouteLeave((_to, _from, next) => {
           label: ''
         }
       ]"
+            :components="fieldComponents"
         >
             <template #end>
                 <span class="trp-description-text" v-html="T.descriptionText" />
             </template>
         </SettingsBox>
 
-        <SettingsActions :scope="scope" />
+        <SettingsActions />
     </div>
 </template>
 

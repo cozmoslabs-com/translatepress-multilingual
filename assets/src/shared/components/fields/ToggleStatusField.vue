@@ -13,11 +13,12 @@
 <script setup>
 import ToggleField from './ToggleField.vue'
 import { computed }  from "vue"
+import { __ } from '@wordpress/i18n'
 
 const props = defineProps({
     modelValue: Boolean,
-    onText:  { type: String, default: 'Enabled' },
-    offText: { type: String, default: 'Disabled' }
+    onText:  { type: String, default: __('Enabled', 'translatepress-multilingual') },
+    offText: { type: String, default: __('Disabled', 'translatepress-multilingual') }
 })
 const emit = defineEmits(['update:modelValue'])
 

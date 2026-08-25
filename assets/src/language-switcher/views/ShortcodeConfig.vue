@@ -2,8 +2,9 @@
 import { computed, provide } from 'vue'
 import { onBeforeRouteLeave } from 'vue-router'
 
-import SettingsBox from '../components/SettingsBox.vue'
-import SettingsActions from '../components/SettingsActions.vue'
+import SettingsBox from '../../shared/components/SettingsBox.vue'
+import SettingsActions from '../../shared/components/SettingsActions.vue'
+import LayoutCustomizerField from '../components/fields/LayoutCustomizerField.vue'
 import LanguageSwitcherPreview from '../components/LanguageSwitcherPreview.vue'
 import ShortcodeCopy from '../components/ShortcodeCopy.vue'
 
@@ -16,7 +17,7 @@ import { __ }                  from '@wordpress/i18n'
 const scope = 'shortcode'
 const cfg = useSwitcherConfig(scope)
 const persistence = useSwitcherPersistence(scope)
-provide('switcherPersistence', persistence)
+provide('settingsPersistence', persistence)
 
 const { isDirty, revert } = persistence
 const { positioning } = useLayoutCustomizer(scope)
@@ -73,6 +74,10 @@ const T = {
     showOppositeLanguage: __('Show opposite language', 'translatepress-multilingual'),
 }
 
+const fieldComponents = {
+    lCustomizer: LayoutCustomizerField,
+}
+
 onBeforeRouteLeave((_to, _from, next) => {
     if (!isDirty.value) return next()
     const confirmLeave = window.confirm(T.confirmLeave)
@@ -88,7 +93,7 @@ onBeforeRouteLeave((_to, _from, next) => {
                     <LanguageSwitcherPreview :scope="scope" />
                 </SettingsBox>
 
-                <SettingsActions :scope="scope" />
+                <SettingsActions />
             </div>
         </div>
 
@@ -152,6 +157,7 @@ onBeforeRouteLeave((_to, _from, next) => {
                 :title="T.customizeLayout"
                 :scope="scope"
                 collapsible
+                :components="fieldComponents"
                 :fields="[
                     { key: 'layoutCustomizer', type: 'lCustomizer', label: '' }
                 ]"

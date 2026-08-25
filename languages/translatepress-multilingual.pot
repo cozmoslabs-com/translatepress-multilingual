@@ -6,7 +6,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-08-18 13:42+0000\n"
+"POT-Creation-Date: 2026-08-25 09:21+0000\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
 "X-Poedit-SearchPath-0: .\n"
@@ -365,7 +365,7 @@ msgstr ""
 msgid "Advanced"
 msgstr ""
 
-#: includes/class-advanced-tab.php:231, includes/class-language-switcher-tab.php:197
+#: includes/class-advanced-tab.php:231, includes/class-language-switcher-tab.php:197, add-ons-pro/automatic-language-detection/includes/class-ald-settings.php:545
 msgid "Settings saved."
 msgstr ""
 
@@ -601,11 +601,11 @@ msgstr ""
 msgid "Active"
 msgstr ""
 
-#: includes/class-language-switcher-tab.php:169, includes/class-language-switcher-tab.php:213, add-ons-pro/multiple-domains/class-multiple-domains.php:768
+#: includes/class-language-switcher-tab.php:169, includes/class-language-switcher-tab.php:213, add-ons-pro/multiple-domains/class-multiple-domains.php:768, add-ons-pro/automatic-language-detection/includes/class-ald-settings.php:525
 msgid "Permission denied."
 msgstr ""
 
-#: includes/class-language-switcher-tab.php:176, includes/class-language-switcher-tab.php:221
+#: includes/class-language-switcher-tab.php:176, includes/class-language-switcher-tab.php:221, add-ons-pro/automatic-language-detection/includes/class-ald-settings.php:532
 msgid "Invalid nonce."
 msgstr ""
 
@@ -1227,7 +1227,7 @@ msgstr ""
 msgid "Different Menu Items for each Language"
 msgstr ""
 
-#: includes/class-translation-manager.php:170, partials/addons-settings-page.php:81, add-ons-pro/automatic-language-detection/class-automatic-language-detection.php:66, includes/onboarding/class-addons.php:77, add-ons-pro/automatic-language-detection/partials/general-settings.php:6
+#: includes/class-translation-manager.php:170, partials/addons-settings-page.php:81, add-ons-pro/automatic-language-detection/class-automatic-language-detection.php:69, includes/onboarding/class-addons.php:77, add-ons-pro/automatic-language-detection/partials/general-settings.php:6
 msgid "Automatic User Language Detection"
 msgstr ""
 
@@ -2044,11 +2044,11 @@ msgstr ""
 msgid "There are no logged errors."
 msgstr ""
 
-#: partials/floating-switcher.php:33, partials/shortcode-switcher.php:56
+#: partials/floating-switcher.php:33, partials/shortcode-switcher.php:56, add-ons-pro/automatic-language-detection/partials/no-text-popup.php:46, add-ons-pro/automatic-language-detection/partials/popup.php:42
 msgid "Change language"
 msgstr ""
 
-#: partials/floating-switcher.php:80, partials/shortcode-switcher.php:116, partials/shortcode-switcher.php:98
+#: partials/floating-switcher.php:80, partials/shortcode-switcher.php:116, partials/shortcode-switcher.php:98, add-ons-pro/automatic-language-detection/partials/no-text-popup.php:42, add-ons-pro/automatic-language-detection/partials/popup.php:39
 msgid "Website language selector"
 msgstr ""
 
@@ -2056,7 +2056,7 @@ msgstr ""
 msgid "WordPress Translation Plugin"
 msgstr ""
 
-#: partials/floating-switcher.php:106, partials/shortcode-switcher.php:124
+#: partials/floating-switcher.php:106, partials/shortcode-switcher.php:124, add-ons-pro/automatic-language-detection/partials/no-text-popup.php:54, add-ons-pro/automatic-language-detection/partials/popup.php:49
 msgid "Available languages"
 msgstr ""
 
@@ -4150,88 +4150,68 @@ msgstr ""
 msgid "Invalid language code"
 msgstr ""
 
-#: add-ons-pro/automatic-language-detection/includes/class-ald-settings.php:54
+#: add-ons-pro/automatic-language-detection/includes/class-ald-settings.php:37
+msgid "We've detected you might be speaking a different language. Do you want to change to:"
+msgstr ""
+
+#: add-ons-pro/automatic-language-detection/includes/class-ald-settings.php:38
+msgid "Change Language"
+msgstr ""
+
+#: add-ons-pro/automatic-language-detection/includes/class-ald-settings.php:39
+msgid "Close and do not switch language"
+msgstr ""
+
+#: add-ons-pro/automatic-language-detection/includes/class-ald-settings.php:85
 msgid "First by browser language, then IP address (recommended)"
 msgstr ""
 
-#: add-ons-pro/automatic-language-detection/includes/class-ald-settings.php:55
+#: add-ons-pro/automatic-language-detection/includes/class-ald-settings.php:86
 msgid "First by IP address, then by browser language"
 msgstr ""
 
-#: add-ons-pro/automatic-language-detection/includes/class-ald-settings.php:56
+#: add-ons-pro/automatic-language-detection/includes/class-ald-settings.php:87
 msgid "Only by browser language"
 msgstr ""
 
-#: add-ons-pro/automatic-language-detection/includes/class-ald-settings.php:57
+#: add-ons-pro/automatic-language-detection/includes/class-ald-settings.php:88
 msgid "Only by IP address"
 msgstr ""
 
-#: add-ons-pro/automatic-language-detection/includes/class-ald-settings.php:147
+#: add-ons-pro/automatic-language-detection/includes/class-ald-settings.php:359
 msgid "A popup appears asking the user if they want to be redirected"
 msgstr ""
 
-#: add-ons-pro/automatic-language-detection/includes/class-ald-settings.php:148
+#: add-ons-pro/automatic-language-detection/includes/class-ald-settings.php:360
 msgid "Redirect directly (*not recommended)"
 msgstr ""
 
-#: add-ons-pro/automatic-language-detection/includes/class-ald-settings.php:154
+#: add-ons-pro/automatic-language-detection/includes/class-ald-settings.php:366
 msgid "Pop-up window over the content"
 msgstr ""
 
-#: add-ons-pro/automatic-language-detection/includes/class-ald-settings.php:155
+#: add-ons-pro/automatic-language-detection/includes/class-ald-settings.php:367
 msgid "Hello bar before the content"
 msgstr ""
 
-#: add-ons-pro/automatic-language-detection/includes/class-ald-settings.php:188
+#: add-ons-pro/automatic-language-detection/includes/class-ald-settings.php:405
+msgid "Automatic User Language Detection requires a newer version of TranslatePress to use its visual settings interface. The legacy settings form will remain available until TranslatePress is updated."
+msgstr ""
+
+#: add-ons-pro/automatic-language-detection/includes/class-ald-settings.php:406
+msgid "Update TranslatePress"
+msgstr ""
+
+#: add-ons-pro/automatic-language-detection/includes/class-ald-settings.php:507
 msgid "WARNING. Cannot determine your language preference based on your current IP.<br>This is most likely because the website is on a local environment."
+msgstr ""
+
+#: add-ons-pro/automatic-language-detection/includes/class-ald-settings.php:539
+msgid "Invalid settings."
 msgstr ""
 
 #: add-ons-pro/automatic-language-detection/partials/general-settings.php:8
 msgid "Go to <a href=\"%s\" target=\"_self\">Advanced</a> tab to change this feature's settings"
-msgstr ""
-
-#: add-ons-pro/automatic-language-detection/partials/settings-option.php:7
-msgid "User Language Detection Method"
-msgstr ""
-
-#: add-ons-pro/automatic-language-detection/partials/settings-option.php:22
-msgid "Select how the language should be detected for first time visitors.<br>The visitor's last displayed language will be remembered through cookies."
-msgstr ""
-
-#: add-ons-pro/automatic-language-detection/partials/settings-option.php:31
-msgid "User Notification Popup"
-msgstr ""
-
-#: add-ons-pro/automatic-language-detection/partials/settings-option.php:36
-msgid "A popup appears asking the user if they want to be redirected."
-msgstr ""
-
-#: add-ons-pro/automatic-language-detection/partials/settings-option.php:40
-msgid "Popup Type"
-msgstr ""
-
-#: add-ons-pro/automatic-language-detection/partials/settings-option.php:51
-msgid "Popup Text"
-msgstr ""
-
-#: add-ons-pro/automatic-language-detection/partials/settings-option.php:55
-msgid "The same text is displayed in all languages. <br>A selecting language switcher will be appended to the pop-up. The detected language is pre-selected."
-msgstr ""
-
-#: add-ons-pro/automatic-language-detection/partials/settings-option.php:60
-msgid "Button Text"
-msgstr ""
-
-#: add-ons-pro/automatic-language-detection/partials/settings-option.php:64
-msgid "Write the text you wish to appear on the button.."
-msgstr ""
-
-#: add-ons-pro/automatic-language-detection/partials/settings-option.php:69
-msgid "Close Button Text"
-msgstr ""
-
-#: add-ons-pro/automatic-language-detection/partials/settings-option.php:73
-msgid "Write the text you wish to appear on the close button. Leave empty for just the close button."
 msgstr ""
 
 #: add-ons-pro/deepl/includes/class-deepl.php:62

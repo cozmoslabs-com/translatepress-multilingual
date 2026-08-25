@@ -1,8 +1,11 @@
 <script setup>
-import SettingsBox                         from '../components/SettingsBox.vue'
-import PresetApplier                       from "../components/PresetApplier.vue"
+import SettingsBox                         from '../../shared/components/SettingsBox.vue'
+import PresetApplier                       from '../../shared/components/PresetApplier.vue'
 import LanguageSwitcherPreview             from "../components/LanguageSwitcherPreview.vue"
-import SettingsActions                     from "../components/SettingsActions.vue"
+import PresetPreviewLanguageSwitcher       from "../components/PresetPreviewLanguageSwitcher.vue"
+import SettingsActions                     from "../../shared/components/SettingsActions.vue"
+import LayoutCustomizerField               from "../components/fields/LayoutCustomizerField.vue"
+import { switcherPresets, switcherPresetCssVars } from '../presets/switcherPresets'
 
 import { useLanguages, useSwitcherConfig } from "../composables/useSwitcherConfig"
 import { useLayoutCustomizer }             from "../composables/layoutCustomizer/useLayoutCustomizer"
@@ -19,7 +22,7 @@ const cfg = useSwitcherConfig( scope )
 
 const persistence = useSwitcherPersistence( scope )
 
-provide( 'switcherPersistence', persistence )
+provide( 'settingsPersistence', persistence )
 
 const { isDirty, revert } = persistence
 
@@ -97,6 +100,10 @@ const T = {
     enableTransitions: __( 'Switcher animations', 'translatepress-multilingual' )
 }
 
+const fieldComponents = {
+    lCustomizer: LayoutCustomizerField,
+}
+
 const oppositeLanguageFieldDescription = __(
     'Transforms the language switcher into a button showing the other available language, not the current one. <br> Only works when there are exactly two languages, the default one and a translation one.',
     'translatepress-multilingual'
@@ -140,7 +147,7 @@ provide('languageItemSettings', languageItemSettings)
                     <LanguageSwitcherPreview :scope="scope"/>
                 </SettingsBox>
 
-                <SettingsActions :scope="scope" />
+                <SettingsActions />
             </div>
         </div>
         <div class="trp-floater-settings__right">
@@ -174,7 +181,14 @@ provide('languageItemSettings', languageItemSettings)
                 :title="T.applyPreset"
                 :scope="scope"
             >
-                <PresetApplier :scope="scope" />
+                <PresetApplier
+                    :config="cfg"
+                    :presets="switcherPresets"
+                    :preview-component="PresetPreviewLanguageSwitcher"
+                    preview-config-prop=""
+                    :preview-props="{ scope }"
+                    :get-preview-style="switcherPresetCssVars"
+                />
             </SettingsBox>
 
             <SettingsBox
@@ -237,6 +251,7 @@ provide('languageItemSettings', languageItemSettings)
                     type: 'lCustomizer',
                     label: ''
                 }]"
+                :components="fieldComponents"
             />
 
             <SettingsBox

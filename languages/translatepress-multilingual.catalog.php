@@ -1022,6 +1022,9 @@
 <?php __("TranslatePress has detected and cleaned up some failed translation entries in your database following %1$san isolated incident%2$s. No further action is required.", "translatepress-multilingual"); ?>
 <?php __("Post Slug", "translatepress-multilingual"); ?>
 <?php __("Invalid language code", "translatepress-multilingual"); ?>
+<?php __("We've detected you might be speaking a different language. Do you want to change to:", "translatepress-multilingual"); ?>
+<?php __("Change Language", "translatepress-multilingual"); ?>
+<?php __("Close and do not switch language", "translatepress-multilingual"); ?>
 <?php __("First by browser language, then IP address (recommended)", "translatepress-multilingual"); ?>
 <?php __("First by IP address, then by browser language", "translatepress-multilingual"); ?>
 <?php __("Only by browser language", "translatepress-multilingual"); ?>
@@ -1030,19 +1033,11 @@
 <?php __("Redirect directly (*not recommended)", "translatepress-multilingual"); ?>
 <?php __("Pop-up window over the content", "translatepress-multilingual"); ?>
 <?php __("Hello bar before the content", "translatepress-multilingual"); ?>
+<?php __("Automatic User Language Detection requires a newer version of TranslatePress to use its visual settings interface. The legacy settings form will remain available until TranslatePress is updated.", "translatepress-multilingual"); ?>
+<?php __("Update TranslatePress", "translatepress-multilingual"); ?>
 <?php __("WARNING. Cannot determine your language preference based on your current IP.<br>This is most likely because the website is on a local environment.", "translatepress-multilingual"); ?>
+<?php __("Invalid settings.", "translatepress-multilingual"); ?>
 <?php __("Go to <a href=\"%s\" target=\"_self\">Advanced</a> tab to change this feature's settings", "translatepress-multilingual"); ?>
-<?php __("User Language Detection Method", "translatepress-multilingual"); ?>
-<?php __("Select how the language should be detected for first time visitors.<br>The visitor's last displayed language will be remembered through cookies.", "translatepress-multilingual"); ?>
-<?php __("User Notification Popup", "translatepress-multilingual"); ?>
-<?php __("A popup appears asking the user if they want to be redirected.", "translatepress-multilingual"); ?>
-<?php __("Popup Type", "translatepress-multilingual"); ?>
-<?php __("Popup Text", "translatepress-multilingual"); ?>
-<?php __("The same text is displayed in all languages. <br>A selecting language switcher will be appended to the pop-up. The detected language is pre-selected.", "translatepress-multilingual"); ?>
-<?php __("Button Text", "translatepress-multilingual"); ?>
-<?php __("Write the text you wish to appear on the button..", "translatepress-multilingual"); ?>
-<?php __("Close Button Text", "translatepress-multilingual"); ?>
-<?php __("Write the text you wish to appear on the close button. Leave empty for just the close button.", "translatepress-multilingual"); ?>
 <?php __("Bad request. There was an error accessing the DeepL API.", "translatepress-multilingual"); ?>
 <?php __("The API key entered is invalid.", "translatepress-multilingual"); ?>
 <?php __("The API resource could not be found.", "translatepress-multilingual"); ?>

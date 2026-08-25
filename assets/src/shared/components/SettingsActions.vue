@@ -1,13 +1,18 @@
 <script setup>
-import { useSwitcherConfig } from "../composables/useSwitcherConfig"
 import { inject, ref } from "vue"
 import { __ }          from "@wordpress/i18n"
 
 const props = defineProps({
-    scope: { type: String, required: true }
+    persistenceKey: { type: String, default: 'settingsPersistence' }
 })
 
-const { save, revert, isDirty, saving, justSaved, errorMsg } = inject('switcherPersistence')
+const persistence = inject(props.persistenceKey)
+
+if (!persistence) {
+    throw new Error(`SettingsActions could not find persistence provider "${props.persistenceKey}".`)
+}
+
+const { save, revert, isDirty, saving, justSaved, errorMsg } = persistence
 
 const confirmRevert = ref(false)
 
@@ -21,8 +26,6 @@ function doRevert () {
     revert()
     confirmRevert.value = false
 }
-
-const cfg = useSwitcherConfig(props.scope)
 
 const T = {
     saving: __('Saving...', 'translatepress-multilingual'),
@@ -47,6 +50,7 @@ const T = {
     <div class="trp-settings-actions">
         <button
             class="trp-submit-btn"
+            type="button"
             :disabled="!isDirty || saving"
             @click="save"
         >
@@ -66,6 +70,7 @@ const T = {
 
         <button
             class="trp-button-secondary"
+            type="button"
             :disabled="!isDirty || saving"
             :title="T.revertTitle"
             @click="askRevert"

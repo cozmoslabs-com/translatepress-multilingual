@@ -1,14 +1,15 @@
 <script setup>
 const props = defineProps({
     modelValue: Boolean,
-    label: { type: String, default: '' }
+    label: { type: String, default: '' },
+    compact: { type: Boolean, default: false }
 })
 
 const emit = defineEmits(['update:modelValue'])
 </script>
 
 <template>
-    <div class="trp-toggle-wrapper">
+    <div class="trp-toggle-wrapper" :class="{ 'trp-toggle-wrapper--compact': compact }">
     <span v-if="label" class="trp-field__label trp-primary-text-bold">
       {{ label }}
     </span>
@@ -29,6 +30,14 @@ const emit = defineEmits(['update:modelValue'])
 .trp-toggle-wrapper {
     display: flex;
     align-items: center;
+}
+
+.trp-toggle-wrapper.trp-toggle-wrapper--compact {
+    gap: 8px;
+}
+
+.trp-toggle-wrapper--compact .trp-field__label {
+    width: auto;
 }
 
 .trp-toggle-inner {

@@ -18,7 +18,7 @@ const props = defineProps( {
 // Injected global layout settings (optional override)
 const injectedSettings = inject( 'languageItemSettings' )
 
-const pluginUrl = window?.tpLangSwitcherData?.misc?.pluginUrl || ''
+const pluginUrl = window?.tpLangSwitcherData?.misc?.pluginUrl || window?.tpAldConfiguratorData?.misc?.pluginUrl || ''
 
 const finalFlagPos = computed( () =>
     props.flagPos ?? injectedSettings?.value.flagPos ?? 'before'

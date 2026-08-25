@@ -79,8 +79,8 @@ class TRP_Failed_Translations_Cleanup {
      * @return bool
      */
     protected function is_valid_table_name( $table ) {
-        // Only allow alphanumeric characters and underscores — standard MySQL table name characters.
-        if ( ! preg_match( '/^[a-zA-Z0-9_]+$/', $table ) ) {
+        // Custom language codes can contain hyphens (for example de-AT).
+        if ( ! preg_match( '/^[a-zA-Z0-9_-]+$/', $table ) ) {
             return false;
         }
 

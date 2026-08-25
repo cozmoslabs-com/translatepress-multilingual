@@ -1,5 +1,6 @@
 <script setup>
 import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
+import { __ } from '@wordpress/i18n'
 import 'vue-color/style.css'
 import { ChromePicker, tinycolor } from 'vue-color'
 
@@ -8,6 +9,7 @@ const props = defineProps({
     modelValue : { type: String, required: true }
 })
 const emit = defineEmits(['update:modelValue'])
+const openColourPickerLabel = __('Open colour picker', 'translatepress-multilingual')
 
 // picker visibility + refs for click-outside
 const showPicker = ref(false)
@@ -62,7 +64,7 @@ const tinyColorModel = computed({
                 @click="togglePicker"
                 @keydown.enter.space="togglePicker"
                 role="button"
-                aria-label="Open colour picker"
+                :aria-label="openColourPickerLabel"
                 tabindex="0"
             />
 

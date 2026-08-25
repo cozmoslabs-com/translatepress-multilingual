@@ -420,7 +420,7 @@ class TRP_Settings{
         );
 
         if ( 'not_set' == $settings_option || is_string($settings_option) ){
-            if ( is_string($settings_option) ){
+            if ( is_string( $settings_option ) && 'not_set' !== $settings_option ){
                 error_log( 'Invalid trp_settings: ' . json_encode($settings_option) );
             }
             update_option ( 'trp_settings', $default_settings );
@@ -531,12 +531,12 @@ class TRP_Settings{
         if( in_array( $hook, array( 'settings_page_translate-press', 'admin_page_trp_advanced_page', 'admin_page_trp_machine_translation', 'admin_page_trp_machine_translation_glossary' ) ) ) {
             // Base script now handles both free and pro functionality via hooks/filters.
             // However, we keep loading trp-back-end-script-pro.js for backwords compatibility when TP Free is newer then the Pro Addon.
-            $back_end_script_url = TRP_PLUGIN_URL . 'assets/js/trp-back-end-script.js';
+            $back_end_script_url  = TRP_PLUGIN_URL . 'assets/js/trp-back-end-script.js';
             if( defined( 'TRP_IN_EL_PLUGIN_URL' ) && file_exists( TRP_IN_EL_PLUGIN_DIR . 'assets/js/trp-back-end-script-pro.js' ) ) {
                 $license_status = get_option( 'trp_license_status' );
                 //load the pro script only if the license is valid
                 if( $license_status === 'valid' ) {
-                    $back_end_script_url = TRP_IN_EL_PLUGIN_URL . 'assets/js/trp-back-end-script-pro.js';
+                    $back_end_script_url  = TRP_IN_EL_PLUGIN_URL . 'assets/js/trp-back-end-script-pro.js';
                 }
             }
             wp_enqueue_script( 'trp-settings-script', $back_end_script_url, array( 'jquery', 'jquery-ui-sortable' ), TRP_PLUGIN_VERSION );

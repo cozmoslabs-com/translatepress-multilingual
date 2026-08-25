@@ -82,7 +82,7 @@ class TRP_Translate_Press{
         define( 'TRP_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
         define( 'TRP_PLUGIN_BASE', plugin_basename( __DIR__ . '/index.php' ) );
         define( 'TRP_PLUGIN_SLUG', 'translatepress-multilingual' );
-        define( 'TRP_PLUGIN_VERSION', '3.3.3' );
+        define( 'TRP_PLUGIN_VERSION', '3.3.4' );
 
 	    wp_cache_add_non_persistent_groups(array('trp'));
 
@@ -618,16 +618,25 @@ class TRP_Translate_Press{
         if ( 'translatepress-multilingual' !== $domain ) {
             return $file;
         }
+        if ( ! is_string( $file ) || '' === trim( $file ) || is_dir( $file ) ) {
+            return '';
+        }
         $bundled = TRP_PLUGIN_DIR . 'languages/' . basename( $file );
-        return file_exists( $bundled ) ? $bundled : $file;
+        return is_file( $bundled ) ? $bundled : $file;
     }
 
     public function prefer_bundled_script_translation_file( $file, $handle, $domain ) {
+        if ( ! $file ) {
+            return $file;
+        }
         if ( 'translatepress-multilingual' !== $domain ) {
             return $file;
         }
+        if ( ! is_string( $file ) || '' === trim( $file ) || is_dir( $file ) ) {
+            return '';
+        }
         $bundled = TRP_PLUGIN_DIR . 'languages/' . basename( $file );
-        return file_exists( $bundled ) ? $bundled : $file;
+        return is_file( $bundled ) ? $bundled : $file;
     }
 
     public function init_machine_translation(){

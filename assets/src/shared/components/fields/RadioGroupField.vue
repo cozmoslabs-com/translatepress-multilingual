@@ -1,5 +1,6 @@
 <script setup>
 import { computed, ref, watch } from 'vue'
+import { __ } from '@wordpress/i18n'
 
 import NumberField from './NumberField.vue'
 
@@ -15,6 +16,7 @@ const props = defineProps({
             (o.title    === undefined || typeof o.title    === 'string')
         )
     },
+    columns:     { type: Number, default: 0 },
     customValue: { type: [Number, String] }, // (optional) a number v-model. If parent binds this prop, then “Custom” is automatically injected as an extra option.
 })
 
@@ -55,7 +57,7 @@ const displayedOptions = computed(() => {
 
     return [
         ...props.options,
-        { value: 'custom', label: 'Custom' }
+        { value: 'custom', label: __('Custom', 'translatepress-multilingual') }
     ]
 })
 </script>
@@ -64,7 +66,11 @@ const displayedOptions = computed(() => {
     <div class="trp-radio-group__wrapper">
         <span v-if="label" class="trp-field__label trp-primary-text-bold">{{ label }}</span>
 
-        <div class="trp-radio-group">
+        <div
+            class="trp-radio-group"
+            :class="{ 'trp-radio-group--grid': columns > 0 }"
+            :style="columns > 0 ? { '--trp-radio-columns': columns } : null"
+        >
             <div
                 v-for="opt in displayedOptions"
                 :key="opt.value"
@@ -97,13 +103,30 @@ const displayedOptions = computed(() => {
 </template>
 
 <style scoped>
+.trp-radio-group__wrapper {
+    gap: 16px;
+}
+
 .trp-radio-group {
     display:flex;
     gap:16px;
+    flex-wrap: wrap;
+    align-items: flex-start;
+}
+
+.trp-radio-group--grid {
+    display: grid;
+    grid-template-columns: repeat(var(--trp-radio-columns), minmax(0, 1fr));
+    column-gap: 24px;
+    row-gap: 14px;
 }
 
 .trp-radio-label {
+    display: inline-flex;
+    align-items: flex-start;
+    gap: 8px;
     cursor: pointer;
+    line-height: 20px;
 }
 
 .trp-lc-custom-number {
@@ -115,7 +138,11 @@ const displayedOptions = computed(() => {
     line-height: 20px;
     min-width: 140px;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
+}
+
+.trp-radio-group--grid .trp-radio-option {
+    min-width: 0;
 }
 
 .trp-radio-option.is-disabled {
@@ -131,6 +158,8 @@ const displayedOptions = computed(() => {
     border: 1px solid var(--trp-settings-medium-gray-border-color);
     width: 20px;
     height: 20px;
+    flex: 0 0 20px;
+    margin: 0;
     position: relative;
 }
 

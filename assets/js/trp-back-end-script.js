@@ -722,10 +722,16 @@ function TRP_Advanced_Settings_Tabs() {
 
         function showTargetContainer(targetClass) {
             containers.forEach(container => container.style.display = "none");
+            const settingsSubmit = document.querySelector('#trp-settings__wrap > .trp-submit-btn');
+            const aldPopupConfigurator = document.getElementById('tp-ald-popup-configurator-root');
 
             let targetContainers = targetClass === 'ald_settings' && aldSettingsContainer ?
                 document.querySelectorAll('.advanced_settings_class.ald_settings') :
                 document.querySelectorAll(`.trp-settings-container-${targetClass}`);
+
+            if (settingsSubmit) {
+                settingsSubmit.style.display = targetClass === 'ald_settings' && aldPopupConfigurator ? 'none' : '';
+            }
 
             if (targetContainers.length > 0) {
                 targetContainers.forEach(container => container.style.display = "block");

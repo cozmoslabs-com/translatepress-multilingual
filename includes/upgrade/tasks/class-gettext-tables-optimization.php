@@ -801,7 +801,7 @@ class TRP_Gettext_Tables_Optimization {
      * @return bool
      */
     protected function is_valid_gettext_locale_table( $table_name ) {
-        if ( ! preg_match( '/^[a-zA-Z0-9_]+$/', $table_name ) ) {
+        if ( ! preg_match( '/^[a-zA-Z0-9_-]+$/', $table_name ) ) {
             return false;
         }
 

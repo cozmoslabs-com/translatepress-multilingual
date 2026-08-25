@@ -1,5 +1,6 @@
 <script setup>
 import { computed }  from 'vue'
+import { __ } from '@wordpress/i18n'
 import NumberField from './NumberField.vue'
 
 /*
@@ -25,7 +26,12 @@ const bindings = Array.from( { length : 4 }, ( _, i ) =>
     })
 )
 
-const cornerLabels = [ 'Top Left', 'Top Right', 'Bottom Left', 'Bottom Right' ]
+const cornerLabels = [
+    __('Top Left', 'translatepress-multilingual'),
+    __('Top Right', 'translatepress-multilingual'),
+    __('Bottom Left', 'translatepress-multilingual'),
+    __('Bottom Right', 'translatepress-multilingual'),
+]
 </script>
 
 <template>
