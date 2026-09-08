@@ -15,6 +15,7 @@ class TRP_Gettext_Tables_Optimization {
     protected $settings;
     protected $trp_query;
     protected $upgrade;
+    protected $text_column_definitions = array();
 
     public function __construct() {
         global $wpdb;
@@ -26,6 +27,48 @@ class TRP_Gettext_Tables_Optimization {
         $this->settings = $settings->get_settings();
         $this->trp_query = $trp->get_component( 'query' );
         $this->upgrade   = $trp->get_component( 'upgrade' );
+    }
+
+    /**
+     * Validate unresolved locale values before the background runner is started.
+     *
+     * @return string Empty when the task can start, otherwise an actionable error.
+     */
+    public function validate_before_start() {
+        $originals_table = sanitize_text_field( $this->trp_query->get_table_name_for_gettext_original_strings() );
+
+        if ( ! $this->trp_query->table_exists( $originals_table ) ) {
+            return '';
+        }
+
+        $target_columns = $this->get_text_column_definitions( $originals_table );
+        if ( empty( $target_columns['original'] ) || empty( $target_columns['domain'] ) ) {
+            return sprintf( 'Could not determine gettext originals column capacity and character set for %s.', $originals_table );
+        }
+
+        foreach ( $this->trp_query->get_all_gettext_table_names() as $table_name ) {
+            $table_name = sanitize_text_field( $table_name );
+
+            if ( ! $this->is_valid_gettext_locale_table( $table_name ) || ! $this->trp_query->table_column_exists( $table_name, 'original_id' ) ) {
+                continue;
+            }
+
+            $source_columns = $this->get_text_column_definitions( $table_name );
+            if ( empty( $source_columns['original'] ) || empty( $source_columns['domain'] ) ) {
+                return sprintf( 'Could not determine gettext locale column capacity and character set for %s.', $table_name );
+            }
+
+            $incompatibility = $this->find_incompatible_locale_original( $table_name, $originals_table, $source_columns, $target_columns );
+            if ( $this->db->last_error !== '' ) {
+                return sprintf( 'Could not verify gettext originals character-set compatibility for %1$s: %2$s', $table_name, $this->db->last_error );
+            }
+
+            if ( ! empty( $incompatibility ) ) {
+                return $this->format_incompatible_locale_original_error( $incompatibility, $table_name, $originals_table );
+            }
+        }
+
+        return '';
     }
 
     /**
@@ -45,6 +88,7 @@ class TRP_Gettext_Tables_Optimization {
                 'locale_last_plural_form'=> -1,
                 'runtime_language_index' => 0,
                 'runtime_batch'          => 0,
+                'id_schema_validated'    => false,
                 'stats'                  => array(
                     'duplicate_originals' => 0,
                     'duplicate_gettext'   => 0,
@@ -63,6 +107,16 @@ class TRP_Gettext_Tables_Optimization {
      */
     public function execute( $item ) {
         $item = $this->normalize_item( $item );
+
+        if ( ! $item['id_schema_validated'] ) {
+            $schema_error = $this->validate_gettext_id_schema();
+
+            if ( $schema_error !== '' ) {
+                return $this->error_result( $item, $schema_error );
+            }
+
+            $item['id_schema_validated'] = true;
+        }
 
         if ( $item['phase'] === 'originals_hash' ) {
             return $this->execute_originals_hash_phase( $item );
@@ -365,6 +419,34 @@ class TRP_Gettext_Tables_Optimization {
             return $this->continue_result( $item, sprintf( __( 'Prepared gettext original ids in %s...', 'translatepress-multilingual' ), $table_name ) );
         }
 
+        $resolved_ids = $this->find_existing_locale_original_ids( $table_name, $originals_table, $rows );
+        if ( $this->db->last_error !== '' ) {
+            return $this->error_result( $item, sprintf( 'Could not resolve existing gettext originals for %1$s: %2$s', $table_name, $this->db->last_error ) );
+        }
+
+        if ( ! empty( $resolved_ids ) ) {
+            $update_error = $this->update_locale_original_ids( $table_name, $resolved_ids );
+            if ( $update_error !== '' ) {
+                return $this->error_result( $item, $update_error );
+            }
+
+            $rows = array_filter(
+                $rows,
+                function( $row ) use ( $resolved_ids ) {
+                    return ! isset( $resolved_ids[ (int) $row['id'] ] );
+                }
+            );
+        }
+
+        if ( empty( $rows ) ) {
+            return $this->continue_result( $item, sprintf( __( 'Resolving missing gettext original ids in %s...', 'translatepress-multilingual' ), $table_name ), count( $resolved_ids ) );
+        }
+
+        $incompatible_error = $this->get_incompatible_gettext_originals_error( $table_name, $originals_table, $rows );
+        if ( $incompatible_error !== '' ) {
+            return $this->error_result( $item, $incompatible_error );
+        }
+
         $sync_rows = array();
         foreach ( $rows as $index => $row ) {
             $sync_rows[ $index ] = array(
@@ -394,16 +476,359 @@ class TRP_Gettext_Tables_Optimization {
             $case_rows[] = $this->db->prepare( 'WHEN %d THEN %d', (int) $row['id'], (int) $original_ids[ $index ] );
         }
 
-        if ( ! empty( $case_rows ) ) {
-            $ids_sql = implode( ',', $ids );
-            $this->db->query( "UPDATE `$table_name` SET original_id = CASE id " . implode( ' ', $case_rows ) . " END WHERE id IN ($ids_sql)" );
+        if ( empty( $case_rows ) ) {
+            return $this->error_result(
+                $item,
+                sprintf(
+                    'Gettext original_id backfill made no progress in %1$s for rows %2$s.',
+                    $table_name,
+                    implode( ', ', array_map( 'intval', wp_list_pluck( $rows, 'id' ) ) )
+                )
+            );
+        }
 
-            if ( $this->db->last_error !== '' ) {
-                return $this->error_result( $item, sprintf( 'Could not backfill original_id in %1$s: %2$s', $table_name, $this->db->last_error ) );
+        $ids_sql = implode( ',', $ids );
+        $this->db->query( "UPDATE `$table_name` SET original_id = CASE id " . implode( ' ', $case_rows ) . " END WHERE id IN ($ids_sql)" );
+
+        if ( $this->db->last_error !== '' ) {
+            return $this->error_result( $item, sprintf( 'Could not backfill original_id in %1$s: %2$s', $table_name, $this->db->last_error ) );
+        }
+
+        return $this->continue_result( $item, sprintf( __( 'Resolving missing gettext original ids in %s...', 'translatepress-multilingual' ), $table_name ), count( $resolved_ids ) + count( $case_rows ) );
+    }
+
+    /**
+     * Stop before MySQL can silently truncate or lossily transcode a locale
+     * identity while inserting it into the gettext originals table.
+     *
+     * @param string $table_name Locale gettext table.
+     * @param string $originals_table Gettext originals table.
+     * @param array  $rows Locale rows selected for backfill.
+     *
+     * @return string Empty when all rows are compatible, otherwise an actionable error.
+     */
+    protected function get_incompatible_gettext_originals_error( $table_name, $originals_table, $rows ) {
+        $source_columns = $this->get_text_column_definitions( $table_name );
+        $target_columns = $this->get_text_column_definitions( $originals_table );
+
+        if (
+            empty( $source_columns['original'] ) ||
+            empty( $source_columns['domain'] ) ||
+            empty( $target_columns['original'] ) ||
+            empty( $target_columns['domain'] )
+        ) {
+            return sprintf( 'Could not determine gettext column capacity and character sets for %1$s and %2$s.', $table_name, $originals_table );
+        }
+
+        $ids             = array_map( 'intval', wp_list_pluck( $rows, 'id' ) );
+        $incompatibility = $this->find_incompatible_locale_original( $table_name, $originals_table, $source_columns, $target_columns, $ids );
+
+        if ( $this->db->last_error !== '' ) {
+            return sprintf( 'Could not verify gettext originals character-set compatibility for %1$s: %2$s', $originals_table, $this->db->last_error );
+        }
+
+        if ( ! empty( $incompatibility ) ) {
+            return $this->format_incompatible_locale_original_error( $incompatibility, $table_name, $originals_table );
+        }
+
+        return '';
+    }
+
+    /**
+     * Return text-column capacity and character-set metadata.
+     *
+     * @param string $table_name Database table name.
+     *
+     * @return array
+     */
+    protected function get_text_column_definitions( $table_name ) {
+        if ( isset( $this->text_column_definitions[ $table_name ] ) ) {
+            return $this->text_column_definitions[ $table_name ];
+        }
+
+        $column_rows = $this->db->get_results(
+            $this->db->prepare(
+                "SELECT COLUMN_NAME, CHARACTER_OCTET_LENGTH, CHARACTER_SET_NAME
+                FROM information_schema.COLUMNS
+                WHERE TABLE_SCHEMA = DATABASE()
+                    AND TABLE_NAME = %s
+                    AND COLUMN_NAME IN ('original', 'domain')",
+                $table_name
+            ),
+            ARRAY_A
+        );
+
+        $definitions = array();
+        foreach ( $column_rows as $column_row ) {
+            $column_name = isset( $column_row['COLUMN_NAME'] ) ? (string) $column_row['COLUMN_NAME'] : '';
+            $capacity    = isset( $column_row['CHARACTER_OCTET_LENGTH'] ) ? (int) $column_row['CHARACTER_OCTET_LENGTH'] : 0;
+            $charset     = isset( $column_row['CHARACTER_SET_NAME'] ) ? (string) $column_row['CHARACTER_SET_NAME'] : '';
+
+            if (
+                in_array( $column_name, array( 'original', 'domain' ), true ) &&
+                $capacity > 0 &&
+                preg_match( '/^[a-zA-Z0-9_]+$/', $charset )
+            ) {
+                $definitions[ $column_name ] = array(
+                    'capacity' => $capacity,
+                    'charset'  => $charset,
+                );
             }
         }
 
-        return $this->continue_result( $item, sprintf( __( 'Resolving missing gettext original ids in %s...', 'translatepress-multilingual' ), $table_name ), count( $case_rows ) );
+        if ( $this->db->last_error === '' ) {
+            $this->text_column_definitions[ $table_name ] = $definitions;
+        }
+
+        return $definitions;
+    }
+
+    /**
+     * Find one unresolved value that would be changed or truncated by the target columns.
+     *
+     * @param string $table_name Locale gettext table.
+     * @param string $originals_table Gettext originals table.
+     * @param array  $source_columns Locale column definitions.
+     * @param array  $target_columns Originals column definitions.
+     * @param array  $ids Optional locale row IDs to inspect.
+     *
+     * @return array Incompatibility details, or an empty array.
+     */
+    protected function find_incompatible_locale_original( $table_name, $originals_table, $source_columns, $target_columns, $ids = array() ) {
+        $source_original_charset = $source_columns['original']['charset'];
+        $source_domain_charset   = $source_columns['domain']['charset'];
+        $target_original_charset = $target_columns['original']['charset'];
+        $target_domain_charset   = $target_columns['domain']['charset'];
+        $target_original_size    = (int) $target_columns['original']['capacity'];
+        $target_domain_size      = (int) $target_columns['domain']['capacity'];
+        $ids_condition           = '';
+
+        if ( ! empty( $ids ) ) {
+            $ids_condition = 'AND tt.id IN (' . implode( ',', array_map( 'intval', $ids ) ) . ')';
+        }
+
+        $original_size = "OCTET_LENGTH(CONVERT(tt.original USING $target_original_charset))";
+        $domain_size   = "OCTET_LENGTH(CONVERT(COALESCE(tt.domain, '') USING $target_domain_charset))";
+
+        // Keep the successful preflight path to one scan. Only calculate
+        // diagnostic details when an incompatible row was actually found.
+        $incompatible_id = (int) $this->db->get_var(
+            "SELECT tt.id
+            FROM `$table_name` AS tt
+            LEFT JOIN `$originals_table` AS current_original ON tt.original_id = current_original.id
+            WHERE (tt.original_id IS NULL OR tt.original_id = 0 OR current_original.id IS NULL)
+                AND tt.original <> ''
+                $ids_condition
+                AND (
+                    $original_size > $target_original_size
+                    OR $domain_size > $target_domain_size
+                    OR BINARY tt.original <> BINARY CONVERT(CONVERT(tt.original USING $target_original_charset) USING $source_original_charset)
+                    OR BINARY COALESCE(tt.domain, '') <> BINARY CONVERT(CONVERT(COALESCE(tt.domain, '') USING $target_domain_charset) USING $source_domain_charset)
+                )
+            ORDER BY tt.id
+            LIMIT 1"
+        );
+
+        if ( $incompatible_id <= 0 || $this->db->last_error !== '' ) {
+            return array();
+        }
+
+        $incompatibility = $this->db->get_row(
+            $this->db->prepare(
+                "SELECT tt.id,
+                    CASE
+                        WHEN $original_size > $target_original_size THEN 'original_capacity'
+                        WHEN $domain_size > $target_domain_size THEN 'domain_capacity'
+                        WHEN BINARY tt.original <> BINARY CONVERT(CONVERT(tt.original USING $target_original_charset) USING $source_original_charset) THEN 'original_charset'
+                        ELSE 'domain_charset'
+                    END AS reason,
+                    CASE
+                        WHEN $original_size > $target_original_size THEN $original_size
+                        WHEN $domain_size > $target_domain_size THEN $domain_size
+                        ELSE 0
+                    END AS value_size,
+                    CASE
+                        WHEN $original_size > $target_original_size THEN $target_original_size
+                        WHEN $domain_size > $target_domain_size THEN $target_domain_size
+                        ELSE 0
+                    END AS target_capacity
+                FROM `$table_name` AS tt
+                WHERE tt.id = %d",
+                $incompatible_id
+            ),
+            ARRAY_A
+        );
+
+        return is_array( $incompatibility ) ? $incompatibility : array();
+    }
+
+    /**
+     * Format an actionable error for a locale value that cannot be copied safely.
+     *
+     * @param array  $incompatibility Incompatibility details.
+     * @param string $table_name Locale gettext table.
+     * @param string $originals_table Gettext originals table.
+     *
+     * @return string
+     */
+    protected function format_incompatible_locale_original_error( $incompatibility, $table_name, $originals_table ) {
+        $row_id = isset( $incompatibility['id'] ) ? (int) $incompatibility['id'] : 0;
+        $reason = isset( $incompatibility['reason'] ) ? (string) $incompatibility['reason'] : '';
+
+        if ( $reason === 'original_capacity' || $reason === 'domain_capacity' ) {
+            $column          = $reason === 'original_capacity' ? 'original' : 'domain';
+            $value_size      = isset( $incompatibility['value_size'] ) ? (int) $incompatibility['value_size'] : 0;
+            $target_capacity = isset( $incompatibility['target_capacity'] ) ? (int) $incompatibility['target_capacity'] : 0;
+
+            return sprintf(
+                'Gettext optimization cannot continue because the %1$s value in row %2$d from %3$s is %4$d bytes, but %5$s.%1$s accepts at most %6$d bytes. Increase that column capacity or remove or shorten the value, then retry.',
+                $column,
+                $row_id,
+                $table_name,
+                $value_size,
+                $originals_table,
+                $target_capacity
+            );
+        }
+
+        return sprintf(
+            'Gettext optimization cannot continue because row %1$d from %2$s cannot be represented by the original/domain character sets in %3$s. Convert the gettext originals table to a compatible character set, then retry.',
+            $row_id,
+            $table_name,
+            $originals_table
+        );
+    }
+
+    /**
+     * Resolve selected locale rows against existing originals inside MySQL.
+     *
+     * Select one indexed comparison strategy for the whole table. Raw-byte
+     * equality is safe only when source and target use the same character sets.
+     * Mixed-character-set tables convert the locale values while leaving the
+     * indexed originals columns unwrapped.
+     *
+     * @param string $table_name Locale gettext table.
+     * @param string $originals_table Gettext originals table.
+     * @param array  $rows Selected locale rows.
+     *
+     * @return array Locale row ID to original row ID map.
+     */
+    protected function find_existing_locale_original_ids( $table_name, $originals_table, $rows ) {
+        $ids = array_map( 'intval', wp_list_pluck( $rows, 'id' ) );
+        if ( empty( $ids ) ) {
+            return array();
+        }
+
+        $source_columns = $this->get_text_column_definitions( $table_name );
+
+        if ( $this->db->last_error !== '' ) {
+            return array();
+        }
+
+        $target_columns = $this->get_text_column_definitions( $originals_table );
+
+        if (
+            empty( $source_columns['original']['charset'] ) ||
+            empty( $source_columns['domain']['charset'] ) ||
+            empty( $target_columns['original']['charset'] ) ||
+            empty( $target_columns['domain']['charset'] )
+        ) {
+            $this->db->last_error = sprintf( 'Could not determine gettext column character sets for %1$s and %2$s.', $table_name, $originals_table );
+            return array();
+        }
+
+        $character_sets_differ =
+            strcasecmp( $source_columns['original']['charset'], $target_columns['original']['charset'] ) !== 0 ||
+            strcasecmp( $source_columns['domain']['charset'], $target_columns['domain']['charset'] ) !== 0;
+
+        return $this->query_existing_locale_original_ids(
+            $table_name,
+            $originals_table,
+            $ids,
+            $character_sets_differ,
+            $source_columns,
+            $target_columns
+        );
+    }
+
+    /**
+     * Query existing gettext original IDs for selected locale rows.
+     *
+     * @param string $table_name Locale gettext table.
+     * @param string $originals_table Gettext originals table.
+     * @param array  $ids Locale row IDs.
+     * @param bool   $convert_character_sets Convert locale values to the originals column character sets.
+     * @param array  $source_columns Locale text-column definitions.
+     * @param array  $target_columns Originals text-column definitions.
+     *
+     * @return array Locale row ID to original row ID map.
+     */
+    protected function query_existing_locale_original_ids( $table_name, $originals_table, $ids, $convert_character_sets, $source_columns = array(), $target_columns = array() ) {
+        if ( empty( $ids ) ) {
+            return array();
+        }
+
+        if ( $convert_character_sets ) {
+            $source_original_charset = $source_columns['original']['charset'];
+            $source_domain_charset   = $source_columns['domain']['charset'];
+            $target_original_charset = $target_columns['original']['charset'];
+            $target_domain_charset   = $target_columns['domain']['charset'];
+
+            // Convert only locale values so the originals index remains usable. The
+            // BINARY is exact; source -> target -> source rejects lossy conversions like € -> ?.
+            $identity_condition = "originals.original = BINARY CONVERT(tt.original USING $target_original_charset)
+                AND originals.domain = BINARY CONVERT(COALESCE(tt.domain, '') USING $target_domain_charset)
+                AND BINARY tt.original = BINARY CONVERT(CONVERT(tt.original USING $target_original_charset) USING $source_original_charset)
+                AND BINARY COALESCE(tt.domain, '') = BINARY CONVERT(CONVERT(COALESCE(tt.domain, '') USING $target_domain_charset) USING $source_domain_charset)";
+        } else {
+            $identity_condition = "originals.original = BINARY tt.original
+                AND originals.domain = BINARY COALESCE(tt.domain, '')";
+        }
+
+        $matches = $this->db->get_results(
+            "SELECT tt.id AS locale_id, MIN(originals.id) AS original_id
+            FROM `$table_name` AS tt
+            INNER JOIN `$originals_table` AS originals
+                ON $identity_condition
+            WHERE tt.id IN (" . implode( ',', $ids ) . ")
+            GROUP BY tt.id",
+            ARRAY_A
+        );
+
+        $resolved_ids = array();
+        foreach ( $matches as $match ) {
+            $resolved_ids[ (int) $match['locale_id'] ] = (int) $match['original_id'];
+        }
+
+        return $resolved_ids;
+    }
+
+    /**
+     * Apply an original ID map to one locale table.
+     *
+     * @param string $table_name Locale gettext table.
+     * @param array  $resolved_ids Locale row ID to original row ID map.
+     *
+     * @return string Empty on success, otherwise an error message.
+     */
+    protected function update_locale_original_ids( $table_name, $resolved_ids ) {
+        if ( empty( $resolved_ids ) ) {
+            return '';
+        }
+
+        $case_rows = array();
+        foreach ( $resolved_ids as $locale_id => $original_id ) {
+            $case_rows[] = $this->db->prepare( 'WHEN %d THEN %d', (int) $locale_id, (int) $original_id );
+        }
+
+        $ids_sql = implode( ',', array_map( 'intval', array_keys( $resolved_ids ) ) );
+        $this->db->query( "UPDATE `$table_name` SET original_id = CASE id " . implode( ' ', $case_rows ) . " END WHERE id IN ($ids_sql)" );
+
+        if ( $this->db->last_error !== '' ) {
+            return sprintf( 'Could not backfill original_id in %1$s: %2$s', $table_name, $this->db->last_error );
+        }
+
+        return '';
     }
 
     /**
@@ -767,6 +1192,90 @@ class TRP_Gettext_Tables_Optimization {
         sort( $tables );
 
         return $tables;
+    }
+
+    /**
+     * Verify that gettext tables can safely use ID-based batch cursors.
+     *
+     * @return string Empty when valid, otherwise an actionable error.
+     */
+    protected function validate_gettext_id_schema() {
+        $tables = array_merge(
+            array( $this->trp_query->get_table_name_for_gettext_original_strings() ),
+            $this->get_gettext_locale_tables()
+        );
+
+        foreach ( array_unique( $tables ) as $table_name ) {
+            if ( ! preg_match( '/^[a-zA-Z0-9_-]+$/', $table_name ) ) {
+                return sprintf( 'Could not validate gettext table ID schema for invalid table name %s.', $table_name );
+            }
+
+            $column = $this->db->get_row(
+                $this->db->prepare(
+                    "SELECT IS_NULLABLE, EXTRA
+                    FROM information_schema.COLUMNS
+                    WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = %s AND COLUMN_NAME = 'id'",
+                    $table_name
+                ),
+                ARRAY_A
+            );
+
+            if ( $this->db->last_error !== '' ) {
+                return sprintf( 'Could not validate the ID column in %1$s: %2$s', $table_name, $this->db->last_error );
+            }
+
+            if ( empty( $column ) ) {
+                return sprintf( 'Gettext optimization cannot start because table %s is missing its id column.', $table_name );
+            }
+
+            $primary_columns = $this->db->get_col(
+                $this->db->prepare(
+                    "SELECT COLUMN_NAME
+                    FROM information_schema.STATISTICS
+                    WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = %s AND INDEX_NAME = 'PRIMARY'
+                    ORDER BY SEQ_IN_INDEX",
+                    $table_name
+                )
+            );
+
+            if ( $this->db->last_error !== '' ) {
+                return sprintf( 'Could not validate the primary key in %1$s: %2$s', $table_name, $this->db->last_error );
+            }
+
+            $problems = array();
+
+            if ( $column['IS_NULLABLE'] !== 'NO' ) {
+                $problems[] = 'id must be NOT NULL';
+            }
+
+            if ( stripos( $column['EXTRA'], 'auto_increment' ) === false ) {
+                $problems[] = 'AUTO_INCREMENT is missing from id';
+            }
+
+            if ( $primary_columns !== array( 'id' ) ) {
+                $problems[] = 'PRIMARY KEY (id) is missing';
+            }
+
+            if ( ! empty( $problems ) ) {
+                return sprintf(
+                    'Gettext optimization cannot start because table %1$s has an invalid ID schema: %2$s. Repair the table schema and retry.',
+                    $table_name,
+                    implode( '; ', $problems )
+                );
+            }
+
+            $invalid_id = $this->db->get_var( "SELECT id FROM `$table_name` WHERE id <= 0 LIMIT 1" );
+
+            if ( $this->db->last_error !== '' ) {
+                return sprintf( 'Could not validate gettext IDs in %1$s: %2$s', $table_name, $this->db->last_error );
+            }
+
+            if ( $invalid_id !== null ) {
+                return sprintf( 'Gettext optimization cannot start because table %s contains an id of zero or less. Repair the affected rows and retry.', $table_name );
+            }
+        }
+
+        return '';
     }
 
     /**

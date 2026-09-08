@@ -407,12 +407,24 @@
 <?php __("Update aborted! Your user account doesn't have the capability to perform database updates.", "translatepress-multilingual"); ?>
 <?php __("Update aborted! Invalid nonce.", "translatepress-multilingual"); ?>
 <?php __("Update aborted! Incorrect action.", "translatepress-multilingual"); ?>
+<?php __("Update aborted! Start the gettext database optimization separately from the Advanced settings page.", "translatepress-multilingual"); ?>
 <?php __("Update aborted! Incorrect language code.", "translatepress-multilingual"); ?>
 <?php __("Updating database to version %s+", "translatepress-multilingual"); ?>
 <?php __("Processing table for language %s...", "translatepress-multilingual"); ?>
 <?php __("Back to TranslatePress Settings", "translatepress-multilingual"); ?>
 <?php __("Successfully updated database!", "translatepress-multilingual"); ?>
 <?php __(" done.", "translatepress-multilingual"); ?>
+<?php __("Update aborted while %1$s. SQL error: %2$s", "translatepress-multilingual"); ?>
+<?php __("inserting original strings", "translatepress-multilingual"); ?>
+<?php __("checking original string insertion progress", "translatepress-multilingual"); ?>
+<?php __("cleaning duplicate original strings", "translatepress-multilingual"); ?>
+<?php __("updating original string IDs", "translatepress-multilingual"); ?>
+<?php __("checking original string ID update progress", "translatepress-multilingual"); ?>
+<?php __("inserting gettext original strings", "translatepress-multilingual"); ?>
+<?php __("checking gettext original insertion progress", "translatepress-multilingual"); ?>
+<?php __("cleaning duplicate gettext original strings", "translatepress-multilingual"); ?>
+<?php __("updating gettext original string IDs", "translatepress-multilingual"); ?>
+<?php __("checking gettext original string ID update progress", "translatepress-multilingual"); ?>
 <?php __("All individual TranslatePress add-on plugins <a href=\"%1$s\" target=\"_blank\">have been discontinued</a> and are now included in the premium Personal, Business and Developer versions of TranslatePress. Please log into your <a href=\"%2$s\" target=\"_blank\">account page</a>, download the new premium version and install it. Your individual addons settings will be ported over.", "translatepress-multilingual"); ?>
 <?php __("Brand-new Language Switcher Settings are here!", "translatepress-multilingual"); ?>
 <?php __("Explore pre-made templates, switch colors, flag styles, spacing, layouts & more. Use the live preview to perfect your switcher in seconds.", "translatepress-multilingual"); ?>
@@ -1005,8 +1017,8 @@
 <?php __("URL Slugs Translation", "translatepress-multilingual"); ?>
 <?php __("String Translation Editor", "translatepress-multilingual"); ?>
 <?php __("Every minute", "translatepress-multilingual"); ?>
-<?php __("Waiting to start background processing...", "translatepress-multilingual"); ?>
 <?php __("Could not load the background task.", "translatepress-multilingual"); ?>
+<?php __("Waiting to start background processing...", "translatepress-multilingual"); ?>
 <?php __("Background processing could not start.", "translatepress-multilingual"); ?>
 <?php __("Background processing completed.", "translatepress-multilingual"); ?>
 <?php __("A previous batch item failed.", "translatepress-multilingual"); ?>
@@ -1058,9 +1070,9 @@
 <?php __("Allow this user to translate the website.", "translatepress-multilingual"); ?>
 <?php __("Update aborted! Unknown gettext lookup hash migration phase: %s.", "translatepress-multilingual"); ?>
 <?php __("Update aborted! Could not find an available gettext original_id index name for table %s.", "translatepress-multilingual"); ?>
+<?php __("Update aborted! Gettext lookup hash migration cannot process invalid ID %1$d in table %2$s. Repair the table ID schema and retry.", "translatepress-multilingual"); ?>
 <?php __("Update aborted! Table %1$s still references %2$d duplicate gettext original ids.", "translatepress-multilingual"); ?>
 <?php __("Update aborted! Gettext original meta still references %d duplicate original ids.", "translatepress-multilingual"); ?>
-<?php __("Update aborted while %1$s. SQL error: %2$s", "translatepress-multilingual"); ?>
 <?php __("Gettext database optimization completed.", "translatepress-multilingual"); ?>
 <?php __("Deduplicating gettext translation tables...", "translatepress-multilingual"); ?>
 <?php __("Migrating gettext original lookup hashes...", "translatepress-multilingual"); ?>

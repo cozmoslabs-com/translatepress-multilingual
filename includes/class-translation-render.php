@@ -2037,9 +2037,13 @@ class TRP_Translation_Render{
                         'translated'  => trp_sanitize_string( $translated ),
                         'status'      => $this->trp_query->get_constant_machine_translated() );
                 }
+                // keep a saved chunk's locks as recently translated markers; when the save is
+                // skipped or fails, delete them so the strings can be retried right away
+                $chunk_saved = false;
                 if ( ! empty( $chunk_update_strings ) && apply_filters( 'trp_allow_string_saving', true, array(), $chunk_update_strings ) ) {
-                    $this->trp_query->update_strings( $chunk_update_strings, $language_code, array( 'id', 'original', 'translated', 'status', 'original_id' ) );
+                    $chunk_saved = $this->trp_query->update_strings( $chunk_update_strings, $language_code, array( 'id', 'original', 'translated', 'status', 'original_id' ) );
                 }
+                $this->machine_translator->release_locks( $chunk_saved );
             }
 
             $unique_original_strings_with_machine_translations = array_keys( $machine_strings );
@@ -2057,6 +2061,9 @@ class TRP_Translation_Render{
          * not added to $update_strings here. $update_strings below carries only the "similar strings"
          * rows. $machine_strings is still used further down to populate $translated_strings for
          * rendering this request. */
+
+        // strings another request is translating right now must not be inserted as untranslated below: the lock holder inserts them when it saves
+        $lock_skipped_strings = $this->machine_translator ? $this->machine_translator->get_lock_skipped_strings() : array();
 
         // update existing strings without translation if we have one now. also, do not insert duplicates for existing untranslated strings in db
         foreach( $new_strings as $i => $string ){
@@ -2094,7 +2101,7 @@ class TRP_Translation_Render{
 
             }
 
-            if ( isset( $untranslated_list[ $string ] ) || isset( $machine_strings[ $string ] ) ) {
+            if ( isset( $untranslated_list[ $string ] ) || isset( $machine_strings[ $string ] ) || isset( $lock_skipped_strings[ $string ] ) ) {
                 unset( $new_strings[ $i ] );
             }
         }

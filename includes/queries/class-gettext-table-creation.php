@@ -40,7 +40,7 @@ class TRP_Gettext_Table_Creation extends TRP_Query{
 	 */
     public function check_gettext_table( $language_code ){
         $table_name = sanitize_text_field( $this->get_gettext_table_name($language_code) );
-        if ( $this->db->get_var( "SHOW TABLES LIKE '$table_name'" ) != $table_name ) {
+        if ( ! $this->trp_table_exists_exact( $table_name ) ) {
             // table not in database. Create new table
             $charset_collate = $this->db->get_charset_collate();
 
@@ -80,7 +80,7 @@ class TRP_Gettext_Table_Creation extends TRP_Query{
     public function check_gettext_original_table(){
 
         $table_name = $this->get_table_name_for_gettext_original_strings();
-        if ( $this->db->get_var( "SHOW TABLES LIKE '$table_name'" ) != $table_name ) {
+        if ( ! $this->trp_table_exists_exact( $table_name ) ) {
             // table not in database. Create new table
             $charset_collate = $this->db->get_charset_collate();
 
@@ -117,7 +117,7 @@ class TRP_Gettext_Table_Creation extends TRP_Query{
     public function check_gettext_original_meta_table(){
 
         $table_name = $this->get_table_name_for_gettext_original_meta();
-        if ( $this->db->get_var( "SHOW TABLES LIKE '$table_name'" ) != $table_name ) {
+        if ( ! $this->trp_table_exists_exact( $table_name ) ) {
             // table not in database. Create new table
             $charset_collate = $this->db->get_charset_collate();
 

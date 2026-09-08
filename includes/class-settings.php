@@ -376,6 +376,9 @@ class TRP_Settings{
         $gettext_table_creation->check_gettext_original_table();
         $gettext_table_creation->check_gettext_original_meta_table();
 
+        // table used to keep concurrent requests from machine translating the same string at the same time
+        $this->trp_query->check_machine_translation_lock_table();
+
         // regenerate permalinks in case something changed
         flush_rewrite_rules();
 

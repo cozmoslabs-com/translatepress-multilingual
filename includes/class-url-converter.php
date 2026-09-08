@@ -55,6 +55,12 @@ class TRP_Url_Converter {
         if( empty( $TRP_LANGUAGE ) )
             return $url;
 
+        // Keep the canonical WordPress REST URL unprefixed. On subdirectory installs,
+        // adding the default language here prevents WP::parse_request() from removing
+        // the real home path and the REST rewrite rules no longer match.
+        if ( $this->is_unprefixed_rest_request_on_subdirectory_install() )
+            return $url;
+
         if ( isset( $this->settings['add-subdirectory-to-default-language'] ) && $this->settings['add-subdirectory-to-default-language'] == 'no' && $TRP_LANGUAGE == $this->settings['default-language'] ) {
             return $url;
         }
@@ -86,6 +92,25 @@ class TRP_Url_Converter {
     }
 
     /**
+     * Check if an unprefixed REST request is affected by a subdirectory install.
+     *
+     * @return bool
+     */
+    public function is_unprefixed_rest_request_on_subdirectory_install() {
+        if ( ( $this->settings['add-subdirectory-to-default-language'] ?? 'no' ) !== 'yes' ) {
+            return false;
+        }
+
+        $home_path = wp_parse_url( $this->get_abs_home(), PHP_URL_PATH );
+        if ( ! is_string( $home_path ) || trim( $home_path, '/' ) === '' ) {
+            return false;
+        }
+
+        return TRP_Translation_Manager::is_rest_api_request()
+            && $this->get_lang_from_url_string( $this->cur_page_url( false ) ) === null;
+    }
+
+    /**
      * Check if this is a request at the backend.
      *
      * @return bool true if is admin request, otherwise false.
@@ -98,9 +123,9 @@ class TRP_Url_Converter {
         //because this function is hooked to 'locale' and reaches at a certain point a function hooked to 'kses_allowed_protocols'
         //Scriptless Social Sharing had a function hooked to the same filter and it created an infinit loop
         $referrer = '';
-        if ( ! empty( $_REQUEST['_wp_http_referer'] ) ) {
+        if ( ! empty( $_REQUEST['_wp_http_referer'] ) && is_string( $_REQUEST['_wp_http_referer'] ) ) {
             $referrer = wp_unslash( esc_url_raw( $_REQUEST['_wp_http_referer'], array( 'http', 'https' ) ) );
-        } else if ( ! empty( $_SERVER['HTTP_REFERER'] ) ) {
+        } else if ( ! empty( $_SERVER['HTTP_REFERER'] ) && is_string( $_SERVER['HTTP_REFERER'] ) ) {
             $referrer = wp_unslash( esc_url_raw( $_SERVER['HTTP_REFERER'], array( 'http', 'https' ) ) );
         }
 
@@ -181,6 +206,8 @@ class TRP_Url_Converter {
             return;
         }
 
+        $hreflang_source_url = $this->get_hreflang_source_url( $this->cur_page_url( false ) );
+
         $languages = $this->settings['publish-languages'];
         if ( isset( $_GET['trp-edit-translation'] ) && $_GET['trp-edit-translation'] == 'preview' ) {
             $languages = $this->settings['translation-languages'];
@@ -196,7 +223,7 @@ class TRP_Url_Converter {
                 $hreflang              = str_replace( '_', '-', $hreflang );
                 $hreflang              = apply_filters( 'trp_hreflang', $hreflang, $language );
                 $hreflang_duplicates[] = $hreflang;
-                echo '<link rel="alternate" hreflang="' . esc_attr( $hreflang ) . '" href="' . esc_url( $this->get_url_for_language( $language ) ) . '"/>' . "\n";
+                echo '<link rel="alternate" hreflang="' . esc_attr( $hreflang ) . '" href="' . esc_url( $this->get_url_for_language( $language, $hreflang_source_url ) ) . '"/>' . "\n";
             }
 
             if ( apply_filters( 'trp_add_region_independent_hreflang_tags', true ) ) {
@@ -204,7 +231,7 @@ class TRP_Url_Converter {
                 $language_independent_hreflang = apply_filters( 'trp_hreflang', $language_independent_hreflang, $language );
                 if ( !empty( $language_independent_hreflang ) && !in_array( $language_independent_hreflang, $region_independent_languages ) ) {
                     $region_independent_languages[]                      = $language_independent_hreflang;
-                    $hreflang_duplicates_region_independent[ $language ] = '<link rel="alternate" hreflang="' . esc_attr( $language_independent_hreflang ) . '" href="' . esc_url( $this->get_url_for_language( $language ) ) . '"/>' . "\n";
+                    $hreflang_duplicates_region_independent[ $language ] = '<link rel="alternate" hreflang="' . esc_attr( $language_independent_hreflang ) . '" href="' . esc_url( $this->get_url_for_language( $language, $hreflang_source_url ) ) . '"/>' . "\n";
 
                 }
             }
@@ -222,8 +249,68 @@ class TRP_Url_Converter {
 
         if ( !empty( $this->settings['trp_advanced_settings']['enable_hreflang_xdefault'] ) && $this->settings['trp_advanced_settings']['enable_hreflang_xdefault'] != 'disabled' && in_array( $this->settings['trp_advanced_settings']['enable_hreflang_xdefault'], $this->settings['translation-languages'] ) ) {
             $default_lang = $this->settings['trp_advanced_settings']['enable_hreflang_xdefault'];
-            echo '<link rel="alternate" hreflang="x-default" href="' . esc_url( $this->get_url_for_language( $default_lang ) ) . '"/>' . "\n";
+            echo '<link rel="alternate" hreflang="x-default" href="' . esc_url( $this->get_url_for_language( $default_lang, $hreflang_source_url ) ) . '"/>' . "\n";
         }
+    }
+
+    /**
+     * Return the current URL without query parameters that should not be present in hreflang tags.
+     *
+     * Pagination parameters are preserved because paginated URLs identify different content. Query
+     * parameters are left unchanged on sites using plain permalinks because they identify the requested
+     * resource in that permalink structure.
+     *
+     * @param string $url Current page URL.
+     * @return string
+     */
+    public function get_hreflang_source_url( $url ) {
+        $url_obj = new \TranslatePress\Uri( $url );
+        $query   = $url_obj->getQuery();
+
+        if ( empty( $query ) ) {
+            return $url;
+        }
+
+        if ( empty( get_option( 'permalink_structure' ) ) ) {
+            return $url;
+        }
+
+        $query_args = array();
+        wp_parse_str( $query, $query_args );
+
+        $pagination_query_args = array( 'page', 'paged', 'cpage' );
+        $preserved_query_args  = $pagination_query_args;
+
+        /**
+         * Filter the query parameters preserved in hreflang URLs.
+         *
+         * @param string[] $preserved_query_args Query parameter names to preserve.
+         * @param string   $url                  Current page URL.
+         */
+        $preserved_query_args = apply_filters( 'trp_hreflang_preserved_query_args', $preserved_query_args, $url );
+        $preserved_query_args = is_array( $preserved_query_args ) ? array_filter( $preserved_query_args, 'is_string' ) : array();
+        $preserved_query_args = array_unique( $preserved_query_args );
+
+        $query_args = array_intersect_key( $query_args, array_flip( $preserved_query_args ) );
+
+        // Only page numbers greater than one identify a separate paginated resource.
+        foreach ( $pagination_query_args as $pagination_query_arg ) {
+            if (
+                isset( $query_args[ $pagination_query_arg ] ) &&
+                ( !is_scalar( $query_args[ $pagination_query_arg ] ) || !ctype_digit( strval( $query_args[ $pagination_query_arg ] ) ) || intval( $query_args[ $pagination_query_arg ] ) < 2 )
+            ) {
+                unset( $query_args[ $pagination_query_arg ] );
+            }
+        }
+
+        $url_obj->setQuery( '' );
+        $url = $url_obj->getUri();
+
+        if ( !empty( $query_args ) ) {
+            $url = add_query_arg( $query_args, $url );
+        }
+
+        return $url;
     }
 
     /**
@@ -1046,7 +1133,8 @@ class TRP_Url_Converter {
         if ( empty( $url_lang_slug ) ) {
             $path_no_lang_slug = $url_object->getPath();
         } else {
-            $path_no_lang_slug = preg_replace( '/\/' . preg_quote( $url_lang_slug, '/' ) . '\/?/', '/', $url_object->getPath(), 1 );
+            // Remove the language slug only when it is a complete path segment.
+            $path_no_lang_slug = preg_replace( '/\/' . preg_quote( $url_lang_slug, '/' ) . '(?:\/|$)/', '/', $url_object->getPath(), 1 );
         }
 
         // Returning the path using strval() to avoid an empty check.
@@ -1054,4 +1142,3 @@ class TRP_Url_Converter {
     }
 
 }
-

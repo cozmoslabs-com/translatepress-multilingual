@@ -857,8 +857,15 @@ class TRP_Translation_Manager {
 			return false;
 		}
 
-		$rest_prefix         = trailingslashit( rest_get_url_prefix() );
-		$is_rest_api_request = strpos( $_SERVER['REQUEST_URI'], $rest_prefix ) !== false; /* phpcs:ignore */
+		if ( isset( $_GET['rest_route'] ) ) {
+			return apply_filters( 'trp_is_rest_api_request', true );
+		}
+
+		$request_path = wp_parse_url( wp_unslash( $_SERVER['REQUEST_URI'] ), PHP_URL_PATH ); /* phpcs:ignore */
+		$rest_prefix  = trim( rest_get_url_prefix(), '/' );
+
+		$is_rest_api_request = is_string( $request_path )
+			&& preg_match( '#(?:^|/)' . preg_quote( $rest_prefix, '#' ) . '(?:/|$)#', $request_path ) === 1;
 
 		return apply_filters( 'trp_is_rest_api_request', $is_rest_api_request );
 	}

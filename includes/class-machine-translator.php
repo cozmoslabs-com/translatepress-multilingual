@@ -16,7 +16,18 @@ class TRP_Machine_Translator {
 	protected $machine_translator_logger;
 	protected $machine_translation_codes;
 	protected $trp_languages;
+    protected $trp_query;
     protected $correct_api_key = null;
+
+    /* Engines extend this class, so more than one instance exists per request. Wire up the cron only once. */
+    protected static $lock_cleanup_hooked = false;
+
+    /* Owner tokens of the machine translation locks this instance claimed and has not released yet */
+    protected $held_lock_owners = array();
+
+    /* Strings dropped from translation because a concurrent request holds their lock, keyed by string */
+    protected $lock_skipped_strings = array();
+
     /**
      * TRP_Machine_Translator constructor.
      *
@@ -39,6 +50,31 @@ class TRP_Machine_Translator {
 
         add_filter( 'trp_exclude_words_from_automatic_translation', array( $this, 'sort_exclude_words_from_automatic_translation_array' ), 99999, 1 );
         add_filter( 'trp_exclude_words_from_automatic_translation', array( $this, 'exclude_special_symbol_from_translation' ), 9999, 2 );
+
+        $this->schedule_machine_translation_lock_cleanup();
+    }
+
+    /**
+     * Schedule the recurring cleanup of the locks left behind by requests killed mid translation.
+     */
+    protected function schedule_machine_translation_lock_cleanup(){
+        if ( self::$lock_cleanup_hooked ){
+            return;
+        }
+        self::$lock_cleanup_hooked = true;
+
+        add_action( 'trp_machine_translation_lock_cleanup', array( $this, 'cleanup_machine_translation_locks_cron' ) );
+
+        if ( ! wp_next_scheduled( 'trp_machine_translation_lock_cleanup' ) ){
+            wp_schedule_event( time() + HOUR_IN_SECONDS, 'hourly', 'trp_machine_translation_lock_cleanup' );
+        }
+    }
+
+    /**
+     * Cron callback clearing abandoned machine translation locks.
+     */
+    public function cleanup_machine_translation_locks_cron(){
+        $this->get_trp_query()->cleanup_machine_translation_locks( $this->get_machine_translation_lock_timeout() );
     }
 
     /**
@@ -525,12 +561,17 @@ class TRP_Machine_Translator {
     /**
      * Function to be used externally
      *
-     * @param $strings
-     * @param $target_language_code
-     * @param $source_language_code
+     * Strings locked by a concurrent request ( in flight or recently translated ) are dropped from the
+     * return array. Locks claimed here are held until the caller saves the translations and calls
+     * release_locks( true ).
+     *
+     * @param array $strings
+     * @param string $target_language_code
+     * @param string|null $source_language_code
+     * @param string $dictionary_context        Dictionary the caller saves to: 'regular' or 'gettext'.
      * @return array
      */
-    public function translate($strings, $target_language_code, $source_language_code = null ){
+    public function translate($strings, $target_language_code, $source_language_code = null, $dictionary_context = 'regular' ){
         if ( !empty($strings) && is_array($strings) && method_exists( $this, 'translate_array' ) && apply_filters( 'trp_disable_automatic_translations_due_to_error', false ) === false ) {
 
             /* google has a problem translating this characters ( '%', '$', '#' )...for some reasons it puts spaces after them so we need to 'encode' them and decode them back. hopefully it won't break anything important */
@@ -562,16 +603,29 @@ class TRP_Machine_Translator {
             // Continue with only the strings that meet the minimum length
             $strings = $strings_to_translate;
 
-            foreach ($strings as $key => $string) {
-                /* html_entity_decode is needed before replacing the character "#" from the list because characters like &#8220; (8220 utf8)
-                 * will get an extra space after '&' which will break the character, rendering it like this: & #8220;
-                 */
+            // claim the strings so concurrent requests don't send the same string to the engine twice
+            $strings = $this->claim_strings_for_machine_translation( $strings, $target_language_code, $source_language_code, $dictionary_context );
 
-                $strings[$key] = str_replace($trp_exclude_words_from_automatic_translation, $placeholders, html_entity_decode( $string ));
-                $strings[$key] = trp_do_these_shortcodes( $strings[$key], $shortcode_tags_to_execute );
+            $machine_strings = array();
+            if ( !empty( $strings ) ) {
+                foreach ($strings as $key => $string) {
+                    /* html_entity_decode is needed before replacing the character "#" from the list because characters like &#8220; (8220 utf8)
+                     * will get an extra space after '&' which will break the character, rendering it like this: & #8220;
+                     */
+
+                    $strings[$key] = str_replace($trp_exclude_words_from_automatic_translation, $placeholders, html_entity_decode( $string ));
+                    $strings[$key] = trp_do_these_shortcodes( $strings[$key], $shortcode_tags_to_execute );
+                }
+
+                try {
+                    $machine_strings = $this->translate_array($strings, $target_language_code, $source_language_code);
+                } finally {
+                    if ( empty( $machine_strings ) ) {
+                        // nothing to save, free the locks now
+                        $this->release_locks();
+                    }
+                }
             }
-
-            $machine_strings = $this->translate_array($strings, $target_language_code, $source_language_code);
 
             $machine_strings_return_array = array();
             if (!empty($machine_strings)) {
@@ -602,6 +656,158 @@ class TRP_Machine_Translator {
         }else {
             return array();
         }
+    }
+
+    /**
+     * Claim each string in the machine translation locks table, returning only the ones this request may translate.
+     *
+     * Drops the strings another request is translating right now or translated in the last lock timeout
+     * seconds ( locks are kept after a save as recently translated markers ); they are read from the
+     * dictionary on a following page load. The claimed locks stay in place after returning: they must
+     * also cover the dictionary save in the caller.
+     *
+     * @param array $strings                        Strings to translate, keys are preserved.
+     * @param string $target_language_code
+     * @param string|null $source_language_code
+     * @param string $dictionary_context            'regular' or 'gettext', see translate().
+     * @return array                                The strings this request should translate. All of them when
+     *                                              locking is disabled via filter or unavailable.
+     */
+    protected function claim_strings_for_machine_translation( $strings, $target_language_code, $source_language_code, $dictionary_context ){
+        if ( empty( $strings ) || !is_array( $strings ) ){
+            return array();
+        }
+
+        if ( !apply_filters( 'trp_prevent_concurrent_machine_translation', true, $strings, $target_language_code, $source_language_code ) ){
+            return $strings;
+        }
+
+        $trp_query = $this->get_trp_query();
+
+        // if the locks table can't be created, don't hold up translations because of it
+        if ( !$trp_query->check_machine_translation_lock_table() ){
+            return $strings;
+        }
+
+        // the context keeps regular and gettext locks for the same text apart
+        $string_hashes = array();
+        foreach( $strings as $key => $string ){
+            $string_hashes[$key] = sha1( $dictionary_context . '|' . $source_language_code . '|' . $target_language_code . '|' . $string );
+        }
+
+        $lock_owner = wp_generate_uuid4();
+        $claimed_hashes = $trp_query->claim_machine_translation_locks( array_values( $string_hashes ), $lock_owner, $this->get_machine_translation_lock_timeout() );
+
+        // locking is unavailable, translate everything rather than nothing
+        if ( $claimed_hashes === null ){
+            $trp_query->delete_machine_translation_locks( array( $lock_owner ) );
+            return $strings;
+        }
+
+        // every string is locked by concurrent requests, nothing was claimed
+        if ( empty( $claimed_hashes ) ){
+            $this->remember_lock_skipped_strings( $strings );
+            return array();
+        }
+
+        $this->hold_lock_owner( $lock_owner );
+
+        $claimed_hashes = array_flip( $claimed_hashes );
+
+        $claimed_strings = array();
+        foreach( $string_hashes as $key => $string_hash ){
+            if ( isset( $claimed_hashes[$string_hash] ) ){
+                $claimed_strings[$key] = $strings[$key];
+            }
+        }
+
+        $this->remember_lock_skipped_strings( array_diff_key( $strings, $claimed_strings ) );
+
+        return $claimed_strings;
+    }
+
+    /**
+     * Remember strings dropped because a concurrent request holds their lock.
+     */
+    protected function remember_lock_skipped_strings( $strings ){
+        foreach( $strings as $string ){
+            $this->lock_skipped_strings[ $string ] = true;
+        }
+    }
+
+    /**
+     * Strings this request dropped because a concurrent request holds their lock, keyed by string.
+     *
+     * The lock holder inserts these into the dictionary when it saves, so callers must not register
+     * them as untranslated strings themselves: that would duplicate the holder's rows.
+     *
+     * @return array
+     */
+    public function get_lock_skipped_strings(){
+        return $this->lock_skipped_strings;
+    }
+
+    /**
+     * Remember a lock owner token until its locks are released.
+     */
+    protected function hold_lock_owner( $lock_owner ){
+        if ( empty( $this->held_lock_owners ) ){
+            // PHP_INT_MAX so the hook still runs when registered during shutdown ( gettext translates on shutdown )
+            add_action( 'shutdown', array( $this, 'release_locks' ), PHP_INT_MAX, 0 );
+        }
+        $this->held_lock_owners[] = $lock_owner;
+    }
+
+    /**
+     * Stop tracking every machine translation lock this instance still holds.
+     *
+     * Callers of translate() must call this after saving the returned translations, with
+     * $translations_saved = true: the locks then stay in place until the lock timeout as "recently
+     * translated" markers, blocking concurrent requests whose dictionary read predates the save from
+     * re-translating the same strings. Otherwise the locks are deleted so the strings can be retried.
+     *
+     * @param bool $translations_saved      Whether the translations were saved to the dictionary.
+     */
+    public function release_locks( $translations_saved = false ){
+        if ( empty( $this->held_lock_owners ) ){
+            return;
+        }
+
+        $lock_owners            = $this->held_lock_owners;
+        $this->held_lock_owners = array();
+
+        if ( $translations_saved ){
+            $this->get_trp_query()->refresh_machine_translation_locks( $lock_owners );
+        } else {
+            $this->get_trp_query()->delete_machine_translation_locks( $lock_owners );
+        }
+    }
+
+    /**
+     * Seconds after which a machine translation lock is considered abandoned and can be taken over.
+     *
+     * Must exceed the engine call plus the dictionary save — every engine sends its HTTP request with
+     * a 45s timeout, so a shorter value lets a concurrent request take over a lock whose engine call
+     * is still in flight and re-bill the same strings. Must also stay above
+     * trp_machine_translation_time_budget, so locks kept after a save outlive any concurrent request
+     * still working off a dictionary read that predates the save.
+     *
+     * @return int
+     */
+    public function get_machine_translation_lock_timeout(){
+        return (int) apply_filters( 'trp_machine_translation_lock_timeout', 50 ); // seconds
+    }
+
+    /**
+     * @return TRP_Query
+     */
+    protected function get_trp_query(){
+        if ( !$this->trp_query ){
+            $trp = TRP_Translate_Press::get_trp_instance();
+            $this->trp_query = $trp->get_component( 'query' );
+        }
+
+        return $this->trp_query;
     }
 
     /**

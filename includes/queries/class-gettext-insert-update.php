@@ -336,7 +336,7 @@ class TRP_Gettext_Insert_Update extends TRP_Query {
 	 * @param $language_code
 	 * @param $columns_to_update array Only update specified columns
 	 *
-	 * @return void
+	 * @return bool Whether the strings were written to the DB ( false when nothing was saved or the query failed )
      *
      *
      * How to call this functions?
@@ -353,7 +353,7 @@ class TRP_Gettext_Insert_Update extends TRP_Query {
 	 */
 	public function update_gettext_strings( $updated_strings, $language_code, $columns_to_update = array('id','original','translated','domain','status','plural_form')) {
 		if ( count( $updated_strings ) == 0 ) {
-			return;
+			return false;
 		}
 		$placeholder_array_mapping = array(
 			'id'          => '%d',
@@ -395,7 +395,7 @@ class TRP_Gettext_Insert_Update extends TRP_Query {
 		}
 
 		if ( empty( $place_holders ) || empty( $values ) ) {
-			return;
+			return false;
 		}
 
 		$on_duplicate    = ' ON DUPLICATE KEY UPDATE ';
@@ -411,9 +411,11 @@ class TRP_Gettext_Insert_Update extends TRP_Query {
 		$on_duplicate = rtrim( $on_duplicate, ',' );
 		$query        .= $on_duplicate;
 
-		$this->db->query( $this->db->prepare( $query . ' ', $values ) );
+		$result = $this->db->query( $this->db->prepare( $query . ' ', $values ) );
 
 		$this->maybe_record_automatic_translation_error( array( 'details' => 'Error running update_gettext_strings()' ) );
+
+		return false !== $result;
 	}
 
 	/**

@@ -147,6 +147,15 @@ class TRP_Process_Gettext {
         if ( $this->should_skip_gettext_processing( $current_locale, $translation, $text, $domain ) )
             return $translation;
 
+        $in_foreign_locale_switch = $this->is_inside_foreign_locale_switch( $current_locale );
+
+        // If WordPress looked this string up in a different locale than the TP language we would
+        // store it under, treat it as untranslated so no foreign text is stored/served.
+        if ( !$in_foreign_locale_switch && !$this->skip_gettext_querying && $translation !== $text
+             && $this->wordpress_gettext_lookup_locale_differs( $current_locale ) ) {
+            $translation = $text;
+        }
+
         $cache_key = $this->get_resolved_gettext_cache_key( $current_locale, $context, $plural_form, $text, $domain );
 
         //use a global for is_ajax_on_frontend() so we don't execute it multiple times
@@ -155,11 +164,12 @@ class TRP_Process_Gettext {
             $tp_gettext_is_ajax_on_frontend = TRP_Gettext_Manager::is_ajax_on_frontend();
 
         if ( !defined( 'DOING_AJAX' ) || $tp_gettext_is_ajax_on_frontend ) {
-            $cached_gettext_resolution = $this->get_resolved_gettext_cache_entry( $cache_key );
+            $db_id = '';
+            $cached_gettext_resolution = $in_foreign_locale_switch ? null : $this->get_resolved_gettext_cache_entry( $cache_key );
             if ( $cached_gettext_resolution !== null ) {
                 $translation = $cached_gettext_resolution['translation'];
                 $db_id       = $cached_gettext_resolution['db_id'];
-            } else {
+            } else if ( !$in_foreign_locale_switch ) {
             $trp             = TRP_Translate_Press::get_trp_instance();
 
             if ( !$this->gettext_manager ) {
@@ -327,6 +337,40 @@ class TRP_Process_Gettext {
         }
 
         return get_locale();
+    }
+
+    /**
+     * Whether the locale WordPress used for this lookup (WP_Translation_Controller locale on
+     * WP 6.5+, else determine_locale()) differs from the current TranslatePress language.
+     *
+     * @param string $current_locale The current TranslatePress language.
+     * @return bool
+     */
+    protected function wordpress_gettext_lookup_locale_differs( $current_locale ) {
+        if ( class_exists( 'WP_Translation_Controller' ) ) {
+            $wp_lookup_locale = WP_Translation_Controller::get_instance()->get_locale();
+        } else {
+            $wp_lookup_locale = determine_locale();
+        }
+
+        return ( ! empty( $wp_lookup_locale ) && strtolower( $wp_lookup_locale ) !== strtolower( $current_locale ) );
+    }
+
+    /**
+     * Inside switch_to_locale() to a locale other than the TP language, e.g. Contact Form 7 rendering a form in its own locale.
+     * Such translations are neither discarded nor stored.
+     *
+     * @param string $current_locale
+     * @return bool
+     */
+    protected function is_inside_foreign_locale_switch( $current_locale ) {
+        global $wp_locale_switcher;
+
+        if ( ! ( $wp_locale_switcher instanceof WP_Locale_Switcher ) || ! $wp_locale_switcher->is_switched() ) {
+            return false;
+        }
+
+        return $this->wordpress_gettext_lookup_locale_differs( $current_locale );
     }
 
     /**
@@ -552,10 +596,13 @@ class TRP_Process_Gettext {
         }
 
                         $gettext_insert_update = $this->trp_query->get_query_component('gettext_insert_update');
+                        // First-seen translation is sourced from a WordPress language (.mo) file:
+                        // store it with the language-file status, not the human-reviewed default.
                         $db_id = $gettext_insert_update->insert_gettext_strings( array(
                             array(
 	                            'original'        => $text,
 	                            'translated'      => ( $translation != $text && $translation != $original_plural ) ? $translation : '',
+	                            'status'          => $this->get_gettext_translated_in_language_file_status(),
 	                            'domain'          => $domain,
 	                            'context'         => $context,
 	                            'plural_form'     => $plural_form,
@@ -759,11 +806,16 @@ class TRP_Process_Gettext {
             return;
                     }
 
+        $translated_from_language_file = ( $translation != $text && $translation != $original_plural );
+
+        // Observed translations come from a .mo file, not a human: store as language-file status
+        // (empty ones fall through to NOT_TRANSLATED in insert_gettext_strings()).
         $this->pending_gettext_storage[ $language ][ $key ] = array(
             'key'                  => $key,
             'language'             => $language,
             'original'             => $text,
-            'translated'           => ( $translation != $text && $translation != $original_plural ) ? $translation : '',
+            'translated'           => $translated_from_language_file ? $translation : '',
+            'status'               => $this->get_gettext_translated_in_language_file_status(),
             'domain'               => $domain,
             'context'              => $context,
             'plural_form'          => $plural_form,
@@ -771,6 +823,20 @@ class TRP_Process_Gettext {
             'observed_translation' => $translation,
         );
                     }
+
+    /**
+     * Return the gettext status constant for translations sourced from a WordPress language file.
+     *
+     * @return int
+     */
+    protected function get_gettext_translated_in_language_file_status() {
+        if ( ! $this->trp_query ) {
+            $trp             = TRP_Translate_Press::get_trp_instance();
+            $this->trp_query = $trp->get_component( 'query' );
+        }
+
+        return $this->trp_query->get_constant_gettext_translated_in_language_file();
+    }
 
 	                /**
      * Register an observed gettext row as a machine-translation candidate.

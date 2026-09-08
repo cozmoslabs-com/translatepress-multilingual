@@ -93,6 +93,22 @@ function trp_stop_redirect_on_robots_txt( $allow_redirect, $needed_language, $cu
 add_filter( 'trp_allow_language_redirect', 'trp_stop_redirect_on_robots_txt', 10, 3 );
 
 /**
+ * Keep the canonical, unprefixed WordPress REST URL accessible when the default
+ * language uses a subdirectory. REST requests must not redirect to themselves.
+ */
+function trp_stop_redirect_on_unprefixed_rest_request( $allow_redirect, $needed_language, $current_page_url ) {
+    $trp           = TRP_Translate_Press::get_trp_instance();
+    $url_converter = $trp->get_component( 'url_converter' );
+
+    if ( $url_converter->is_unprefixed_rest_request_on_subdirectory_install() ) {
+        return false;
+    }
+
+    return $allow_redirect;
+}
+add_filter( 'trp_allow_language_redirect', 'trp_stop_redirect_on_unprefixed_rest_request', 10, 3 );
+
+/**
  * Don't have html inside menu title tags. Some themes just put in the title the content of the link without striping HTML
  */
 add_filter( 'nav_menu_link_attributes', 'trp_remove_html_from_menu_title', 10, 3);
@@ -270,8 +286,17 @@ function trp_do_not_translate_dk_pdf($translate, $output){
 
 add_filter( 'trp_skip_gettext_processing', 'trp_invoices_for_woocommerce_strip_gettext_from_pdf', 10, 4 );
 function trp_invoices_for_woocommerce_strip_gettext_from_pdf( $bool, $translation, $text, $domain ){
+    if ( !isset( $_GET['wc-ajax'] ) || $_GET['wc-ajax'] != 'checkout' ) {
+        return $bool;
+    }
 
-    if ( isset( $_GET['wc-ajax'] ) && $_GET['wc-ajax'] == "checkout" && class_exists( '\BEWPI_Invoice' ) && ((trim( $domain ) === 'woocommerce-pdf-invoice') || ( $text == 'Cash on delivery' && trim($domain) == 'woocommerce') ) ) {
+    $domain = trim( $domain );
+    $is_invoice_string = (
+        $domain === 'woocommerce-pdf-invoice' ||
+        ( $text == 'Cash on delivery' && $domain == 'woocommerce' )
+    );
+
+    if ( $is_invoice_string && class_exists( '\BEWPI_Invoice' ) ) {
         return true;
     }
     return $bool;
@@ -356,7 +381,17 @@ function trp_woocommerce_pdf_catalog_compatibility_dont_translate_pdf( $bool, $o
 
 add_filter( 'trp_skip_gettext_processing', 'trp_woo_strip_gettext_from_yith_pdf', 10, 4 );
 function trp_woo_strip_gettext_from_yith_pdf( $bool, $translation, $text, $domain ){
-    if ( isset( $_GET['wc-ajax'] ) && $_GET['wc-ajax'] == 'checkout' && class_exists( 'YITH_Checkout_Addon' ) && ((trim( $domain ) === 'yith-woocommerce-pdf-invoice') || ( $text == 'N/A' && trim($domain) == 'woocommerce') ) ){
+    if ( !isset( $_GET['wc-ajax'] ) || $_GET['wc-ajax'] != 'checkout' ) {
+        return $bool;
+    }
+
+    $domain = trim( $domain );
+    $is_invoice_string = (
+        $domain === 'yith-woocommerce-pdf-invoice' ||
+        ( $text == 'N/A' && $domain == 'woocommerce' )
+    );
+
+    if ( $is_invoice_string && class_exists( 'YITH_Checkout_Addon' ) ) {
         return true;
     }
     return $bool;
@@ -2249,6 +2284,7 @@ add_filter( 'trp_needed_language', 'trp_page_builders_compatibility_with_subdire
 function trp_page_builders_compatibility_with_subdirectory_for_default_language( $needed_language, $lang_from_url, $settings, $trp) {
     if ( ( ( isset( $_GET['action'] ) && $_GET['action'] === 'elementor' ) || isset( $_GET['elementor-preview'] ) ) //Elementor
         || trp_divi_is_builder_request() //Divi 4 & 5. Divi 4 appended PageSpeed=off to the builder URL, Divi 5 no longer does, so don't rely on it
+        || trp_is_breakdance_builder_request() //Breakdance builder shell (?breakdance=builder) and canvas iframe (breakdance_iframe=true)
         || ( ( isset( $_GET['vc_action'] ) && $_GET['vc_action'] === 'vc_inline' ) || ( isset( $_GET['vc_editable'] ) && $_GET['vc_editable'] === 'true' ) ) ) { //WPBakery
         $needed_language = $settings['default-language'];
     }
@@ -3399,6 +3435,141 @@ function trp_breakdance_builder_respect_user_locale( $locale ) {
 // Priority 100000 so this runs after TRP_Languages::change_locale() (99999).
 add_filter( 'locale', 'trp_breakdance_builder_respect_user_locale', 100000 );
 add_filter( 'plugin_locale', 'trp_breakdance_builder_respect_user_locale', 100000 );
+
+/**
+ * Convert a URL of this site to its default-language version, collapsing repeated language slugs.
+ *
+ * Breakdance builds the "Edit Global Styles" (browse mode) admin bar link with
+ * home_url( $_SERVER['REQUEST_URI'] ). On a secondary-language page the request URI already carries
+ * the language slug and TRP_Url_Converter::add_language_to_home_url() prepends it once more, so the
+ * browseModeOpenUrl and returnUrl parameters end up as https://example.com/en/en/page/ .
+ * TRP_Url_Converter::get_url_for_language() replaces a single language slug, so drop the duplicated
+ * leading slugs first and let it handle the remaining one (including translated slugs from SEO Pack).
+ *
+ * @param string $url Absolute URL of this site.
+ *
+ * @return string The URL in the default language.
+ */
+function trp_breakdance_url_to_default_language( $url ) {
+    $trp           = TRP_Translate_Press::get_trp_instance();
+    $url_converter = $trp->get_component( 'url_converter' );
+    $settings      = $trp->get_component( 'settings' )->get_settings();
+
+    if ( empty( $url ) || ! $url_converter || empty( $settings['default-language'] ) ) {
+        return $url;
+    }
+
+    $language_slugs = array();
+    foreach ( (array) $settings['translation-languages'] as $language_code ) {
+        $language_slugs[] = $url_converter->get_url_slug( $language_code, false );
+    }
+
+    $url_obj  = new \TranslatePress\Uri( $url );
+    $abs_home = wp_parse_url( $url_converter->get_abs_home() );
+
+    // Only URLs of this site carry TranslatePress language slugs.
+    if ( $url_obj->getHost() && ! empty( $abs_home['host'] ) && strcasecmp( strval( $url_obj->getHost() ), $abs_home['host'] ) !== 0 ) {
+        return $url;
+    }
+
+    $original_path = strval( $url_obj->getPath() );
+    $home_path     = isset( $abs_home['path'] ) ? trim( strval( $abs_home['path'] ), '/' ) : '';
+    $path          = trim( $original_path, '/' );
+
+    if ( $home_path !== '' && strpos( $path, $home_path ) === 0 ) {
+        $path = trim( substr( $path, strlen( $home_path ) ), '/' );
+    }
+
+    $segments = ( $path === '' ) ? array() : explode( '/', $path );
+
+    // A URL never legitimately starts with two language slugs. Keep the last one so
+    // get_url_for_language() still knows which language the rest of the path is in.
+    while ( count( $segments ) >= 2 && in_array( $segments[0], $language_slugs, true ) && in_array( $segments[1], $language_slugs, true ) ) {
+        array_shift( $segments );
+    }
+
+    $new_path = '/' . ltrim( $home_path . '/' . implode( '/', $segments ), '/' );
+    if ( $new_path !== '/' && substr( $original_path, -1 ) === '/' ) {
+        $new_path .= '/';
+    }
+    $url_obj->setPath( $new_path );
+
+    return $url_converter->get_url_for_language( $settings['default-language'], $url_obj->getUri(), '' );
+}
+
+/**
+ * Redirect Breakdance Builder requests opened on a secondary language URL to the default language.
+ *
+ * Admin Bar → Breakdance → "Edit Global Styles" on a secondary-language page links to the builder on
+ * that language ( https://example.com/en/?breakdance=builder&mode=browse&browseModeOpenUrl=... ), so the
+ * builder canvas renders the translated page and edits made there are saved into the original
+ * content, mixing languages. The browseModeOpenUrl and returnUrl parameters also carry a doubled
+ * language slug ( /en/en/page/ ), which resolves to a 404 in the canvas and when leaving the builder.
+ *
+ * Applies to the builder shell (?breakdance=builder) and the canvas iframe (breakdance_iframe=true).
+ * Hooked before TRP_Language_Switcher::redirect_to_correct_language() so we don't redirect twice.
+ */
+add_action( 'template_redirect', 'trp_breakdance_builder_redirect_to_default_language', 10 );
+function trp_breakdance_builder_redirect_to_default_language() {
+    if ( is_admin() || ! defined( '__BREAKDANCE_VERSION' ) || ! trp_is_breakdance_builder_request() ) {
+        return;
+    }
+
+    $trp           = TRP_Translate_Press::get_trp_instance();
+    $url_converter = $trp->get_component( 'url_converter' );
+    if ( ! $url_converter ) {
+        return;
+    }
+
+    $current_url  = $url_converter->cur_page_url();
+    $redirect_url = trp_breakdance_url_to_default_language( $current_url );
+    $redirect     = ( $redirect_url !== $current_url );
+
+    // Browse mode: the page opened in the canvas and the page returned to when closing the builder.
+    foreach ( array( 'browseModeOpenUrl', 'returnUrl' ) as $param ) {
+        if ( empty( $_GET[ $param ] ) ) {
+            continue;
+        }
+        $original_value  = esc_url_raw( wp_unslash( $_GET[ $param ] ) ); /* phpcs:ignore WordPress.Security.NonceVerification.Recommended */
+        $converted_value = trp_breakdance_url_to_default_language( $original_value );
+        if ( $converted_value !== $original_value ) {
+            $redirect_url = add_query_arg( $param, rawurlencode( $converted_value ), $redirect_url );
+            $redirect     = true;
+        }
+    }
+
+    if ( $redirect ) {
+        $status = apply_filters( 'trp_redirect_status', 302, 'breakdance_builder_redirect_to_default_language' );
+        wp_safe_redirect( $redirect_url, $status );
+        exit;
+    }
+}
+
+/**
+ * Disable the automatic language detection redirect script inside the Breakdance canvas.
+ * Otherwise it would send the canvas back to the visitor's preferred language,
+ * bouncing against the redirect to the default language above.
+ */
+add_filter( 'trp_ald_enqueue_redirecting_script', 'trp_breakdance_builder_disable_ald_redirect' );
+function trp_breakdance_builder_disable_ald_redirect( $enqueue_redirecting_script ) {
+    if ( trp_is_breakdance_builder_request() ) {
+        return false;
+    }
+    return $enqueue_redirecting_script;
+}
+
+/**
+ * Hide the floating language switcher inside the Breakdance canvas, so the canvas can't be switched
+ * to a secondary language while editing.
+ */
+add_filter( 'trp_floating_ls_html', 'trp_breakdance_builder_disable_language_switcher' );
+add_filter( 'trp_floater_ls_html_v2', 'trp_breakdance_builder_disable_language_switcher' );
+function trp_breakdance_builder_disable_language_switcher( $html ) {
+    if ( trp_is_breakdance_builder_request() ) {
+        return '';
+    }
+    return $html;
+}
 
 /**
  * Remove Woodmart Layouts' template overrides when TranslatePress editors are active.

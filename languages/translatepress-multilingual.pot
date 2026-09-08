@@ -6,7 +6,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-08-25 09:21+0000\n"
+"POT-Creation-Date: 2026-09-08 14:51+0000\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
 "X-Poedit-SearchPath-0: .\n"
@@ -30,7 +30,7 @@ msgstr ""
 msgid "Your License has expired."
 msgstr ""
 
-#: index-dev.php:96, index-dev.php:107, index-dev.php:117, includes/class-settings.php:746
+#: index-dev.php:96, index-dev.php:107, index-dev.php:117, includes/class-settings.php:749
 msgid "Activate License"
 msgstr ""
 
@@ -365,23 +365,23 @@ msgstr ""
 msgid "Advanced"
 msgstr ""
 
-#: includes/class-advanced-tab.php:231, includes/class-language-switcher-tab.php:197, add-ons-pro/automatic-language-detection/includes/class-ald-settings.php:545
+#: includes/class-advanced-tab.php:237, includes/class-language-switcher-tab.php:197, add-ons-pro/automatic-language-detection/includes/class-ald-settings.php:545
 msgid "Settings saved."
 msgstr ""
 
-#: includes/class-advanced-tab.php:644, includes/class-advanced-tab.php:706, includes/class-advanced-tab.php:780
+#: includes/class-advanced-tab.php:650, includes/class-advanced-tab.php:712, includes/class-advanced-tab.php:786
 msgid "Are you sure you want to remove this item?"
 msgstr ""
 
-#: includes/class-advanced-tab.php:644, includes/class-advanced-tab.php:706, includes/class-advanced-tab.php:780, partials/main-settings-language-selector.php:127, includes/onboarding/class-languages.php:124, includes/onboarding/class-languages.php:151
+#: includes/class-advanced-tab.php:650, includes/class-advanced-tab.php:712, includes/class-advanced-tab.php:786, partials/main-settings-language-selector.php:127, includes/onboarding/class-languages.php:124, includes/onboarding/class-languages.php:151
 msgid "Remove"
 msgstr ""
 
-#: includes/class-advanced-tab.php:685, includes/class-advanced-tab.php:750, includes/class-advanced-tab.php:895, partials/main-settings-language-selector.php:182
+#: includes/class-advanced-tab.php:691, includes/class-advanced-tab.php:756, includes/class-advanced-tab.php:908, partials/main-settings-language-selector.php:182
 msgid "Add"
 msgstr ""
 
-#: includes/class-advanced-tab.php:834, includes/class-advanced-tab.php:878
+#: includes/class-advanced-tab.php:840, includes/class-advanced-tab.php:890
 msgid "Select..."
 msgstr ""
 
@@ -513,7 +513,7 @@ msgstr ""
 msgid "Automatic translation has been disabled."
 msgstr ""
 
-#: includes/class-error-manager.php:170, includes/class-plugin-notices.php:359, includes/class-plugin-notices.php:437, includes/class-plugin-notices.php:412, includes/class-plugin-notices.php:497, includes/class-plugin-notices.php:475, includes/class-plugin-notices.php:526, includes/class-plugin-notices.php:582, includes/class-plugin-notices.php:638, includes/class-plugin-notices.php:627, includes/class-plugin-notices.php:663, includes/class-plugin-notices.php:715, includes/class-plugin-notices.php:698, includes/class-reviews.php:129, includes/class-reviews.php:132, includes/class-upgrade.php:1437, includes/class-upgrade.php:2146, add-ons-advanced/extra-languages/class-extra-languages.php:157, add-ons-advanced/seo-pack/class-seo-pack.php:853, add-ons-pro/multiple-domains/class-multiple-domains.php:577, includes/upgrade/class-batch-processor.php:565, includes/upgrade/class-batch-processor.php:1216
+#: includes/class-error-manager.php:170, includes/class-plugin-notices.php:359, includes/class-plugin-notices.php:437, includes/class-plugin-notices.php:412, includes/class-plugin-notices.php:497, includes/class-plugin-notices.php:475, includes/class-plugin-notices.php:526, includes/class-plugin-notices.php:582, includes/class-plugin-notices.php:638, includes/class-plugin-notices.php:627, includes/class-plugin-notices.php:663, includes/class-plugin-notices.php:715, includes/class-plugin-notices.php:698, includes/class-reviews.php:129, includes/class-reviews.php:132, includes/class-upgrade.php:1525, includes/class-upgrade.php:2234, add-ons-advanced/extra-languages/class-extra-languages.php:157, add-ons-advanced/seo-pack/class-seo-pack.php:853, add-ons-pro/multiple-domains/class-multiple-domains.php:578, includes/upgrade/class-batch-processor.php:609, includes/upgrade/class-batch-processor.php:1260
 msgid "Dismiss this notice."
 msgstr ""
 
@@ -601,7 +601,7 @@ msgstr ""
 msgid "Active"
 msgstr ""
 
-#: includes/class-language-switcher-tab.php:169, includes/class-language-switcher-tab.php:213, add-ons-pro/multiple-domains/class-multiple-domains.php:768, add-ons-pro/automatic-language-detection/includes/class-ald-settings.php:525
+#: includes/class-language-switcher-tab.php:169, includes/class-language-switcher-tab.php:213, add-ons-pro/multiple-domains/class-multiple-domains.php:769, add-ons-pro/automatic-language-detection/includes/class-ald-settings.php:525
 msgid "Permission denied."
 msgstr ""
 
@@ -641,7 +641,7 @@ msgstr ""
 msgid "The selected automatic translation engine does not provide support for these languages.<br>You can still manually translate pages in these languages using the Translation Editor."
 msgstr ""
 
-#: includes/class-machine-translation-tab.php:285, includes/class-settings.php:668
+#: includes/class-machine-translation-tab.php:285, includes/class-settings.php:671
 msgid "General"
 msgstr ""
 
@@ -657,11 +657,11 @@ msgstr ""
 msgid "API key verification was successful."
 msgstr ""
 
-#: includes/class-machine-translator.php:157, includes/google-translate/class-google-translate-v2-machine-translator.php:205
+#: includes/class-machine-translator.php:193, includes/google-translate/class-google-translate-v2-machine-translator.php:205
 msgid "Please enter your Google Translate key."
 msgstr ""
 
-#: includes/class-machine-translator.php:172, add-ons-pro/deepl/includes/class-deepl-machine-translator.php:376
+#: includes/class-machine-translator.php:208, add-ons-pro/deepl/includes/class-deepl-machine-translator.php:376
 msgid "Please enter your DeepL API key."
 msgstr ""
 
@@ -881,43 +881,43 @@ msgstr ""
 msgid "Invalid language code. Please try again."
 msgstr ""
 
-#: includes/class-settings.php:486
+#: includes/class-settings.php:489
 msgid "Language codes can contain only A-Z a-z 0-9 - _ characters. Check your language codes in TranslatePress General Settings."
 msgstr ""
 
-#: includes/class-settings.php:559
+#: includes/class-settings.php:562
 msgid "Error! Duplicate URL slug values."
 msgstr ""
 
-#: includes/class-settings.php:560
+#: includes/class-settings.php:563
 msgid "You cannot select two languages that have the same <a href=\"https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes\" target=\"_blank\">iso code</a> but different formalities because doing so will lead to duplicate <a href=\"https://developers.google.com/search/docs/specialty/international/localized-versions\" target=\"_blank\">hreflang tags</a>."
 msgstr ""
 
-#: includes/class-settings.php:561
+#: includes/class-settings.php:564
 msgid "Duplicate language detected.<br>Each language can only be added once to ensure accurate translation management.<br> Please change the duplicate language entry and try again. "
 msgstr ""
 
-#: includes/class-settings.php:618
+#: includes/class-settings.php:621
 msgid "Current Language"
 msgstr ""
 
-#: includes/class-settings.php:624
+#: includes/class-settings.php:627
 msgid "Opposite Language"
 msgstr ""
 
-#: includes/class-settings.php:673, includes/class-translation-manager.php:548, add-ons-pro/translator-accounts/includes/class-translator-accounts.php:159
+#: includes/class-settings.php:676, includes/class-translation-manager.php:548, add-ons-pro/translator-accounts/includes/class-translator-accounts.php:159
 msgid "Translate Site"
 msgstr ""
 
-#: includes/class-settings.php:678
+#: includes/class-settings.php:681
 msgid "Addons"
 msgstr ""
 
-#: includes/class-settings.php:732, includes/class-translation-manager.php:704, includes/elementor/class-language-switcher-widget.php:93
+#: includes/class-settings.php:735, includes/class-translation-manager.php:704, includes/elementor/class-language-switcher-widget.php:93
 msgid "Settings"
 msgstr ""
 
-#: includes/class-settings.php:738
+#: includes/class-settings.php:741
 msgid "Pro Features"
 msgstr ""
 
@@ -1420,79 +1420,79 @@ msgstr ""
 msgid "Opens post in the translation editor. Post must be saved as draft or published beforehand."
 msgstr ""
 
-#: includes/class-translation-manager.php:920
+#: includes/class-translation-manager.php:927
 msgid "Security check"
 msgstr ""
 
-#: includes/class-translation-manager.php:992
+#: includes/class-translation-manager.php:999
 msgid "<strong>Warning:</strong> Some strings have possibly incorrectly encoded characters. This may result in breaking the queries, rendering the page untranslated in live mode. Consider revising the following strings or their method of outputting."
 msgstr ""
 
-#: includes/class-translation-manager.php:1016, includes/class-translation-manager.php:1041, includes/class-upgrade.php:435
+#: includes/class-translation-manager.php:1023, includes/class-translation-manager.php:1048, includes/class-upgrade.php:436
 msgid "IMPORTANT: It is strongly recommended to first backup the database!"
 msgstr ""
 
-#: includes/class-translation-manager.php:1017, includes/class-translation-manager.php:1042, includes/class-upgrade.php:436
+#: includes/class-translation-manager.php:1024, includes/class-translation-manager.php:1049, includes/class-upgrade.php:437
 msgid "Are you sure you want to continue?"
 msgstr ""
 
-#: includes/class-translation-manager.php:1022, includes/class-translation-manager.php:1046, includes/class-upgrade.php:446, includes/class-upgrade.php:460
+#: includes/class-translation-manager.php:1029, includes/class-translation-manager.php:1053, includes/class-upgrade.php:447, includes/class-upgrade.php:461
 msgid "TranslatePress data update"
 msgstr ""
 
-#: includes/class-translation-manager.php:1022, includes/class-translation-manager.php:1046, includes/class-upgrade.php:460
+#: includes/class-translation-manager.php:1029, includes/class-translation-manager.php:1053, includes/class-upgrade.php:461
 msgid "We need to update your translations database to the latest version."
 msgstr ""
 
-#: includes/class-translation-manager.php:1023
+#: includes/class-translation-manager.php:1030
 msgid "Updating will allow editing translations of localized text from plugins and theme. Existing translation will still work as expected."
 msgstr ""
 
-#: includes/class-translation-manager.php:1025, includes/class-translation-manager.php:1049, includes/class-upgrade.php:461
+#: includes/class-translation-manager.php:1032, includes/class-translation-manager.php:1056, includes/class-upgrade.php:462
 msgid "Run the updater"
 msgstr ""
 
-#: includes/class-translation-manager.php:1047
+#: includes/class-translation-manager.php:1054
 msgid "Updating will allow editing translations of slugs. Existing translation will still work as expected."
 msgstr ""
 
-#: includes/class-translation-manager.php:1102
+#: includes/class-translation-manager.php:1109
 msgid "Please activate the SEO Addon from <br/>WordPress -> Settings -> TranslatePress -> Addons section"
 msgstr ""
 
-#: includes/class-translation-manager.php:1105
+#: includes/class-translation-manager.php:1112
 msgid "Go to Addons"
 msgstr ""
 
-#: includes/class-translation-manager.php:1121
+#: includes/class-translation-manager.php:1128
 msgid "The SEO Pack add-on allows translation of all the URL slugs:"
 msgstr ""
 
-#: includes/class-translation-manager.php:1124
+#: includes/class-translation-manager.php:1131
 msgid "Taxonomy slugs"
 msgstr ""
 
-#: includes/class-translation-manager.php:1127
+#: includes/class-translation-manager.php:1134
 msgid "Term slugs"
 msgstr ""
 
-#: includes/class-translation-manager.php:1130
+#: includes/class-translation-manager.php:1137
 msgid "Post slugs (this includes pages and custom post types)"
 msgstr ""
 
-#: includes/class-translation-manager.php:1133
+#: includes/class-translation-manager.php:1140
 msgid "Post type base slugs"
 msgstr ""
 
-#: includes/class-translation-manager.php:1136
+#: includes/class-translation-manager.php:1143
 msgid "WooCommerce slugs"
 msgstr ""
 
-#: includes/class-translation-manager.php:1141
+#: includes/class-translation-manager.php:1148
 msgid "The SEO Pack add-on is available with ALL premium versions of the plugin."
 msgstr ""
 
-#: includes/class-translation-manager.php:1144
+#: includes/class-translation-manager.php:1151
 msgid "Upgrade to Pro"
 msgstr ""
 
@@ -1636,79 +1636,127 @@ msgstr ""
 msgid "Finishing up..."
 msgstr ""
 
-#: includes/class-upgrade.php:446
+#: includes/class-upgrade.php:447
 msgid "TranslatePress needs to optimize gettext database tables. Translations continue to work while this runs in the background."
 msgstr ""
 
-#: includes/class-upgrade.php:447
+#: includes/class-upgrade.php:448
 msgid "Before starting, we strongly recommend creating a database backup."
 msgstr ""
 
-#: includes/class-upgrade.php:448
+#: includes/class-upgrade.php:449
 msgid "Start optimization"
 msgstr ""
 
-#: includes/class-upgrade.php:535
+#: includes/class-upgrade.php:539
 msgid "Update aborted! Could not schedule gettext database optimization."
 msgstr ""
 
-#: includes/class-upgrade.php:599
+#: includes/class-upgrade.php:604
 msgid "Database optimization did not complete successfully. We recommend restoring the original database or <a href=\"%s\" >trying again.</a>"
 msgstr ""
 
-#: includes/class-upgrade.php:615
+#: includes/class-upgrade.php:620
 msgid "Update aborted! Your user account doesn't have the capability to perform database updates."
 msgstr ""
 
-#: includes/class-upgrade.php:620
+#: includes/class-upgrade.php:625
 msgid "Update aborted! Invalid nonce."
 msgstr ""
 
-#: includes/class-upgrade.php:665
+#: includes/class-upgrade.php:674
 msgid "Update aborted! Incorrect action."
 msgstr ""
 
-#: includes/class-upgrade.php:668
+#: includes/class-upgrade.php:677
+msgid "Update aborted! Start the gettext database optimization separately from the Advanced settings page."
+msgstr ""
+
+#: includes/class-upgrade.php:680
 msgid "Update aborted! Incorrect language code."
 msgstr ""
 
-#: includes/class-upgrade.php:652
+#: includes/class-upgrade.php:661
 msgid "Updating database to version %s+"
 msgstr ""
 
-#: includes/class-upgrade.php:656, includes/class-upgrade.php:729
+#: includes/class-upgrade.php:665, includes/class-upgrade.php:746
 msgid "Processing table for language %s..."
 msgstr ""
 
-#: includes/class-upgrade.php:638, includes/class-upgrade.php:768
+#: includes/class-upgrade.php:647, includes/class-upgrade.php:785
 msgid "Back to TranslatePress Settings"
 msgstr ""
 
-#: includes/class-upgrade.php:642
+#: includes/class-upgrade.php:651
 msgid "Successfully updated database!"
 msgstr ""
 
-#: includes/class-upgrade.php:734, includes/class-upgrade.php:726
+#: includes/class-upgrade.php:751, includes/class-upgrade.php:743
 msgid " done."
 msgstr ""
 
-#: includes/class-upgrade.php:1435
+#: includes/class-upgrade.php:809, includes/upgrade/gettext-optimization/class-gettext-originals-lookup-hash-migration.php:1003
+msgid "Update aborted while %1$s. SQL error: %2$s"
+msgstr ""
+
+#: includes/class-upgrade.php:892
+msgid "inserting original strings"
+msgstr ""
+
+#: includes/class-upgrade.php:899
+msgid "checking original string insertion progress"
+msgstr ""
+
+#: includes/class-upgrade.php:916
+msgid "cleaning duplicate original strings"
+msgstr ""
+
+#: includes/class-upgrade.php:946
+msgid "updating original string IDs"
+msgstr ""
+
+#: includes/class-upgrade.php:953
+msgid "checking original string ID update progress"
+msgstr ""
+
+#: includes/class-upgrade.php:1218
+msgid "inserting gettext original strings"
+msgstr ""
+
+#: includes/class-upgrade.php:1225
+msgid "checking gettext original insertion progress"
+msgstr ""
+
+#: includes/class-upgrade.php:1251
+msgid "cleaning duplicate gettext original strings"
+msgstr ""
+
+#: includes/class-upgrade.php:1278
+msgid "updating gettext original string IDs"
+msgstr ""
+
+#: includes/class-upgrade.php:1285
+msgid "checking gettext original string ID update progress"
+msgstr ""
+
+#: includes/class-upgrade.php:1523
 msgid "All individual TranslatePress add-on plugins <a href=\"%1$s\" target=\"_blank\">have been discontinued</a> and are now included in the premium Personal, Business and Developer versions of TranslatePress. Please log into your <a href=\"%2$s\" target=\"_blank\">account page</a>, download the new premium version and install it. Your individual addons settings will be ported over."
 msgstr ""
 
-#: includes/class-upgrade.php:2172
+#: includes/class-upgrade.php:2260
 msgid "Brand-new Language Switcher Settings are here!"
 msgstr ""
 
-#: includes/class-upgrade.php:2175
+#: includes/class-upgrade.php:2263
 msgid "Explore pre-made templates, switch colors, flag styles, spacing, layouts & more. Use the live preview to perfect your switcher in seconds."
 msgstr ""
 
-#: includes/class-upgrade.php:2179
+#: includes/class-upgrade.php:2267
 msgid "Start customizing"
 msgstr ""
 
-#: includes/class-upgrade.php:2180
+#: includes/class-upgrade.php:2268
 msgid "Read documentation"
 msgstr ""
 
@@ -1716,7 +1764,7 @@ msgstr ""
 msgid "<strong>TranslatePress</strong> requires <strong><a href=\"http://php.net/manual/en/book.mbstring.php\">Multibyte String PHP library</a></strong>. Please contact your server administrator to install it on your server."
 msgstr ""
 
-#: includes/compatibility-functions.php:2126
+#: includes/compatibility-functions.php:2161
 msgid "Detected long query limitation on WPEngine hosting. Some large pages may appear untranslated. You can remove limitation by adding the following to your site’s wp-config.php: define( 'WPE_GOVERNOR', false ); "
 msgstr ""
 
@@ -1944,7 +1992,7 @@ msgstr ""
 msgid "Configure different menu items for different languages."
 msgstr ""
 
-#: partials/addons-settings-page.php:113, add-ons-pro/multiple-domains/class-multiple-domains.php:376, includes/onboarding/class-addons.php:101
+#: partials/addons-settings-page.php:113, add-ons-pro/multiple-domains/class-multiple-domains.php:377, includes/onboarding/class-addons.php:101
 msgid "Different Domain per Language"
 msgstr ""
 
@@ -2733,7 +2781,7 @@ msgstr ""
 msgid "The inactive languages will still be visible and active for the admin. For other users they won't be visible in the language switchers and won't be accessible either."
 msgstr ""
 
-#: add-ons-advanced/extra-languages/class-extra-languages.php:145, add-ons-pro/multiple-domains/class-multiple-domains.php:565
+#: add-ons-advanced/extra-languages/class-extra-languages.php:145, add-ons-pro/multiple-domains/class-multiple-domains.php:566
 msgid "unknown"
 msgstr ""
 
@@ -2749,102 +2797,102 @@ msgstr ""
 msgid "If you absolutely need them, the removed translations can be found in tables trp_slug_original_obsolete and trp_slug_translation_obsolete."
 msgstr ""
 
-#: add-ons-pro/multiple-domains/class-multiple-domains.php:379
+#: add-ons-pro/multiple-domains/class-multiple-domains.php:380
 msgid "View Docs"
 msgstr ""
 
-#: add-ons-pro/multiple-domains/class-multiple-domains.php:386
+#: add-ons-pro/multiple-domains/class-multiple-domains.php:387
 msgid "Assign different domains or subdomains to each language. When visitors access these domains, TranslatePress loads the appropriate language translation directly without redirecting."
 msgstr ""
 
 #. translators: %1$s, %2$s, %3$s are example domains
-#: add-ons-pro/multiple-domains/class-multiple-domains.php:392
+#: add-ons-pro/multiple-domains/class-multiple-domains.php:393
 msgid "Example: %1$s for English, %2$s for Spanish, %3$s for French."
 msgstr ""
 
-#: add-ons-pro/multiple-domains/class-multiple-domains.php:400
+#: add-ons-pro/multiple-domains/class-multiple-domains.php:401
 msgid "Before enabling:"
 msgstr ""
 
-#: add-ons-pro/multiple-domains/class-multiple-domains.php:401
+#: add-ons-pro/multiple-domains/class-multiple-domains.php:402
 msgid "Ensure your domains are registered, pointed to your server, and have SSL certificates configured."
 msgstr ""
 
-#: add-ons-pro/multiple-domains/class-multiple-domains.php:414, add-ons-pro/multiple-domains/class-multiple-domains.php:434, includes/advanced-settings/exclude-gettext-strings.php:14, includes/string-translation/class-string-translation.php:296, includes/string-translation/class-string-translation.php:326
+#: add-ons-pro/multiple-domains/class-multiple-domains.php:415, add-ons-pro/multiple-domains/class-multiple-domains.php:435, includes/advanced-settings/exclude-gettext-strings.php:14, includes/string-translation/class-string-translation.php:296, includes/string-translation/class-string-translation.php:326
 msgid "Domain"
 msgstr ""
 
-#: add-ons-pro/multiple-domains/class-multiple-domains.php:415
+#: add-ons-pro/multiple-domains/class-multiple-domains.php:416
 msgid "Map this language to a different domain or sub-domain."
 msgstr ""
 
-#: add-ons-pro/multiple-domains/class-multiple-domains.php:469
+#: add-ons-pro/multiple-domains/class-multiple-domains.php:470
 msgid "https://example.com"
 msgstr ""
 
-#: add-ons-pro/multiple-domains/class-multiple-domains.php:476
+#: add-ons-pro/multiple-domains/class-multiple-domains.php:477
 msgid "Prefill with current domain"
 msgstr ""
 
-#: add-ons-pro/multiple-domains/class-multiple-domains.php:484
+#: add-ons-pro/multiple-domains/class-multiple-domains.php:485
 msgid "Check DNS"
 msgstr ""
 
-#: add-ons-pro/multiple-domains/class-multiple-domains.php:549
+#: add-ons-pro/multiple-domains/class-multiple-domains.php:550
 msgid "Checking DNS..."
 msgstr ""
 
-#: add-ons-pro/multiple-domains/class-multiple-domains.php:550
+#: add-ons-pro/multiple-domains/class-multiple-domains.php:551
 msgid "DNS is correctly configured!"
 msgstr ""
 
-#: add-ons-pro/multiple-domains/class-multiple-domains.php:551
+#: add-ons-pro/multiple-domains/class-multiple-domains.php:552
 msgid "DNS check failed. Please verify your domain configuration."
 msgstr ""
 
-#: add-ons-pro/multiple-domains/class-multiple-domains.php:552
+#: add-ons-pro/multiple-domains/class-multiple-domains.php:553
 msgid "This domain is already assigned to another language."
 msgstr ""
 
-#: add-ons-pro/multiple-domains/class-multiple-domains.php:569
+#: add-ons-pro/multiple-domains/class-multiple-domains.php:570
 msgid "<strong>Different Domain per Language add-on</strong> requires TranslatePress version %1$s or higher. You are currently using version %2$s. Please update TranslatePress to enable this feature."
 msgstr ""
 
-#: add-ons-pro/multiple-domains/class-multiple-domains.php:702
+#: add-ons-pro/multiple-domains/class-multiple-domains.php:703
 msgid "Note: This option is disabled when Different Domain for Language addon is active."
 msgstr ""
 
-#: add-ons-pro/multiple-domains/class-multiple-domains.php:727
+#: add-ons-pro/multiple-domains/class-multiple-domains.php:728
 msgid "Different Domain per Language: Domain is required when domain mapping is enabled. The toggle has been disabled for languages with empty domains."
 msgstr ""
 
-#: add-ons-pro/multiple-domains/class-multiple-domains.php:741
+#: add-ons-pro/multiple-domains/class-multiple-domains.php:742
 msgid "Different Domain per Language: The same domain cannot be assigned to multiple languages. The toggle has been disabled for duplicate domains."
 msgstr ""
 
-#: add-ons-pro/multiple-domains/class-multiple-domains.php:755
+#: add-ons-pro/multiple-domains/class-multiple-domains.php:756
 msgid "Different Domain per Language: A language domain cannot be the same as the main site URL. The toggle has been disabled for the matching domain."
 msgstr ""
 
-#: add-ons-pro/multiple-domains/class-multiple-domains.php:774
+#: add-ons-pro/multiple-domains/class-multiple-domains.php:775
 msgid "Please enter a domain."
 msgstr ""
 
-#: add-ons-pro/multiple-domains/class-multiple-domains.php:781
+#: add-ons-pro/multiple-domains/class-multiple-domains.php:782
 msgid "Invalid domain format."
 msgstr ""
 
 #. translators: %s is the error message
-#: add-ons-pro/multiple-domains/class-multiple-domains.php:795
+#: add-ons-pro/multiple-domains/class-multiple-domains.php:796
 msgid "Could not reach domain: %s"
 msgstr ""
 
 #. translators: %d is the HTTP status code
-#: add-ons-pro/multiple-domains/class-multiple-domains.php:811
+#: add-ons-pro/multiple-domains/class-multiple-domains.php:812
 msgid "Domain returned HTTP status %d."
 msgstr ""
 
-#: add-ons-pro/multiple-domains/class-multiple-domains.php:805
+#: add-ons-pro/multiple-domains/class-multiple-domains.php:806
 msgid "Domain is reachable!"
 msgstr ""
 
@@ -3148,7 +3196,7 @@ msgstr ""
 msgid "TranslatePress gettext database optimization failed."
 msgstr ""
 
-#: includes/advanced-settings/remove-duplicates-from-db.php:26, includes/upgrade/class-batch-processor.php:465, includes/upgrade/class-batch-processor.php:564
+#: includes/advanced-settings/remove-duplicates-from-db.php:26, includes/upgrade/class-batch-processor.php:509, includes/upgrade/class-batch-processor.php:608
 msgid "Retry"
 msgstr ""
 
@@ -4082,51 +4130,51 @@ msgstr ""
 msgid "Every minute"
 msgstr ""
 
-#: includes/upgrade/class-batch-processor.php:134
-msgid "Waiting to start background processing..."
-msgstr ""
-
-#: includes/upgrade/class-batch-processor.php:244
+#: includes/upgrade/class-batch-processor.php:107, includes/upgrade/class-batch-processor.php:288
 msgid "Could not load the background task."
 msgstr ""
 
-#: includes/upgrade/class-batch-processor.php:259
+#: includes/upgrade/class-batch-processor.php:154
+msgid "Waiting to start background processing..."
+msgstr ""
+
+#: includes/upgrade/class-batch-processor.php:184, includes/upgrade/class-batch-processor.php:303
 msgid "Background processing could not start."
 msgstr ""
 
-#: includes/upgrade/class-batch-processor.php:286, includes/upgrade/class-batch-processor.php:409
+#: includes/upgrade/class-batch-processor.php:330, includes/upgrade/class-batch-processor.php:453
 msgid "Background processing completed."
 msgstr ""
 
-#: includes/upgrade/class-batch-processor.php:308
+#: includes/upgrade/class-batch-processor.php:352
 msgid "A previous batch item failed."
 msgstr ""
 
-#: includes/upgrade/class-batch-processor.php:450, includes/upgrade/class-batch-processor.php:607
+#: includes/upgrade/class-batch-processor.php:494, includes/upgrade/class-batch-processor.php:651
 msgid "TranslatePress background processing did not complete successfully."
 msgstr ""
 
-#: includes/upgrade/class-batch-processor.php:453, includes/upgrade/class-batch-processor.php:612, includes/upgrade/class-batch-processor.php:610
+#: includes/upgrade/class-batch-processor.php:497, includes/upgrade/class-batch-processor.php:656, includes/upgrade/class-batch-processor.php:654
 msgid "Error: %s"
 msgstr ""
 
-#: includes/upgrade/class-batch-processor.php:575
+#: includes/upgrade/class-batch-processor.php:619
 msgid "You do not have permission to view this task status."
 msgstr ""
 
-#: includes/upgrade/class-batch-processor.php:584
+#: includes/upgrade/class-batch-processor.php:628
 msgid "Invalid batch task."
 msgstr ""
 
-#: includes/upgrade/class-batch-processor.php:605
+#: includes/upgrade/class-batch-processor.php:649
 msgid "TranslatePress background processing completed successfully."
 msgstr ""
 
-#: includes/upgrade/class-batch-processor.php:597
+#: includes/upgrade/class-batch-processor.php:641
 msgid "TranslatePress is processing a background task."
 msgstr ""
 
-#: includes/upgrade/class-batch-processor.php:1184
+#: includes/upgrade/class-batch-processor.php:1228
 msgid "Processing %s..."
 msgstr ""
 
@@ -4286,99 +4334,99 @@ msgstr ""
 msgid "Allow this user to translate the website."
 msgstr ""
 
-#: includes/upgrade/gettext-optimization/class-gettext-originals-lookup-hash-migration.php:132
+#: includes/upgrade/gettext-optimization/class-gettext-originals-lookup-hash-migration.php:136
 msgid "Update aborted! Unknown gettext lookup hash migration phase: %s."
 msgstr ""
 
-#: includes/upgrade/gettext-optimization/class-gettext-originals-lookup-hash-migration.php:255
+#: includes/upgrade/gettext-optimization/class-gettext-originals-lookup-hash-migration.php:259
 msgid "Update aborted! Could not find an available gettext original_id index name for table %s."
 msgstr ""
 
-#: includes/upgrade/gettext-optimization/class-gettext-originals-lookup-hash-migration.php:887
+#: includes/upgrade/gettext-optimization/class-gettext-originals-lookup-hash-migration.php:308
+msgid "Update aborted! Gettext lookup hash migration cannot process invalid ID %1$d in table %2$s. Repair the table ID schema and retry."
+msgstr ""
+
+#: includes/upgrade/gettext-optimization/class-gettext-originals-lookup-hash-migration.php:921
 msgid "Update aborted! Table %1$s still references %2$d duplicate gettext original ids."
 msgstr ""
 
-#: includes/upgrade/gettext-optimization/class-gettext-originals-lookup-hash-migration.php:902
+#: includes/upgrade/gettext-optimization/class-gettext-originals-lookup-hash-migration.php:936
 msgid "Update aborted! Gettext original meta still references %d duplicate original ids."
 msgstr ""
 
-#: includes/upgrade/gettext-optimization/class-gettext-originals-lookup-hash-migration.php:969
-msgid "Update aborted while %1$s. SQL error: %2$s"
-msgstr ""
-
-#: includes/upgrade/tasks/class-gettext-tables-optimization.php:90
+#: includes/upgrade/tasks/class-gettext-tables-optimization.php:144
 msgid "Gettext database optimization completed."
 msgstr ""
 
-#: includes/upgrade/tasks/class-gettext-tables-optimization.php:125
+#: includes/upgrade/tasks/class-gettext-tables-optimization.php:179
 msgid "Deduplicating gettext translation tables..."
 msgstr ""
 
-#: includes/upgrade/tasks/class-gettext-tables-optimization.php:130
+#: includes/upgrade/tasks/class-gettext-tables-optimization.php:184
 msgid "Migrating gettext original lookup hashes..."
 msgstr ""
 
-#: includes/upgrade/tasks/class-gettext-tables-optimization.php:146
+#: includes/upgrade/tasks/class-gettext-tables-optimization.php:200
 msgid "Preparing the gettext originals lookup index..."
 msgstr ""
 
-#: includes/upgrade/tasks/class-gettext-tables-optimization.php:203
+#: includes/upgrade/tasks/class-gettext-tables-optimization.php:257
 msgid "Updating gettext runtime statuses..."
 msgstr ""
 
-#: includes/upgrade/tasks/class-gettext-tables-optimization.php:219
+#: includes/upgrade/tasks/class-gettext-tables-optimization.php:273
 msgid "Finishing gettext database optimization..."
 msgstr ""
 
-#: includes/upgrade/tasks/class-gettext-tables-optimization.php:238
+#: includes/upgrade/tasks/class-gettext-tables-optimization.php:292
 msgid "Updating gettext runtime statuses for language %s..."
 msgstr ""
 
-#: includes/upgrade/tasks/class-gettext-tables-optimization.php:293, includes/upgrade/tasks/class-gettext-tables-optimization.php:406, includes/upgrade/tasks/class-gettext-tables-optimization.php:658
+#: includes/upgrade/tasks/class-gettext-tables-optimization.php:347, includes/upgrade/tasks/class-gettext-tables-optimization.php:442, includes/upgrade/tasks/class-gettext-tables-optimization.php:497, includes/upgrade/tasks/class-gettext-tables-optimization.php:1083
 msgid "Resolving missing gettext original ids in %s..."
 msgstr ""
 
-#: includes/upgrade/tasks/class-gettext-tables-optimization.php:299
+#: includes/upgrade/tasks/class-gettext-tables-optimization.php:353
 msgid "Preparing gettext table %s..."
 msgstr ""
 
-#: includes/upgrade/tasks/class-gettext-tables-optimization.php:337
+#: includes/upgrade/tasks/class-gettext-tables-optimization.php:391
 msgid "Removing invalid gettext rows from %s..."
 msgstr ""
 
-#: includes/upgrade/tasks/class-gettext-tables-optimization.php:365
+#: includes/upgrade/tasks/class-gettext-tables-optimization.php:419
 msgid "Prepared gettext original ids in %s..."
 msgstr ""
 
-#: includes/upgrade/tasks/class-gettext-tables-optimization.php:435, includes/upgrade/tasks/class-gettext-tables-optimization.php:664
+#: includes/upgrade/tasks/class-gettext-tables-optimization.php:860, includes/upgrade/tasks/class-gettext-tables-optimization.php:1089
 msgid "Normalizing plural forms in %s..."
 msgstr ""
 
-#: includes/upgrade/tasks/class-gettext-tables-optimization.php:474
+#: includes/upgrade/tasks/class-gettext-tables-optimization.php:899
 msgid "Processing duplicate gettext rows in %s..."
 msgstr ""
 
-#: includes/upgrade/tasks/class-gettext-tables-optimization.php:490
+#: includes/upgrade/tasks/class-gettext-tables-optimization.php:915
 msgid "Building duplicate gettext map for %s..."
 msgstr ""
 
-#: includes/upgrade/tasks/class-gettext-tables-optimization.php:611
+#: includes/upgrade/tasks/class-gettext-tables-optimization.php:1036
 msgid "Verifying gettext table %s..."
 msgstr ""
 
-#: includes/upgrade/tasks/class-gettext-tables-optimization.php:635
+#: includes/upgrade/tasks/class-gettext-tables-optimization.php:1060
 msgid "Deleting duplicate gettext rows from %s..."
 msgstr ""
 
-#: includes/upgrade/tasks/class-gettext-tables-optimization.php:672, includes/upgrade/tasks/class-gettext-tables-optimization.php:699
+#: includes/upgrade/tasks/class-gettext-tables-optimization.php:1097, includes/upgrade/tasks/class-gettext-tables-optimization.php:1124
 msgid "Rechecking duplicate gettext rows in %s..."
 msgstr ""
 
-#: includes/upgrade/tasks/class-gettext-tables-optimization.php:676
+#: includes/upgrade/tasks/class-gettext-tables-optimization.php:1101
 msgid "Adding unique gettext index for %s..."
 msgstr ""
 
-#: includes/upgrade/tasks/class-gettext-tables-optimization.php:711
+#: includes/upgrade/tasks/class-gettext-tables-optimization.php:1136
 msgid "Finished gettext table %s."
 msgstr ""
 

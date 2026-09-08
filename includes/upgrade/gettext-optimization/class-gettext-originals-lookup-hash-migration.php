@@ -62,11 +62,15 @@ class TRP_Gettext_Originals_Lookup_Hash_Migration {
         }
 
         if ( $phase === 'backfill' ) {
-            $remaining = $this->backfill_gettext_original_lookup_hashes( $batch_size );
+            $last_id = isset( $extra_params['last_id'] ) ? (int) $extra_params['last_id'] : 0;
+            $result  = $this->backfill_gettext_original_lookup_hashes( $batch_size, $last_id );
 
             return array(
                 'finalize_with_language' => false,
-                'extra_params'           => array( 'phase' => $remaining ? 'backfill' : 'build_map' ),
+                'extra_params'           => array(
+                    'phase'   => $result['complete'] ? 'build_map' : 'backfill',
+                    'last_id' => $result['last_id'],
+                ),
             );
         }
 
@@ -259,22 +263,31 @@ class TRP_Gettext_Originals_Lookup_Hash_Migration {
     }
 
     /**
-     * Backfill missing lookup hashes in bounded batches.
+     * Build canonical lookup hashes in bounded batches.
+     *
+     * All rows are inspected, including rows populated by an interrupted older
+     * migration. This prevents a retry after a plugin update from preserving a
+     * partial set of hashes generated with an incompatible algorithm.
      *
      * @param int $batch_size Batch size.
+     * @param int $last_id Last inspected original ID.
      *
-     * @return bool Whether rows remain to process.
+     * @return array Batch completion state and last inspected ID.
      */
-    protected function backfill_gettext_original_lookup_hashes( $batch_size ) {
+    protected function backfill_gettext_original_lookup_hashes( $batch_size, $last_id = 0 ) {
         $originals_table = sanitize_text_field( $this->trp_query->get_table_name_for_gettext_original_strings() );
 
         if ( ! $this->trp_query->table_exists( $originals_table ) ) {
-            return false;
+            return array(
+                'complete' => true,
+                'last_id'  => (int) $last_id,
+            );
         }
 
         $rows = $this->db->get_results(
             $this->db->prepare(
-                "SELECT id, original, domain, context FROM `$originals_table` WHERE lookup_hash IS NULL ORDER BY id LIMIT %d",
+                "SELECT id, original, domain, context, lookup_hash FROM `$originals_table` WHERE id > %d ORDER BY id LIMIT %d",
+                $last_id,
                 $batch_size
             ),
             ARRAY_A
@@ -282,22 +295,43 @@ class TRP_Gettext_Originals_Lookup_Hash_Migration {
         $this->fail_gettext_original_lookup_hash_migration_on_error( 'selecting gettext originals for lookup_hash backfill' );
 
         if ( empty( $rows ) ) {
-            return false;
+            return array(
+                'complete' => true,
+                'last_id'  => (int) $last_id,
+            );
         }
 
         foreach ( $rows as $row ) {
+            if ( (int) $row['id'] <= 0 ) {
+                $this->fail_gettext_original_lookup_hash_migration(
+                    sprintf(
+                        __( 'Update aborted! Gettext lookup hash migration cannot process invalid ID %1$d in table %2$s. Repair the table ID schema and retry.', 'translatepress-multilingual' ),
+                        (int) $row['id'],
+                        esc_html( $originals_table )
+                    )
+                );
+            }
+
             $lookup_hash = $this->trp_query->get_gettext_original_lookup_hash( $row['original'], $row['domain'], $row['context'] );
-            $this->db->query(
-                $this->db->prepare(
-                    "UPDATE `$originals_table` SET lookup_hash = %s WHERE id = %d",
-                    $lookup_hash,
-                    (int) $row['id']
-                )
-            );
-            $this->fail_gettext_original_lookup_hash_migration_on_error( 'backfilling gettext original lookup_hash' );
+
+            if ( $row['lookup_hash'] !== $lookup_hash ) {
+                $this->db->query(
+                    $this->db->prepare(
+                        "UPDATE `$originals_table` SET lookup_hash = %s WHERE id = %d",
+                        $lookup_hash,
+                        (int) $row['id']
+                    )
+                );
+                $this->fail_gettext_original_lookup_hash_migration_on_error( 'backfilling gettext original lookup_hash' );
+            }
+
+            $last_id = (int) $row['id'];
         }
 
-        return count( $rows ) === $batch_size;
+        return array(
+            'complete' => count( $rows ) < $batch_size,
+            'last_id'  => $last_id,
+        );
     }
 
     /**

@@ -102,6 +102,26 @@ class TRP_Batch_Processor {
             return false;
         }
 
+        $task = $this->instantiate_task( $registry[ $flag_name ] );
+        if ( ! $task ) {
+            $error = $this->task_load_error !== '' ? $this->task_load_error : __( 'Could not load the background task.', 'translatepress-multilingual' );
+            $this->fail_task_before_start( $flag_name, $error );
+            return false;
+        }
+
+        if ( method_exists( $task, 'validate_before_start' ) ) {
+            try {
+                $error = $task->validate_before_start();
+            } catch ( Exception $exception ) {
+                $error = $exception->getMessage();
+            }
+
+            if ( is_string( $error ) && $error !== '' ) {
+                $this->fail_task_before_start( $flag_name, $error );
+                return false;
+            }
+        }
+
         if ( $reset ) {
             delete_option( 'trp_batch_todo_' . $flag_name );
             delete_option( 'trp_batch_found_rows_' . $flag_name );
@@ -141,6 +161,30 @@ class TRP_Batch_Processor {
         $this->dispatch_async_runner( true );
 
         return true;
+    }
+
+    /**
+     * Record a task preflight failure without scheduling a runner.
+     *
+     * @param string $flag_name Task flag option name.
+     * @param string $error Error returned by the task preflight.
+     */
+    protected function fail_task_before_start( $flag_name, $error ) {
+        $result = array(
+            'status' => 'failed',
+            'error'  => $error,
+        );
+
+        update_option( $flag_name, 'failed', false );
+        update_option( 'trp_batch_error_' . $flag_name, $result, false );
+        $this->update_task_state(
+            $flag_name,
+            array(
+                'status'  => 'failed',
+                'message' => __( 'Background processing could not start.', 'translatepress-multilingual' ),
+                'error'   => $error,
+            )
+        );
     }
 
     /**
