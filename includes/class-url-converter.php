@@ -206,10 +206,15 @@ class TRP_Url_Converter {
             return;
         }
 
-        $hreflang_source_url = $this->get_hreflang_source_url( $this->cur_page_url( false ) );
+        $is_editor_preview = ( isset( $_GET['trp-edit-translation'] ) && $_GET['trp-edit-translation'] == 'preview' );
+
+        // The Translation Editor switches languages by following these hreflang URLs, so inside the
+        // editor preview the current URL is used as it is. Stripping query arguments here would drop
+        // trp-edit-translation=preview and send the editor to the plain frontend page, closing it.
+        $hreflang_source_url = $is_editor_preview ? $this->cur_page_url( false ) : $this->get_hreflang_source_url( $this->cur_page_url( false ) );
 
         $languages = $this->settings['publish-languages'];
-        if ( isset( $_GET['trp-edit-translation'] ) && $_GET['trp-edit-translation'] == 'preview' ) {
+        if ( $is_editor_preview ) {
             $languages = $this->settings['translation-languages'];
         }
 

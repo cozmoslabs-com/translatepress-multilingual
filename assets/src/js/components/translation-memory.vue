@@ -9,7 +9,14 @@
                         <div v-for="(suggestion, index) in suggestions" @click="copy(suggestion.translated)" :key="index" :title="editorStrings.translation_memory_click_to_copy">
                           <span class="percentage"><span>{{suggestion.similarity}}%</span></span>
                               <span class="translated">{{suggestion.translated}}</span>
-                            <span class="original" v-html="suggestion.original"></span>
+                            <span class="original">
+                                <template v-for="(part, partIndex) in suggestion.originalDiff" :key="partIndex">
+                                    <template v-if="partIndex > 0">{{ ' ' }}</template>
+                                    <ins v-if="part[0] === '+'">{{ part[1].join(' ') }}</ins>
+                                    <del v-else-if="part[0] === '-'">{{ part[1].join(' ') }}</del>
+                                    <template v-else>{{ part[1].join(' ') }}</template>
+                                </template>
+                            </span>
                         </div>
                     </span>
                 </div>
@@ -63,7 +70,8 @@
 
                         for (i = suggestions.length - 1; i >= 0; --i) {
                             suggestions[i]['similarity'] = Math.round(similarity.compareTwoStrings(self.string.original,suggestions[i]['original'])*100)
-                            suggestions[i]['original'] = simplediff.htmlDiff(self.string.original, suggestions[i]['original'])
+                            // Render diff text through Vue interpolation; originals can contain untrusted HTML.
+                            suggestions[i]['originalDiff'] = simplediff.stringDiff(self.string.original, suggestions[i]['original'])
 
                             if (suggestions[i]['similarity'] < 70 ) {
                                 suggestions.splice(i, 1); // drop suggestions less then 70%

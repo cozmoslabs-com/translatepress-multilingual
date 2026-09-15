@@ -1,3 +1,17 @@
+= 3.3.5 =
+* Reduce Automatic Translation usage by better handling concurrent translation requests of the same page
+* Fixed stalling gettext optimization by failing it on invalid table ID schemas
+* Prevent incorrect string matching and database optimization failures when gettext tables use different character sets
+* Fixed REST redirect loop on subdirectory installs
+* Fixed bug relating to Gutenberg language restriction on classic blocks
+* Improved compatibility with Breakdance Builder
+* Fixed compatibility issue with Booking Calendar plugin’s settings
+* Fixed long AJAX checkout calls when Folders plugin is enabled
+* Stop foreign-locale gettext polluting trp_gettext_en_us
+* Do not add most query strings to hreflang tags
+* Fixed Text RTL saving against the wrong custom language
+* Improved SQL query for checking if table exists
+
 = 3.3.4 =
 * Fixed unauthenticated stored XSS via comment noise-key injection. Thanks to daroo and the Wordfence team
 * Added support for hyphenated custom language gettext tables in upgrading tasks
