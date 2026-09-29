@@ -1,3 +1,7 @@
+= 3.3.6 =
+* Prevent XSS in translation memory suggestions
+* Keep the translation editor open when switching language
+
 = 3.3.5 =
 * Reduce Automatic Translation usage by better handling concurrent translation requests of the same page
 * Fixed stalling gettext optimization by failing it on invalid table ID schemas

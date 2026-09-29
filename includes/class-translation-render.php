@@ -61,13 +61,19 @@ class TRP_Translation_Render{
     }
 
     /**
-     * Function to hide php errors and notice and instead log them in debug.log so we don't store the notice strings inside the db if WP_DEBUG is on
+     * Hide PHP errors and notices so they are not stored as translation strings when WP_DEBUG is on.
+     *
+     * Preserve an error log path already configured by WordPress or PHP.
      */
     public function trp_debug_mode_off(){
         if ( WP_DEBUG ) {
-            ini_set('display_errors', 0);
-            ini_set('log_errors', 1);
-            ini_set('error_log', WP_CONTENT_DIR . '/debug.log');
+            ini_set( 'display_errors', 0 );
+            ini_set( 'log_errors', 1 );
+
+            $error_log = ini_get( 'error_log' );
+            if ( $error_log === false || $error_log === '' ) {
+                ini_set( 'error_log', WP_CONTENT_DIR . '/debug.log' );
+            }
         }
     }
 
@@ -284,8 +290,33 @@ class TRP_Translation_Render{
 	 * @return string
 	 */
     public function trim_translation_block( $string ){
-	    return preg_replace('/\s+/', ' ',   html_entity_decode( htmlspecialchars_decode( wp_strip_all_tags(trp_full_trim( $string )), ENT_QUOTES ) ) ) ;
+	    return preg_replace('/\s+/', ' ',   html_entity_decode( htmlspecialchars_decode( $this->strip_all_tags_tolerantly(trp_full_trim( $string )), ENT_QUOTES ) ) ) ;
     }
+
+	/**
+	 * wp_strip_all_tags() replacement that survives malformed markup.
+	 *
+	 * strip_tags() discards everything that follows an unterminated tag, so a single customer typo
+	 * such as </span< in an Elementor widget emptied the rest of the page for trim_translation_block(),
+	 * and every translation block below that typo stopped being recognized and split back into
+	 * individual strings on each page load.
+	 *
+	 * Matches wp_strip_all_tags() on well-formed markup: script and style contents are dropped,
+	 * comments are dropped, everything else between < and > is removed.
+	 *
+	 * @param string $string
+	 *
+	 * @return string
+	 */
+	public function strip_all_tags_tolerantly( $string ){
+		$stripped = preg_replace( '@<(script|style)[^>]*?>.*?</\\1>@si', '', $string );
+		$stripped = preg_replace( '/<!--.*?-->/s', '', $stripped );
+		// quote-aware so that a > inside an attribute value does not end the tag early
+		$stripped = preg_replace( '/<[^>"\']*(?:(?:"[^"]*"|\'[^\']*\')[^>"\']*)*>/', '', $stripped );
+
+		// any of the above returns null if the string defeats the backtrack limit
+		return ( $stripped === null ) ? wp_strip_all_tags( $string ) : trim( $stripped );
+	}
 
     /**
      * Recursive function that checks if a DOM node contains certain tags or not
@@ -798,6 +829,12 @@ class TRP_Translation_Render{
                         foreach ($node_from_value->find('trp-gettext') as $nfv_row) {
                             $nfv_row->outertext = $nfv_row->innertext();
 	                        $saved_node_from_value = $node_from_value->save();
+
+	                        // unwrapping the marker ( and decoding the value ) must not expose a script scheme that
+	                        // wp_kses never saw, e.g. href="&lt;trp-gettext /?&gt;javascript:..." [CU-869f8bpxr]
+	                        if ( $this->is_url_attribute( $attr_name ) && $this->has_unsafe_url_scheme( $saved_node_from_value ) ) {
+		                        $saved_node_from_value = '';
+	                        }
 
 	                        // attributes of these tags are not handled well by the parser so don't escape them [see iss6264]
 	                        if ( $row->tag != 'script' && $row->tag != 'style' ){
@@ -1583,10 +1620,107 @@ class TRP_Translation_Render{
      * delimiters "'<> and can no longer leave a single attribute value / text node. Legitimately escaped
      * wrappers carry &quot;/&#039; rather than raw quotes, so they are still removed.
      *
+     * Security ( CU-869f8bpxr ): a marker can also sit entirely inside ONE url attribute value and act as an
+     * obfuscation prefix: href="&lt;trp-gettext /?&gt;javascript:alert(1)". wp_kses_bad_protocol() skips
+     * any value with "/?" before the first colon ( it looks like a relative url ), so it is stored verbatim
+     * and is inert, but removing the marker leaves a live href="javascript:...". Constraining the marker shape
+     * is not enough ( the attribute gettext path in translate_page() also html-decodes the value ), so url
+     * attribute values that carry a marker are re-checked for a script scheme after the markers are removed.
+     *
      * @param $string
      * @return string|string[]|null
      */
     function remove_trp_html_tags( $string ){
+        if ( stripos( $string, 'trp-' ) !== false ) {
+            $string = $this->neutralize_marker_hidden_url_schemes( $string );
+        }
+
+        return $this->strip_trp_markers( $string );
+    }
+
+    /**
+     * Empty url attribute values ( href, src, action... ) that only get a script scheme once the trp markers
+     * inside them are removed. Values with no marker are left alone; wp_kses already had its say on them.
+     *
+     * @param string $string
+     * @return string
+     */
+    private function neutralize_marker_hidden_url_schemes( $string ){
+        $url_attributes = array_map( function( $attr ){ return preg_quote( $attr, '/' ); }, $this->get_url_attributes() );
+
+        // the quote can be json-escaped ( href=\"...\" ) when the html is inside a json response
+        $pattern = '/(?<=[\s"\'\/])((?:' . implode( '|', $url_attributes ) . ')\s*=\s*)(\\\\{0,2}["\'])(.*?)\2/is';
+
+        $result = preg_replace_callback( $pattern, function( $matches ){
+            if ( stripos( $matches[3], 'trp-' ) === false || !$this->has_unsafe_url_scheme( $this->strip_trp_markers( $matches[3] ) ) ) {
+                return $matches[0];
+            }
+            return $matches[1] . $matches[2] . $matches[2];
+        }, $string );
+
+        // preg failure ( e.g. backtrack limit ) - keep the original string rather than blanking the page
+        return ( $result === null ) ? $string : $result;
+    }
+
+    /**
+     * @param string $attr_name
+     * @return bool
+     */
+    private function is_url_attribute( $attr_name ){
+        return in_array( strtolower( $attr_name ), $this->get_url_attributes(), true );
+    }
+
+    /**
+     * Attributes a browser resolves as a url ( same list wp_kses runs wp_kses_bad_protocol() on ).
+     *
+     * @return array
+     */
+    private function get_url_attributes(){
+        if ( function_exists( 'wp_kses_uri_attributes' ) ) {
+            return wp_kses_uri_attributes();
+        }
+        return array( 'action', 'archive', 'background', 'cite', 'classid', 'codebase', 'data', 'formaction', 'href', 'icon', 'longdesc', 'manifest', 'poster', 'profile', 'src', 'usemap', 'xmlns' );
+    }
+
+    /**
+     * Whether a url attribute value would be run by the browser under a scheme that is not in
+     * wp_allowed_protocols() ( javascript:, data:, vbscript: ... ).
+     *
+     * Deliberately stricter than the browser: entities are decoded repeatedly ( a value can be decoded more
+     * than once on its way out ), numeric references are also decoded without their ";", and every
+     * whitespace / control character and backslash is dropped before the scheme is read.
+     *
+     * @param string $value
+     * @return bool
+     */
+    private function has_unsafe_url_scheme( $value ){
+        $decoded = (string) $value;
+        for ( $i = 0; $i < 5; $i++ ) {
+            $previous = $decoded;
+            $decoded  = html_entity_decode( $decoded, ENT_QUOTES | ENT_HTML5, 'UTF-8' );
+            $decoded  = preg_replace_callback( '/&#(x[0-9a-f]++|[0-9]++);?/i', function( $matches ){
+                return html_entity_decode( '&#' . $matches[1] . ';', ENT_QUOTES | ENT_HTML5, 'UTF-8' );
+            }, $decoded );
+            if ( $decoded === $previous ) {
+                break;
+            }
+        }
+        $decoded = preg_replace( '/[\x00-\x20\x7f\\\\]+/', '', $decoded );
+
+        if ( !preg_match( '/^([a-z][a-z0-9+.\-]*):/i', $decoded, $matches ) ) {
+            return false;
+        }
+
+        return !in_array( strtolower( $matches[1] ), wp_allowed_protocols(), true );
+    }
+
+    /**
+     * Remove every trp-gettext / trp-wrap / trp-post-container marker ( real, entity and percent-encoded forms ).
+     *
+     * @param string $string
+     * @return string|string[]|null
+     */
+    private function strip_trp_markers( $string ){
         // trp-gettext opening tag: the real form ( <...> ) and the entity form ( &lt;...&gt; ) both carry an
         // unquoted attribute ( data-trpgettextoriginal=123 ), so a single delimiter-constrained match is safe.
         $string = preg_replace( '/(<|&lt;)trp-gettext ([^"\'<>]*?)(>|&gt;)/i', '', $string );

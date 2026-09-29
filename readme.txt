@@ -3,9 +3,9 @@ Contributors: cozmoslabs, razvan.mo, madalin.ungureanu, sareiodata, cristophor
 Donate link: https://www.translatepress.com/
 Tags: translate, translation, multilingual, automatic translation, ai translation, front-end translation, google translate, language
 Requires at least: 3.1.0
-Tested up to: 7.1
+Tested up to: 7.1.2
 Requires PHP: 7.4
-Stable tag: 3.3.6
+Stable tag: 3.3.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -169,9 +169,14 @@ Please report security bugs found in the source code of the TranslatePress plugi
 
 
 == Changelog ==
-= 3.3.6 =
-* Prevent XSS in translation memory suggestions
-* Keep the translation editor open when switching language
+= 3.3.7 =
+* Prevent XSS from using trp-gettext markers hiding js schemes in url attributes
+* Fixed #TRPLINKPROCESSED markers caused by conflict with Hummingbird
+* Fixed Rank Math self-redirects and translated category redirects
+* Skip unnecessary automatic translation memory queries
+* Fixed edge case fatal error related to Czech malformed gettext translation pack
+* Fixed translation blocks edge case failure on malformed HTML
+* Respect custom WordPress debug log configuration
 
 = Older versions =
 [Click Here](https://translatepress.com/docs/translatepress-free-changelog/?utm_source=wp.org&utm_medium=tp-description-page&utm_campaign=TPFree) to view the full changelog, or you can find it in the changelog.txt file in the plugin folder.

@@ -1031,7 +1031,8 @@
 <?php __("Processing %s...", "translatepress-multilingual"); ?>
 <?php __("%s is optimizing gettext database tables in the background. Translations continue to work while this runs.", "translatepress-multilingual"); ?>
 <?php __("TranslatePress gettext database optimization completed successfully.", "translatepress-multilingual"); ?>
-<?php __("TranslatePress has detected and cleaned up some failed translation entries in your database following %1$san isolated incident%2$s. No further action is required.", "translatepress-multilingual"); ?>
+<?php __("TranslatePress has detected and cleaned up some failed translation entries in your database following %s. No further action is required.", "translatepress-multilingual"); ?>
+<?php __("an isolated incident", "translatepress-multilingual"); ?>
 <?php __("Post Slug", "translatepress-multilingual"); ?>
 <?php __("Invalid language code", "translatepress-multilingual"); ?>
 <?php __("We've detected you might be speaking a different language. Do you want to change to:", "translatepress-multilingual"); ?>

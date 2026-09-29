@@ -823,6 +823,22 @@ function trp_strip_request_metadata_keys( $metadata ){
 }
 
 /**
+ * Let Hummingbird start its page-cache buffer before TranslatePress.
+ *
+ * Both normally start at init priority 0, but TranslatePress registers first.
+ * Buffers are processed in reverse order, so Hummingbird would cache the page
+ * before it is translated and before #TRPLINKPROCESSED markers are removed.
+ */
+add_filter( 'trp_start_output_buffer_priority', 'trp_hummingbird_compatibility' );
+function trp_hummingbird_compatibility( $priority ){
+    if ( defined( 'WPHB_VERSION' ) && (int) $priority === 0 ) {
+        return 1;
+    }
+
+    return $priority;
+}
+
+/**
  * Compatibility with NextGEN Gallery
  *
  * They start an output buffer at init -1 (before ours at init 0). They print footer scripts after we run translate_page,
@@ -3696,7 +3712,17 @@ function trp_divi_wrap_module_with_post_id($output, $render_slug, $module) {
 /**
  * Compatibility with redirect plugins when SEO Pack rewrites REQUEST_URI for translated slugs.
  */
-add_filter( 'rank_math/redirection/pre_search', 'trp_rank_math_use_original_request_uri_for_redirections', 9, 3 );
+add_action( 'plugins_loaded', 'trp_register_rank_math_seo_pack_compatibility', 20 );
+function trp_register_rank_math_seo_pack_compatibility() {
+    if ( ! defined( 'TRP_IN_SP_PLUGIN_VERSION' ) || ! class_exists( 'RankMath', false ) ) {
+        return;
+    }
+
+    add_filter( 'rank_math/redirection/pre_search', 'trp_rank_math_use_original_request_uri_for_redirections', 9, 3 );
+    add_filter( 'rank_math/redirection/add_redirect_header', 'trp_guard_rank_math_redirect', PHP_INT_MAX );
+    add_filter( 'request', 'trp_rank_math_category_redirect_language', 9 );
+}
+
 function trp_rank_math_use_original_request_uri_for_redirections( $check, $uri, $full_uri ) {
     if ( ! is_null( $check ) ) {
         return $check;
@@ -3728,6 +3754,84 @@ function trp_rank_math_use_original_request_uri_for_redirections( $check, $uri, 
     }
 
     return $redirection ?: $check;
+}
+
+/**
+ * Rank Math calls this filter immediately before wp_redirect(), after resolving its target.
+ * Leave its header preference unchanged; only guard this redirect attempt.
+ */
+function trp_guard_rank_math_redirect( $add_header ) {
+    if ( ! empty( trp_get_original_request_uri() ) ) {
+        add_filter( 'wp_redirect', 'trp_prevent_rank_math_self_redirect', PHP_INT_MAX );
+    }
+
+    return $add_header;
+}
+
+/**
+ * Cancel a Rank Math self-redirect using the visitor URL preserved before URI rewriting.
+ */
+function trp_prevent_rank_math_self_redirect( $location ) {
+    remove_filter( 'wp_redirect', 'trp_prevent_rank_math_self_redirect', PHP_INT_MAX );
+
+    if ( ! is_string( $location ) || $location === '' ) {
+        return $location;
+    }
+
+    // A form submission can legitimately redirect to the same URL for a new GET request.
+    if ( isset( $_SERVER['REQUEST_METHOD'] ) && ! in_array( $_SERVER['REQUEST_METHOD'], array( 'GET', 'HEAD' ), true ) ) {
+        return $location;
+    }
+
+    // The translated-slug cache preserves the visitor URL before SEO Pack rewrites REQUEST_URI.
+    $trp = TRP_Translate_Press::get_trp_instance();
+    $current_url = $trp->get_component( 'url_converter' )->cur_page_url();
+    $target = wp_parse_url( WP_Http::make_absolute_url( $location, $current_url ) );
+    $current = wp_parse_url( $current_url );
+
+    if ( ! is_array( $target ) || ! is_array( $current ) ) {
+        return $location;
+    }
+
+    $normalize_url = static function ( $url ) {
+        $url['scheme'] = strtolower( isset( $url['scheme'] ) ? $url['scheme'] : '' );
+        $url['host'] = strtolower( isset( $url['host'] ) ? $url['host'] : '' );
+        $url['port'] = isset( $url['port'] ) ? $url['port'] : ( $url['scheme'] === 'https' ? 443 : 80 );
+        $url['path'] = isset( $url['path'] ) && $url['path'] !== '' ? $url['path'] : '/';
+        ksort( $url );
+        return $url;
+    };
+
+    return $normalize_url( $target ) === $normalize_url( $current ) ? false : $location;
+}
+
+/**
+ * Rank Math strips the category base during request parsing, before its redirect module.
+ */
+function trp_rank_math_category_redirect_language( $query_vars ) {
+    global $TRP_LANGUAGE;
+
+    if ( ! isset( $query_vars['rank_math_category_redirect'] ) || ! is_string( $query_vars['rank_math_category_redirect'] ) || empty( $TRP_LANGUAGE ) ) {
+        return $query_vars;
+    }
+
+    $trp = TRP_Translate_Press::get_trp_instance();
+    $settings = $trp->get_component( 'settings' )->get_settings();
+    if ( $TRP_LANGUAGE === $settings['default-language'] ) {
+        return $query_vars;
+    }
+
+    $category_url = trailingslashit( get_option( 'home' ) ) . user_trailingslashit( $query_vars['rank_math_category_redirect'], 'category' );
+    add_filter( 'wp_redirect', function ( $location ) use ( $category_url, $TRP_LANGUAGE ) {
+        if ( $location !== $category_url ) {
+            return $location;
+        }
+
+        $trp = TRP_Translate_Press::get_trp_instance();
+        return $trp->get_component( 'url_converter' )->get_url_for_language( $TRP_LANGUAGE, $location, '' );
+    } );
+
+    return $query_vars;
 }
 
 /**

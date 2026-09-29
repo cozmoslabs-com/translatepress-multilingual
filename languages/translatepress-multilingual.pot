@@ -6,7 +6,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-09-15 14:52+0000\n"
+"POT-Creation-Date: 2026-09-29 14:03+0000\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
 "X-Poedit-SearchPath-0: .\n"
@@ -1496,67 +1496,67 @@ msgstr ""
 msgid "Upgrade to Pro"
 msgstr ""
 
-#: includes/class-translation-render.php:161
+#: includes/class-translation-render.php:167
 msgid "Description"
 msgstr ""
 
-#: includes/class-translation-render.php:167
+#: includes/class-translation-render.php:173
 msgid "Article Section"
 msgstr ""
 
-#: includes/class-translation-render.php:173
+#: includes/class-translation-render.php:179
 msgid "Article Tag"
 msgstr ""
 
-#: includes/class-translation-render.php:179
+#: includes/class-translation-render.php:185
 msgid "OG Title"
 msgstr ""
 
-#: includes/class-translation-render.php:185
+#: includes/class-translation-render.php:191
 msgid "OG Site Name"
 msgstr ""
 
-#: includes/class-translation-render.php:191
+#: includes/class-translation-render.php:197
 msgid "OG Description"
 msgstr ""
 
-#: includes/class-translation-render.php:197
+#: includes/class-translation-render.php:203
 msgid "OG Image Alt"
 msgstr ""
 
-#: includes/class-translation-render.php:203
+#: includes/class-translation-render.php:209
 msgid "Twitter Title"
 msgstr ""
 
-#: includes/class-translation-render.php:209
+#: includes/class-translation-render.php:215
 msgid "Twitter Description"
 msgstr ""
 
-#: includes/class-translation-render.php:215
+#: includes/class-translation-render.php:221
 msgid "Twitter Image Alt"
 msgstr ""
 
-#: includes/class-translation-render.php:219
+#: includes/class-translation-render.php:225
 msgid "Page Title"
 msgstr ""
 
-#: includes/class-translation-render.php:225
+#: includes/class-translation-render.php:231
 msgid "Dublin Core Title"
 msgstr ""
 
-#: includes/class-translation-render.php:231
+#: includes/class-translation-render.php:237
 msgid "Dublin Core Description"
 msgstr ""
 
-#: includes/class-translation-render.php:237
+#: includes/class-translation-render.php:243
 msgid "OG Image"
 msgstr ""
 
-#: includes/class-translation-render.php:243
+#: includes/class-translation-render.php:249
 msgid "OG Image Secure URL"
 msgstr ""
 
-#: includes/class-translation-render.php:249
+#: includes/class-translation-render.php:255
 msgid "Twitter Image"
 msgstr ""
 
@@ -1764,7 +1764,7 @@ msgstr ""
 msgid "<strong>TranslatePress</strong> requires <strong><a href=\"http://php.net/manual/en/book.mbstring.php\">Multibyte String PHP library</a></strong>. Please contact your server administrator to install it on your server."
 msgstr ""
 
-#: includes/compatibility-functions.php:2161
+#: includes/compatibility-functions.php:2177
 msgid "Detected long query limitation on WPEngine hosting. Some large pages may appear untranslated. You can remove limitation by adding the following to your site’s wp-config.php: define( 'WPE_GOVERNOR', false ); "
 msgstr ""
 
@@ -4186,8 +4186,13 @@ msgstr ""
 msgid "TranslatePress gettext database optimization completed successfully."
 msgstr ""
 
-#: includes/upgrade/class-upgrade-tasks-registry.php:31
-msgid "TranslatePress has detected and cleaned up some failed translation entries in your database following %1$san isolated incident%2$s. No further action is required."
+#. translators: %s: Link with the text "an isolated incident".
+#: includes/upgrade/class-upgrade-tasks-registry.php:33
+msgid "TranslatePress has detected and cleaned up some failed translation entries in your database following %s. No further action is required."
+msgstr ""
+
+#: includes/upgrade/class-upgrade-tasks-registry.php:34
+msgid "an isolated incident"
 msgstr ""
 
 #: add-ons-advanced/seo-pack/includes/class-slug-manager.php:61, add-ons-advanced/seo-pack-legacy/includes/class-slug-manager.php:55, add-ons-advanced/seo-pack/includes/string-translation/class-string-translation-seo.php:61, add-ons-advanced/seo-pack-legacy/includes/string-translation/class-string-translation-seo.php:60
