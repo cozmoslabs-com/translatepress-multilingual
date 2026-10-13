@@ -595,9 +595,18 @@ class TRP_Machine_Translator {
                 }
             }
 
-            // If all strings are too short, return them as-is
+            // If all strings are too short, return them as-is. Keyed by the original string, the same
+            // way the regular return below is: callers look the result up by original string
+            // ( isset( $machine_strings[ $string ] ) ), so returning the incoming index-keyed array
+            // here meant nothing was ever matched. The translations were then saved against the array
+            // index instead of the original ( rows with original = "10" ), the real string stayed
+            // NOT TRANSLATED, and it was collected and re-processed again on every single page load.
             if ( empty($strings_to_translate) ) {
-                return $original_strings;
+                $skipped_strings_return_array = array();
+                foreach ( $original_strings as $original_string ) {
+                    $skipped_strings_return_array[ $original_string ] = $original_string;
+                }
+                return $skipped_strings_return_array;
             }
 
             // Continue with only the strings that meet the minimum length
@@ -630,6 +639,14 @@ class TRP_Machine_Translator {
             $machine_strings_return_array = array();
             if (!empty($machine_strings)) {
                 foreach ($machine_strings as $key => $machine_string) {
+                    // An engine is expected to return the keys it was given. If it re-indexed them we
+                    // have no original string to key the result by, and using the bare key would save
+                    // the translation against a meaningless original. Skip instead, so the string is
+                    // simply left untranslated for this request.
+                    if ( !isset( $original_strings[$key] ) ) {
+                        continue;
+                    }
+
                     // Restore placeholders to original excluded words (or to user-driven replacements via filter)
                     $trp_replace_placeholders_with = apply_filters( 'trp_replace_placeholders_with', $trp_exclude_words_from_automatic_translation, $trp_exclude_words_from_automatic_translation, $placeholders, $machine_string, $original_strings[$key], $target_language_code, $source_language_code );
                     if ( !is_array( $trp_replace_placeholders_with ) || count( $trp_replace_placeholders_with ) !== count( $placeholders ) ) {
@@ -662,8 +679,9 @@ class TRP_Machine_Translator {
      * Claim each string in the machine translation locks table, returning only the ones this request may translate.
      *
      * Drops the strings another request is translating right now or translated in the last lock timeout
-     * seconds ( locks are kept after a save as recently translated markers ); they are read from the
-     * dictionary on a following page load. The claimed locks stay in place after returning: they must
+     * seconds ( locks are kept after a save as recently translated markers ). Also defers strings when
+     * lock contention persists after retries. These strings are handled on a following page load.
+     * The claimed locks stay in place after returning: they must
      * also cover the dictionary save in the caller.
      *
      * @param array $strings                        Strings to translate, keys are preserved.
@@ -698,6 +716,13 @@ class TRP_Machine_Translator {
         $lock_owner = wp_generate_uuid4();
         $claimed_hashes = $trp_query->claim_machine_translation_locks( array_values( $string_hashes ), $lock_owner, $this->get_machine_translation_lock_timeout() );
 
+        // Don't send an unprotected batch to the engine when another request prevents claiming it.
+        if ( $claimed_hashes === false ){
+            $trp_query->delete_machine_translation_locks( array( $lock_owner ) );
+            $this->remember_lock_skipped_strings( $strings );
+            return array();
+        }
+
         // locking is unavailable, translate everything rather than nothing
         if ( $claimed_hashes === null ){
             $trp_query->delete_machine_translation_locks( array( $lock_owner ) );
@@ -727,7 +752,7 @@ class TRP_Machine_Translator {
     }
 
     /**
-     * Remember strings dropped because a concurrent request holds their lock.
+     * Remember strings skipped because they are locked or lock contention prevented claiming them.
      */
     protected function remember_lock_skipped_strings( $strings ){
         foreach( $strings as $string ){
@@ -980,8 +1005,9 @@ class TRP_Machine_Translator {
      * Restore punctuation and spacing patterns at string boundaries
      *
      * Handles patterns at the beginning or end of strings:
-     * - Two-character: ", " (comma+space), ". " (period+space), "; " (semicolon+space)
+     * - Two-character: comma, period or semicolon with a space before or after it
      * - Single character: "," (comma), "." (period), ";" (semicolon), " " (space)
+     * Existing boundary punctuation is preserved even when its spacing differs.
      *
      * @param string $original_string The original untranslated string
      * @param string $translated_string The translated string from the API
@@ -1005,12 +1031,15 @@ class TRP_Machine_Translator {
         // Check all patterns and restore at both leading and trailing positions
         foreach ($patterns as $pattern) {
             $pattern_len = mb_strlen($pattern, 'UTF-8');
+            $punctuation = trim($pattern);
 
             // Check and restore leading pattern
             $original_start = mb_substr($original_string, 0, $pattern_len, 'UTF-8');
             $translated_start = mb_substr($translated_string, 0, $pattern_len, 'UTF-8');
 
-            if ($original_start === $pattern && $translated_start !== $pattern) {
+            // Spacing differences must not cause an existing punctuation mark to be duplicated.
+            if ($original_start === $pattern && $translated_start !== $pattern
+                && ($punctuation === '' || mb_substr(ltrim($translated_string), 0, 1, 'UTF-8') !== $punctuation)) {
                 $translated_string = $pattern . $translated_string;
             }
 
@@ -1018,7 +1047,8 @@ class TRP_Machine_Translator {
             $original_end = mb_substr($original_string, -$pattern_len, $pattern_len, 'UTF-8');
             $translated_end = mb_substr($translated_string, -$pattern_len, $pattern_len, 'UTF-8');
 
-            if ($original_end === $pattern && $translated_end !== $pattern) {
+            if ($original_end === $pattern && $translated_end !== $pattern
+                && ($punctuation === '' || mb_substr(rtrim($translated_string), -1, 1, 'UTF-8') !== $punctuation)) {
                 $translated_string = $translated_string . $pattern;
             }
         }

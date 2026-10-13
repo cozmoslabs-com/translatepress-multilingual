@@ -391,14 +391,17 @@ class TRP_Query{
      * @param array $string_hashes      Array of sha1 string hashes ( see TRP_Machine_Translator ).
      * @param string $lock_owner        UUIDv4 token ( wp_generate_uuid4() ) identifying the claiming request. Used to release.
      * @param int $lock_timeout         Seconds after which a lock is considered abandoned.
-     * @return array|null               The hashes that were claimed. Null if the database errored out
-     *                                  or the claims couldn't be read back (locking unavailable).
+     * @return array|false|null         The hashes that were claimed. False if lock contention persists.
+     *                                  Null if locking is unavailable or the claims couldn't be read back.
      */
     public function claim_machine_translation_locks( $string_hashes, $lock_owner, $lock_timeout = 50 ){
         $string_hashes = array_values( array_unique( array_filter( (array) $string_hashes ) ) );
         if ( empty( $string_hashes ) || ! is_string( $lock_owner ) || $lock_owner === '' ){
             return array();
         }
+
+        // Acquire overlapping hashes in the same order across concurrent requests.
+        sort( $string_hashes, SORT_STRING );
 
         $table_name     = $this->get_table_name_for_machine_translation_locks();
         $now            = gmdate( 'Y-m-d H:i:s' );
@@ -410,17 +413,25 @@ class TRP_Query{
         foreach( $string_hashes as $string_hash ){
             array_push( $insert_values, $string_hash, $lock_owner, $now );
         }
-        $this->db->query( $this->db->prepare( "INSERT IGNORE INTO `" . $table_name . "` ( string_hash, owner, updated_at ) VALUES " . $insert_placeholders, $insert_values ) );
-        if ( $this->db->last_error !== '' ){
-            return null;
+        $insert_query = $this->db->prepare(
+            "INSERT IGNORE INTO `" . $table_name . "` ( string_hash, owner, updated_at ) VALUES " . $insert_placeholders,
+            $insert_values
+        );
+        $insert_result = $this->query_machine_translation_locks_with_retry( $insert_query );
+        if ( $insert_result !== true ){
+            return $insert_result;
         }
         $rows_claimed_by_insert = (int) $this->db->rows_affected;
 
         // take over expired locks
         $in_placeholders = implode( ', ', array_fill( 0, count( $string_hashes ), '%s' ) );
-        $this->db->query( $this->db->prepare( "UPDATE `" . $table_name . "` SET owner = %s, updated_at = %s WHERE updated_at < %s AND string_hash IN ( " . $in_placeholders . " )", array_merge( array( $lock_owner, $now, $expired_before ), $string_hashes ) ) );
-        if ( $this->db->last_error !== '' ){
-            return null;
+        $update_query = $this->db->prepare(
+            "UPDATE `" . $table_name . "` SET owner = %s, updated_at = %s WHERE updated_at < %s AND string_hash IN ( " . $in_placeholders . " ) ORDER BY string_hash",
+            array_merge( array( $lock_owner, $now, $expired_before ), $string_hashes )
+        );
+        $update_result = $this->query_machine_translation_locks_with_retry( $update_query );
+        if ( $update_result !== true ){
+            return $update_result;
         }
         $rows_claimed_by_update = (int) $this->db->rows_affected;
 
@@ -437,6 +448,43 @@ class TRP_Query{
         }
 
         return $claimed;
+    }
+
+    /**
+     * Retry a lock claim statement after a deadlock, without logging recovered errors.
+     *
+     * Claims use autocommit, so a deadlock rolls back only the statement being retried.
+     *
+     * @param string $query Prepared INSERT or UPDATE query.
+     * @return bool|null True on success, false on contention, null on another database error.
+     */
+    protected function query_machine_translation_locks_with_retry( $query ){
+        $suppress_errors = $this->db->suppress_errors( true );
+        $is_contention   = false;
+
+        try {
+            for ( $attempt = 0; $attempt < 3; $attempt++ ) {
+                $this->db->query( $query );
+                if ( $this->db->last_error === '' ) {
+                    return true;
+                }
+
+                // Use wpdb's public error text, including with database drop-ins.
+                $is_deadlock   = stripos( $this->db->last_error, 'Deadlock found when trying to get lock' ) !== false;
+                $is_contention = $is_deadlock || stripos( $this->db->last_error, 'Lock wait timeout exceeded' ) !== false;
+                if ( ! $is_deadlock || $attempt === 2 ) {
+                    break;
+                }
+
+                usleep( wp_rand( 10000, 30000 ) * ( $attempt + 1 ) );
+            }
+        } finally {
+            $this->db->suppress_errors( $suppress_errors );
+        }
+
+        // Preserve normal error reporting when retries fail or the error isn't retryable.
+        $this->db->print_error( $this->db->last_error );
+        return $is_contention ? false : null;
     }
 
     /**

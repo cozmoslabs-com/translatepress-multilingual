@@ -74,6 +74,9 @@ class TRP_Gettext_Manager {
 						$trp_strings[ $context . '::' . $plural_form . '::' . $domain . '::' . $original ] = $value;
 					}
 					$trp_translated_gettext_texts = $trp_strings;
+				} else {
+                    // A language without saved overrides must not reuse the previous email's map.
+                    $trp_translated_gettext_texts = [];
 				}
 			}
 		}

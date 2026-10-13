@@ -916,7 +916,7 @@ function trp_get_license_status(){
  * To get a user's preferred language use this code: get_user_meta( $user_id, 'trp_language', true );
  *
  * @param $language
- * @return void
+ * @return bool Whether WordPress pushed a locale that must subsequently be restored.
  */
 function trp_switch_language($language){
     global $TRP_LANGUAGE, $TRP_LANGUAGE_COPY, $TRP_LANGUAGE_ORIGINAL;
@@ -929,8 +929,9 @@ function trp_switch_language($language){
     // Function trp_reset_language() is added on the hook in order to set global $TRP_LANGUAGE according to our need for the email language instead.
     add_filter( 'trp_before_translate_content', 'trp_reset_language', 99999999 );
 
-    switch_to_locale($language);
+    $switched_locale = switch_to_locale($language);
     add_filter( 'plugin_locale', 'trp_get_locale', 99999999);
+    return $switched_locale;
 }
 
 /**

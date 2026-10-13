@@ -3,9 +3,9 @@ Contributors: cozmoslabs, razvan.mo, madalin.ungureanu, sareiodata, cristophor
 Donate link: https://www.translatepress.com/
 Tags: translate, translation, multilingual, automatic translation, ai translation, front-end translation, google translate, language
 Requires at least: 3.1.0
-Tested up to: 7.1.2
+Tested up to: 7.1.3
 Requires PHP: 7.4
-Stable tag: 3.3.7
+Stable tag: 3.3.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -169,14 +169,16 @@ Please report security bugs found in the source code of the TranslatePress plugi
 
 
 == Changelog ==
-= 3.3.7 =
-* Prevent XSS from using trp-gettext markers hiding js schemes in url attributes
-* Fixed #TRPLINKPROCESSED markers caused by conflict with Hummingbird
-* Fixed Rank Math self-redirects and translated category redirects
-* Skip unnecessary automatic translation memory queries
-* Fixed edge case fatal error related to Czech malformed gettext translation pack
-* Fixed translation blocks edge case failure on malformed HTML
-* Respect custom WordPress debug log configuration
+= 3.3.8 =
+* Fixed unauthenticated stored XSS via #TRPLINKPROCESSED. Thanks to daroo and the Wordfence team
+* Fixed missing translations in WooCommerce emails sent from the admin, including strings added by WooCommerce extensions
+* Fixed a bug where trailing punctuation was doubled after automatic translation
+* Improved performance of database upgrade process regarding duplicate removal
+* Improvements to machine translation deadlocks caused by concurrent requests
+* Fixed html lang attribute for languages with _informal and _ao90 suffixes
+* Fixed edge case where junk database entries where added when all new strings on a page were skipped by automatic translation
+* Keep the selected language on Slider Revolution layer links
+* Make "Do not translate certain paths" work with non-latin slugs
 
 = Older versions =
 [Click Here](https://translatepress.com/docs/translatepress-free-changelog/?utm_source=wp.org&utm_medium=tp-description-page&utm_campaign=TPFree) to view the full changelog, or you can find it in the changelog.txt file in the plugin folder.

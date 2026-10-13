@@ -356,7 +356,7 @@ class TRP_Url_Converter {
      */
     public function change_lang_attr_in_html_tag( $output ){
         global $TRP_LANGUAGE;
-        $tp_lang = str_replace('_formal', '', $TRP_LANGUAGE); // de-de-formal is not a valid lang attribute.
+        $tp_lang = str_replace( array( '_formal', '_informal', '_ao90' ), '', $TRP_LANGUAGE ); // de-DE-formal, de-CH-informal and pt-PT-ao90 are not valid lang attributes.
         $lang = get_bloginfo('language');
         if ( $lang && !empty($tp_lang) ) {
             if ( apply_filters( 'trp_add_default_lang_tags', true ) ) {

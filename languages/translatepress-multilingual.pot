@@ -6,7 +6,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-09-29 14:03+0000\n"
+"POT-Creation-Date: 2026-10-13 14:46+0000\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
 "X-Poedit-SearchPath-0: .\n"
@@ -513,7 +513,7 @@ msgstr ""
 msgid "Automatic translation has been disabled."
 msgstr ""
 
-#: includes/class-error-manager.php:170, includes/class-plugin-notices.php:359, includes/class-plugin-notices.php:437, includes/class-plugin-notices.php:412, includes/class-plugin-notices.php:497, includes/class-plugin-notices.php:475, includes/class-plugin-notices.php:526, includes/class-plugin-notices.php:582, includes/class-plugin-notices.php:638, includes/class-plugin-notices.php:627, includes/class-plugin-notices.php:663, includes/class-plugin-notices.php:715, includes/class-plugin-notices.php:698, includes/class-reviews.php:129, includes/class-reviews.php:132, includes/class-upgrade.php:1525, includes/class-upgrade.php:2234, add-ons-advanced/extra-languages/class-extra-languages.php:157, add-ons-advanced/seo-pack/class-seo-pack.php:853, add-ons-pro/multiple-domains/class-multiple-domains.php:578, includes/upgrade/class-batch-processor.php:609, includes/upgrade/class-batch-processor.php:1260
+#: includes/class-error-manager.php:170, includes/class-plugin-notices.php:359, includes/class-plugin-notices.php:437, includes/class-plugin-notices.php:412, includes/class-plugin-notices.php:497, includes/class-plugin-notices.php:475, includes/class-plugin-notices.php:526, includes/class-plugin-notices.php:582, includes/class-plugin-notices.php:638, includes/class-plugin-notices.php:627, includes/class-plugin-notices.php:663, includes/class-plugin-notices.php:715, includes/class-plugin-notices.php:698, includes/class-reviews.php:129, includes/class-reviews.php:132, includes/class-upgrade.php:1525, includes/class-upgrade.php:2234, add-ons-advanced/extra-languages/class-extra-languages.php:157, add-ons-advanced/seo-pack/class-seo-pack.php:872, add-ons-pro/multiple-domains/class-multiple-domains.php:578, includes/upgrade/class-batch-processor.php:609, includes/upgrade/class-batch-processor.php:1260
 msgid "Dismiss this notice."
 msgstr ""
 
@@ -2789,11 +2789,11 @@ msgstr ""
 msgid "<strong>Extra Languages add-on</strong> requires TranslatePress version %1$s or higher. You are currently using version %2$s. Please update TranslatePress to enable this feature."
 msgstr ""
 
-#: add-ons-advanced/seo-pack/class-seo-pack.php:848
+#: add-ons-advanced/seo-pack/class-seo-pack.php:867
 msgid "Automatic and manual slug translation changes performed when <strong>TranslatePress - Multilingual</strong> 2.8.4 was active had to be removed because of some issues with that version. All slug translations from before that version are now in use. Thank you for understanding!"
 msgstr ""
 
-#: add-ons-advanced/seo-pack/class-seo-pack.php:849
+#: add-ons-advanced/seo-pack/class-seo-pack.php:868
 msgid "If you absolutely need them, the removed translations can be found in tables trp_slug_original_obsolete and trp_slug_translation_obsolete."
 msgstr ""
 

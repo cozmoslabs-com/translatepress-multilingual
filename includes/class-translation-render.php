@@ -1352,7 +1352,7 @@ class TRP_Translation_Render{
                 $a_href->setAttribute( 'data-trp-unpreviewable', 'trp-unpreviewable' );
             }
 
-            $a_href->href = str_replace('#TRPLINKPROCESSED', '', $a_href->href);
+            $a_href->href = $this->strip_link_processed_marker( $a_href->href );
         }
 
         // pass the current language in forms where the action does not contain the language
@@ -1384,7 +1384,7 @@ class TRP_Translation_Render{
                 }
 
                 // this should happen regardless of whether we made changes above
-                $row->action = str_replace( '#TRPLINKPROCESSED', '', esc_url( $row->action ) );
+                $row->action = $this->strip_link_processed_marker( esc_url( $row->action ) );
             }
         }
 
@@ -1393,11 +1393,34 @@ class TRP_Translation_Render{
                 if ( isset( $link->rel ) && ( $link->rel == 'next' || $link->rel == 'prev' ) )
                     $link->href = $this->url_converter->get_url_for_language( $TRP_LANGUAGE, $link->href );
 
-                $link->href = str_replace('#TRPLINKPROCESSED', '', $link->href);
+                $link->href = $this->strip_link_processed_marker( $link->href );
             }
         }
 
         return $html;
+    }
+
+    /**
+     * Remove the internal #TRPLINKPROCESSED marker from a url attribute value and re-validate the result.
+     *
+     * The marker is normally a trailing fragment TRP appends to links it has already processed, but it can
+     * also arrive embedded in attacker-controlled input ( e.g. a stored comment anchor href ) where it SPLITS
+     * an otherwise-blocked scheme: "java#TRPLINKPROCESSEDscript:alert(1)" passes wp_kses / has_unsafe_url_scheme()
+     * while split, then collapses to a live "javascript:alert(1)" once the marker is removed. We only neutralize
+     * in that case ( stripping the marker turned a safe value into an unsafe one ) so that url schemes the site
+     * itself placed, including a plain "javascript:void(0)", are left exactly as before. [CU-869ffp71k]
+     *
+     * @param string $value url attribute value that may still contain #TRPLINKPROCESSED
+     * @return string the marker-free value, or '' when stripping the marker exposed an unsafe scheme
+     */
+    private function strip_link_processed_marker( $value ){
+        $stripped = str_replace( '#TRPLINKPROCESSED', '', $value );
+        if ( $stripped !== $value
+            && $this->has_unsafe_url_scheme( $stripped )
+            && ! $this->has_unsafe_url_scheme( $value ) ) {
+            return '';
+        }
+        return $stripped;
     }
 
     public function is_first_language_not_default_language(){
@@ -2545,7 +2568,8 @@ class TRP_Translation_Render{
             $trp                 = TRP_Translate_Press::get_trp_instance();
             $this->url_converter = $trp->get_component( 'url_converter' );
         }
-        $skip_email_translation = (
+        $is_order_email = TRP_Woocommerce_Emails::is_sending_order_email();
+        $skip_email_translation = ! $is_order_email && (
             $pagenow === 'wp-login.php'
             || $pagenow === 'xmlrpc.php'
             || ( is_admin() && ! TRP_Gettext_Manager::is_ajax_on_frontend() )
@@ -2571,7 +2595,8 @@ class TRP_Translation_Render{
 
         $did_switch_language = false;
 
-        if ( $recipient !== '' ) {
+        // TranslatePress already selected the order email language in trp_woo_setup_locale().
+        if ( ! $is_order_email && $recipient !== '' ) {
             $did_switch_language = trp_switch_to_preffered_language( $recipient );
         }
 
@@ -2636,7 +2661,8 @@ class TRP_Translation_Render{
                 $this->url_converter = $trp->get_component('url_converter');
             }
 
-            $location = $this->url_converter->get_url_for_language( $form_language, $location );
+            // Redirects do not pass through the HTML renderer that removes link markers.
+            $location = $this->url_converter->get_url_for_language( $form_language, $location, '' );
         }
         return $location;
     }

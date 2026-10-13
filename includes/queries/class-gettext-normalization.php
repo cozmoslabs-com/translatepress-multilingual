@@ -184,8 +184,9 @@ class TRP_Gettext_Normalization extends TRP_Query {
         }
 
         $originals_table = $this->get_table_name_for_gettext_original_strings();
+        // Plain equality allows index lookups in either join order; binary casts keep matching byte-exact.
         $result = $this->db->query(
-            "DELETE t1 FROM `$originals_table` t1 INNER JOIN `$originals_table` t2 WHERE t1.id > t2.id AND t1.original = BINARY t2.original AND t1.domain = BINARY t2.domain AND COALESCE( NULLIF( t1.context, '' ), 'trp_context' ) = BINARY COALESCE( NULLIF( t2.context, '' ), 'trp_context' )"
+            "DELETE t1 FROM `$originals_table` t1 INNER JOIN `$originals_table` t2 WHERE t1.id > t2.id AND t1.original = t2.original AND CAST(t1.original AS BINARY) = CAST(t2.original AS BINARY) AND t1.domain = BINARY t2.domain AND COALESCE( NULLIF( t1.context, '' ), 'trp_context' ) = BINARY COALESCE( NULLIF( t2.context, '' ), 'trp_context' )"
         );
 
         $this->record_error_preserving_last_error( 'last_error_cleaning_gettext_original_strings' );

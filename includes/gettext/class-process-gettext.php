@@ -163,7 +163,7 @@ class TRP_Process_Gettext {
         if ( !isset( $tp_gettext_is_ajax_on_frontend ) )
             $tp_gettext_is_ajax_on_frontend = TRP_Gettext_Manager::is_ajax_on_frontend();
 
-        if ( !defined( 'DOING_AJAX' ) || $tp_gettext_is_ajax_on_frontend ) {
+        if ( !defined( 'DOING_AJAX' ) || $tp_gettext_is_ajax_on_frontend || TRP_Woocommerce_Emails::is_translating_email() ) {
             $db_id = '';
             $cached_gettext_resolution = $in_foreign_locale_switch ? null : $this->get_resolved_gettext_cache_entry( $cache_key );
             if ( $cached_gettext_resolution !== null ) {
@@ -270,7 +270,7 @@ class TRP_Process_Gettext {
             }
             unset( $callstack_functions );//maybe free up some memory
             global $trp_output_buffer_started;
-            if ( did_action( 'init' ) && isset( $trp_output_buffer_started ) && $trp_output_buffer_started ) {//check here for our global $trp_output_buffer_started, don't wrap the gettexts if they are not processed by our cleanup callbacks for the buffers
+            if ( did_action( 'init' ) && ( ( isset( $trp_output_buffer_started ) && $trp_output_buffer_started ) || TRP_Woocommerce_Emails::is_order_email() ) ) {// Order emails also clean up gettext markers in wp_mail, including admin/AJAX sends.
                 if ( ( !empty( $TRP_LANGUAGE ) && $this->settings["default-language"] != $TRP_LANGUAGE ) || ( isset( $_REQUEST['trp-edit-translation'] ) && $_REQUEST['trp-edit-translation'] == 'preview' ) ) {
                     //add special start and end tags so that it does not influence html in any way. we will replace them with < and > at the start of the translate function
 	                /**

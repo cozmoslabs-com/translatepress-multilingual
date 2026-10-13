@@ -1,3 +1,12 @@
+= 3.3.7 =
+* Prevent XSS from using trp-gettext markers hiding js schemes in url attributes
+* Fixed #TRPLINKPROCESSED markers caused by conflict with Hummingbird
+* Fixed Rank Math self-redirects and translated category redirects
+* Skip unnecessary automatic translation memory queries
+* Fixed edge case fatal error related to Czech malformed gettext translation pack
+* Fixed translation blocks edge case failure on malformed HTML
+* Respect custom WordPress debug log configuration
+
 = 3.3.6 =
 * Prevent XSS in translation memory suggestions
 * Keep the translation editor open when switching language
