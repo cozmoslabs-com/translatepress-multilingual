@@ -25,6 +25,9 @@ class TRP_Machine_Translator {
     /* Owner tokens of the machine translation locks this instance claimed and has not released yet */
     protected $held_lock_owners = array();
 
+    /* Largest string, in bytes, sent to an engine: the smallest engine body limit ( TranslatePress AI returns longer ones untranslated ) */
+    const MAX_STRING_BYTES = 99400;
+
     /* Strings dropped from translation because a concurrent request holds their lock, keyed by string */
     protected $lock_skipped_strings = array();
 
@@ -47,9 +50,6 @@ class TRP_Machine_Translator {
         }
 
         $this->machine_translation_codes = $this->trp_languages->get_iso_codes($this->settings['translation-languages']);
-
-        add_filter( 'trp_exclude_words_from_automatic_translation', array( $this, 'sort_exclude_words_from_automatic_translation_array' ), 99999, 1 );
-        add_filter( 'trp_exclude_words_from_automatic_translation', array( $this, 'exclude_special_symbol_from_translation' ), 9999, 2 );
 
         $this->schedule_machine_translation_lock_cleanup();
     }
@@ -352,14 +352,6 @@ class TRP_Machine_Translator {
         return preg_match( '/'. $crawlers .'/i', sanitize_text_field ( $_SERVER['HTTP_USER_AGENT'] ) );
     }
 
-    private function get_placeholders( $count ){
-	    $placeholders = array();
-	    for( $i = 1 ; $i <= $count; $i++ ){
-            $placeholders[] = '1TP' . $i . 'T';
-        }
-	    return $placeholders;
-    }
-
     /**
      * Check if a string should be sent for translation based on minimum length and content criteria
      *
@@ -368,7 +360,7 @@ class TRP_Machine_Translator {
      */
     private function should_translate_string( $string ) {
         // Reject single strings that exceed the smallest engine body limit
-        if ( strlen( $string ) > 99400 ) {
+        if ( strlen( $string ) > self::MAX_STRING_BYTES ) {
             return false;
         }
 
@@ -574,11 +566,9 @@ class TRP_Machine_Translator {
     public function translate($strings, $target_language_code, $source_language_code = null, $dictionary_context = 'regular' ){
         if ( !empty($strings) && is_array($strings) && method_exists( $this, 'translate_array' ) && apply_filters( 'trp_disable_automatic_translations_due_to_error', false ) === false ) {
 
-            /* google has a problem translating this characters ( '%', '$', '#' )...for some reasons it puts spaces after them so we need to 'encode' them and decode them back. hopefully it won't break anything important */
-            /* we put '%s' before '%' because google seems to transform %s into % in strings for some languages which causes a 500 Fatal Error in PHP 8*/
+            // TRP_Machine_Translation_Spans wraps excluded words in spans (1TPnT tokens inside attribute values) and sends %% as 1TPnT; %s, %d go as they are (1TPnT for Google), %, $, # always
             $imploded_strings = implode(" ", $strings);
-            $trp_exclude_words_from_automatic_translation = apply_filters('trp_exclude_words_from_automatic_translation', array('%s', '%d', '%', '$', '#'), $imploded_strings, $target_language_code, $source_language_code);
-            $placeholders = $this->get_placeholders(count($trp_exclude_words_from_automatic_translation));
+            $trp_exclude_words_from_automatic_translation = apply_filters('trp_exclude_words_from_automatic_translation', array(), $imploded_strings, $target_language_code, $source_language_code);
             $shortcode_tags_to_execute = apply_filters( 'trp_do_these_shortcodes_before_automatic_translation', array('trp_language', 'language-include', 'language-exclude') );
 
             $strings = array_unique($strings);
@@ -592,6 +582,30 @@ class TRP_Machine_Translator {
                     $strings_to_skip[$key] = $string;
                 } else {
                     $strings_to_translate[$key] = $string;
+                }
+            }
+
+            // decode and wrap before claiming, so a string skipped for its sent size is never locked
+            $decoded_strings = array();
+            $sent_strings = array();
+            foreach ($strings_to_translate as $key => $string) {
+                $decoded_strings[$key] = trp_do_these_shortcodes( html_entity_decode( $string ), $shortcode_tags_to_execute );
+                /**
+                 * Filter a string right before it is sent to the translation engine. TranslatePress wraps
+                 * the excluded words, and for TranslatePress AI the glossary terms, in spans here (priority 10),
+                 * as 1TPnT tokens inside attribute values, and the escaped percent sign %% as a 1TPnT token;
+                 * markup added here must be removed again on trp_machine_translation_string_after_receive.
+                 *
+                 * @param string      $string               Decoded string, shortcodes executed.
+                 * @param string      $target_language_code
+                 * @param string|null $source_language_code
+                 * @param mixed       $exclude_words        Result of trp_exclude_words_from_automatic_translation for this call, normally an array.
+                 */
+                $sent_strings[$key] = apply_filters( 'trp_machine_translation_string_before_send', $decoded_strings[$key], $target_language_code, $source_language_code, $trp_exclude_words_from_automatic_translation );
+                // the limit applies to what is sent; wrapping can push a string over it
+                if ( strlen( $sent_strings[$key] ) > self::MAX_STRING_BYTES ) {
+                    $strings_to_skip[$key] = $string;
+                    unset( $strings_to_translate[$key] );
                 }
             }
 
@@ -614,20 +628,13 @@ class TRP_Machine_Translator {
 
             // claim the strings so concurrent requests don't send the same string to the engine twice
             $strings = $this->claim_strings_for_machine_translation( $strings, $target_language_code, $source_language_code, $dictionary_context );
+            $sent_strings = array_intersect_key( $sent_strings, $strings );
+            $strings = array_intersect_key( $decoded_strings, $strings );
 
             $machine_strings = array();
             if ( !empty( $strings ) ) {
-                foreach ($strings as $key => $string) {
-                    /* html_entity_decode is needed before replacing the character "#" from the list because characters like &#8220; (8220 utf8)
-                     * will get an extra space after '&' which will break the character, rendering it like this: & #8220;
-                     */
-
-                    $strings[$key] = str_replace($trp_exclude_words_from_automatic_translation, $placeholders, html_entity_decode( $string ));
-                    $strings[$key] = trp_do_these_shortcodes( $strings[$key], $shortcode_tags_to_execute );
-                }
-
                 try {
-                    $machine_strings = $this->translate_array($strings, $target_language_code, $source_language_code);
+                    $machine_strings = $this->translate_array($sent_strings, $target_language_code, $source_language_code);
                 } finally {
                     if ( empty( $machine_strings ) ) {
                         // nothing to save, free the locks now
@@ -647,12 +654,20 @@ class TRP_Machine_Translator {
                         continue;
                     }
 
-                    // Restore placeholders to original excluded words (or to user-driven replacements via filter)
-                    $trp_replace_placeholders_with = apply_filters( 'trp_replace_placeholders_with', $trp_exclude_words_from_automatic_translation, $trp_exclude_words_from_automatic_translation, $placeholders, $machine_string, $original_strings[$key], $target_language_code, $source_language_code );
-                    if ( !is_array( $trp_replace_placeholders_with ) || count( $trp_replace_placeholders_with ) !== count( $placeholders ) ) {
-                        $trp_replace_placeholders_with = $trp_exclude_words_from_automatic_translation;
-                    }
-                    $processed_string = str_ireplace( $placeholders, $trp_replace_placeholders_with, $machine_string );
+                    $machine_string   = $this->decode_engine_entities( $machine_string, $sent_strings[$key], $original_strings[$key], $dictionary_context );
+                    /**
+                     * Filter a translation returned by the engine, before quotes and punctuation are restored and it
+                     * is saved. TranslatePress unwraps the glossary spans and tokens at priority 10, the excluded
+                     * word ones at 20, and strips leftover spans (restoring leftover tokens) at 30.
+                     *
+                     * @param string      $machine_string       Translation returned by the engine, with the entities it added decoded (see decode_engine_entities()).
+                     * @param string      $sent_string          String that was sent, after trp_machine_translation_string_before_send.
+                     * @param string      $original_string      Original string as passed to translate().
+                     * @param string      $target_language_code
+                     * @param string|null $source_language_code
+                     * @param mixed       $exclude_words        Result of trp_exclude_words_from_automatic_translation for this call, normally an array.
+                     */
+                    $processed_string = apply_filters( 'trp_machine_translation_string_after_receive', $machine_string, $sent_strings[$key], $original_strings[$key], $target_language_code, $source_language_code, $trp_exclude_words_from_automatic_translation );
 
                     // Restore quote patterns (use $strings which is decoded, not $original_strings with HTML entities)
                     $processed_string = $this->restore_translation_quotes($strings[$key], $processed_string);
@@ -673,6 +688,45 @@ class TRP_Machine_Translator {
         }else {
             return array();
         }
+    }
+
+    /**
+     * Decode the entities an engine added (Google &#39; &quot;, OpenRouter &#x27;). Entities that were already in the
+     * sent text stay. &lt; &gt; &amp; (any notation) stay escaped in regular strings, which are HTML, so text like
+     * 5 &lt; 6 or an engine-escaped tag doesn't become markup. In gettext strings, which are plain text, each of them
+     * is decoded only when the original contains that character unescaped.
+     *
+     * @param string $machine_string
+     * @param string $sent_string
+     * @param string $original_string       Original string as the caller passed it, before html_entity_decode().
+     * @param string $dictionary_context    'regular' or 'gettext', see translate().
+     * @return string
+     */
+    public function decode_engine_entities( $machine_string, $sent_string, $original_string = '', $dictionary_context = 'regular' ) {
+        if ( !is_string( $machine_string ) || strpos( $machine_string, '&' ) === false ) {
+            return $machine_string;
+        }
+        $entity_pattern = '(?:#[0-9]+|#x[0-9a-f]+|[a-z][a-z0-9]*);';
+        $keep_escaped   = array( '<' => true, '>' => true, '&' => true );
+        if ( $dictionary_context === 'gettext' && is_string( $original_string ) ) {
+            $keep_escaped['<'] = strpos( $original_string, '<' ) === false;
+            $keep_escaped['>'] = strpos( $original_string, '>' ) === false;
+            $keep_escaped['&'] = !preg_match( '/&(?!' . $entity_pattern . ')/i', $original_string );
+        }
+        $decoded = preg_replace_callback( '/&' . $entity_pattern . '/i', function ( $entity ) use ( $sent_string, $keep_escaped ) {
+            if ( is_string( $sent_string ) && strpos( $sent_string, $entity[0] ) !== false ) {
+                return $entity[0];
+            }
+            $character = html_entity_decode( $entity[0], ENT_QUOTES | ENT_HTML5, 'UTF-8' );
+            // &nvlt; decodes to < plus a combining mark
+            foreach ( $keep_escaped as $escaped => $keep ) {
+                if ( $keep && strpos( $character, $escaped ) !== false ) {
+                    return $entity[0];
+                }
+            }
+            return $character;
+        }, $machine_string );
+        return $decoded === null ? $machine_string : $decoded;
     }
 
     /**
@@ -848,24 +902,6 @@ class TRP_Machine_Translator {
         return 50;
     }
 
-    /**
-     * @param $trp_exclude_words_from_automatic_translation
-     * @return mixed
-     *
-     * We need to sort the $trp_exclude_words_from_automatic_translation array descending because we risk to not translate excluded multiple words when one
-     * is repeated ( example: Facebook, Facebook Store, Facebook View, because Facebook was the first one in the array it was replaced with a code and the
-     * other words group ( Store, View) were translated)
-     */
-    public function sort_exclude_words_from_automatic_translation_array($trp_exclude_words_from_automatic_translation){
-        usort($trp_exclude_words_from_automatic_translation, array($this,"sort_array"));
-
-        return $trp_exclude_words_from_automatic_translation;
-    }
-
-    public function sort_array($a, $b){
-        return strlen($b)-strlen($a);
-    }
-
 
     public function test_request(){}
 
@@ -875,19 +911,6 @@ class TRP_Machine_Translator {
 
     public function extra_request_validations( $to_language ){
         return true;
-    }
-
-    public function exclude_special_symbol_from_translation($array, $strings){
-        $float_array_symbols = array('d', 's', 'e', 'E', 'f', 'F', 'g', 'G', 'h', 'H');
-        foreach ($float_array_symbols as $float_array_symbol){
-            for($i= 1; $i<=10; $i++) {
-                $symbol = '%'.$i .'$'.$float_array_symbol;
-                if ( strpos( $strings, $symbol ) !== false ) {
-                    $array[] = '%' . $i . '$' . $float_array_symbol;
-                }
-            }
-        }
-        return $array;
     }
 
     /**
@@ -1007,9 +1030,10 @@ class TRP_Machine_Translator {
      * Handles patterns at the beginning or end of strings:
      * - Two-character: comma, period or semicolon with a space before or after it
      * - Single character: "," (comma), "." (period), ";" (semicolon), " " (space)
-     * Existing boundary punctuation is preserved even when its spacing differs.
+     * No mark is added when the translation already has one at that boundary (see boundary_has_punctuation()):
+     * the same mark, a script-native sentence/clause mark such as the Chinese full stop U+3002, or a final "!" / "?".
      *
-     * @param string $original_string The original untranslated string
+     * @param string $original_string The original string (entity-decoded, shortcodes executed, excluded words replaced by placeholders)
      * @param string $translated_string The translated string from the API
      * @return string The translated string with punctuation patterns restored
      */
@@ -1039,7 +1063,7 @@ class TRP_Machine_Translator {
 
             // Spacing differences must not cause an existing punctuation mark to be duplicated.
             if ($original_start === $pattern && $translated_start !== $pattern
-                && ($punctuation === '' || mb_substr(ltrim($translated_string), 0, 1, 'UTF-8') !== $punctuation)) {
+                && ($punctuation === '' || !$this->boundary_has_punctuation($translated_string, $punctuation, false, $original_string))) {
                 $translated_string = $pattern . $translated_string;
             }
 
@@ -1048,12 +1072,120 @@ class TRP_Machine_Translator {
             $translated_end = mb_substr($translated_string, -$pattern_len, $pattern_len, 'UTF-8');
 
             if ($original_end === $pattern && $translated_end !== $pattern
-                && ($punctuation === '' || mb_substr(rtrim($translated_string), -1, 1, 'UTF-8') !== $punctuation)) {
+                && ($punctuation === '' || !$this->boundary_has_punctuation($translated_string, $punctuation, true, $original_string))) {
                 $translated_string = $translated_string . $pattern;
             }
         }
 
         return $translated_string;
+    }
+
+    /**
+     * Whether the translation already starts or ends with a punctuation mark that stands in for $punctuation
+     *
+     * Only the first/last 1 KB (after trimming plain whitespace) is inspected. Whitespace and invisible characters are ignored, and at the end also
+     * closing HTML tags (stripped before entities are decoded, so an escaped "&lt;/b&gt;" is text, not a tag).
+     * A boundary has the mark when it ends/starts with:
+     * - the same ASCII mark (e.g. "Bonjour.&nbsp;", "Lire <a>plus.</a>"); always kept, the filter is not consulted;
+     * - at the end, "!" or "?" as the last visible character (not inside brackets, quotes or a tag: "(vraiment !)" still gets ".");
+     * - a script-native sentence/clause mark, at the end also behind closing quotes, brackets or tags (U+3002 inside closing quotes or a link).
+     * An ASCII "." behind a closer does not count, so the "." of "(etc.)" does not replace the sentence's full stop.
+     * At the start, opening marks such as Spanish inverted question/exclamation marks do not count.
+     * Beyond the window the old behaviour applies (the mark is out of reach and gets restored): more than 1 KB of trailing
+     * tags or of entity/invisible spacing (&nbsp;, U+00A0, U+200B), or invalid UTF-8 inside the window (preg fails, so only
+     * the old byte-level exact match is done). NUL and vertical tab next to the mark are trimmed like other whitespace.
+     *
+     * @param string $translated_string The translation being processed (after placeholder and quote restoration; may contain HTML entities)
+     * @param string $punctuation The ASCII mark that would be restored: ",", "." or ";"
+     * @param bool $at_end True to check the end of the string, false for the start
+     * @param string $original_string The original string (entity-decoded, shortcodes executed, excluded words replaced by placeholders), passed to the filter
+     * @return bool
+     */
+    private function boundary_has_punctuation($translated_string, $punctuation, $at_end, $original_string) {
+        $ignored = '[\s\p{Z}\x{00AD}\x{061C}\x{200B}-\x{200F}\x{202A}-\x{202E}\x{2060}\x{2066}-\x{2069}\x{FEFF}]';
+        // Plain whitespace is trimmed from the whole string first, so a long run of it cannot hide the mark from the window
+        $text   = $at_end ? rtrim($translated_string) : ltrim($translated_string);
+        $limit  = 1024;
+        // Byte length even when mbstring.func_overload (PHP < 8) makes strlen() count characters, since mb_strcut works in bytes
+        $length = mb_strlen($text, '8bit');
+        if ( $length > $limit ) {
+            // At the end the cut must run to the end of the string: mb_strcut moves a mid-character start back, which would drop the last character
+            $text = $at_end ? mb_strcut($text, $length - $limit, $length, 'UTF-8') : mb_strcut($text, 0, $limit, 'UTF-8');
+            if ( $at_end ) {
+                // A cut inside an entity leaves a fragment such as "sp;" that would decode to a literal ";"
+                $text = preg_replace('/^[#a-zA-Z0-9]{0,31};/', '', $text);
+            }
+        }
+
+        if ( $at_end ) {
+            $visible   = preg_replace('/' . $ignored . '+$/u', '', $text);
+            $untagged  = is_string($visible) ? $this->strip_trailing_closing_tags($visible, $ignored) : null;
+            $behind_tag = $untagged !== $visible;
+        } else {
+            $untagged  = preg_replace('/^' . $ignored . '+/u', '', $text);
+            $behind_tag = false;
+        }
+
+        // Engines like Google v2 return HTML entities (&quot;); decode only to inspect the boundary
+        $bare = is_string($untagged) ? html_entity_decode($untagged, ENT_QUOTES | ENT_HTML5, 'UTF-8') : null;
+        $bare = is_string($bare) ? preg_replace($at_end ? '/' . $ignored . '+$/u' : '/^' . $ignored . '+/u', '', $bare) : null;
+
+        if ( !is_string($bare) ) {
+            // preg failure (e.g. invalid UTF-8): keep the byte-level exact-match check
+            $trimmed = $at_end ? rtrim($translated_string) : ltrim($translated_string);
+            return ( $at_end ? substr($trimmed, -1) : substr($trimmed, 0, 1) ) === $punctuation;
+        }
+
+        $char = mb_substr($bare, $at_end ? -1 : 0, 1, 'UTF-8');
+        if ( $char === $punctuation ) {
+            return true;
+        }
+
+        // Script-native sentence and clause marks: CJK full/half-width, Arabic/Urdu, Devanagari, Armenian, Ethiopic, Myanmar, Khmer, Tibetan, ellipses
+        $native_marks = '/^[\x{3002}\x{FF0E}\x{FF61}\x{FF0C}\x{3001}\x{FF64}\x{FF1B}\x{FF1A}\x{FF01}\x{FF1F}\x{060C}\x{061B}\x{061F}\x{06D4}\x{0964}\x{0965}\x{0589}\x{1362}\x{1363}\x{104A}\x{104B}\x{17D4}\x{0F0D}\x{2026}\x{2025}]$/u';
+
+        if ( $at_end && !$behind_tag && ( $char === '!' || $char === '?' ) ) {
+            $has_mark = true;
+        } elseif ( $at_end ) {
+            $inner    = preg_replace('/[\s\p{Z}\x{00AD}\x{061C}\x{200B}-\x{200F}\x{202A}-\x{202E}\x{2060}\x{2066}-\x{2069}\x{FEFF}\p{Pe}\p{Pf}\p{Pi}"\']+$/u', '', $bare);
+            $char     = is_string($inner) ? mb_substr($inner, -1, 1, 'UTF-8') : $char;
+            $has_mark = preg_match($native_marks, $char) === 1;
+        } else {
+            $has_mark = preg_match($native_marks, $char) === 1;
+        }
+
+        /**
+         * Override whether the translation already has a mark at this boundary, so the original's ASCII mark is not restored.
+         * Not applied when the same ASCII mark is already present (that is always kept).
+         *
+         * @param bool   $has_mark          Decision so far.
+         * @param string $char              Boundary character that was inspected (after decoding and trimming); may be '' or an ASCII
+         *                                  mark that did not count (e.g. the "." of "(etc.)").
+         * @param string $punctuation       ASCII mark that would be restored: ",", "." or ";".
+         * @param bool   $at_end            True for the end of the string, false for the start.
+         * @param string $original_string   Original string (entity-decoded, shortcodes executed, excluded words replaced by placeholders).
+         * @param string $translated_string Translation being processed (after placeholder and quote restoration; may contain HTML entities).
+         */
+        return (bool) apply_filters( 'trp_restore_punctuation_boundary_has_mark', $has_mark, $char, $punctuation, $at_end, $original_string, $translated_string );
+    }
+
+    /**
+     * Strip trailing closing HTML tags (and whitespace between them)
+     *
+     * @param string $text
+     * @param string $ignored Character class of whitespace/invisible characters
+     * @return string|null Null on preg failure
+     */
+    private function strip_trailing_closing_tags($text, $ignored) {
+        do {
+            $previous = $text;
+            $text = preg_replace('/<\/[a-zA-Z][a-zA-Z0-9-]*\s*>$/', '', $text);
+            if ( is_string($text) ) {
+                $text = preg_replace('/' . $ignored . '+$/u', '', $text);
+            }
+        } while ( is_string($text) && $text !== $previous );
+
+        return $text;
     }
 
 }

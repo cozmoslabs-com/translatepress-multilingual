@@ -7,15 +7,15 @@ if ( !defined( 'ABSPATH' ) )
  * Class TRP_Glossary
  *
  * Provides glossary substitutions during machine translation by exposing
- * filter callbacks for `trp_exclude_words_from_automatic_translation` and
- * `trp_replace_placeholders_with`.
+ * filter callbacks for `trp_machine_translation_span_terms` and
+ * `trp_machine_translation_string_after_receive`.
  *
  * Terms are read from the `trp_glossary` option managed by
- * TRP_Glossary_Queries. Each glossary term (a default-language string) is
- * protected from automatic translation; for target languages where the user
- * supplied a translation the placeholder is restored with that translation,
- * otherwise the original term is kept. Matching against page strings is
- * case-insensitive.
+ * TRP_Glossary_Queries. Each glossary term (a default-language string) that has
+ * a translation for the target language is wrapped in a span (a 1TPnT placeholder
+ * inside attribute values) before it is sent to TranslatePress AI, and the span
+ * is replaced with that translation in the response. Matching against page
+ * strings is case-insensitive.
  */
 class TRP_Glossary {
 
@@ -154,6 +154,9 @@ class TRP_Glossary {
      * correctly. This makes "care" match in "Handle with care." but not in
      * "caregiver", and "grated cheese" not match inside "ungrated cheese".
      *
+     * Used by the Replace existing translations tool, which keeps this strict rule: unlike machine
+     * translation (TRP_Machine_Translation_Spans::word_edges()), "zł" doesn't match in "100zł".
+     *
      * @param string $term
      * @return string PCRE pattern.
      */
@@ -172,12 +175,7 @@ class TRP_Glossary {
      * @return bool
      */
     public function uses_word_boundaries( $language_code ) {
-        $no_boundary = apply_filters(
-            'trp_glossary_languages_without_word_boundaries',
-            array( 'zh', 'ja', 'th', 'lo', 'km', 'my', 'bo' )
-        );
-        $prefix = strtolower( (string) strtok( (string) $language_code, '_' ) );
-        return ! in_array( $prefix, $no_boundary, true );
+        return TRP_Machine_Translation_Spans::uses_word_boundaries( $language_code );
     }
 
     /**
@@ -207,11 +205,12 @@ class TRP_Glossary {
             $map = array();
 
             foreach ( $this->get_terms() as $term => $translations ) {
+                $term = (string) $term;
                 if ( $term === '' || !is_array( $translations ) ) {
                     continue;
                 }
                 if ( isset( $translations[ $target_language_code ] ) && $translations[ $target_language_code ] !== '' ) {
-                    $map[ strtolower( $term ) ] = $translations[ $target_language_code ];
+                    $map[ mb_strtolower( $term, 'UTF-8' ) ] = $translations[ $target_language_code ];
                 }
             }
 
@@ -222,121 +221,160 @@ class TRP_Glossary {
     }
 
     /**
-     * Add every case-variant of each glossary term found in the strings to the
-     * exclude-words array, protecting them from automatic translation. Each
-     * variant gets its own placeholder slot, so a sentence containing both
-     * "World" and "world" produces two placeholders.
+     * Whether the glossary applies to this machine translation request: TranslatePress AI engine,
+     * translating from the default language (glossary terms are default-language strings).
      *
-     * @param array  $exclude_words        Existing exclusions (e.g. %s, %d).
-     * @param string $imploded_strings     All strings in the current batch, joined.
-     * @param string $target_language_code Target language (full locale). Terms without a
-     *                                     translation for it are left unprotected.
-     * @return array
+     * @param string|null $source_language_code
+     * @return bool
      */
-    public function add_excluded_words( $exclude_words, $imploded_strings = '', $target_language_code = '' ) {
-        if ( !is_array( $exclude_words ) ) {
-            $exclude_words = array();
-        }
-
-        // Glossary only applies to the TranslatePress AI engine.
+    protected function applies_to_request( $source_language_code ) {
         if ( ! $this->is_tp_ai_active() ) {
-            return $exclude_words;
+            return false;
         }
-
-        if ( !is_string( $imploded_strings ) || $imploded_strings === '' ) {
-            return $exclude_words;
-        }
-
-        // Source strings are in the default language; use its boundary rules.
         $default_language = isset( $this->settings['default-language'] ) ? $this->settings['default-language'] : '';
-
-        foreach ( $this->get_terms() as $term => $translations ) {
-            if ( $term === '' || ! is_array( $translations ) ) {
-                continue;
-            }
-            // Only protect the term for target languages where the user supplied a
-            // translation. Without one, leave it unprotected so the MT engine
-            // translates it normally instead of keeping the original word.
-            if ( $target_language_code !== '' && ( ! isset( $translations[ $target_language_code ] ) || $translations[ $target_language_code ] === '' ) ) {
-                continue;
-            }
-            // Only protect the term where it appears as a whole word (for spaced
-            // languages), so a compound like "caregiver" is still translated normally.
-            if ( preg_match_all( $this->term_match_pattern( $term, $default_language ), $imploded_strings, $matches ) ) {
-                foreach ( array_unique( $matches[0] ) as $variant ) {
-                    if ( !in_array( $variant, $exclude_words, true ) ) {
-                        $exclude_words[] = $variant;
-                    }
-                }
-            }
-        }
-
-        return $exclude_words;
+        return $default_language === '' || $source_language_code === null || $source_language_code === $default_language;
     }
 
     /**
-     * Swap protected glossary terms in the placeholder-restoration array with the
-     * translation configured for the current target language. Non-glossary items
-     * (e.g. %s, %d) and terms without a translation for this language pass through
-     * unchanged, so they are restored to their original text.
+     * Add the glossary terms to the text wrapped in spans before the string is sent to TranslatePress AI,
+     * as <span id="trp-glossary-N">. The model sees the real term (a placeholder leaves a hole it tends to
+     * fill with invented words), the server keeps the span around the aligned words and unwrap_terms()
+     * overwrites them with the configured translation. A term inside a quoted attribute value, where a tag
+     * can't go, is sent as a 1TPnT placeholder instead (TRP_Machine_Translation_Spans::wrap()).
      *
-     * The array length is preserved (values are swapped in place) so it stays
-     * aligned with the placeholder tokens.
+     * Hooked to trp_machine_translation_span_terms. Only terms with a translation for the target language
+     * are added. Priority beats excluded words of the same length; a longer excluded phrase still wins.
      *
-     * @param array  $replacements         Default = the exclude-words array.
-     * @param array  $exclude_words        Original exclude-words array.
-     * @param array  $placeholders         Placeholder tokens (positional).
-     * @param string $machine_string       MT output before restoration.
-     * @param string $original_string      Pre-translation original.
-     * @param string $target_language_code Target language code (full locale).
-     * @param string $source_language_code Source language code (full locale).
+     * @param array       $groups
+     * @param string      $string               String about to be sent.
+     * @param string      $target_language_code
+     * @param string|null $source_language_code
      * @return array
      */
-    public function apply_replacements( $replacements, $exclude_words, $placeholders, $machine_string, $original_string, $target_language_code, $source_language_code ) {
-        if ( !is_array( $replacements ) ) {
-            return $replacements;
+    public function add_span_terms( $groups, $string = '', $target_language_code = '', $source_language_code = null ) {
+        if ( !is_string( $string ) || $string === '' || !$this->applies_to_request( $source_language_code ) ) {
+            return $groups;
         }
 
-        // Glossary only applies to the TranslatePress AI engine.
-        if ( ! $this->is_tp_ai_active() ) {
-            return $replacements;
-        }
-
-        // Glossary terms are default-language strings; only apply when translating from the default language.
-        $default_language = isset( $this->settings['default-language'] ) ? $this->settings['default-language'] : '';
-        if ( $default_language !== '' && $source_language_code !== null && $source_language_code !== $default_language ) {
-            return $replacements;
-        }
-
-        $map = $this->get_target_replacements( $target_language_code );
-        if ( empty( $map ) ) {
-            return $replacements;
-        }
-
-        foreach ( $replacements as $index => $value ) {
-            if ( !is_string( $value ) ) {
+        $terms = array();
+        foreach ( $this->get_terms() as $term => $translations ) {
+            $term = (string) $term;
+            if ( $term === '' || !is_array( $translations ) || !isset( $translations[ $target_language_code ] ) || $translations[ $target_language_code ] === '' ) {
                 continue;
             }
-            $lookup = strtolower( $value );
-            // Only substitute when the term is a whole word in THIS string (for spaced
-            // languages). This keeps a shared placeholder (e.g. for "care") from replacing
-            // inside "caregiver" when both appear in the same translation batch. The source
-            // string is in the default language, so use its boundary rules.
-            if ( isset( $map[ $lookup ] ) && preg_match( $this->term_match_pattern( $value, $default_language ), (string) $original_string ) ) {
-                $replacements[ $index ] = $this->match_case( $value, $map[ $lookup ] );
+            if ( mb_stripos( $string, $term, 0, 'UTF-8' ) !== false ) {
+                $terms[] = $term;
+            }
+        }
+        if ( empty( $terms ) ) {
+            return $groups;
+        }
+
+        $default_language = isset( $this->settings['default-language'] ) ? $this->settings['default-language'] : '';
+        $groups           = (array) $groups;
+        $groups[]         = array(
+            'prefix'   => 'trp-glossary-',
+            'pattern'  => TRP_Machine_Translation_Spans::words_pattern( $terms, $default_language === '' || $this->uses_word_boundaries( $default_language ), true, true, true ),
+            'priority' => 10,
+        );
+
+        return $groups;
+    }
+
+    /**
+     * Replace the content of each glossary span in the TranslatePress AI response with the configured
+     * translation and drop the span, and replace each glossary 1TPnT token (a term inside an attribute value)
+     * with it. Text spelled exactly like a configured term gets that term's translation as configured; any other
+     * casing goes through match_case(). When the model drops a span the translation is kept as returned and the
+     * miss is logged.
+     *
+     * Hooked to trp_machine_translation_string_after_receive.
+     *
+     * @param string      $machine_string       Translation returned by the engine.
+     * @param string      $sent_string          String that was sent, see TRP_Machine_Translation_Spans::wrap_protected_text().
+     * @param string      $original_string
+     * @param string      $target_language_code
+     * @param string|null $source_language_code
+     * @return string
+     */
+    public function unwrap_terms( $machine_string, $sent_string = '', $original_string = '', $target_language_code = '', $source_language_code = null ) {
+        if ( !is_string( $machine_string ) || !is_string( $sent_string ) ) {
+            return $machine_string;
+        }
+        $variants = strpos( $sent_string, 'trp-glossary-' ) === false ? array() : TRP_Machine_Translation_Spans::get_span_contents( $sent_string, 'trp-glossary-' );
+        $tokens   = TRP_Machine_Translation_Spans::token_texts( $sent_string, 'trp-glossary-' );
+        if ( empty( $variants ) && empty( $tokens ) ) {
+            return $machine_string;
+        }
+
+        $terms           = $this->get_terms();
+        $map             = $this->get_target_replacements( $target_language_code );
+        $translation_for = function ( $variant ) use ( $terms, $map, $target_language_code, &$translation_for ) {
+            if ( isset( $terms[ $variant ][ $target_language_code ] ) && $terms[ $variant ][ $target_language_code ] !== '' ) {
+                return $terms[ $variant ][ $target_language_code ]; // spelled exactly as configured: translation as configured
+            }
+            $lookup = mb_strtolower( $variant, 'UTF-8' );
+            if ( isset( $map[ $lookup ] ) ) {
+                return $this->match_case( $variant, $map[ $lookup ] );
+            }
+            // A term with digits after it (zł100) was wrapped whole, only the term part is translated
+            $code = TRP_Machine_Translation_Spans::split_trailing_digits( $variant );
+            return $code === null ? $variant : $translation_for( $code[0] ) . $code[1];
+        };
+
+        $result         = $machine_string;
+        $missing_tokens = array();
+        if ( !empty( $tokens ) ) {
+            list( $result, $found ) = TRP_Machine_Translation_Spans::restore_tokens( $result, $sent_string, 'trp-glossary-', function ( $number, $text ) use ( $translation_for ) {
+                return $translation_for( $text );
+            } );
+            $missing_tokens = array_diff_key( $tokens, array_flip( $found ) );
+        }
+
+        $drifted = array();
+        $found   = array();
+        if ( !empty( $variants ) ) {
+            list( $result, $found ) = TRP_Machine_Translation_Spans::replace_spans( $result, 'trp-glossary-', function ( $id, $content, $neighbours = array() ) use ( $variants, $translation_for, $target_language_code, &$drifted ) {
+                if ( !isset( $variants[ $id ] ) ) {
+                    return $content;
+                }
+                $restored = TRP_Machine_Translation_Spans::restore_span( $content, $variants[ $id ], $translation_for( $variants[ $id ] ), $target_language_code, $neighbours );
+                if ( $restored === null ) {
+                    $drifted[ $id ] = $variants[ $id ];
+                    return $content;
+                }
+                return $restored;
+            } );
+        }
+
+        if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
+            $missing = array_diff_key( $variants, array_flip( $found ) );
+            if ( !empty( $missing ) ) {
+                error_log( 'TranslatePress glossary: trp-glossary span missing or left unclosed in the ' . $target_language_code . ' translation for "' . implode( '", "', $missing ) . '". Sent: ' . $sent_string . ' Received: ' . $machine_string );
+            }
+            if ( !empty( $drifted ) ) {
+                error_log( 'TranslatePress glossary: trp-glossary span drifted in the ' . $target_language_code . ' translation for "' . implode( '", "', $drifted ) . '", kept the engine text. Sent: ' . $sent_string . ' Received: ' . $machine_string );
+            }
+            if ( !empty( $missing_tokens ) ) {
+                error_log( 'TranslatePress glossary: glossary placeholder missing in the ' . $target_language_code . ' translation for "' . implode( '", "', $missing_tokens ) . '". Sent: ' . $sent_string . ' Received: ' . $machine_string );
             }
         }
 
-        return $replacements;
+        return $result;
     }
 
     /**
      * Copy the capitalization pattern of the matched source term onto the
      * translation. Deterministic and intentionally simple:
-     *   - ALL CAPS   (WORLD) -> uppercase the translation
-     *   - all lower  (world) -> lowercase the translation
-     *   - Capitalized(World) -> upper-case the first letter of the translation
-     *   - anything mixed (iPhone, Hello World) -> leave the translation as configured
+     *   - ALL CAPS   (WORLD) -> uppercase the translation; needs two cased letters
+     *   - all lower  (world) -> lowercase the first letter only, configured capitals elsewhere (d'Aurelda) stay
+     *   - Capitalized(World) -> upper-case the first letter of the translation; a single cased
+     *                           letter (A, C#) counts as Capitalized: match_case('C#','do dièse') -> 'Do dièse'
+     *   - no cased letters (42, 東京) or anything mixed (iPhone, 3D, Hello World) -> leave the translation as configured
+     *
+     * Machine translation (unwrap_terms) skips this for text spelled exactly like the configured term,
+     * so R&D -> R et D and C# -> do dièse stay as configured. The Replace existing translations tool
+     * (TRP_Glossary_Queries::case_aware_replace) always applies it.
      *
      * @param string $source      The exact source term variant matched in the text.
      * @param string $translation The configured translation for the target language.
@@ -350,17 +388,31 @@ class TRP_Glossary {
         $upper = mb_strtoupper( $source, 'UTF-8' );
         $lower = mb_strtolower( $source, 'UTF-8' );
 
-        if ( $source === $upper && $upper !== $lower ) {          // ALL CAPS (has at least one cased letter)
+        if ( $source === $upper && preg_match_all( '/[\p{Lu}\p{Ll}\p{Lt}]/u', $source ) > 1 ) { // ALL CAPS
             return mb_strtoupper( $translation, 'UTF-8' );
         }
         if ( $source === $lower ) {                               // all lower (or no cased letters)
-            return mb_strtolower( $translation, 'UTF-8' );
+            return $upper === $lower ? $translation : $this->mb_lcfirst( $translation );
         }
         if ( $this->mb_ucfirst( $lower ) === $source ) {          // Capitalized first letter only
             return $this->mb_ucfirst( $translation );
         }
 
         return $translation;                                      // mixed casing -> verbatim
+    }
+
+    /**
+     * Multibyte-safe lcfirst().
+     *
+     * @param string $string
+     * @return string
+     */
+    public function mb_lcfirst( $string ) {
+        if ( $string === '' ) {
+            return $string;
+        }
+        $first = mb_substr( $string, 0, 1, 'UTF-8' );
+        return mb_strtolower( $first, 'UTF-8' ) . mb_substr( $string, 1, null, 'UTF-8' );
     }
 
     /**

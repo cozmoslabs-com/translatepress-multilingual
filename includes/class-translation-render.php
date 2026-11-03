@@ -1671,8 +1671,17 @@ class TRP_Translation_Render{
     private function neutralize_marker_hidden_url_schemes( $string ){
         $url_attributes = array_map( function( $attr ){ return preg_quote( $attr, '/' ); }, $this->get_url_attributes() );
 
-        // the quote can be json-escaped ( href=\"...\" ) when the html is inside a json response
-        $pattern = '/(?<=[\s"\'\/])((?:' . implode( '|', $url_attributes ) . ')\s*=\s*)(\\\\{0,2}["\'])(.*?)\2/is';
+        // Capture the value with a possessive, delimiter-bounded class instead of a lazy .*? ( CU-1amndjnkyuu ).
+        // A url attribute value never legitimately contains a raw < or > ( they would close the tag ) nor an
+        // unescaped copy of its own quote, so the value is matched with [^"<>] / [^'<>] and *+ ( possessive, no
+        // backtracking ). The old lazy .*?\2 could be forced to span ~1MB across many comments by a stray
+        // opening quote whose closing quote sat far away; that defeated pcre.backtrack_limit, preg_replace_callback
+        // returned null, the function failed open and strip_trp_markers() then collapsed a smuggled
+        // java<marker>script: value into a live javascript: url. Bounding on < > keeps every candidate inside a
+        // single tag ( at most one comment ), so the match stays linear and the backtrack limit is never reached.
+        // A branch reset group ( ?| ) keeps $matches[2]/$matches[3] = opening-delimiter/value for both quote types,
+        // and the quote can be json-escaped ( href=\"...\" ) when the html is inside a json response.
+        $pattern = '/(?<=[\s"\'\/])((?:' . implode( '|', $url_attributes ) . ')\s*=\s*)(?|(\\\\{0,2}")([^"<>]*+)"|(\\\\{0,2}\')([^\'<>]*+)\')/is';
 
         $result = preg_replace_callback( $pattern, function( $matches ){
             if ( stripos( $matches[3], 'trp-' ) === false || !$this->has_unsafe_url_scheme( $this->strip_trp_markers( $matches[3] ) ) ) {
@@ -1681,7 +1690,8 @@ class TRP_Translation_Render{
             return $matches[1] . $matches[2] . $matches[2];
         }, $string );
 
-        // preg failure ( e.g. backtrack limit ) - keep the original string rather than blanking the page
+        // preg failure ( e.g. backtrack limit ) - keep the original string rather than blanking the page. The
+        // bounded pattern above makes this unreachable for the comment-smuggling vector, so it stays a last resort.
         return ( $result === null ) ? $string : $result;
     }
 
@@ -2456,6 +2466,7 @@ class TRP_Translation_Render{
             'trp_wp_ajax_url'                                      => apply_filters( 'trp_wp_ajax_url', admin_url( 'admin-ajax.php' ) ),
             'trp_language_to_query'                                => $language_to_query,
             'trp_original_language'                                => $this->settings['default-language'],
+            'trp_blog_id'                                          => get_current_blog_id(), // used by trp-ajax.php to query the subsite's tables on multisite
             'trp_current_language'                                 => $TRP_LANGUAGE,
             'trp_skip_selectors'                                   => apply_filters( 'trp_skip_selectors_from_dynamic_translation', array( '[data-no-translation]', '[data-no-dynamic-translation]', '[data-trp-translate-id-innertext]', 'script', 'style', 'head', 'trp-span', 'translate-press' ), $TRP_LANGUAGE, $this->settings ), // data-trp-translate-id-innertext refers to translation block and it shouldn't be detected
             'trp_base_selectors'                                   => $this->get_base_attribute_selectors(),

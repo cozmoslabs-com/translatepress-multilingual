@@ -3,9 +3,9 @@ Contributors: cozmoslabs, razvan.mo, madalin.ungureanu, sareiodata, cristophor
 Donate link: https://www.translatepress.com/
 Tags: translate, translation, multilingual, automatic translation, ai translation, front-end translation, google translate, language
 Requires at least: 3.1.0
-Tested up to: 7.1.3
+Tested up to: 7.1.4
 Requires PHP: 7.4
-Stable tag: 3.3.8
+Stable tag: 3.3.9
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -29,6 +29,8 @@ https://www.youtube.com/watch?v=EMBdXuyrZUA
 * Fully compatible with all themes and plugins
 * Live preview of your translated pages, as you edit them.
 * Automatic AI translation support through [TranslatePress AI Free](https://translatepress.com/ai-free/?utm_source=wp.org&utm_medium=tp-description-page&utm_campaign=TPFree), with a 2,000 AI words limit. Use our free [Website Word Count](https://translatepress.com/website-word-count/?utm_source=wp.org&utm_medium=tp-description-page&utm_campaign=TPFree) to find how many words your website contains. 
+* Translation Glossary for TranslatePress AI that allows you to set preferred translations for brand names, product terms and industry jargon, so they're translated consistently every time and in every language.
+* Search & Replace functionality that lets you find and bulk edit a word or phrase across all your existing translations at once.
 * Integrates with Google Translate, allowing you to set up unlimited automatic translations using your own Google API key.
 * Fully customizable language switcher that you can display as a menu item, a floating dropdown, or place anywhere else using the Language Switcher block, or the **[language-switcher]** shortcode.
 * [Image translation](https://translatepress.com/docs/image-translation/?utm_source=wp.org&utm_medium=tp-description-page&utm_campaign=TPFree) support, for [translating images, sliders and other media](https://translatepress.com/translate-images-in-wordpress/?utm_source=wp.org&utm_medium=tp-description-page&utm_campaign=TPFree).
@@ -169,16 +171,16 @@ Please report security bugs found in the source code of the TranslatePress plugi
 
 
 == Changelog ==
-= 3.3.8 =
-* Fixed unauthenticated stored XSS via #TRPLINKPROCESSED. Thanks to daroo and the Wordfence team
-* Fixed missing translations in WooCommerce emails sent from the admin, including strings added by WooCommerce extensions
-* Fixed a bug where trailing punctuation was doubled after automatic translation
-* Improved performance of database upgrade process regarding duplicate removal
-* Improvements to machine translation deadlocks caused by concurrent requests
-* Fixed html lang attribute for languages with _informal and _ao90 suffixes
-* Fixed edge case where junk database entries where added when all new strings on a page were skipped by automatic translation
-* Keep the selected language on Slider Revolution layer links
-* Make "Do not translate certain paths" work with non-latin slugs
+= 3.3.9 =
+* Improved translation quality on texts with placeholders and glossary terms
+* Fixed XSS by serving trp-ajax.php responses as inert JSON
+* Fixed stored XSS via PCRE backtrack bypass of URL-scheme neutralizer
+* Fixed gettext insert query fails on MySQL8 when having duplicate originals in the same batch
+* Small performance improvement on referer-less AJAX loopbacks
+* Fixed Chinese and other languages getting an ASCII punctuation after a native mark in new automatic translations
+* Fixed trp-ajax dynamic translation on multisites by querying the correct subsite tables
+* Fixed String Translation search with straight apostrophes
+* Fixed CSS issue with checkboxes in String Translation
 
 = Older versions =
 [Click Here](https://translatepress.com/docs/translatepress-free-changelog/?utm_source=wp.org&utm_medium=tp-description-page&utm_campaign=TPFree) to view the full changelog, or you can find it in the changelog.txt file in the plugin folder.

@@ -1074,7 +1074,12 @@ class TRP_Process_Gettext {
             sort( $original_placeholders );
             sort( $translated_placeholders );
 
-            return $original_placeholders === $translated_placeholders;
+            if ( $original_placeholders !== $translated_placeholders ) {
+                return false;
+            }
+
+            // A stray % the regex doesn't see (%. or %3$d% at the end) still makes sprintf() throw
+            return strpos( $string, '%' ) === false || !$this->is_sprintf_compatible( $original_text ) || $this->is_sprintf_compatible( $string );
         }
 
         // 200 arguments should be enough. If a string has more than 200 placeholders then it might cause "Warning: sprintf(): Too few arguments" on certain php versions

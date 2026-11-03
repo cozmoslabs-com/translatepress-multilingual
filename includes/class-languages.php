@@ -156,7 +156,8 @@ class TRP_Languages{
 			require_once( ABSPATH . 'wp-admin/includes/translation-install.php' );
 			$this->wp_languages = wp_get_available_translations();
 
-			if ( count( $this->wp_languages ) == 0 ) {
+			// The available_translations site transient can come back as a string (corrupted serialized value or a faulty object cache).
+			if ( ! is_array( $this->wp_languages ) || count( $this->wp_languages ) == 0 ) {
 				$this->wp_languages = $this->get_wp_languages_backup();
 			}
 		}

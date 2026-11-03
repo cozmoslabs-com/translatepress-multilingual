@@ -46,9 +46,8 @@ class TRP_Gettext_Insert_Update extends TRP_Query {
 		}
 		$query = "INSERT INTO `" . sanitize_text_field( $this->get_gettext_table_name( $language_code ) ) . "` ( original, translated, domain, status, plural_form, original_id ) VALUES ";
 
-		$values        = array();
-		$place_holders = array();
-		$original_ids  = $this->gettext_original_strings_sync( $new_strings );
+		$rows         = array();
+		$original_ids = $this->gettext_original_strings_sync( $new_strings );
 		foreach ( $new_strings as $key => $string ) {
 			//make sure we don't insert empty strings in db
 			if ( empty( $string['original'] ) ) {
@@ -69,14 +68,19 @@ class TRP_Gettext_Insert_Update extends TRP_Query {
 			if ( !isset( $original_ids[ $key ] ) ) {
 				continue;
 			}
-			array_push( $values, $string['original'], $translated, $string['domain'], $status, $string['plural_form'], $original_ids[ $key ] );
-			$place_holders[] = "( '%s', '%s', '%s', '%d', '%d', '%d')";
+			// One row per (original_id, plural_form): MySQL 8 rejects a multi-row ODKU insert that repeats a unique key (ERROR 1869).
+			$row_key = (int) $original_ids[ $key ] . ':' . (int) $string['plural_form'];
+			if ( isset( $rows[ $row_key ] ) && ( $rows[ $row_key ][1] !== null || $translated === null ) ) {
+				continue;
+			}
+			$rows[ $row_key ] = array( $string['original'], $translated, $string['domain'], $status, $string['plural_form'], $original_ids[ $key ] );
 		}
 
-        if ( empty( $values ) )
+        if ( empty( $rows ) )
             return null;
 
-		$query .= implode( ', ', $place_holders );
+		$values = call_user_func_array( 'array_merge', array_values( $rows ) );
+		$query .= implode( ', ', array_fill( 0, count( $rows ), "( '%s', '%s', '%s', '%d', '%d', '%d')" ) );
 		$query .= ' ON DUPLICATE KEY UPDATE id = LAST_INSERT_ID(id)';
 		$this->db->query( $this->db->prepare( $query . ' ', $values ) );
 

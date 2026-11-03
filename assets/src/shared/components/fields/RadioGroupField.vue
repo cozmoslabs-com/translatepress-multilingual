@@ -156,6 +156,7 @@ const displayedOptions = computed(() => {
 
 .trp-radio-option input {
     border: 1px solid var(--trp-settings-medium-gray-border-color);
+    background: #fff;
     width: 20px;
     height: 20px;
     flex: 0 0 20px;

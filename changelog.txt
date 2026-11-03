@@ -1,3 +1,14 @@
+= 3.3.8 =
+* Fixed unauthenticated stored XSS via #TRPLINKPROCESSED. Thanks to daroo and the Wordfence team
+* Fixed missing translations in WooCommerce emails sent from the admin, including strings added by WooCommerce extensions
+* Fixed a bug where trailing punctuation was doubled after automatic translation
+* Improved performance of database upgrade process regarding duplicate removal
+* Improvements to machine translation deadlocks caused by concurrent requests
+* Fixed html lang attribute for languages with _informal and _ao90 suffixes
+* Fixed edge case where junk database entries where added when all new strings on a page were skipped by automatic translation
+* Keep the selected language on Slider Revolution layer links
+* Make "Do not translate certain paths" work with non-latin slugs
+
 = 3.3.7 =
 * Prevent XSS from using trp-gettext markers hiding js schemes in url attributes
 * Fixed #TRPLINKPROCESSED markers caused by conflict with Hummingbird

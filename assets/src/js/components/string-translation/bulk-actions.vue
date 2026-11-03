@@ -11,6 +11,7 @@
 
 <script>
     import axios from "axios"
+    import he    from "he"
 
     export default {
         props   : [
@@ -42,9 +43,15 @@
                     action !== 'trp_default' &&
                     strings.length >= 1
                 ){
-                    let message = this.stEditorStrings[ action + "_warning" ] + " \n \n" +
+                    // The warning strings come from esc_html__() on the PHP side, so chars like
+                    // apostrophes/quotes arrive HTML-encoded (e.g. &#039;). Native prompt()/alert()
+                    // dialogs render plain text, not HTML, so decode the entities back to real
+                    // characters here — without altering the underlying translation.
+                    let message = he.decode(
+                        this.stEditorStrings[ action + "_warning" ] + " \n \n" +
                         ( (this.tableControls.selectAllOrVisible === '' ) ? '' : this.stEditorStrings[ this.tableControls.selectAllOrVisible + "_warning" ] + " \n \n ") +
                         this.stEditorStrings.type_a_word_for_security + " " + action
+                    )
 
                     let wordTyped = prompt( message, '' )
 
@@ -67,7 +74,7 @@
                              .then( function ( response ) {
                                  if ( response != null ){
                                      if ( response ){
-                                        alert( self.stEditorStrings[ 'entries_deleted' ].replace("%d", parseInt( response.data ) ) )
+                                        alert( he.decode( self.stEditorStrings[ 'entries_deleted' ].replace("%d", parseInt( response.data ) ) ) )
                                         window.location.reload()
                                      }
                                  }
@@ -76,7 +83,7 @@
                                  console.log( error )
                              } )
                     } else {
-                        alert( this.stEditorStrings.incorect_word_typed )
+                        alert( he.decode( this.stEditorStrings.incorect_word_typed ) )
                     }
                 }
             }

@@ -276,6 +276,12 @@ class TRP_Gettext_Manager {
 				$referer = wp_unslash( esc_url_raw( $_SERVER['HTTP_REFERER'] ) );
 			}
 
+			// No referer usually means a server-side loopback (Action Scheduler, WP_Async_Request etc.), not a visitor's page.
+			// Treat it as not front-end, unless something in the request still points to a translated language.
+			if ( $referer === '' && self::is_referer_less_request_in_default_language( $url_converter ) ) {
+				return apply_filters( 'trp_is_ajax_on_frontend_without_referer', false );
+			}
+
 			//if the request did not come from the admin set proper variables for the request (being processed in ajax they got lost) and return true
             // Remove the absolute home prefix from the referer and admin URL
             $referer_uri    = trp_remove_prefix($url_converter->get_abs_home(), $referer);
@@ -287,6 +293,25 @@ class TRP_Gettext_Manager {
 		}
 
 		return false;
+	}
+
+	/**
+	 * Whether an ajax request without a referer has nothing that points to a translated language:
+	 * no trp-form-language field, not a WooCommerce ajax call and no language in the request URL (or domain).
+	 *
+	 * @param TRP_Url_Converter $url_converter
+	 * @return bool
+	 */
+	protected static function is_referer_less_request_in_default_language( $url_converter ) {
+		if ( ! empty( $_REQUEST['trp-form-language'] ) || ! empty( $_GET['wc-ajax'] ) || ( defined( 'WC_DOING_AJAX' ) && WC_DOING_AJAX ) ) {
+			return false;
+		}
+
+		$trp          = TRP_Translate_Press::get_trp_instance();
+		$settings     = $trp->get_component( 'settings' )->get_settings();
+		$url_language = $url_converter->get_lang_from_url_string( $url_converter->cur_page_url( false ) );
+
+		return empty( $url_language ) || $url_language === $settings['default-language'];
 	}
 
 	/**
@@ -588,6 +613,15 @@ class TRP_Gettext_Manager {
 				if ( empty( $machine_strings ) ) {
 							continue;
 						}
+
+				// still saved, so it is never re-sent and re-billed; is_sprintf_compatible() keeps it off the page
+				if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
+					foreach ( $machine_strings as $original => $machine_string ) {
+						if ( ! $this->process_gettext->is_sprintf_compatible( $machine_string, $original ) ) {
+							error_log( 'TranslatePress: the ' . $language . ' machine translation of the gettext string "' . $original . '" changed its printf placeholders, so the original is displayed instead. Edit the translation to fix it. Received: ' . substr( $machine_string, 0, 200 ) );
+						}
+					}
+				}
 
 						$strings_to_save = array();
 				foreach ( $new_strings as $key => $new_string ) {

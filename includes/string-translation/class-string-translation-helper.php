@@ -276,6 +276,9 @@ class TRP_String_Translation_Helper {
             // Properly escape the search term for SQL
             $search_term_escaped = esc_sql( $search_term );
 
+            // esc_like must run before esc_sql, otherwise the backslash esc_sql adds before quotes gets escaped again and breaks the query
+            $search_term_like = esc_sql( '%' . $wpdb->esc_like( $search_term ) . '%' );
+
             $search = [
                 'queries' => [],
                 'clauses' => []
@@ -296,9 +299,7 @@ class TRP_String_Translation_Helper {
                 if ( $is_exact_match ) {
                     $language_clauses = ["$language.translated = '$search_term_escaped'"];
                 } else {
-                    // Use esc_like to escape special LIKE wildcards (%, _, \)
-                    $search_term_like = '%' . $wpdb->esc_like( $search_term_escaped ) . '%';
-                    $language_clauses = ["$language.translated LIKE '$search_term_like'"];
+                    $language_clauses =["$language.translated LIKE '$search_term_like'"];
                 }
 
                 if ( ! empty( $sanitized_args['status'] ) ) {
@@ -324,15 +325,12 @@ class TRP_String_Translation_Helper {
             if ( $is_exact_match ) {
                 $where_clauses[] = "(original_strings.original = '$search_term_escaped' )";
             } else {
-                // Use esc_like to escape special LIKE wildcards (%, _, \)
-                $search_term_like = '%' . $wpdb->esc_like( $search_term_escaped ) . '%';
                 $where_clauses[] = "(original_strings.original LIKE '$search_term_like' )";
             }
 		}
 
 		if ( ! empty( $sanitized_args['domain'] ) ) {
-			$domain_escaped = esc_sql( $sanitized_args['domain'] );
-			$domain_like = '%' . $wpdb->esc_like( $domain_escaped ) . '%';
+			$domain_like = esc_sql( '%' . $wpdb->esc_like( $sanitized_args['domain'] ) . '%' );
 			$where_clauses[] = "(original_strings.domain LIKE '$domain_like' )";
 		}
 

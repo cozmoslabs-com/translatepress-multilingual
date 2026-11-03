@@ -10,6 +10,14 @@ class TRP_Ajax{
     protected $connection;
     protected $table_prefix;
 
+    /*
+     * Flags that make json_encode() escape <, >, &, ' and " as \uXXXX, so a stored dictionary original such
+     * as <svg onload=...> can never be parsed as live html when this standalone endpoint's response is opened
+     * as a top-level document. JSON.parse() restores the exact string, so legitimate consumers are unaffected.
+     * See CU-1amndjnkyv6.
+     */
+    const SAFE_JSON_FLAGS = JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT;
+
     /**
      * TRP_Ajax constructor.
      *
@@ -21,6 +29,17 @@ class TRP_Ajax{
             die();
         }
 
+        /*
+         * This file runs outside WordPress and is directly requestable, so an attacker can open its response
+         * as a top-level document. Force an inert content type ( application/json + nosniff ) before any output
+         * so the browser never sniffs/renders the json body as html, whatever the dictionary happens to contain.
+         * Combined with SAFE_JSON_FLAGS this closes the stored-XSS sink. See CU-1amndjnkyv6.
+         */
+        if ( ! headers_sent() ) {
+            header( 'Content-Type: application/json; charset=utf-8' );
+            header( 'X-Content-Type-Options: nosniff' );
+        }
+
         // Anchor to this file's directory. A cwd-relative include fails on PHP-FPM pools
         // where the working directory of a directly-requested script is not the script's own directory.
         include dirname( __FILE__ ) . '/external-functions.php';
@@ -29,7 +48,7 @@ class TRP_Ajax{
             $this->return_error();
         }
         if ( !trp_is_valid_language_code( $_POST['language'] ) || !trp_is_valid_language_code( $_POST['original_language'] ) ) {//phpcs:ignore
-            echo json_encode( 'TranslatePress Error: Invalid language code' );
+            echo json_encode( 'TranslatePress Error: Invalid language code', self::SAFE_JSON_FLAGS );
             exit;
         }
 
@@ -146,6 +165,13 @@ class TRP_Ajax{
             }
         }
 
+        // On multisite, $table_prefix from wp-config.php is the network base prefix. Subsites (blog_id > 1)
+        // store their tables under base_prefix . blog_id . '_' (see wpdb::get_blog_prefix()). See CU-869fh67ce.
+        $blog_id = isset( $_POST['blog_id'] ) ? (int) $_POST['blog_id'] : 1;
+        if ( $blog_id > 1 ) {
+            $this->table_prefix .= $blog_id . '_';
+        }
+
         return true;
     }
 
@@ -254,7 +280,7 @@ class TRP_Ajax{
             }
 
 	        $dictionary_by_original = trp_sort_dictionary_by_original( $dictionaries, 'regular', 'dynamicstrings', null, null );
-            echo json_encode($dictionary_by_original);
+            echo json_encode( $dictionary_by_original, self::SAFE_JSON_FLAGS );
         }
 
     }
@@ -263,7 +289,7 @@ class TRP_Ajax{
      * Return error in case of connection fail and other problems.
      */
     protected function return_error(){
-        echo json_encode( 'error' );
+        echo json_encode( 'error', self::SAFE_JSON_FLAGS );
         exit;
     }
 }

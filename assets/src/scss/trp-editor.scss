@@ -126,7 +126,7 @@ body{
 
 #trp-controls{
     direction: ltr !important;
-    width: 356px;
+    width: 370px;
     position: relative;
     border-right: 1px solid #ddd;
     background: #fff;
@@ -1114,8 +1114,6 @@ span.trp-translation-icon {
     user-select: none;
     font-size: 12px;
     margin-top: 5px;
-    width:200px;
-    margin-right: -112px;
 }
 
 .discard-all{
@@ -1440,7 +1438,8 @@ a.navigation-tab-active{
 }
 
 
-#trp-filter-translation-status input[type=checkbox]{
+#trp-filter-translation-status input[type=checkbox],
+.trp-strings-table input[type=checkbox]{
     width: 20px;
     height: 20px;
     border-radius: 3px;
@@ -1448,24 +1447,28 @@ a.navigation-tab-active{
     background: #FFFFFE;
 }
 
-#trp-filter-translation-status input[type=checkbox]:checked{
+#trp-filter-translation-status input[type=checkbox]:checked,
+.trp-strings-table input[type=checkbox]:checked{
     border-radius: 3px;
     border: 1px solid #3858E9;
     background: #3858E9;
 }
 
-#trp-filter-translation-status input[type=checkbox]:checked:before{
+#trp-filter-translation-status input[type=checkbox]:checked:before,
+.trp-strings-table input[type=checkbox]:checked:before{
     content: url("data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2020%2020%27%3E%3Cpath%20d%3D%27M14.83%204.89l1.34.94-5.81%208.38H9.02L5.78%209.67l1.34-1.25%202.57%202.4z%27%20fill%3D%27%23ffffff%27%2F%3E%3C%2Fsvg%3E") !important;
     width: 18px;
     margin: 0 0 0 -1px;
 }
 
-#trp-filter-translation-status input[type=checkbox]:focus{
+#trp-filter-translation-status input[type=checkbox]:focus,
+.trp-strings-table input[type=checkbox]:focus{
     outline: none;
     box-shadow: none;
 }
 
-#trp-filter-translation-status input[type=checkbox]:focus-visible{
+#trp-filter-translation-status input[type=checkbox]:focus-visible,
+.trp-strings-table input[type=checkbox]:focus-visible{
     outline: 2px solid #6a30d7;
 }
 

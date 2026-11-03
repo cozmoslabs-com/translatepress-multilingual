@@ -49,6 +49,7 @@ class TRP_Translate_Press{
     protected $language_switcher_tab;
     protected $ai_words_notification;
     protected $glossary;
+    protected $machine_translation_spans;
     protected $glossary_queries;
 
     protected $batch_processor;
@@ -82,7 +83,7 @@ class TRP_Translate_Press{
         define( 'TRP_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
         define( 'TRP_PLUGIN_BASE', plugin_basename( __DIR__ . '/index.php' ) );
         define( 'TRP_PLUGIN_SLUG', 'translatepress-multilingual' );
-        define( 'TRP_PLUGIN_VERSION', '3.3.8' );
+        define( 'TRP_PLUGIN_VERSION', '3.3.9' );
 
 	    wp_cache_add_non_persistent_groups(array('trp'));
 
@@ -120,6 +121,7 @@ class TRP_Translate_Press{
         require_once TRP_PLUGIN_DIR . 'includes/class-language-switcher-v2.php';
         require_once TRP_PLUGIN_DIR . 'includes/class-machine-translator.php';
         require_once TRP_PLUGIN_DIR . 'includes/class-machine-translator-logger.php';
+        require_once TRP_PLUGIN_DIR . 'includes/class-machine-translation-spans.php';
         require_once TRP_PLUGIN_DIR . 'includes/glossary/class-glossary.php';
         require_once TRP_PLUGIN_DIR . 'includes/glossary/class-glossary-queries.php';
         require_once TRP_PLUGIN_DIR . 'includes/queries/class-query.php';
@@ -198,6 +200,7 @@ class TRP_Translate_Press{
         $this->machine_translator_logger  = new TRP_Machine_Translator_Logger( $this->settings->get_settings() );
         $this->machine_translator         = new TRP_Machine_Translator( $this->settings->get_settings() ); // Will be overwritten in init_machine_translation with the actual machine translator class. Use this as replacement until then.
         $this->glossary                   = new TRP_Glossary( $this->settings->get_settings() );
+        $this->machine_translation_spans  = new TRP_Machine_Translation_Spans( $this->settings->get_settings() );
         $this->glossary_queries           = new TRP_Glossary_Queries( $this->settings->get_settings() );
         $this->translation_manager        = new TRP_Translation_Manager( $this->settings->get_settings() );
         $this->editor_api_regular_strings = new TRP_Editor_Api_Regular_Strings( $this->settings->get_settings() );
@@ -331,9 +334,12 @@ class TRP_Translate_Press{
         //Machine Translation Logger defaults
         $this->loader->add_action( 'trp_machine_translation_sanitize_settings', $this->machine_translator_logger, 'sanitize_settings', 10, 1 );
 
-        //Glossary substitutions during machine translation
-        $this->loader->add_filter( 'trp_exclude_words_from_automatic_translation', $this->glossary, 'add_excluded_words', 10, 3 );
-        $this->loader->add_filter( 'trp_replace_placeholders_with', $this->glossary, 'apply_replacements', 10, 7 );
+        //Excluded words and glossary terms wrapped in spans during machine translation
+        $this->loader->add_filter( 'trp_machine_translation_string_before_send', $this->machine_translation_spans, 'wrap_protected_text', 10, 4 );
+        $this->loader->add_filter( 'trp_machine_translation_span_terms', $this->glossary, 'add_span_terms', 10, 4 );
+        $this->loader->add_filter( 'trp_machine_translation_string_after_receive', $this->glossary, 'unwrap_terms', 10, 5 );
+        $this->loader->add_filter( 'trp_machine_translation_string_after_receive', $this->machine_translation_spans, 'unwrap_excluded_words', 20, 6 );
+        $this->loader->add_filter( 'trp_machine_translation_string_after_receive', $this->machine_translation_spans, 'remove_leftover_tags', 30, 2 );
 
         //Glossary settings page
         $this->loader->add_action( 'admin_menu',    $this->glossary, 'add_submenu_page' );

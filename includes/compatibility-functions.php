@@ -1492,6 +1492,10 @@ if( defined( 'WOO_VOU_PLUGIN_VERSION' ) ){
 
 add_filter( 'aws_search_results_products_ids', 'trp_aws_search_results_products_ids', 10, 2 );
 function trp_aws_search_results_products_ids(  $posts_ids, $s ){
+    // an empty search would match every translated string, so keep the Advanced Woo Search results like in the default language
+    if ( '' === trim( (string) $s ) ){
+        return $posts_ids;
+    }
     global $TRP_LANGUAGE;
     $trp = TRP_Translate_Press::get_trp_instance();
     $trp_settings = $trp->get_component( 'settings' );
@@ -2069,6 +2073,10 @@ if( class_exists('WooCommerce_Product_Search_Service') ) {
 
     function trp_woocommerce_product_search_compatibility($search_query)
     {
+        // an empty search would match every translated string, so let WooCommerce Product Search handle it like in the default language
+        if ( '' === trim( (string) $search_query ) ) {
+            return $search_query;
+        }
         global $TRP_LANGUAGE;
         $trp = TRP_Translate_Press::get_trp_instance();
         $trp_settings = $trp->get_component('settings');

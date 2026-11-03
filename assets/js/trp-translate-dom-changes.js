@@ -36,6 +36,7 @@ function TRP_Translator(){
                 security                 : trp_data['gettranslationsnonceregular'],
                 language                 : language_to_query,
                 original_language        : original_language, // used for trp custom ajax
+                blog_id                  : trp_data.trp_blog_id, // used for trp custom ajax on multisite
                 originals                : JSON.stringify( string_originals ),
                 skip_machine_translation : JSON.stringify( skip_machine_translation ),
                 dynamic_strings          : 'true',
