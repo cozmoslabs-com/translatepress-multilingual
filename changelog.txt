@@ -1,5 +1,15 @@
+= 3.4 =
+* Import Export functionality, now in TranslatePress → Settings → Advanced Settings → Import & Export.
+* Improvement: added a new dynamic translation caching system that substantially reduces the number of requests sent to the server for dynamically translated content (popups, sliders, mini-cart, product filters, "load more" results).
+* Fixed stored XSS via unescaped data-src in image srcset translation. Thanks to Khanh Nguyen and the Patchstack team
+* Fixed some edge cases of double billing by automatic translation engines
+* Fixed some cases of 504 timeout errors in database updater process
+* Fixed wrong site activation for a license by sending the language parameter along side home_url to TranslatePress AI
+* Improved performance by optimizing class_exists calls
+
 = 3.3.9 =
 * Improved translation quality on texts with placeholders and glossary terms
+* Improved performance of SQL queries when searching in translated languages
 * Fixed XSS by serving trp-ajax.php responses as inert JSON
 * Fixed stored XSS via PCRE backtrack bypass of URL-scheme neutralizer
 * Fixed gettext insert query fails on MySQL8 when having duplicate originals in the same batch
@@ -8,6 +18,7 @@
 * Fixed trp-ajax dynamic translation on multisites by querying the correct subsite tables
 * Fixed String Translation search with straight apostrophes
 * Fixed CSS issue with checkboxes in String Translation
+* Fixed edge case fatal error when the available_translations transient is corrupted
 
 = 3.3.8 =
 * Fixed unauthenticated stored XSS via #TRPLINKPROCESSED. Thanks to daroo and the Wordfence team

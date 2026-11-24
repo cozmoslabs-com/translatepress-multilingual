@@ -4270,3 +4270,40 @@ function trp_slider_revolution_get_link_for_current_language( $url ) {
 
     return $new_url;
 }
+
+/**
+ * Compatibility with Shiptastic for WooCommerce (used by WooCommerce Germanized for shipments)
+ *
+ * Shipment and return emails take their language from the order stored in $TRP_EMAIL_ORDER.
+ * Shiptastic sets it on its *_notification hooks at priority 10, which is also the priority of the
+ * email's trigger(). When the WooCommerce mailer is built before Shiptastic registers its callback
+ * (e.g. by an email builder plugin), the email is sent first and falls back to the language of the
+ * admin request. Partial shipments are affected most, since they do not change the order status.
+ * Storing the order at priority 5 removes that dependency on hook registration order.
+ */
+add_action( 'init', 'trp_shiptastic_add_email_order_hooks' );
+function trp_shiptastic_add_email_order_hooks(){
+    if ( !trp_class_exists( '\Vendidero\Shiptastic\Emails' ) || !is_callable( array( '\Vendidero\Shiptastic\Emails', 'get_email_notification_hooks' ) ) ) {
+        return;
+    }
+
+    foreach ( \Vendidero\Shiptastic\Emails::get_email_notification_hooks() as $hook ) {
+        add_action( $hook . '_notification', 'trp_shiptastic_store_email_order', 5, 1 );
+    }
+
+    // Shipment emails sent directly, e.g. from WooCommerce order fulfillments
+    add_action( 'woocommerce_shiptastic_shipment_notify_customer', 'trp_shiptastic_store_email_order', 5, 1 );
+}
+
+function trp_shiptastic_store_email_order( $shipment_id ){
+    if ( !function_exists( 'wc_stc_get_shipment' ) ) {
+        return;
+    }
+
+    $shipment = wc_stc_get_shipment( $shipment_id );
+
+    if ( $shipment && $shipment->get_order_id() ) {
+        global $TRP_EMAIL_ORDER;
+        $TRP_EMAIL_ORDER = $shipment->get_order_id();
+    }
+}

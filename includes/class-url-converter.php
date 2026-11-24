@@ -528,7 +528,7 @@ class TRP_Url_Converter {
 
         $cached_url = $this->check_if_url_is_valid_and_set_cache('get_url_for_language_', $language, $url, $trp_link_is_processed );
 
-        if ( !isset( $cached_url['no_cache'] ) ) return $cached_url;
+        if ( !isset( $cached_url['no_cache'] ) ) return $this->encode_square_brackets_in_url( $cached_url );
 
         $hash = $cached_url['hash'];
 
@@ -617,8 +617,37 @@ class TRP_Url_Converter {
         //when using this filter, if the user did not run the updater for slugs, calling this function will result in using the fallback functions in
         // SeoPack->class-slug-manager.php->get_slug_translated_url_for_language->get_slugs_pairs_based_on_language
         $new_url = apply_filters( 'trp_get_url_for_language', $new_url, $url, $language, $this->get_abs_home(), $lang_from_url_string, $this->get_url_slug( $language ) );
+
+        // Some trp_get_url_for_language callbacks urldecode() the URL (e.g. the legacy SEO Pack), which turns the
+        // %5B / %5D written by cur_page_url() back into literal brackets. Encode them again after all filters ran.
+        $new_url = $this->encode_square_brackets_in_url( $new_url );
+
         wp_cache_set('get_url_for_language_' . $hash, $new_url . $trp_link_is_processed, 'trp');
         return $new_url . $trp_link_is_processed;
+    }
+
+    /**
+     * Percent-encode literal [ and ] in the path, query and fragment of a URL.
+     *
+     * Language switcher links are built from the current request URL. If one of them keeps a literal "[shortcode]"
+     * and is printed inside post content (e.g. the Language Switcher block, rendered by do_blocks() before
+     * do_shortcode() runs on the_content), WordPress executes that shortcode. esc_url() is not a reliable safety
+     * net here, because its bracket encoding gives up when the query string repeats the URL's origin.
+     *
+     * The scheme and authority are left untouched so IPv6 hosts such as http://[::1]/ keep their brackets.
+     * Already-encoded %5B / %5D are not affected.
+     *
+     * @param string $url
+     * @return string
+     */
+    public function encode_square_brackets_in_url( $url ) {
+        if ( ! is_string( $url ) || strpbrk( $url, '[]' ) === false ) {
+            return $url;
+        }
+
+        $authority_length = preg_match( '#^(?:[a-z][a-z0-9+.\-]*:)?//[^/?\#]*#i', $url, $matches ) ? strlen( $matches[0] ) : 0;
+
+        return substr( $url, 0, $authority_length ) . strtr( substr( $url, $authority_length ), array( '[' => '%5B', ']' => '%5D' ) );
     }
 
     /**
@@ -894,6 +923,11 @@ class TRP_Url_Converter {
         // ?jet_ajax_search_settings={"search_source":"product"}). Already percent-encoded
         // sequences (%7B, %7D, %22, ...) are unaffected, so this is a no-op for correctly
         // encoded URLs. The result is then sanitized by esc_url_raw().
+        //
+        // [ and ] are encoded here as well because esc_url()/esc_url_raw() do not reliably encode them:
+        // their bracket encoder gives up when the query string repeats the URL's origin (or contains "//" in a
+        // relative URL), leaving a literal "[shortcode]" in every language switcher link. Inside post content
+        // (e.g. the Language Switcher block, rendered by do_blocks before do_shortcode) that text gets executed.
         // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- sanitized via esc_url_raw() on the same statement, after pre-encoding.
         $req_uri = isset( $_SERVER['REQUEST_URI'] ) ? esc_url_raw( strtr( wp_unslash( $_SERVER['REQUEST_URI'] ), array(
             '{' => '%7B',
@@ -901,6 +935,8 @@ class TRP_Url_Converter {
             '"' => '%22',
             '<' => '%3C',
             '>' => '%3E',
+            '[' => '%5B',
+            ']' => '%5D',
         ) ) ) : '';
 
         // strval converts null to empty string. $this->get_abs_home() can be null and this causes a PHP 8 notice.

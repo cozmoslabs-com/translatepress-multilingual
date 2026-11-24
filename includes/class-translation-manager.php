@@ -14,6 +14,15 @@ class TRP_Translation_Manager {
     protected $url_converter;
 
     /**
+     * Set to true by trp_view_as_user() once a user allowed to translate passed the nonce check and the
+     * current user was switched to another role ( e.g. logged out ) for the Translation Editor preview.
+     * After the switch current_user_can() reflects the viewed role, not the translator.
+     *
+     * @var bool
+     */
+    protected $view_as_authorized = false;
+
+    /**
      * TRP_Translation_Manager constructor.
      *
      * @param array $settings Settings option.
@@ -64,6 +73,35 @@ class TRP_Translation_Manager {
             }
         }
         return false;
+    }
+
+    /**
+     * Whether the current request is a Translation Editor preview ( ?trp-edit-translation=preview ) made by a
+     * user allowed to translate.
+     *
+     * The preview query parameter on its own can be added to any URL by anyone, so it must never be trusted
+     * to unlock editor-only behaviour such as saving strings or spending machine translation quota.
+     *
+     * When the editor previews the page as another role ( "View as" ), the current user has already been
+     * switched by trp_view_as_user(), so we rely on the authorization recorded there.
+     *
+     * @return bool
+     */
+    public function is_authorized_preview_request() {
+        if ( !isset( $_REQUEST['trp-edit-translation'] ) || $_REQUEST['trp-edit-translation'] !== 'preview' ) {
+            return false;
+        }
+
+        if ( $this->view_as_authorized ) {
+            return true;
+        }
+
+        // Pluggable functions are not available before plugins_loaded
+        if ( !function_exists( 'wp_get_current_user' ) ) {
+            return false;
+        }
+
+        return current_user_can( apply_filters( 'trp_translating_capability', 'manage_options' ) );
     }
 
     /**
@@ -930,7 +968,11 @@ class TRP_Translation_Manager {
                         $view_as = sanitize_text_field( $_REQUEST['trp-view-as'] );
                         if ( $view_as === 'current_user' ) {
                             return;
-                        } elseif ( $view_as === 'logged_out' ) {
+                        }
+
+                        $this->view_as_authorized = true;
+
+                        if ( $view_as === 'logged_out' ) {
                             $current_user = new WP_User( 0, 'trp_logged_out' );
                         } else {
                             $current_user = apply_filters( 'trp_temporary_change_current_user_role', $current_user, $view_as );

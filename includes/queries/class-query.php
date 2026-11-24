@@ -1273,7 +1273,7 @@ class TRP_Query{
 	    if ( $default_language == null ) {
 		    $default_language = $this->settings['default-language'];
 	    }
-	    $language_code = str_replace($this->db->prefix . 'trp_dictionary_' . strtolower( $default_language ) . '_', '', $table_name );
+	    $language_code = str_ireplace($this->db->prefix . 'trp_dictionary_' . strtolower( $default_language ) . '_', '', $table_name );
 	    return $language_code;
     }
 
@@ -1767,13 +1767,13 @@ class TRP_Query{
 
     public function get_all_table_names ( $original_language, $exception_translation_languages = array() ){
 	    foreach ( $exception_translation_languages as $key => $language ){
-		    $exception_translation_languages[$key] = $this->get_table_name( $language, $original_language );
+		    $exception_translation_languages[$key] = strtolower( $this->get_table_name( $language, $original_language ) );
 	    }
 	    $return_tables = array();
 	    $table_name = $this->get_table_name( '', null, true  );
 	    $table_names = $this->db->get_results( "SHOW TABLES LIKE '$table_name%'", ARRAY_N );
 	    foreach ( $table_names as $table_name ){
-	    	if ( isset( $table_name[0]) && ! in_array( $table_name[0], $exception_translation_languages ) ) {
+	    	if ( isset( $table_name[0]) && ! in_array( strtolower( $table_name[0] ), $exception_translation_languages, true ) ) {
 			    $return_tables[] = $table_name[0];
 		    }
 	    }
@@ -2198,7 +2198,7 @@ class TRP_Query{
      * @return bool
      */
     protected function trp_table_exists_exact( $table_name ){
-        return (string) $this->db->get_var( $this->db->prepare( 'SHOW TABLES LIKE %s', $this->db->esc_like( $table_name ) ) ) === $table_name;
+        return strtolower( (string) $this->db->get_var( $this->db->prepare( 'SHOW TABLES LIKE %s', $this->db->esc_like( $table_name ) ) ) ) === strtolower( $table_name );
     }
 
     /**

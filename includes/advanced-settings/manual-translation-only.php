@@ -26,8 +26,9 @@ function trp_restrict_string_saving_to_editor($allow, $new_strings, $update_stri
             return $allow;
         }
 
-        // Only allow string saving if we're in the translation editor
-        if ( !isset($_GET['trp-edit-translation']) || $_GET['trp-edit-translation'] !== 'preview' ) {
+        // Only allow string saving inside the translation editor preview, opened by a user allowed to translate.
+        // The ?trp-edit-translation=preview parameter alone can be added to any URL by anyone.
+        if ( !trp_is_authorized_translation_editor_preview() ) {
             return false;
         }
     }
@@ -44,8 +45,8 @@ function trp_disable_machine_translation_outside_editor($is_available) {
             return $is_available;
         }
 
-        // If not in translation editor, disable machine translation
-        if ( !isset($_GET['trp-edit-translation']) || $_GET['trp-edit-translation'] !== 'preview' ) {
+        // If not in the translation editor preview opened by a user allowed to translate, disable machine translation
+        if ( !trp_is_authorized_translation_editor_preview() ) {
             // Modify the machine translation setting to 'no'
             $is_available = false;
         }

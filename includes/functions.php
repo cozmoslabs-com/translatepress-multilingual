@@ -278,6 +278,26 @@ function trp_is_translation_editor( $value = '' ){
     return false;
 }
 
+/**
+ * Whether the current request is a Translation Editor preview made by a user allowed to translate.
+ *
+ * Unlike trp_is_translation_editor( 'preview' ), which only looks at the query parameter that anyone can add
+ * to a URL, this also checks the translating capability. Use it to gate anything that writes to the database
+ * or spends machine translation quota.
+ *
+ * @return bool
+ */
+function trp_is_authorized_translation_editor_preview(){
+    if ( !trp_is_translation_editor( 'preview' ) ) {
+        return false;
+    }
+
+    $trp = TRP_Translate_Press::get_trp_instance();
+    $translation_manager = $trp ? $trp->get_component( 'translation_manager' ) : null;
+
+    return $translation_manager ? $translation_manager->is_authorized_preview_request() : false;
+}
+
 function trp_remove_accents( $string ){
 
     if ( !preg_match('/[\x80-\xff]/', $string) )

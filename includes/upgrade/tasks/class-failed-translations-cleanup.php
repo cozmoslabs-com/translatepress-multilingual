@@ -88,13 +88,13 @@ class TRP_Failed_Translations_Cleanup {
         $prefix = $wpdb->prefix . 'trp_';
 
         // Must match one of: {prefix}dictionary_*, {prefix}gettext_*, {prefix}slug_translations
-        if ( strpos( $table, $prefix . 'dictionary_' ) === 0 ) {
+        if ( stripos( $table, $prefix . 'dictionary_' ) === 0 ) {
             return true;
         }
-        if ( strpos( $table, $prefix . 'gettext_' ) === 0 ) {
+        if ( stripos( $table, $prefix . 'gettext_' ) === 0 ) {
             return true;
         }
-        if ( $table === $prefix . 'slug_translations' ) {
+        if ( strcasecmp( $table, $prefix . 'slug_translations' ) === 0 ) {
             return true;
         }
 

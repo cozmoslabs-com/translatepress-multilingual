@@ -1186,7 +1186,7 @@ class TRP_Gettext_Tables_Optimization {
         $locale_map_table = $this->get_locale_map_table_name();
 
         $tables = array_values( array_filter( $tables, function ( $table_name ) use ( $locale_map_table ) {
-            return $table_name !== $locale_map_table;
+            return strcasecmp( $table_name, $locale_map_table ) !== 0;
         } ) );
 
         sort( $tables );
@@ -1292,7 +1292,7 @@ class TRP_Gettext_Tables_Optimization {
         $configured_codes = isset( $this->settings['translation-languages'] ) ? $this->settings['translation-languages'] : array();
 
         foreach ( array_unique( array_merge( $configured_codes, $language_codes ) ) as $language_code ) {
-            if ( $this->trp_query->get_gettext_table_name( $language_code ) === $table_name ) {
+            if ( strcasecmp( $this->trp_query->get_gettext_table_name( $language_code ), $table_name ) === 0 ) {
                 return $language_code;
             }
         }
@@ -1314,7 +1314,7 @@ class TRP_Gettext_Tables_Optimization {
             return false;
         }
 
-        if ( strpos( $table_name, $this->db->prefix . 'trp_gettext_' ) !== 0 ) {
+        if ( stripos( $table_name, $this->db->prefix . 'trp_gettext_' ) !== 0 ) {
             return false;
         }
 

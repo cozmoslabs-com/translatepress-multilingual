@@ -270,7 +270,10 @@ class TRP_Process_Gettext {
             }
             unset( $callstack_functions );//maybe free up some memory
             global $trp_output_buffer_started;
-            if ( did_action( 'init' ) && ( ( isset( $trp_output_buffer_started ) && $trp_output_buffer_started ) || TRP_Woocommerce_Emails::is_order_email() ) ) {// Order emails also clean up gettext markers in wp_mail, including admin/AJAX sends.
+            // Order emails also clean up gettext markers in wp_mail, including admin/AJAX sends.
+            // Not in cron: the wp_mail filter that removes the markers is a frontend hook, which is not registered there.
+            $wrap_order_email = TRP_Woocommerce_Emails::is_order_email() && ! wp_doing_cron();
+            if ( did_action( 'init' ) && ( ( isset( $trp_output_buffer_started ) && $trp_output_buffer_started ) || $wrap_order_email ) ) {
                 if ( ( !empty( $TRP_LANGUAGE ) && $this->settings["default-language"] != $TRP_LANGUAGE ) || ( isset( $_REQUEST['trp-edit-translation'] ) && $_REQUEST['trp-edit-translation'] == 'preview' ) ) {
                     //add special start and end tags so that it does not influence html in any way. we will replace them with < and > at the start of the translate function
 	                /**

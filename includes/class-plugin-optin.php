@@ -99,7 +99,7 @@ class TRP_Plugin_Optin {
                 global $wpdb;
                 $dictionary_table_name = $wpdb->prefix . 'trp_dictionary_' . strtolower( $trp_settings['default-language'] ) . '_'. strtolower( $trp_settings['translation-languages'][1] );
 
-                if( $wpdb->get_var( "SHOW TABLES LIKE '$dictionary_table_name'" ) == $dictionary_table_name || (int)$wpdb->get_var( "SELECT COUNT(id) FROM $dictionary_table_name WHERE translated != ''" ) > 25 )
+                if( strcasecmp( (string) $wpdb->get_var( "SHOW TABLES LIKE '$dictionary_table_name'" ), $dictionary_table_name ) === 0 || (int)$wpdb->get_var( "SELECT COUNT(id) FROM $dictionary_table_name WHERE translated != ''" ) > 25 )
                     $translation_tables = true;
 
                 if( $multiple_languages && $translation_tables )

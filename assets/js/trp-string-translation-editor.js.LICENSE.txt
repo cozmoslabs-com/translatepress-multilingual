@@ -10,36 +10,36 @@
  * @license MIT
  */
 
-/*! Select2 4.0.13 | https://github.com/select2/select2/blob/master/LICENSE.md */
+/*! Select2 4.2.0 | https://github.com/select2/select2/blob/master/LICENSE.md */
 
 /*! https://mths.be/he v1.2.0 by @mathias | MIT license */
 
 /**
-* @vue/compiler-core v3.5.45
+* @vue/compiler-core v3.5.46
 * (c) 2018-present Yuxi (Evan) You and Vue contributors
 * @license MIT
 **/
 
 /**
-* @vue/compiler-dom v3.5.45
+* @vue/compiler-dom v3.5.46
 * (c) 2018-present Yuxi (Evan) You and Vue contributors
 * @license MIT
 **/
 
 /**
-* @vue/runtime-core v3.5.45
+* @vue/runtime-core v3.5.46
 * (c) 2018-present Yuxi (Evan) You and Vue contributors
 * @license MIT
 **/
 
 /**
-* @vue/runtime-dom v3.5.45
+* @vue/runtime-dom v3.5.46
 * (c) 2018-present Yuxi (Evan) You and Vue contributors
 * @license MIT
 **/
 
 /**
-* @vue/shared v3.5.45
+* @vue/shared v3.5.46
 * (c) 2018-present Yuxi (Evan) You and Vue contributors
 * @license MIT
 **/
